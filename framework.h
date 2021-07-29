@@ -33,6 +33,7 @@
 #include"sceneManager.h"
 #include"soundManager.h"
 #include"animationManager.h"
+#include"effectManager.h"
 //======================================
 //##			매니저들			  ##
 //======================================
@@ -44,6 +45,7 @@
 #define SCENE			sceneManager::getSingleton()
 #define SOUND			soundManager::getSingleton()
 #define ANIMATION		animationManager::getSingleton()
+#define EFFECT			effectManager::getSingleton()
 //==========================================
 //				 매크로 설정
 //==========================================

@@ -71,7 +71,9 @@ void gameNode::release()
 		TXT->releaseSingleton();
 		SCENE->releaseSingleton();
 		SOUND->releaseSingleton();
+		EFFECT->releaseSingleton();
 
+		EFFECT->release();
 		SCENE->release();
 		IMAGE->release();
 		TIME->release();
