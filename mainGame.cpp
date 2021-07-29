@@ -24,6 +24,7 @@ void mainGame::update()
 	gameNode::update();
 
 	//Á¤Áö¼ö
+	//³Ü³Ü
 }
 
 void mainGame::render()
