@@ -12,7 +12,7 @@ HRESULT mainGame::init()
 
 	///* astar */	_aStar = new CaStar;
 	///* astar */ _aStar->init();
-	
+
 	return S_OK;
 }
 

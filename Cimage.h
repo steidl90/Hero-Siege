@@ -1,6 +1,5 @@
 #pragma once
-#include "gameNode.h"
-class Cimage :public gameNode
+class Cimage
 {
 private:
 	/*	모든 이미지 이미지매니저에 추가하는 용도	*/
