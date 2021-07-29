@@ -46,6 +46,69 @@
     <Filter Include="애니메이션">
       <UniqueIdentifier>{fe5b71f5-9576-4557-b40c-b18eaa05b79e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="mainGame\히어로시즈">
+      <UniqueIdentifier>{97ea26e1-a103-40d1-a672-5ed2abb55b05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cunit">
+      <UniqueIdentifier>{c3b66eec-def3-4b49-9883-c2fa2863eee4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cobject">
+      <UniqueIdentifier>{4e81eaa7-4095-48ee-be63-6d92f4eabf20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cunit\Cenemy">
+      <UniqueIdentifier>{8127ab37-da7f-44b9-aa88-978afacad88c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cimage">
+      <UniqueIdentifier>{f90010ee-4cf1-41d3-b379-83fe23a8fedc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\manager">
+      <UniqueIdentifier>{c37793e9-1727-4416-8100-1c49646d51d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cunit\CplayerManager">
+      <UniqueIdentifier>{ce5ae0a8-7e57-42e8-9c57-29583cb3dfd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cunit\CplayerManager\Cplayer">
+      <UniqueIdentifier>{2af9d8e5-c58f-4e46-b995-657bbe66afb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cunit\Cenemy\CenemyManager">
+      <UniqueIdentifier>{85bdc983-fdba-4819-99d8-7e9fe5e3d746}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\minion">
+      <UniqueIdentifier>{58704b94-8bf9-404b-8a6c-5e0c1e527ddc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cunit\Cenemy\CbossManager">
+      <UniqueIdentifier>{c8b7c45b-6703-4611-bad5-eb73e044c56b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cunit\Cenemy\CbossManager\boss">
+      <UniqueIdentifier>{069501e6-f62f-4eab-baf3-cc772a3a8ab9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\minion\Celemental">
+      <UniqueIdentifier>{23d9a5c3-ecb7-470e-be60-4101ac85e2d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\minion\Cslime">
+      <UniqueIdentifier>{4d73ea54-c7e7-4245-9a0b-788fb8a0f6ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\minion\Cmonk">
+      <UniqueIdentifier>{575dadf1-78b4-4d6d-acca-3411be7a1e7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\minion\Cpriest">
+      <UniqueIdentifier>{f7d3d6fa-8476-45b6-8c34-425d6490679b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\minion\Cprison">
+      <UniqueIdentifier>{60ab1a8c-ee20-4aeb-ab77-72f9706d2981}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cunit\Cenemy\CbossManager\boss\Cmevius">
+      <UniqueIdentifier>{f363ad6e-4a34-4bf7-9303-34acbaad1aa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cunit\Cenemy\CenemyAttack">
+      <UniqueIdentifier>{be967a18-626b-493b-9d7a-2b46d5b22d47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cunit\CplayerManager\Cplayer\CplayerAttack">
+      <UniqueIdentifier>{891f437d-af7e-43e9-b82f-aae82a77f57a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cunit\CplayerManager\Cplayer\CplayerSkill">
+      <UniqueIdentifier>{d67614be-55bc-43b6-94f2-adacb553d430}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -114,6 +177,42 @@
     <ClInclude Include="animationManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
+    <ClInclude Include="CmainManager.h">
+      <Filter>mainGame\히어로시즈\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Cplayer.h">
+      <Filter>mainGame\히어로시즈\Cunit\CplayerManager\Cplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="Cunit.h">
+      <Filter>mainGame\히어로시즈\Cunit</Filter>
+    </ClInclude>
+    <ClInclude Include="CenemyManager.h">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Celemental.h">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\minion\Celemental</Filter>
+    </ClInclude>
+    <ClInclude Include="Cmonk.h">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\minion\Cmonk</Filter>
+    </ClInclude>
+    <ClInclude Include="Cpriest.h">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\minion\Cpriest</Filter>
+    </ClInclude>
+    <ClInclude Include="Cprison.h">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\minion\Cprison</Filter>
+    </ClInclude>
+    <ClInclude Include="Cslime.h">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\minion\Cslime</Filter>
+    </ClInclude>
+    <ClInclude Include="Cmevius.h">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CbossManager\boss\Cmevius</Filter>
+    </ClInclude>
+    <ClInclude Include="CplayerManager.h">
+      <Filter>mainGame\히어로시즈\Cunit\CplayerManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CbossManager.h">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CbossManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -163,6 +262,42 @@
     </ClCompile>
     <ClCompile Include="animationManager.cpp">
       <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CmainManager.cpp">
+      <Filter>mainGame\히어로시즈\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Cplayer.cpp">
+      <Filter>mainGame\히어로시즈\Cunit\CplayerManager\Cplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="Cunit.cpp">
+      <Filter>mainGame\히어로시즈\Cunit</Filter>
+    </ClCompile>
+    <ClCompile Include="CenemyManager.cpp">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Celemental.cpp">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\minion\Celemental</Filter>
+    </ClCompile>
+    <ClCompile Include="Cmonk.cpp">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\minion\Cmonk</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpriest.cpp">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\minion\Cpriest</Filter>
+    </ClCompile>
+    <ClCompile Include="Cprison.cpp">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\minion\Cprison</Filter>
+    </ClCompile>
+    <ClCompile Include="Cslime.cpp">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\minion\Cslime</Filter>
+    </ClCompile>
+    <ClCompile Include="Cmevius.cpp">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CbossManager\boss\Cmevius</Filter>
+    </ClCompile>
+    <ClCompile Include="CplayerManager.cpp">
+      <Filter>mainGame\히어로시즈\Cunit\CplayerManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CbossManager.cpp">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CbossManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

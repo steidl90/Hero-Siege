@@ -23,9 +23,7 @@ void mainGame::update()
 {
 	gameNode::update();
 
-	//Á¤Áö¼ö
-	//³Ü³Ü
-	//±èÇåÈñ
+	
 }
 
 void mainGame::render()
