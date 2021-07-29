@@ -5,6 +5,7 @@
 #include "Cpriest.h"
 #include "Cprison.h"
 #include "Cslime.h"
+#include "CenemyAttack.h"
 
 //enemy 행동패턴용도
 enum class ENEMYTYPE {

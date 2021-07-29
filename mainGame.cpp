@@ -9,7 +9,9 @@ mainGame::~mainGame()
 HRESULT mainGame::init()
 {
 	gameNode::init(true);
-	
+
+	/* astar */	_aStar = new CaStar;
+	/* astar */ _aStar->init();
 
 	return S_OK;
 }
@@ -17,26 +19,27 @@ HRESULT mainGame::init()
 void mainGame::release()
 {
 	gameNode::release();
+	/* astar */ SAFE_DELETE(_aStar);
 }
 
 void mainGame::update()
 {
 	gameNode::update();
-
+	
+	/* astar */ _aStar->update();
 	
 }
 
 void mainGame::render()
 {
-	//백버퍼 뿌리자.
-	//HDC memDC = this->getBackBuffer()->getMemDC();
 	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
-	//==============================================
+	/////////////////////////////////////////////////////////
+	/* astar */ _aStar->render();
 
 
 
 
-	//백버퍼의 내용을 HDC그린다.(건드리지 말것.)
+	/////////////////////////////////////////////////////////
 	this->getBackBuffer()->render(getHDC(), 0, 0);
 
 }

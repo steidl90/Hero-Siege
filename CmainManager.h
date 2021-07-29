@@ -3,10 +3,10 @@
 #include "CenemyManager.h"
 #include "CbossManager.h"
 #include "CplayerManager.h"
-
 class CmainManager :public gameNode
 {
 private:
+
 
 public:
 	CmainManager();

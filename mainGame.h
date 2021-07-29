@@ -1,10 +1,12 @@
 #pragma once
 #include"gameNode.h"
 
+/* astar */ #include "CaStar.h"
+
 class mainGame : public gameNode
 {
 private:
-	
+	/* astar */ CaStar * _aStar;
 
 public:
 	mainGame();

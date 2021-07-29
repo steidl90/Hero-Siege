@@ -1,94 +1,153 @@
-﻿  API_FrameWork.cpp
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Input.cpp
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  animation.cpp
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  animation.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   animationManager.cpp
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  camera.cpp
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  API_FrameWork.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CaStar.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CbossManager.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Cdungeon.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Celemental.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CenemyAttack.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CenemyManager.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Cimage.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CmainManager.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Cmevius.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Cmonk.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Cobject.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Cplayer.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CplayerAttack.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CplayerManager.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CplayerSkill.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Cpriest.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Cprison.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Cslime.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CTown.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Cunit.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   gameNode.cpp
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\gameNode.cpp(98,6): warning C4101: 'hdc' :참조되지 않은 지역 변수입니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\gameNode.cpp(97,14): warning C4101: 'ps' :참조되지 않은 지역 변수입니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\gameNode.cpp(98,6): warning C4101: 'hdc' :참조되지 않은 지역 변수입니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\gameNode.cpp(97,14): warning C4101: 'ps' :참조되지 않은 지역 변수입니다.
   image.cpp
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.cpp(266,18): warning C4244: '=': 'const int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.cpp(267,18): warning C4244: '=': 'const int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.cpp(476,23): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.cpp(484,22): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.cpp(493,24): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.cpp(501,22): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.cpp(542,23): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.cpp(550,22): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.cpp(559,24): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.cpp(567,22): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.cpp(594,34): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.cpp(594,19): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.cpp(599,44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.cpp(599,29): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.cpp(604,44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.cpp(604,29): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.cpp(266,18): warning C4244: '=': 'const int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.cpp(267,18): warning C4244: '=': 'const int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.cpp(476,23): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.cpp(484,22): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.cpp(493,24): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.cpp(501,22): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.cpp(542,23): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.cpp(550,22): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.cpp(559,24): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.cpp(567,22): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.cpp(594,34): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.cpp(594,19): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.cpp(599,44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.cpp(599,29): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.cpp(604,44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.cpp(604,29): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.cpp(184): warning C4715: 'image::init': 모든 제어 경로에서 값을 반환하지는 않습니다.
   imageManager.cpp
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\imageManager.cpp(127,6): warning C4244: '인수': 'const float'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\imageManager.cpp(127,6): warning C4244: '인수': 'const float'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Input.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   loading.cpp
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\loading.cpp(51,21): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\loading.cpp(52,21): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\loading.cpp(85,21): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\loading.cpp(86,21): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\loading.cpp(166,19): warning C4018: '>=': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\loading.cpp(189,61): warning C4244: '인수': 'int'에서 'const float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\loading.cpp(189,54): warning C4244: '인수': 'int'에서 'const float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\loading.cpp(195,54): warning C4244: '인수': 'unsigned int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\loading.cpp(195,24): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\loading.cpp(51,21): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\loading.cpp(52,21): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\loading.cpp(85,21): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\loading.cpp(86,21): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\loading.cpp(166,19): warning C4018: '>=': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\loading.cpp(189,61): warning C4244: '인수': 'int'에서 'const float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\loading.cpp(189,54): warning C4244: '인수': 'int'에서 'const float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\loading.cpp(195,54): warning C4244: '인수': 'unsigned int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\loading.cpp(195,24): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   mainGame.cpp
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  mapTool.cpp
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   progressBar.cpp
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\progressBar.cpp(15,7): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\progressBar.cpp(16,7): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\progressBar.cpp(18,28): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\progressBar.cpp(18,25): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\progressBar.cpp(50,37): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\progressBar.cpp(15,7): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\progressBar.cpp(16,7): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\progressBar.cpp(18,28): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\progressBar.cpp(18,25): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\progressBar.cpp(50,37): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   sceneManager.cpp
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\sceneManager.cpp(84): warning C4715: 'sceneManager::changeScene': 모든 제어 경로에서 값을 반환하지는 않습니다.
   soundManager.cpp
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   timeManager.cpp
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   timer.cpp
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   txtData.cpp
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\txtData.cpp(45,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\txtData.cpp(49,15): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\txtData.cpp(45,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\txtData.cpp(49,15): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\txtData.cpp(54): warning C4172: 지역 변수 또는 임시: str의 주소를 반환하고 있습니다.
   utils.cpp
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\utils.cpp(19,15): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\utils.cpp(23,16): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\utils.cpp(24,33): warning C4305: '-=': 'double'에서 'float'(으)로 잘립니다.
-  코드를 생성하고 있습니다...
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\txtData.cpp(54): warning C4172: 지역 변수 또는 임시: str의 주소를 반환하고 있습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\sceneManager.cpp(84): warning C4715: 'sceneManager::changeScene': 모든 제어 경로에서 값을 반환하지는 않습니다.
-C:\Users\KGA_13\Documents\GitHub\beefTeamProject\image.cpp(184): warning C4715: 'image::init': 모든 제어 경로에서 값을 반환하지는 않습니다.
-  API_FrameWork.vcxproj -> C:\Users\KGA_13\Documents\GitHub\beefTeamProject\Debug\API_FrameWork.exe
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\utils.cpp(19,15): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\utils.cpp(23,16): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\utils.cpp(24,33): warning C4305: '-=': 'double'에서 'float'(으)로 잘립니다.
+  API_FrameWork.vcxproj -> C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\Debug\API_FrameWork.exe
