@@ -22,18 +22,8 @@ void mainGame::release()
 void mainGame::update()
 {
 	gameNode::update();
-	
 
-
-
-
-
-
-
-
-
-
-
+	//Á¤Áö¼ö
 }
 
 void mainGame::render()
