@@ -24,6 +24,16 @@ void mainGame::update()
 	gameNode::update();
 	
 
+
+
+
+
+
+
+
+
+
+
 }
 
 void mainGame::render()
