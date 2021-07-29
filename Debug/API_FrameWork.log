@@ -1,4 +1,0 @@
-﻿  mainGame.cpp
-C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\image.h(133,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  API_FrameWork.vcxproj -> C:\Users\Administrator\source\repos\a)팀프로젝트\beefTeamProject\Debug\API_FrameWork.exe
