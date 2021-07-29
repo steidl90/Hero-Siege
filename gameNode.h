@@ -1,5 +1,6 @@
 #pragma once
 #include"image.h"
+#include"Cimage.h"
 
 static image* backBuffer = IMAGE->addImage("backbuffer", WINSIZEX, WINSIZEY);
 static image* screenbuffer = IMAGE->addImage("screenbuffer", WINSIZEX*2, WINSIZEY);
