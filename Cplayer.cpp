@@ -11,7 +11,7 @@ Cplayer::~Cplayer()
 
 HRESULT Cplayer::init()
 {
-    return E_NOTIMPL;
+    return S_OK;
 }
 
 void Cplayer::release()
