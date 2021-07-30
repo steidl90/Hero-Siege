@@ -124,6 +124,12 @@
     <Filter Include="이펙트">
       <UniqueIdentifier>{2e134f28-1250-4606-8eff-bf40947e3f51}</UniqueIdentifier>
     </Filter>
+    <Filter Include="맵툴\카메라">
+      <UniqueIdentifier>{a073fbc0-fcd1-4831-88ff-a22b5fb1361a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="맵툴\테스트캐릭">
+      <UniqueIdentifier>{79e92196-bbff-4400-9926-a07691137b68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -228,9 +234,6 @@
     <ClInclude Include="CbossManager.h">
       <Filter>mainGame\히어로시즈\Cunit\Cenemy\CbossManager</Filter>
     </ClInclude>
-    <ClInclude Include="mapTool.h">
-      <Filter>맵툴</Filter>
-    </ClInclude>
     <ClInclude Include="CplayerAttack.h">
       <Filter>mainGame\히어로시즈\Cunit\CplayerManager\Cplayer\CplayerAttack</Filter>
     </ClInclude>
@@ -260,6 +263,27 @@
     </ClInclude>
     <ClInclude Include="effect.h">
       <Filter>이펙트</Filter>
+    </ClInclude>
+    <ClInclude Include="mapToolManager.h">
+      <Filter>맵툴</Filter>
+    </ClInclude>
+    <ClInclude Include="mapToolSub.h">
+      <Filter>맵툴</Filter>
+    </ClInclude>
+    <ClInclude Include="mapToolMain.h">
+      <Filter>맵툴</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>맵툴\카메라</Filter>
+    </ClInclude>
+    <ClInclude Include="rootHeader.h">
+      <Filter>맵툴</Filter>
+    </ClInclude>
+    <ClInclude Include="animationTest.h">
+      <Filter>맵툴\테스트캐릭</Filter>
+    </ClInclude>
+    <ClInclude Include="camel.h">
+      <Filter>맵툴\테스트캐릭</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -347,9 +371,6 @@
     <ClCompile Include="CbossManager.cpp">
       <Filter>mainGame\히어로시즈\Cunit\Cenemy\CbossManager</Filter>
     </ClCompile>
-    <ClCompile Include="mapTool.cpp">
-      <Filter>맵툴</Filter>
-    </ClCompile>
     <ClCompile Include="CplayerAttack.cpp">
       <Filter>mainGame\히어로시즈\Cunit\CplayerManager\Cplayer\CplayerAttack</Filter>
     </ClCompile>
@@ -379,6 +400,24 @@
     </ClCompile>
     <ClCompile Include="effect.cpp">
       <Filter>이펙트</Filter>
+    </ClCompile>
+    <ClCompile Include="mapToolManager.cpp">
+      <Filter>맵툴</Filter>
+    </ClCompile>
+    <ClCompile Include="mapToolSub.cpp">
+      <Filter>맵툴</Filter>
+    </ClCompile>
+    <ClCompile Include="mapToolMain.cpp">
+      <Filter>맵툴</Filter>
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>맵툴\카메라</Filter>
+    </ClCompile>
+    <ClCompile Include="camel.cpp">
+      <Filter>맵툴\테스트캐릭</Filter>
+    </ClCompile>
+    <ClCompile Include="animationTest.cpp">
+      <Filter>맵툴\테스트캐릭</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

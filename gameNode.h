@@ -1,9 +1,9 @@
 #pragma once
 #include"image.h"
 #include"Cimage.h"
-
+#include"rootHeader.h"
 static image* backBuffer = IMAGE->addImage("backbuffer", WINSIZEX, WINSIZEY);
-static image* screenbuffer = IMAGE->addImage("screenbuffer", WINSIZEX*2, WINSIZEY);
+static image* mapBuffer = IMAGE->addImage("mapBuffer", MAPSIZE, MAPSIZE);
 
 class gameNode
 {
@@ -25,11 +25,12 @@ public:
 	virtual void render(/*HDC hdc*/);
 
 	image* getBackBuffer()const { return backBuffer; }
+	image* getMapBuffer() const { return mapBuffer; }
+
 	HDC getHDC()const { return _hdc; }
 	HDC getMemDC()const { return backBuffer->getMemDC(); }
+	HDC getMapDC()const { return mapBuffer->getMemDC(); }
 
-	image* getScreenBuffer()const { return screenbuffer; }
-	HDC getScreenDC()const { return screenbuffer->getMemDC(); }
 
 	LRESULT MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
 

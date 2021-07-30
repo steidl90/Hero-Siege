@@ -144,7 +144,10 @@
   <ItemGroup>
     <ClInclude Include="animation.h" />
     <ClInclude Include="animationManager.h" />
+    <ClInclude Include="animationTest.h" />
     <ClInclude Include="API_FrameWork.h" />
+    <ClInclude Include="camel.h" />
+    <ClInclude Include="camera.h" />
     <ClInclude Include="CaStar.h" />
     <ClInclude Include="CbossManager.h" />
     <ClInclude Include="Cdungeon.h" />
@@ -175,7 +178,10 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="loading.h" />
     <ClInclude Include="mainGame.h" />
-    <ClInclude Include="mapTool.h" />
+    <ClInclude Include="rootHeader.h" />
+    <ClInclude Include="mapToolMain.h" />
+    <ClInclude Include="mapToolManager.h" />
+    <ClInclude Include="mapToolSub.h" />
     <ClInclude Include="progressBar.h" />
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="Resource.h" />
@@ -191,7 +197,10 @@
   <ItemGroup>
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="animationManager.cpp" />
+    <ClCompile Include="animationTest.cpp" />
     <ClCompile Include="API_FrameWork.cpp" />
+    <ClCompile Include="camel.cpp" />
+    <ClCompile Include="camera.cpp" />
     <ClCompile Include="CaStar.cpp" />
     <ClCompile Include="CbossManager.cpp" />
     <ClCompile Include="Cdungeon.cpp" />
@@ -220,7 +229,9 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="loading.cpp" />
     <ClCompile Include="mainGame.cpp" />
-    <ClCompile Include="mapTool.cpp" />
+    <ClCompile Include="mapToolMain.cpp" />
+    <ClCompile Include="mapToolManager.cpp" />
+    <ClCompile Include="mapToolSub.cpp" />
     <ClCompile Include="progressBar.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="soundManager.cpp" />
