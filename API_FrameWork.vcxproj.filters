@@ -130,6 +130,15 @@
     <Filter Include="맵툴\테스트캐릭">
       <UniqueIdentifier>{79e92196-bbff-4400-9926-a07691137b68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="mainGame\히어로시즈\Cobject\Citem">
+      <UniqueIdentifier>{b0a26e03-75d1-47c3-b390-61bac4954a55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cobject\Cinventory">
+      <UniqueIdentifier>{b7c0a32d-8406-4448-b92b-73ee8dd887dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cobject\Cshop">
+      <UniqueIdentifier>{cd8a4305-9180-4c46-96ca-b22d6a9041b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -285,6 +294,15 @@
     <ClInclude Include="camel.h">
       <Filter>맵툴\테스트캐릭</Filter>
     </ClInclude>
+    <ClInclude Include="Cshop.h">
+      <Filter>mainGame\히어로시즈\Cobject\Cshop</Filter>
+    </ClInclude>
+    <ClInclude Include="Citem.h">
+      <Filter>mainGame\히어로시즈\Cobject\Citem</Filter>
+    </ClInclude>
+    <ClInclude Include="Cinventory.h">
+      <Filter>mainGame\히어로시즈\Cobject\Cinventory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -418,6 +436,15 @@
     </ClCompile>
     <ClCompile Include="animationTest.cpp">
       <Filter>맵툴\테스트캐릭</Filter>
+    </ClCompile>
+    <ClCompile Include="Cshop.cpp">
+      <Filter>mainGame\히어로시즈\Cobject\Cshop</Filter>
+    </ClCompile>
+    <ClCompile Include="Citem.cpp">
+      <Filter>mainGame\히어로시즈\Cobject\Citem</Filter>
+    </ClCompile>
+    <ClCompile Include="Cinventory.cpp">
+      <Filter>mainGame\히어로시즈\Cobject\Cinventory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
