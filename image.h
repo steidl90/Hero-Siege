@@ -101,6 +101,10 @@ public:
 	void alphaRender(HDC hdc, const int destX, const int destY, BYTE alpha);
 	void alphaRender(HDC hdc, const int destX, const int destY, const int sourX, const int sourY, const int sourWidth, const int sourHeight, BYTE alpha);
 
+	//내가 추가시킨거..
+	void alphaFrameRender(HDC hdc, const int destX, const int destY, BYTE alpha);
+	void alphaFrameRender(HDC hdc, const int destX, const int destY, int currentFrameX, int currentFrameY, BYTE alpha);
+
 	void aniRender(HDC hdc, const int destX, const int destY, animation* ani);
 
 	//DC를 가져와라
