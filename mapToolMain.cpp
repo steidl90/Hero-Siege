@@ -38,6 +38,16 @@ void mapToolMain::render()
 		IMAGE->frameRender("tilemap", getMapDC(), _tiles[i].rc.left, _tiles[i].rc.top, _tiles[i].objFrameX, _tiles[i].objFrameY);
 
 	}
+
+	for (int i = 0; i < TILEX; i++)
+	{
+		LineMake(getMapDC(), 0, i * TILESIZE, MAPSIZE, i * TILESIZE);
+	}
+	for (int i = 0; i < TILEY; i++)
+	{
+		LineMake(getMapDC(), i * TILESIZE, 0, i * TILESIZE, MAPSIZE);
+	}
+
 }
 
 void mapToolMain::maptoolSetup()
@@ -81,8 +91,8 @@ void mapToolMain::setMap()
 	for (size_t i = 0; i < TILEX * TILEY; i++)
 	{
 
-		if (m_camera->getCameraPoint().x < _tiles[i].rc.left && m_camera->getCameraPoint().y < _tiles[i].rc.top &&
-			m_camera->getCameraPoint2().x > _tiles[i].rc.right && m_camera->getCameraPoint2().y > _tiles[i].rc.bottom)
+		if (m_camera->getCameraPoint().x <= _tiles[i].rc.left && m_camera->getCameraPoint().y <= _tiles[i].rc.top &&
+			m_camera->getCameraPoint2().x >= _tiles[i].rc.right && m_camera->getCameraPoint2().y >= _tiles[i].rc.bottom)
 		{
 			if (PtInRect(&_tiles[i].rc, cameraMouse))
 			{
@@ -91,18 +101,32 @@ void mapToolMain::setMap()
 
 				case CTRL::CTRL_TERRAINDRAW:
 				{
-
-					_tiles[i].terrainFrameX = _currentTile.frame_x;
-					_tiles[i].terrainFrameY = _currentTile.frame_y;
-					_tiles[i].terrain = terrainSelect(_currentTile.frame_x, _currentTile.frame_y);
-
+					int j, k;
+					int l, m;
+					for (j = m_currentDragTile.index_StartY, l = m_currentDragTile.frame_StartY; j <= m_currentDragTile.index_EndY; j++, l++)
+					{
+						for (k = m_currentDragTile.index_StartX, m = m_currentDragTile.frame_StartX; k <= m_currentDragTile.index_EndX; k++, m++)
+						{
+							_tiles[i + k + j * TILEX].terrainFrameX = m;
+							_tiles[i + k + j * TILEX].terrainFrameY = l;
+							_tiles[i + k + j * TILEX].terrain = terrainSelect(1, 0);
+						}
+					}
 				}
 				break;
 				case CTRL::CTRL_OBJDRAW:
 				{
-					_tiles[i].objFrameX = _currentTile.frame_x;
-					_tiles[i].objFrameY = _currentTile.frame_y;
-					_tiles[i].obj = objSelect(_currentTile.frame_x, _currentTile.frame_y);
+					int j, k;
+					int l, m;
+					for (j = m_currentDragTile.index_StartY, l = m_currentDragTile.frame_StartY; j <= m_currentDragTile.index_EndY; j++, l++)
+					{
+						for (k = m_currentDragTile.index_StartX, m = m_currentDragTile.frame_StartX; k <= m_currentDragTile.index_EndX; k++, m++)
+						{
+							_tiles[i + k + j * TILEX].objFrameX = m;
+							_tiles[i + k + j * TILEX].objFrameY = l;
+							_tiles[i + k + j * TILEX].obj = objSelect(1, 0);
+						}
+					}
 				}
 				break;
 				default:

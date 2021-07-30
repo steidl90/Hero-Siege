@@ -20,8 +20,14 @@ private:
 
 	tagSampleTile _sampleTiles[SAMPLETILEX * SAMPLETILEY];
 
-	tagCurrentTile _currentTile; // 공용
+	//tagCurrentTile _currentTile; // 공용
 
+	tagDragTileIndex m_currentDragTile; // 공용
+
+	// 버튼 클릭 여부 및 타일 클릭, 토글 느낌으로 쓰는 키업 변수
+	bool m_isButtonClick;
+	bool m_isTileClick;
+	bool m_isKeyUp;
 	int _ctrSelect; // 공용
 	int _pos[2];
 
@@ -44,6 +50,7 @@ public:
 	void mapSave();
 	void mapLoad();
 
+	void dragTileInit();
 	void setMapToolMainMemory(mapToolMain* mt) { m_mapToolmain = mt; }
 };
 

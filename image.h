@@ -92,6 +92,7 @@ public:
 	//«¡∑π¿” ∑ª¥ı
 	void frameRender(HDC hdc, const int destX, const int destY);
 	void frameRender(HDC hdc, const int destX, const int destY, const int currentFrameX, const int currentFrameY);
+	void alphaframeRender(HDC hdc, const int destX, const int destY, const int currentFrameX, const int currentFrameY, BYTE alpha);
 
 	//∑Á«¡∑ª¥ı
 	void loopRender(HDC hdc, const LPRECT drawArea, int offsetX, int offsetY);
