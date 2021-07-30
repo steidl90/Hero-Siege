@@ -19,8 +19,24 @@ HRESULT Cimage::init()
     /*  나눠진 섹션에서 프레임이미지랑 아닌 이미지랑 구별해라  */
 
     //=================Player=================//
-    
 
+
+
+
+
+    //=================NPC====================//
+    IMAGE->addFrameImage("NPC블랙마켓", "images/BlackMarketNPC.bmp", 798, 121, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("NPC에드워드", "images/Edward.bmp", 136, 34, 4, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("NPC에릭", "images/Eric.bmp", 120, 31, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("NPC가노르", "images/GarNor.bmp", 280, 34, 8, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("NPC할스테인", "images/Halstein.bmp", 152, 46, 4, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("NPC카일리아", "images/Kayla.bmp", 120, 32, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("NPC사캐스터", "images/Sarcaster.bmp", 184, 33, 8, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("NPC샵키퍼", "images/ShopKeeper.bmp", 184, 37, 8, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("NPC토스테인", "images/Torstein.bmp", 612, 41, 17, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("NPC위치", "images/Witch.bmp", 120, 62, 5, 1, true, RGB(255, 0, 255));
+
+    
 
 
     //=================Enemy=================//
