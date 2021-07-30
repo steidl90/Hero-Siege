@@ -63,10 +63,10 @@ void camera::render()
 	TextOut(getMemDC(), WINSIZEX / 2 - 500, 20, str, lstrlen(str));
 	TextOut(getMemDC(), WINSIZEX / 2 - 500, 35, str2, lstrlen(str2));
 
-	LineMake(getMemDC(), camera_x1, camera_y1, camera_x1, camera_y2);
+	/*LineMake(getMemDC(), camera_x1, camera_y1, camera_x1, camera_y2);
 	LineMake(getMemDC(), camera_x1, camera_y1, camera_x2, camera_y1);
 	LineMake(getMemDC(), camera_x2, camera_y1, camera_x2, camera_y2);
-	LineMake(getMemDC(), camera_x1, camera_y2, camera_x2, camera_y2);
+	LineMake(getMemDC(), camera_x1, camera_y2, camera_x2, camera_y2);*/
 
 	//HPEN oldPen;
 	//oldPen = (HPEN)::SelectObject(getMapDC(), (HGDIOBJ)pen);

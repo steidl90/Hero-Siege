@@ -17,7 +17,9 @@ private:
 
 	tagTile _tiles[TILEX * TILEY];
 
-	tagCurrentTile _currentTile; // 공용
+	//tagCurrentTile _currentTile; // 공용
+
+	tagDragTileIndex m_currentDragTile; // 공용
 
 	int _ctrSelect; // 공용
 
@@ -36,7 +38,8 @@ public:
 
 	tagTile* getMainMapTile() { return _tiles; }
 
-	void setMainMapCurrentTile(tagCurrentTile tile) { _currentTile = tile; }
+	//void setMainMapCurrentTile(tagCurrentTile tile) { _currentTile = tile; }
+	void setMainMapDragTile(tagDragTileIndex tile) { m_currentDragTile = tile; }
 	void setMainMapSelect(int select) { _ctrSelect = select; }
 	void setCameraMemory(camera* c) { m_camera = c; }
 };

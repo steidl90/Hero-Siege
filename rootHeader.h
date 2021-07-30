@@ -80,3 +80,18 @@ struct tagCurrentTile
 	int frame_x;
 	int frame_y;
 };
+
+// 드래그 할시 시작 타일 인덱스 x,y 정보 끝 타일 인덱스 x, y 정보
+struct tagDragTileIndex
+{
+	int index_StartX;
+	int index_StartY;
+	int index_EndX;
+	int index_EndY;
+
+	// 메인 맵에서 이용
+	int frame_StartX;
+	int frame_StartY;
+	int frame_EndX;
+	int frame_EndY;
+};

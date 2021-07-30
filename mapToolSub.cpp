@@ -13,6 +13,7 @@ HRESULT mapToolSub::init()
 	_save = RectMakeCenter(CAMERAWIDTH + 100, WINSIZEY / 2 + 100, 50, 50);
 	_load = RectMakeCenter(CAMERAWIDTH + 200, WINSIZEY / 2 + 100, 50, 50);
 
+	m_isKeyUp = true;
 
 	return S_OK;
 }
@@ -24,7 +25,23 @@ void mapToolSub::release()
 void mapToolSub::update()
 {
 	// 좌클릭, 맵 셋팅
-	if (InputManager->isStayKeyDown(VK_LBUTTON))setMap();
+	if (InputManager->isStayKeyDown(VK_LBUTTON))
+	{
+		m_isButtonClick = true;
+	}
+	else
+	{
+		m_isButtonClick = false;
+	}
+	setMap();
+
+	// 우클릭, 취소
+	if (InputManager->isOnceKeyDown(VK_RBUTTON))
+	{
+		m_isTileClick = false;
+		memset(&m_currentDragTile, 0, sizeof(tagDragTileIndex));
+		_ctrSelect = static_cast<int>(CTRL::CTRL_ERASER);
+	}
 
 	if (PtInRect(&_terrain, m_ptMouse) && InputManager->isOnceKeyDown(VK_LBUTTON))
 	{
@@ -37,6 +54,8 @@ void mapToolSub::update()
 	else if (PtInRect(&_erase, m_ptMouse) && InputManager->isOnceKeyDown(VK_LBUTTON))
 	{
 		_ctrSelect = static_cast<int>(CTRL::CTRL_ERASER);
+		memset(&m_currentDragTile, 0, sizeof(tagDragTileIndex));
+
 	}
 	else if (PtInRect(&_save, m_ptMouse) && InputManager->isOnceKeyDown(VK_LBUTTON))
 	{
@@ -48,6 +67,7 @@ void mapToolSub::update()
 	}
 
 	m_mapToolmain->setMainMapSelect(_ctrSelect);
+	m_mapToolmain->setMainMapDragTile(m_currentDragTile);
 }
 
 void mapToolSub::render()
@@ -69,11 +89,29 @@ void mapToolSub::render()
 	Rectangle(getMemDC(), _save.left, _save.top, _save.right, _save.bottom);
 	Rectangle(getMemDC(), _load.left, _load.top, _load.right, _load.bottom);
 
-	/*TextOut(getMapDC(), WINSIZEX / 2 + 100, WINSIZEY / 2, TEXT("지형"), lstrlen("지형"));
-	TextOut(getMapDC(), WINSIZEX / 2 + 200, WINSIZEY / 2, TEXT("오브젝트"), lstrlen("오브젝트"));
-	TextOut(getMapDC(), WINSIZEX / 2 + 300, WINSIZEY / 2, TEXT("지우개"), lstrlen("지우개"));
-	TextOut(getMapDC(), WINSIZEX / 2 + 100, WINSIZEY / 2 + 100, TEXT("세이브"), lstrlen("세이브"));
-	TextOut(getMapDC(), WINSIZEX / 2 + 200, WINSIZEY / 2 + 100, TEXT("로드"), lstrlen("로드"));*/
+	SetTextColor(getMemDC(), RGB(0, 0, 0));
+
+	TextOut(getMemDC(), CAMERAWIDTH + 100, WINSIZEY / 2, TEXT("지형"), lstrlen("지형"));
+	TextOut(getMemDC(), CAMERAWIDTH + 200, WINSIZEY / 2, TEXT("오브젝트"), lstrlen("오브젝트"));
+	TextOut(getMemDC(), CAMERAWIDTH + 300, WINSIZEY / 2, TEXT("지우개"), lstrlen("지우개"));
+	TextOut(getMemDC(), CAMERAWIDTH + 100, WINSIZEY / 2 + 100, TEXT("세이브"), lstrlen("세이브"));
+	TextOut(getMemDC(), CAMERAWIDTH + 200, WINSIZEY / 2 + 100, TEXT("로드"), lstrlen("로드"));
+
+	// 마우스 클릭시 타일 이미지 알파값
+
+	if (m_isTileClick && _ctrSelect != static_cast<int>(CTRL::CTRL_ERASER))
+	{
+		int countI, i;
+		int countJ, j;
+
+		for (countI = 0, i = m_currentDragTile.frame_StartY; i <= m_currentDragTile.frame_EndY; countI++, i++)
+		{
+			for (countJ = 0, j = m_currentDragTile.frame_StartX; j <= m_currentDragTile.frame_EndX; countJ++, j++)
+			{
+				IMAGE->findImage("tilemap")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
+			}
+		}
+	}
 }
 
 void mapToolSub::maptoolSetup()
@@ -101,17 +139,65 @@ void mapToolSub::maptoolSetup()
 void mapToolSub::setMap()
 {
 	//오른쪽 샘플 클릭하는 순간
-	for (size_t i = 0; i < SAMPLETILEX * SAMPLETILEY; i++)
+	if (m_isButtonClick)
 	{
-		if (PtInRect(&_sampleTiles[i].rcTile, m_ptMouse))
+		//처음 좌클릭으로 셋맵 호출후 클릭 눌려있는동안에 처음 한번 타일정보 입력받고 마우스클릭DOWN에서 UP 될때 다시 허용
+		// 상태변화에 따라 1회만 실행되게 하는 keyUp 변수
+		if (m_isKeyUp)
 		{
-			_currentTile.frame_x = _sampleTiles[i].terrainFrameX;
-			_currentTile.frame_y = _sampleTiles[i].terrainFrameY;
-			break;
+			for (size_t i = 0; i < SAMPLETILEX * SAMPLETILEY; i++)
+			{
+				if (PtInRect(&_sampleTiles[i].rcTile, m_ptMouse))
+				{
+					m_currentDragTile.index_StartX = _sampleTiles[i].terrainFrameX;
+					m_currentDragTile.index_StartY = _sampleTiles[i].terrainFrameY;
+
+					m_isKeyUp = false;
+					break;
+				}
+			}
 		}
 	}
+	// 버튼 클릭이 false가 되면 -> 마우스 클릭 때는 순간
+	if (!m_isButtonClick)
+	{
+		// 상태변화에 따라 1회만 실행되게 하는 keyUp 변수
+		if (!m_isKeyUp)
+		{
+			for (size_t i = 0; i < SAMPLETILEX * SAMPLETILEY; i++)
+			{
+				if (PtInRect(&_sampleTiles[i].rcTile, m_ptMouse))
+				{
+					m_currentDragTile.index_EndX = _sampleTiles[i].terrainFrameX;
+					m_currentDragTile.index_EndY = _sampleTiles[i].terrainFrameY;
 
-	m_mapToolmain->setMainMapCurrentTile(_currentTile);
+					m_isTileClick = true;
+					m_isKeyUp = true;
+
+					// 타일 숫자 크기 정렬
+					if (m_currentDragTile.index_StartX > m_currentDragTile.index_EndX)
+					{
+						int temp;
+						temp = m_currentDragTile.index_StartX;
+						m_currentDragTile.index_StartX = m_currentDragTile.index_EndX;
+						m_currentDragTile.index_EndX = temp;
+					}
+
+					if (m_currentDragTile.index_StartY > m_currentDragTile.index_EndY)
+					{
+						int temp;
+						temp = m_currentDragTile.index_StartY;
+						m_currentDragTile.index_StartY = m_currentDragTile.index_EndY;
+						m_currentDragTile.index_EndY = temp;
+					}
+
+					this->dragTileInit();
+					m_mapToolmain->setMainMapDragTile(m_currentDragTile);
+					break;
+				}
+			}
+		}
+	}
 }
 
 void mapToolSub::mapSave()
@@ -139,4 +225,19 @@ void mapToolSub::mapLoad()
 	ReadFile(file, m_mapToolmain->getMainMapTile(), sizeof(tagTile) * TILEX * TILEY, &read, NULL);
 	ReadFile(file, _pos, sizeof(int) * 2, &read, NULL);
 	CloseHandle(file);
+}
+
+void mapToolSub::dragTileInit()
+{
+	// 메인 맵에서 타일에 적용할 프레임 x,y값 설정
+	m_currentDragTile.frame_StartX = m_currentDragTile.index_StartX;
+	m_currentDragTile.frame_StartY = m_currentDragTile.index_StartY;
+	m_currentDragTile.frame_EndX = m_currentDragTile.index_EndX;
+	m_currentDragTile.frame_EndY = m_currentDragTile.index_EndY;
+
+	// 메인 맵에서 타일에 그려주기 위한 인덱스를 계산하기 쉽게 0,0을 시작 x,y로 만듬
+	m_currentDragTile.index_StartX = m_currentDragTile.index_StartX - m_currentDragTile.frame_StartX;
+	m_currentDragTile.index_StartY = m_currentDragTile.index_StartY - m_currentDragTile.frame_StartY;
+	m_currentDragTile.index_EndX = m_currentDragTile.index_EndX - m_currentDragTile.frame_StartX;
+	m_currentDragTile.index_EndY = m_currentDragTile.index_EndY - m_currentDragTile.frame_StartY;
 }
