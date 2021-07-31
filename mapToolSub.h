@@ -2,7 +2,7 @@
 #include"gameNode.h"
 
 /*
-	왼쪽 타일 부분
+	오른쪽 타일 부분
 
 	이미지로 그리기 위한 툴 클래스입니다
 
@@ -20,13 +20,15 @@ private:
 
 	tagSampleTile _sampleTiles[SAMPLETILEX * SAMPLETILEY];
 
-	//tagCurrentTile _currentTile; // 공용
+	tagCurrentTile _currentTile; // 공용
 
 	tagDragTileIndex m_currentDragTile; // 공용
 
-	// 버튼 클릭 여부 및 타일 클릭, 토글 느낌으로 쓰는 키업 변수
+	// 버튼 클릭 여부 
 	bool m_isButtonClick;
+	// 타일 클릭 여부
 	bool m_isTileClick;
+	//토글 느낌으로 쓰는 키업 변수
 	bool m_isKeyUp;
 	int _ctrSelect; // 공용
 	int _pos[2];
@@ -36,7 +38,7 @@ private:
 	RECT _erase;
 	RECT _save;
 	RECT _load;
-	RECT _fill;
+	RECT m_fill;
 
 public:
 

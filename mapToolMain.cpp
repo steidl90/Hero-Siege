@@ -8,6 +8,8 @@ HRESULT mapToolMain::init()
 
 	maptoolSetup();
 
+	m_isKeyUp = true;
+
 	return S_OK;
 }
 
@@ -17,7 +19,19 @@ void mapToolMain::release()
 
 void mapToolMain::update()
 {
-	if (InputManager->isStayKeyDown(VK_LBUTTON))setMap();
+	if (InputManager->isStayKeyDown(VK_LBUTTON))
+	{
+		setMap();
+		m_isButtonClick = true;
+	}
+	else
+	{
+		m_isButtonClick = false;
+	}
+	if(_ctrSelect == static_cast<int>(CTRL::CTRL_FILL))
+		this->fillMap();
+
+
 
 }
 
@@ -91,6 +105,7 @@ void mapToolMain::setMap()
 	for (size_t i = 0; i < TILEX * TILEY; i++)
 	{
 
+		// 샘플 툴 쪽에서 눌렀을 때 맵 타일에 그려지지 않도록 카메라 범위 안에서만 타일 세팅 작동
 		if (m_camera->getCameraPoint().x <= _tiles[i].rc.left && m_camera->getCameraPoint().y <= _tiles[i].rc.top &&
 			m_camera->getCameraPoint2().x >= _tiles[i].rc.right && m_camera->getCameraPoint2().y >= _tiles[i].rc.bottom)
 		{
@@ -129,6 +144,8 @@ void mapToolMain::setMap()
 					}
 				}
 				break;
+				case CTRL::CTRL_FILL:
+				break;
 				default:
 					_tiles[i].obj = OBJECT::OBJ_NONE;
 					break;
@@ -138,6 +155,75 @@ void mapToolMain::setMap()
 			}
 		}
 	}
+}
+
+void mapToolMain::fillMap()
+{
+
+	if (m_isButtonClick)
+	{
+		if (m_isKeyUp)
+		{
+			POINT cameraMouse = m_ptMouse;
+			cameraMouse.x += m_camera->getCameraPoint().x;
+			cameraMouse.y += m_camera->getCameraPoint().y;
+
+
+			for (size_t i = 0; i < TILEX * TILEY; i++)
+			{
+				if (m_camera->getCameraPoint().x <= _tiles[i].rc.left && m_camera->getCameraPoint().y <= _tiles[i].rc.top &&
+					m_camera->getCameraPoint2().x >= _tiles[i].rc.right && m_camera->getCameraPoint2().y >= _tiles[i].rc.bottom)
+				{
+					if (PtInRect(&_tiles[i].rc, cameraMouse))
+					{
+						// 타일이 비어있을땐 바로 push
+						if (m_vSelectTileIndex.empty())
+						{
+							m_vSelectTileIndex.push_back(i);
+							break;
+						}
+						// 타일이 한개 선택되어 있을 때
+						else if (m_vSelectTileIndex.size() == 1)
+						{
+							if (m_vSelectTileIndex[0] == i)	// 같은 타일 선택일 경우 break;
+								break;
+							else
+							{
+								m_vSelectTileIndex.push_back(i);	// 다른 타일일 경우 push 및 그려주기 / 초기화
+
+								int j, k;
+								int l, m;
+								int startX, startY;
+								int endX, endY;
+								this->indexCalculate(m_vSelectTileIndex, &startX, &startY, &endX, &endY);
+								// k는 선택된 타일 2개중 작은 인덱스 y 값, m 은 큰 y 값
+								// j는 선택된 타일 2개중 작은 인덱스 x 값, l 은 큰 x 값
+								for (k = startY; k <= endY; k++)
+								{
+									for (j = startX; j <= endX; j++)
+									{
+										_tiles[j + k * TILEX].terrainFrameX = _currentTile.frame_x;
+										_tiles[j + k * TILEX].terrainFrameY = _currentTile.frame_y;
+										_tiles[j + k * TILEX].terrain = terrainSelect(1, 0);
+									}
+								}
+								m_vSelectTileIndex.clear();
+								break;
+							}
+						}
+						InvalidateRect(m_hWnd, NULL, false);
+						break;
+					}
+				}
+			}
+			m_isKeyUp = false;
+		}
+	}
+	else
+	{
+		m_isKeyUp = true;
+	}
+	
 }
 
 TERRAIN mapToolMain::terrainSelect(int frameX, int frameY)
@@ -168,4 +254,36 @@ TERRAIN mapToolMain::terrainSelect(int frameX, int frameY)
 OBJECT mapToolMain::objSelect(int frameX, int frameY)
 {
 	return OBJECT::OBJ_BLOCK1;
+}
+
+void mapToolMain::indexCalculate(vector<int> vInt, int* x1, int* y1, int* x2, int* y2)
+{
+	int temp;
+	// 크기 순서 정렬
+	if (vInt[0] > vInt[1])
+	{
+		temp = vInt[0];
+		vInt[0] = vInt[1];
+		vInt[1] = temp;
+	}
+
+	*x1 = vInt[0] % TILEX;
+	*y1 = vInt[0] / TILEX;
+	*x2 = vInt[1] % TILEX;
+	*y2 = vInt[1] / TILEX;
+
+	// 크기 순서 정렬
+
+	if (*x1 > *x2)
+	{
+		temp = *x1;
+		*x1 = *x2;
+		*x2 = temp;
+	}
+	if (*y1 > *y2)
+	{
+		temp = *y1;
+		*y1 = *y2;
+		*y2 = temp;
+	}
 }

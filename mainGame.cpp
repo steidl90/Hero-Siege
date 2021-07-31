@@ -45,7 +45,7 @@ void mainGame::update()
 	m_camera->setTargetPoint(PointMake(m_player->getPlayRc()->left, m_player->getPlayRc()->top));
 	m_camera->update();
 	///* astar */ _aStar->update();
-	ANIMATION->update();
+	//ANIMATION->update();
 
 }
 

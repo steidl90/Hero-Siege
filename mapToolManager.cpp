@@ -4,7 +4,7 @@
 
 HRESULT mapToolManager::init()
 {
-
+	// 임시 추가 이미지, 나중에 한곳에서 몰아서 할수도
 	IMAGE->addFrameImage("tilemap", "images/Tile.bmp", 648, 288, SAMPLETILEX, SAMPLETILEY, true, RGB(255, 0, 255));
 
 	m_mainMapTool = new mapToolMain;
