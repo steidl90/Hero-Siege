@@ -35,20 +35,43 @@ void mapToolMain::update()
 
 void mapToolMain::render()
 {
-	for (size_t i = 0; i < TILEX * TILEY; i++)
+	// 타일 랜더 최적화
+	int x1 = m_camera->getCameraPoint().x / TILESIZE;
+	int y1 = m_camera->getCameraPoint().y / TILESIZE;
+	int x2 = m_camera->getCameraPoint2().x / TILESIZE;
+	int y2 = m_camera->getCameraPoint2().y / TILESIZE;
+
+	int startX = x1;
+	int startY = y1;
+	int endX = x2;
+	int endY = y2;
+
+	for (startY = y1; startY <= endY; startY++)
 	{
-
-		if (m_camera->getCameraPoint().x - TILESIZE * 2 < _tiles[i].rc.left && m_camera->getCameraPoint().y - TILESIZE * 2 < _tiles[i].rc.top &&
-			m_camera->getCameraPoint2().x + TILESIZE * 2 > _tiles[i].rc.right && m_camera->getCameraPoint2().y + TILESIZE * 2 > _tiles[i].rc.bottom)
+		for (startX = x1; startX <= endX; startX++)
 		{
-			IMAGE->frameRender("tilemap", getMapDC(), _tiles[i].rc.left, _tiles[i].rc.top, _tiles[i].terrainFrameX, _tiles[i].terrainFrameY);
-			//Rectangle(getMemDC(), _tiles[i].rc.left, _tiles[i].rc.top, _tiles[i].rc.right, _tiles[i].rc.bottom);
+			IMAGE->frameRender("tilemap", getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].terrainFrameX, _tiles[startX + startY * TILEX].terrainFrameY);
+			if (_tiles[startX + startY * TILEX].obj == OBJECT::OBJ_NONE)continue;
+
+			IMAGE->frameRender("tilemap", getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
 		}
-
-		if (_tiles[i].obj == OBJECT::OBJ_NONE)continue;
-
-		IMAGE->frameRender("tilemap", getMapDC(), _tiles[i].rc.left, _tiles[i].rc.top, _tiles[i].objFrameX, _tiles[i].objFrameY);
 	}
+
+	//for (size_t i = 0; i < TILEX * TILEY; i++)
+	//{
+
+	//	if (m_camera->getCameraPoint().x - TILESIZE * 2 < _tiles[i].rc.left && m_camera->getCameraPoint().y - TILESIZE * 2 < _tiles[i].rc.top &&
+	//		m_camera->getCameraPoint2().x + TILESIZE * 2 > _tiles[i].rc.right && m_camera->getCameraPoint2().y + TILESIZE * 2 > _tiles[i].rc.bottom)
+	//	{
+	//		IMAGE->frameRender("tilemap", getMapDC(), _tiles[i].rc.left, _tiles[i].rc.top, _tiles[i].terrainFrameX, _tiles[i].terrainFrameY);
+	//		//Rectangle(getMemDC(), _tiles[i].rc.left, _tiles[i].rc.top, _tiles[i].rc.right, _tiles[i].rc.bottom);
+	//	}
+
+	//	if (_tiles[i].obj == OBJECT::OBJ_NONE)continue;
+
+	//	IMAGE->frameRender("tilemap", getMapDC(), _tiles[i].rc.left, _tiles[i].rc.top, _tiles[i].objFrameX, _tiles[i].objFrameY);
+	//}
+
 
 	//왼쪽 타일 그리드
 	/*for (int i = 0; i < TILEX; i++)
