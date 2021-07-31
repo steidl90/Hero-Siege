@@ -21,6 +21,13 @@ private:
 	int _x;
 	int _y;
 	int _speed;
+	int m_currentX;
+	int m_currentY;
+
+	int m_nextX;
+	int m_nextY;
+
+	bool isKeyDown;
 
 	int m_count;
 	DIRECTION direct;

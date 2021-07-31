@@ -61,6 +61,7 @@ HRESULT camel::init()
 	//시작  애니메이션 설정
 	_ani = ANIMATION->findAnimation("ani1");
 
+	isKeyDown = false;
 
 	return S_OK;
 }
@@ -75,7 +76,7 @@ void camel::release()
 void camel::update()
 {
 
-	if (InputManager->isStayKeyDown(VK_UP) && _y > 0)
+	/*if (InputManager->isStayKeyDown(VK_UP) && _y > 0)
 	{
 		_y -= _speed;
 		direct = DIRECTION::TOP;
@@ -95,7 +96,45 @@ void camel::update()
 		if (_x > 0)
 			_x -= _speed;
 		direct = DIRECTION::LEFT;
+	}*/
+
+	//마우스 왼쪽 버튼으로 화면 이동 기능 -> 현재 캐릭터의 x,y의 값을 변경하여 이동 하는 구조로 되어있음
+	if (!isKeyDown) //현재 마우스의 절대 좌표값 표현 용도
+	{
+		m_currentX = _x + m_ptMouse.x;
+		m_currentY = _y + m_ptMouse.y;
 	}
+	if (InputManager->isStayKeyDown(VK_RBUTTON))
+	{
+		isKeyDown = true;
+
+		m_nextX = _x + m_ptMouse.x;
+		m_nextY = _y + m_ptMouse.y;
+		if (m_nextX < m_currentX) //마우스를 왼쪽으로 이동시키면 화면이 오른쪽으로 이동한다
+		{
+			_x = _x + (m_currentX - m_nextX);
+			if (_x > MAPSIZE)  _x = MAPSIZE - IMAGE->findImage("red")->getFrameWidth(); //좌표(캐릭터)가 화면 밖으로 이동 했을 때 예외처리
+		}
+		
+		if (m_nextX > m_currentX) //마우스를 오른쪽으로 이동시키면 화면이 왼쪽으로 이동한다
+		{
+			_x = _x - (m_nextX - m_currentX);
+			if (_x < 0) _x = 0; //좌표(캐릭터)가 화면 밖으로 이동 했을 때 예외처리
+		}
+
+		if (m_nextY < m_currentY) //마우스를 위쪽으로 이동시키면 화면이 아래쪽으로 이동한다
+		{
+			_y = _y + (m_currentY - m_nextY);
+			if (_y > MAPSIZE) _y = MAPSIZE - IMAGE->findImage("red")->getFrameHeight() * 2; //좌표(캐릭터)가 화면 밖으로 이동 했을 때 예외처리
+		}
+
+		if (m_nextY > m_currentY) //마우스를 아래쪽으로 이동시키면 화면이 위쪽으로 이동한다
+		{
+			_y = _y - (m_nextY - m_currentY);
+			if (_y < 0) _y = 0; //좌표(캐릭터)가 화면 밖으로 이동 했을 때 예외처리
+		}
+	}
+	else isKeyDown = false;
 
 	switch (direct)
 	{
@@ -131,4 +170,9 @@ void camel::render()
 {
 	Rectangle(getMapDC(), _redRc.left, _redRc.top, _redRc.right, _redRc.bottom);
 	_red->aniRender(getMapDC(), _redRc.left, _redRc.top, _ani);
+
+	char str[100];
+	sprintf_s(str, "current x : %d, current y : %d", m_currentX, m_currentY);
+	SetTextColor(getMemDC(), RGB(255, 255, 0));
+	TextOut(getMemDC(), WINSIZEX / 2 - 500, WINSIZEY - 200, str, lstrlen(str));
 }

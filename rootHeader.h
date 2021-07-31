@@ -5,14 +5,11 @@
 
 #define MAPSIZE TILEX * TILESIZE
 
-
-
 /*
 	샘플 타일쪽 (툴) 클래스에서 사용할 enum class, 구조체와
 
 	맵 타일쪽 (그리기) 클래스에서 사용할 것들 여기에 선언!
 */
-
 
 #define TILESIZE  36		//샘플 타일 이미지 사이즈
 #define TILEX     50		//맵 타일 x축 개수 
