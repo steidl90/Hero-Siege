@@ -82,8 +82,10 @@ void mapToolSub::update()
 		}
 		else
 		{
+			tagTile* temp2 = m_mapToolmain->getMemoryTile()->back();
 			m_mapToolmain->getMemoryTile()->pop_back();
 			m_mapToolmain->setTile(m_mapToolmain->getTagTile(), m_mapToolmain->getMemoryTile()->back());
+			SAFE_DELETE(temp2);
 		}
 	}
 	m_mapToolmain->setMainMapSelect(_ctrSelect);

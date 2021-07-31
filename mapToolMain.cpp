@@ -336,7 +336,14 @@ void mapToolMain::pushTile()
 
 	// 기억할 타일 변경 정보는 100개 까지.. 일단
 	if (m_lTileMemory.size() > 100)
+	{
+		
+		// 할당받은거 해제 안하면 터짐..
+		tagTile* temp2 = m_lTileMemory.front();
 		m_lTileMemory.pop_front();
+		SAFE_DELETE(temp2);
+		
+	}
 }
 
 // 뒤로가기용 셋 타일
