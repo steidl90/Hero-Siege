@@ -35,15 +35,15 @@ void camera::update()
 		camera_y2 = camera_height;
 	}
 
-	if (camera_x2 >= 2500)
+	if (camera_x2 >= MAPSIZE)
 	{
-		camera_x2 = 2500;
+		camera_x2 = MAPSIZE;
 		camera_x1 = camera_x2 - camera_width;
 
 	}
-	if (camera_y2 >= WINSIZEY + 500)
+	if (camera_y2 >= MAPSIZE)
 	{
-		camera_y2 = WINSIZEY + 500;
+		camera_y2 = MAPSIZE;
 		camera_y1 = camera_y2 - camera_height;
 	}
 

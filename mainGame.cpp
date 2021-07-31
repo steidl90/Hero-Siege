@@ -41,12 +41,12 @@ void mainGame::update()
 {
 	gameNode::update();
 	SCENE->update();
-	//ANIMATION->update();
 	m_player->update();
 	m_camera->setTargetPoint(PointMake(m_player->getPlayRc()->left, m_player->getPlayRc()->top));
 	m_camera->update();
 	///* astar */ _aStar->update();
-	
+	ANIMATION->update();
+
 }
 
 void mainGame::render()
@@ -54,6 +54,11 @@ void mainGame::render()
 	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	/////////////////////////////////////////////////////////
 	///* astar */ _aStar->render();
+
+	// MapBuffer에는 getMapDC에 그려진 맵 전체 크기의 이미지가 들어있다, MapBuffer의 render 함수를 통해
+	// 카메라의 시작 x,y 좌표부터 가로 세로 길이만큼 크기의 이미지를 잘라서 (sour 인수가 그런기능)
+	// 우리가 볼 화면인 backBuffer쪽 getMemDC에다가 그려준다
+
 	this->getMapBuffer()->render(getMemDC(), 0, 0, m_camera->getCameraPoint().x, m_camera->getCameraPoint().y, m_camera->getCameraWidth(), m_camera->getCameraHeight());
 
 	SCENE->render();

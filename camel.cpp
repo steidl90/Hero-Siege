@@ -80,7 +80,7 @@ void camel::update()
 		_y -= _speed;
 		direct = DIRECTION::TOP;
 	}
-	if (InputManager->isStayKeyDown(VK_DOWN) && _y < WINSIZEY + 500)
+	if (InputManager->isStayKeyDown(VK_DOWN) && _y < MAPSIZE - IMAGE->findImage("red")->getFrameHeight())
 	{
 		_y += _speed;
 		direct = DIRECTION::DOWN;

@@ -36,6 +36,7 @@ private:
 	RECT _erase;
 	RECT _save;
 	RECT _load;
+	RECT _fill;
 
 public:
 
