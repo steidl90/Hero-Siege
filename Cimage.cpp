@@ -47,8 +47,7 @@ HRESULT Cimage::init()
 
 
     //=================Object=================//
-
-    IMAGE->addFrameImage("나무빅", "images/나무빅.bmp", 1134, 242, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("나무빅", "images/나무빅.bmp", 1020, 200, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("나무스몰", "images/나무스몰.bmp", 1520, 182, 10, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("나무장작", "images/나무장작.bmp", 308, 75, 4, 1, true, RGB(255, 0, 255));
 

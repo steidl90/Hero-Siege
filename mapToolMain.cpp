@@ -31,8 +31,6 @@ void mapToolMain::update()
 	if(_ctrSelect == static_cast<int>(CTRL::CTRL_FILL))
 		this->fillMap();
 
-
-
 }
 
 void mapToolMain::render()
@@ -50,17 +48,17 @@ void mapToolMain::render()
 		if (_tiles[i].obj == OBJECT::OBJ_NONE)continue;
 
 		IMAGE->frameRender("tilemap", getMapDC(), _tiles[i].rc.left, _tiles[i].rc.top, _tiles[i].objFrameX, _tiles[i].objFrameY);
-
 	}
 
-	for (int i = 0; i < TILEX; i++)
+	//왼쪽 타일 그리드
+	/*for (int i = 0; i < TILEX; i++)
 	{
 		LineMake(getMapDC(), 0, i * TILESIZE, MAPSIZE, i * TILESIZE);
 	}
 	for (int i = 0; i < TILEY; i++)
 	{
 		LineMake(getMapDC(), i * TILESIZE, 0, i * TILESIZE, MAPSIZE);
-	}
+	}*/
 
 }
 
