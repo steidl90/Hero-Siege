@@ -72,20 +72,3 @@
 extern HINSTANCE m_hInstance;
 extern HWND m_hWnd;
 extern POINT m_ptMouse;
-
-
-//========================================================
-//						전역 define
-//========================================================
-
-#define TESTNUM	  -10
-#define TILESIZE  36		//오른쪽화면 타일 사이즈
-#define TILEX     50		//왼쪽화면타일 사이즈 X
-#define TILEY     50		//왼쪽화면타일 사이즈 Y
-
-#define TILESIZEX TILEX * TILESIZE
-#define TILESIZEY TILEY * TILESIZE
-
-//화면  오른쪽 이미지 타일 갯수
-#define SAMPLETILEX 18
-#define SAMPLETILEY 8
