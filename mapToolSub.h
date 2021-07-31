@@ -39,6 +39,7 @@ private:
 	RECT _save;
 	RECT _load;
 	RECT m_fill;
+	RECT m_back;
 
 public:
 

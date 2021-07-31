@@ -9,7 +9,7 @@ HRESULT mapToolMain::init()
 	maptoolSetup();
 
 	m_isKeyUp = true;
-
+	m_isDifferentTile = 0;
 	return S_OK;
 }
 
@@ -89,6 +89,8 @@ void mapToolMain::maptoolSetup()
 		_tiles[i].terrain = terrainSelect(_tiles[i].terrainFrameX, _tiles[i].terrainFrameY);
 		_tiles[i].obj = OBJECT::OBJ_NONE;
 	}
+
+	this->pushTile();
 }
 
 void mapToolMain::setMap()
@@ -120,10 +122,23 @@ void mapToolMain::setMap()
 					{
 						for (k = m_currentDragTile.index_StartX, m = m_currentDragTile.frame_StartX; k <= m_currentDragTile.index_EndX; k++, m++)
 						{
+							if (_tiles[i + k + j * TILEX].terrainFrameX != m)
+								m_isDifferentTile++;
+							else if (_tiles[i + k + j * TILEX].terrainFrameY != l)
+								m_isDifferentTile++;
+							else if (_tiles[i + k + j * TILEX].terrain != terrainSelect(1, 0))
+								m_isDifferentTile++;
+
 							_tiles[i + k + j * TILEX].terrainFrameX = m;
 							_tiles[i + k + j * TILEX].terrainFrameY = l;
 							_tiles[i + k + j * TILEX].terrain = terrainSelect(1, 0);
 						}
+					}
+					// 이전과 같은 타일이 아닐때
+					if (m_isDifferentTile > 0)
+					{
+						this->pushTile();
+						m_isDifferentTile = 0;
 					}
 				}
 				break;
@@ -135,24 +150,46 @@ void mapToolMain::setMap()
 					{
 						for (k = m_currentDragTile.index_StartX, m = m_currentDragTile.frame_StartX; k <= m_currentDragTile.index_EndX; k++, m++)
 						{
+							if (_tiles[i + k + j * TILEX].objFrameX != m)
+								m_isDifferentTile++;
+							else if (_tiles[i + k + j * TILEX].objFrameY != l)
+								m_isDifferentTile++;
+							else if (_tiles[i + k + j * TILEX].obj != objSelect(1, 0))
+								m_isDifferentTile++;
+
 							_tiles[i + k + j * TILEX].objFrameX = m;
 							_tiles[i + k + j * TILEX].objFrameY = l;
 							_tiles[i + k + j * TILEX].obj = objSelect(1, 0);
 						}
+					}
+					if (m_isDifferentTile > 0)
+					{
+						this->pushTile();
+						m_isDifferentTile = 0;
 					}
 				}
 				break;
 				case CTRL::CTRL_FILL:
 				break;
 				default:
+					if (_tiles[i].obj != OBJECT::OBJ_NONE)
+						m_isDifferentTile++;
 					_tiles[i].obj = OBJECT::OBJ_NONE;
+
+					if (m_isDifferentTile > 0)
+					{
+						this->pushTile();
+						m_isDifferentTile = 0;
+					}
 					break;
 				}
 				InvalidateRect(m_hWnd, NULL, false);
 				break;
 			}
+
 		}
 	}
+
 }
 
 void mapToolMain::fillMap()
@@ -200,10 +237,22 @@ void mapToolMain::fillMap()
 								{
 									for (j = startX; j <= endX; j++)
 									{
+										if (_tiles[j + k * TILEX].terrainFrameX != _currentTile.frame_x)
+											m_isDifferentTile++;
+										else if (_tiles[j + k * TILEX].terrainFrameY != _currentTile.frame_y)
+											m_isDifferentTile++;
+										else if (_tiles[j + k * TILEX].terrain != terrainSelect(1, 0))
+											m_isDifferentTile++;
+
 										_tiles[j + k * TILEX].terrainFrameX = _currentTile.frame_x;
 										_tiles[j + k * TILEX].terrainFrameY = _currentTile.frame_y;
 										_tiles[j + k * TILEX].terrain = terrainSelect(1, 0);
 									}
+								}
+								if (m_isDifferentTile > 0)
+								{
+									this->pushTile();
+									m_isDifferentTile = 0;
 								}
 								m_vSelectTileIndex.clear();
 								break;
@@ -221,7 +270,6 @@ void mapToolMain::fillMap()
 	{
 		m_isKeyUp = true;
 	}
-	
 }
 
 TERRAIN mapToolMain::terrainSelect(int frameX, int frameY)
@@ -253,6 +301,27 @@ OBJECT mapToolMain::objSelect(int frameX, int frameY)
 {
 	return OBJECT::OBJ_BLOCK1;
 }
+
+// 뒤로가기용 푸쉬타일
+void mapToolMain::pushTile()
+{
+	tagTile* temp = new tagTile[TILEX * TILEY];
+	memset(temp, 0, sizeof(tagTile) * TILEX * TILEY);
+	setTile(temp, _tiles);
+
+	m_lTileMemory.push_back(temp);
+
+	// 기억할 타일 변경 정보는 100개 까지.. 일단
+	if (m_lTileMemory.size() > 100)
+		m_lTileMemory.pop_front();
+}
+
+// 뒤로가기용 셋 타일
+void mapToolMain::setTile(tagTile* tileDst, tagTile* tileSour)
+{
+	memcpy(tileDst, tileSour, sizeof(tagTile) * TILEX * TILEY);
+}
+
 
 void mapToolMain::indexCalculate(vector<int> vInt, int* x1, int* y1, int* x2, int* y2)
 {

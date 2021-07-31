@@ -13,6 +13,7 @@ HRESULT mapToolSub::init()
 	_save = RectMakeCenter(CAMERAWIDTH + 100, WINSIZEY / 2 + 100, 50, 50);
 	_load = RectMakeCenter(CAMERAWIDTH + 200, WINSIZEY / 2 + 100, 50, 50);
 	m_fill = RectMakeCenter(CAMERAWIDTH + 300, WINSIZEY / 2 + 100, 50, 50);
+	m_back = RectMakeCenter(CAMERAWIDTH + 100, WINSIZEY / 2 + 200, 50, 50);
 
 	m_isKeyUp = true;
 
@@ -72,7 +73,19 @@ void mapToolSub::update()
 	{
 		_ctrSelect = static_cast<int>(CTRL::CTRL_FILL);
 	}
-
+	else if (PtInRect(&m_back, m_ptMouse) && InputManager->isOnceKeyDown(VK_LBUTTON))
+	{
+		// 클래스간 메모리 참조해서 사용할때는 무조건 주소로 받아서 쓰기... getMemoryTile 주소말고 그냥받았다가 작동안됨
+		if (m_mapToolmain->getMemoryTile()->size() == 1)
+		{
+			m_mapToolmain->setTile(m_mapToolmain->getTagTile(), m_mapToolmain->getMemoryTile()->back());
+		}
+		else
+		{
+			m_mapToolmain->getMemoryTile()->pop_back();
+			m_mapToolmain->setTile(m_mapToolmain->getTagTile(), m_mapToolmain->getMemoryTile()->back());
+		}
+	}
 	m_mapToolmain->setMainMapSelect(_ctrSelect);
 	m_mapToolmain->setMainMapDragTile(m_currentDragTile);
 	m_mapToolmain->setMainMapCurrentTile(_currentTile);
@@ -97,6 +110,7 @@ void mapToolSub::render()
 	Rectangle(getMemDC(), _save.left, _save.top, _save.right, _save.bottom);
 	Rectangle(getMemDC(), _load.left, _load.top, _load.right, _load.bottom);
 	Rectangle(getMemDC(), m_fill.left, m_fill.top, m_fill.right, m_fill.bottom);
+	Rectangle(getMemDC(), m_back.left, m_back.top, m_back.right, m_back.bottom);
 
 	SetTextColor(getMemDC(), RGB(0, 0, 0));
 
@@ -106,6 +120,7 @@ void mapToolSub::render()
 	TextOut(getMemDC(), CAMERAWIDTH + 100, WINSIZEY / 2 + 100, TEXT("세이브"), lstrlen("세이브"));
 	TextOut(getMemDC(), CAMERAWIDTH + 200, WINSIZEY / 2 + 100, TEXT("로드"), lstrlen("로드"));
 	TextOut(getMemDC(), CAMERAWIDTH + 300, WINSIZEY / 2 + 100, TEXT("채우기"), lstrlen("채우기"));
+	TextOut(getMemDC(), CAMERAWIDTH + 100, WINSIZEY / 2 + 200, TEXT("뒤로가기"), lstrlen("뒤로가기"));
 
 	// 마우스 클릭시 타일 이미지 알파값
 
