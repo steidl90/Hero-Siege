@@ -15,6 +15,7 @@ class mapToolSub : public gameNode
 {
 
 private:
+	Cimage* m_image;
 
 	mapToolMain* m_mapToolmain;
 
@@ -31,7 +32,12 @@ private:
 	//토글 느낌으로 쓰는 키업 변수
 	bool m_isKeyUp;
 	int _ctrSelect; // 공용
+	int m_subTile; //오른쪽 타일
 	int _pos[2];
+
+	bool isTileLine; //왼쪽 타일 그리드 on off용도
+
+
 
 	RECT _terrain;
 	RECT _object;

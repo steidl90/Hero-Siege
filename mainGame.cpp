@@ -13,6 +13,9 @@ HRESULT mainGame::init()
 	///* astar */	_aStar = new CaStar;
 	///* astar */ _aStar->init();
 	
+	m_image = new Cimage;
+	m_image->init();
+
 	m_player = new camel;
 	m_player->init();
 

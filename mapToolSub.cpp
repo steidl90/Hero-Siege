@@ -6,17 +6,9 @@ HRESULT mapToolSub::init()
 {
 
 	maptoolSetup();
-
-	_terrain = RectMakeCenter(CAMERAWIDTH + 100, WINSIZEY / 2, 50, 50);
-	_object = RectMakeCenter(CAMERAWIDTH + 200, WINSIZEY / 2, 50, 50);
-	_erase = RectMakeCenter(CAMERAWIDTH + 300, WINSIZEY / 2, 50, 50);
-	_save = RectMakeCenter(CAMERAWIDTH + 100, WINSIZEY / 2 + 100, 50, 50);
-	_load = RectMakeCenter(CAMERAWIDTH + 200, WINSIZEY / 2 + 100, 50, 50);
-	m_fill = RectMakeCenter(CAMERAWIDTH + 300, WINSIZEY / 2 + 100, 50, 50);
-	m_back = RectMakeCenter(CAMERAWIDTH + 100, WINSIZEY / 2 + 200, 50, 50);
-
+	m_subTile = 0;
 	m_isKeyUp = true;
-
+	isTileLine = false;
 	return S_OK;
 }
 
@@ -38,42 +30,32 @@ void mapToolSub::update()
 	}
 	setMap();
 
-	// 우클릭, 취소, 드래그 초기화
-	if (InputManager->isOnceKeyDown(VK_RBUTTON))
-	{
-		m_isTileClick = false;
-		memset(&m_currentDragTile, 0, sizeof(tagDragTileIndex));
-		_ctrSelect = static_cast<int>(CTRL::CTRL_ERASER);
-	}
-
-	
-
-	if (PtInRect(&_terrain, m_ptMouse) && InputManager->isOnceKeyDown(VK_LBUTTON))
+	if (InputManager->isOnceKeyDown('1'))
 	{
 		_ctrSelect = static_cast<int>(CTRL::CTRL_TERRAINDRAW);
 	}
-	else if (PtInRect(&_object, m_ptMouse) && InputManager->isOnceKeyDown(VK_LBUTTON))
+	else if (InputManager->isOnceKeyDown('2'))
 	{
 		_ctrSelect = static_cast<int>(CTRL::CTRL_OBJDRAW);
 	}
-	else if (PtInRect(&_erase, m_ptMouse) && InputManager->isOnceKeyDown(VK_LBUTTON))
+	else if (InputManager->isOnceKeyDown('E'))
 	{
 		_ctrSelect = static_cast<int>(CTRL::CTRL_ERASER);
 		memset(&m_currentDragTile, 0, sizeof(tagDragTileIndex));
 	}
-	else if (PtInRect(&_save, m_ptMouse) && InputManager->isOnceKeyDown(VK_LBUTTON))
+	else if (InputManager->isStayKeyDown(VK_CONTROL) && InputManager->isOnceKeyDown('S'))
 	{
 		this->mapSave();
 	}
-	else if (PtInRect(&_load, m_ptMouse) && InputManager->isOnceKeyDown(VK_LBUTTON))
+	else if (InputManager->isStayKeyDown(VK_CONTROL) && InputManager->isOnceKeyDown('V'))
 	{
 		this->mapLoad();
 	}
-	else if (PtInRect(&m_fill, m_ptMouse) && InputManager->isOnceKeyDown(VK_LBUTTON))
+	else if (InputManager->isOnceKeyDown('3'))
 	{
 		_ctrSelect = static_cast<int>(CTRL::CTRL_FILL);
 	}
-	else if (PtInRect(&m_back, m_ptMouse) && InputManager->isOnceKeyDown(VK_LBUTTON))
+	else if (InputManager->isStayKeyDown(VK_CONTROL) && InputManager->isOnceKeyDown('Z'))
 	{
 		// 클래스간 메모리 참조해서 사용할때는 무조건 주소로 받아서 쓰기... getMemoryTile 주소말고 그냥받았다가 작동안됨
 		if (m_mapToolmain->getMemoryTile()->size() == 1)
@@ -88,6 +70,26 @@ void mapToolSub::update()
 			SAFE_DELETE(temp2);
 		}
 	}
+
+	if (InputManager->isOnceKeyDown(VK_TAB))
+	{
+		if (m_subTile <= 7)m_subTile++;
+		if (m_subTile > 7)m_subTile = 0;
+		maptoolSetup();
+	}
+
+	//왼쪽 타일맵 그리드 on off
+	if (InputManager->isOnceKeyDown(VK_F1)) isTileLine = true;
+	if (InputManager->isOnceKeyDown(VK_F2)) isTileLine = false;
+	if (isTileLine)
+	{
+		for (int i = 0; i < TILEX; i++)
+		{
+			LineMake(getMapDC(), 0, i * TILESIZE, MAPSIZE, i * TILESIZE);
+			LineMake(getMapDC(), i * TILESIZE, 0, i * TILESIZE, MAPSIZE);
+		}
+	}
+
 	m_mapToolmain->setMainMapSelect(_ctrSelect);
 	m_mapToolmain->setMainMapDragTile(m_currentDragTile);
 	m_mapToolmain->setMainMapCurrentTile(_currentTile);
@@ -95,8 +97,13 @@ void mapToolSub::update()
 
 void mapToolSub::render()
 {
-	IMAGE->render("tilemap", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth(), 0);
+	//오른쪽 타일 이미지
+	if (m_subTile == 0)IMAGE->render("tilemap", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth(), 0);
+	if (m_subTile == 1)IMAGE->render("나무장작", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("나무장작")->getWidth(), 0);
+	//if (m_subTile == 2)IMAGE->render("나무장작", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("나무장작")->getWidth(), 0);
+	//if (m_subTile == 0)IMAGE->render("tilemap", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth(), 0);
 
+	//오른쪽 타일 그리드
 	for (int i = 0; i < SAMPLETILEY; i++)
 	{
 		LineMake(getMemDC(), MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth(), i * TILESIZE, MAPTOOLPOINT, i * TILESIZE);
@@ -106,31 +113,22 @@ void mapToolSub::render()
 		LineMake(getMemDC(), MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth() + i * TILESIZE, 0, MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth() + i * TILESIZE, IMAGE->findImage("tilemap")->getHeight());
 	}
 
-	Rectangle(getMemDC(), _terrain.left, _terrain.top, _terrain.right, _terrain.bottom);
-	Rectangle(getMemDC(), _object.left, _object.top, _object.right, _object.bottom);
-	Rectangle(getMemDC(), _erase.left, _erase.top, _erase.right, _erase.bottom);
-	Rectangle(getMemDC(), _save.left, _save.top, _save.right, _save.bottom);
-	Rectangle(getMemDC(), _load.left, _load.top, _load.right, _load.bottom);
-	Rectangle(getMemDC(), m_fill.left, m_fill.top, m_fill.right, m_fill.bottom);
-	Rectangle(getMemDC(), m_back.left, m_back.top, m_back.right, m_back.bottom);
-
 	SetTextColor(getMemDC(), RGB(0, 0, 0));
-
-	TextOut(getMemDC(), CAMERAWIDTH + 100, WINSIZEY / 2, TEXT("지형"), lstrlen("지형"));
-	TextOut(getMemDC(), CAMERAWIDTH + 200, WINSIZEY / 2, TEXT("오브젝트"), lstrlen("오브젝트"));
-	TextOut(getMemDC(), CAMERAWIDTH + 300, WINSIZEY / 2, TEXT("지우개"), lstrlen("지우개"));
-	TextOut(getMemDC(), CAMERAWIDTH + 100, WINSIZEY / 2 + 100, TEXT("세이브"), lstrlen("세이브"));
-	TextOut(getMemDC(), CAMERAWIDTH + 200, WINSIZEY / 2 + 100, TEXT("로드"), lstrlen("로드"));
-	TextOut(getMemDC(), CAMERAWIDTH + 300, WINSIZEY / 2 + 100, TEXT("채우기"), lstrlen("채우기"));
-	TextOut(getMemDC(), CAMERAWIDTH + 100, WINSIZEY / 2 + 200, TEXT("뒤로가기"), lstrlen("뒤로가기"));
+	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 160, TEXT("지형    - 1"), lstrlen("지형    - 1"));
+	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 180, TEXT("오브젝트    - 2"), lstrlen("오브젝트    - 2"));
+	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 200, TEXT("지우개    - E"), lstrlen("지우개    - E"));
+	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 220, TEXT("세이브    - 컨트롤+S"), lstrlen("세이브    - 컨트롤+S"));
+	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 240, TEXT("로드    - 컨트롤+V"), lstrlen("로드    - 컨트롤+V"));
+	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 260, TEXT("채우기    - 3"), lstrlen("채우기    - 3"));
+	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 280, TEXT("뒤로가기    - 컨트롤+Z"), lstrlen("뒤로가기    - 컨트롤+Z"));
+	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 300, TEXT("타일맵 그리드    - F1(on),F2(off)"), lstrlen("타일맵 그리드    - F1(on),F2(off)"));
 
 	// 마우스 클릭시 타일 이미지 알파값
-
 	if (m_isTileClick && _ctrSelect != static_cast<int>(CTRL::CTRL_ERASER))
 	{
 		if (_ctrSelect == static_cast<int>(CTRL::CTRL_FILL))
 		{
-			IMAGE->findImage("tilemap")->alphaframeRender(getMemDC(), m_ptMouse.x - 10 , m_ptMouse.y - 10, _currentTile.frame_x, _currentTile.frame_y, 128);
+			if (m_subTile == 0)IMAGE->findImage("tilemap")->alphaframeRender(getMemDC(), m_ptMouse.x - 10 , m_ptMouse.y - 10, _currentTile.frame_x, _currentTile.frame_y, 128);
 		}
 		else
 		{
@@ -162,13 +160,22 @@ void mapToolSub::maptoolSetup()
 			_sampleTiles[i * SAMPLETILEX + j].terrainFrameY = i;
 
 			//좌표값설정
-			SetRect(&_sampleTiles[i * SAMPLETILEX + j].rcTile,
-				(MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth()) + j * TILESIZE,
-				i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth()) + j * TILESIZE + TILESIZE,
-				i * TILESIZE + TILESIZE);
+			if (m_subTile == 0)
+			{
+				SetRect(&_sampleTiles[i * SAMPLETILEX + j].rcTile,
+					(MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth()) + j * TILESIZE,
+					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth()) + j * TILESIZE + TILESIZE,
+					i * TILESIZE + TILESIZE);
+			}
+			if (m_subTile == 1)
+			{
+				SetRect(&_sampleTiles[i * SAMPLETILEX + j].rcTile,
+					(MAPTOOLPOINT - IMAGE->findImage("나무장작")->getWidth()) + j * TILESIZE,
+					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("나무장작")->getWidth()) + j * TILESIZE + TILESIZE,
+					i * TILESIZE + TILESIZE);
+			}
 		}
 	}
-
 }
 
 void mapToolSub::setMap()

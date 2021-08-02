@@ -110,8 +110,8 @@ HRESULT Cimage::init()
     IMAGE->addFrameImage("Ç³Â÷³¯°³", "images/WindmillWing.bmp", 2016, 339, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("Áý1", "images/House1.bmp", 378, 432, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("Áý2", "images/House2.bmp", 458, 290, 1, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("Áý3", "images/House3.bmp", 226, 332, 1, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("Áý4", "images/House4.bmp", 226, 221, 1, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("Áý3", "images/House3.bmp", 482, 332, 1, 1, true, RGB(255, 0, 255));
+    //IMAGE->addFrameImage("Áý4", "images/House4.bmp", 226, 221, 1, 1, true, RGB(255, 0, 255));
 
     //=================item=================//
     IMAGE->addFrameImage("½Å¹ßºò", "images/½Å¹ßºò.bmp", 384, 320, 7, 4, true, RGB(255, 0, 255));
@@ -151,10 +151,11 @@ HRESULT Cimage::init()
 
     //==================ECT=================//
     IMAGE->addFrameImage("È÷Æ®", "images/Hit.bmp", 414, 71, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("Äù½ºÆ®1", "images/Quest1.bmp", 16, 25, 1, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("Äù½ºÆ®2", "images/Quest2.bmp", 16, 25, 1, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("Äù½ºÆ®3", "images/Quest3.bmp", 16, 25, 1, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("Äù½ºÆ®4", "images/Quest4.bmp", 9, 25, 1, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("Äù½ºÆ®1", "images/Quest1.bmp", 48, 25, 3, 1, true, RGB(255, 0, 255));
+
+    IMAGE->addImage("Äù½ºÆ®2", "images/Quest2.bmp", 9, 25, true, RGB(255, 0, 255));
+
+
 
 
 

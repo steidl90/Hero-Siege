@@ -4,6 +4,7 @@
 #include"camel.h"
 #include"mapToolManager.h"
 
+
 ///* astar */ #include "CaStar.h"
 
 class mainGame : public gameNode
@@ -13,7 +14,7 @@ private:
 
 	camel* m_player;
 	camera* m_camera;
-
+	Cimage* m_image;
 	mapToolManager* m_mapTool;
 
 	bool isDebug;

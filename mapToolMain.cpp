@@ -1,4 +1,4 @@
-#include"framework.h"
+#include "framework.h"
 #include "mapToolMain.h"
 #include "mapToolSub.h"
 #include "camera.h"
@@ -51,37 +51,11 @@ void mapToolMain::render()
 		for (startX = x1; startX <= endX; startX++)
 		{
 			IMAGE->frameRender("tilemap", getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].terrainFrameX, _tiles[startX + startY * TILEX].terrainFrameY);
-			if (_tiles[startX + startY * TILEX].obj == OBJECT::OBJ_NONE)continue;
 
+			if (_tiles[startX + startY * TILEX].obj == OBJECT::OBJ_NONE)continue;
 			IMAGE->frameRender("tilemap", getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
 		}
 	}
-
-	//for (size_t i = 0; i < TILEX * TILEY; i++)
-	//{
-
-	//	if (m_camera->getCameraPoint().x - TILESIZE * 2 < _tiles[i].rc.left && m_camera->getCameraPoint().y - TILESIZE * 2 < _tiles[i].rc.top &&
-	//		m_camera->getCameraPoint2().x + TILESIZE * 2 > _tiles[i].rc.right && m_camera->getCameraPoint2().y + TILESIZE * 2 > _tiles[i].rc.bottom)
-	//	{
-	//		IMAGE->frameRender("tilemap", getMapDC(), _tiles[i].rc.left, _tiles[i].rc.top, _tiles[i].terrainFrameX, _tiles[i].terrainFrameY);
-	//		//Rectangle(getMemDC(), _tiles[i].rc.left, _tiles[i].rc.top, _tiles[i].rc.right, _tiles[i].rc.bottom);
-	//	}
-
-	//	if (_tiles[i].obj == OBJECT::OBJ_NONE)continue;
-
-	//	IMAGE->frameRender("tilemap", getMapDC(), _tiles[i].rc.left, _tiles[i].rc.top, _tiles[i].objFrameX, _tiles[i].objFrameY);
-	//}
-
-
-	//왼쪽 타일 그리드
-	/*for (int i = 0; i < TILEX; i++)
-	{
-		LineMake(getMapDC(), 0, i * TILESIZE, MAPSIZE, i * TILESIZE);
-	}
-	for (int i = 0; i < TILEY; i++)
-	{
-		LineMake(getMapDC(), i * TILESIZE, 0, i * TILESIZE, MAPSIZE);
-	}*/
 
 }
 
