@@ -100,12 +100,10 @@ HRESULT Cimage::init()
     IMAGE->addFrameImage("포탈", "images/Portal.bmp", 330, 66, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("게이트", "images/Gate.bmp", 468, 87, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("창고", "images/Chest.bmp", 83, 49, 1, 1, true, RGB(255, 0, 255));
-
     
     IMAGE->addFrameImage("큰풀", "images/GrassBig.bmp", 408, 31, 12, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("작은풀1", "images/GrassSmall1.bmp", 152, 19, 8, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("작은풀2", "images/GrassSmall2.bmp", 160, 17, 8, 1, true, RGB(255, 0, 255));
-
 
     IMAGE->addFrameImage("커피집", "images/CoffeeHouse.bmp", 904, 152, 8, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("풍차", "images/Windmill.bmp", 152, 343, 1, 1, true, RGB(255, 0, 255));
@@ -114,7 +112,6 @@ HRESULT Cimage::init()
     IMAGE->addFrameImage("집2", "images/House2.bmp", 458, 290, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("집3", "images/House3.bmp", 226, 332, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("집4", "images/House4.bmp", 226, 221, 1, 1, true, RGB(255, 0, 255));
-
 
     //=================item=================//
     IMAGE->addFrameImage("신발빅", "images/신발빅.bmp", 384, 320, 7, 4, true, RGB(255, 0, 255));
@@ -151,7 +148,6 @@ HRESULT Cimage::init()
     IMAGE->addFrameImage("선택샤먼", "images/ChooseShaman.bmp", 228, 43, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("선택스틱맨", "images/ChooseStickMan.bmp", 138, 42, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("선택화이트메이지", "images/ChooseWhiteMage.bmp", 180, 37, 6, 1, true, RGB(255, 0, 255));
-
 
     //==================ECT=================//
     IMAGE->addFrameImage("히트", "images/Hit.bmp", 414, 71, 6, 1, true, RGB(255, 0, 255));

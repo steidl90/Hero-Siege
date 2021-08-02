@@ -12,8 +12,8 @@
 */
 
 #define TILESIZE  36		//샘플 타일 이미지 사이즈
-#define TILEX     500		//맵 타일 x축 개수 
-#define TILEY     500		//맵 타일 y축 개수
+#define TILEX	  50		//맵 타일 x축 개수 
+#define TILEY     50		//맵 타일 y축 개수
 
 
 #define TILESIZEX TILEX * TILESIZE	// 맵 타일 전체 x축 사이즈(길이)
