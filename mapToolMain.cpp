@@ -52,11 +52,11 @@ void mapToolMain::render()
 	{
 		for (startX = index_X1; startX <= endX; startX++)
 		{
-			if (m_subTile == 0)IMAGE->frameRender("tilemap", getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].terrainFrameX, _tiles[startX + startY * TILEX].terrainFrameY);
-
+			IMAGE->frameRender("tilemap", getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].terrainFrameX, _tiles[startX + startY * TILEX].terrainFrameY);
+			
 			if (_tiles[startX + startY * TILEX].obj == OBJECT::OBJ_NONE)continue;
 			if (m_subTile == 0)IMAGE->frameRender("tilemap", getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
-			if (m_subTile == 1)IMAGE->frameRender("나무장작", getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].terrainFrameX, _tiles[startX + startY * TILEX].objFrameY);
+			if (m_subTile == 1)IMAGE->frameRender("나무장작", getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
 		}
 	}
 }

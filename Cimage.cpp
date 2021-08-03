@@ -88,7 +88,7 @@ HRESULT Cimage::init()
     //=================Object=================//
     IMAGE->addFrameImage("나무빅", "images/나무빅.bmp", 1020, 200, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("나무스몰", "images/나무스몰.bmp", 1520, 182, 10, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("나무장작", "images/나무장작.bmp", 308, 75, 4, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("나무장작", "images/Tile-2.bmp", 648, 288, 18, 8, true, RGB(255, 0, 255));
 
     IMAGE->addFrameImage("제너레이터", "images/Generator.bmp", 485, 67, 5, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("기둥", "images/Pillar.bmp", 222, 87, 6, 1, true, RGB(255, 0, 255));

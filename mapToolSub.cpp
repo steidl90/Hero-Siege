@@ -43,7 +43,7 @@ void mapToolSub::render()
 {
 	//오른쪽 타일 이미지
 	if (m_subTile == 0)IMAGE->render("tilemap", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth(), 0);
-	if (m_subTile == 1)IMAGE->render("나무장작", getMemDC(), 1150 - IMAGE->findImage("나무장작")->getWidth(), 0, 0, 0, 300, 36);
+	if (m_subTile == 1)IMAGE->render("나무장작", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("나무장작")->getWidth(), 0);
 	//if (m_subTile == 2)IMAGE->render("나무장작", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("나무장작")->getWidth(), 0);
 	//if (m_subTile == 0)IMAGE->render("tilemap", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth(), 0);
 
@@ -94,8 +94,8 @@ void mapToolSub::maptoolSetup()
 			if (m_subTile == 1)
 			{
 				SetRect(&_sampleTiles[i * SAMPLETILEX + j].rcTile,
-					(1150 - IMAGE->findImage("나무장작")->getWidth()) + j * TILESIZE,
-					i * TILESIZE, (1150 - IMAGE->findImage("나무장작")->getWidth()) + j * TILESIZE + TILESIZE,
+					(MAPTOOLPOINT - IMAGE->findImage("나무장작")->getWidth()) + j * TILESIZE,
+					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("나무장작")->getWidth()) + j * TILESIZE + TILESIZE,
 					i * TILESIZE + TILESIZE);
 			}
 		}
