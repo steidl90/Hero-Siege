@@ -16,6 +16,8 @@ HRESULT mapToolManager::init()
 	m_subMapTool->setMapToolMainMemory(m_mainMapTool);
 
 	m_mainMapTool->setCameraMemory(m_camera);
+
+	
 	return S_OK;
 }
 
@@ -27,6 +29,12 @@ void mapToolManager::update()
 {
 	m_mainMapTool->update();
 	m_subMapTool->update();
+
+	// 공용값 적용시켜주기
+	m_mainMapTool->setSubTile(m_subMapTool->getSubTile());
+	m_mainMapTool->setMainMapCurrentTile(m_subMapTool->getCurrentTile());
+	m_mainMapTool->setMainMapDragTile(m_subMapTool->getTagDragTile());
+	m_mainMapTool->setMainMapSelect(m_subMapTool->getCtrlSelect());
 
 }
 

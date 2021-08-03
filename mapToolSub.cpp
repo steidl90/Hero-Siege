@@ -32,11 +32,6 @@ void mapToolSub::update()
 	this->inputFunction();
 	
 	setMap();
-
-	// 전방참조, 데이터 mainTool로 보내주기
-	m_mapToolmain->setMainMapSelect(_ctrSelect);
-	m_mapToolmain->setMainMapDragTile(m_currentDragTile);
-	m_mapToolmain->setMainMapCurrentTile(_currentTile);
 }
 
 void mapToolSub::render()
@@ -178,7 +173,6 @@ void mapToolSub::setMap()
 						}
 
 						this->dragTileInit();
-						m_mapToolmain->setMainMapDragTile(m_currentDragTile);
 						break;
 					}
 				}
@@ -317,7 +311,7 @@ void mapToolSub::clickAlphaRender()
 				for (countJ = 0, j = m_currentDragTile.frame_StartX; j <= m_currentDragTile.frame_EndX; countJ++, j++)
 				{
 					if (m_subTile == 0)IMAGE->findImage("tilemap")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
-					if (m_subTile == 1)IMAGE->findImage("나무장작")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
+					//if (m_subTile == 1)IMAGE->findImage("나무장작")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
 				}
 			}
 		}

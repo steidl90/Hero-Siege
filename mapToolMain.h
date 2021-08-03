@@ -6,7 +6,7 @@
 	맵에 그려지는 클래스입니다
 
 */
-class mapToolSub;
+
 class camera;
 class mapToolMain : public gameNode
 {
@@ -24,11 +24,13 @@ private:
 
 	tagDragTileIndex m_currentDragTile; // 공용
 
+	int _ctrSelect; // 공용
+
+	int m_subTile; //오른쪽 타일, 공용
+
 	tileMemory m_lTileMemory;
 	tileMemory::iterator m_liTileMemory;
 
-	int _ctrSelect; // 공용
-	int m_subTile; //오른쪽 타일
 
 	vector<int> m_vSelectTileIndex;
 
@@ -53,9 +55,12 @@ public:
 
 	tagTile* getMainMapTile() { return _tiles; }
 
+	// 공용 데이터 받아오기
 	void setMainMapCurrentTile(tagCurrentTile tile) { _currentTile = tile; }
 	void setMainMapDragTile(tagDragTileIndex tile) { m_currentDragTile = tile; }
 	void setMainMapSelect(int select) { _ctrSelect = select; }
+	void setSubTile(int sub) { m_subTile = sub; }
+
 	void setCameraMemory(camera* c) { m_camera = c; }
 	void setSubTile(int subtile) { m_subTile = subtile; }
 

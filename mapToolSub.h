@@ -24,6 +24,9 @@ private:
 	tagCurrentTile _currentTile; // 공용
 
 	tagDragTileIndex m_currentDragTile; // 공용
+	
+	int _ctrSelect; // 공용
+
 
 	// 버튼 클릭 여부 
 	bool m_isButtonClick;
@@ -31,7 +34,6 @@ private:
 	bool m_isTileClick;
 	//토글 느낌으로 쓰는 키업 변수
 	bool m_isKeyUp;
-	int _ctrSelect; // 공용
 	int m_subTile; //오른쪽 타일
 	int _pos[2];
 
@@ -63,7 +65,12 @@ public:
 	void dragTileInit();
 	void setMapToolMainMemory(mapToolMain* mt) { m_mapToolmain = mt; }
 
+
+	int getCtrlSelect()const { return _ctrSelect; }
 	int getSubTile()const { return m_subTile; }
+	tagCurrentTile getCurrentTile()const { return _currentTile; }
+	tagDragTileIndex getTagDragTile()const { return m_currentDragTile; }
+
 
 	// 코드 간략화를 위한 함수들
 

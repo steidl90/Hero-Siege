@@ -59,6 +59,10 @@ void mapToolMain::render()
 			if (m_subTile == 1)IMAGE->frameRender("나무장작", getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
 		}
 	}
+	char str[100];
+	sprintf_s(str, "서브타일 : %d ", m_subTile);
+	TextOut(getMemDC(), 100, 100, str, lstrlen(str));
+
 }
 
 void mapToolMain::maptoolSetup()
