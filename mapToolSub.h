@@ -63,6 +63,8 @@ public:
 	void dragTileInit();
 	void setMapToolMainMemory(mapToolMain* mt) { m_mapToolmain = mt; }
 
+	int getSubTile()const { return m_subTile; }
+
 	// 코드 간략화를 위한 함수들
 
 	void inputFunction();

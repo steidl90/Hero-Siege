@@ -27,6 +27,7 @@ void mapToolManager::update()
 {
 	m_mainMapTool->update();
 	m_subMapTool->update();
+
 }
 
 void mapToolManager::render()

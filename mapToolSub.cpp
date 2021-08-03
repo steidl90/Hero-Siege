@@ -43,7 +43,7 @@ void mapToolSub::render()
 {
 	//오른쪽 타일 이미지
 	if (m_subTile == 0)IMAGE->render("tilemap", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth(), 0);
-	if (m_subTile == 1)IMAGE->render("나무장작", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("나무장작")->getWidth(), 0);
+	if (m_subTile == 1)IMAGE->render("나무장작", getMemDC(), 1150 - IMAGE->findImage("나무장작")->getWidth(), 0, 0, 0, 300, 36);
 	//if (m_subTile == 2)IMAGE->render("나무장작", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("나무장작")->getWidth(), 0);
 	//if (m_subTile == 0)IMAGE->render("tilemap", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth(), 0);
 
@@ -94,8 +94,8 @@ void mapToolSub::maptoolSetup()
 			if (m_subTile == 1)
 			{
 				SetRect(&_sampleTiles[i * SAMPLETILEX + j].rcTile,
-					(MAPTOOLPOINT - IMAGE->findImage("나무장작")->getWidth()) + j * TILESIZE,
-					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("나무장작")->getWidth()) + j * TILESIZE + TILESIZE,
+					(1150 - IMAGE->findImage("나무장작")->getWidth()) + j * TILESIZE,
+					i * TILESIZE, (1150 - IMAGE->findImage("나무장작")->getWidth()) + j * TILESIZE + TILESIZE,
 					i * TILESIZE + TILESIZE);
 			}
 		}
@@ -305,6 +305,7 @@ void mapToolSub::clickAlphaRender()
 		if (_ctrSelect == static_cast<int>(CTRL::CTRL_FILL))
 		{
 			if (m_subTile == 0)IMAGE->findImage("tilemap")->alphaframeRender(getMemDC(), m_ptMouse.x - 10, m_ptMouse.y - 10, _currentTile.frame_x, _currentTile.frame_y, 128);
+			if (m_subTile == 1)IMAGE->findImage("나무장작")->alphaframeRender(getMemDC(), m_ptMouse.x - 10, m_ptMouse.y - 10, _currentTile.frame_x, _currentTile.frame_y, 128);
 		}
 		else
 		{
@@ -315,7 +316,8 @@ void mapToolSub::clickAlphaRender()
 			{
 				for (countJ = 0, j = m_currentDragTile.frame_StartX; j <= m_currentDragTile.frame_EndX; countJ++, j++)
 				{
-					IMAGE->findImage("tilemap")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
+					if (m_subTile == 0)IMAGE->findImage("tilemap")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
+					if (m_subTile == 1)IMAGE->findImage("나무장작")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
 				}
 			}
 		}

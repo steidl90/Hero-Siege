@@ -28,6 +28,7 @@ private:
 	tileMemory::iterator m_liTileMemory;
 
 	int _ctrSelect; // 공용
+	int m_subTile; //오른쪽 타일
 
 	vector<int> m_vSelectTileIndex;
 
