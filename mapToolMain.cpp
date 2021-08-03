@@ -37,28 +37,9 @@ void mapToolMain::update()
 
 void mapToolMain::render()
 {
-	// 타일 랜더 최적화
-	int index_X1 = m_camera->getCameraPoint().x / TILESIZE;
-	int index_Y1 = m_camera->getCameraPoint().y / TILESIZE;
-	int index_X2 = m_camera->getCameraPoint2().x / TILESIZE;
-	int index_Y2 = m_camera->getCameraPoint2().y / TILESIZE;
+	
+	this->cullingRender();
 
-	int startX = index_X1;
-	int startY = index_Y1;
-	int endX = index_X2;
-	int endY = index_Y2;
-
-	for (startY = index_Y1; startY <= endY; startY++)
-	{
-		for (startX = index_X1; startX <= endX; startX++)
-		{
-			IMAGE->frameRender("tilemap", getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].terrainFrameX, _tiles[startX + startY * TILEX].terrainFrameY);
-			
-			if (_tiles[startX + startY * TILEX].obj == OBJECT::OBJ_NONE)continue;
-			if (m_subTile == 0)IMAGE->frameRender("tilemap", getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
-			if (m_subTile == 1)IMAGE->frameRender("나무장작", getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
-		}
-	}
 	char str[100];
 	sprintf_s(str, "서브타일 : %d ", m_subTile);
 	TextOut(getMemDC(), 100, 100, str, lstrlen(str));
@@ -91,6 +72,9 @@ void mapToolMain::maptoolSetup()
 
 		_tiles[i].terrain = terrainSelect(_tiles[i].terrainFrameX, _tiles[i].terrainFrameY);
 		_tiles[i].obj = OBJECT::OBJ_NONE;
+
+		*_tiles[i].terrainImage = "tilemap";
+		*_tiles[i].objImage = "나무장작";
 	}
 
 	// 초기 타일 정보 뒤로가기용 리스트에 저장
@@ -195,6 +179,7 @@ void mapToolMain::fillMap()
 								_tiles[j + k * TILEX].terrainFrameX = _currentTile.frame_x;
 								_tiles[j + k * TILEX].terrainFrameY = _currentTile.frame_y;
 								_tiles[j + k * TILEX].terrain = terrainSelect(1, 0);
+								*_tiles[j + k * TILEX].terrainImage = *_currentTile.terrainImage;
 							}
 						}
 						// m_isDifferentTile 변수를 사용하여, 뒤로가기에 저장할 타일에 대해 중복을 방지함!
@@ -328,6 +313,8 @@ void mapToolMain::drawTerrain(int i)
 			_tiles[i + k + j * TILEX].terrainFrameX = m;
 			_tiles[i + k + j * TILEX].terrainFrameY = l;
 			_tiles[i + k + j * TILEX].terrain = terrainSelect(1, 0);
+			*_tiles[i + k + j * TILEX].terrainImage = *m_currentDragTile.terrainImage;
+
 		}
 	}
 	// 이전과 같은 타일이 아닐때
@@ -358,11 +345,48 @@ void mapToolMain::drawObject(int i)
 			_tiles[i + k + j * TILEX].objFrameX = m;
 			_tiles[i + k + j * TILEX].objFrameY = l;
 			_tiles[i + k + j * TILEX].obj = objSelect(1, 0);
+			*_tiles[i + k + j * TILEX].objImage = *m_currentDragTile.objImage;
 		}
 	}
 	if (m_isDifferentTile > 0)
 	{
 		this->pushTile();
 		m_isDifferentTile = 0;
+	}
+}
+
+void mapToolMain::cullingRender()
+{
+	// 타일 랜더 최적화
+	// 카메라 좌상단 좌표 기준부터 우하단 좌표까지를 타일 인덱스로 렌더링하게 구현
+	int index_X1 = m_camera->getCameraPoint().x / TILESIZE;
+	int index_Y1 = m_camera->getCameraPoint().y / TILESIZE;
+	int index_X2 = m_camera->getCameraPoint2().x / TILESIZE;
+	int index_Y2 = m_camera->getCameraPoint2().y / TILESIZE;
+
+	int startX = index_X1;
+	int startY = index_Y1;
+	int endX = index_X2;
+	int endY = index_Y2;
+
+	// 인덱스 범위초과 예외처리
+	if (endY > 49)
+		endY = 49;
+	if (endX > 49)
+		endX = 49;
+
+	for (startY = index_Y1; startY <= endY; startY++)
+	{
+		for (startX = index_X1; startX <= endX; startX++)
+		{	
+			if (*_tiles[startX + startY * TILEX].terrainImage == NULL)
+				*_tiles[startX + startY * TILEX].terrainImage = "tilemap";
+			IMAGE->frameRender(*_tiles[startX + startY * TILEX].terrainImage, getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].terrainFrameX, _tiles[startX + startY * TILEX].terrainFrameY);
+
+			if (*_tiles[startX + startY * TILEX].objImage == NULL)
+				*_tiles[startX + startY * TILEX].objImage = "나무장작";
+			if (_tiles[startX + startY * TILEX].obj == OBJECT::OBJ_NONE)continue;
+			IMAGE->frameRender(*_tiles[startX + startY * TILEX].objImage, getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
+		}
 	}
 }

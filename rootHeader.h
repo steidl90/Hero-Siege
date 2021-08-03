@@ -76,6 +76,9 @@ struct tagTile
 	int objFrameX;
 	int objFrameY;
 
+	char* terrainImage[20];
+	char* objImage[20];
+
 };
 
 //샘플 (툴용) 타일 구조체
@@ -84,13 +87,19 @@ struct tagSampleTile
 	RECT rcTile;
 	int terrainFrameX;
 	int terrainFrameY;
+
+	char* terrainImage[20];
+	char* objImage[20];
 };
 
-//현재 타일 구조체 - 일단은 프레임 정보만 담김
+//현재 타일 구조체
 struct tagCurrentTile
 {
 	int frame_x;
 	int frame_y;
+
+	char* terrainImage[20];
+	char* objImage[20];
 };
 
 // 드래그 할시 시작 타일 인덱스 x,y 정보 끝 타일 인덱스 x, y 정보
@@ -106,4 +115,7 @@ struct tagDragTileIndex
 	int frame_StartY;
 	int frame_EndX;
 	int frame_EndY;
+
+	char* terrainImage[20];
+	char* objImage[20];
 };

@@ -65,6 +65,7 @@ public:
 	void dragTileInit();
 	void setMapToolMainMemory(mapToolMain* mt) { m_mapToolmain = mt; }
 
+	// 공용 데이터 함수
 
 	int getCtrlSelect()const { return _ctrSelect; }
 	int getSubTile()const { return m_subTile; }

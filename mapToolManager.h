@@ -12,7 +12,6 @@ class mapToolManager : public gameNode
 	mapToolSub* m_subMapTool;
 	camera* m_camera;
 
-	int m_subTile;
 
 public:
 

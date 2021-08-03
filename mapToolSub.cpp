@@ -39,8 +39,7 @@ void mapToolSub::render()
 	//오른쪽 타일 이미지
 	if (m_subTile == 0)IMAGE->render("tilemap", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth(), 0);
 	if (m_subTile == 1)IMAGE->render("나무장작", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("나무장작")->getWidth(), 0);
-	//if (m_subTile == 2)IMAGE->render("나무장작", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("나무장작")->getWidth(), 0);
-	//if (m_subTile == 0)IMAGE->render("tilemap", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth(), 0);
+
 
 	//오른쪽 타일 그리드
 	for (int i = 0; i < SAMPLETILEY; i++)
@@ -85,6 +84,10 @@ void mapToolSub::maptoolSetup()
 					(MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth()) + j * TILESIZE,
 					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth()) + j * TILESIZE + TILESIZE,
 					i * TILESIZE + TILESIZE);
+
+				*_sampleTiles[i * SAMPLETILEX + j].terrainImage = "tilemap";
+				*_sampleTiles[i * SAMPLETILEX + j].objImage = "tilemap";
+
 			}
 			if (m_subTile == 1)
 			{
@@ -92,6 +95,9 @@ void mapToolSub::maptoolSetup()
 					(MAPTOOLPOINT - IMAGE->findImage("나무장작")->getWidth()) + j * TILESIZE,
 					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("나무장작")->getWidth()) + j * TILESIZE + TILESIZE,
 					i * TILESIZE + TILESIZE);
+
+				*_sampleTiles[i * SAMPLETILEX + j].terrainImage = "나무장작";
+				*_sampleTiles[i * SAMPLETILEX + j].objImage = "나무장작";
 			}
 		}
 	}
@@ -110,6 +116,8 @@ void mapToolSub::setMap()
 				{
 					_currentTile.frame_x = _sampleTiles[i].terrainFrameX;
 					_currentTile.frame_y = _sampleTiles[i].terrainFrameY;
+					*_currentTile.terrainImage = *_sampleTiles[i].terrainImage;
+					*_currentTile.objImage = *_sampleTiles[i].objImage;
 					m_isTileClick = true;
 					break;
 				}
@@ -131,6 +139,8 @@ void mapToolSub::setMap()
 					{
 						m_currentDragTile.index_StartX = _sampleTiles[i].terrainFrameX;
 						m_currentDragTile.index_StartY = _sampleTiles[i].terrainFrameY;
+						*m_currentDragTile.terrainImage = *_sampleTiles[i].terrainImage;
+						*m_currentDragTile.objImage = *_sampleTiles[i].objImage;
 
 						m_isKeyUp = false;
 						break;
@@ -150,7 +160,9 @@ void mapToolSub::setMap()
 					{
 						m_currentDragTile.index_EndX = _sampleTiles[i].terrainFrameX;
 						m_currentDragTile.index_EndY = _sampleTiles[i].terrainFrameY;
-						
+						*m_currentDragTile.terrainImage = *_sampleTiles[i].terrainImage;
+						*m_currentDragTile.objImage = *_sampleTiles[i].objImage;
+
 						m_isTileClick = true;
 						m_isKeyUp = true;
 
@@ -311,7 +323,7 @@ void mapToolSub::clickAlphaRender()
 				for (countJ = 0, j = m_currentDragTile.frame_StartX; j <= m_currentDragTile.frame_EndX; countJ++, j++)
 				{
 					if (m_subTile == 0)IMAGE->findImage("tilemap")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
-					//if (m_subTile == 1)IMAGE->findImage("나무장작")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
+					if (m_subTile == 1)IMAGE->findImage("나무장작")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
 				}
 			}
 		}

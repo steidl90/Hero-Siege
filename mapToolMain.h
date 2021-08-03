@@ -14,7 +14,7 @@ class mapToolMain : public gameNode
 	typedef list<tagTile*> tileMemory;
 
 private:
-	mapToolSub* m_mapToolSub;
+
 	camera* m_camera;
 
 	tagTile _tiles[TILEX * TILEY];
@@ -62,7 +62,6 @@ public:
 	void setSubTile(int sub) { m_subTile = sub; }
 
 	void setCameraMemory(camera* c) { m_camera = c; }
-	void setSubTile(int subtile) { m_subTile = subtile; }
 
 
 	// 뒤로가기 구현위해 필요한 함수들
@@ -77,5 +76,6 @@ public:
 
 	void drawTerrain(int index);
 	void drawObject(int index);
+	void cullingRender();
 };
 

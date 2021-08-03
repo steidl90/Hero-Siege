@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="singleton">
-      <UniqueIdentifier>{4195f04f-5855-464f-9ac2-ec62e85370d4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Manager">
       <UniqueIdentifier>{0e37485a-37e2-4a87-b41b-bd726dcd3fed}</UniqueIdentifier>
     </Filter>
@@ -139,6 +136,9 @@
     <Filter Include="mainGame\히어로시즈\Cobject\Cshop">
       <UniqueIdentifier>{cd8a4305-9180-4c46-96ca-b22d6a9041b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="리소스 파일\singleton">
+      <UniqueIdentifier>{4195f04f-5855-464f-9ac2-ec62e85370d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -160,7 +160,7 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="singleton.h">
-      <Filter>singleton</Filter>
+      <Filter>리소스 파일\singleton</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>Manager</Filter>
