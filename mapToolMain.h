@@ -12,6 +12,8 @@ class mapToolMain : public gameNode
 {
 
 	typedef list<tagTile*> tileMemory;
+	typedef list<tagTileImage*> tileImageMemory;
+
 
 private:
 
@@ -19,6 +21,8 @@ private:
 
 	tagTile _tiles[TILEX * TILEY];
 	tagTile temp_tiles[TILEX * TILEY];
+	tagTileImage _tilesImage[TILEX * TILEY];
+	tagTileImage temp_tilesImage[TILEX * TILEY];
 
 	tagCurrentTile _currentTile; // 공용
 
@@ -29,8 +33,8 @@ private:
 	int m_subTile; //오른쪽 타일, 공용
 
 	tileMemory m_lTileMemory;
-	tileMemory::iterator m_liTileMemory;
 
+	tileImageMemory m_lTileImageMemory;
 
 	vector<int> m_vSelectTileIndex;
 
@@ -54,6 +58,7 @@ public:
 	OBJECT objSelect(int frameX, int frameY);
 
 	tagTile* getMainMapTile() { return _tiles; }
+	tagTileImage* getMainMapTileImage() { return _tilesImage; }
 
 	// 공용 데이터 받아오기
 	void setMainMapCurrentTile(tagCurrentTile tile) { _currentTile = tile; }
@@ -66,9 +71,10 @@ public:
 
 	// 뒤로가기 구현위해 필요한 함수들
 	void pushTile();
-	void setTile(tagTile* tileDst, tagTile* tileSour);
+	void setTile(tagTile* tileDst, tagTile* tileSour, tagTileImage* tileImgDst, tagTileImage* tileImgSour);
 	tileMemory* getMemoryTile() { return &m_lTileMemory; }
-	tagTile* getTagTile() { return _tiles; }
+	tileImageMemory* getMemoryTileImage() { return &m_lTileImageMemory; }
+
 
 	void indexCalculate(vector<int> vInt, int* x1, int* y1, int* x2, int* y2);
 

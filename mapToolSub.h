@@ -19,6 +19,8 @@ private:
 
 	mapToolMain* m_mapToolmain;
 
+	tagTileImage _sampleTileImage[SAMPLETILEX * SAMPLETILEY];
+
 	tagSampleTile _sampleTiles[SAMPLETILEX * SAMPLETILEY];
 
 	tagCurrentTile _currentTile; // °ø¿ë

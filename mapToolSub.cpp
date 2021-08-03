@@ -85,8 +85,8 @@ void mapToolSub::maptoolSetup()
 					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth()) + j * TILESIZE + TILESIZE,
 					i * TILESIZE + TILESIZE);
 
-				*_sampleTiles[i * SAMPLETILEX + j].terrainImage = "tilemap";
-				*_sampleTiles[i * SAMPLETILEX + j].objImage = "tilemap";
+				*_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "tilemap";
+				*_sampleTileImage[i * SAMPLETILEX + j].objImage = "tilemap";
 
 			}
 			if (m_subTile == 1)
@@ -96,8 +96,8 @@ void mapToolSub::maptoolSetup()
 					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("나무장작")->getWidth()) + j * TILESIZE + TILESIZE,
 					i * TILESIZE + TILESIZE);
 
-				*_sampleTiles[i * SAMPLETILEX + j].terrainImage = "나무장작";
-				*_sampleTiles[i * SAMPLETILEX + j].objImage = "나무장작";
+				*_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "나무장작";
+				*_sampleTileImage[i * SAMPLETILEX + j].objImage = "나무장작";
 			}
 		}
 	}
@@ -116,8 +116,8 @@ void mapToolSub::setMap()
 				{
 					_currentTile.frame_x = _sampleTiles[i].terrainFrameX;
 					_currentTile.frame_y = _sampleTiles[i].terrainFrameY;
-					*_currentTile.terrainImage = *_sampleTiles[i].terrainImage;
-					*_currentTile.objImage = *_sampleTiles[i].objImage;
+					*_currentTile.terrainImage = *_sampleTileImage[i].terrainImage;
+					*_currentTile.objImage = *_sampleTileImage[i].objImage;
 					m_isTileClick = true;
 					break;
 				}
@@ -139,8 +139,8 @@ void mapToolSub::setMap()
 					{
 						m_currentDragTile.index_StartX = _sampleTiles[i].terrainFrameX;
 						m_currentDragTile.index_StartY = _sampleTiles[i].terrainFrameY;
-						*m_currentDragTile.terrainImage = *_sampleTiles[i].terrainImage;
-						*m_currentDragTile.objImage = *_sampleTiles[i].objImage;
+						*m_currentDragTile.terrainImage = *_sampleTileImage[i].terrainImage;
+						*m_currentDragTile.objImage = *_sampleTileImage[i].objImage;
 
 						m_isKeyUp = false;
 						break;
@@ -160,8 +160,8 @@ void mapToolSub::setMap()
 					{
 						m_currentDragTile.index_EndX = _sampleTiles[i].terrainFrameX;
 						m_currentDragTile.index_EndY = _sampleTiles[i].terrainFrameY;
-						*m_currentDragTile.terrainImage = *_sampleTiles[i].terrainImage;
-						*m_currentDragTile.objImage = *_sampleTiles[i].objImage;
+						*m_currentDragTile.terrainImage = *_sampleTileImage[i].terrainImage;
+						*m_currentDragTile.objImage = *_sampleTileImage[i].objImage;
 
 						m_isTileClick = true;
 						m_isKeyUp = true;
@@ -204,6 +204,7 @@ void mapToolSub::mapSave()
 
 	WriteFile(file, m_mapToolmain->getMainMapTile(), sizeof(tagTile) * TILEX * TILEY, &write, NULL);
 	WriteFile(file, _pos, sizeof(int) * 2, &write, NULL);
+	WriteFile(file, m_mapToolmain->getMainMapTileImage(), sizeof(tagTileImage) * TILEX * TILEY, &write, NULL);
 	CloseHandle(file);
 }
 
@@ -217,6 +218,8 @@ void mapToolSub::mapLoad()
 
 	ReadFile(file, m_mapToolmain->getMainMapTile(), sizeof(tagTile) * TILEX * TILEY, &read, NULL);
 	ReadFile(file, _pos, sizeof(int) * 2, &read, NULL);
+	//ReadFile(file, m_mapToolmain->getMainMapTileImage(), sizeof(tagTileImage) * TILEX * TILEY, &read, NULL);
+
 	CloseHandle(file);
 }
 
@@ -279,14 +282,18 @@ void mapToolSub::inputFunction()
 		// 뒤로가기 -> 저장해뒀던 타일 정보를 다시 대입,  동적할당받은 타일 반환
 		if (m_mapToolmain->getMemoryTile()->size() == 1)
 		{
-			m_mapToolmain->setTile(m_mapToolmain->getTagTile(), m_mapToolmain->getMemoryTile()->back());
+			m_mapToolmain->setTile(m_mapToolmain->getMainMapTile(), m_mapToolmain->getMemoryTile()->back(), m_mapToolmain->getMainMapTileImage(), m_mapToolmain->getMemoryTileImage()->back());
 		}
 		else
 		{
 			tagTile* temp2 = m_mapToolmain->getMemoryTile()->back();
+			tagTileImage* tempImg2 = m_mapToolmain->getMemoryTileImage()->back();
+
 			m_mapToolmain->getMemoryTile()->pop_back();
-			m_mapToolmain->setTile(m_mapToolmain->getTagTile(), m_mapToolmain->getMemoryTile()->back());
+			m_mapToolmain->getMemoryTileImage()->pop_back();
+			m_mapToolmain->setTile(m_mapToolmain->getMainMapTile(), m_mapToolmain->getMemoryTile()->back(), m_mapToolmain->getMainMapTileImage(), m_mapToolmain->getMemoryTileImage()->back());
 			SAFE_DELETE(temp2);
+			SAFE_DELETE(tempImg2);
 		}
 	}
 

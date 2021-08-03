@@ -73,8 +73,8 @@ void mapToolMain::maptoolSetup()
 		_tiles[i].terrain = terrainSelect(_tiles[i].terrainFrameX, _tiles[i].terrainFrameY);
 		_tiles[i].obj = OBJECT::OBJ_NONE;
 
-		*_tiles[i].terrainImage = "tilemap";
-		*_tiles[i].objImage = "나무장작";
+		*_tilesImage[i].terrainImage = "tilemap";
+		*_tilesImage[i].objImage = "나무장작";
 	}
 
 	// 초기 타일 정보 뒤로가기용 리스트에 저장
@@ -179,7 +179,7 @@ void mapToolMain::fillMap()
 								_tiles[j + k * TILEX].terrainFrameX = _currentTile.frame_x;
 								_tiles[j + k * TILEX].terrainFrameY = _currentTile.frame_y;
 								_tiles[j + k * TILEX].terrain = terrainSelect(1, 0);
-								*_tiles[j + k * TILEX].terrainImage = *_currentTile.terrainImage;
+								*_tilesImage[j + k * TILEX].terrainImage = *_currentTile.terrainImage;
 							}
 						}
 						// m_isDifferentTile 변수를 사용하여, 뒤로가기에 저장할 타일에 대해 중복을 방지함!
@@ -234,10 +234,16 @@ OBJECT mapToolMain::objSelect(int frameX, int frameY)
 void mapToolMain::pushTile()
 {
 	tagTile* temp = new tagTile[TILEX * TILEY];
+	tagTileImage* tempImg = new tagTileImage[TILEX * TILEY];
+
 	memset(temp, 0, sizeof(tagTile) * TILEX * TILEY);
-	setTile(temp, _tiles);
+	memset(tempImg, 0, sizeof(tagTileImage) * TILEX * TILEY);
+
+	setTile(temp, _tiles, tempImg, _tilesImage);
 
 	m_lTileMemory.push_back(temp);
+	m_lTileImageMemory.push_back(tempImg);
+
 
 	// 기억할 타일 변경 정보는 100개 까지.. 일단
 	if (m_lTileMemory.size() > 100)
@@ -249,12 +255,20 @@ void mapToolMain::pushTile()
 		SAFE_DELETE(temp2);
 		
 	}
+	if (m_lTileImageMemory.size() > 100)
+	{
+		tagTileImage* tempImg2 = m_lTileImageMemory.front();
+		m_lTileImageMemory.pop_front();
+		SAFE_DELETE(tempImg2);
+	}
 }
 
 // 뒤로가기용 셋 타일,  이전 타일 정보를 현재 타일에 대입
-void mapToolMain::setTile(tagTile* tileDst, tagTile* tileSour)
+void mapToolMain::setTile(tagTile* tileDst, tagTile* tileSour, tagTileImage* tileImgDst, tagTileImage* tileImgSour)
 {
 	memcpy(tileDst, tileSour, sizeof(tagTile) * TILEX * TILEY);
+	memcpy(tileImgDst, tileImgSour, sizeof(tagTileImage) * TILEX * TILEY);
+
 }
 
 
@@ -313,7 +327,7 @@ void mapToolMain::drawTerrain(int i)
 			_tiles[i + k + j * TILEX].terrainFrameX = m;
 			_tiles[i + k + j * TILEX].terrainFrameY = l;
 			_tiles[i + k + j * TILEX].terrain = terrainSelect(1, 0);
-			*_tiles[i + k + j * TILEX].terrainImage = *m_currentDragTile.terrainImage;
+			*_tilesImage[i + k + j * TILEX].terrainImage = *m_currentDragTile.terrainImage;
 
 		}
 	}
@@ -345,7 +359,7 @@ void mapToolMain::drawObject(int i)
 			_tiles[i + k + j * TILEX].objFrameX = m;
 			_tiles[i + k + j * TILEX].objFrameY = l;
 			_tiles[i + k + j * TILEX].obj = objSelect(1, 0);
-			*_tiles[i + k + j * TILEX].objImage = *m_currentDragTile.objImage;
+			*_tilesImage[i + k + j * TILEX].objImage = *m_currentDragTile.objImage;
 		}
 	}
 	if (m_isDifferentTile > 0)
@@ -379,14 +393,14 @@ void mapToolMain::cullingRender()
 	{
 		for (startX = index_X1; startX <= endX; startX++)
 		{	
-			if (*_tiles[startX + startY * TILEX].terrainImage == NULL)
-				*_tiles[startX + startY * TILEX].terrainImage = "tilemap";
-			IMAGE->frameRender(*_tiles[startX + startY * TILEX].terrainImage, getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].terrainFrameX, _tiles[startX + startY * TILEX].terrainFrameY);
+			if (*_tilesImage[startX + startY * TILEX].terrainImage == NULL)
+				*_tilesImage[startX + startY * TILEX].terrainImage = "tilemap";
+			IMAGE->frameRender(*_tilesImage[startX + startY * TILEX].terrainImage, getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].terrainFrameX, _tiles[startX + startY * TILEX].terrainFrameY);
 
-			if (*_tiles[startX + startY * TILEX].objImage == NULL)
-				*_tiles[startX + startY * TILEX].objImage = "나무장작";
+			if (*_tilesImage[startX + startY * TILEX].objImage == NULL)
+				*_tilesImage[startX + startY * TILEX].objImage = "나무장작";
 			if (_tiles[startX + startY * TILEX].obj == OBJECT::OBJ_NONE)continue;
-			IMAGE->frameRender(*_tiles[startX + startY * TILEX].objImage, getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
+			IMAGE->frameRender(*_tilesImage[startX + startY * TILEX].objImage, getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
 		}
 	}
 }
