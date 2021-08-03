@@ -62,5 +62,10 @@ public:
 
 	void dragTileInit();
 	void setMapToolMainMemory(mapToolMain* mt) { m_mapToolmain = mt; }
+
+	// 코드 간략화를 위한 함수들
+
+	void inputFunction();
+	void clickAlphaRender();
 };
 

@@ -33,8 +33,6 @@ private:
 
 	// 버튼 클릭 여부 
 	bool m_isButtonClick;
-	//토글 느낌으로 쓰는 키업 변수
-	bool m_isKeyUp;
 
 	int m_isDifferentTile;
 
@@ -59,11 +57,17 @@ public:
 	void setMainMapSelect(int select) { _ctrSelect = select; }
 	void setCameraMemory(camera* c) { m_camera = c; }
 
+	// 뒤로가기 구현위해 필요한 함수들
 	void pushTile();
 	void setTile(tagTile* tileDst, tagTile* tileSour);
 	tileMemory* getMemoryTile() { return &m_lTileMemory; }
 	tagTile* getTagTile() { return _tiles; }
 
 	void indexCalculate(vector<int> vInt, int* x1, int* y1, int* x2, int* y2);
+
+	// 코드 간략화를 위한 함수들
+
+	void drawTerrain(int index);
+	void drawObject(int index);
 };
 

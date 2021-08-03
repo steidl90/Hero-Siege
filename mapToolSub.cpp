@@ -18,69 +18,7 @@ void mapToolSub::release()
 
 void mapToolSub::update()
 {
-
-	// 좌클릭, 맵 셋팅
-	if (InputManager->isStayKeyDown(VK_LBUTTON))
-	{
-		m_isButtonClick = true;
-	}
-	else
-	{
-		m_isButtonClick = false;
-	}
-	setMap();
-
-	if (InputManager->isOnceKeyDown('1'))
-	{
-		_ctrSelect = static_cast<int>(CTRL::CTRL_TERRAINDRAW);
-	}
-	else if (InputManager->isOnceKeyDown('2'))
-	{
-		_ctrSelect = static_cast<int>(CTRL::CTRL_OBJDRAW);
-	}
-	else if (InputManager->isOnceKeyDown('E'))
-	{
-		_ctrSelect = static_cast<int>(CTRL::CTRL_ERASER);
-		memset(&m_currentDragTile, 0, sizeof(tagDragTileIndex));
-	}
-	else if (InputManager->isStayKeyDown(VK_CONTROL) && InputManager->isOnceKeyDown('S'))
-	{
-		this->mapSave();
-	}
-	else if (InputManager->isStayKeyDown(VK_CONTROL) && InputManager->isOnceKeyDown('V'))
-	{
-		this->mapLoad();
-	}
-	else if (InputManager->isOnceKeyDown('3'))
-	{
-		_ctrSelect = static_cast<int>(CTRL::CTRL_FILL);
-	}
-	else if (InputManager->isStayKeyDown(VK_CONTROL) && InputManager->isOnceKeyDown('Z'))
-	{
-		// 클래스간 메모리 참조해서 사용할때는 무조건 주소로 받아서 쓰기... getMemoryTile 주소말고 그냥받았다가 작동안됨
-		if (m_mapToolmain->getMemoryTile()->size() == 1)
-		{
-			m_mapToolmain->setTile(m_mapToolmain->getTagTile(), m_mapToolmain->getMemoryTile()->back());
-		}
-		else
-		{
-			tagTile* temp2 = m_mapToolmain->getMemoryTile()->back();
-			m_mapToolmain->getMemoryTile()->pop_back();
-			m_mapToolmain->setTile(m_mapToolmain->getTagTile(), m_mapToolmain->getMemoryTile()->back());
-			SAFE_DELETE(temp2);
-		}
-	}
-
-	if (InputManager->isOnceKeyDown(VK_TAB))
-	{
-		if (m_subTile <= 7)m_subTile++;
-		if (m_subTile > 7)m_subTile = 0;
-		maptoolSetup();
-	}
-
 	//왼쪽 타일맵 그리드 on off
-	if (InputManager->isOnceKeyDown(VK_F1)) isTileLine = true;
-	if (InputManager->isOnceKeyDown(VK_F2)) isTileLine = false;
 	if (isTileLine)
 	{
 		for (int i = 0; i < TILEX; i++)
@@ -90,6 +28,12 @@ void mapToolSub::update()
 		}
 	}
 
+	// 입력 명령 집합
+	this->inputFunction();
+	
+	setMap();
+
+	// 전방참조, 데이터 mainTool로 보내주기
 	m_mapToolmain->setMainMapSelect(_ctrSelect);
 	m_mapToolmain->setMainMapDragTile(m_currentDragTile);
 	m_mapToolmain->setMainMapCurrentTile(_currentTile);
@@ -123,27 +67,7 @@ void mapToolSub::render()
 	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 280, TEXT("뒤로가기    - 컨트롤+Z"), lstrlen("뒤로가기    - 컨트롤+Z"));
 	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 300, TEXT("타일맵 그리드    - F1(on),F2(off)"), lstrlen("타일맵 그리드    - F1(on),F2(off)"));
 
-	// 마우스 클릭시 타일 이미지 알파값
-	if (m_isTileClick && _ctrSelect != static_cast<int>(CTRL::CTRL_ERASER))
-	{
-		if (_ctrSelect == static_cast<int>(CTRL::CTRL_FILL))
-		{
-			if (m_subTile == 0)IMAGE->findImage("tilemap")->alphaframeRender(getMemDC(), m_ptMouse.x - 10 , m_ptMouse.y - 10, _currentTile.frame_x, _currentTile.frame_y, 128);
-		}
-		else
-		{
-			int countI, i;
-			int countJ, j;
-
-			for (countI = 0, i = m_currentDragTile.frame_StartY; i <= m_currentDragTile.frame_EndY; countI++, i++)
-			{
-				for (countJ = 0, j = m_currentDragTile.frame_StartX; j <= m_currentDragTile.frame_EndX; countJ++, j++)
-				{
-					IMAGE->findImage("tilemap")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
-				}
-			}
-		}
-	}
+	this->clickAlphaRender();
 }
 
 void mapToolSub::maptoolSetup()
@@ -151,7 +75,7 @@ void mapToolSub::maptoolSetup()
 
 	_ctrSelect = static_cast<int>(CTRL::CTRL_TERRAINDRAW);
 
-	//샘플 맵 셋팅
+	//샘플 맵 셋팅 모든 타일 인덱싱
 	for (size_t i = 0; i < SAMPLETILEY; i++)
 	{
 		for (size_t j = 0; j < SAMPLETILEX; j++)
@@ -159,7 +83,7 @@ void mapToolSub::maptoolSetup()
 			_sampleTiles[i * SAMPLETILEX + j].terrainFrameX = j;
 			_sampleTiles[i * SAMPLETILEX + j].terrainFrameY = i;
 
-			//좌표값설정
+			//렉트 생성
 			if (m_subTile == 0)
 			{
 				SetRect(&_sampleTiles[i * SAMPLETILEX + j].rcTile,
@@ -303,4 +227,97 @@ void mapToolSub::dragTileInit()
 	m_currentDragTile.index_StartY = m_currentDragTile.index_StartY - m_currentDragTile.frame_StartY;
 	m_currentDragTile.index_EndX = m_currentDragTile.index_EndX - m_currentDragTile.frame_StartX;
 	m_currentDragTile.index_EndY = m_currentDragTile.index_EndY - m_currentDragTile.frame_StartY;
+}
+
+// 코드 간략화를 위한 함수들
+
+void mapToolSub::inputFunction()
+{
+	// 좌클릭, 맵 셋팅
+	if (InputManager->isStayKeyDown(VK_LBUTTON))
+	{
+		m_isButtonClick = true;
+	}
+	else
+	{
+		m_isButtonClick = false;
+	}
+
+	if (InputManager->isOnceKeyDown('1'))
+	{
+		_ctrSelect = static_cast<int>(CTRL::CTRL_TERRAINDRAW);
+	}
+	else if (InputManager->isOnceKeyDown('2'))
+	{
+		_ctrSelect = static_cast<int>(CTRL::CTRL_OBJDRAW);
+	}
+	else if (InputManager->isOnceKeyDown('E'))
+	{
+		_ctrSelect = static_cast<int>(CTRL::CTRL_ERASER);
+		memset(&m_currentDragTile, 0, sizeof(tagDragTileIndex));
+	}
+	else if (InputManager->isStayKeyDown(VK_CONTROL) && InputManager->isOnceKeyDown('S'))
+	{
+		this->mapSave();
+	}
+	else if (InputManager->isStayKeyDown(VK_CONTROL) && InputManager->isOnceKeyDown('V'))
+	{
+		this->mapLoad();
+	}
+	else if (InputManager->isOnceKeyDown('3'))
+	{
+		_ctrSelect = static_cast<int>(CTRL::CTRL_FILL);
+	}
+	else if (InputManager->isStayKeyDown(VK_CONTROL) && InputManager->isOnceKeyDown('Z'))
+	{
+		// 뒤로가기 -> 저장해뒀던 타일 정보를 다시 대입,  동적할당받은 타일 반환
+		if (m_mapToolmain->getMemoryTile()->size() == 1)
+		{
+			m_mapToolmain->setTile(m_mapToolmain->getTagTile(), m_mapToolmain->getMemoryTile()->back());
+		}
+		else
+		{
+			tagTile* temp2 = m_mapToolmain->getMemoryTile()->back();
+			m_mapToolmain->getMemoryTile()->pop_back();
+			m_mapToolmain->setTile(m_mapToolmain->getTagTile(), m_mapToolmain->getMemoryTile()->back());
+			SAFE_DELETE(temp2);
+		}
+	}
+
+	// 샘플 타일 전환
+	if (InputManager->isOnceKeyDown(VK_TAB))
+	{
+		if (m_subTile <= 7)m_subTile++;
+		if (m_subTile > 7)m_subTile = 0;
+		maptoolSetup();
+	}
+
+	//왼쪽 타일맵 그리드 on off
+	if (InputManager->isOnceKeyDown(VK_F1)) isTileLine = true;
+	if (InputManager->isOnceKeyDown(VK_F2)) isTileLine = false;
+}
+
+void mapToolSub::clickAlphaRender()
+{
+	// 샘플타일 마우스 클릭시 타일 이미지 알파랜더
+	if (m_isTileClick && _ctrSelect != static_cast<int>(CTRL::CTRL_ERASER))
+	{
+		if (_ctrSelect == static_cast<int>(CTRL::CTRL_FILL))
+		{
+			if (m_subTile == 0)IMAGE->findImage("tilemap")->alphaframeRender(getMemDC(), m_ptMouse.x - 10, m_ptMouse.y - 10, _currentTile.frame_x, _currentTile.frame_y, 128);
+		}
+		else
+		{
+			// 드래그로 범위 선택
+			int countI, i;
+			int countJ, j;
+			for (countI = 0, i = m_currentDragTile.frame_StartY; i <= m_currentDragTile.frame_EndY; countI++, i++)
+			{
+				for (countJ = 0, j = m_currentDragTile.frame_StartX; j <= m_currentDragTile.frame_EndX; countJ++, j++)
+				{
+					IMAGE->findImage("tilemap")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
+				}
+			}
+		}
+	}
 }
