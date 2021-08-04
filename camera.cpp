@@ -18,8 +18,8 @@ void camera::release()
 void camera::update()
 {
 
-	//camera_x1 = target_x - camera_width / 2;
-	//camera_y1 = target_y - camera_height / 2;
+	//camera_x1 = /*target_x - */camera_width / 2;
+	//camera_y1 = /*target_y - */camera_height / 2;
 
 
 
@@ -36,20 +36,17 @@ void camera::update()
 		m_nextY = camera_y1 + m_ptMouse.y;
 		if (m_nextX < m_currentX) //마우스를 왼쪽으로 이동시키면 화면이 오른쪽으로 이동한다
 		{
-			camera_x1 += (m_currentX - m_currentY);
+			camera_x1 += m_currentX - m_nextX;
 		}
-
-		if (m_nextX > m_currentX) //마우스를 오른쪽으로 이동시키면 화면이 왼쪽으로 이동한다
+		else if (m_nextX > m_currentX) //마우스를 오른쪽으로 이동시키면 화면이 왼쪽으로 이동한다
 		{
-			camera_x1 -= (m_nextX - m_currentX);
+			camera_x1 -= m_nextX - m_currentX;
 		}
-
 		if (m_nextY < m_currentY) //마우스를 위쪽으로 이동시키면 화면이 아래쪽으로 이동한다
 		{
 			camera_y1 += m_currentY - m_nextY;
 		}
-
-		if (m_nextY > m_currentY) //마우스를 아래쪽으로 이동시키면 화면이 위쪽으로 이동한다
+		else if (m_nextY > m_currentY) //마우스를 아래쪽으로 이동시키면 화면이 위쪽으로 이동한다
 		{
 			camera_y1 -= m_nextY - m_currentY;
 		}
@@ -60,24 +57,24 @@ void camera::update()
 	camera_y2 = camera_y1 + camera_height;
 
 
-	if (camera_x1 <= 0)
+	if (camera_x1 < 0)
 	{
 		camera_x1 = 0;
 		camera_x2 = camera_width;
 	}
-	if (camera_y1 <= 0)
+	if (camera_y1 < 0)
 	{
 		camera_y1 = 0;
 		camera_y2 = camera_height;
 	}
 
-	if (camera_x2 >= MAPSIZE)
+	if (camera_x2 > MAPSIZE)
 	{
 		camera_x2 = MAPSIZE;
 		camera_x1 = camera_x2 - camera_width;
 
 	}
-	if (camera_y2 >= MAPSIZE)
+	if (camera_y2 > MAPSIZE)
 	{
 		camera_y2 = MAPSIZE;
 		camera_y1 = camera_y2 - camera_height;
