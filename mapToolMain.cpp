@@ -74,7 +74,7 @@ void mapToolMain::maptoolSetup()
 		_tiles[i].obj = OBJECT::OBJ_NONE;
 
 		*_tilesImage[i].terrainImage = "tilemap";
-		*_tilesImage[i].objImage = "나무장작";
+		*_tilesImage[i].objImage = "오브젝트타일1";
 	}
 
 	// 초기 타일 정보 뒤로가기용 리스트에 저장
@@ -227,7 +227,14 @@ TERRAIN mapToolMain::terrainSelect(int frameX, int frameY)
 
 OBJECT mapToolMain::objSelect(int frameX, int frameY)
 {
-	return OBJECT::OBJ_BLOCK1;
+	if (frameX == 1 && frameY == 0)
+	{
+		return OBJECT::OBJ_BLOCKS; // 부서지지 않는 오브젝트(벽)
+	}
+	else if (frameX == 2 && frameY == 0)
+	{
+		return OBJECT::OBJ_BLOCK1; // 체력1인 오브젝트
+	}
 }
 
 // 뒤로가기용 푸쉬타일, 현재 타일 정보를 리스트에 저장해두고 나중에 불러오기
@@ -398,7 +405,7 @@ void mapToolMain::cullingRender()
 			IMAGE->frameRender(*_tilesImage[startX + startY * TILEX].terrainImage, getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].terrainFrameX, _tiles[startX + startY * TILEX].terrainFrameY);
 
 			if (*_tilesImage[startX + startY * TILEX].objImage == NULL)
-				*_tilesImage[startX + startY * TILEX].objImage = "나무장작";
+				*_tilesImage[startX + startY * TILEX].objImage = "오브젝트타일1";
 			if (_tiles[startX + startY * TILEX].obj == OBJECT::OBJ_NONE)continue;
 			IMAGE->frameRender(*_tilesImage[startX + startY * TILEX].objImage, getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
 		}

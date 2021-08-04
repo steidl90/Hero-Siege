@@ -38,7 +38,11 @@ void mapToolSub::render()
 {
 	//오른쪽 타일 이미지
 	if (m_subTile == 0)IMAGE->render("tilemap", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth(), 0);
-	if (m_subTile == 1)IMAGE->render("나무장작", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("나무장작")->getWidth(), 0);
+	if (m_subTile == 1)IMAGE->render("오브젝트타일1", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("오브젝트타일1")->getWidth(), 0);
+	if (m_subTile == 2)IMAGE->render("오브젝트타일2", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("오브젝트타일2")->getWidth(), 0);
+	if (m_subTile == 3)IMAGE->render("오브젝트타일3", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("오브젝트타일3")->getWidth(), 0);
+	if (m_subTile == 4)IMAGE->render("오브젝트타일4", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("오브젝트타일4")->getWidth(), 0);
+	if (m_subTile == 5)IMAGE->render("오브젝트타일5", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("오브젝트타일5")->getWidth(), 0);
 
 
 	//오른쪽 타일 그리드
@@ -92,12 +96,52 @@ void mapToolSub::maptoolSetup()
 			if (m_subTile == 1)
 			{
 				SetRect(&_sampleTiles[i * SAMPLETILEX + j].rcTile,
-					(MAPTOOLPOINT - IMAGE->findImage("나무장작")->getWidth()) + j * TILESIZE,
-					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("나무장작")->getWidth()) + j * TILESIZE + TILESIZE,
+					(MAPTOOLPOINT - IMAGE->findImage("오브젝트타일1")->getWidth()) + j * TILESIZE,
+					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("오브젝트타일1")->getWidth()) + j * TILESIZE + TILESIZE,
 					i * TILESIZE + TILESIZE);
 
-				*_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "나무장작";
-				*_sampleTileImage[i * SAMPLETILEX + j].objImage = "나무장작";
+				*_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "오브젝트타일1";
+				*_sampleTileImage[i * SAMPLETILEX + j].objImage = "오브젝트타일1";
+			}
+			if (m_subTile == 2)
+			{
+				SetRect(&_sampleTiles[i * SAMPLETILEX + j].rcTile,
+					(MAPTOOLPOINT - IMAGE->findImage("오브젝트타일2")->getWidth()) + j * TILESIZE,
+					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("오브젝트타일2")->getWidth()) + j * TILESIZE + TILESIZE,
+					i * TILESIZE + TILESIZE);
+
+				*_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "오브젝트타일2";
+				*_sampleTileImage[i * SAMPLETILEX + j].objImage = "오브젝트타일2";
+			}
+			if (m_subTile == 3)
+			{
+				SetRect(&_sampleTiles[i * SAMPLETILEX + j].rcTile,
+					(MAPTOOLPOINT - IMAGE->findImage("오브젝트타일3")->getWidth()) + j * TILESIZE,
+					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("오브젝트타일3")->getWidth()) + j * TILESIZE + TILESIZE,
+					i * TILESIZE + TILESIZE);
+
+				*_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "오브젝트타일3";
+				*_sampleTileImage[i * SAMPLETILEX + j].objImage = "오브젝트타일3";
+			}
+			if (m_subTile == 4)
+			{
+				SetRect(&_sampleTiles[i * SAMPLETILEX + j].rcTile,
+					(MAPTOOLPOINT - IMAGE->findImage("오브젝트타일4")->getWidth()) + j * TILESIZE,
+					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("오브젝트타일4")->getWidth()) + j * TILESIZE + TILESIZE,
+					i * TILESIZE + TILESIZE);
+
+				*_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "오브젝트타일4";
+				*_sampleTileImage[i * SAMPLETILEX + j].objImage = "오브젝트타일4";
+			}
+			if (m_subTile == 5)
+			{
+				SetRect(&_sampleTiles[i * SAMPLETILEX + j].rcTile,
+					(MAPTOOLPOINT - IMAGE->findImage("오브젝트타일5")->getWidth()) + j * TILESIZE,
+					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("오브젝트타일5")->getWidth()) + j * TILESIZE + TILESIZE,
+					i * TILESIZE + TILESIZE);
+
+				*_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "오브젝트타일5";
+				*_sampleTileImage[i * SAMPLETILEX + j].objImage = "오브젝트타일5";
 			}
 		}
 	}
@@ -219,7 +263,6 @@ void mapToolSub::mapLoad()
 	ReadFile(file, m_mapToolmain->getMainMapTile(), sizeof(tagTile) * TILEX * TILEY, &read, NULL);
 	ReadFile(file, _pos, sizeof(int) * 2, &read, NULL);
 	//ReadFile(file, m_mapToolmain->getMainMapTileImage(), sizeof(tagTileImage) * TILEX * TILEY, &read, NULL);
-
 	CloseHandle(file);
 }
 
@@ -318,7 +361,11 @@ void mapToolSub::clickAlphaRender()
 		if (_ctrSelect == static_cast<int>(CTRL::CTRL_FILL))
 		{
 			if (m_subTile == 0)IMAGE->findImage("tilemap")->alphaframeRender(getMemDC(), m_ptMouse.x - 10, m_ptMouse.y - 10, _currentTile.frame_x, _currentTile.frame_y, 128);
-			if (m_subTile == 1)IMAGE->findImage("나무장작")->alphaframeRender(getMemDC(), m_ptMouse.x - 10, m_ptMouse.y - 10, _currentTile.frame_x, _currentTile.frame_y, 128);
+			if (m_subTile == 1)IMAGE->findImage("오브젝트타일1")->alphaframeRender(getMemDC(), m_ptMouse.x - 10, m_ptMouse.y - 10, _currentTile.frame_x, _currentTile.frame_y, 128);
+			if (m_subTile == 2)IMAGE->findImage("오브젝트타일2")->alphaframeRender(getMemDC(), m_ptMouse.x - 10, m_ptMouse.y - 10, _currentTile.frame_x, _currentTile.frame_y, 128);
+			if (m_subTile == 3)IMAGE->findImage("오브젝트타일3")->alphaframeRender(getMemDC(), m_ptMouse.x - 10, m_ptMouse.y - 10, _currentTile.frame_x, _currentTile.frame_y, 128);
+			if (m_subTile == 4)IMAGE->findImage("오브젝트타일4")->alphaframeRender(getMemDC(), m_ptMouse.x - 10, m_ptMouse.y - 10, _currentTile.frame_x, _currentTile.frame_y, 128);
+			if (m_subTile == 5)IMAGE->findImage("오브젝트타일5")->alphaframeRender(getMemDC(), m_ptMouse.x - 10, m_ptMouse.y - 10, _currentTile.frame_x, _currentTile.frame_y, 128);
 		}
 		else
 		{
@@ -330,7 +377,11 @@ void mapToolSub::clickAlphaRender()
 				for (countJ = 0, j = m_currentDragTile.frame_StartX; j <= m_currentDragTile.frame_EndX; countJ++, j++)
 				{
 					if (m_subTile == 0)IMAGE->findImage("tilemap")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
-					if (m_subTile == 1)IMAGE->findImage("나무장작")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
+					if (m_subTile == 1)IMAGE->findImage("오브젝트타일1")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
+					if (m_subTile == 2)IMAGE->findImage("오브젝트타일2")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
+					if (m_subTile == 3)IMAGE->findImage("오브젝트타일3")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
+					if (m_subTile == 4)IMAGE->findImage("오브젝트타일4")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
+					if (m_subTile == 5)IMAGE->findImage("오브젝트타일5")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
 				}
 			}
 		}

@@ -89,29 +89,29 @@ HRESULT Cimage::init()
     //IMAGE->addFrameImage("나무빅", "images/나무빅.bmp", 1020, 200, 6, 1, true, RGB(255, 0, 255));
     //IMAGE->addFrameImage("나무스몰", "images/나무스몰.bmp", 1520, 182, 10, 1, true, RGB(255, 0, 255));
     //IMAGE->addFrameImage("나무장작", "images/Tile-2.bmp", 648, 288, 18, 8, true, RGB(255, 0, 255));
+    //IMAGE->addFrameImage("기둥", "images/Pillar.bmp", 222, 87, 6, 1, true, RGB(255, 0, 255));
+    //IMAGE->addFrameImage("울타리세로", "images/FanceVertical.bmp", 8, 88, 1, 1, true, RGB(255, 0, 255));
+    //IMAGE->addFrameImage("울타리가로", "images/FanceHorizontal.bmp", 72, 24, 1, 1, true, RGB(255, 0, 255));
+    //IMAGE->addFrameImage("창고", "images/Chest.bmp", 83, 49, 1, 1, true, RGB(255, 0, 255));
+    //IMAGE->addFrameImage("풍차", "images/Windmill.bmp", 152, 343, 1, 1, true, RGB(255, 0, 255));
+    //IMAGE->addFrameImage("집1", "images/House1.bmp", 378, 432, 1, 1, true, RGB(255, 0, 255));
+    //IMAGE->addFrameImage("집2", "images/House2.bmp", 458, 290, 1, 1, true, RGB(255, 0, 255));
+    //IMAGE->addFrameImage("집3", "images/House3.bmp", 482, 332, 1, 1, true, RGB(255, 0, 255));
+    //IMAGE->addFrameImage("집4", "images/House4.bmp", 226, 221, 1, 1, true, RGB(255, 0, 255));
 
     IMAGE->addFrameImage("제너레이터", "images/Generator.bmp", 485, 67, 5, 1, true, RGB(255, 0, 255));
-    //IMAGE->addFrameImage("기둥", "images/Pillar.bmp", 222, 87, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("용광로", "images/Furnace.bmp", 280, 30, 8, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("램프", "images/Lamp.bmp", 960, 98, 16, 1, true, RGB(255, 0, 255));
-    //IMAGE->addFrameImage("울타리가로", "images/FanceHorizontal.bmp", 72, 24, 1, 1, true, RGB(255, 0, 255));
-    //IMAGE->addFrameImage("울타리세로", "images/FanceVertical.bmp", 8, 88, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("웨이포인트", "images/WayPoint.bmp", 1304, 137, 8, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("포탈", "images/Portal.bmp", 330, 66, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("게이트", "images/Gate.bmp", 468, 87, 6, 1, true, RGB(255, 0, 255));
-    //IMAGE->addFrameImage("창고", "images/Chest.bmp", 83, 49, 1, 1, true, RGB(255, 0, 255));
     
     IMAGE->addFrameImage("큰풀", "images/GrassBig.bmp", 408, 31, 12, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("작은풀1", "images/GrassSmall1.bmp", 152, 19, 8, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("작은풀2", "images/GrassSmall2.bmp", 160, 17, 8, 1, true, RGB(255, 0, 255));
 
     IMAGE->addFrameImage("커피집", "images/CoffeeHouse.bmp", 904, 152, 8, 1, true, RGB(255, 0, 255));
-    //IMAGE->addFrameImage("풍차", "images/Windmill.bmp", 152, 343, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("풍차날개", "images/WindmillWing.bmp", 2016, 339, 6, 1, true, RGB(255, 0, 255));
-    //IMAGE->addFrameImage("집1", "images/House1.bmp", 378, 432, 1, 1, true, RGB(255, 0, 255));
-    //IMAGE->addFrameImage("집2", "images/House2.bmp", 458, 290, 1, 1, true, RGB(255, 0, 255));
-    //IMAGE->addFrameImage("집3", "images/House3.bmp", 482, 332, 1, 1, true, RGB(255, 0, 255));
-    //IMAGE->addFrameImage("집4", "images/House4.bmp", 226, 221, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("오브젝트타일1", "images/ObjectTile.bmp", 648, 504, 18, 14, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("오브젝트타일2", "images/ObjectTile2.bmp", 648, 504, 18, 14, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("오브젝트타일3", "images/ObjectTile3.bmp", 648, 504, 18, 14, true, RGB(255, 0, 255));

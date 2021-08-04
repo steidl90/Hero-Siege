@@ -22,7 +22,7 @@
 // 툴용
 // 샘플 타일 갯수
 #define SAMPLETILEX 18
-#define SAMPLETILEY 8
+#define SAMPLETILEY 14
 
 // 툴에서 사용할 기능,  현재 선택중인 CRTL에 따라 맵 타일 속성정의 등등
 enum class CTRL
