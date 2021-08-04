@@ -13,7 +13,6 @@ class mapToolMain;
 
 class mapToolSub : public gameNode
 {
-
 private:
 	Cimage* m_image;
 
@@ -29,7 +28,6 @@ private:
 	
 	int _ctrSelect; // 공용
 
-
 	// 버튼 클릭 여부 
 	bool m_isButtonClick;
 	// 타일 클릭 여부
@@ -40,8 +38,6 @@ private:
 	int _pos[2];
 
 	bool isTileLine; //왼쪽 타일 그리드 on off용도
-
-
 
 	RECT _terrain;
 	RECT _object;

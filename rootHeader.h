@@ -72,7 +72,6 @@ struct tagTileImage
 //타일 구조체 (맵에 그릴 타일)
 struct tagTile
 {
-
 	TERRAIN terrain;
 	OBJECT obj;
 	RECT  rc;
@@ -81,7 +80,6 @@ struct tagTile
 	int terrainFrameY;
 	int objFrameX;
 	int objFrameY;
-
 };
 
 //샘플 (툴용) 타일 구조체

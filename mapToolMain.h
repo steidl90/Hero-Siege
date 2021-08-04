@@ -10,11 +10,8 @@
 class camera;
 class mapToolMain : public gameNode
 {
-
 	typedef list<tagTile*> tileMemory;
 	typedef list<tagTileImage*> tileImageMemory;
-
-
 private:
 
 	camera* m_camera;

@@ -78,9 +78,7 @@ void mapToolSub::render()
 
 void mapToolSub::maptoolSetup()
 {
-
-	_ctrSelect = static_cast<int>(CTRL::CTRL_TERRAINDRAW);
-
+	if (m_subTile == 0)_ctrSelect = static_cast<int>(CTRL::CTRL_TERRAINDRAW);
 	//»ùÇÃ ¸Ê ¼ÂÆÃ ¸ðµç Å¸ÀÏ ÀÎµ¦½Ì
 	for (size_t i = 0; i < SAMPLETILEY; i++)
 	{
@@ -342,7 +340,7 @@ void mapToolSub::inputFunction()
 			m_mapToolmain->getMemoryTileImage()->pop_back();
 			m_mapToolmain->setTile(m_mapToolmain->getMainMapTile(), m_mapToolmain->getMemoryTile()->back(), m_mapToolmain->getMainMapTileImage(), m_mapToolmain->getMemoryTileImage()->back());
 			SAFE_DELETE(temp2);
-			SAFE_DELETE(tempImg2);
+			//SAFE_DELETE(tempImg2);
 		}
 	}
 

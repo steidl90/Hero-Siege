@@ -5,7 +5,6 @@
 
 HRESULT mapToolMain::init()
 {
-
 	maptoolSetup();
 	m_isDifferentTile = 0;
 	m_subTile = 0;
@@ -256,22 +255,20 @@ void mapToolMain::pushTile()
 	m_lTileMemory.push_back(temp);
 	m_lTileImageMemory.push_back(tempImg);
 
-
 	// 기억할 타일 변경 정보는 100개 까지.. 일단
 	if (m_lTileMemory.size() > 100)
 	{
-		
 		// 할당받은거 해제 안하면 터짐..
 		tagTile* temp2 = m_lTileMemory.front();
 		m_lTileMemory.pop_front();
 		SAFE_DELETE(temp2);
-		
 	}
+
 	if (m_lTileImageMemory.size() > 100)
 	{
 		tagTileImage* tempImg2 = m_lTileImageMemory.front();
 		m_lTileImageMemory.pop_front();
-		SAFE_DELETE(tempImg2);
+		//SAFE_DELETE(tempImg2);
 	}
 }
 
