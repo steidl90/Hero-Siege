@@ -53,10 +53,10 @@ HRESULT camel::init()
 	ANIMATION->addAnimation("ani3", "red", 4, 7, 10, false, true);
 
 
-	ANIMATION->addAnimation("redUp", "red", 4, 7, 10, false, true);
-	ANIMATION->addAnimation("redDown", "red", 0, 3, 10, false, true);
-	ANIMATION->addAnimation("redRight", "red", 8, 11, 10, false, true);
-	ANIMATION->addAnimation("redLeft", "red", 12, 15, 10, false, true);
+	ANIMATION->addAnimation("redUp", "red", 4, 7, 5, false, true);
+	ANIMATION->addAnimation("redDown", "red", 0, 3, 5, false, true);
+	ANIMATION->addAnimation("redRight", "red", 8, 11, 5, false, true);
+	ANIMATION->addAnimation("redLeft", "red", 12, 15, 5, false, true);
 
 	//시작  애니메이션 설정
 	_ani = ANIMATION->findAnimation("ani1");
@@ -75,7 +75,7 @@ void camel::release()
 
 void camel::update()
 {
-
+	direct = DIRECTION::IDLE;
 	if (InputManager->isStayKeyDown(VK_UP) && _y > 0)
 	{
 		_y -= _speed;
@@ -171,8 +171,8 @@ void camel::render()
 	Rectangle(getMapDC(), _redRc.left, _redRc.top, _redRc.right, _redRc.bottom);
 	_red->aniRender(getMapDC(), _redRc.left, _redRc.top, _ani);
 
-	char str[100];
-	sprintf_s(str, "current x : %d, current y : %d", m_currentX, m_currentY);
-	SetTextColor(getMemDC(), RGB(255, 255, 0));
-	TextOut(getMemDC(), WINSIZEX / 2 - 500, WINSIZEY - 200, str, lstrlen(str));
+	//char str[100];
+	//sprintf_s(str, "current x : %d, current y : %d", m_currentX, m_currentY);
+	//SetTextColor(getMemDC(), RGB(255, 255, 0));
+	//TextOut(getMemDC(), WINSIZEX / 2 - 500, WINSIZEY - 200, str, lstrlen(str));
 }

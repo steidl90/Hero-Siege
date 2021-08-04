@@ -5,7 +5,7 @@
 
 enum class DIRECTION
 {
-	LEFT, RIGHT, TOP, DOWN
+	LEFT, RIGHT, TOP, DOWN, IDLE
 };
 class camel : public gameNode
 {
