@@ -63,6 +63,12 @@ enum class KINDSUBTILE
 	KINDSUBTILE_OBJECTTWO,
 };
 
+struct tagTileImage
+{
+	string terrainImage;
+	string objImage;
+};
+
 //타일 구조체 (맵에 그릴 타일)
 struct tagTile
 {
@@ -92,8 +98,8 @@ struct tagCurrentTile
 	int frame_x;
 	int frame_y;
 
-	char* terrainImage[20];
-	char* objImage[20];
+	string terrainImage;
+	string objImage;
 };
 
 // 드래그 할시 시작 타일 인덱스 x,y 정보 끝 타일 인덱스 x, y 정보
@@ -110,12 +116,6 @@ struct tagDragTileIndex
 	int frame_EndX;
 	int frame_EndY;
 
-	char* terrainImage[20];
-	char* objImage[20];
-};
-
-struct tagTileImage
-{
-	char* terrainImage[20];
-	char* objImage[20];
+	string terrainImage;
+	string objImage;
 };

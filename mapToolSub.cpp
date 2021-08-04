@@ -32,6 +32,9 @@ void mapToolSub::update()
 	this->inputFunction();
 	
 	setMap();
+
+
+	
 }
 
 void mapToolSub::render()
@@ -64,8 +67,13 @@ void mapToolSub::render()
 	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 260, TEXT("채우기    - 3"), lstrlen("채우기    - 3"));
 	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 280, TEXT("뒤로가기    - 컨트롤+Z"), lstrlen("뒤로가기    - 컨트롤+Z"));
 	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 300, TEXT("타일맵 그리드    - F1(on),F2(off)"), lstrlen("타일맵 그리드    - F1(on),F2(off)"));
+	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 320, TEXT("샘플타일변경    - 다음(Tab), 뒤로(Ctrl+Tab)"), lstrlen("샘플타일변경    - 다음(Tab), 뒤로(Ctrl+Tab)"));
 
 	this->clickAlphaRender();
+
+	/*char str[1000];
+	sprintf_s(str, "xxxx : %s", *m_mapToolmain->getMainMapTileImage()[10].objImage);
+	TextOut(getMemDC(), 500, 500, str, lstrlen(str));*/
 }
 
 void mapToolSub::maptoolSetup()
@@ -89,8 +97,8 @@ void mapToolSub::maptoolSetup()
 					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth()) + j * TILESIZE + TILESIZE,
 					i * TILESIZE + TILESIZE);
 
-				*_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "tilemap";
-				*_sampleTileImage[i * SAMPLETILEX + j].objImage = "tilemap";
+				_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "tilemap";
+				_sampleTileImage[i * SAMPLETILEX + j].objImage = "tilemap";
 
 			}
 			if (m_subTile == 1)
@@ -100,8 +108,8 @@ void mapToolSub::maptoolSetup()
 					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("오브젝트타일1")->getWidth()) + j * TILESIZE + TILESIZE,
 					i * TILESIZE + TILESIZE);
 
-				*_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "오브젝트타일1";
-				*_sampleTileImage[i * SAMPLETILEX + j].objImage = "오브젝트타일1";
+				_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "오브젝트타일1";
+				_sampleTileImage[i * SAMPLETILEX + j].objImage = "오브젝트타일1";
 			}
 			if (m_subTile == 2)
 			{
@@ -110,8 +118,8 @@ void mapToolSub::maptoolSetup()
 					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("오브젝트타일2")->getWidth()) + j * TILESIZE + TILESIZE,
 					i * TILESIZE + TILESIZE);
 
-				*_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "오브젝트타일2";
-				*_sampleTileImage[i * SAMPLETILEX + j].objImage = "오브젝트타일2";
+				_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "오브젝트타일2";
+				_sampleTileImage[i * SAMPLETILEX + j].objImage = "오브젝트타일2";
 			}
 			if (m_subTile == 3)
 			{
@@ -120,8 +128,8 @@ void mapToolSub::maptoolSetup()
 					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("오브젝트타일3")->getWidth()) + j * TILESIZE + TILESIZE,
 					i * TILESIZE + TILESIZE);
 
-				*_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "오브젝트타일3";
-				*_sampleTileImage[i * SAMPLETILEX + j].objImage = "오브젝트타일3";
+				_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "오브젝트타일3";
+				_sampleTileImage[i * SAMPLETILEX + j].objImage = "오브젝트타일3";
 			}
 			if (m_subTile == 4)
 			{
@@ -130,8 +138,8 @@ void mapToolSub::maptoolSetup()
 					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("오브젝트타일4")->getWidth()) + j * TILESIZE + TILESIZE,
 					i * TILESIZE + TILESIZE);
 
-				*_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "오브젝트타일4";
-				*_sampleTileImage[i * SAMPLETILEX + j].objImage = "오브젝트타일4";
+				_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "오브젝트타일4";
+				_sampleTileImage[i * SAMPLETILEX + j].objImage = "오브젝트타일4";
 			}
 			if (m_subTile == 5)
 			{
@@ -140,8 +148,8 @@ void mapToolSub::maptoolSetup()
 					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("오브젝트타일5")->getWidth()) + j * TILESIZE + TILESIZE,
 					i * TILESIZE + TILESIZE);
 
-				*_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "오브젝트타일5";
-				*_sampleTileImage[i * SAMPLETILEX + j].objImage = "오브젝트타일5";
+				_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "오브젝트타일5";
+				_sampleTileImage[i * SAMPLETILEX + j].objImage = "오브젝트타일5";
 			}
 		}
 	}
@@ -160,8 +168,8 @@ void mapToolSub::setMap()
 				{
 					_currentTile.frame_x = _sampleTiles[i].terrainFrameX;
 					_currentTile.frame_y = _sampleTiles[i].terrainFrameY;
-					*_currentTile.terrainImage = *_sampleTileImage[i].terrainImage;
-					*_currentTile.objImage = *_sampleTileImage[i].objImage;
+					_currentTile.terrainImage = _sampleTileImage[i].terrainImage;
+					_currentTile.objImage = _sampleTileImage[i].objImage;
 					m_isTileClick = true;
 					break;
 				}
@@ -183,8 +191,8 @@ void mapToolSub::setMap()
 					{
 						m_currentDragTile.index_StartX = _sampleTiles[i].terrainFrameX;
 						m_currentDragTile.index_StartY = _sampleTiles[i].terrainFrameY;
-						*m_currentDragTile.terrainImage = *_sampleTileImage[i].terrainImage;
-						*m_currentDragTile.objImage = *_sampleTileImage[i].objImage;
+						m_currentDragTile.terrainImage = _sampleTileImage[i].terrainImage;
+						m_currentDragTile.objImage = _sampleTileImage[i].objImage;
 
 						m_isKeyUp = false;
 						break;
@@ -204,12 +212,11 @@ void mapToolSub::setMap()
 					{
 						m_currentDragTile.index_EndX = _sampleTiles[i].terrainFrameX;
 						m_currentDragTile.index_EndY = _sampleTiles[i].terrainFrameY;
-						*m_currentDragTile.terrainImage = *_sampleTileImage[i].terrainImage;
-						*m_currentDragTile.objImage = *_sampleTileImage[i].objImage;
+						m_currentDragTile.terrainImage = _sampleTileImage[i].terrainImage;
+						m_currentDragTile.objImage = _sampleTileImage[i].objImage;
 
 						m_isTileClick = true;
 						m_isKeyUp = true;
-
 
 						// 타일 숫자 크기 정렬
 						if (m_currentDragTile.index_StartX > m_currentDragTile.index_EndX)
@@ -245,10 +252,9 @@ void mapToolSub::mapSave()
 	file = CreateFile("tileMap.map",
 		GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
-
+	WriteFile(file, m_mapToolmain->getMainMapTileImage(), sizeof(tagTileImage) * TILEX * TILEY, &write, NULL);
 	WriteFile(file, m_mapToolmain->getMainMapTile(), sizeof(tagTile) * TILEX * TILEY, &write, NULL);
 	WriteFile(file, _pos, sizeof(int) * 2, &write, NULL);
-	WriteFile(file, m_mapToolmain->getMainMapTileImage(), sizeof(tagTileImage) * TILEX * TILEY, &write, NULL);
 	CloseHandle(file);
 }
 
@@ -260,9 +266,9 @@ void mapToolSub::mapLoad()
 	file = CreateFile("tileMap.map",
 		GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
+	ReadFile(file, m_mapToolmain->getMainMapTileImage(), sizeof(tagTileImage) * TILEX * TILEY, &read, NULL);
 	ReadFile(file, m_mapToolmain->getMainMapTile(), sizeof(tagTile) * TILEX * TILEY, &read, NULL);
 	ReadFile(file, _pos, sizeof(int) * 2, &read, NULL);
-	//ReadFile(file, m_mapToolmain->getMainMapTileImage(), sizeof(tagTileImage) * TILEX * TILEY, &read, NULL);
 	CloseHandle(file);
 }
 
@@ -341,10 +347,16 @@ void mapToolSub::inputFunction()
 	}
 
 	// 샘플 타일 전환
-	if (InputManager->isOnceKeyDown(VK_TAB))
+	if (InputManager->isStayKeyDown(VK_CONTROL) && InputManager->isOnceKeyDown(VK_TAB)) // 뒤로가기
 	{
-		if (m_subTile <= 7)m_subTile++;
-		if (m_subTile > 7)m_subTile = 0;
+		if (m_subTile >= 0)m_subTile--;
+		if (m_subTile < 0)m_subTile = 5;
+		maptoolSetup();
+	}
+	if (InputManager->isOnceKeyDown(VK_TAB)) // 앞으로가기
+	{
+		if (m_subTile <= 5)m_subTile++;
+		if (m_subTile > 5)m_subTile = 0;
 		maptoolSetup();
 	}
 

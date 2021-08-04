@@ -44,6 +44,11 @@ void mapToolMain::render()
 	sprintf_s(str, "서브타일 : %d ", m_subTile);
 	TextOut(getMemDC(), 100, 100, str, lstrlen(str));
 
+
+	/*char str[1000];
+	sprintf_s(str, "xxxx : %s", *_tilesImage[10].objImage);
+	TextOut(getMemDC(), 500, 550, str, lstrlen(str));*/
+
 }
 
 void mapToolMain::maptoolSetup()
@@ -73,8 +78,8 @@ void mapToolMain::maptoolSetup()
 		_tiles[i].terrain = terrainSelect(_tiles[i].terrainFrameX, _tiles[i].terrainFrameY);
 		_tiles[i].obj = OBJECT::OBJ_NONE;
 
-		*_tilesImage[i].terrainImage = "tilemap";
-		*_tilesImage[i].objImage = "오브젝트타일1";
+		_tilesImage[i].terrainImage = "tilemap";
+		_tilesImage[i].objImage = "오브젝트타일1";
 	}
 
 	// 초기 타일 정보 뒤로가기용 리스트에 저장
@@ -179,7 +184,7 @@ void mapToolMain::fillMap()
 								_tiles[j + k * TILEX].terrainFrameX = _currentTile.frame_x;
 								_tiles[j + k * TILEX].terrainFrameY = _currentTile.frame_y;
 								_tiles[j + k * TILEX].terrain = terrainSelect(1, 0);
-								*_tilesImage[j + k * TILEX].terrainImage = *_currentTile.terrainImage;
+								_tilesImage[j + k * TILEX].terrainImage = _currentTile.terrainImage;
 							}
 						}
 						// m_isDifferentTile 변수를 사용하여, 뒤로가기에 저장할 타일에 대해 중복을 방지함!
@@ -275,7 +280,6 @@ void mapToolMain::setTile(tagTile* tileDst, tagTile* tileSour, tagTileImage* til
 {
 	memcpy(tileDst, tileSour, sizeof(tagTile) * TILEX * TILEY);
 	memcpy(tileImgDst, tileImgSour, sizeof(tagTileImage) * TILEX * TILEY);
-
 }
 
 
@@ -334,7 +338,7 @@ void mapToolMain::drawTerrain(int i)
 			_tiles[i + k + j * TILEX].terrainFrameX = m;
 			_tiles[i + k + j * TILEX].terrainFrameY = l;
 			_tiles[i + k + j * TILEX].terrain = terrainSelect(1, 0);
-			*_tilesImage[i + k + j * TILEX].terrainImage = *m_currentDragTile.terrainImage;
+			_tilesImage[i + k + j * TILEX].terrainImage = m_currentDragTile.terrainImage;
 
 		}
 	}
@@ -366,7 +370,7 @@ void mapToolMain::drawObject(int i)
 			_tiles[i + k + j * TILEX].objFrameX = m;
 			_tiles[i + k + j * TILEX].objFrameY = l;
 			_tiles[i + k + j * TILEX].obj = objSelect(1, 0);
-			*_tilesImage[i + k + j * TILEX].objImage = *m_currentDragTile.objImage;
+			_tilesImage[i + k + j * TILEX].objImage = m_currentDragTile.objImage;
 		}
 	}
 	if (m_isDifferentTile > 0)
@@ -400,14 +404,14 @@ void mapToolMain::cullingRender()
 	{
 		for (startX = index_X1; startX <= endX; startX++)
 		{	
-			if (*_tilesImage[startX + startY * TILEX].terrainImage == NULL)
-				*_tilesImage[startX + startY * TILEX].terrainImage = "tilemap";
-			IMAGE->frameRender(*_tilesImage[startX + startY * TILEX].terrainImage, getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].terrainFrameX, _tiles[startX + startY * TILEX].terrainFrameY);
+			if (_tilesImage[startX + startY * TILEX].terrainImage == "")
+				_tilesImage[startX + startY * TILEX].terrainImage = "tilemap";
+			IMAGE->frameRender(_tilesImage[startX + startY * TILEX].terrainImage, getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].terrainFrameX, _tiles[startX + startY * TILEX].terrainFrameY);
 
-			if (*_tilesImage[startX + startY * TILEX].objImage == NULL)
-				*_tilesImage[startX + startY * TILEX].objImage = "오브젝트타일1";
+			if (_tilesImage[startX + startY * TILEX].objImage == "")
+				_tilesImage[startX + startY * TILEX].objImage = "오브젝트타일1";
 			if (_tiles[startX + startY * TILEX].obj == OBJECT::OBJ_NONE)continue;
-			IMAGE->frameRender(*_tilesImage[startX + startY * TILEX].objImage, getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
+			IMAGE->frameRender(_tilesImage[startX + startY * TILEX].objImage, getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
 		}
 	}
 }
