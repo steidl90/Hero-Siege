@@ -11,6 +11,14 @@ class camera : public gameNode
 
 	int target_x, target_y;
 
+	int m_currentX;
+	int m_currentY;
+
+	int m_nextX;
+	int m_nextY;
+
+	bool isKeyDown;
+
 public:
 
 
