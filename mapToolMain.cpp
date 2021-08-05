@@ -8,6 +8,7 @@ HRESULT mapToolMain::init()
 	maptoolSetup();
 	m_isDifferentTile = 0;
 	m_subTile = 0;
+	memset(&m_frameObjectInfo, 0, sizeof(tagFrameObjectInfo));
 	return S_OK;
 }
 
@@ -32,6 +33,24 @@ void mapToolMain::update()
 		if (InputManager->isOnceKeyDown(VK_LBUTTON))
 			this->fillMap();
 	}
+
+	//if (InputManager->isStayKeyDown(VK_RBUTTON))
+	//{
+	//	if (!m_frameObject.empty())
+	//	{
+	//		for (auto iter = m_frameObject.begin(); iter != m_frameObject.end();)
+	//		{
+	//			if (PtInRect(&(*iter)->getRect(), m_ptMouse))
+	//			{
+	//				iter = m_frameObject.erase(iter);
+	//			}
+	//			else
+	//			{
+	//				++iter;
+	//			}
+	//		}
+	//	}
+	//}
 }
 
 void mapToolMain::render()
@@ -43,11 +62,17 @@ void mapToolMain::render()
 	sprintf_s(str, "서브타일 : %d ", m_subTile);
 	TextOut(getMemDC(), 100, 100, str, lstrlen(str));
 
+	if (!m_frameObject.empty())
+	{
+		for (auto iter = m_frameObject.begin(); iter != m_frameObject.end(); ++iter)
+		{
+			(*iter).frameObject->render();
+		}
+	}
 
 	/*char str[1000];
 	sprintf_s(str, "xxxx : %s", *_tilesImage[10].objImage);
 	TextOut(getMemDC(), 500, 550, str, lstrlen(str));*/
-
 }
 
 void mapToolMain::maptoolSetup()
@@ -111,6 +136,16 @@ void mapToolMain::setMap()
 					this->drawObject(i); break;
 
 				case CTRL::CTRL_FILL:
+					break;
+				case CTRL::CTRL_FRAME:
+					m_frameObjectInfo[i].check = 1;
+					m_frameObjectInfo[i].frame_kind = m_currentFrameKind;
+					setFrameObject(_tiles[i].rc.left, _tiles[i].rc.top, m_currentFrameKind, i);
+					break;
+				case CTRL::CTRL_ERASERFRAME:
+					m_frameObjectInfo[i].check = 0;
+					m_frameObjectInfo[i].frame_kind = KINDFRAMEOBJECT::NONE;
+					deleteFrameObject(i);
 					break;
 				default:
 					// 지우개
@@ -241,6 +276,54 @@ OBJECT mapToolMain::objSelect(int frameX, int frameY)
 	}
 }
 
+void mapToolMain::setFrameObject(int x, int y, KINDFRAMEOBJECT frameKind, int index)
+{
+	tagFrameObject tempObject;
+	tempObject.frameObject = new frameObject;
+	tempObject.frameObject->init(x, y, frameKind);
+	tempObject.index = index;
+	m_frameObject.push_back(tempObject);
+
+	//frameObject* tempObject = new frameObject;
+	//tempObject->init(x, y, frameKind);
+	//m_frameObject.push_back(tempObject);
+
+	//m_frameObjectInfo.count++;
+	//m_frameObjectInfo.frame_kind[m_frameObjectInfo.count] = frameKind;
+	//m_frameObjectInfo.x[m_frameObjectInfo.count] = x;
+	//m_frameObjectInfo.y[m_frameObjectInfo.count] = y;
+
+}
+
+void mapToolMain::deleteFrameObject(int index)
+{
+	if (!m_frameObject.empty())
+	{
+		for (auto iter = m_frameObject.begin(); iter != m_frameObject.end(); ++iter)
+		{
+			if ((*iter).index == index)
+			{
+				m_frameObject.erase(iter);
+				break;
+			}
+		}
+	}
+}
+
+void mapToolMain::initFrameObject()
+{
+	m_frameObject.clear();
+	for (size_t i = 0; i < TILEX * TILEY; i++)
+	{
+		if (m_frameObjectInfo[i].check == 1)
+		{
+			this->setFrameObject(_tiles[i].rc.left, _tiles[i].rc.top, m_frameObjectInfo[i].frame_kind, i);
+		}
+	}
+
+	int temp = 10;
+}
+
 // 뒤로가기용 푸쉬타일, 현재 타일 정보를 리스트에 저장해두고 나중에 불러오기
 void mapToolMain::pushTile()
 {
@@ -263,12 +346,18 @@ void mapToolMain::pushTile()
 		m_lTileMemory.pop_front();
 		SAFE_DELETE(temp2);
 	}
-
+	// 문제가 터지는곳
 	if (m_lTileImageMemory.size() > 100)
 	{
+		// 예균이표 이터레이터 활용 코드.. but 버그는 여전함
+		//auto tempImg2 = m_lTileImageMemory.begin();
+		////delete[] *tempImg2;
+		//m_lTileImageMemory.erase(tempImg2);
 		tagTileImage* tempImg2 = m_lTileImageMemory.front();
 		m_lTileImageMemory.pop_front();
-		//SAFE_DELETE(tempImg2);
+
+		//SAFE_DELETE(tempImg2); 
+
 	}
 }
 

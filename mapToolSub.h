@@ -14,7 +14,7 @@ class mapToolMain;
 class mapToolSub : public gameNode
 {
 private:
-	Cimage* m_image;
+
 
 	mapToolMain* m_mapToolmain;
 
@@ -24,8 +24,7 @@ private:
 
 	tagCurrentTile _currentTile; // 공용
 
-	tagTile _tiles[TILEX * TILEY];
-	tagTileImage _tilesImage[TILEX * TILEY];
+	KINDFRAMEOBJECT m_currentFrameKind; // 공용
 
 	tagDragTileIndex m_currentDragTile; // 공용
 	
@@ -38,9 +37,10 @@ private:
 	//토글 느낌으로 쓰는 키업 변수
 	bool m_isKeyUp;
 	int m_subTile; //오른쪽 타일
-	int _pos[2];
 
 	bool isTileLine; //왼쪽 타일 그리드 on off용도
+
+	int _pos[2];
 
 	RECT _terrain;
 	RECT _object;
@@ -72,7 +72,7 @@ public:
 	int getSubTile()const { return m_subTile; }
 	tagCurrentTile getCurrentTile()const { return _currentTile; }
 	tagDragTileIndex getTagDragTile()const { return m_currentDragTile; }
-
+	KINDFRAMEOBJECT getFrameKind()const { return m_currentFrameKind; }
 
 	// 코드 간략화를 위한 함수들
 

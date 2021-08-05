@@ -27,7 +27,7 @@ void mapToolManager::release()
 
 void mapToolManager::update()
 {
-	m_mainMapTool->update();
+
 	m_subMapTool->update();
 
 	// 공용값 적용시켜주기
@@ -35,12 +35,14 @@ void mapToolManager::update()
 	m_mainMapTool->setMainMapCurrentTile(m_subMapTool->getCurrentTile());
 	m_mainMapTool->setMainMapDragTile(m_subMapTool->getTagDragTile());
 	m_mainMapTool->setMainMapSelect(m_subMapTool->getCtrlSelect());
+	m_mainMapTool->setFrameKind(m_subMapTool->getFrameKind());
 
+	m_mainMapTool->update();
 }
 
 void mapToolManager::render()
 {
 	m_mainMapTool->render();
 	m_subMapTool->render();
-	m_mainMapTool->setSubTile(m_subMapTool->getSubTile());
+	//m_mainMapTool->setSubTile(m_subMapTool->getSubTile());
 }

@@ -153,8 +153,37 @@ void mapToolSub::maptoolSetup()
 	}
 }
 
+
+// 오른쪽 타일 클릭시, 타일의 이미지 프레임 정보등을 current 구조체에 담는다
+// current 구조체는 main툴에 전달되어서 타일 그릴때 사용
 void mapToolSub::setMap()
 {
+
+	if (m_subTile == 1)
+	{
+		if (m_isButtonClick)
+		{
+			for (size_t i = 248; i < SAMPLETILEX * SAMPLETILEY; i++)
+			{
+				if (PtInRect(&_sampleTiles[i].rcTile, m_ptMouse))
+				{
+
+					_ctrSelect = static_cast<int>(CTRL::CTRL_FRAME);
+					if (i == 248)
+						m_currentFrameKind = KINDFRAMEOBJECT::GRASS_BIG;
+					if (i == 249)
+						m_currentFrameKind = KINDFRAMEOBJECT::GRASS_SAMLL1;
+					if (i == 250)
+						m_currentFrameKind = KINDFRAMEOBJECT::GRASS_SMALL2;
+
+					m_isTileClick = true;
+					break;
+				}
+			}
+		}
+	}
+
+
 	// 채우기 기능 선택후 버튼 클릭시
 	if (_ctrSelect == static_cast<int>(CTRL::CTRL_FILL))
 	{
@@ -250,6 +279,7 @@ void mapToolSub::mapSave()
 	file = CreateFile("tileMap.map",
 		GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
+	WriteFile(file, m_mapToolmain->getFrameObjectInfo(), sizeof(tagFrameObjectInfo) * TILEX * TILEY, &write, NULL);
 	WriteFile(file, m_mapToolmain->getMainMapTileImage(), sizeof(tagTileImage) * TILEX * TILEY, &write, NULL);
 	WriteFile(file, m_mapToolmain->getMainMapTile(), sizeof(tagTile) * TILEX * TILEY, &write, NULL);
 	WriteFile(file, _pos, sizeof(int) * 2, &write, NULL);
@@ -264,10 +294,13 @@ void mapToolSub::mapLoad()
 	file = CreateFile("tileMap.map",
 		GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
+	ReadFile(file, m_mapToolmain->getFrameObjectInfo(), sizeof(tagFrameObjectInfo) * TILEX * TILEY, &read, NULL);
 	ReadFile(file, m_mapToolmain->getMainMapTileImage(), sizeof(tagTileImage) * TILEX * TILEY, &read, NULL);
 	ReadFile(file, m_mapToolmain->getMainMapTile(), sizeof(tagTile) * TILEX * TILEY, &read, NULL);
 	ReadFile(file, _pos, sizeof(int) * 2, &read, NULL);
 	CloseHandle(file);
+
+	m_mapToolmain->initFrameObject();
 }
 
 void mapToolSub::dragTileInit()
@@ -342,6 +375,10 @@ void mapToolSub::inputFunction()
 			SAFE_DELETE(temp2);
 			//SAFE_DELETE(tempImg2);
 		}
+	}
+	else if (InputManager->isStayKeyDown(VK_CONTROL) && InputManager->isOnceKeyDown('F'))
+	{
+		_ctrSelect = static_cast<int>(CTRL::CTRL_ERASERFRAME);
 	}
 
 	// 샘플 타일 전환
