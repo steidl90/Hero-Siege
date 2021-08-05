@@ -13,6 +13,7 @@ HRESULT mainGame::init()
 	///* astar */	_aStar = new CaStar;
 	///* astar */ _aStar->init();
 	
+
 	m_image = new Cimage;
 	m_image->init();
 
@@ -31,6 +32,9 @@ HRESULT mainGame::init()
 
 	SCENE->changeScene("맵툴");
 
+	ANIMATION->addDefAnimation("큰풀모션", "큰풀", 10, false, true);
+	ANIMATION->start("큰풀모션");
+
 	return S_OK;
 }
 
@@ -48,7 +52,7 @@ void mainGame::update()
 	m_camera->setTargetPoint(PointMake(m_player->getPlayRc()->left, m_player->getPlayRc()->top));
 	m_camera->update();
 	///* astar */ _aStar->update();
-	//ANIMATION->update();
+	ANIMATION->update();
 
 }
 

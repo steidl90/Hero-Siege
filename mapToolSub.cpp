@@ -187,6 +187,8 @@ void mapToolSub::setMap()
 				{
 					if (PtInRect(&_sampleTiles[i].rcTile, m_ptMouse))
 					{
+						if (i == 248)
+							_ctrSelect = static_cast<int>(CTRL::CTRL_FRAME);
 						m_currentDragTile.index_StartX = _sampleTiles[i].terrainFrameX;
 						m_currentDragTile.index_StartY = _sampleTiles[i].terrainFrameY;
 						m_currentDragTile.terrainImage = _sampleTileImage[i].terrainImage;

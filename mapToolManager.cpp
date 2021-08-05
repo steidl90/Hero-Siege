@@ -42,5 +42,5 @@ void mapToolManager::render()
 {
 	m_mainMapTool->render();
 	m_subMapTool->render();
-	m_mainMapTool->setSubTile(m_subMapTool->getSubTile());
+	//m_mainMapTool->setSubTile(m_subMapTool->getSubTile());
 }

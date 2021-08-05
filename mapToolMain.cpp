@@ -43,11 +43,17 @@ void mapToolMain::render()
 	sprintf_s(str, "서브타일 : %d ", m_subTile);
 	TextOut(getMemDC(), 100, 100, str, lstrlen(str));
 
+	if (!m_frameObject.empty())
+	{
+		for (auto iter = m_frameObject.begin(); iter != m_frameObject.end(); ++iter)
+		{
+			(*iter)->render();
+		}
+	}
 
 	/*char str[1000];
 	sprintf_s(str, "xxxx : %s", *_tilesImage[10].objImage);
 	TextOut(getMemDC(), 500, 550, str, lstrlen(str));*/
-
 }
 
 void mapToolMain::maptoolSetup()
@@ -107,10 +113,14 @@ void mapToolMain::setMap()
 				case CTRL::CTRL_TERRAINDRAW:
 					this->drawTerrain(i); break;
 
+
 				case CTRL::CTRL_OBJDRAW:
 					this->drawObject(i); break;
 
 				case CTRL::CTRL_FILL:
+					break;
+				case CTRL::CTRL_FRAME:
+					setFrameObject(_tiles[i].rc.left, _tiles[i].rc.top);
 					break;
 				default:
 					// 지우개
@@ -241,6 +251,13 @@ OBJECT mapToolMain::objSelect(int frameX, int frameY)
 	}
 }
 
+void mapToolMain::setFrameObject(int x, int y)
+{
+	frameObject* m_bigLeaf = new frameObject;
+	m_bigLeaf->init(x, y);
+	m_frameObject.push_back(m_bigLeaf);
+}
+
 // 뒤로가기용 푸쉬타일, 현재 타일 정보를 리스트에 저장해두고 나중에 불러오기
 void mapToolMain::pushTile()
 {
@@ -263,12 +280,18 @@ void mapToolMain::pushTile()
 		m_lTileMemory.pop_front();
 		SAFE_DELETE(temp2);
 	}
-
+	// 문제가 터지는곳
 	if (m_lTileImageMemory.size() > 100)
 	{
+		// 예균이표 이터레이터 활용 코드.. but 버그는 여전함
+		//auto tempImg2 = m_lTileImageMemory.begin();
+		////delete[] *tempImg2;
+		//m_lTileImageMemory.erase(tempImg2);
 		tagTileImage* tempImg2 = m_lTileImageMemory.front();
 		m_lTileImageMemory.pop_front();
-		//SAFE_DELETE(tempImg2);
+
+		//SAFE_DELETE(tempImg2); 
+
 	}
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 #include"gameNode.h"
+
 class frameObject : public gameNode
 {
 	RECT m_objectRect;

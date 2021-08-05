@@ -1,10 +1,10 @@
 #pragma once
 #include"gameNode.h"
+#include"frameObject.h"
 #include<list>
 /*
 	왼쪽 타일 부분
 	맵에 그려지는 클래스입니다
-
 */
 
 class camera;
@@ -17,9 +17,8 @@ private:
 	camera* m_camera;
 
 	tagTile _tiles[TILEX * TILEY];
-	tagTile temp_tiles[TILEX * TILEY];
+
 	tagTileImage _tilesImage[TILEX * TILEY];
-	tagTileImage temp_tilesImage[TILEX * TILEY];
 
 	tagCurrentTile _currentTile; // 공용
 
@@ -34,6 +33,10 @@ private:
 	tileImageMemory m_lTileImageMemory;
 
 	vector<int> m_vSelectTileIndex;
+
+	vector<frameObject*> m_frameObject;
+
+	frameObject* m_test;
 
 	// 버튼 클릭 여부 
 	bool m_isButtonClick;
@@ -65,6 +68,7 @@ public:
 
 	void setCameraMemory(camera* c) { m_camera = c; }
 
+	void setFrameObject(int x, int y);
 
 	// 뒤로가기 구현위해 필요한 함수들
 	void pushTile();

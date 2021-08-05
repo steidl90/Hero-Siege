@@ -3,10 +3,10 @@
 
 HRESULT frameObject::init(int x, int y)
 {
+
 	
-	ANIMATION->addDefAnimation("큰풀모션", "큰풀", 10, false, true);
 	m_ani = ANIMATION->findAnimation("큰풀모션");
-	ANIMATION->start("큰풀모션");
+	
 	m_x = x;
 	m_y = y;
 	return S_OK;
@@ -14,10 +14,12 @@ HRESULT frameObject::init(int x, int y)
 
 void frameObject::release()
 {
+	ANIMATION->release();
 }
 
 void frameObject::update()
 {
+
 }
 
 void frameObject::render()

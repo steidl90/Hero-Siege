@@ -4,7 +4,6 @@
 #include"camel.h"
 #include"mapToolManager.h"
 
-
 ///* astar */ #include "CaStar.h"
 
 class mainGame : public gameNode
