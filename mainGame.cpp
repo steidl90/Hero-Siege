@@ -22,6 +22,9 @@ HRESULT mainGame::init()
 	m_camera = new camera;
 	m_camera->init();
 
+	m_mevius = new Cmevius;
+	m_mevius->init();
+
 	/*m_mapTool = new mapToolManager;
 	m_mapTool->init();
 	m_mapTool->setCameraMemory(m_camera);*/
@@ -41,6 +44,7 @@ void mainGame::release()
 	gameNode::release();
 	///* astar */ SAFE_DELETE(_aStar);
 	//SAFE_DELETE(m_mapTool);
+	SAFE_DELETE(m_mevius);
 	SAFE_DELETE(m_image);
 	SAFE_DELETE(m_player);
 	SAFE_DELETE(m_camera);
@@ -52,11 +56,13 @@ void mainGame::update()
 {
 	gameNode::update();
 	SCENE->update();
+	m_mevius->update();
 	m_player->update();
 	m_camera->setTargetPoint(PointMake(m_player->getPlayRc()->left, m_player->getPlayRc()->top));
 	m_camera->update();
 	///* astar */ _aStar->update();
 	ANIMATION->update();
+	EFFECT->update();
 
 }
 
@@ -73,11 +79,13 @@ void mainGame::render()
 	this->getMapBuffer()->render(getMemDC(), 0, 0, m_camera->getCameraPoint().x, m_camera->getCameraPoint().y, m_camera->getCameraWidth(), m_camera->getCameraHeight());
 
 	SCENE->render();
+	EFFECT->render();
 
+	m_mevius->render();
 	m_player->render();
 	m_camera->render();
 	TIME->render(getMemDC());
-
+	
 	char str[100];
 	sprintf_s(str, "마우스 x : %d, 마우스 y: %d, ", m_ptMouse.x, m_ptMouse.y);
 	SetTextColor(getMemDC(), RGB(255, 255, 0));
