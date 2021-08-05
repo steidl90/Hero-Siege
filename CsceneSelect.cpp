@@ -14,63 +14,63 @@ HRESULT CsceneSelect::init()
 	IMAGE->findImage("선택화면");
 
 	IMAGE->findImage("선택아마존");
-	ANIMATION->addDefAnimation("아마존", "선택아마존", 10, false, true);
+	ANIMATION->addDefAnimation("아마존", "선택아마존", 5, false, true);
 	m_ani[0] = ANIMATION->findAnimation("아마존");
 
 	IMAGE->findImage("선택데몬");
-	ANIMATION->addDefAnimation("데몬", "선택데몬", 10, false, true);
+	ANIMATION->addDefAnimation("데몬", "선택데몬", 5, false, true);
 	m_ani[1] = ANIMATION->findAnimation("데몬");
 
 	IMAGE->findImage("선택데몬슬레이어");
-	ANIMATION->addDefAnimation("데몬슬레이어", "선택데몬슬레이어", 1, false, true);
+	ANIMATION->addDefAnimation("데몬슬레이어", "선택데몬슬레이어", 5, false, true);
 	m_ani[2] = ANIMATION->findAnimation("데몬슬레이어");
 
 	IMAGE->findImage("선택랜서");
-	ANIMATION->addDefAnimation("랜서", "선택랜서", 1, false, true);
+	ANIMATION->addDefAnimation("랜서", "선택랜서", 5, false, true);
 	m_ani[3] = ANIMATION->findAnimation("랜서");
 
 	IMAGE->findImage("선택머로더");
-	ANIMATION->addDefAnimation("머로더", "선택머로더", 1, false, true);
+	ANIMATION->addDefAnimation("머로더", "선택머로더", 5, false, true);
 	m_ani[4] = ANIMATION->findAnimation("머로더");
 
 	IMAGE->findImage("선택마크맨");
-	ANIMATION->addDefAnimation("마크맨", "선택마크맨", 1, false, true);
+	ANIMATION->addDefAnimation("마크맨", "선택마크맨", 5, false, true);
 	m_ani[5] = ANIMATION->findAnimation("마크맨");
 
 	IMAGE->findImage("선택네크로맨서");
-	ANIMATION->addDefAnimation("네크로맨서", "선택네크로맨서", 1, false, true);
+	ANIMATION->addDefAnimation("네크로맨서", "선택네크로맨서", 5, false, true);
 	m_ani[6] = ANIMATION->findAnimation("네크로맨서");
 
 	IMAGE->findImage("선택노마드");
-	ANIMATION->addDefAnimation("노마드", "선택노마드", 1, false, true);
+	ANIMATION->addDefAnimation("노마드", "선택노마드", 5, false, true);
 	m_ani[7] = ANIMATION->findAnimation("노마드");
 
 	IMAGE->findImage("선택팔라딘");
-	ANIMATION->addDefAnimation("팔라딘", "선택팔라딘", 1, false, true);
+	ANIMATION->addDefAnimation("팔라딘", "선택팔라딘", 5, false, true);
 	m_ani[8] = ANIMATION->findAnimation("팔라딘");
 
 	IMAGE->findImage("선택파이렛");
-	ANIMATION->addDefAnimation("파이렛", "선택파이렛", 1, false, true);
+	ANIMATION->addDefAnimation("파이렛", "선택파이렛", 5, false, true);
 	m_ani[9] = ANIMATION->findAnimation("파이렛");
 
 	IMAGE->findImage("선택레드넥");
-	ANIMATION->addDefAnimation("레드넥", "선택레드넥", 1, false, true);
+	ANIMATION->addDefAnimation("레드넥", "선택레드넥", 5, false, true);
 	m_ani[10] = ANIMATION->findAnimation("레드넥");
 
 	IMAGE->findImage("선택사무라이");
-	ANIMATION->addDefAnimation("사무라이", "선택사무라이", 1, false, true);
+	ANIMATION->addDefAnimation("사무라이", "선택사무라이", 5, false, true);
 	m_ani[11] = ANIMATION->findAnimation("사무라이");
 
 	IMAGE->findImage("선택샤먼");
-	ANIMATION->addDefAnimation("샤먼", "선택샤먼", 1, false, true);
+	ANIMATION->addDefAnimation("샤먼", "선택샤먼", 5, false, true);
 	m_ani[12] = ANIMATION->findAnimation("샤먼");
 
 	IMAGE->findImage("선택스틱맨");
-	ANIMATION->addDefAnimation("스틱맨", "선택스틱맨", 1, false, true);
+	ANIMATION->addDefAnimation("스틱맨", "선택스틱맨", 5, false, true);
 	m_ani[13] = ANIMATION->findAnimation("스틱맨");
 
 	IMAGE->findImage("선택화이트메이지");
-	ANIMATION->addDefAnimation("화이트메이지", "선택화이트메이지", 1, false, true);
+	ANIMATION->addDefAnimation("화이트메이지", "선택화이트메이지", 5, false, true);
 	m_ani[14] = ANIMATION->findAnimation("화이트메이지");
 
 	m_playerRc = RectMakeCenter(430, 300, IMAGE->findImage("선택아마존")->getFrameWidth(), IMAGE->findImage("선택아마존")->getFrameHeight());
@@ -100,7 +100,7 @@ void CsceneSelect::release()
 
 void CsceneSelect::update()
 {
-	if (true)
+	if (InputManager->isOnceKeyDown(VK_F10))
 	{
 		ANIMATION->start("아마존");
 		ANIMATION->start("데몬");
