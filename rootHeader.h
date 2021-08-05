@@ -15,7 +15,6 @@
 #define TILEX	  50		//맵 타일 x축 개수 
 #define TILEY     50		//맵 타일 y축 개수
 
-
 #define TILESIZEX TILEX * TILESIZE	// 맵 타일 전체 x축 사이즈(길이)
 #define TILESIZEY TILEY * TILESIZE
 

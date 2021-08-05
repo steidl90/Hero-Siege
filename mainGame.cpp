@@ -9,7 +9,6 @@ mainGame::~mainGame()
 HRESULT mainGame::init()
 {
 	gameNode::init(true);
-
 	///* astar */	_aStar = new CaStar;
 	///* astar */ _aStar->init();
 	

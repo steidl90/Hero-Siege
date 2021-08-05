@@ -139,6 +139,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="mainGame\히어로시즈\CsceneManager">
+      <UniqueIdentifier>{efb0d4a2-196b-40e4-a402-63bac3f4a91b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -303,6 +306,9 @@
     <ClInclude Include="Cinventory.h">
       <Filter>mainGame\히어로시즈\Cobject\Cinventory</Filter>
     </ClInclude>
+    <ClInclude Include="CsceneStart.h">
+      <Filter>mainGame\히어로시즈\CsceneManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -445,6 +451,9 @@
     </ClCompile>
     <ClCompile Include="Cinventory.cpp">
       <Filter>mainGame\히어로시즈\Cobject\Cinventory</Filter>
+    </ClCompile>
+    <ClCompile Include="CsceneStart.cpp">
+      <Filter>mainGame\히어로시즈\CsceneManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
