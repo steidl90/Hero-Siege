@@ -8,6 +8,7 @@ HRESULT mapToolMain::init()
 	maptoolSetup();
 	m_isDifferentTile = 0;
 	m_subTile = 0;
+	memset(&m_frameObjectInfo, 0, sizeof(tagFrameObjectInfo));
 	return S_OK;
 }
 
@@ -32,6 +33,24 @@ void mapToolMain::update()
 		if (InputManager->isOnceKeyDown(VK_LBUTTON))
 			this->fillMap();
 	}
+
+	//if (InputManager->isStayKeyDown(VK_RBUTTON))
+	//{
+	//	if (!m_frameObject.empty())
+	//	{
+	//		for (auto iter = m_frameObject.begin(); iter != m_frameObject.end();)
+	//		{
+	//			if (PtInRect(&(*iter)->getRect(), m_ptMouse))
+	//			{
+	//				iter = m_frameObject.erase(iter);
+	//			}
+	//			else
+	//			{
+	//				++iter;
+	//			}
+	//		}
+	//	}
+	//}
 }
 
 void mapToolMain::render()
@@ -47,7 +66,7 @@ void mapToolMain::render()
 	{
 		for (auto iter = m_frameObject.begin(); iter != m_frameObject.end(); ++iter)
 		{
-			(*iter)->render();
+			(*iter).frameObject->render();
 		}
 	}
 
@@ -113,14 +132,20 @@ void mapToolMain::setMap()
 				case CTRL::CTRL_TERRAINDRAW:
 					this->drawTerrain(i); break;
 
-
 				case CTRL::CTRL_OBJDRAW:
 					this->drawObject(i); break;
 
 				case CTRL::CTRL_FILL:
 					break;
 				case CTRL::CTRL_FRAME:
-					setFrameObject(_tiles[i].rc.left, _tiles[i].rc.top);
+					m_frameObjectInfo[i].check = 1;
+					m_frameObjectInfo[i].frame_kind = m_currentFrameKind;
+					setFrameObject(_tiles[i].rc.left, _tiles[i].rc.top, m_currentFrameKind, i);
+					break;
+				case CTRL::CTRL_ERASERFRAME:
+					m_frameObjectInfo[i].check = 0;
+					m_frameObjectInfo[i].frame_kind = KINDFRAMEOBJECT::NONE;
+					deleteFrameObject(i);
 					break;
 				default:
 					// 지우개
@@ -251,11 +276,52 @@ OBJECT mapToolMain::objSelect(int frameX, int frameY)
 	}
 }
 
-void mapToolMain::setFrameObject(int x, int y)
+void mapToolMain::setFrameObject(int x, int y, KINDFRAMEOBJECT frameKind, int index)
 {
-	frameObject* m_bigLeaf = new frameObject;
-	m_bigLeaf->init(x, y);
-	m_frameObject.push_back(m_bigLeaf);
+	tagFrameObject tempObject;
+	tempObject.frameObject = new frameObject;
+	tempObject.frameObject->init(x, y, frameKind);
+	tempObject.index = index;
+	m_frameObject.push_back(tempObject);
+
+	//frameObject* tempObject = new frameObject;
+	//tempObject->init(x, y, frameKind);
+	//m_frameObject.push_back(tempObject);
+
+	//m_frameObjectInfo.count++;
+	//m_frameObjectInfo.frame_kind[m_frameObjectInfo.count] = frameKind;
+	//m_frameObjectInfo.x[m_frameObjectInfo.count] = x;
+	//m_frameObjectInfo.y[m_frameObjectInfo.count] = y;
+
+}
+
+void mapToolMain::deleteFrameObject(int index)
+{
+	if (!m_frameObject.empty())
+	{
+		for (auto iter = m_frameObject.begin(); iter != m_frameObject.end(); ++iter)
+		{
+			if ((*iter).index == index)
+			{
+				m_frameObject.erase(iter);
+				break;
+			}
+		}
+	}
+}
+
+void mapToolMain::initFrameObject()
+{
+	m_frameObject.clear();
+	for (size_t i = 0; i < TILEX * TILEY; i++)
+	{
+		if (m_frameObjectInfo[i].check == 1)
+		{
+			this->setFrameObject(_tiles[i].rc.left, _tiles[i].rc.top, m_frameObjectInfo[i].frame_kind, i);
+		}
+	}
+
+	int temp = 10;
 }
 
 // 뒤로가기용 푸쉬타일, 현재 타일 정보를 리스트에 저장해두고 나중에 불러오기

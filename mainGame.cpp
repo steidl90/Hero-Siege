@@ -34,7 +34,10 @@ HRESULT mainGame::init()
 
 	ANIMATION->addDefAnimation("큰풀모션", "큰풀", 10, false, true);
 	ANIMATION->start("큰풀모션");
-
+	ANIMATION->addDefAnimation("작은풀1모션", "작은풀1", 10, false, true);
+	ANIMATION->start("작은풀1모션");
+	ANIMATION->addDefAnimation("작은풀2모션", "작은풀2", 10, false, true);
+	ANIMATION->start("작은풀2모션");
 	return S_OK;
 }
 

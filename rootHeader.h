@@ -24,6 +24,8 @@
 #define SAMPLETILEX 18
 #define SAMPLETILEY 14
 
+class frameObject;
+
 // 툴에서 사용할 기능,  현재 선택중인 CRTL에 따라 맵 타일 속성정의 등등
 enum class CTRL
 {
@@ -31,7 +33,8 @@ enum class CTRL
 	CTRL_OBJDRAW,
 	CTRL_ERASER,
 	CTRL_FILL,
-	CTRL_FRAME
+	CTRL_FRAME,
+	CTRL_ERASERFRAME
 };
 
 //지형 속성 종류
@@ -48,6 +51,14 @@ enum class OBJECT
 	OBJ_BLOCK3,
 	OBJ_BLOCKS,
 	OBJ_NONE
+};
+
+enum KINDFRAMEOBJECT
+{
+	GRASS_BIG,
+	GRASS_SAMLL1,
+	GRASS_SMALL2,
+	NONE
 };
 
 //오른쪽 타일 종류 변경 용도
@@ -117,4 +128,16 @@ struct tagDragTileIndex
 
 	string terrainImage;
 	string objImage;
+};
+
+struct tagFrameObjectInfo
+{
+	int check;
+	KINDFRAMEOBJECT frame_kind;
+};
+
+struct tagFrameObject
+{
+	frameObject* frameObject;
+	int index;
 };
