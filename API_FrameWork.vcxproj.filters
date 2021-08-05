@@ -312,6 +312,9 @@
     <ClInclude Include="CsceneSelect.h">
       <Filter>mainGame\히어로시즈\Cscene</Filter>
     </ClInclude>
+    <ClInclude Include="frameObject.h">
+      <Filter>맵툴</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -460,6 +463,9 @@
     </ClCompile>
     <ClCompile Include="CsceneSelect.cpp">
       <Filter>mainGame\히어로시즈\Cscene</Filter>
+    </ClCompile>
+    <ClCompile Include="frameObject.cpp">
+      <Filter>맵툴</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
