@@ -303,6 +303,9 @@
     <ClInclude Include="Cinventory.h">
       <Filter>mainGame\히어로시즈\Cobject\Cinventory</Filter>
     </ClInclude>
+    <ClInclude Include="frameObject.h">
+      <Filter>맵툴</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -445,6 +448,9 @@
     </ClCompile>
     <ClCompile Include="Cinventory.cpp">
       <Filter>mainGame\히어로시즈\Cobject\Cinventory</Filter>
+    </ClCompile>
+    <ClCompile Include="frameObject.cpp">
+      <Filter>맵툴</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
