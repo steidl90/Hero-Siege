@@ -19,6 +19,9 @@ HRESULT mainGame::init()
 	m_player = new camel;
 	m_player->init();
 
+	player = new Cplayer;
+	player->init();
+
 	m_camera = new camera;
 	m_camera->init();
 
@@ -44,6 +47,8 @@ void mainGame::release()
 	SAFE_DELETE(m_image);
 	SAFE_DELETE(m_player);
 	SAFE_DELETE(m_camera);
+	SAFE_DELETE(player);
+
 	//SAFE_DELETE(m_town);
 	SCENE->release();
 }
@@ -53,6 +58,9 @@ void mainGame::update()
 	gameNode::update();
 	SCENE->update();
 	m_player->update();
+
+	player->update();
+
 	m_camera->setTargetPoint(PointMake(m_player->getPlayRc()->left, m_player->getPlayRc()->top));
 	m_camera->update();
 	///* astar */ _aStar->update();
@@ -75,6 +83,9 @@ void mainGame::render()
 	SCENE->render();
 
 	m_player->render();
+
+	player->render();
+
 	m_camera->render();
 	TIME->render(getMemDC());
 
