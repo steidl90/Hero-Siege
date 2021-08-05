@@ -1,12 +1,10 @@
 #pragma once
 #include"gameNode.h"
-#include<list>
 /*
 	왼쪽 타일 부분
 	맵에 그려지는 클래스입니다
 
 */
-
 class camera;
 class mapToolMain : public gameNode
 {

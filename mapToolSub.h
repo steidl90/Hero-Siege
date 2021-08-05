@@ -24,6 +24,9 @@ private:
 
 	tagCurrentTile _currentTile; // 공용
 
+	tagTile _tiles[TILEX * TILEY];
+	tagTileImage _tilesImage[TILEX * TILEY];
+
 	tagDragTileIndex m_currentDragTile; // 공용
 	
 	int _ctrSelect; // 공용

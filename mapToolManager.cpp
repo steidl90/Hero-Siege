@@ -5,24 +5,24 @@
 HRESULT mapToolManager::init()
 {
 	// 임시 추가 이미지, 나중에 한곳에서 몰아서 할수도
-	IMAGE->addFrameImage("tilemap", "images/Tile2.bmp", 648, 504, SAMPLETILEX, SAMPLETILEY, true, RGB(255, 0, 255));
+	
 
 	m_mainMapTool = new mapToolMain;
 	m_mainMapTool->init();
 
 	m_subMapTool = new mapToolSub;
 	m_subMapTool->init();
-
+	
 	m_subMapTool->setMapToolMainMemory(m_mainMapTool);
-
 	m_mainMapTool->setCameraMemory(m_camera);
 
-	
 	return S_OK;
 }
 
 void mapToolManager::release()
 {
+	SAFE_DELETE(m_mainMapTool);
+	SAFE_DELETE(m_subMapTool);
 }
 
 void mapToolManager::update()

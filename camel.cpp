@@ -33,8 +33,6 @@ HRESULT camel::init()
 	//_ani3->setFPS(1);
 
 
-
-
 	//매니저로
 	_camel = IMAGE->addFrameImage("camel", "images/camel.bmp", 300, 267, 4, 3, true, RGB(255, 0, 255));
 	_red = IMAGE->addFrameImage("red", "images/레드.bmp", 256, 88, 8, 2, true, RGB(255, 0, 255));

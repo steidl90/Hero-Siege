@@ -22,13 +22,15 @@ HRESULT mainGame::init()
 	m_camera = new camera;
 	m_camera->init();
 
-	m_mapTool = new mapToolManager;
+	/*m_mapTool = new mapToolManager;
 	m_mapTool->init();
+	m_mapTool->setCameraMemory(m_camera);*/
 
-	m_mapTool->setCameraMemory(m_camera);
-
-	SCENE->addScene("¸ÊÅø", m_mapTool);
-
+	m_town = new CTown;
+	m_town->init();
+	m_town->setCameraMemory(m_camera);
+	
+	SCENE->addScene("¸ÊÅø", m_town);
 	SCENE->changeScene("¸ÊÅø");
 
 	return S_OK;
@@ -38,6 +40,12 @@ void mainGame::release()
 {
 	gameNode::release();
 	///* astar */ SAFE_DELETE(_aStar);
+	//SAFE_DELETE(m_mapTool);
+	SAFE_DELETE(m_image);
+	SAFE_DELETE(m_player);
+	SAFE_DELETE(m_camera);
+	SAFE_DELETE(m_town);
+	SCENE->release();
 }
 
 void mainGame::update()
@@ -48,7 +56,7 @@ void mainGame::update()
 	m_camera->setTargetPoint(PointMake(m_player->getPlayRc()->left, m_player->getPlayRc()->top));
 	m_camera->update();
 	///* astar */ _aStar->update();
-	//ANIMATION->update();
+	ANIMATION->update();
 
 }
 
