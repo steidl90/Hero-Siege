@@ -9,8 +9,6 @@ mainGame::~mainGame()
 HRESULT mainGame::init()
 {
 	gameNode::init(true);
-	///* astar */	_aStar = new CaStar;
-	///* astar */ _aStar->init();
 	
 	m_image = new Cimage;
 	m_image->init();
@@ -30,7 +28,10 @@ HRESULT mainGame::init()
 	m_town->setCameraMemory(m_camera);
 	
 	SCENE->addScene("맵툴", m_town);
-	SCENE->changeScene("맵툴");
+	SCENE->addScene("시작화면", new CsceneStart);
+	SCENE->addScene("선택화면", new CsceneSelect);
+
+	SCENE->changeScene("시작화면");
 	
 	return S_OK;
 }

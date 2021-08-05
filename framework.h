@@ -53,8 +53,8 @@
 #define WINNAME			(LPTSTR)(TEXT("히어로시즈"))
 #define WINSTARTX		100
 #define WINSTARTY		100
-#define WINSIZEX		1500
-#define WINSIZEY		768
+#define WINSIZEX		1280
+#define WINSIZEY		820
 #define	WINSTYLE		WS_CAPTION | WS_SYSMENU
 
 

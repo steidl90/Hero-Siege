@@ -4,14 +4,11 @@
 #include"camel.h"
 #include"mapToolManager.h"
 #include"CTown.h"
-
-///* astar */ #include "CaStar.h"
-
+#include"CsceneStart.h"
+#include"CsceneSelect.h"
 class mainGame : public gameNode
 {
 private:
-	///* astar */ CaStar * _aStar;
-
 	camel* m_player;
 	camera* m_camera;
 	Cimage* m_image;
