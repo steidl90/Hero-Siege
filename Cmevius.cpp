@@ -30,7 +30,7 @@ HRESULT Cmevius::init()
 	ANIMATION->addDefAnimation("애니공중", "보스공중", 10, false, true);
     ANIMATION->addDefAnimation("애니보스", "보스", 5, false, true);
     ANIMATION->addDefAnimation("애니캐스팅", "보스캐스팅", 10, false, false);
-    ANIMATION->addDefAnimation("애니걷기", "보스걷기", 3, false, false);
+    ANIMATION->addDefAnimation("애니걷기", "보스걷기2", 10, false, false);
     ANIMATION->addDefAnimation("애니공", "보스공", 10, false, true);
     EFFECT->addEffect("라이트닝", "images/Lightning.bmp", 576, 402, 72, 402, 1, 0.35f, 100);
     EFFECT->addEffect("스텀프", "images/Stomp.bmp", 819*2, 78*2, 91*2, 78*2, 1, 0.2f, 200);
@@ -84,7 +84,7 @@ void Cmevius::update()
     if (m_isWalking)
     {
         m_isWalking = false;
-        m_meviusImage = IMAGE->findImage("보스걷기");
+        m_meviusImage = IMAGE->findImage("보스걷기2");
         m_meviusAnimation = ANIMATION->findAnimation("애니걷기");
         ANIMATION->start("애니걷기");
     }
