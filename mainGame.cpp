@@ -32,7 +32,7 @@ HRESULT mainGame::init()
 	
 	SCENE->addScene("¸ÊÅø", m_town);
 	SCENE->changeScene("¸ÊÅø");
-
+	
 	return S_OK;
 }
 
@@ -44,7 +44,7 @@ void mainGame::release()
 	SAFE_DELETE(m_image);
 	SAFE_DELETE(m_player);
 	SAFE_DELETE(m_camera);
-	SAFE_DELETE(m_town);
+	//SAFE_DELETE(m_town);
 	SCENE->release();
 }
 

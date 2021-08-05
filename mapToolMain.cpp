@@ -76,7 +76,7 @@ void mapToolMain::maptoolSetup()
 
 		_tiles[i].terrain = terrainSelect(_tiles[i].terrainFrameX, _tiles[i].terrainFrameY);
 		_tiles[i].obj = OBJECT::OBJ_NONE;
-
+		
 		_tilesImage[i].terrainImage = "tilemap";
 		_tilesImage[i].objImage = "오브젝트타일1";
 	}
@@ -278,7 +278,6 @@ void mapToolMain::setTile(tagTile* tileDst, tagTile* tileSour, tagTileImage* til
 	memcpy(tileDst, tileSour, sizeof(tagTile) * TILEX * TILEY);
 	memcpy(tileImgDst, tileImgSour, sizeof(tagTileImage) * TILEX * TILEY);
 }
-
 
 void mapToolMain::indexCalculate(vector<int> vInt, int* x1, int* y1, int* x2, int* y2)
 {

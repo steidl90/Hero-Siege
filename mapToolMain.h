@@ -3,7 +3,6 @@
 /*
 	왼쪽 타일 부분
 	맵에 그려지는 클래스입니다
-
 */
 class camera;
 class mapToolMain : public gameNode
@@ -15,12 +14,9 @@ private:
 	camera* m_camera;
 
 	tagTile _tiles[TILEX * TILEY];
-	tagTile temp_tiles[TILEX * TILEY];
 	tagTileImage _tilesImage[TILEX * TILEY];
-	tagTileImage temp_tilesImage[TILEX * TILEY];
 
 	tagCurrentTile _currentTile; // 공용
-
 	tagDragTileIndex m_currentDragTile; // 공용
 
 	int _ctrSelect; // 공용

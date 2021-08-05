@@ -58,10 +58,10 @@ void CTown::cullingRender()
 	int endY = index_Y2;
 
 	// 인덱스 범위초과 예외처리
-	if (endY > 49)
+	/*if (endY > 49)
 		endY = 49;
 	if (endX > 49)
-		endX = 49;
+		endX = 49;*/
 
 	for (startY = index_Y1; startY <= endY; startY++)
 	{
