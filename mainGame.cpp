@@ -32,7 +32,7 @@ HRESULT mainGame::init()
 	SCENE->addScene("시작화면", new CsceneStart);
 	SCENE->addScene("선택화면", new CsceneSelect);
 
-	SCENE->changeScene("시작화면");
+	SCENE->changeScene("맵툴");
 	
 	return S_OK;
 }

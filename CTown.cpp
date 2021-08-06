@@ -27,6 +27,14 @@ void CTown::update()
 void CTown::render()
 {
 	this->cullingRender();
+
+	if (!m_frameObject.empty())
+	{
+		for (auto iter = m_frameObject.begin(); iter != m_frameObject.end(); ++iter)
+		{
+			(*iter).frameObject->render();
+		}
+	}
 }
 
 void CTown::load()
@@ -37,10 +45,13 @@ void CTown::load()
     file = CreateFile("tileMap.map",
         GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
+	ReadFile(file, m_frameObjectInfo, sizeof(tagFrameObjectInfo) * TILEX * TILEY, &read, NULL);
     ReadFile(file, _tilesImage, sizeof(tagTileImage) * TILEX * TILEY, &read, NULL);
     ReadFile(file, _tiles, sizeof(tagTile) * TILEX * TILEY, &read, NULL);
     ReadFile(file, _pos, sizeof(int) * 2, &read, NULL);
     CloseHandle(file);
+
+	this->initFrameObject();
 }
 
 void CTown::cullingRender()
@@ -77,4 +88,25 @@ void CTown::cullingRender()
 			IMAGE->frameRender(_tilesImage[startX + startY * TILEX].objImage, getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
 		}
 	}
+}
+
+void CTown::initFrameObject()
+{
+	m_frameObject.clear();
+	for (size_t i = 0; i < TILEX * TILEY; i++)
+	{
+		if (m_frameObjectInfo[i].check == 1)
+		{
+			this->setFrameObject(_tiles[i].rc.left, _tiles[i].rc.top, m_frameObjectInfo[i].frame_kind, i);
+		}
+	}
+}
+
+void CTown::setFrameObject(int x, int y, KINDFRAMEOBJECT frameKind, int index)
+{
+	tagFrameObject tempObject;
+	tempObject.frameObject = new frameObject;
+	tempObject.frameObject->init(x, y, frameKind);
+	tempObject.index = index;
+	m_frameObject.push_back(tempObject);
 }
