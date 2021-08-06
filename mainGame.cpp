@@ -16,8 +16,8 @@ HRESULT mainGame::init()
 	m_image = new Cimage;
 	m_image->init();
 
-	m_player = new camel;
-	m_player->init();
+	/*m_player = new camel;
+	m_player->init();*/
 
 	player = new Cplayer;
 	player->init();
@@ -57,11 +57,11 @@ void mainGame::update()
 {
 	gameNode::update();
 	SCENE->update();
-	m_player->update();
+	//m_player->update();
 
 	player->update();
 
-	m_camera->setTargetPoint(PointMake(m_player->getPlayRc()->left, m_player->getPlayRc()->top));
+	//m_camera->setTargetPoint(PointMake(m_player->getPlayRc()->left, m_player->getPlayRc()->top));
 	m_camera->update();
 	///* astar */ _aStar->update();
 	ANIMATION->update();
@@ -82,7 +82,7 @@ void mainGame::render()
 
 	SCENE->render();
 
-	m_player->render();
+	//m_player->render();
 
 	player->render();
 
