@@ -62,6 +62,7 @@ private:
 	//알파용
 	BLENDFUNCTION	_blendFunc;			//알파블렌드를 위한 정보
 	LPIMAGE_INFO	_blendImage;		//알파블렌드를 사용하기 위한 이미지 정보
+	LPIMAGE_INFO	_rotateImage;		//회전이미지
 
 public:
 
@@ -71,11 +72,12 @@ public:
 	HRESULT init(const char* fileName, const float x, const float y, const int width, const int height, bool  isTrans = false, COLORREF transColor = RGB(255, 0, 255));
 
 
-
 	//프레임 이미지 초기화
 	HRESULT init(const char* fileName, const int width, const int height, const int frameX, const int frameY, bool isTrans = false, COLORREF transColor = RGB(255, 0, 255));
 	HRESULT init(const char* fileName, const int x, const int y, const int width, const int height, const int frameX, const int frameY, bool isTrans = false, COLORREF transColor = RGB(255, 0, 255));
 
+	//로테이트 이미지 초기화
+	HRESULT initForRotate();
 
 
 	//투명값 셋팅
@@ -101,6 +103,9 @@ public:
 	void alphaRender(HDC hdc, BYTE alpha);
 	void alphaRender(HDC hdc, const int destX, const int destY, BYTE alpha);
 	void alphaRender(HDC hdc, const int destX, const int destY, const int sourX, const int sourY, const int sourWidth, const int sourHeight, BYTE alpha);
+
+	//로테이트렌더
+	void rotateRender(HDC hdc, float centerX, float centerY, float angle);
 
 	//내가 추가시킨거..
 	void alphaFrameRender(HDC hdc, const int destX, const int destY, BYTE alpha);
