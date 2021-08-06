@@ -29,6 +29,11 @@ private:
 
 	bool isKeyDown;
 
+	bool isLeft;
+	bool isRight;
+	bool isDown;
+	bool isUp;
+
 	int m_count;
 	DIRECTION direct;
 

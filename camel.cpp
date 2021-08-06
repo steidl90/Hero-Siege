@@ -31,7 +31,11 @@ HRESULT camel::init()
 	//_ani3->init(_camel->getWidth(), _camel->getHeight(), 75, 89);
 	//_ani3->setPlayFrame(1, 10, false, true);
 	//_ani3->setFPS(1);
-
+	
+	isLeft = false;
+	isRight = false;
+	isDown = false;
+	isUp = false;
 
 	//매니저로
 	_camel = IMAGE->addFrameImage("camel", "images/camel.bmp", 300, 267, 4, 3, true, RGB(255, 0, 255));
@@ -40,7 +44,7 @@ HRESULT camel::init()
 	_redRc = RectMake(WINSIZEX / 2, WINSIZEY / 2, _red->getFrameWidth(), _red->getFrameHeight());
 	_x = 100;
 	_y = 100;
-	_speed = 7;
+	_speed = 2;
 
 	ANIMATION->addDefAnimation("ani1", "red", 10, true, false);
 
@@ -74,26 +78,72 @@ void camel::release()
 void camel::update()
 {
 	direct = DIRECTION::IDLE;
-	if (InputManager->isStayKeyDown(VK_UP) && _y > 0)
+	if (isUp && (InputManager->isStayKeyDown(VK_RIGHT) || InputManager->isStayKeyDown(VK_LEFT)))
 	{
 		_y -= _speed;
+		if (InputManager->isOnceKeyUp(VK_UP)) isUp = false;
+		if (InputManager->isStayKeyDown(VK_RIGHT))_x += _speed;
+		if (InputManager->isStayKeyDown(VK_LEFT))_x -= _speed;
 		direct = DIRECTION::TOP;
 	}
-	if (InputManager->isStayKeyDown(VK_DOWN) && _y < MAPSIZE - IMAGE->findImage("red")->getFrameHeight())
-	{
-		_y += _speed;
-		direct = DIRECTION::DOWN;
-	}
-	if (InputManager->isStayKeyDown(VK_RIGHT) && _x < MAPSIZE - IMAGE->findImage("red")->getFrameWidth())
+	else if (isRight && (InputManager->isStayKeyDown(VK_UP) || InputManager->isStayKeyDown(VK_DOWN)))
 	{
 		_x += _speed;
+		if (InputManager->isOnceKeyUp(VK_RIGHT)) isRight = false;
+		if (InputManager->isStayKeyDown(VK_DOWN))_y += _speed;
+		if (InputManager->isStayKeyDown(VK_UP))_y -= _speed;
 		direct = DIRECTION::RIGHT;
 	}
-	if (InputManager->isStayKeyDown(VK_LEFT) && _x > 0)
+	else if (isDown && (InputManager->isStayKeyDown(VK_RIGHT) || InputManager->isStayKeyDown(VK_LEFT)))
 	{
-		if (_x > 0)
-			_x -= _speed;
+		_y += _speed;
+		if (InputManager->isOnceKeyUp(VK_DOWN)) isDown = false;
+		if (InputManager->isStayKeyDown(VK_RIGHT))_x += _speed;
+		if (InputManager->isStayKeyDown(VK_LEFT))_x -= _speed;
+		direct = DIRECTION::DOWN;
+	}
+	else if (isLeft && (InputManager->isStayKeyDown(VK_UP) || InputManager->isStayKeyDown(VK_DOWN)))
+	{
+		_x -= _speed;
+		if (InputManager->isOnceKeyUp(VK_LEFT)) isLeft = false;
+		if (InputManager->isStayKeyDown(VK_DOWN))_y += _speed;
+		if (InputManager->isStayKeyDown(VK_UP))_y -= _speed;
 		direct = DIRECTION::LEFT;
+	}
+	else if (InputManager->isStayKeyDown(VK_UP))
+	{
+		_y -= _speed;
+		isUp = true;
+		
+		direct = DIRECTION::TOP;
+	}
+	else if (InputManager->isStayKeyDown(VK_RIGHT))
+	{
+		_x += _speed;
+		isRight = true;
+		
+		direct = DIRECTION::RIGHT;
+	}
+	else if (InputManager->isStayKeyDown(VK_DOWN))
+	{
+		_y += _speed;
+		isDown = true;
+		
+		direct = DIRECTION::DOWN;
+	}
+	else if (InputManager->isStayKeyDown(VK_LEFT))
+	{
+		_x -= _speed;
+		isLeft = true;
+		
+		direct = DIRECTION::LEFT;
+	}
+	else
+	{
+		isLeft = false;
+		isRight = false;
+		isDown = false;
+		isUp = false;
 	}
 
 	////마우스 왼쪽 버튼으로 화면 이동 기능 -> 현재 캐릭터의 x,y의 값을 변경하여 이동 하는 구조로 되어있음
@@ -168,9 +218,9 @@ void camel::render()
 {
 	Rectangle(getMapDC(), _redRc.left, _redRc.top, _redRc.right, _redRc.bottom);
 	_red->aniRender(getMapDC(), _redRc.left, _redRc.top, _ani);
-
-	//char str[100];
-	//sprintf_s(str, "current x : %d, current y : %d", m_currentX, m_currentY);
-	//SetTextColor(getMemDC(), RGB(255, 255, 0));
-	//TextOut(getMemDC(), WINSIZEX / 2 - 500, WINSIZEY - 200, str, lstrlen(str));
+	
+	char str[100];
+	sprintf_s(str, "left : %d, right : %d, down : %d, up : %d", isLeft, isRight, isDown, isUp);
+	SetTextColor(getMemDC(), RGB(255, 255, 0));
+	TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, str, lstrlen(str));
 }
