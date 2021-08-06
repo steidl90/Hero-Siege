@@ -307,16 +307,13 @@ void Cplayer::moveAnimation()
 	{
 	case DIRECTIONS::DIRECTIONS_LEFT:
 
-		if (!isAttack)
+		if (isMoving)
 		{
-			if (isMoving)
-			{
-				playerMoveAni = ANIMATION->findAnimation("¿ÞÂÊ°È±â");
-				ANIMATION->start("¿ÞÂÊ°È±â");
-				playerAttackAni = ANIMATION->findAnimation("¿ÞÂÊ°ø°Ý");
-				ANIMATION->start("¿ÞÂÊ°ø°Ý");
-				isIdle = false;
-			}
+			playerMoveAni = ANIMATION->findAnimation("¿ÞÂÊ°È±â");
+			ANIMATION->start("¿ÞÂÊ°È±â");
+			playerAttackAni = ANIMATION->findAnimation("¿ÞÂÊ°ø°Ý");
+			ANIMATION->start("¿ÞÂÊ°ø°Ý");
+			isIdle = false;
 		}
 		break;
 	case DIRECTIONS::DIRECTIONS_UP:
