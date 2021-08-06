@@ -65,6 +65,10 @@ public:
 
 	void setCameraMemory(camera* c) { m_camera = c; }
 
+	// 이미지 불러오기 함수
+	string getImageName(OBJECTIMAGE image);
+
+	// 프레임 오브젝트 관련 함수
 	void setFrameObject(int x, int y, KINDFRAMEOBJECT frameKind, int index);
 	void deleteFrameObject(int index);
 	void initFrameObject();

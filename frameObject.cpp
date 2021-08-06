@@ -27,7 +27,7 @@ HRESULT frameObject::init(int x, int y, KINDFRAMEOBJECT frameObject)
 
 void frameObject::release()
 {
-	ANIMATION->release();
+	//ANIMATION->release();
 }
 
 void frameObject::update()

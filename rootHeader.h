@@ -1,5 +1,5 @@
 #pragma once
-#define CAMERAWIDTH WINSIZEX
+#define CAMERAWIDTH WINSIZEX - 700
 #define CAMERAHEIGHT WINSIZEY
 #define MAPTOOLPOINT (WINSIZEX - 30)
 
@@ -60,6 +60,16 @@ enum KINDFRAMEOBJECT
 	NONE
 };
 
+enum class OBJECTIMAGE
+{
+	OBJECTIMAGE_TILE,
+	OBJECTIMAGE_OBJECT1,
+	OBJECTIMAGE_OBJECT2,
+	OBJECTIMAGE_OBJECT3,
+	OBJECTIMAGE_OBJECT4,
+	OBJECTIMAGE_OBJECT5
+};
+
 //오른쪽 타일 종류 변경 용도
 enum class KINDSUBTILE
 {
@@ -76,8 +86,8 @@ enum class KINDSUBTILE
 
 struct tagTileImage
 {
-	string terrainImage;
-	string objImage;
+	OBJECTIMAGE terrainImage;
+	OBJECTIMAGE objImage;
 };
 
 //타일 구조체 (맵에 그릴 타일)
@@ -107,8 +117,8 @@ struct tagCurrentTile
 	int frame_x;
 	int frame_y;
 
-	string terrainImage;
-	string objImage;
+	OBJECTIMAGE terrainImage;
+	OBJECTIMAGE objImage;
 };
 
 // 드래그 할시 시작 타일 인덱스 x,y 정보 끝 타일 인덱스 x, y 정보
@@ -125,8 +135,8 @@ struct tagDragTileIndex
 	int frame_EndX;
 	int frame_EndY;
 
-	string terrainImage;
-	string objImage;
+	OBJECTIMAGE terrainImage;
+	OBJECTIMAGE objImage;
 };
 
 struct tagFrameObjectInfo

@@ -78,14 +78,14 @@ void CTown::cullingRender()
 	{
 		for (startX = index_X1; startX <= endX; startX++)
 		{
-			if (_tilesImage[startX + startY * TILEX].terrainImage == "")
-				_tilesImage[startX + startY * TILEX].terrainImage = "tilemap";
-			IMAGE->frameRender(_tilesImage[startX + startY * TILEX].terrainImage, getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].terrainFrameX, _tiles[startX + startY * TILEX].terrainFrameY);
+			//if (_tilesImage[startX + startY * TILEX].terrainImage == "")
+			//	_tilesImage[startX + startY * TILEX].terrainImage = "tilemap";
+			IMAGE->frameRender(this->getImageName(_tilesImage[startX + startY * TILEX].terrainImage), getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].terrainFrameX, _tiles[startX + startY * TILEX].terrainFrameY);
 
-			if (_tilesImage[startX + startY * TILEX].objImage == "")
-				_tilesImage[startX + startY * TILEX].objImage = "오브젝트타일1";
+			//if (_tilesImage[startX + startY * TILEX].objImage == "")
+			//	_tilesImage[startX + startY * TILEX].objImage = "오브젝트타일1";
 			if (_tiles[startX + startY * TILEX].obj == OBJECT::OBJ_NONE)continue;
-			IMAGE->frameRender(_tilesImage[startX + startY * TILEX].objImage, getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
+			IMAGE->frameRender(this->getImageName(_tilesImage[startX + startY * TILEX].objImage), getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
 		}
 	}
 }
@@ -109,4 +109,33 @@ void CTown::setFrameObject(int x, int y, KINDFRAMEOBJECT frameKind, int index)
 	tempObject.frameObject->init(x, y, frameKind);
 	tempObject.index = index;
 	m_frameObject.push_back(tempObject);
+}
+
+string CTown::getImageName(OBJECTIMAGE image)
+{
+	string imageStr;
+
+	switch (image)
+	{
+	case OBJECTIMAGE::OBJECTIMAGE_TILE:
+		imageStr = "tilemap";
+		break;
+	case OBJECTIMAGE::OBJECTIMAGE_OBJECT1:
+		imageStr = "오브젝트타일1";
+		break;
+	case OBJECTIMAGE::OBJECTIMAGE_OBJECT2:
+		imageStr = "오브젝트타일2";
+		break;
+	case OBJECTIMAGE::OBJECTIMAGE_OBJECT3:
+		imageStr = "오브젝트타일3";
+		break;
+	case OBJECTIMAGE::OBJECTIMAGE_OBJECT4:
+		imageStr = "오브젝트타일4";
+		break;
+	case OBJECTIMAGE::OBJECTIMAGE_OBJECT5:
+		imageStr = "오브젝트타일5";
+		break;
+	}
+
+	return imageStr;
 }

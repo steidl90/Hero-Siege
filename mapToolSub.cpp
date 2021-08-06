@@ -95,8 +95,8 @@ void mapToolSub::maptoolSetup()
 					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth()) + j * TILESIZE + TILESIZE,
 					i * TILESIZE + TILESIZE);
 
-				_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "tilemap";
-				_sampleTileImage[i * SAMPLETILEX + j].objImage = "tilemap";
+				_sampleTileImage[i * SAMPLETILEX + j].terrainImage = OBJECTIMAGE::OBJECTIMAGE_TILE;
+				_sampleTileImage[i * SAMPLETILEX + j].objImage = OBJECTIMAGE::OBJECTIMAGE_TILE;
 
 			}
 			if (m_subTile == 1)
@@ -106,8 +106,8 @@ void mapToolSub::maptoolSetup()
 					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("오브젝트타일1")->getWidth()) + j * TILESIZE + TILESIZE,
 					i * TILESIZE + TILESIZE);
 
-				_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "오브젝트타일1";
-				_sampleTileImage[i * SAMPLETILEX + j].objImage = "오브젝트타일1";
+				_sampleTileImage[i * SAMPLETILEX + j].terrainImage = OBJECTIMAGE::OBJECTIMAGE_OBJECT1;
+				_sampleTileImage[i * SAMPLETILEX + j].objImage = OBJECTIMAGE::OBJECTIMAGE_OBJECT1;
 			}
 			if (m_subTile == 2)
 			{
@@ -116,8 +116,8 @@ void mapToolSub::maptoolSetup()
 					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("오브젝트타일2")->getWidth()) + j * TILESIZE + TILESIZE,
 					i * TILESIZE + TILESIZE);
 
-				_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "오브젝트타일2";
-				_sampleTileImage[i * SAMPLETILEX + j].objImage = "오브젝트타일2";
+				_sampleTileImage[i * SAMPLETILEX + j].terrainImage = OBJECTIMAGE::OBJECTIMAGE_OBJECT2;
+				_sampleTileImage[i * SAMPLETILEX + j].objImage = OBJECTIMAGE::OBJECTIMAGE_OBJECT2;
 			}
 			if (m_subTile == 3)
 			{
@@ -126,8 +126,8 @@ void mapToolSub::maptoolSetup()
 					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("오브젝트타일3")->getWidth()) + j * TILESIZE + TILESIZE,
 					i * TILESIZE + TILESIZE);
 
-				_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "오브젝트타일3";
-				_sampleTileImage[i * SAMPLETILEX + j].objImage = "오브젝트타일3";
+				_sampleTileImage[i * SAMPLETILEX + j].terrainImage = OBJECTIMAGE::OBJECTIMAGE_OBJECT3;
+				_sampleTileImage[i * SAMPLETILEX + j].objImage = OBJECTIMAGE::OBJECTIMAGE_OBJECT3;
 			}
 			if (m_subTile == 4)
 			{
@@ -136,8 +136,8 @@ void mapToolSub::maptoolSetup()
 					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("오브젝트타일4")->getWidth()) + j * TILESIZE + TILESIZE,
 					i * TILESIZE + TILESIZE);
 
-				_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "오브젝트타일4";
-				_sampleTileImage[i * SAMPLETILEX + j].objImage = "오브젝트타일4";
+				_sampleTileImage[i * SAMPLETILEX + j].terrainImage = OBJECTIMAGE::OBJECTIMAGE_OBJECT4;
+				_sampleTileImage[i * SAMPLETILEX + j].objImage = OBJECTIMAGE::OBJECTIMAGE_OBJECT4;
 			}
 			if (m_subTile == 5)
 			{
@@ -146,8 +146,8 @@ void mapToolSub::maptoolSetup()
 					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("오브젝트타일5")->getWidth()) + j * TILESIZE + TILESIZE,
 					i * TILESIZE + TILESIZE);
 
-				_sampleTileImage[i * SAMPLETILEX + j].terrainImage = "오브젝트타일5";
-				_sampleTileImage[i * SAMPLETILEX + j].objImage = "오브젝트타일5";
+				_sampleTileImage[i * SAMPLETILEX + j].terrainImage = OBJECTIMAGE::OBJECTIMAGE_OBJECT5;
+				_sampleTileImage[i * SAMPLETILEX + j].objImage = OBJECTIMAGE::OBJECTIMAGE_OBJECT5;
 			}
 		}
 	}
@@ -373,7 +373,7 @@ void mapToolSub::inputFunction()
 			m_mapToolmain->getMemoryTileImage()->pop_back();
 			m_mapToolmain->setTile(m_mapToolmain->getMainMapTile(), m_mapToolmain->getMemoryTile()->back(), m_mapToolmain->getMainMapTileImage(), m_mapToolmain->getMemoryTileImage()->back());
 			SAFE_DELETE(temp2);
-			//SAFE_DELETE(tempImg2);
+			SAFE_DELETE(tempImg2);
 		}
 	}
 	else if (InputManager->isStayKeyDown(VK_CONTROL) && InputManager->isOnceKeyDown('F'))

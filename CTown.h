@@ -38,6 +38,8 @@ public:
 	void initFrameObject();
 	void setFrameObject(int x, int y, KINDFRAMEOBJECT frameKind, int index);
 
+	string getImageName(OBJECTIMAGE image);
+
 	//void attackBlock(int tileN);
 };
 
