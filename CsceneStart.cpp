@@ -39,7 +39,10 @@ void CsceneStart::release()
 
 void CsceneStart::update()
 {
-	if (PtInRect(&m_newStartRc, m_ptMouse) && InputManager->isOnceKeyDown(VK_LBUTTON))	SCENE->changeScene("선택화면");
+	if (PtInRect(&m_newStartRc, m_ptMouse) && InputManager->isOnceKeyDown(VK_LBUTTON))
+	{
+		SCENE->changeScene("선택화면");
+	}
 }
 
 void CsceneStart::render()

@@ -28,11 +28,13 @@ HRESULT mainGame::init()
 	m_town->setCameraMemory(m_camera);
 	
 	//SCENE->addScene("시작화면", m_mapTool);
-	SCENE->addScene("맵툴", m_town);
+	SCENE->addScene("맵툴", m_mapTool);
+
 	SCENE->addScene("시작화면", new CsceneStart);
 	SCENE->addScene("선택화면", new CsceneSelect);
+	SCENE->addScene("마을", m_town);
 
-	SCENE->changeScene("맵툴");
+	SCENE->changeScene("시작화면");
 	
 	return S_OK;
 }
