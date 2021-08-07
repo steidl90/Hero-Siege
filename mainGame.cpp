@@ -47,7 +47,7 @@ void mainGame::release()
 	SAFE_DELETE(m_image);
 	SAFE_DELETE(m_player);
 	SAFE_DELETE(m_camera);
-	//SAFE_DELETE(m_town);
+	SAFE_DELETE(m_town);
 	SCENE->release();
 }
 
@@ -60,7 +60,6 @@ void mainGame::update()
 	m_camera->update();
 	///* astar */ _aStar->update();
 	ANIMATION->update();
-
 }
 
 void mainGame::render()

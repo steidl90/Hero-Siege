@@ -78,12 +78,8 @@ void CTown::cullingRender()
 	{
 		for (startX = index_X1; startX <= endX; startX++)
 		{
-			//if (_tilesImage[startX + startY * TILEX].terrainImage == "")
-			//	_tilesImage[startX + startY * TILEX].terrainImage = "tilemap";
 			IMAGE->frameRender(this->getImageName(_tilesImage[startX + startY * TILEX].terrainImage), getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].terrainFrameX, _tiles[startX + startY * TILEX].terrainFrameY);
 
-			//if (_tilesImage[startX + startY * TILEX].objImage == "")
-			//	_tilesImage[startX + startY * TILEX].objImage = "오브젝트타일1";
 			if (_tiles[startX + startY * TILEX].obj == OBJECT::OBJ_NONE)continue;
 			IMAGE->frameRender(this->getImageName(_tilesImage[startX + startY * TILEX].objImage), getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
 		}

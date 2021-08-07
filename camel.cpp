@@ -114,28 +114,36 @@ void camel::update()
 	{
 		_y -= _speed;
 		isUp = true;
-		
+		isLeft = false;
+		isRight = false;
+		isDown = false;
 		direct = DIRECTION::TOP;
 	}
 	else if (InputManager->isStayKeyDown(VK_RIGHT))
 	{
 		_x += _speed;
 		isRight = true;
-		
+		isLeft = false;
+		isDown = false;
+		isUp = false;
 		direct = DIRECTION::RIGHT;
 	}
 	else if (InputManager->isStayKeyDown(VK_DOWN))
 	{
 		_y += _speed;
 		isDown = true;
-		
+		isLeft = false;
+		isRight = false;
+		isUp = false;
 		direct = DIRECTION::DOWN;
 	}
 	else if (InputManager->isStayKeyDown(VK_LEFT))
 	{
 		_x -= _speed;
 		isLeft = true;
-		
+		isRight = false;
+		isDown = false;
+		isUp = false;
 		direct = DIRECTION::LEFT;
 	}
 	else

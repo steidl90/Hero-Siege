@@ -7,10 +7,6 @@ private:
 	RECT m_loadRc;
 	RECT m_exitRc;
 
-	int m_startX, m_startY;
-	int m_loadX, m_loadY;
-	int m_exitX, m_exitY;
-
 public:
 	CsceneStart();
 	~CsceneStart();
@@ -19,5 +15,8 @@ public:
 	void release();
 	void update();
 	void render();
+
+	void imageRender();
+	void sceneChange();
 };
 
