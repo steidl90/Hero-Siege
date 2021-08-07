@@ -8,6 +8,7 @@ HRESULT mapToolMain::init()
 	maptoolSetup();
 	m_isDifferentTile = 0;
 	m_subTile = 0;
+	m_isCollisionTileOn = false;
 	memset(&m_frameObjectInfo, 0, sizeof(tagFrameObjectInfo));
 	return S_OK;
 }
@@ -28,29 +29,17 @@ void mapToolMain::update()
 		m_isButtonClick = false;
 	}
 
+	if (InputManager->isOnceKeyDown(VK_F11))
+	{
+		m_isCollisionTileOn = !m_isCollisionTileOn;
+	}
+
 	if (_ctrSelect == static_cast<int>(CTRL::CTRL_FILL))
 	{
 		if (InputManager->isOnceKeyDown(VK_LBUTTON))
 			this->fillMap();
 	}
 
-	//if (InputManager->isStayKeyDown(VK_RBUTTON))
-	//{
-	//	if (!m_frameObject.empty())
-	//	{
-	//		for (auto iter = m_frameObject.begin(); iter != m_frameObject.end();)
-	//		{
-	//			if (PtInRect(&(*iter)->getRect(), m_ptMouse))
-	//			{
-	//				iter = m_frameObject.erase(iter);
-	//			}
-	//			else
-	//			{
-	//				++iter;
-	//			}
-	//		}
-	//	}
-	//}
 }
 
 void mapToolMain::render()
@@ -62,9 +51,9 @@ void mapToolMain::render()
 	sprintf_s(str, "서브타일 : %d ", m_subTile);
 	TextOut(getMemDC(), 100, 100, str, lstrlen(str));
 
-	if (!m_frameObject.empty())
+	if (!m_vFrameObject.empty())
 	{
-		for (auto iter = m_frameObject.begin(); iter != m_frameObject.end(); ++iter)
+		for (auto iter = m_vFrameObject.begin(); iter != m_vFrameObject.end(); ++iter)
 		{
 			(*iter).frameObject->render();
 		}
@@ -101,6 +90,7 @@ void mapToolMain::maptoolSetup()
 
 		_tiles[i].terrain = terrainSelect(_tiles[i].terrainFrameX, _tiles[i].terrainFrameY);
 		_tiles[i].obj = OBJECT::OBJ_NONE;
+		_tiles[i].collisionObj = COLLISIONOBJECT::COLLISIONOBJ_NONE;
 		
 		_tilesImage[i].terrainImage = OBJECTIMAGE::OBJECTIMAGE_TILE;
 		_tilesImage[i].objImage = OBJECTIMAGE::OBJECTIMAGE_OBJECT1;
@@ -146,6 +136,28 @@ void mapToolMain::setMap()
 					m_frameObjectInfo[i].check = 0;
 					m_frameObjectInfo[i].frame_kind = KINDFRAMEOBJECT::NONE;
 					deleteFrameObject(i);
+					break;
+				case CTRL::CTRL_COLLISIONTILE:
+					if (_tiles[i].collisionObj != collisionObjSelect(0, 0))
+						m_isDifferentTile++;
+					_tiles[i].collisionObj = collisionObjSelect(0, 0);
+					m_attribute[i] = ATTRIBUTE::COLLISION_ON;
+					if (m_isDifferentTile > 0)
+					{
+						this->pushTile();
+						m_isDifferentTile = 0;
+					}
+					break;
+				case CTRL::CTRL_ERASERCOLLISION:
+					if (_tiles[i].collisionObj != collisionObjSelect(1, 0))
+						m_isDifferentTile++;
+					_tiles[i].collisionObj = collisionObjSelect(1, 0);
+					m_attribute[i] = ATTRIBUTE::COLLISION_OFF;
+					if (m_isDifferentTile > 0)
+					{
+						this->pushTile();
+						m_isDifferentTile = 0;
+					}
 					break;
 				default:
 					// 지우개
@@ -246,21 +258,6 @@ TERRAIN mapToolMain::terrainSelect(int frameX, int frameY)
 	{
 		return TERRAIN::TR_CEMENT;
 	}
-	//사막
-	else if (frameX == 2 && frameY == 0)
-	{
-		return TERRAIN::TR_DESERT;
-	}
-	//잔디
-	else if (frameX == 3 && frameY == 0)
-	{
-		return TERRAIN::TR_GRASS;
-	}
-	//잔디
-	else if (frameX == 4 && frameY == 0)
-	{
-		return TERRAIN::TR_WATER;
-	}
 	return TERRAIN::TR_GRASS;
 }
 
@@ -268,11 +265,36 @@ OBJECT mapToolMain::objSelect(int frameX, int frameY)
 {
 	if (frameX == 1 && frameY == 0)
 	{
-		return OBJECT::OBJ_BLOCKS; // 부서지지 않는 오브젝트(벽)
+		return OBJECT::OBJ_BLOCK1; // 부서지지 않는 오브젝트(벽)
 	}
 	else if (frameX == 2 && frameY == 0)
 	{
-		return OBJECT::OBJ_BLOCK1; // 체력1인 오브젝트
+		return OBJECT::OBJ_COLLISION; // 체력1인 오브젝트
+	}
+}
+
+COLLISIONOBJECT mapToolMain::collisionObjSelect(int frameX, int frameY)
+{
+	if (frameX == 0 && frameY == 0)
+	{
+		return COLLISIONOBJECT::COLLISIONOBJ;
+	}
+	else
+		return COLLISIONOBJECT::COLLISIONOBJ_NONE;
+}
+
+void mapToolMain::initTileAttribute()
+{
+	for (int i = 0; i < TILEX * TILEY; i++)
+	{
+		if (_tiles[i].collisionObj == COLLISIONOBJECT::COLLISIONOBJ)
+		{
+			m_attribute[i] = ATTRIBUTE::COLLISION_ON;
+		}
+		else
+		{
+			m_attribute[i] = ATTRIBUTE::COLLISION_OFF;
+		}
 	}
 }
 
@@ -312,20 +334,20 @@ void mapToolMain::setFrameObject(int x, int y, KINDFRAMEOBJECT frameKind, int in
 	tempObject.frameObject = new frameObject;
 	tempObject.frameObject->init(x, y, frameKind);
 	tempObject.index = index;
-	m_frameObject.push_back(tempObject);
+	m_vFrameObject.push_back(tempObject);
 
 }
 
 void mapToolMain::deleteFrameObject(int index)
 {
-	if (!m_frameObject.empty())
+	if (!m_vFrameObject.empty())
 	{
-		for (auto iter = m_frameObject.begin(); iter != m_frameObject.end(); ++iter)
+		for (auto iter = m_vFrameObject.begin(); iter != m_vFrameObject.end(); ++iter)
 		{
 			if ((*iter).index == index)
 			{
 				SAFE_DELETE((*iter).frameObject);
-				m_frameObject.erase(iter);
+				m_vFrameObject.erase(iter);
 				break;
 			}
 		}
@@ -334,7 +356,7 @@ void mapToolMain::deleteFrameObject(int index)
 
 void mapToolMain::initFrameObject()
 {
-	m_frameObject.clear();
+	m_vFrameObject.clear();
 	for (size_t i = 0; i < TILEX * TILEY; i++)
 	{
 		if (m_frameObjectInfo[i].check == 1)
@@ -516,8 +538,18 @@ void mapToolMain::cullingRender()
 
 			//if (_tilesImage[startX + startY * TILEX].objImage == "")
 			//	_tilesImage[startX + startY * TILEX].objImage = "오브젝트타일1";
-			if (_tiles[startX + startY * TILEX].obj == OBJECT::OBJ_NONE)continue;
-			IMAGE->frameRender(this->getImageName(_tilesImage[startX + startY * TILEX].objImage), getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
+			if (_tiles[startX + startY * TILEX].obj != OBJECT::OBJ_NONE)
+			{
+				IMAGE->frameRender(this->getImageName(_tilesImage[startX + startY * TILEX].objImage), getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
+			}
+			// 해당 타일의 충돌속성이 On인 경우 충돌타일 표시 렌더, 디버깅으로 on/off
+			if (m_isCollisionTileOn)
+			{
+				if (_tiles[startX + startY * TILEX].collisionObj == COLLISIONOBJECT::COLLISIONOBJ)
+				{
+					IMAGE->frameRender("tilemap", getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, 0, 0);
+				}
+			}
 
 		}
 	}

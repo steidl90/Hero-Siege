@@ -16,13 +16,16 @@ private:
 
 	camera* m_camera;
 
+	// 각 타일에 대응하는 충돌 속성
+	ATTRIBUTE m_attribute[TILEX * TILEY];
+
 	tagTile _tiles[TILEX * TILEY];
 
 	tagTileImage _tilesImage[TILEX * TILEY]; // 각 타일에 대응하는 이미지 정보를 담는 구조체 배열
 
 	tagFrameObjectInfo m_frameObjectInfo[TILEX * TILEY];	// 오브젝트 프레임 클래스들 불러오기 위한 정보?
 
-	vector<tagFrameObject> m_frameObject;	// 생성된 모든 프레임 클래스들에 대해 접근하기 위한 프레임 클래스 정보담는 벡터, 실제 렌더
+	vector<tagFrameObject> m_vFrameObject;	// 생성된 모든 프레임 클래스들에 대해 접근하기 위한 프레임 클래스 정보담는 벡터, 실제 렌더
 
 	KINDFRAMEOBJECT m_currentFrameKind; // 공용, 서브맵툴에서 현재 선택한 프레임 오브젝트 종류 담긴 enum 클래스
 
@@ -40,6 +43,8 @@ private:
 
 	vector<int> m_vSelectTileIndex; // 채우기를 위한, 첫 선택 타일 x,y 인덱스  끝 선택 타일 x,y 인덱스를 담고있는 벡터
 
+
+	bool m_isCollisionTileOn;
 
 	// 버튼 클릭 여부 
 	bool m_isButtonClick;
@@ -59,11 +64,16 @@ public:
 
 	TERRAIN terrainSelect(int frameX, int frameY);
 	OBJECT objSelect(int frameX, int frameY);
+	COLLISIONOBJECT collisionObjSelect(int frameX, int frameY);
 
 	tagTile* getMainMapTile() { return _tiles; }
 	tagTileImage* getMainMapTileImage() { return _tilesImage; }
+	ATTRIBUTE* getAttribute() { return m_attribute; }
 
 	void setCameraMemory(camera* c) { m_camera = c; }
+
+	// 타일 속성 초기화
+	void initTileAttribute();
 
 	// 이미지 불러오기 함수
 	string getImageName(OBJECTIMAGE image);

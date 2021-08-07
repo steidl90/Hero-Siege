@@ -26,15 +26,17 @@ HRESULT mainGame::init()
 	m_town = new CTown;
 	m_town->init();
 	m_town->setCameraMemory(m_camera);
+
+	
 	
 	//SCENE->addScene("시작화면", m_mapTool);
 	SCENE->addScene("맵툴", m_mapTool);
 
-	SCENE->addScene("시작화면", new CsceneStart);
-	SCENE->addScene("선택화면", new CsceneSelect);
-	SCENE->addScene("마을", m_town);
+	//SCENE->addScene("시작화면", new CsceneStart);
+	//SCENE->addScene("선택화면", new CsceneSelect);
+	//SCENE->addScene("마을", m_town);
 
-	SCENE->changeScene("시작화면");
+	SCENE->changeScene("맵툴");
 	
 	return S_OK;
 }
@@ -53,7 +55,10 @@ void mainGame::release()
 
 void mainGame::update()
 {
+
 	gameNode::update();
+	m_player->setMapMemory(m_mapTool->getMapToolMain());
+
 	SCENE->update();
 	m_player->update();
 	m_camera->setTargetPoint(PointMake(m_player->getPlayRc()->left, m_player->getPlayRc()->top));
