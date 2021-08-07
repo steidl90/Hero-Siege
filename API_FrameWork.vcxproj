@@ -156,6 +156,7 @@
     <ClInclude Include="CenemyManager.h" />
     <ClInclude Include="Cimage.h" />
     <ClInclude Include="Cinventory.h" />
+    <ClInclude Include="CinventoryUi.h" />
     <ClInclude Include="Citem.h" />
     <ClInclude Include="CmainManager.h" />
     <ClInclude Include="Cmevius.h" />
@@ -216,6 +217,7 @@
     <ClCompile Include="CenemyManager.cpp" />
     <ClCompile Include="Cimage.cpp" />
     <ClCompile Include="Cinventory.cpp" />
+    <ClCompile Include="CinventoryUi.cpp" />
     <ClCompile Include="Citem.cpp" />
     <ClCompile Include="CmainManager.cpp" />
     <ClCompile Include="Cmevius.cpp" />

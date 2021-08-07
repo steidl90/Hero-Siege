@@ -18,5 +18,7 @@ public:
 	void update();
 	void render();
 
+	mapToolMain* getMapToolMain() { return m_mainMapTool; }
+
 	void setCameraMemory(camera* c) { m_camera = c; }
 };

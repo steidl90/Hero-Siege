@@ -300,9 +300,6 @@
     <ClInclude Include="Cshop.h">
       <Filter>mainGame\히어로시즈\Cobject\Cshop</Filter>
     </ClInclude>
-    <ClInclude Include="Citem.h">
-      <Filter>mainGame\히어로시즈\Cobject\Citem</Filter>
-    </ClInclude>
     <ClInclude Include="Cinventory.h">
       <Filter>mainGame\히어로시즈\Cobject\Cinventory</Filter>
     </ClInclude>
@@ -317,6 +314,12 @@
     </ClInclude>
     <ClInclude Include="CsceneTown.h">
       <Filter>mainGame\히어로시즈\Cscene</Filter>
+    </ClInclude>
+    <ClInclude Include="CinventoryUi.h">
+      <Filter>mainGame\히어로시즈\Cobject\Cinventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Citem.h">
+      <Filter>mainGame\히어로시즈\Cobject\Citem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -472,6 +475,9 @@
     </ClCompile>
     <ClCompile Include="CsceneTown.cpp">
       <Filter>mainGame\히어로시즈\Cscene</Filter>
+    </ClCompile>
+    <ClCompile Include="CinventoryUi.cpp">
+      <Filter>mainGame\히어로시즈\Cobject\Cinventory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

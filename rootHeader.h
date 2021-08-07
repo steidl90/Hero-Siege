@@ -1,16 +1,30 @@
 #pragma once
+
+// 카메라 크기
+// 맵 사이즈
 #define CAMERAWIDTH WINSIZEX
 #define CAMERAHEIGHT WINSIZEY
 #define MAPTOOLPOINT (WINSIZEX - 30)
 
 #define MAPSIZE TILEX * TILESIZE
+//////////////////////////////////////////////////////
 
-/*
-	샘플 타일쪽 (툴) 클래스에서 사용할 enum class, 구조체와
 
-	맵 타일쪽 (그리기) 클래스에서 사용할 것들 여기에 선언!
+
+//////////////////////////////////////////////////////
+/* 
+
+	맵 / 맵툴 관련 
+
 */
+//////////////////////////////////////////////
+class frameObject;
+// 툴용
+// 샘플 타일 갯수
+#define SAMPLETILEX 18
+#define SAMPLETILEY 14
 
+// 툴에서 사용할 기능,  현재 선택중인 CRTL에 따라 맵 타일 속성정의 등등
 #define TILESIZE  36		//샘플 타일 이미지 사이즈
 #define TILEX	  50		//맵 타일 x축 개수 
 #define TILEY     50		//맵 타일 y축 개수
@@ -18,14 +32,6 @@
 #define TILESIZEX TILEX * TILESIZE	// 맵 타일 전체 x축 사이즈(길이)
 #define TILESIZEY TILEY * TILESIZE
 
-// 툴용
-// 샘플 타일 갯수
-#define SAMPLETILEX 18
-#define SAMPLETILEY 14
-
-class frameObject;
-
-// 툴에서 사용할 기능,  현재 선택중인 CRTL에 따라 맵 타일 속성정의 등등
 enum class CTRL
 {
 	CTRL_TERRAINDRAW,
@@ -33,7 +39,9 @@ enum class CTRL
 	CTRL_ERASER,
 	CTRL_FILL,
 	CTRL_FRAME,
-	CTRL_ERASERFRAME
+	CTRL_ERASERFRAME,
+	CTRL_COLLISIONTILE,
+	CTRL_ERASERCOLLISION
 };
 
 //지형 속성 종류
@@ -47,12 +55,17 @@ enum class TERRAIN
 enum class OBJECT
 {
 	OBJ_BLOCK1,
-	OBJ_BLOCK3,
-	OBJ_BLOCKS,
+	OBJ_COLLISION,
 	OBJ_NONE
 };
 
-enum KINDFRAMEOBJECT
+enum class COLLISIONOBJECT
+{
+	COLLISIONOBJ,
+	COLLISIONOBJ_NONE
+};
+
+enum class KINDFRAMEOBJECT
 {
 	GRASS_BIG,
 	GRASS_SAMLL1,
@@ -68,6 +81,12 @@ enum class OBJECTIMAGE
 	OBJECTIMAGE_OBJECT3,
 	OBJECTIMAGE_OBJECT4,
 	OBJECTIMAGE_OBJECT5
+};
+
+enum class ATTRIBUTE
+{
+	COLLISION_OFF,
+	COLLISION_ON
 };
 
 //오른쪽 타일 종류 변경 용도
@@ -95,6 +114,7 @@ struct tagTile
 {
 	TERRAIN terrain;
 	OBJECT obj;
+	COLLISIONOBJECT collisionObj;
 	RECT  rc;
 
 	int terrainFrameX;
@@ -149,4 +169,17 @@ struct tagFrameObject
 {
 	frameObject* frameObject;
 	int index;
+};
+
+////////////////////////////////////
+/*  
+
+	인벤토리, 아이템 관련  
+
+*/
+////////////////////////////////////
+enum class ITEMTYPE
+{
+	ITEMTYPE_WEAPON,
+	ITEMTYPE_ARMOR
 };
