@@ -22,4 +22,5 @@ public:
 	void imageRender();
 	void animation();
 	void sceneChange();
+	void shadowEffect();
 };

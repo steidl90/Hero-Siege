@@ -1,5 +1,5 @@
 #include "framework.h"
-#include "CTown.h"
+#include "Ctown.h"
 #include "camera.h"
 
 Ctown::Ctown()

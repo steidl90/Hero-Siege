@@ -133,6 +133,7 @@ HRESULT Cimage::init()
     IMAGE->addImage("불러오기버튼활성화", "images/LoadGame2.bmp", 338, 62, true, RGB(255, 0, 255));
     IMAGE->addImage("나가기버튼비활성화", "images/GameOut1.bmp", 338, 62, true, RGB(255, 0, 255));
     IMAGE->addImage("나가기버튼활성화", "images/GameOut2.bmp", 338, 62, true, RGB(255, 0, 255));
+    IMAGE->addImage("선택그림자", "images/Shadow.bmp", 40, 21, true, RGB(255, 0, 255));
 
     IMAGE->addFrameImage("레벨업", "images/LevelUP.bmp", 183, 55, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("HUD", "images/HUD.bmp", 361, 112, 1, 1, true, RGB(255, 0, 255));
@@ -142,7 +143,7 @@ HRESULT Cimage::init()
     IMAGE->addFrameImage("인벤토리2", "images/Inventory2.bmp", 389, 465, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("인벤토리3", "images/Inventory3.bmp", 858, 473, 1, 1, true, RGB(255, 0, 255));
 
-    IMAGE->addFrameImage("선택아마존", "images/Choose/ChooseAmazon.bmp", 558, 207, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("선택아마존", "images/Choose/ChooseAmazon.bmp", 372, 138, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("선택데몬", "images/Choose/ChooseDemon.bmp", 528, 92, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("선택데몬슬레이어", "images/Choose/ChooseDemonSlayer.bmp", 264, 80, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("선택랜서", "images/Choose/ChooseLancer.bmp", 468, 130, 6, 1, true, RGB(255, 0, 255));
