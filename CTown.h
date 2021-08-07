@@ -1,11 +1,13 @@
 #pragma once
 #include "Cobject.h"
 #include "frameObject.h"
+#include "Cplayer.h"
 class camera;
-class CTown :public Cobject
+class Ctown :public Cobject
 {
 private:
 	camera* m_camera;
+	Cplayer* m_player;
 private:
 	tagCurrentTile _currentTile;
 	tagTile _tiles[TILEX * TILEY];
@@ -17,8 +19,8 @@ private:
 	int _pos[2];
 
 public:
-	CTown();
-	~CTown();
+	Ctown();
+	~Ctown();
 
 	HRESULT init();
 	void release();

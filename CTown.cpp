@@ -2,29 +2,29 @@
 #include "CTown.h"
 #include "camera.h"
 
-CTown::CTown()
+Ctown::Ctown()
 {
 }
 
-CTown::~CTown()
+Ctown::~Ctown()
 {
 }
 
-HRESULT CTown::init()
+HRESULT Ctown::init()
 {
     load();
     return S_OK;
 }
 
-void CTown::release()
+void Ctown::release()
 {
 }
 
-void CTown::update()
+void Ctown::update()
 {
 }
 
-void CTown::render()
+void Ctown::render()
 {
 	this->cullingRender();
 
@@ -37,7 +37,7 @@ void CTown::render()
 	}
 }
 
-void CTown::load()
+void Ctown::load()
 {
     HANDLE file;
     DWORD read;
@@ -54,7 +54,7 @@ void CTown::load()
 	this->initFrameObject();
 }
 
-void CTown::cullingRender()
+void Ctown::cullingRender()
 {
 	// 타일 랜더 최적화
 	// 카메라 좌상단 좌표 기준부터 우하단 좌표까지를 타일 인덱스로 렌더링하게 구현
@@ -86,7 +86,7 @@ void CTown::cullingRender()
 	}
 }
 
-void CTown::initFrameObject()
+void Ctown::initFrameObject()
 {
 	m_frameObject.clear();
 	for (size_t i = 0; i < TILEX * TILEY; i++)
@@ -98,7 +98,7 @@ void CTown::initFrameObject()
 	}
 }
 
-void CTown::setFrameObject(int x, int y, KINDFRAMEOBJECT frameKind, int index)
+void Ctown::setFrameObject(int x, int y, KINDFRAMEOBJECT frameKind, int index)
 {
 	tagFrameObject tempObject;
 	tempObject.frameObject = new frameObject;
@@ -107,7 +107,7 @@ void CTown::setFrameObject(int x, int y, KINDFRAMEOBJECT frameKind, int index)
 	m_frameObject.push_back(tempObject);
 }
 
-string CTown::getImageName(OBJECTIMAGE image)
+string Ctown::getImageName(OBJECTIMAGE image)
 {
 	string imageStr;
 

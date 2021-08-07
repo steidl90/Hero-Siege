@@ -1,19 +1,19 @@
 #pragma once
 #include"gameNode.h"
 #include"camera.h"
-#include"camel.h"
+#include"Cplayer.h"
 #include"mapToolManager.h"
-#include"CTown.h"
+#include"Ctown.h"
 #include"CsceneStart.h"
 #include"CsceneSelect.h"
 class mainGame : public gameNode
 {
 private:
-	camel* m_player;
+	Cplayer* m_player;
 	camera* m_camera;
 	Cimage* m_image;
 	mapToolManager* m_mapTool;
-	CTown* m_town;
+	Ctown* m_town;
 
 	bool isDebug;
 

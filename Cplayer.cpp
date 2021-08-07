@@ -84,7 +84,7 @@ void Cplayer::update()
 
 void Cplayer::render()
 {
-	Rectangle(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerMoveRc.right, playerMoveRc.bottom);
+	//Rectangle(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerMoveRc.right, playerMoveRc.bottom);
 	if (isMoving == true)
 	{
 		switch (direction)
@@ -182,7 +182,6 @@ void Cplayer::render()
 					ANIMATION->start("¾Æ·¡ÂÊ");
 					isIdle = true;
 				}
-
 			}
 			else
 			{
@@ -228,8 +227,6 @@ void Cplayer::move()
 	float elpasedTime = TIME->getElapsedTime();
 	float moveSpeed = elpasedTime * speed;
 	//setPlayerPosition(rc);
-	
-	
 	
 	if (InputManager->isStayKeyDown(VK_RIGHT) && (InputManager->isStayKeyDown(VK_UP) || InputManager->isStayKeyDown(VK_DOWN)))
 	{

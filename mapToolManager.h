@@ -8,7 +8,7 @@ class mapToolManager : public gameNode
 {
 	mapToolMain* m_mainMapTool;
 	mapToolSub* m_subMapTool;
-	CTown* m_town;
+	Ctown* m_town;
 	camera* m_camera;
 
 public:

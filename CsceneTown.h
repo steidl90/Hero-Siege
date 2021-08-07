@@ -1,15 +1,13 @@
 #pragma once
 #include "gameNode.h"
+#include "Ctown.h"
+#include "camera.h"
 class CsceneTown : public gameNode
 {
 private:
-	RECT m_newStartRc;
-	RECT m_loadRc;
-	RECT m_exitRc;
+	Ctown* m_town;
+	camera* m_camera;
 
-	int m_startX, m_startY;
-	int m_loadX, m_loadY;
-	int m_exitX, m_exitY;
 
 public:
 	CsceneTown();

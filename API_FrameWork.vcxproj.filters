@@ -261,7 +261,7 @@
     <ClInclude Include="Cobject.h">
       <Filter>mainGame\히어로시즈\Cobject</Filter>
     </ClInclude>
-    <ClInclude Include="CTown.h">
+    <ClInclude Include="Ctown.h">
       <Filter>mainGame\히어로시즈\Cobject\CTown</Filter>
     </ClInclude>
     <ClInclude Include="Cdungeon.h">
@@ -419,7 +419,7 @@
     <ClCompile Include="Cobject.cpp">
       <Filter>mainGame\히어로시즈\Cobject</Filter>
     </ClCompile>
-    <ClCompile Include="CTown.cpp">
+    <ClCompile Include="Ctown.cpp">
       <Filter>mainGame\히어로시즈\Cobject\CTown</Filter>
     </ClCompile>
     <ClCompile Include="Cdungeon.cpp">

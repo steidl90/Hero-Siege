@@ -13,7 +13,7 @@ HRESULT mainGame::init()
 	m_image = new Cimage;
 	m_image->init();
 
-	m_player = new camel;
+	m_player = new Cplayer;
 	m_player->init();
 
 	m_camera = new camera;
@@ -23,7 +23,7 @@ HRESULT mainGame::init()
 	m_mapTool->init();
 	m_mapTool->setCameraMemory(m_camera);
 
-	m_town = new CTown;
+	m_town = new Ctown;
 	m_town->init();
 	m_town->setCameraMemory(m_camera);
 	
@@ -56,7 +56,7 @@ void mainGame::update()
 	gameNode::update();
 	SCENE->update();
 	m_player->update();
-	m_camera->setTargetPoint(PointMake(m_player->getPlayRc()->left, m_player->getPlayRc()->top));
+	m_camera->setTargetPoint(PointMake(m_player->getplayerMoveRC()->left, m_player->getplayerMoveRC()->top));
 	m_camera->update();
 	///* astar */ _aStar->update();
 	ANIMATION->update();

@@ -2,7 +2,6 @@
 #include "gameNode.h"
 class camera : public gameNode
 {
-
 	int camera_x1, camera_y1;
 	int camera_x2, camera_y2;
 
@@ -11,17 +10,7 @@ class camera : public gameNode
 
 	int target_x, target_y;
 
-	int m_currentX;
-	int m_currentY;
-
-	int m_nextX;
-	int m_nextY;
-
-	bool isKeyDown;
-
 public:
-
-
 	POINT getCameraPoint() { return PointMake(camera_x1, camera_y1); }
 	POINT getCameraPoint2() { return PointMake(camera_x2, camera_y2); }
 
@@ -34,5 +23,4 @@ public:
 	void release();
 	void update();
 	void render();
-
 };

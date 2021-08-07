@@ -92,19 +92,6 @@ HRESULT Cimage::init()
 
 
     //=================Object=================//
-    //IMAGE->addFrameImage("나무빅", "images/나무빅.bmp", 1020, 200, 6, 1, true, RGB(255, 0, 255));
-    //IMAGE->addFrameImage("나무스몰", "images/나무스몰.bmp", 1520, 182, 10, 1, true, RGB(255, 0, 255));
-    //IMAGE->addFrameImage("나무장작", "images/Tile-2.bmp", 648, 288, 18, 8, true, RGB(255, 0, 255));
-    //IMAGE->addFrameImage("기둥", "images/Pillar.bmp", 222, 87, 6, 1, true, RGB(255, 0, 255));
-    //IMAGE->addFrameImage("울타리세로", "images/FanceVertical.bmp", 8, 88, 1, 1, true, RGB(255, 0, 255));
-    //IMAGE->addFrameImage("울타리가로", "images/FanceHorizontal.bmp", 72, 24, 1, 1, true, RGB(255, 0, 255));
-    //IMAGE->addFrameImage("창고", "images/Chest.bmp", 83, 49, 1, 1, true, RGB(255, 0, 255));
-    //IMAGE->addFrameImage("풍차", "images/Windmill.bmp", 152, 343, 1, 1, true, RGB(255, 0, 255));
-    //IMAGE->addFrameImage("집1", "images/House1.bmp", 378, 432, 1, 1, true, RGB(255, 0, 255));
-    //IMAGE->addFrameImage("집2", "images/House2.bmp", 458, 290, 1, 1, true, RGB(255, 0, 255));
-    //IMAGE->addFrameImage("집3", "images/House3.bmp", 482, 332, 1, 1, true, RGB(255, 0, 255));
-    //IMAGE->addFrameImage("집4", "images/House4.bmp", 226, 221, 1, 1, true, RGB(255, 0, 255));
-
     IMAGE->addFrameImage("제너레이터", "images/Generator.bmp", 485, 67, 5, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("용광로", "images/Furnace.bmp", 280, 30, 8, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("램프", "images/Lamp.bmp", 960, 98, 16, 1, true, RGB(255, 0, 255));
@@ -155,21 +142,21 @@ HRESULT Cimage::init()
     IMAGE->addFrameImage("인벤토리2", "images/Inventory2.bmp", 389, 465, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("인벤토리3", "images/Inventory3.bmp", 858, 473, 1, 1, true, RGB(255, 0, 255));
 
-    IMAGE->addFrameImage("선택아마존", "images/ChooseAmazon.bmp", 186 * 2, 69 * 2, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("선택데몬", "images/ChooseDemon.bmp", 264 * 2, 46 * 2, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("선택데몬슬레이어", "images/ChooseDemonSlayer.bmp", 132 * 2, 40 * 2, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("선택랜서", "images/ChooseLancer.bmp", 234 * 2, 65 * 2, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("선택머로더", "images/ChooseMarauder.bmp", 450 * 2, 60 * 2, 10, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("선택마크맨", "images/ChooseMarksman.bmp", 252 * 2, 37 * 2, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("선택네크로맨서", "images/ChooseNecroMancer.bmp", 208 * 2, 33 * 2, 8, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("선택노마드", "images/ChooseNomad.bmp", 540 * 2, 49 * 2, 9, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("선택팔라딘", "images/ChoosePaladin.bmp", 216 * 2, 40 * 2, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("선택파이렛", "images/ChoosePirate.bmp", 510 * 2, 45 * 2, 15, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("선택레드넥", "images/ChooseRedneck.bmp", 234 * 2, 35 * 2, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("선택사무라이", "images/ChooseSamurai.bmp", 336 * 2, 49 * 2, 8, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("선택샤먼", "images/ChooseShaman.bmp", 228 * 2, 43 * 2, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("선택스틱맨", "images/ChooseStickMan.bmp", 138 * 2, 42 * 2, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("선택화이트메이지", "images/ChooseWhiteMage.bmp", 180 * 2, 37 * 2, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("선택아마존", "images/Choose/ChooseAmazon.bmp", 558, 207, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("선택데몬", "images/Choose/ChooseDemon.bmp", 528, 92, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("선택데몬슬레이어", "images/Choose/ChooseDemonSlayer.bmp", 264, 80, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("선택랜서", "images/Choose/ChooseLancer.bmp", 468, 130, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("선택머로더", "images/Choose/ChooseMarauder.bmp", 900, 120, 10, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("선택마크맨", "images/Choose/ChooseMarksman.bmp", 504, 74, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("선택네크로맨서", "images/Choose/ChooseNecroMancer.bmp", 416, 66, 8, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("선택노마드", "images/Choose/ChooseNomad.bmp", 1080, 98, 9, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("선택팔라딘", "images/Choose/ChoosePaladin.bmp", 432, 80, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("선택파이렛", "images/Choose/ChoosePirate.bmp", 1020, 90, 15, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("선택레드넥", "images/Choose/ChooseRedneck.bmp", 468, 70, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("선택사무라이", "images/Choose/ChooseSamurai.bmp", 672, 98, 8, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("선택샤먼", "images/Choose/ChooseShaman.bmp", 456, 86, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("선택스틱맨", "images/Choose/ChooseStickMan.bmp", 276, 84, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("선택화이트메이지", "images/Choose/ChooseWhiteMage.bmp", 360, 74, 6, 1, true, RGB(255, 0, 255));
 
     //==================ECT=================//
     IMAGE->addFrameImage("히트", "images/Hit.bmp", 414, 71, 6, 1, true, RGB(255, 0, 255));
