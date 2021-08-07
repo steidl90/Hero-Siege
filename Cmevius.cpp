@@ -30,10 +30,19 @@ HRESULT Cmevius::init()
 	ANIMATION->addDefAnimation("애니공중", "보스공중", 10, false, true);
     ANIMATION->addDefAnimation("애니보스", "보스", 5, false, true);
     ANIMATION->addDefAnimation("애니캐스팅", "보스캐스팅", 10, false, false);
-    ANIMATION->addDefAnimation("애니걷기", "보스걷기2", 10, false, false);
+    ANIMATION->addDefAnimation("애니캐스팅2", "보스캐스팅", 10, true, false);
+    ANIMATION->addDefAnimation("애니걷기", "보스걷기", 3, false, false);
     ANIMATION->addDefAnimation("애니공", "보스공", 10, false, true);
-    EFFECT->addEffect("라이트닝", "images/Lightning.bmp", 576, 402, 72, 402, 1, 0.35f, 100);
+    EFFECT->addEffect("라이트닝", "images/Lightning.bmp", 576, 402, 72, 402, 1, 0.25f, 100);
     EFFECT->addEffect("스텀프", "images/Stomp.bmp", 819*2, 78*2, 91*2, 78*2, 1, 0.2f, 200);
+
+    m_isEffect = false;
+    m_isAppear = false;
+	m_isWalking = false;
+	m_isCasting = false;
+	m_isIdle = false;
+	m_isDie = false;
+
     m_x = WINSIZEX / 2;
     m_y = -50;
     m_speed = 1;
@@ -48,11 +57,6 @@ void Cmevius::release()
 void Cmevius::update()
 {
     m_effectCount++;
-    if (m_effectCount % 10 == 0) 
-    {
-        EFFECT->play("라이트닝", RND->getFromIntTo(100, WINSIZEX - 100), RND->getFromIntTo(100, WINSIZEY - 100));
-        EFFECT->play("라이트닝", RND->getFromIntTo(100, WINSIZEX - 100), RND->getFromIntTo(100, WINSIZEY - 100));
-    }
 
     if (InputManager->isOnceKeyDown(VK_LBUTTON))
     {
@@ -62,6 +66,16 @@ void Cmevius::update()
     if (InputManager->isOnceKeyDown('1'))
     {
         m_isAppear = true;
+        m_isEffect = true;
+    }
+
+    if (m_isEffect)
+    {
+        if (m_effectCount % 4 == 0)
+        {
+            EFFECT->play("라이트닝", RND->getFromIntTo(100, WINSIZEX - 100), RND->getFromIntTo(100, WINSIZEY - 100));
+            //EFFECT->play("라이트닝", RND->getFromIntTo(100, WINSIZEX - 100), RND->getFromIntTo(100, WINSIZEY - 100));
+        }
     }
 
     if (m_isAppear)
@@ -70,23 +84,51 @@ void Cmevius::update()
         m_meviusAnimation = ANIMATION->findAnimation("애니공중");
         ANIMATION->start("애니공중");
         if (m_meviusRc.top <= 200)
-        {
-            m_y += m_speed;
-        }
-        else
-        {
-            m_isAppear = false;
-            m_isWalking = true;
-        EFFECT->play("스텀프", m_meviusRc.left +(m_meviusRc.right- m_meviusRc.left)/2, m_meviusRc.bottom);
-        }
+		{
+			m_y += m_speed;
+		}
+		else
+		{
+			m_coolTime++;
+			if (m_coolTime == 50)
+			{
+				m_isEffect = false;
+				m_isAppear = false;
+				m_isWalking = true;
+                m_isIdle = true;
+			EFFECT->play("스텀프", m_meviusRc.left + (m_meviusRc.right - m_meviusRc.left) / 2, m_meviusRc.bottom);
+                m_coolTime = 0;
+			}
+		}
+	}
+	if (m_isWalking)
+	{
+		m_meviusImage = IMAGE->findImage("보스걷기");
+		m_meviusAnimation = ANIMATION->findAnimation("애니걷기");
+		ANIMATION->start("애니걷기");
+		m_isWalking = false;
+	}
+
+	if (!m_isAppear && !m_isWalking && m_meviusRc.top <= 230)
+	{
+		m_y += 0.2f;
+	}
+
+    if (m_meviusRc.top >= 230 && m_isIdle)
+    {
+        m_meviusImage = IMAGE->findImage("보스");
+        m_meviusAnimation = ANIMATION->findAnimation("애니보스");
+        ANIMATION->start("애니보스");
+        m_isIdle = false;
+        m_isCasting = true;
     }
 
-    if (m_isWalking)
+    if (m_isCasting && InputManager->isOnceKeyDown('3'))
     {
-        m_isWalking = false;
-        m_meviusImage = IMAGE->findImage("보스걷기2");
-        m_meviusAnimation = ANIMATION->findAnimation("애니걷기");
-        ANIMATION->start("애니걷기");
+        m_meviusImage = IMAGE->findImage("보스캐스팅");
+        m_meviusAnimation = ANIMATION->findAnimation("애니캐스팅2");
+        ANIMATION->start("애니캐스팅2");
+
     }
 
     if (InputManager->isOnceKeyDown('2'))
@@ -100,12 +142,15 @@ void Cmevius::update()
 
 void Cmevius::render()
 {
-    //TCHAR str[100];
-    //wsprintf(str, "x : %d y : %d", , m_y);
-    //TextOut(getMemDC(), 100, 100, str, lstrlen(str));
+    TCHAR str[100];
+    wsprintf(str, "left : %d right : %d  top : %d  bottom : %d", m_meviusRc.left, m_meviusRc.right, m_meviusRc.top, m_meviusRc.bottom);
+    TextOut(getMemDC(), 100, 100, str, lstrlen(str));
+    TCHAR str1[100];
+    wsprintf(str1, "idle : %d walk : %d  casting : %d", m_isIdle,m_isWalking,m_isCasting);
+    TextOut(getMemDC(), 100, 130, str1, lstrlen(str1));
     if (m_meviusImage != nullptr) {
-        //Rectangle(getMemDC(), m_meviusRc.left, m_meviusRc.top, m_meviusRc.right, m_meviusRc.bottom);
-        m_meviusImage->aniRender(getMemDC(), m_x, m_y, m_meviusAnimation);
+        Rectangle(getMapDC(), m_meviusRc.left, m_meviusRc.top, m_meviusRc.right, m_meviusRc.bottom);
+        m_meviusImage->aniRender(getMapDC(), m_x, m_y, m_meviusAnimation);
         
     }
 }
@@ -137,5 +182,27 @@ void Cmevius::meviusState()
     case BOSS_STATE::BOSS_STATE_DIE:
         m_isDie = true;
         break;
+    }
+
+    m_effectCount++;
+    if (m_effectCount % 4 == 0)
+    {
+        EFFECT->play("라이트닝", RND->getFromIntTo(100, WINSIZEX - 100), RND->getFromIntTo(100, WINSIZEY - 100));
+        //EFFECT->play("라이트닝", RND->getFromIntTo(100, WINSIZEX - 100), RND->getFromIntTo(100, WINSIZEY - 100));
+    }
+
+
+}
+
+void Cmevius::coolTime(float time, bool idle, bool walk, bool cast)
+{
+    TIME->getWorldTime();
+    float waitTime;
+    waitTime = TIME->getWorldTime();
+    if (waitTime + time <= TIME->getWorldTime())
+    {
+        m_isWalking = walk;
+        m_isCasting = cast;
+        m_isIdle = idle;
     }
 }

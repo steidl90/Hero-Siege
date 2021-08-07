@@ -25,6 +25,13 @@ HRESULT mainGame::init()
 	m_mevius = new Cmevius;
 	m_mevius->init();
 
+	m_elemental = new Celemental;
+	m_elemental->init();
+
+
+	m_priest = new Cpriest;
+	m_priest->init();
+
 	/*m_mapTool = new mapToolManager;
 	m_mapTool->init();
 	m_mapTool->setCameraMemory(m_camera);*/
@@ -48,6 +55,8 @@ void mainGame::release()
 	SAFE_DELETE(m_image);
 	SAFE_DELETE(m_player);
 	SAFE_DELETE(m_camera);
+	SAFE_DELETE(m_elemental);
+	SAFE_DELETE(m_priest);
 	//SAFE_DELETE(m_town);
 	SCENE->release();
 }
@@ -56,8 +65,10 @@ void mainGame::update()
 {
 	gameNode::update();
 	SCENE->update();
+	m_elemental->update();
+	m_priest->update();
 	m_mevius->update();
-	m_player->update();
+	//m_player->update();
 	m_camera->setTargetPoint(PointMake(m_player->getPlayRc()->left, m_player->getPlayRc()->top));
 	m_camera->update();
 	///* astar */ _aStar->update();
@@ -81,8 +92,11 @@ void mainGame::render()
 	SCENE->render();
 	EFFECT->render();
 
+	m_elemental->render();
+	m_priest->render();
 	m_mevius->render();
-	m_player->render();
+
+	//m_player->render();
 	m_camera->render();
 	TIME->render(getMemDC());
 	

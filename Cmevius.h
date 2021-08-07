@@ -11,25 +11,30 @@ enum class BOSS_STATE
 class Cmevius :public Cunit
 {
 private:
-	Cimage* m_mevius;
 	image* m_meviusImage;
 	animation* m_meviusAnimation;
 	effect* m_meviusEffect;
 
 	BOSS_STATE m_meviusState;
 
-	RECT m_meviusRc;
-	RECT m_meviusSkillRc;
-	RECT m_meviusCallRc;
+	RECT m_meviusRc;		//보스 이미지 RC
+	RECT m_meviusSkillRc;	//보스 스킬 RC(가시공)
+	RECT m_meviusCallRc;	//보스 소환 인식 범위 RC
+	RECT m_meviusDamageRc;	//보스 타격 RC
 
 	float m_x, m_y;
 	float m_speed;
+
 	int m_effectCount;
-	bool m_isAppear;
-	bool m_isWalking;
-	bool m_isCasting;
-	bool m_isIdle;
-	bool m_isDie;
+	int m_coolTime;
+
+	bool m_isEffect;		//이펙트상태
+
+	bool m_isAppear;		//등장상태
+	bool m_isWalking;		//걷는상태
+	bool m_isCasting;		//캐스팅상태
+	bool m_isIdle;			//일반상태
+	bool m_isDie;			//죽은상태
 
 public:
 	Cmevius();
@@ -41,5 +46,6 @@ public:
 	void render();
 
 	void meviusState();
+	void coolTime(float time,bool idle, bool walk, bool cast);
 };
 

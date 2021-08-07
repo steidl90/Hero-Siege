@@ -5,6 +5,8 @@
 #include "mapToolManager.h"
 #include "CTown.h"
 #include "Cmevius.h"
+#include "Celemental.h"
+#include "Cpriest.h"
 
 ///* astar */ #include "CaStar.h"
 
@@ -19,6 +21,8 @@ private:
 	mapToolManager* m_mapTool;
 	CTown* m_town;
 	Cmevius* m_mevius;
+	Celemental* m_elemental;
+	Cpriest* m_priest;
 
 	bool isDebug;
 
