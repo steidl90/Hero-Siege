@@ -12,6 +12,9 @@ CTown::~CTown()
 
 HRESULT CTown::init()
 {
+	m_inventoryUi = new CinventoryUi;
+	m_inventoryUi->init();
+
     load();
     return S_OK;
 }
@@ -22,6 +25,7 @@ void CTown::release()
 
 void CTown::update()
 {
+	m_inventoryUi->update();
 }
 
 void CTown::render()
@@ -35,6 +39,9 @@ void CTown::render()
 			(*iter).frameObject->render();
 		}
 	}
+
+	m_inventoryUi->render();
+
 }
 
 void CTown::load()

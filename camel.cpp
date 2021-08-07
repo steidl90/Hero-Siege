@@ -268,69 +268,69 @@ void camel::playerMove()
 
 	}
 
-	// 지금 밟고  있는 타일 번호를 알아오자
-	tileX = rcCollision.left / TILESIZE;
-	tileY = rcCollision.top / TILESIZE;
+	//// 지금 밟고  있는 타일 번호를 알아오자
+	//tileX = rcCollision.left / TILESIZE;
+	//tileY = rcCollision.top / TILESIZE;
 
 
-	switch (direct)
-	{
-		// 타일 기준 검사 좌표가 레프트 탑이라서 반대쪽을 신경써주는 것
-	case DIRECTION::LEFT:
-		tileIndex[0] = tileX + tileY * TILEX;
-		tileIndex[1] = tileX + (tileY + 1) * TILEX;
-		break;
-	case DIRECTION::RIGHT:
-		tileIndex[0] = (tileX + tileY * TILEX) + 1;
-		tileIndex[1] = (tileX + (tileY + 1) * TILEX) + 1;
-		break;
-	case DIRECTION::TOP:
-		tileIndex[0] = tileX + tileY * TILEX;
-		tileIndex[1] = tileX + 1 + tileY * TILEX;
-		break;
-	case DIRECTION::DOWN:
-		tileIndex[0] = (tileX + tileY * TILEX) + TILEX;
-		tileIndex[1] = (tileX + 1 + tileY * TILEX) + TILEX;
-		break;
-	}
+	//switch (direct)
+	//{
+	//	// 타일 기준 검사 좌표가 레프트 탑이라서 반대쪽을 신경써주는 것
+	//case DIRECTION::LEFT:
+	//	tileIndex[0] = tileX + tileY * TILEX;
+	//	tileIndex[1] = tileX + (tileY + 1) * TILEX;
+	//	break;
+	//case DIRECTION::RIGHT:
+	//	tileIndex[0] = (tileX + tileY * TILEX) + 1;
+	//	tileIndex[1] = (tileX + (tileY + 1) * TILEX) + 1;
+	//	break;
+	//case DIRECTION::TOP:
+	//	tileIndex[0] = tileX + tileY * TILEX;
+	//	tileIndex[1] = tileX + 1 + tileY * TILEX;
+	//	break;
+	//case DIRECTION::DOWN:
+	//	tileIndex[0] = (tileX + tileY * TILEX) + TILEX;
+	//	tileIndex[1] = (tileX + 1 + tileY * TILEX) + TILEX;
+	//	break;
+	//}
 
-	for (size_t i = 0; i < 2; i++)
-	{
-		RECT rc;
+	//for (size_t i = 0; i < 2; i++)
+	//{
+	//	RECT rc;
 
-		//해당 타일의 속성이 움직이지 못하는 곳이면
-		if (((_map->getMainMapTile()[tileIndex[i]].collisionObj == COLLISIONOBJECT::COLLISIONOBJ) &&
-			IntersectRect(&rc, &_map->getMainMapTile()[tileIndex[i]].rc, &rcCollision)))
-		{
-			switch (direct)
+	//	//해당 타일의 속성이 움직이지 못하는 곳이면
+	//	if (((_map->getMainMapTile()[tileIndex[i]].collisionObj == COLLISIONOBJECT::COLLISIONOBJ) &&
+	//		IntersectRect(&rc, &_map->getMainMapTile()[tileIndex[i]].rc, &rcCollision)))
+	//	{
+	//		switch (direct)
 
-			{
-			case DIRECTION::LEFT:
+	//		{
+	//		case DIRECTION::LEFT:
 
-				_redRc.left = _map->getMainMapTile()[tileIndex[i]].rc.right;//왼쪽 타일의 라이트의 위치를 탱크의 레프트의 위치로 고정
-				_redRc.right = _redRc.left + _red->getFrameWidth();			//탱크의 크기만큼
-				_x = _redRc.left;				//탱크 X의 위치를 계산한 탱크 렉트의 위치값으로 설정(중앙으로)
-				break;
-			case DIRECTION::RIGHT:
-				_redRc.right = _map->getMainMapTile()[tileIndex[i]].rc.left;
-				_redRc.left = _redRc.right - _red->getFrameWidth();
-				_x = _redRc.left;
-				break;
-			case DIRECTION::TOP:
-				_redRc.top = _map->getMainMapTile()[tileIndex[i]].rc.bottom;
-				_redRc.bottom = _redRc.top + _red->getFrameHeight();
-				_y = _redRc.top;
-				break;
-			case DIRECTION::DOWN:
-				_redRc.bottom = _map->getMainMapTile()[tileIndex[i]].rc.top;
-				_redRc.top = _redRc.bottom - _red->getFrameHeight();
-				_y = _redRc.top;
-				break;
-			}
-			return;
-		}
+	//			_redRc.left = _map->getMainMapTile()[tileIndex[i]].rc.right;//왼쪽 타일의 라이트의 위치를 탱크의 레프트의 위치로 고정
+	//			_redRc.right = _redRc.left + _red->getFrameWidth();			//탱크의 크기만큼
+	//			_x = _redRc.left;				//탱크 X의 위치를 계산한 탱크 렉트의 위치값으로 설정(중앙으로)
+	//			break;
+	//		case DIRECTION::RIGHT:
+	//			_redRc.right = _map->getMainMapTile()[tileIndex[i]].rc.left;
+	//			_redRc.left = _redRc.right - _red->getFrameWidth();
+	//			_x = _redRc.left;
+	//			break;
+	//		case DIRECTION::TOP:
+	//			_redRc.top = _map->getMainMapTile()[tileIndex[i]].rc.bottom;
+	//			_redRc.bottom = _redRc.top + _red->getFrameHeight();
+	//			_y = _redRc.top;
+	//			break;
+	//		case DIRECTION::DOWN:
+	//			_redRc.bottom = _map->getMainMapTile()[tileIndex[i]].rc.top;
+	//			_redRc.top = _redRc.bottom - _red->getFrameHeight();
+	//			_y = _redRc.top;
+	//			break;
+	//		}
+	//		return;
+	//	}
 
-	}//end of for
+	//}//end of for
 
 	rcCollision = RectMakeCenter(_x, _y, _red->getFrameWidth(), _red->getFrameHeight());
 	_redRc = rcCollision;

@@ -1,6 +1,7 @@
 #pragma once
 #include "Cobject.h"
 #include "frameObject.h"
+#include "CinventoryUi.h"
 class camera;
 class CTown :public Cobject
 {
@@ -15,7 +16,9 @@ private:
 
 	DWORD _attribute[TILEX * TILEY];
 	int _pos[2];
+	////////////////////////////////////////////////////////////
 
+	CinventoryUi* m_inventoryUi;
 public:
 	CTown();
 	~CTown();
