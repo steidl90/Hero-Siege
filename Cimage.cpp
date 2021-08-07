@@ -19,25 +19,21 @@ HRESULT Cimage::init()
     /*  나눠진 섹션에서 프레임이미지랑 아닌 이미지랑 구별해라  */
 
     //=================Player=================//
-    IMAGE->addFrameImage("플레이어위쪽걷기", "images/WalkingAmazonUp.bmp", 168, 59, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("플레이어위쪽걷기-1", "images/WalkingAmazonUp-3.bmp", 756, 118, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("플레이어위쪽", "images/IdleAmazonUP.bmp", 168, 59, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("플레이어위쪽공격", "images/AttackAmazonUp.bmp", 186, 112, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("플레이어위쪽걷기", "images/WalkingAmazonUp-3.bmp", 756, 118, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("플레이어위쪽", "images/IdleAmazoneUP-1.bmp", 696,107, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("플레이어위쪽공격", "images/AttackAmazoneUp.bmp", 1368, 231, 6, 1, true, RGB(255, 0, 255));
 
-    IMAGE->addFrameImage("플레이어오른쪽걷기", "images/WalkingAmazonRight.bmp", 384, 44, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("플레이어오른쪽걷기-1", "images/WalkingAmazonRight-3.bmp", 756, 118, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("플레이어오른쪽", "images/IdleAmazonRight.bmp", 384, 44, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("플레이어오른쪽공격", "images/AttackAmazonRight.bmp", 666, 43, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("플레이어오른쪽걷기", "images/WalkingAmazonRight-3.bmp", 756, 118, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("플레이어오른쪽", "images/IdleAmazoneRight-1.bmp", 696, 107, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("플레이어오른쪽공격", "images/AttackAmazoneRight.bmp", 1368, 231, 6, 1, true, RGB(255, 0, 255));
 
-    IMAGE->addFrameImage("플레이어왼쪽걷기", "images/WalkingAmazonLeft.bmp", 384, 44, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("플레이어왼쪽걷기-1", "images/WalkingAmazonLeft-3.bmp", 756, 118, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("플레이어왼쪽", "images/IdleAmazonLeft.bmp", 384, 44, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("플레이어왼쪽공격", "images/AttackAmazonLeft.bmp", 666, 43, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("플레이어왼쪽걷기", "images/WalkingAmazonLeft-3.bmp", 756, 118, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("플레이어왼쪽", "images/IdleAmazoneLeft-1.bmp", 696, 107, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("플레이어왼쪽공격", "images/AttackAmazoneLeft.bmp", 1368, 231, 6, 1, true, RGB(255, 0, 255));
 
-    IMAGE->addFrameImage("플레이어아래쪽걷기", "images/WalkingAmazonDown.bmp", 186, 69, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("플레이어아래쪽걷기-1", "images/WalkingAmazonDown-4.bmp", 756, 118, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("플레이어아래쪽", "images/IdleAmazonDown.bmp", 186, 69, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("플레이어아래쪽공격", "images/AttackAmazonDown.bmp", 192, 120, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("플레이어아래쪽걷기", "images/WalkingAmazonDown-3.bmp", 756, 118, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("플레이어아래쪽", "images/IdleAmazoneDown-1.bmp", 696, 107, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("플레이어아래쪽공격", "images/AttackAmazoneDown.bmp", 1368, 231, 6, 1, true, RGB(255, 0, 255));
 
 
 

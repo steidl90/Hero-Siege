@@ -16,11 +16,6 @@ void camera::release()
 
 void camera::update()
 {
-
-	
-
-
-
 	//if (!isKeyDown) //현재 마우스의 절대 좌표값 표현 용도
 	//{
 	//	m_currentX =  camera_x1 + m_ptMouse.x;
@@ -79,7 +74,6 @@ void camera::update()
 		camera_y2 = MAPSIZE;
 		camera_y1 = camera_y2 - camera_height;
 	}
-
 
 }
 

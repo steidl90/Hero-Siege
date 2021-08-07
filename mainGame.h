@@ -1,10 +1,10 @@
 #pragma once
 #include"gameNode.h"
 #include"camera.h"
-#include"camel.h"
 #include"mapToolManager.h"
 #include"CTown.h"
 #include"Cplayer.h"
+#include"CplayerManager.h"
 ///* astar */ #include "CaStar.h"
 
 class mainGame : public gameNode
@@ -12,12 +12,13 @@ class mainGame : public gameNode
 private:
 	///* astar */ CaStar * _aStar;
 
-	camel* m_player;
 	camera* m_camera;
 	Cimage* m_image;
 	mapToolManager* m_mapTool;
 	CTown* m_town;
 	Cplayer* player;
+	CplayerManager* m_playerManager;
+
 
 	bool isDebug;
 

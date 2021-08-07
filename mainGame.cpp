@@ -13,28 +13,32 @@ HRESULT mainGame::init()
 	///* astar */	_aStar = new CaStar;
 	///* astar */ _aStar->init();
 	
+
 	m_image = new Cimage;
 	m_image->init();
 
-	/*m_player = new camel;
-	m_player->init();*/
+	m_playerManager = new CplayerManager;
+	m_playerManager->init();
 
-	player = new Cplayer;
+
+
+	/*player = new Cplayer;
 	player->init();
 
 	m_camera = new camera;
-	m_camera->init();
+	m_camera->init();*/
 
 	/*m_mapTool = new mapToolManager;
 	m_mapTool->init();
 	m_mapTool->setCameraMemory(m_camera);*/
 
-	m_town = new CTown;
+	/*m_town = new CTown;
 	m_town->init();
 	m_town->setCameraMemory(m_camera);
-	
-	SCENE->addScene("맵툴", m_town);
-	SCENE->changeScene("맵툴");
+	*/
+
+	/*SCENE->addScene("맵툴", m_town);
+	SCENE->changeScene("맵툴");*/
 	
 	return S_OK;
 }
@@ -45,11 +49,12 @@ void mainGame::release()
 	///* astar */ SAFE_DELETE(_aStar);
 	//SAFE_DELETE(m_mapTool);
 	SAFE_DELETE(m_image);
-	SAFE_DELETE(m_player);
-	SAFE_DELETE(m_camera);
+	SAFE_DELETE(m_playerManager);
+
+	/*SAFE_DELETE(m_camera);
 	SAFE_DELETE(player);
 
-	//SAFE_DELETE(m_town);
+	SAFE_DELETE(m_town);*/
 	SCENE->release();
 }
 
@@ -57,12 +62,12 @@ void mainGame::update()
 {
 	gameNode::update();
 	SCENE->update();
-	//m_player->update();
 
-	player->update();
+	//player->update();
+	m_playerManager->update();
 
-	m_camera->setTargetPoint(PointMake(player->getplayerMoveRC()->left, player->getplayerMoveRC()->top));
-	m_camera->update();
+	/*m_camera->setTargetPoint(PointMake(player->getplayerMoveRC()->left, player->getplayerMoveRC()->top));
+	m_camera->update();*/
 	///* astar */ _aStar->update();
 	ANIMATION->update();
 
@@ -78,15 +83,17 @@ void mainGame::render()
 	// 카메라의 시작 x,y 좌표부터 가로 세로 길이만큼 크기의 이미지를 잘라서 (sour 인수가 그런기능)
 	// 우리가 볼 화면인 backBuffer쪽 getMemDC에다가 그려준다
 
-	this->getMapBuffer()->render(getMemDC(), 0, 0, m_camera->getCameraPoint().x, m_camera->getCameraPoint().y, m_camera->getCameraWidth(), m_camera->getCameraHeight());
-
+	//this->getMapBuffer()->render(getMemDC(), 0, 0, m_camera->getCameraPoint().x, m_camera->getCameraPoint().y, m_camera->getCameraWidth(), m_camera->getCameraHeight());
 	SCENE->render();
 
-	//m_player->render();
+	
+	m_playerManager->render();
 
-	player->render();
 
-	m_camera->render();
+
+	//player->render();
+
+	//m_camera->render();
 	TIME->render(getMemDC());
 
 	char str[100];
