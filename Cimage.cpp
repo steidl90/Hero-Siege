@@ -87,6 +87,8 @@ HRESULT Cimage::init()
     IMAGE->addFrameImage("보스빛", "images/MeviusLight.bmp", 87, 1042, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("보스몬스터", "images/MeviusMonster.bmp", 1218, 153, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("보스걷기", "images/MeviusWalking.bmp", 720, 148, 8, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("보스걷기1", "images/MeviusWalking-1.bmp", 2160, 444, 8, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("보스걷기2", "images/MeviusWalking-2.bmp", 1440, 296, 8, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("보스벽", "images/MeviusWall.bmp", 256, 192, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("보스공", "images/MeviusSpikeBall.bmp", 329, 54, 7, 1, true, RGB(255, 0, 255));
 

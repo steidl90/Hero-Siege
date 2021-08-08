@@ -25,6 +25,27 @@ private:
 	Cprison* m_prison;
 	Cslime* m_slime;
 
+	CenemyAttack* m_enemyAttack;
+private:
+	vector<Celemental*> m_vElemental;
+	vector<Celemental*>::iterator m_viElemental;
+
+	vector<Cpriest*> m_vPriest;
+	vector<Cpriest*>::iterator m_viPriest;
+
+	vector<Cmonk*> m_vMonk;
+	vector<Cmonk*>::iterator m_viMonk;
+
+	vector<Cprison*> m_vPrison;
+	vector<Cprison*>::iterator m_viPrison;
+
+	vector<Cslime*> m_vSlime;
+	vector<Cslime*>::iterator m_viSlime;
+
+
+private:
+
+	float m_angle;
 
 public:
 	CenemyManager();
@@ -34,5 +55,40 @@ public:
 	void release();
 	void update();
 	void render();
+
+	//======================몬스터 세팅======================
+
+	void setElemental(int setenemy, int x, int y, int distanceX, int distanceY, int pattern);
+	void setPriest(int setenemy, int x, int y, int distanceX, int distanceY, int pattern);
+	void setMonk(int setenemy, int x, int y, int distanceX, int distanceY, int pattern);
+	void setPrison(int setenemy, int x, int y, int distanceX, int distanceY, int pattern);
+	void setSlime(int setenemy, int x, int y, int distanceX, int distanceY, int pattern);
+
+	void elementalSkill();
+	void priestSkill();
+	void monkAttack();
+	void prisonAttack();
+	void slimeAttack();
+
+	void removeElemental(int arrNum);
+	void removePriest(int arrNum);
+	void removeMonk(int arrNum);
+	void removePrison(int arrNum);
+	void removeSlime(int arrNum);
+
+	vector<Celemental*> getvElemental() { return m_vElemental; }
+	vector<Celemental*>::iterator getviElemental() { return m_viElemental; }
+
+	vector<Cpriest*> getvPriest() { return m_vPriest; }
+	vector<Cpriest*>::iterator getviPriest() { return m_viPriest; }
+
+	vector<Cmonk*> getvMonk() { return m_vMonk; }
+	vector<Cmonk*>::iterator getviMonk() { return m_viMonk; }
+
+	vector<Cprison*> getvPrison() { return m_vPrison; }
+	vector<Cprison*>::iterator getviPrison() { return m_viPrison; }
+
+	vector<Cslime*> getvSlime() { return m_vSlime; }
+	vector<Cslime*>::iterator getviSlime() { return m_viSlime; }
 };
 
