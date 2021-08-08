@@ -19,17 +19,17 @@ HRESULT mainGame::init()
 	m_camera = new camera;
 	m_camera->init();
 
-	//m_mapTool = new mapToolManager;
-	//m_mapTool->init();
-	//m_mapTool->setCameraMemory(m_camera);
+	m_mapTool = new mapToolManager;
+	m_mapTool->init();
+	m_mapTool->setCameraMemory(m_camera);
 
-	m_town = new CTown;
+	/*m_town = new CTown;
 	m_town->init();
-	m_town->setCameraMemory(m_camera);
+	m_town->setCameraMemory(m_camera);*/
 
 	
 	
-	SCENE->addScene("시작화면", m_town);
+	SCENE->addScene("시작화면", m_mapTool);
 	//SCENE->addScene("맵툴", m_mapTool);
 
 	//SCENE->addScene("시작화면", new CsceneStart);
@@ -45,7 +45,7 @@ void mainGame::release()
 {
 	gameNode::release();
 	///* astar */ SAFE_DELETE(_aStar);
-	//SAFE_DELETE(m_mapTool);
+	SAFE_DELETE(m_mapTool);
 	SAFE_DELETE(m_image);
 	SAFE_DELETE(m_player);
 	SAFE_DELETE(m_camera);

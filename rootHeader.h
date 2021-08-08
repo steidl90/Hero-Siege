@@ -2,7 +2,7 @@
 
 // 카메라 크기
 // 맵 사이즈
-#define CAMERAWIDTH WINSIZEX
+#define CAMERAWIDTH WINSIZEX-700
 #define CAMERAHEIGHT WINSIZEY
 #define MAPTOOLPOINT (WINSIZEX - 30)
 
