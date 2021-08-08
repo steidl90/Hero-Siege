@@ -6,15 +6,11 @@
 #include"Ctown.h"
 #include"CsceneStart.h"
 #include"CsceneSelect.h"
+#include"CsceneTown.h"
 class mainGame : public gameNode
 {
 private:
-	Cplayer* m_player;
-	camera* m_camera;
 	Cimage* m_image;
-	mapToolManager* m_mapTool;
-	Ctown* m_town;
-
 	bool isDebug;
 
 public:

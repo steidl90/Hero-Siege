@@ -13,26 +13,9 @@ HRESULT mainGame::init()
 	m_image = new Cimage;
 	m_image->init();
 
-	m_player = new Cplayer;
-	m_player->init();
-
-	m_camera = new camera;
-	m_camera->init();
-
-	m_mapTool = new mapToolManager;
-	m_mapTool->init();
-	m_mapTool->setCameraMemory(m_camera);
-
-	m_town = new Ctown;
-	m_town->init();
-	m_town->setCameraMemory(m_camera);
-	
-	//SCENE->addScene("시작화면", m_mapTool);
-	SCENE->addScene("맵툴", m_mapTool);
-
 	SCENE->addScene("시작화면", new CsceneStart);
 	SCENE->addScene("선택화면", new CsceneSelect);
-	SCENE->addScene("마을", m_town);
+	SCENE->addScene("마을", new CsceneTown);
 
 	SCENE->changeScene("시작화면");
 	
@@ -42,12 +25,7 @@ HRESULT mainGame::init()
 void mainGame::release()
 {
 	gameNode::release();
-	///* astar */ SAFE_DELETE(_aStar);
-	SAFE_DELETE(m_mapTool);
 	SAFE_DELETE(m_image);
-	SAFE_DELETE(m_player);
-	SAFE_DELETE(m_camera);
-	SAFE_DELETE(m_town);
 	SCENE->release();
 }
 
@@ -55,10 +33,6 @@ void mainGame::update()
 {
 	gameNode::update();
 	SCENE->update();
-	m_player->update();
-	m_camera->setTargetPoint(PointMake(m_player->getplayerMoveRC()->left, m_player->getplayerMoveRC()->top));
-	m_camera->update();
-	///* astar */ _aStar->update();
 	ANIMATION->update();
 }
 
@@ -72,18 +46,8 @@ void mainGame::render()
 	// 카메라의 시작 x,y 좌표부터 가로 세로 길이만큼 크기의 이미지를 잘라서 (sour 인수가 그런기능)
 	// 우리가 볼 화면인 backBuffer쪽 getMemDC에다가 그려준다
 
-	this->getMapBuffer()->render(getMemDC(), 0, 0, m_camera->getCameraPoint().x, m_camera->getCameraPoint().y, m_camera->getCameraWidth(), m_camera->getCameraHeight());
-
 	SCENE->render();
-
-	m_player->render();
-	m_camera->render();
 	TIME->render(getMemDC());
-
-	char str[100];
-	sprintf_s(str, "마우스 x : %d, 마우스 y: %d, ", m_ptMouse.x, m_ptMouse.y);
-	SetTextColor(getMemDC(), RGB(255, 255, 0));
-	TextOut(getMemDC(), WINSIZEX / 2 - 500, 70, str, lstrlen(str));
 
 
 	/////////////////////////////////////////////////////////

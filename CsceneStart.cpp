@@ -28,6 +28,7 @@ void CsceneStart::update()
 
 void CsceneStart::render()
 {
+	this->getMapBuffer()->render(getMemDC(), 0, 0);
 	imageRender();
 }
 

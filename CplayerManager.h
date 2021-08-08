@@ -4,13 +4,11 @@
 #include "CplayerAttack.h"
 #include "CplayerSkill.h"
 #include "camera.h"
-#include "CTown.h"
 class CplayerManager :public Cunit
 {
 private:
 	Cplayer* m_player;
 	camera* m_camera;
-	CTown* m_town;
 
 public:
 	CplayerManager();
@@ -20,4 +18,6 @@ public:
 	void release();
 	void update();
 	void render();
+
+	RECT* getplayerRect() { return m_player->getplayerMoveRC(); }
 };

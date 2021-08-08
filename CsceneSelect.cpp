@@ -89,6 +89,7 @@ void CsceneSelect::update()
 
 void CsceneSelect::render()
 {
+	this->getMapBuffer()->render(getMemDC(), 0, 0);
 	imageRender();
 }
 
