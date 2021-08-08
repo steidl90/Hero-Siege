@@ -94,16 +94,16 @@ void Cplayer::render()
 			if(!isAttack) playerMoveLeft->aniRender(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerMoveAni);
 			else
 			{
+				Rectangle(getMapDC(), playerMoveRc.left - 55, playerY + 10, playerMoveRc.left + 40, playerY - 40);
 				playerAttackLeft->aniRender(getMapDC(), playerMoveRc.left-50, playerMoveRc.top-60, playerAttackAni);
-				Rectangle(getMapDC(), playerMoveRc.left -200, playerY+10, playerMoveRc.left+40, playerY -40);
 			}
 			break;
 		case DIRECTIONS::DIRECTIONS_UP:
 			if (!isAttack) playerMoveUp->aniRender(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerMoveAni);
 			else
 			{
+				Rectangle(getMapDC(), playerMoveRc.left + 36, playerY - 135, playerMoveRc.left + 90, playerY - 55);
 				playerAttackUp->aniRender(getMapDC(), playerMoveRc.left - 50, playerMoveRc.top - 60, playerAttackAni);
-				Rectangle(getMapDC(), playerMoveRc.left+36, playerY-295, playerMoveRc.left+90, playerY - 55);
 
 			}
 			break;
@@ -111,8 +111,8 @@ void Cplayer::render()
 			if (!isAttack) playerMoveRight->aniRender(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerMoveAni);
 			else
 			{
+				Rectangle(getMapDC(), playerMoveRc.right - 40, playerY + 10, playerMoveRc.right + 55, playerY - 40);
 				playerAttackRight->aniRender(getMapDC(), playerMoveRc.left - 50, playerMoveRc.top - 60, playerAttackAni);
-				Rectangle(getMapDC(), playerMoveRc.right-40, playerY + 10, playerMoveRc.right + 200 ,playerY - 40);
 
 			}
 			break;
@@ -120,8 +120,8 @@ void Cplayer::render()
 			if (!isAttack) playerMoveDown->aniRender(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerMoveAni);
 			else
 			{
+				Rectangle(getMapDC(), playerMoveRc.left + 36, playerY + 25, playerMoveRc.left + 90, playerY + 115);
 				playerAttackDown->aniRender(getMapDC(), playerMoveRc.left - 50, playerMoveRc.top - 60, playerAttackAni);
-				Rectangle(getMapDC(), playerMoveRc.left + 36, playerY+25, playerMoveRc.left + 90, playerY+255);
 
 			}
 			break;
@@ -144,8 +144,8 @@ void Cplayer::render()
 			}
 			else
 			{
+				Rectangle(getMapDC(), playerMoveRc.left - 55, playerY + 10, playerMoveRc.left + 40, playerY - 40);
 				playerAttackLeft->aniRender(getMapDC(), playerMoveRc.left - 50, playerMoveRc.top - 60, playerAttackAni);
-				Rectangle(getMapDC(), playerMoveRc.left - 200, playerY + 10, playerMoveRc.left + 40, playerY - 40);
 
 			}
 			break;
@@ -162,8 +162,8 @@ void Cplayer::render()
 			}
 			else
 			{
+				Rectangle(getMapDC(), playerMoveRc.left + 36, playerY - 135, playerMoveRc.left + 90, playerY - 55);
 				playerAttackUp->aniRender(getMapDC(), playerMoveRc.left - 50, playerMoveRc.top - 60, playerAttackAni);
-				Rectangle(getMapDC(), playerMoveRc.left + 36, playerY - 295, playerMoveRc.left + 90, playerY - 55);
 
 			}
 			break;
@@ -180,8 +180,8 @@ void Cplayer::render()
 			}
 			else
 			{
+				Rectangle(getMapDC(), playerMoveRc.right - 40, playerY + 10, playerMoveRc.right + 55, playerY - 40);
 				playerAttackRight->aniRender(getMapDC(), playerMoveRc.left - 50, playerMoveRc.top - 60, playerAttackAni);
-				Rectangle(getMapDC(), playerMoveRc.right - 40, playerY + 10, playerMoveRc.right + 200, playerY - 40);
 
 			}
 			break;
@@ -199,33 +199,13 @@ void Cplayer::render()
 			}
 			else
 			{
+				Rectangle(getMapDC(), playerMoveRc.left + 36, playerY + 25, playerMoveRc.left + 90, playerY + 115);
 				playerAttackDown->aniRender(getMapDC(), playerMoveRc.left - 50, playerMoveRc.top - 60, playerAttackAni);
-				Rectangle(getMapDC(), playerMoveRc.left + 36, playerY + 25, playerMoveRc.left + 90, playerY + 255);
 
 			}
 			break;
 		}
 	}
-
-	/*switch (direction)
-	{
-	case DIRECTIONS::DIRECTIONS_LEFT:
-		playerAttackLeft->aniRender(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerAttackAni);
-
-		break;
-	case DIRECTIONS::DIRECTIONS_UP:
-		playerAttackUp->aniRender(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerAttackAni);
-
-		break;
-	case DIRECTIONS::DIRECTIONS_RIGHT:
-		playerAttackRight->aniRender(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerAttackAni);
-
-		break;
-	case DIRECTIONS::DIRECTIONS_DOWN:
-		playerAttackDown->aniRender(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerAttackAni);
-
-		break;
-	}*/
 
 }
 
