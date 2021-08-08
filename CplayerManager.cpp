@@ -51,7 +51,8 @@ void CplayerManager::render()
     SCENE->render();
 
     m_player->render();
-    m_camera->render();
     this->getMapBuffer()->render(getMemDC(), 0, 0, m_camera->getCameraPoint().x, m_camera->getCameraPoint().y, m_camera->getCameraWidth(), m_camera->getCameraHeight());
+
+    m_camera->render();
 
 }
