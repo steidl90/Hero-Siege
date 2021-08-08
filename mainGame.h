@@ -7,6 +7,9 @@
 #include "Cmevius.h"
 #include "Celemental.h"
 #include "Cpriest.h"
+#include "Cmonk.h"
+#include "Cprison.h"
+#include "Cslime.h"
 
 ///* astar */ #include "CaStar.h"
 
@@ -23,6 +26,9 @@ private:
 	Cmevius* m_mevius;
 	Celemental* m_elemental;
 	Cpriest* m_priest;
+	Cmonk* m_monk;
+	Cprison* m_prison;
+	Cslime* m_slime;
 
 	bool isDebug;
 

@@ -25,12 +25,22 @@ HRESULT mainGame::init()
 	m_mevius = new Cmevius;
 	m_mevius->init();
 
+	//=======나중에 CenemyManager로 옮기기
+
 	m_elemental = new Celemental;
 	m_elemental->init();
 
-
 	m_priest = new Cpriest;
 	m_priest->init();
+
+	m_monk = new Cmonk;
+	m_monk->init();
+
+	m_prison = new Cprison;
+	m_prison->init();
+
+	m_slime = new Cslime;
+	m_slime->init();
 
 	/*m_mapTool = new mapToolManager;
 	m_mapTool->init();
@@ -57,6 +67,9 @@ void mainGame::release()
 	SAFE_DELETE(m_camera);
 	SAFE_DELETE(m_elemental);
 	SAFE_DELETE(m_priest);
+	SAFE_DELETE(m_monk);
+	SAFE_DELETE(m_prison);
+	SAFE_DELETE(m_slime);
 	//SAFE_DELETE(m_town);
 	SCENE->release();
 }
@@ -65,9 +78,12 @@ void mainGame::update()
 {
 	gameNode::update();
 	SCENE->update();
-	m_elemental->update();
-	m_priest->update();
 	m_mevius->update();
+	//m_elemental->update();
+	//m_priest->update();
+	m_monk->update();
+	//m_prison->update();
+	//m_slime->update();
 	//m_player->update();
 	m_camera->setTargetPoint(PointMake(m_player->getPlayRc()->left, m_player->getPlayRc()->top));
 	m_camera->update();
@@ -92,9 +108,12 @@ void mainGame::render()
 	SCENE->render();
 	EFFECT->render();
 
-	m_elemental->render();
-	m_priest->render();
 	m_mevius->render();
+	//m_elemental->render();
+	//m_priest->render();
+	m_monk->render();
+	//m_prison->render();
+	//m_slime->render();
 
 	//m_player->render();
 	m_camera->render();

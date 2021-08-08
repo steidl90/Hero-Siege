@@ -136,29 +136,21 @@ void Cpriest::update()
 		m_priestImage = IMAGE->findImage("리치");
 		m_priestAnimation = ANIMATION->findAnimation("리치위쪽");
 		ANIMATION->resume("리치위쪽");
-		m_priestRc = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2, m_priestImage->getFrameWidth(), m_priestImage->getFrameHeight());
-
 		break;
 	case PRIEST_STATE::PRIEST_STATE_WALK_DOWN:
 		m_priestImage = IMAGE->findImage("리치");
 		m_priestAnimation = ANIMATION->findAnimation("리치아래쪽");
 		ANIMATION->resume("리치아래쪽");
-		m_priestRc = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2, m_priestImage->getFrameWidth(), m_priestImage->getFrameHeight());
-
 		break;
 	case PRIEST_STATE::PRIEST_STATE_WALK_LEFT:
 		m_priestImage = IMAGE->findImage("리치");
 		m_priestAnimation = ANIMATION->findAnimation("리치왼쪽");
 		ANIMATION->resume("리치왼쪽");
-		m_priestRc = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2, m_priestImage->getFrameWidth(), m_priestImage->getFrameHeight());
-
 		break;
 	case PRIEST_STATE::PRIEST_STATE_WALK_RIGHT:
 		m_priestImage = IMAGE->findImage("리치");
 		m_priestAnimation = ANIMATION->findAnimation("리치오른쪽");
 		ANIMATION->resume("리치오른쪽");
-		m_priestRc = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2, m_priestImage->getFrameWidth(), m_priestImage->getFrameHeight());
-
 		break;
 
 
