@@ -23,4 +23,5 @@ public:
 	void animation();
 	void sceneChange();
 	void shadowEffect();
+	void selectEffect();
 };

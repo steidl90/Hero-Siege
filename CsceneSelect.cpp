@@ -74,8 +74,6 @@ HRESULT CsceneSelect::init()
 	m_playerRc[13] = RectMakeCenter(760, 550, IMAGE->findImage("선택스틱맨")->getFrameWidth(), IMAGE->findImage("선택스틱맨")->getFrameHeight());
 	m_playerRc[14] = RectMakeCenter(880, 550, IMAGE->findImage("선택화이트메이지")->getFrameWidth(), IMAGE->findImage("선택화이트메이지")->getFrameHeight());
 
-	//m_shadow[0] = RectMakeCenter(10, 10, 30, 30);
-
 	return S_OK;
 }
 
@@ -86,6 +84,7 @@ void CsceneSelect::release()
 void CsceneSelect::update()
 {
 	animation();
+	sceneChange();
 }
 
 void CsceneSelect::render()
@@ -121,11 +120,9 @@ void CsceneSelect::animation()
 
 void CsceneSelect::imageRender()
 {
-	IMAGE->render("선택화면", getMapDC());
-
-	sceneChange(); //선택 효과 Rect 때문에 여기에 위치중
+	IMAGE->render("선택씬배경", getMapDC());
 	shadowEffect();
-
+	selectEffect();
 	IMAGE->findImage("선택아마존")->aniRender(getMapDC(), m_playerRc[0].left, m_playerRc[0].top, m_ani[0]);
 	IMAGE->findImage("선택데몬")->aniRender(getMapDC(), m_playerRc[1].left, m_playerRc[1].top, m_ani[1]);
 	IMAGE->findImage("선택데몬슬레이어")->aniRender(getMapDC(), m_playerRc[2].left, m_playerRc[2].top, m_ani[2]);
@@ -148,29 +145,44 @@ void CsceneSelect::imageRender()
 void CsceneSelect::sceneChange()
 {
 	if (PtInRect(&m_playerRc[0], m_ptMouse) && InputManager->isOnceKeyDown(VK_LBUTTON)) SCENE->changeScene("마을");
-	
-
-	//선택한 것 같은 효과 임시로
-	for (size_t i = 0; i < 15; i++) if (PtInRect(&m_playerRc[i], m_ptMouse)) Rectangle(getMapDC(), m_playerRc[i].left, m_playerRc[i].top, m_playerRc[i].right, m_playerRc[i].bottom);
 }
 
 void CsceneSelect::shadowEffect()
 {
 	IMAGE->findImage("선택그림자")->alphaRender(getMapDC(), 387, 255, 150);
-	IMAGE->findImage("선택그림자")->alphaRender(getMapDC(), 500, 255, 150);
+	IMAGE->findImage("선택그림자")->alphaRender(getMapDC(), 500, 259, 150);
 	IMAGE->findImage("선택그림자")->alphaRender(getMapDC(), 620, 263, 150);
 	IMAGE->findImage("선택그림자")->alphaRender(getMapDC(), 748, 260, 150);
 	IMAGE->findImage("선택그림자")->alphaRender(getMapDC(), 859, 257, 150);
 
-	IMAGE->findImage("선택그림자")->alphaRender(getMapDC(), 386, 415, 150);
+	IMAGE->findImage("선택그림자")->alphaRender(getMapDC(), 385, 415, 150);
 	IMAGE->findImage("선택그림자")->alphaRender(getMapDC(), 500, 417, 150);
 	IMAGE->findImage("선택그림자")->alphaRender(getMapDC(), 623, 415, 150);
-	IMAGE->findImage("선택그림자")->alphaRender(getMapDC(), 745, 413, 150);
+	IMAGE->findImage("선택그림자")->alphaRender(getMapDC(), 742, 413, 150);
 	IMAGE->findImage("선택그림자")->alphaRender(getMapDC(), 859, 416, 150);
 
 	IMAGE->findImage("선택그림자")->alphaRender(getMapDC(), 384, 566, 150);
 	IMAGE->findImage("선택그림자")->alphaRender(getMapDC(), 501, 567, 150);
-	IMAGE->findImage("선택그림자")->alphaRender(getMapDC(), 623, 565, 150);
+	IMAGE->findImage("선택그림자")->alphaRender(getMapDC(), 622, 565, 150);
 	IMAGE->findImage("선택그림자")->alphaRender(getMapDC(), 743, 577, 150);
 	IMAGE->findImage("선택그림자")->alphaRender(getMapDC(), 867, 567, 150);
+}
+
+void CsceneSelect::selectEffect()
+{
+	if (PtInRect(&m_playerRc[0], m_ptMouse)) IMAGE->findImage("선택효과")->render(getMapDC(), 385, 255);
+	else if (PtInRect(&m_playerRc[1], m_ptMouse)) IMAGE->findImage("선택효과")->render(getMapDC(), 498, 259);
+	else if (PtInRect(&m_playerRc[2], m_ptMouse)) IMAGE->findImage("선택효과")->render(getMapDC(), 618, 263);
+	else if (PtInRect(&m_playerRc[3], m_ptMouse)) IMAGE->findImage("선택효과")->render(getMapDC(), 746, 260);
+	else if (PtInRect(&m_playerRc[4], m_ptMouse)) IMAGE->findImage("선택효과")->render(getMapDC(), 857, 257);
+	else if (PtInRect(&m_playerRc[5], m_ptMouse)) IMAGE->findImage("선택효과")->render(getMapDC(), 383, 415);
+	else if (PtInRect(&m_playerRc[6], m_ptMouse)) IMAGE->findImage("선택효과")->render(getMapDC(), 498, 417);
+	else if (PtInRect(&m_playerRc[7], m_ptMouse)) IMAGE->findImage("선택효과")->render(getMapDC(), 621, 415);
+	else if (PtInRect(&m_playerRc[8], m_ptMouse)) IMAGE->findImage("선택효과")->render(getMapDC(), 740, 413);
+	else if (PtInRect(&m_playerRc[9], m_ptMouse)) IMAGE->findImage("선택효과")->render(getMapDC(), 857, 416);
+	else if (PtInRect(&m_playerRc[10], m_ptMouse)) IMAGE->findImage("선택효과")->render(getMapDC(), 382, 566);
+	else if (PtInRect(&m_playerRc[11], m_ptMouse)) IMAGE->findImage("선택효과")->render(getMapDC(), 499, 567);
+	else if (PtInRect(&m_playerRc[12], m_ptMouse)) IMAGE->findImage("선택효과")->render(getMapDC(), 620, 565);
+	else if (PtInRect(&m_playerRc[13], m_ptMouse)) IMAGE->findImage("선택효과")->render(getMapDC(), 741, 577);
+	else if (PtInRect(&m_playerRc[14], m_ptMouse)) IMAGE->findImage("선택효과")->render(getMapDC(), 865, 567);
 }

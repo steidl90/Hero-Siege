@@ -127,7 +127,7 @@ HRESULT Cimage::init()
     IMAGE->addFrameImage("장갑스몰", "images/장갑스몰.bmp", 288, 96, 9, 3, true, RGB(255, 0, 255));
 
     //==================UI==================//
-    IMAGE->addImage("선택화면", "images/SelectMap.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
+    IMAGE->addImage("선택씬배경", "images/SelectMap.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
     IMAGE->addImage("시작화면", "images/StartImage.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
     IMAGE->addImage("새게임버튼비활성화", "images/NewGame1.bmp", 338, 62, true, RGB(255, 0, 255));
     IMAGE->addImage("새게임버튼활성화", "images/NewGame2.bmp", 338, 62, true, RGB(255, 0, 255));
@@ -136,6 +136,7 @@ HRESULT Cimage::init()
     IMAGE->addImage("나가기버튼비활성화", "images/GameOut1.bmp", 338, 62, true, RGB(255, 0, 255));
     IMAGE->addImage("나가기버튼활성화", "images/GameOut2.bmp", 338, 62, true, RGB(255, 0, 255));
     IMAGE->addImage("선택그림자", "images/Shadow.bmp", 40, 21, true, RGB(255, 0, 255));
+    IMAGE->addImage("선택효과", "images/SelectEffect.bmp", 44, 25, true, RGB(255, 0, 255));
 
     IMAGE->addFrameImage("레벨업", "images/LevelUP.bmp", 183, 55, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("HUD", "images/HUD.bmp", 361, 112, 1, 1, true, RGB(255, 0, 255));
