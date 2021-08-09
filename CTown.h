@@ -11,6 +11,7 @@ private:
 	tagTile _tiles[TILEX * TILEY];
 	tagTileImage _tilesImage[TILEX * TILEY];
 	tagFrameObjectInfo m_frameObjectInfo[TILEX * TILEY];
+	ATTRIBUTE m_attribute[TILEX * TILEY];
 	vector<tagFrameObject> m_frameObject;
 
 	DWORD _attribute[TILEX * TILEY];
@@ -29,6 +30,7 @@ public:
 
 	void load();
 	void cullingRender();
+	void initTileAttribute();
 
 	DWORD* getAttribute() { return _attribute; }
 	tagTile* getMap() { return _tiles; }

@@ -12,9 +12,8 @@ Ctown::~Ctown()
 
 HRESULT Ctown::init()
 {
-	m_inventoryUi = new CinventoryUi;
-	m_inventoryUi->init();
     load();
+	initTileAttribute();
     return S_OK;
 }
 
@@ -24,7 +23,6 @@ void Ctown::release()
 
 void Ctown::update()
 {
-	m_inventoryUi->update();
 }
 
 void Ctown::render()
@@ -38,7 +36,6 @@ void Ctown::render()
 			(*iter).frameObject->render();
 		}
 	}
-	m_inventoryUi->render();
 }
 
 void Ctown::load()
@@ -86,6 +83,21 @@ void Ctown::cullingRender()
 
 			if (_tiles[startX + startY * TILEX].obj == OBJECT::OBJ_NONE)continue;
 			IMAGE->frameRender(this->getImageName(_tilesImage[startX + startY * TILEX].objImage), getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
+		}
+	}
+}
+
+void Ctown::initTileAttribute()
+{
+	for (int i = 0; i < TILEX * TILEY; i++)
+	{
+		if (_tiles[i].collisionObj == COLLISIONOBJECT::COLLISIONOBJ)
+		{
+			m_attribute[i] = ATTRIBUTE::COLLISION_ON;
+		}
+		else
+		{
+			m_attribute[i] = ATTRIBUTE::COLLISION_OFF;
 		}
 	}
 }

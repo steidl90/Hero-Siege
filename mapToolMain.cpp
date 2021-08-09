@@ -62,9 +62,9 @@ void mapToolMain::render()
 	sprintf_s(str, "서브타일 : %d ", m_subTile);
 	TextOut(getMemDC(), 100, 100, str, lstrlen(str));
 
-	if (!m_frameObject.empty())
+	if (!m_vFrameObject.empty())
 	{
-		for (auto iter = m_frameObject.begin(); iter != m_frameObject.end(); ++iter)
+		for (auto iter = m_vFrameObject.begin(); iter != m_vFrameObject.end(); ++iter)
 		{
 			(*iter).frameObject->render();
 		}
@@ -276,6 +276,21 @@ OBJECT mapToolMain::objSelect(int frameX, int frameY)
 	}
 }
 
+void mapToolMain::initTileAttribute()
+{
+	for (int i = 0; i < TILEX * TILEY; i++)
+	{
+		if (_tiles[i].collisionObj == COLLISIONOBJECT::COLLISIONOBJ)
+		{
+			m_attribute[i] = ATTRIBUTE::COLLISION_ON;
+		}
+		else
+		{
+			m_attribute[i] = ATTRIBUTE::COLLISION_OFF;
+		}
+	}
+}
+
 string mapToolMain::getImageName(OBJECTIMAGE image)
 {
 	string imageStr;
@@ -312,20 +327,20 @@ void mapToolMain::setFrameObject(int x, int y, KINDFRAMEOBJECT frameKind, int in
 	tempObject.frameObject = new frameObject;
 	tempObject.frameObject->init(x, y, frameKind);
 	tempObject.index = index;
-	m_frameObject.push_back(tempObject);
+	m_vFrameObject.push_back(tempObject);
 
 }
 
 void mapToolMain::deleteFrameObject(int index)
 {
-	if (!m_frameObject.empty())
+	if (!m_vFrameObject.empty())
 	{
-		for (auto iter = m_frameObject.begin(); iter != m_frameObject.end(); ++iter)
+		for (auto iter = m_vFrameObject.begin(); iter != m_vFrameObject.end(); ++iter)
 		{
 			if ((*iter).index == index)
 			{
 				SAFE_DELETE((*iter).frameObject);
-				m_frameObject.erase(iter);
+				m_vFrameObject.erase(iter);
 				break;
 			}
 		}
@@ -334,7 +349,7 @@ void mapToolMain::deleteFrameObject(int index)
 
 void mapToolMain::initFrameObject()
 {
-	m_frameObject.clear();
+	m_vFrameObject.clear();
 	for (size_t i = 0; i < TILEX * TILEY; i++)
 	{
 		if (m_frameObjectInfo[i].check == 1)
