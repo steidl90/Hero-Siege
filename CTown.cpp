@@ -42,7 +42,7 @@ void Ctown::load()
     HANDLE file;
     DWORD read;
 
-    file = CreateFile("town.map",
+    file = CreateFile("townMap.map",
         GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	ReadFile(file, m_frameObjectInfo, sizeof(tagFrameObjectInfo) * TILEX * TILEY, &read, NULL);

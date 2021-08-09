@@ -21,6 +21,8 @@ HRESULT CsceneDungeon::init()
 	m_player = new CplayerManager;
 	m_player->init();
 
+	m_changeRect = RectMake(100, 100, 100, 100);
+
 	return S_OK;
 }
 
@@ -37,6 +39,8 @@ void CsceneDungeon::update()
 	m_dungeon->update();
 	m_player->update();
 	m_camera->setTargetPoint(PointMake(m_player->getplayerRect()->left, m_player->getplayerRect()->top));
+
+	sceneChange();
 }
 
 void CsceneDungeon::render()
@@ -46,4 +50,16 @@ void CsceneDungeon::render()
 	m_camera->render();
 	m_dungeon->render();
 	m_player->render();
+
+	Rectangle(getMapDC(), m_changeRect.left, m_changeRect.top, m_changeRect.right, m_changeRect.bottom);
+}
+
+void CsceneDungeon::sceneChange()
+{
+	RECT temp;
+
+	if (IntersectRect(&temp, m_player->getplayerRect(), &m_changeRect))
+	{
+		SCENE->changeScene("¸¶À»");
+	}
 }

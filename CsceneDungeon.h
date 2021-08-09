@@ -10,6 +10,8 @@ private:
 	camera* m_camera;
 	CplayerManager* m_player;
 
+	RECT m_changeRect;
+
 public:
 	CsceneDungeon();
 	~CsceneDungeon();
@@ -18,4 +20,6 @@ public:
 	void release();
 	void update();
 	void render();
+
+	void sceneChange();
 };
