@@ -16,8 +16,9 @@ HRESULT mainGame::init()
 	SCENE->addScene("시작화면", new CsceneStart);
 	SCENE->addScene("선택화면", new CsceneSelect);
 	SCENE->addScene("마을", new CsceneTown);
+	SCENE->addScene("던전", new CsceneDungeon);
 
-	SCENE->changeScene("마을");
+	SCENE->changeScene("던전");
 	
 	return S_OK;
 }

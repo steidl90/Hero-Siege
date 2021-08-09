@@ -324,6 +324,9 @@
     <ClInclude Include="CplayerUi.h">
       <Filter>mainGame\히어로시즈\Cobject\CplayerUi</Filter>
     </ClInclude>
+    <ClInclude Include="CsceneDungeon.h">
+      <Filter>mainGame\히어로시즈\Cscene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -481,6 +484,9 @@
     </ClCompile>
     <ClCompile Include="CplayerUi.cpp">
       <Filter>mainGame\히어로시즈\Cobject\CplayerUi</Filter>
+    </ClCompile>
+    <ClCompile Include="CsceneDungeon.cpp">
+      <Filter>mainGame\히어로시즈\Cscene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

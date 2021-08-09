@@ -45,12 +45,5 @@ void camera::update()
 
 void camera::render()
 {
-	char str[100];
-	char str2[100];
-	sprintf_s(str, "카메라 x1 : %d, 카메라 y1: %d, 카메라 x2: %d, 카메라 y2: %d ", camera_x1, camera_y1, camera_x2, camera_y2);
-	sprintf_s(str2, "타겟 x1 : %d, 타겟 y1 : %d", target_x, target_y);
-
-	SetTextColor(getMemDC(), RGB(255, 255, 0));
-	TextOut(getMemDC(), WINSIZEX / 2 - 500, 20, str, lstrlen(str));
-	TextOut(getMemDC(), WINSIZEX / 2 - 500, 35, str2, lstrlen(str2));
+	
 }

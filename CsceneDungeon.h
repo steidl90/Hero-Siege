@@ -1,25 +1,21 @@
 #pragma once
 #include "gameNode.h"
-#include "Ctown.h"
+#include "Cdungeon.h"
 #include "CplayerManager.h"
 #include "camera.h"
-class CsceneTown : public gameNode
+class CsceneDungeon : public gameNode
 {
 private:
-	Ctown* m_town;
+	Cdungeon* m_dungeon;
 	camera* m_camera;
 	CplayerManager* m_player;
 
-	RECT m_changeRect;
-
 public:
-	CsceneTown();
-	~CsceneTown();
+	CsceneDungeon();
+	~CsceneDungeon();
 
 	HRESULT init();
 	void release();
 	void update();
 	void render();
-
-	void sceneChange();
 };

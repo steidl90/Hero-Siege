@@ -103,7 +103,8 @@ HRESULT Cimage::init()
 
     IMAGE->addFrameImage("커피집", "images/CoffeeHouse.bmp", 904, 152, 8, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("풍차날개", "images/WindmillWing.bmp", 2016, 339, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("tilemap", "images/Tile2.bmp", 648, 504, 18, 14, true, RGB(255, 0, 255));
+    //IMAGE->addFrameImage("tilemap", "images/Tile2.bmp", 648, 504, 18, 14, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("tilemap", "images/Tile4.bmp", 648, 504, 18, 14, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("오브젝트타일1", "images/ObjectTile.bmp", 648, 504, 18, 14, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("오브젝트타일2", "images/ObjectTile2.bmp", 648, 504, 18, 14, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("오브젝트타일3", "images/ObjectTile3.bmp", 648, 504, 18, 14, true, RGB(255, 0, 255));
@@ -135,7 +136,7 @@ HRESULT Cimage::init()
     IMAGE->addImage("선택효과", "images/SelectEffect.bmp", 44, 25, true, RGB(255, 0, 255));
     IMAGE->addImage("SkillUi", "images/HUD.bmp", 361, 112, true, RGB(255, 0, 255));
     IMAGE->addImage("StateUi", "images/StateUI.bmp", 318, 100, true, RGB(255, 0, 255));
-    IMAGE->addImage("MiniMapUi", "images/MinimapUI.bmp", 303, 357, true, RGB(255, 0, 255));
+    IMAGE->addImage("MiniMapUi", "images/MinimapUI.bmp", 303 * 0.75, 357 * 0.75, true, RGB(255, 0, 255));
 
     IMAGE->addFrameImage("레벨업", "images/LevelUP.bmp", 183, 55, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("버튼1", "images/Button1.bmp", 208, 39, 1, 1, true, RGB(255, 0, 255));

@@ -7,6 +7,7 @@
 #include"CsceneStart.h"
 #include"CsceneSelect.h"
 #include"CsceneTown.h"
+#include"CsceneDungeon.h"
 class mainGame : public gameNode
 {
 private:
