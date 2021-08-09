@@ -57,7 +57,6 @@ void mapToolSub::render()
 	{
 		LineMake(getMemDC(), MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth() + i * TILESIZE, 0, MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth() + i * TILESIZE, IMAGE->findImage("tilemap")->getHeight());
 	}
-
 	SetTextColor(getMemDC(), RGB(0, 0, 0));
 	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 160, TEXT("지형    - 1"), lstrlen("지형    - 1"));
 	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 180, TEXT("오브젝트    - 2"), lstrlen("오브젝트    - 2"));

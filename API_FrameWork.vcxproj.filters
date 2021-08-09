@@ -142,6 +142,9 @@
     <Filter Include="mainGame\히어로시즈\Cscene">
       <UniqueIdentifier>{efb0d4a2-196b-40e4-a402-63bac3f4a91b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="mainGame\히어로시즈\Cobject\CplayerUi">
+      <UniqueIdentifier>{398e44db-0038-4e7c-8e7b-82a651bef2a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -318,6 +321,9 @@
     <ClInclude Include="CsceneTown.h">
       <Filter>mainGame\히어로시즈\Cscene</Filter>
     </ClInclude>
+    <ClInclude Include="CplayerUi.h">
+      <Filter>mainGame\히어로시즈\Cobject\CplayerUi</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -472,6 +478,9 @@
     </ClCompile>
     <ClCompile Include="CsceneTown.cpp">
       <Filter>mainGame\히어로시즈\Cscene</Filter>
+    </ClCompile>
+    <ClCompile Include="CplayerUi.cpp">
+      <Filter>mainGame\히어로시즈\Cobject\CplayerUi</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

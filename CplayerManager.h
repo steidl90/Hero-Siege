@@ -4,10 +4,14 @@
 #include "CplayerAttack.h"
 #include "CplayerSkill.h"
 #include "camera.h"
+#include "CplayerUi.h"
+
 class CplayerManager :public Cunit
 {
 private:
+private:
 	Cplayer* m_player;
+	CplayerUi* m_playerUi;
 	camera* m_camera;
 
 public:

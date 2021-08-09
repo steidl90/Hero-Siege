@@ -166,6 +166,7 @@
     <ClInclude Include="CplayerAttack.h" />
     <ClInclude Include="CplayerManager.h" />
     <ClInclude Include="CplayerSkill.h" />
+    <ClInclude Include="CplayerUi.h" />
     <ClInclude Include="Cpriest.h" />
     <ClInclude Include="Cprison.h" />
     <ClInclude Include="CsceneSelect.h" />
@@ -225,6 +226,7 @@
     <ClCompile Include="CplayerAttack.cpp" />
     <ClCompile Include="CplayerManager.cpp" />
     <ClCompile Include="CplayerSkill.cpp" />
+    <ClCompile Include="CplayerUi.cpp" />
     <ClCompile Include="Cpriest.cpp" />
     <ClCompile Include="Cprison.cpp" />
     <ClCompile Include="CsceneSelect.cpp" />
