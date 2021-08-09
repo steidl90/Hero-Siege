@@ -45,11 +45,11 @@ void Cprison::release()
 void Cprison::update()
 {
 	m_prisonState = PRISON_STATE::PRISON_STATE_IDLE;
-	if (InputManager->isOnceKeyDown('1'))
-	{
-		isWalking = true;
-		isDie = false;
-	}
+	//if (InputManager->isOnceKeyDown('1'))
+	//{
+	//	isWalking = true;
+	//	isDie = false;
+	//}
 	//if (InputManager->isOnceKeyDown('2'))
 	//{
 	//	isDie = true;
@@ -105,54 +105,37 @@ void Cprison::animation()
 	switch (m_prisonState)
 	{
 	case PRISON_STATE::PRISON_STATE_WALK_UP:
-		if (isWalking)
-		{
 			m_prison = IMAGE->findImage("교도관");
 			m_prisonAni = ANIMATION->findAnimation("프리즌위쪽");
 			ANIMATION->resume("프리즌위쪽");
-		}
-		//else if (isAttack)
-		//{
-		//	m_prison = IMAGE->findImage("교도관공격");
-		//	m_prisonAni = ANIMATION->findAnimation("프리즌공격위쪽");
-		//	ANIMATION->resume("프리즌공격위쪽");
-		//}
+			m_prisonAttack = IMAGE->findImage("교도관공격");
+			m_prisonAttackAni = ANIMATION->findAnimation("프리즌공격위쪽");
+			ANIMATION->start("프리즌공격위쪽");
+
 		break;
 	case PRISON_STATE::PRISON_STATE_WALK_DOWN:
 		m_prison = IMAGE->findImage("교도관");
 		m_prisonAni = ANIMATION->findAnimation("프리즌아래쪽");
 		ANIMATION->resume("프리즌아래쪽");
+		m_prisonAttack = IMAGE->findImage("교도관공격");
+		m_prisonAttackAni = ANIMATION->findAnimation("프리즌공격아래쪽");
+		ANIMATION->start("프리즌공격아래쪽");
 		break;
 	case PRISON_STATE::PRISON_STATE_WALK_LEFT:
 		m_prison = IMAGE->findImage("교도관");
 		m_prisonAni = ANIMATION->findAnimation("프리즌왼쪽");
 		ANIMATION->resume("프리즌왼쪽");
+		m_prisonAttack = IMAGE->findImage("교도관공격");
+		m_prisonAttackAni = ANIMATION->findAnimation("프리즌공격왼쪽");
+		ANIMATION->start("프리즌공격왼쪽");
 		break;
 	case PRISON_STATE::PRISON_STATE_WALK_RIGHT:
 		m_prison = IMAGE->findImage("교도관");
 		m_prisonAni = ANIMATION->findAnimation("프리즌오른쪽");
 		ANIMATION->resume("프리즌오른쪽");
-		break;
-
-	case PRISON_STATE::PRISON_STATE_ATTACK_UP:
-		m_prison = IMAGE->findImage("교도관공격");
-		m_prisonAni = ANIMATION->findAnimation("프리즌공격위쪽");
-		ANIMATION->resume("프리즌공격위쪽");
-		break;
-	case PRISON_STATE::PRISON_STATE_ATTACK_DOWN:
-		m_prison = IMAGE->findImage("교도관공격");
-		m_prisonAni = ANIMATION->findAnimation("프리즌공격위쪽");
-		ANIMATION->resume("프리즌공격위쪽");
-		break;
-	case PRISON_STATE::PRISON_STATE_ATTACK_LEFT:
-		m_prison = IMAGE->findImage("교도관공격");
-		m_prisonAni = ANIMATION->findAnimation("프리즌공격위쪽");
-		ANIMATION->resume("프리즌공격위쪽");
-		break;
-	case PRISON_STATE::PRISON_STATE_ATTACK_RIGHT:
-		m_prison = IMAGE->findImage("교도관공격");
-		m_prisonAni = ANIMATION->findAnimation("프리즌공격위쪽");
-		ANIMATION->resume("프리즌공격위쪽");
+		m_prisonAttack = IMAGE->findImage("교도관공격");
+		m_prisonAttackAni = ANIMATION->findAnimation("프리즌공격오른쪽");
+		ANIMATION->start("프리즌공격오른쪽");
 		break;
 
 	case PRISON_STATE::PRISON_STATE_DIE_UP:
@@ -202,14 +185,9 @@ void Cprison::move()
 	}
 	if (InputManager->isStayKeyDown(VK_SPACE))
 	{
-		isWalking = false;
 		isAttack = true;
 	}
-	else
-	{
-		isWalking = true;
-		isAttack = false;
-	}
+	else isAttack = false;
 	animation();
 
 }

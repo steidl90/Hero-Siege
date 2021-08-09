@@ -84,7 +84,7 @@ void mainGame::update()
 	//m_monk->update();
 	m_prison->update();
 	//m_slime->update();
-	//m_player->update();
+	m_player->update();
 	m_camera->setTargetPoint(PointMake(m_player->getPlayRc()->left, m_player->getPlayRc()->top));
 	m_camera->update();
 	///* astar */ _aStar->update();
@@ -115,7 +115,7 @@ void mainGame::render()
 	m_prison->render();
 	//m_slime->render();
 
-	//m_player->render();
+	m_player->render();
 	m_camera->render();
 	TIME->render(getMemDC());
 	
