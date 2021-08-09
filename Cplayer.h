@@ -21,13 +21,8 @@ enum class STATE
 class Cplayer :public Cunit
 {
 private:
-
 	DIRECTIONS direction;
 	DIRECTIONS beforeDirection;
-
-	STATE state;
-
-	int playerX, playerY;
 
 	//´ë±â
 	image* playerDown;
@@ -47,22 +42,20 @@ private:
 	image* playerAttackLeft;
 	image* playerAttackRight;
 
-
-
 	animation* playerIdleAni;
 	animation* playerAttackAni;
 	animation* playerMoveAni;
 
-
 	RECT playerAttackRc;
 	RECT playerMoveRc;
 
+	float m_playerX, m_playerY;
 
-	float speed = 100.0f;
+	float m_speed;
 
-	bool isMoving = true;
+	bool isMoving;
 	bool isAttack;
-	bool isLive = true;
+	bool isLive;
 	bool isIdle;
 
 public:
@@ -73,8 +66,9 @@ public:
 	void release();
 	void update();
 	void render();
-	void move();
+	void moveControl();
 	void moveAnimation();
+	void playerStateRender();
 
 	RECT* getplayerMoveRC() { return &playerMoveRc; }
 };
