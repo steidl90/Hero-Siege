@@ -81,11 +81,11 @@ void CenemyAttack::move()
 	//	}
 	//	else ++m_viSkill;
 	//}
-	ANIMATION->findAnimation("¿¤¸®¸àÅ»½ºÅ³¾Ö´Ï");
-	ANIMATION->resume("¿¤¸®¸àÅ»½ºÅ³¾Ö´Ï");
+	//ANIMATION->findAnimation("¿¤¸®¸àÅ»½ºÅ³¾Ö´Ï");
+	//ANIMATION->resume("¿¤¸®¸àÅ»½ºÅ³¾Ö´Ï");
 
-	ANIMATION->findAnimation("¸®Ä¡½ºÅ³¾Ö´Ï");
-	ANIMATION->resume("¸®Ä¡½ºÅ³¾Ö´Ï");
+	//ANIMATION->findAnimation("¸®Ä¡½ºÅ³¾Ö´Ï");
+	//ANIMATION->resume("¸®Ä¡½ºÅ³¾Ö´Ï");
 }
 
 void CenemyAttack::removeBullet(int arrNum)

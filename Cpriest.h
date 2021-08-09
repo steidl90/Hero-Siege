@@ -74,7 +74,7 @@ private:
 	PRIEST_STATE m_priestState;
 
 	RECT m_priestRc;			//ø§∏Æ∏‡≈ª ¿ÃπÃ¡ˆ RC
-	RECT m_priestSkillRc;	//ø§∏Æ∏‡≈ª Ω∫≈≥ RC
+	//RECT m_priestSkillRc;	//ø§∏Æ∏‡≈ª Ω∫≈≥ RC
 	RECT m_priestCallRc;		//ø§∏Æ∏‡≈ª º“»Ø ¿ŒΩƒ π¸¿ß RC
 	RECT m_priestDamageRc;	//ø§∏Æ∏‡≈ª ≈∏∞› RC
 
@@ -87,9 +87,9 @@ public:
 	Cpriest();
 	~Cpriest();
 
-	HRESULT init();
-	void release();
-	void update();
-	void render();
+	virtual HRESULT init();
+	virtual void release();
+	virtual void update();
+	virtual void render();
 };
 

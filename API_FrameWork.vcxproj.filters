@@ -324,6 +324,15 @@
     <ClInclude Include="CtotalItem.h">
       <Filter>mainGame\히어로시즈\Cobject\Citem</Filter>
     </ClInclude>
+    <ClInclude Include="CplayerUi.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CsceneDungeon.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Cenemy.h">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\minion</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -484,6 +493,15 @@
     </ClCompile>
     <ClCompile Include="CtotalItem.cpp">
       <Filter>mainGame\히어로시즈\Cobject\Citem</Filter>
+    </ClCompile>
+    <ClCompile Include="CplayerUi.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CsceneDungeon.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Cenemy.cpp">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\minion</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

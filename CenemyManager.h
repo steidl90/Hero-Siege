@@ -28,19 +28,19 @@ private:
 	CenemyAttack* m_enemyAttack;
 private:
 	vector<Celemental*> m_vElemental;
-	vector<Celemental*>::iterator m_viElemental;
+	vector<Celemental*> m_viElemental;
 
 	vector<Cpriest*> m_vPriest;
-	vector<Cpriest*>::iterator m_viPriest;
+	vector<Cpriest*> m_viPriest;
 
 	vector<Cmonk*> m_vMonk;
-	vector<Cmonk*>::iterator m_viMonk;
+	vector<Cmonk*> m_viMonk;
 
 	vector<Cprison*> m_vPrison;
-	vector<Cprison*>::iterator m_viPrison;
+	vector<Cprison*> m_viPrison;
 
 	vector<Cslime*> m_vSlime;
-	vector<Cslime*>::iterator m_viSlime;
+	vector<Cslime*> m_viSlime;
 
 
 private:
@@ -77,18 +77,18 @@ public:
 	void removeSlime(int arrNum);
 
 	vector<Celemental*> getvElemental() { return m_vElemental; }
-	vector<Celemental*>::iterator getviElemental() { return m_viElemental; }
+	vector<Celemental*> getviElemental() { return m_viElemental; }
 
 	vector<Cpriest*> getvPriest() { return m_vPriest; }
-	vector<Cpriest*>::iterator getviPriest() { return m_viPriest; }
+	vector<Cpriest*> getviPriest() { return m_viPriest; }
 
 	vector<Cmonk*> getvMonk() { return m_vMonk; }
-	vector<Cmonk*>::iterator getviMonk() { return m_viMonk; }
+	vector<Cmonk*> getviMonk() { return m_viMonk; }
 
 	vector<Cprison*> getvPrison() { return m_vPrison; }
-	vector<Cprison*>::iterator getviPrison() { return m_viPrison; }
+	vector<Cprison*> getviPrison() { return m_viPrison; }
 
 	vector<Cslime*> getvSlime() { return m_vSlime; }
-	vector<Cslime*>::iterator getviSlime() { return m_viSlime; }
+	vector<Cslime*> getviSlime() { return m_viSlime; }
 };
 
