@@ -49,7 +49,7 @@ void mapToolMain::render()
 
 	char str[100];
 	sprintf_s(str, "서브타일 : %d ", m_subTile);
-	TextOut(getMemDC(), 100, 100, str, lstrlen(str));
+	TextOut(getMemDC(), 100, 10, str, lstrlen(str));
 
 	if (!m_vFrameObject.empty())
 	{
@@ -528,6 +528,10 @@ void mapToolMain::cullingRender()
 	if (endX > 49)
 		endX = 49;
 
+	char str[100];
+	HFONT hFont, OldFont;
+	hFont = CreateFont(10, 0, 0, 0, 0, 0, 0, 0, HANGEUL_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("궁서"));
+	OldFont = (HFONT)SelectObject(getMapDC(), hFont);
 	for (startY = index_Y1; startY <= endY; startY++)
 	{
 		for (startX = index_X1; startX <= endX; startX++)
@@ -535,7 +539,6 @@ void mapToolMain::cullingRender()
 			//if (_tilesImage[startX + startY * TILEX].terrainImage == NULL)
 			//	_tilesImage[startX + startY * TILEX].terrainImage = "tilemap";
 			IMAGE->frameRender(this->getImageName(_tilesImage[startX + startY * TILEX].terrainImage), getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].terrainFrameX, _tiles[startX + startY * TILEX].terrainFrameY);
-
 			//if (_tilesImage[startX + startY * TILEX].objImage == "")
 			//	_tilesImage[startX + startY * TILEX].objImage = "오브젝트타일1";
 			if (_tiles[startX + startY * TILEX].obj != OBJECT::OBJ_NONE)
@@ -549,8 +552,13 @@ void mapToolMain::cullingRender()
 				{
 					IMAGE->frameRender("tilemap", getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, 0, 0);
 				}
+				wsprintf(str, "y:%d",startY);
+				SetBkMode(getMapDC(), TRANSPARENT);
+				TextOut(getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, str, lstrlen(str));
 			}
 
 		}
 	}
+	SelectObject(getMapDC(), OldFont);
+	DeleteObject(hFont);
 }

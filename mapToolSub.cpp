@@ -59,6 +59,8 @@ void mapToolSub::render()
 	}
 
 	SetTextColor(getMemDC(), RGB(0, 0, 0));
+	TextOut(getMemDC(), CAMERAWIDTH + 200, WINSIZEY / 2 + 120, TEXT("충돌타일,좌표보이기    - F11"), lstrlen("충돌타일,좌표보이기    - F11"));
+	TextOut(getMemDC(), CAMERAWIDTH + 300, WINSIZEY / 2 + 140, TEXT("충돌타일 = sub0 첫번째칸"), lstrlen("충돌타일 = sub1 첫번째칸"));
 	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 120, TEXT("충돌지우개    - L"), lstrlen("충돌지우개    - L"));
 	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 140, TEXT("프레임지우개    - 컨트롤+E"), lstrlen("프레임지우개    - 컨트롤+E"));
 	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 160, TEXT("지형    - 1"), lstrlen("지형    - 1"));
@@ -70,6 +72,7 @@ void mapToolSub::render()
 	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 280, TEXT("뒤로가기    - 컨트롤+Z"), lstrlen("뒤로가기    - 컨트롤+Z"));
 	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 300, TEXT("타일맵 그리드    - F1(on),F2(off)"), lstrlen("타일맵 그리드    - F1(on),F2(off)"));
 	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 320, TEXT("샘플타일변경    - 다음(Tab), 뒤로(Ctrl+Tab)"), lstrlen("샘플타일변경    - 다음(Tab), 뒤로(Ctrl+Tab)"));
+	
 
 	this->clickAlphaRender();
 

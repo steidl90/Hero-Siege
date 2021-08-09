@@ -57,8 +57,7 @@ void mainGame::update()
 {
 
 	gameNode::update();
-	//m_player->setMapMemory(m_mapTool->getMapToolMain());
-
+	m_player->setMapMemory(m_mapTool->getMapToolMain());
 	SCENE->update();
 	m_player->update();
 	m_camera->setTargetPoint(PointMake(m_player->getPlayRc()->left, m_player->getPlayRc()->top));
