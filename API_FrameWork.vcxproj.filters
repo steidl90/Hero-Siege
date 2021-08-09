@@ -132,15 +132,15 @@
     <Filter Include="mainGame\히어로시즈\Cobject\Cshop">
       <UniqueIdentifier>{cd8a4305-9180-4c46-96ca-b22d6a9041b3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="리소스 파일\singleton">
-      <UniqueIdentifier>{4195f04f-5855-464f-9ac2-ec62e85370d4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="mainGame\히어로시즈\Cscene">
       <UniqueIdentifier>{efb0d4a2-196b-40e4-a402-63bac3f4a91b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="singleton">
+      <UniqueIdentifier>{4195f04f-5855-464f-9ac2-ec62e85370d4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -163,7 +163,7 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="singleton.h">
-      <Filter>리소스 파일\singleton</Filter>
+      <Filter>singleton</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>Manager</Filter>
@@ -319,6 +319,9 @@
       <Filter>mainGame\히어로시즈\Cobject\Cinventory</Filter>
     </ClInclude>
     <ClInclude Include="Citem.h">
+      <Filter>mainGame\히어로시즈\Cobject\Citem</Filter>
+    </ClInclude>
+    <ClInclude Include="CtotalItem.h">
       <Filter>mainGame\히어로시즈\Cobject\Citem</Filter>
     </ClInclude>
   </ItemGroup>
@@ -478,6 +481,9 @@
     </ClCompile>
     <ClCompile Include="CinventoryUi.cpp">
       <Filter>mainGame\히어로시즈\Cobject\Cinventory</Filter>
+    </ClCompile>
+    <ClCompile Include="CtotalItem.cpp">
+      <Filter>mainGame\히어로시즈\Cobject\Citem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

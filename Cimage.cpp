@@ -133,6 +133,8 @@ HRESULT Cimage::init()
     IMAGE->addImage("불러오기버튼활성화", "images/LoadGame2.bmp", 338, 62, true, RGB(255, 0, 255));
     IMAGE->addImage("나가기버튼비활성화", "images/GameOut1.bmp", 338, 62, true, RGB(255, 0, 255));
     IMAGE->addImage("나가기버튼활성화", "images/GameOut2.bmp", 338, 62, true, RGB(255, 0, 255));
+    IMAGE->addImage("선택테두리", "images/inventorySelectUI1.bmp", 207, 88, true, RGB(255, 0, 255));
+    IMAGE->addImage("장착테두리", "images/inventorySelectUI2.bmp", 207, 88, true, RGB(255, 0, 255));
 
     IMAGE->addFrameImage("레벨업", "images/LevelUP.bmp", 183, 55, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("HUD", "images/HUD.bmp", 361, 112, 1, 1, true, RGB(255, 0, 255));

@@ -2,12 +2,14 @@
 #include "Cobject.h"
 #include "frameObject.h"
 #include "Cplayer.h"
+#include "CinventoryUi.h"
 class camera;
 class Ctown :public Cobject
 {
 private:
 	camera* m_camera;
 	Cplayer* m_player;
+	CinventoryUi* m_inventoryUi;
 private:
 	tagCurrentTile _currentTile;
 	tagTile _tiles[TILEX * TILEY];

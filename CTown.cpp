@@ -12,6 +12,8 @@ Ctown::~Ctown()
 
 HRESULT Ctown::init()
 {
+	m_inventoryUi = new CinventoryUi;
+	m_inventoryUi->init();
     load();
     return S_OK;
 }
@@ -22,6 +24,7 @@ void Ctown::release()
 
 void Ctown::update()
 {
+	m_inventoryUi->update();
 }
 
 void Ctown::render()
@@ -35,6 +38,7 @@ void Ctown::render()
 			(*iter).frameObject->render();
 		}
 	}
+	m_inventoryUi->render();
 }
 
 void Ctown::load()

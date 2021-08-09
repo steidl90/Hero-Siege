@@ -173,6 +173,7 @@
     <ClInclude Include="CsceneStart.h" />
     <ClInclude Include="Cshop.h" />
     <ClInclude Include="Cslime.h" />
+    <ClInclude Include="CtotalItem.h" />
     <ClInclude Include="Ctown.h" />
     <ClInclude Include="Cunit.h" />
     <ClInclude Include="effect.h" />
@@ -233,6 +234,7 @@
     <ClCompile Include="CsceneStart.cpp" />
     <ClCompile Include="Cshop.cpp" />
     <ClCompile Include="Cslime.cpp" />
+    <ClCompile Include="CtotalItem.cpp" />
     <ClCompile Include="Ctown.cpp" />
     <ClCompile Include="Cunit.cpp" />
     <ClCompile Include="effect.cpp" />

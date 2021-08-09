@@ -35,6 +35,9 @@
 #include"soundManager.h"
 #include"animationManager.h"
 #include"effectManager.h"
+//새로등록
+#include"CtotalItem.h"
+
 //======================================
 //##			매니저들			  ##
 //======================================
@@ -47,6 +50,9 @@
 #define SOUND			soundManager::getSingleton()
 #define ANIMATION		animationManager::getSingleton()
 #define EFFECT			effectManager::getSingleton()
+// 새로등록
+#define ITEM			CtotalItem::getSingleton()
+
 //==========================================
 //				 매크로 설정
 //==========================================
