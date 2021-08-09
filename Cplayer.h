@@ -1,6 +1,6 @@
 #pragma once
 #include "Cunit.h"
-
+#include "CplayerSkill.h"
 enum class  DIRECTIONS
 {
 	DIRECTIONS_LEFT,
@@ -21,6 +21,9 @@ enum class STATE
 class Cplayer :public Cunit
 {
 private:
+
+	CplayerSkill* m_playerSkill;
+
 	DIRECTIONS direction;
 	DIRECTIONS beforeDirection;
 
@@ -52,7 +55,7 @@ private:
 	float m_playerX, m_playerY;
 
 	float m_speed;
-
+	float m_angle;
 	bool isMoving;
 	bool isAttack;
 	bool isLive;
@@ -71,5 +74,7 @@ public:
 	void playerStateRender();
 
 	RECT* getplayerMoveRC() { return &playerMoveRc; }
+	float getplayerX() const { return m_playerX; }
+	float getplayerY() const { return m_playerY; }
 };
 

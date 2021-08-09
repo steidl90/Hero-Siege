@@ -12,6 +12,7 @@ class CplayerManager :public Cunit
 private:
 private:
 	Cplayer* m_player;
+	CplayerSkill* m_playerSkill;
 	CplayerUi* m_playerUi;
 	camera* m_camera;
 	CinventoryUi* m_Inventory;
