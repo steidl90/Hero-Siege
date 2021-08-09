@@ -15,7 +15,5 @@ public:
 	virtual void render();
 
 	virtual void move();
-	virtual void moveAni();
-	virtual void attack();
-	virtual void Die();
+	virtual void animation();
 };

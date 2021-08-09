@@ -30,14 +30,6 @@ void Cenemy::move()
 {
 }
 
-void Cenemy::moveAni()
-{
-}
-
-void Cenemy::attack()
-{
-}
-
-void Cenemy::Die()
+void Cenemy::animation()
 {
 }

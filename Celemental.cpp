@@ -51,14 +51,7 @@ void Celemental::move()
 {
 }
 
-void Celemental::moveAni()
+void Celemental::animation()
 {
 }
 
-void Celemental::attack()
-{
-}
-
-void Celemental::Die()
-{
-}
