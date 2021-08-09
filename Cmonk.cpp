@@ -170,33 +170,31 @@ void Cmonk::move()
 {
 	RECT rc;
 	rc = m_monkRc;
-	float elpasedTime = TIME->getElapsedTime();
-	float moveSpeed = elpasedTime * m_speed;
 
 	if (InputManager->isStayKeyDown('W'))
 	{
-		m_y -= moveSpeed;
+		m_y -= m_speed;
 		isWalking = true;
 		m_direction = MONK_DIRECTION::MONK_DIRECTION_UP;
 	}
 	//else isWalking = false;
 	if (InputManager->isStayKeyDown('S'))
 	{
-		m_y += moveSpeed;
+		m_y += m_speed;
 		isWalking = true;
 		m_direction = MONK_DIRECTION::MONK_DIRECTION_DOWN;
 	}
 	//else isWalking = false;
 	if (InputManager->isStayKeyDown('A'))
 	{
-		m_x -= moveSpeed;
+		m_x -= m_speed;
 		isWalking = true;
 		m_direction = MONK_DIRECTION::MONK_DIRECTION_LEFT;
 	}
 	//else isWalking = false;
 	if (InputManager->isStayKeyDown('D'))
 	{
-		m_x += moveSpeed;
+		m_x += m_speed;
 		isWalking = true;
 		m_direction = MONK_DIRECTION::MONK_DIRECTION_RIGHT;
 	}

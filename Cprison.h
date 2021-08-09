@@ -25,18 +25,24 @@ enum class PRISON_STATE
 class Cprison :public Cunit
 {
 private:
-	image* m_prison;
-	//image* m_prisonAttack;
 
+	image* m_prison;
 	animation* m_prisonAni;
+	RECT m_prisonRc;
+
+	image* m_prisonAttack;
 	animation* m_prisonAttackAni;
+	RECT m_prisonAttackRc;
+
+	image* m_prisonDie;
+	animation* m_prisonDieAni;
+	RECT m_prisonDieRc;
 
 	PRISON_STATE m_prisonState;
-	CenemyAttack* m_prisonAttack;
-
-	RECT m_prisonRc;
 	RECT m_prisonCallRc;
-	RECT m_prisonAttackRc;
+
+	//CenemyAttack* m_prisonAttack;
+
 
 	float m_x, m_y;
 	float m_speed;
@@ -53,5 +59,11 @@ public:
 	void release();
 	void update();
 	void render();
+
+	void animation();
+
+	void move();
+	void attack();
+	void die();
 };
 

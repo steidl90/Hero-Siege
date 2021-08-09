@@ -78,11 +78,11 @@ void mainGame::update()
 {
 	gameNode::update();
 	SCENE->update();
-	m_mevius->update();
+	//m_mevius->update();
 	//m_elemental->update();
 	//m_priest->update();
-	m_monk->update();
-	//m_prison->update();
+	//m_monk->update();
+	m_prison->update();
 	//m_slime->update();
 	//m_player->update();
 	m_camera->setTargetPoint(PointMake(m_player->getPlayRc()->left, m_player->getPlayRc()->top));
@@ -108,11 +108,11 @@ void mainGame::render()
 	SCENE->render();
 	EFFECT->render();
 
-	m_mevius->render();
+	//m_mevius->render();
 	//m_elemental->render();
 	//m_priest->render();
-	m_monk->render();
-	//m_prison->render();
+	//m_monk->render();
+	m_prison->render();
 	//m_slime->render();
 
 	//m_player->render();
