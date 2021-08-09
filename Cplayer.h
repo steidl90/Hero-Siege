@@ -73,10 +73,8 @@ public:
 	void release();
 	void update();
 	void render();
-	//void setPlayerPosition(RECT rc);
 	void move();
 	void moveAnimation();
-	void attack();
 
 	RECT* getplayerMoveRC() { return &playerMoveRc; }
 };
