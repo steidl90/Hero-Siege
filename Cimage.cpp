@@ -114,7 +114,7 @@ HRESULT Cimage::init()
     IMAGE->addFrameImage("풍차날개", "images/WindmillWing.bmp", 2016, 339, 6, 1, true, RGB(255, 0, 255));
     //IMAGE->addFrameImage("tilemap", "images/Tile2.bmp", 648, 504, 18, 14, true, RGB(255, 0, 255));
     //IMAGE->addFrameImage("tilemap", "images/Tile3.bmp", 648, 504, 18, 14, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("tilemap", "images/Tile4.bmp", 648, 504, 18, 14, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("tilemap", "images/Tile3.bmp", 648, 504, 18, 14, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("오브젝트타일1", "images/ObjectTile.bmp", 648, 504, 18, 14, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("오브젝트타일2", "images/ObjectTile2.bmp", 648, 504, 18, 14, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("오브젝트타일3", "images/ObjectTile3.bmp", 648, 504, 18, 14, true, RGB(255, 0, 255));
