@@ -272,18 +272,22 @@ void CinventoryUi::setEquipItem(int index)
 {
 	vector<Citem>::iterator weaponTemp;
 	vector<Citem>::iterator armorTemp;
+	
 	index = index + m_showIndex;
 	// 장착 아이템변수에 담기
 	switch (m_selectType)
 	{
 	case ITEMTYPE::ITEMTYPE_WEAPON:
+		// Ui에서 사용할 equip무기 변수에는 인벤토리 벡터에 있는 원소 직접 주소 말고 복사한 간접 주소 주기
 		weaponTemp = m_myInventory->getvWeaponList()->begin()+index;
-		m_equipWeapon = &(*weaponTemp);
+		m_initItem[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)] = (*weaponTemp);
+		m_equipWeapon = &m_initItem[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)];
 		isEquipWeapon = true;
 		break;
 	case ITEMTYPE::ITEMTYPE_ARMOR:
 		armorTemp = m_myInventory->getvArmorList()->begin() + index;
-		m_equipArmor = &(*armorTemp);
+		m_initItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)] = (*armorTemp);
+		m_equipArmor = &m_initItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)];
 		isEquipArmor = true;
 		break;
 	default:
@@ -381,12 +385,18 @@ void CinventoryUi::abandonItem()
 	}
 }
 
+// 일단 이름으로 비교...
 bool CinventoryUi::checkEquipItem()
 {
-	if (m_equipWeapon == m_selectItem)
+	if (m_equipWeapon != nullptr)
+	{
+		if(m_equipWeapon->getName() == m_selectItem->getName())
 		return false;
-	else if (m_equipArmor == m_selectItem)
+	}
+	else if (m_equipArmor != nullptr)
+	{
+		if (m_equipArmor->getName() == m_selectItem->getName())
 		return false;
-
+	}
 	return true;
 }
