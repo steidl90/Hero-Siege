@@ -1,8 +1,11 @@
 #pragma once
+#include <functional>
+
 class animation
 {
 private:
-
+	function<void()> m_triggerWhenClick;
+	bool useEventWhenEnd;
 	typedef vector<POINT> _vFrameList;
 	typedef vector<int> _vPlayList;
 
@@ -20,7 +23,6 @@ private:
 	float _frameUpdateSec;
 	float _elapseSec;
 	DWORD _nowPlayIndex;
-
 
 
 
@@ -58,11 +60,11 @@ public:
 	inline int getFrameWidth()const { return _frameWidth; }
 	inline int getFrameHeight()const { return _frameHeight; }
 
-
-
-
-
-
-
+	template <typename T>
+	void SetTriggerWhenClick(T* pObj, void(T::* func)())
+	{
+		useEventWhenEnd = true;
+		m_triggerWhenClick = bind(func, pObj);
+	}
 };
 

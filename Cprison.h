@@ -65,5 +65,7 @@ public:
 	void move();
 	void attack();
 	void die();
+
+	void ReturnIdleAnimation();
 };
 

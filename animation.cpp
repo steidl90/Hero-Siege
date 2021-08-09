@@ -12,6 +12,8 @@ animation::~animation()
 
 HRESULT animation::init(int totalW, int totalH, int frameW, int frameH)
 {
+	useEventWhenEnd = false;
+
 	//가로 프레임 갯수
 	_frameWidth = frameW;
 	int frameWidthNum = totalW / _frameWidth;
@@ -215,6 +217,10 @@ void animation::frameUpdate(float elapsedTime)
 				}
 				else
 				{
+					if (useEventWhenEnd)
+					{
+						m_triggerWhenClick();
+					}
 					_nowPlayIndex--;
 					_play = false;
 				}
