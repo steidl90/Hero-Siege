@@ -22,10 +22,10 @@ HRESULT Cpriest::init()
 	ANIMATION->addAnimation("리치오른쪽", "리치", 12, 17, 8, false, true);
 	ANIMATION->addAnimation("리치위쪽", "리치", 18, 23, 8, false, true);
 
-	ANIMATION->addAnimation("리치공격아래쪽", "리치공격", 0, 15, 16, false, true);
-	ANIMATION->addAnimation("리치공격왼쪽", "리치공격", 16, 31, 16, false, true);
-	ANIMATION->addAnimation("리치공격오른쪽", "리치공격", 32, 47, 16, false, true);
-	ANIMATION->addAnimation("리치공격위쪽", "리치공격", 48, 63, 16, false, true);
+	ANIMATION->addAnimation("리치공격아래쪽", "리치공격", 0, 15, 16, false, false);
+	ANIMATION->addAnimation("리치공격왼쪽", "리치공격", 16, 31, 16, false, false);
+	ANIMATION->addAnimation("리치공격오른쪽", "리치공격", 32, 47, 16, false, false);
+	ANIMATION->addAnimation("리치공격위쪽", "리치공격", 48, 63, 16, false, false);
 
 	ANIMATION->addAnimation("리치사망아래쪽", "리치사망", 0, 9, 8, false, false);
 	ANIMATION->addAnimation("리치사망왼쪽", "리치사망", 10, 19, 8, false, false);
@@ -157,22 +157,22 @@ void Cpriest::update()
 	case PRIEST_STATE::PRIEST_STATE_ATTACK_UP:
 		m_priestImage = IMAGE->findImage("리치공격");
 		m_priestAnimation = ANIMATION->findAnimation("리치공격위쪽");
-		ANIMATION->resume("리치공격위쪽");
+		ANIMATION->start("리치공격위쪽");
 		break;
 	case PRIEST_STATE::PRIEST_STATE_ATTACK_DOWN:
 		m_priestImage = IMAGE->findImage("리치공격");
 		m_priestAnimation = ANIMATION->findAnimation("리치공격아래쪽");
-		ANIMATION->resume("리치공격아래쪽");
+		ANIMATION->start("리치공격아래쪽");
 		break;
 	case PRIEST_STATE::PRIEST_STATE_ATTACK_LEFT:
 		m_priestImage = IMAGE->findImage("리치공격");
 		m_priestAnimation = ANIMATION->findAnimation("리치공격왼쪽");
-		ANIMATION->resume("리치공격왼쪽");
+		ANIMATION->start("리치공격왼쪽");
 		break;
 	case PRIEST_STATE::PRIEST_STATE_ATTACK_RIGHT:
 		m_priestImage = IMAGE->findImage("리치공격");
 		m_priestAnimation = ANIMATION->findAnimation("리치공격오른쪽");
-		ANIMATION->resume("리치공격오른쪽");
+		ANIMATION->start("리치공격오른쪽");
 		break;
 
 	case PRIEST_STATE::PRIEST_STATE_DIE_UP:

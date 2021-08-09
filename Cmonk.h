@@ -1,45 +1,46 @@
 #pragma once
 #include "Cunit.h"
 #include "CenemyAttack.h"
+enum class MONK_DIRECTION
+{
+	MONK_DIRECTION_UP,
+	MONK_DIRECTION_DOWN,
+	MONK_DIRECTION_LEFT,
+	MONK_DIRECTION_RIGHT
+};
 enum class MONK_STATE
 {
-	MONK_STATE_IDLE,
-
-	MONK_STATE_WALK_UP,
-	MONK_STATE_WALK_DOWN,
-	MONK_STATE_WALK_LEFT,
-	MONK_STATE_WALK_RIGHT,
-
-	MONK_STATE_ATTACK_UP,
-	MONK_STATE_ATTACK_DOWN,
-	MONK_STATE_ATTACK_LEFT,
-	MONK_STATE_ATTACK_RIGHT,
-
-	MONK_STATE_DIE_UP,
-	MONK_STATE_DIE_DOWN,
-	MONK_STATE_DIE_LEFT,
-	MONK_STATE_DIE_RIGHT,
+	MONK_STATE_UP,
+	MONK_STATE_DOWN,
+	MONK_STATE_LEFT,
+	MONK_STATE_RIGHT
 };
 class Cmonk :public Cunit
 {
 private:
+	
+	MONK_DIRECTION m_direction;
+	MONK_DIRECTION m_beforeDirection;
 
-	image*			m_monkImage;
-	animation*		m_monkAnimation;
+	MONK_STATE m_state;
+
+	image*			m_monk;
+	image*			m_monkAttack;
+	image*			m_monkDie;
+
+	animation*		m_monkAni;
+	animation*		m_monkAttackAni;
+	animation*		m_monkDieAni;
 
 	RECT			m_monkRc;
-	RECT			m_monkCallRc;
-	RECT			m_monkDamageRc;
 	RECT			m_monkAttackRc;
 
-	CenemyAttack*	m_enemyAttack;
-	MONK_STATE		m_monkState;
+	int m_speed;
+	int m_x, m_y;
 
-	float m_x, m_y;
-	float m_speed;
-
-	bool isDie;
+	bool isWalking;
 	bool isAttack;
+	bool isDie;
 
 public:
 	Cmonk();
@@ -49,5 +50,10 @@ public:
 	void release();
 	void update();
 	void render();
+
+	void move();
+	void moveAni();
+	void attack();
+	void Die();
 };
 

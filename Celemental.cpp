@@ -3,6 +3,7 @@
 
 Celemental::Celemental()
 {
+
 }
 
 Celemental::~Celemental()
