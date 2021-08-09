@@ -36,6 +36,8 @@ private:
 	Citem* m_equipArmor;
 	Citem* m_selectItem;
 
+	Citem m_itemInit[2];
+
 	// 버튼 클릭시 stay다운을 once처럼 쓰기위해..
 	bool isButtonClick;
 	bool isOnceClick;

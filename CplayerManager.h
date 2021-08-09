@@ -16,6 +16,8 @@ private:
 	camera* m_camera;
 	CinventoryUi* m_Inventory;
 
+	bool isInventoryOn;
+
 public:
 	CplayerManager();
 	~CplayerManager();

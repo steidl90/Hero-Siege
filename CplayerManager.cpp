@@ -18,6 +18,8 @@ HRESULT CplayerManager::init()
 
     m_Inventory = new CinventoryUi;
     m_Inventory->init();
+
+    isInventoryOn = false;
     return S_OK;
 }
 
@@ -30,13 +32,17 @@ void CplayerManager::release()
 
 void CplayerManager::update()
 {
+    if (InputManager->isOnceKeyDown('I')) isInventoryOn = !isInventoryOn;
+
     m_player->update();
-    m_Inventory->update();
+
+    if(isInventoryOn) m_Inventory->update();
 }
 
 void CplayerManager::render()
 {
     m_player->render();
     m_playerUi->render();
-    m_Inventory->render();
+
+    if(isInventoryOn) m_Inventory->render();
 }

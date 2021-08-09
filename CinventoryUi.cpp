@@ -287,12 +287,14 @@ void CinventoryUi::setEquipItem(int index)
 	{
 	case ITEMTYPE::ITEMTYPE_WEAPON:
 		weaponTemp = m_myInventory->getvWeaponList()->begin()+index;
-		m_equipWeapon = &(*weaponTemp);
+		m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)] = (*weaponTemp);
+		m_equipWeapon = &m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)];
 		isEquipWeapon = true;
 		break;
 	case ITEMTYPE::ITEMTYPE_ARMOR:
 		armorTemp = m_myInventory->getvArmorList()->begin() + index;
-		m_equipArmor = &(*armorTemp);
+		m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)] = (*armorTemp);
+		m_equipArmor = &m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)];
 		isEquipArmor = true;
 		break;
 	default:
@@ -392,10 +394,15 @@ void CinventoryUi::abandonItem()
 
 bool CinventoryUi::checkEquipItem()
 {
-	if (m_equipWeapon == m_selectItem)
-		return false;
-	else if (m_equipArmor == m_selectItem)
-		return false;
-
+	if (m_equipWeapon != nullptr)
+	{
+		if (m_equipWeapon->getName() == m_selectItem->getName())
+			return false;
+	}
+	if (m_equipArmor != nullptr)
+	{
+		if (m_equipArmor->getName() == m_selectItem->getName())
+			return false;
+	}
 	return true;
 }
