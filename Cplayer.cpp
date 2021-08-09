@@ -88,8 +88,8 @@ void Cplayer::update()
 
 void Cplayer::render()
 {
-	playerStateRender();
 	m_playerSkill->render();
+	playerStateRender();
 }
 
 void Cplayer::moveControl()
@@ -162,7 +162,6 @@ void Cplayer::moveControl()
 		else if (direction == DIRECTIONS::DIRECTIONS_RIGHT)m_playerSkill->skillInformation(m_playerX+50, m_playerY+33, PI2, 7.0f, 700, "리치스킬", "리치스킬애니");
 		else if (direction == DIRECTIONS::DIRECTIONS_UP)m_playerSkill->skillInformation(m_playerX+15, m_playerY-20, PI * 0.5, 7.0f, 700, "리치스킬", "리치스킬애니");//위??
 		else if (direction == DIRECTIONS::DIRECTIONS_DOWN)m_playerSkill->skillInformation(m_playerX, m_playerY, PI * 1.5, 7.0f, 700, "리치스킬", "리치스킬애니");
-
 	}
 	else if (InputManager->isOnceKeyDown('W'))
 	{
@@ -191,11 +190,8 @@ void Cplayer::moveControl()
 		for (size_t n = 0; n < 30; n++)
 		{
 			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (n + m_angle) * 0.82, 1.5f, 600, "리치스킬", "리치스킬애니");
-
 		}
-		
 	}
-	else isAttack = false;
 
 	moveAnimation();
 }
