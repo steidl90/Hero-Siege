@@ -366,7 +366,7 @@ void CinventoryUi::abandonItem()
 						if (m_selectItem != nullptr && this->checkEquipItem())
 						{
 							m_myInventory->AbandonItem(m_selectItem);
-							m_selectItem = false;
+							m_selectItem = nullptr;
 							isSelectRender = false;
 						}
 						isOnceClick = false;
