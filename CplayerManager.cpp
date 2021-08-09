@@ -16,6 +16,8 @@ HRESULT CplayerManager::init()
 
     m_playerUi = new CplayerUi;
 
+    m_Inventory = new CinventoryUi;
+    m_Inventory->init();
     return S_OK;
 }
 
@@ -23,15 +25,18 @@ void CplayerManager::release()
 {
     SAFE_DELETE(m_player);
     SAFE_DELETE(m_playerUi);
+    SAFE_DELETE(m_Inventory);
 }
 
 void CplayerManager::update()
 {
     m_player->update();
+    m_Inventory->update();
 }
 
 void CplayerManager::render()
 {
     m_player->render();
     m_playerUi->render();
+    m_Inventory->render();
 }

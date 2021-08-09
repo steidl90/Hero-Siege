@@ -17,6 +17,8 @@ private:
 	int m_itemListY;
 	int m_EquipItemX;
 	int m_EquipItemY;
+	int m_itemInfoX;
+	int m_itemInfoY;
 	int m_functionButtonX;
 	int m_functionButtonY;
 

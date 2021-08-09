@@ -37,6 +37,7 @@
 #include"effectManager.h"
 //새로등록
 #include"CtotalItem.h"
+#include"rootHeader.h"
 
 //======================================
 //##			매니저들			  ##

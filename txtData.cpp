@@ -82,9 +82,21 @@ vector<string> txtData::charArraySeperation(char charArray[])
 {
 
 	vector<string> vArray;
+	string str = charArray;
+	
+	while (str.find("\r") != -1)
+	{
+		str.replace(str.find("\r"), 2, ",");
+	}
+	//while (str.find("\n") != -1)
+	//{
+	//	str.replace(str.find("\n"), 2, ",");
+	//}
+	char* strCopy = &str[0];
+
 	char* seperator = ",";
 	char* token;
-	token = strtok(charArray, seperator);
+	token = strtok(strCopy, seperator);
 	vArray.push_back(token);
 
 

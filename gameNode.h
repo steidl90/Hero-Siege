@@ -1,7 +1,6 @@
 #pragma once
 #include"image.h"
 #include"Cimage.h"
-#include"rootHeader.h"
 static image* backBuffer = IMAGE->addImage("backbuffer", WINSIZEX, WINSIZEY);
 static image* mapBuffer = IMAGE->addImage("mapBuffer", MAPSIZE, MAPSIZE);
 

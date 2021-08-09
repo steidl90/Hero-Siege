@@ -137,6 +137,8 @@ HRESULT Cimage::init()
     IMAGE->addImage("SkillUi", "images/HUD.bmp", 361, 112, true, RGB(255, 0, 255));
     IMAGE->addImage("StateUi", "images/StateUI.bmp", 318, 100, true, RGB(255, 0, 255));
     IMAGE->addImage("MiniMapUi", "images/MinimapUI.bmp", 303 * 0.75, 357 * 0.75, true, RGB(255, 0, 255));
+    IMAGE->addImage("선택테두리", "images/inventorySelectUI1.bmp", 207, 88, true, RGB(255, 0, 255));
+    IMAGE->addImage("장착테두리", "images/inventorySelectUI2.bmp", 207, 88, true, RGB(255, 0, 255));
 
     IMAGE->addFrameImage("레벨업", "images/LevelUP.bmp", 183, 55, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("버튼1", "images/Button1.bmp", 208, 39, 1, 1, true, RGB(255, 0, 255));
@@ -144,6 +146,7 @@ HRESULT Cimage::init()
     IMAGE->addFrameImage("인벤토리1", "images/Inventory1.bmp", 469, 473, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("인벤토리2", "images/Inventory2.bmp", 389, 465, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("인벤토리3", "images/Inventory3.bmp", 858, 473, 1, 1, true, RGB(255, 0, 255));
+
 
     IMAGE->addFrameImage("선택아마존", "images/Choose/ChooseAmazon.bmp", 372, 138, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("선택데몬", "images/Choose/ChooseDemon.bmp", 528, 92, 6, 1, true, RGB(255, 0, 255));

@@ -18,7 +18,7 @@ private:
 	int m_speed;
 	int m_limitLevel;
 	int m_itemBuyPrice;
-
+	// 아이템 등급 추가해야함
 	POINT m_frame;
 
 public:

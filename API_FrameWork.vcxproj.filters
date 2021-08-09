@@ -117,9 +117,6 @@
     <Filter Include="이펙트">
       <UniqueIdentifier>{2e134f28-1250-4606-8eff-bf40947e3f51}</UniqueIdentifier>
     </Filter>
-    <Filter Include="맵툴\카메라">
-      <UniqueIdentifier>{a073fbc0-fcd1-4831-88ff-a22b5fb1361a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="맵툴\테스트캐릭">
       <UniqueIdentifier>{79e92196-bbff-4400-9926-a07691137b68}</UniqueIdentifier>
     </Filter>
@@ -141,6 +138,9 @@
     </Filter>
     <Filter Include="singleton">
       <UniqueIdentifier>{4195f04f-5855-464f-9ac2-ec62e85370d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\카메라">
+      <UniqueIdentifier>{a073fbc0-fcd1-4831-88ff-a22b5fb1361a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -258,9 +258,6 @@
     <ClInclude Include="Cimage.h">
       <Filter>mainGame\히어로시즈\Cimage</Filter>
     </ClInclude>
-    <ClInclude Include="Cobject.h">
-      <Filter>mainGame\히어로시즈\Cobject</Filter>
-    </ClInclude>
     <ClInclude Include="Ctown.h">
       <Filter>mainGame\히어로시즈\Cobject\CTown</Filter>
     </ClInclude>
@@ -286,10 +283,7 @@
       <Filter>맵툴</Filter>
     </ClInclude>
     <ClInclude Include="camera.h">
-      <Filter>맵툴\카메라</Filter>
-    </ClInclude>
-    <ClInclude Include="rootHeader.h">
-      <Filter>맵툴</Filter>
+      <Filter>mainGame\카메라</Filter>
     </ClInclude>
     <ClInclude Include="animationTest.h">
       <Filter>맵툴\테스트캐릭</Filter>
@@ -323,6 +317,18 @@
     </ClInclude>
     <ClInclude Include="CtotalItem.h">
       <Filter>mainGame\히어로시즈\Cobject\Citem</Filter>
+    </ClInclude>
+    <ClInclude Include="CplayerUi.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CsceneDungeon.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Cobject.h">
+      <Filter>mainGame\히어로시즈\Cobject</Filter>
+    </ClInclude>
+    <ClInclude Include="rootHeader.h">
+      <Filter>mainGame</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -450,7 +456,7 @@
       <Filter>맵툴</Filter>
     </ClCompile>
     <ClCompile Include="camera.cpp">
-      <Filter>맵툴\카메라</Filter>
+      <Filter>mainGame\카메라</Filter>
     </ClCompile>
     <ClCompile Include="camel.cpp">
       <Filter>맵툴\테스트캐릭</Filter>
@@ -484,6 +490,12 @@
     </ClCompile>
     <ClCompile Include="CtotalItem.cpp">
       <Filter>mainGame\히어로시즈\Cobject\Citem</Filter>
+    </ClCompile>
+    <ClCompile Include="CplayerUi.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CsceneDungeon.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

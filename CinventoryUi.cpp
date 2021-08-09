@@ -53,6 +53,13 @@ HRESULT CinventoryUi::init()
 		temp = RectMake(m_itemListX, m_itemListY + i * 88, 200, 80);
 		m_vInventoryItemList.push_back(temp);
 	}
+
+	// 
+	m_itemInfoX = m_uiX + 645;
+	m_itemInfoY = m_uiY + 30;
+
+	m_InventoryItemInfo = RectMake(m_itemInfoX, m_itemInfoY, 180, 80);
+
 	// 기능 버튼 rect 기준 좌표
 	m_functionButtonX = m_uiX + 430;
 	m_functionButtonY = m_uiY + 390;
@@ -107,6 +114,8 @@ void CinventoryUi::render()
 	{
 		//Rectangle(getMemDC(), (*iter).left, (*iter).top, (*iter).right, (*iter).bottom);
 	}
+	Rectangle(getMemDC(), m_InventoryItemInfo.left, m_InventoryItemInfo.top, m_InventoryItemInfo.right, m_InventoryItemInfo.bottom);
+
 	Rectangle(getMemDC(), m_equipButton.left, m_equipButton.top, m_equipButton.right, m_equipButton.bottom);
 	Rectangle(getMemDC(), m_unEquipButton.left, m_unEquipButton.top, m_unEquipButton.right, m_unEquipButton.bottom);
 	Rectangle(getMemDC(), m_abandonButton.left, m_abandonButton.top, m_abandonButton.right, m_abandonButton.bottom);
