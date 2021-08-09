@@ -1,6 +1,23 @@
 #pragma once
 #include "Cunit.h"
 
+struct tagPlayerSkill 
+{
+	image* m_skillImage;
+	RECT m_skillRc;
+	animation* m_skillAni;
+
+	float m_skillX, m_skillY;
+	float m_fireX, m_fireY;
+	float m_radius;
+	float m_angle;
+	float m_speed;
+	float m_range;
+	bool m_fire;
+
+	int m_count;
+	float m_index;
+};
 enum class  SKILL
 {
 	SKILL_LEFT,
@@ -12,17 +29,32 @@ class CplayerSkill :public Cunit
 {
 private:
 	SKILL skillDirection;
-	RECT skillBoxRc;
+
+	vector<tagPlayerSkill> m_vPlayerSkill;
+	vector<tagPlayerSkill>::iterator m_viPlayerSkill;
+
+	image* playerAttackDown;
+	image* playerAttackUp;
+	image* playerAttackLeft;
+	image* playerAttackRight;
+
+	animation* playerAttackAni;
+	animation* m_playerSkillAni;
+
+	RECT m_skillRc;
+
 public:
 	CplayerSkill();
 	~CplayerSkill();
 
 	HRESULT init();
 	void release();
-	void update();
+	void update(const char* aniName);
 	void render();
+	void skillInformation(float x, float y, float angle, float speed, float range, const char* fileName, const char* aniName);
 	void skillQ();
 	void skillW();
 	void skillE();
+	void removeSkill(int arrNum);
 };
 

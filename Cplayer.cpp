@@ -11,6 +11,9 @@ Cplayer::~Cplayer()
 
 HRESULT Cplayer::init()
 {
+	m_playerSkill = new CplayerSkill;
+	m_playerSkill->init();
+
    //DIRECTIONS
    direction= DIRECTIONS::DIRECTIONS_DOWN;
    beforeDirection= DIRECTIONS::DIRECTIONS_DOWN;
@@ -31,6 +34,9 @@ HRESULT Cplayer::init()
    playerUp=IMAGE->findImage("플레이어위쪽");
    playerMoveUp=IMAGE->findImage("플레이어위쪽걷기");
    playerAttackUp=IMAGE->findImage("플레이어위쪽공격");
+
+   ANIMATION->addDefAnimation("리치스킬애니", "리치스킬", 15, false, true);
+
 
 
     //MOVE
@@ -61,24 +67,29 @@ HRESULT Cplayer::init()
    m_playerY = WINSIZEY / 2;
    playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth(), playerMoveDown->getFrameHeight());
    playerAttackRc = RectMake(m_playerX, m_playerY, 100, 100);
+  
    return S_OK;
 }
 
 void Cplayer::release()
 {
+	SAFE_DELETE(m_playerSkill);
 }
 
 
 
 void Cplayer::update()
 {
+	m_angle += 0.4;
 	moveControl();
 	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth() - 90, playerMoveDown->getFrameHeight() - 50);
+	m_playerSkill->update("리치스킬애니");
 }
 
 void Cplayer::render()
 {
 	playerStateRender();
+	m_playerSkill->render();
 }
 
 void Cplayer::moveControl()
@@ -142,6 +153,48 @@ void Cplayer::moveControl()
 	else isMoving = false;
 
 	if (InputManager->isStayKeyDown(VK_SPACE)) isAttack = true;
+	else isAttack = false;
+	
+	if (InputManager->isOnceKeyDown('Q'))
+	{
+		isAttack = true;
+		if (direction == DIRECTIONS::DIRECTIONS_LEFT)m_playerSkill->skillInformation(m_playerX-15, m_playerY+33, PI, 7.0f,700, "리치스킬", "리치스킬애니");
+		else if (direction == DIRECTIONS::DIRECTIONS_RIGHT)m_playerSkill->skillInformation(m_playerX+50, m_playerY+33, PI2, 7.0f, 700, "리치스킬", "리치스킬애니");
+		else if (direction == DIRECTIONS::DIRECTIONS_UP)m_playerSkill->skillInformation(m_playerX+15, m_playerY-20, PI * 0.5, 7.0f, 700, "리치스킬", "리치스킬애니");//위??
+		else if (direction == DIRECTIONS::DIRECTIONS_DOWN)m_playerSkill->skillInformation(m_playerX, m_playerY, PI * 1.5, 7.0f, 700, "리치스킬", "리치스킬애니");
+
+	}
+	else if (InputManager->isOnceKeyDown('W'))
+	{
+		isAttack = true;
+		for (size_t i = 0; i < 30; i++)
+		{
+			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.21, 5.0f,1000, "리치스킬", "리치스킬애니");
+		}
+
+	}
+	else if (InputManager->isOnceKeyDown('E'))
+	{
+		isAttack = true;
+		for (size_t i = 0; i < 30; i++)
+		{
+			m_playerSkill->skillInformation(m_playerX - 15, m_playerY +33, (i + m_angle) * 0.21, 5.0f, 700, "리치스킬", "리치스킬애니");
+		}
+		for (size_t j = 0; j < 30; j++)
+		{
+			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (j + m_angle) * 0.38, 3.5f, 600, "리치스킬", "리치스킬애니");
+		}
+		for (size_t z = 0; z < 30; z++) 
+		{
+			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (z + m_angle) * 0.65, 2.5f, 600, "리치스킬", "리치스킬애니");
+		}
+		for (size_t n = 0; n < 30; n++)
+		{
+			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (n + m_angle) * 0.82, 1.5f, 600, "리치스킬", "리치스킬애니");
+
+		}
+		
+	}
 	else isAttack = false;
 
 	moveAnimation();
@@ -209,7 +262,7 @@ void Cplayer::playerStateRender()
 			if (!isAttack) playerMoveLeft->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 13, playerMoveAni);
 			else
 			{
-				playerAttackRc = RectMake(m_playerX - 99, m_playerY, 100, 30);
+				playerAttackRc = RectMake(m_playerX - 99, m_playerY, 100, 40);
 				Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
    				playerAttackLeft->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			}
@@ -218,7 +271,7 @@ void Cplayer::playerStateRender()
 			if (!isAttack) playerMoveUp->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 15, playerMoveAni);
 			else
 			{
-				playerAttackRc = RectMake(m_playerX + 10, m_playerY - 79, 25, 80);
+				playerAttackRc = RectMake(m_playerX + 10, m_playerY - 89, 40, 90);
 				Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
 				playerAttackUp->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 76, playerAttackAni);
 			}
@@ -227,7 +280,7 @@ void Cplayer::playerStateRender()
 			if (!isAttack) playerMoveRight->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 13, playerMoveAni);
 			else
 			{
-				playerAttackRc = RectMake(m_playerX + 35, m_playerY, 100, 30);
+				playerAttackRc = RectMake(m_playerX + 35, m_playerY, 100, 40);
 				Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
 				playerAttackRight->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			}
@@ -236,7 +289,7 @@ void Cplayer::playerStateRender()
 			if (!isAttack) playerMoveDown->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 13, playerMoveAni);
 			else
 			{
-				playerAttackRc = RectMake(m_playerX, m_playerY + 67, 25, 90);
+				playerAttackRc = RectMake(m_playerX-10, m_playerY + 67, 40, 90);
 				Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
 				playerAttackDown->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			}
@@ -260,7 +313,7 @@ void Cplayer::playerStateRender()
 			}
 			else
 			{
-				playerAttackRc = RectMake(m_playerX - 99, m_playerY, 100, 30);
+				playerAttackRc = RectMake(m_playerX - 99, m_playerY, 100, 40);
 				Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
 				playerAttackLeft->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			}
@@ -278,7 +331,7 @@ void Cplayer::playerStateRender()
 			}
 			else
 			{
-				playerAttackRc = RectMake(m_playerX + 10, m_playerY - 79, 25, 80);
+				playerAttackRc = RectMake(m_playerX + 10, m_playerY - 89, 40, 90);
 				Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
 				playerAttackUp->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			}
@@ -296,7 +349,7 @@ void Cplayer::playerStateRender()
 			}
 			else
 			{
-				playerAttackRc = RectMake(m_playerX + 35, m_playerY, 100, 30);
+				playerAttackRc = RectMake(m_playerX + 35, m_playerY, 100, 40);
 				Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
 				playerAttackRight->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			}
@@ -314,7 +367,7 @@ void Cplayer::playerStateRender()
 			}
 			else
 			{
-				playerAttackRc = RectMake(m_playerX, m_playerY + 67, 25, 90);
+				playerAttackRc = RectMake(m_playerX - 10, m_playerY + 67, 40, 90);
 				Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
 				playerAttackDown->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			}
