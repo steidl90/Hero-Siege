@@ -13,28 +13,41 @@ enum class STATE
 class Cenemy : public Cunit
 {
 protected:
-	image* m_Image;
-	animation* m_Animation;
-	effect* m_Effect;
+	class CenemyAttack* m_enemyAttack;
+
+	image* m_image;
+	animation* m_ani;
+	effect* m_effect;
 
 	STATE m_state;
 
-	RECT m_Rc;			//ø§∏Æ∏‡≈ª ¿ÃπÃ¡ˆ RC
-	RECT m_CallRc;		//ø§∏Æ∏‡≈ª º“»Ø ¿ŒΩƒ π¸¿ß RC
-	RECT m_DamageRc;	//ø§∏Æ∏‡≈ª ≈∏∞› RC
+	RECT m_rc;			
+	RECT m_callRc;		
+	RECT m_attackRc;	
 
 	float m_x, m_y;
 	float m_speed;
-	bool isDie;
 
-	class CenemyAttack* m_enemyAttack;
+	bool isIdle;
+	bool isWalking;
+	bool isAttack;
+	bool isDie;
+	
 
 public:
+
+	Cenemy();
+	~Cenemy();
 
 	virtual HRESULT init();
 	virtual void release();
 	virtual void update();
 	virtual void render();
+
+	virtual void move();
+	virtual void moveAni();
+	virtual void attack();
+	virtual void Die();
 
 };
 

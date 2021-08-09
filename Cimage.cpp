@@ -60,8 +60,7 @@ HRESULT Cimage::init()
     IMAGE->addFrameImage("¸®Ä¡½ºÅ³", "images/PriestSkill.bmp", 696, 61, 12, 1, true, RGB(255, 0, 255));
 
     IMAGE->addFrameImage("¿¤¸®¸àÅ»", "images/Elemental.bmp", 252, 268, 4, 4, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("¿¤¸®¸àÅ»½ºÅ³1", "images/ElementalSkill1.bmp", 162, 18, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("¿¤¸®¸àÅ»½ºÅ³2", "images/ElementalSkill2.bmp", 480, 40, 8, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("¿¤¸®¸àÅ»½ºÅ³", "images/ElementalSkill1.bmp", 162, 18, 6, 1, true, RGB(255, 0, 255));
 
     IMAGE->addFrameImage("½½¶óÀÓ", "images/GreenSlime.bmp", 138, 18, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("½½¶óÀÓ°ø°İ", "images/GreenSlimeAttack.bmp", 480, 152, 12, 4, true, RGB(255, 0, 255));

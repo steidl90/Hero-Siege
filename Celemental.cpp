@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "Celemental.h"
+#include "CenemyAttack.h"
 
 Celemental::Celemental()
 {
@@ -11,125 +12,53 @@ Celemental::~Celemental()
 
 HRESULT Celemental::init()
 {
-	a = TIME->getWorldTime();
 	m_enemyAttack = new CenemyAttack;
 	m_enemyAttack->init();
 
-	m_elementalImage = IMAGE->findImage("ø§∏Æ∏‡≈ª");
-	ANIMATION->addAnimation("ElementalDown", "ø§∏Æ∏‡≈ª", 0, 3,8, false, true);
-	ANIMATION->addAnimation("ElementalLeft", "ø§∏Æ∏‡≈ª", 4, 7, 8, false, true);
-	ANIMATION->addAnimation("ElementalRight", "ø§∏Æ∏‡≈ª", 8, 11, 8, false, true);
-	ANIMATION->addAnimation("ElementalUp", "ø§∏Æ∏‡≈ª", 12, 15, 8, false, true);
+	isIdle = false;
+	m_state = STATE::DOWN;
 
-	m_elementalRc = RectMakeCenter(WINSIZEX/2, WINSIZEY/2, m_elementalImage->getFrameWidth(), m_elementalImage->getFrameHeight());
-	m_elementalAnimation = ANIMATION->findAnimation("ElementalDown");
-
+	ANIMATION->addAnimation("ø§∏Æ∏‡≈ªæ∆∑°", "ø§∏Æ∏‡≈ª", 0, 3, 8, false, true);
+	ANIMATION->addAnimation("ø§∏Æ∏‡≈ªæ∆∑°", "ø§∏Æ∏‡≈ª", 4, 7, 8, false, true);
+	ANIMATION->addAnimation("ø§∏Æ∏‡≈ªæ∆∑°", "ø§∏Æ∏‡≈ª", 8, 11, 8, false, true);
+	ANIMATION->addAnimation("ø§∏Æ∏‡≈ªæ∆∑°", "ø§∏Æ∏‡≈ª", 12, 15, 8, false, true);
+	
 	m_x = WINSIZEX / 2;
 	m_y = WINSIZEY / 2;
 	m_speed = 2.0f;
-
 
 	return S_OK;
 }
 
 void Celemental::release()
 {
-	SAFE_DELETE(m_enemyAttack);
+	SAFE_DELETE(m_image);
 }
 
 void Celemental::update()
 {
-
-
-	//if (a + 1 < TIME->getWorldTime())
-	//{
-	//	m_enemyAttack->fire(m_elementalRc.left, m_elementalRc.bottom - (m_elementalRc.bottom - m_elementalRc.top) / 2,
-	//		PI, 5.0f, "ø§∏Æ∏‡≈ªΩ∫≈≥1", "ø§∏Æ∏‡≈ªΩ∫≈≥æ÷¥œ");
-	//}
-
-	m_elementalState = ELEMENTAL_STATE::ELEMENTAL_STATE_IDLE;
-	m_enemyAttack->update("ø§∏Æ∏‡≈ªΩ∫≈≥æ÷¥œ");
-
-	if (InputManager->isStayKeyDown('W'))
-	{
-		m_y -= m_speed;
-		m_elementalState = ELEMENTAL_STATE::ELEMENTAL_STATE_TOP;
-	}
-	if (InputManager->isStayKeyDown('S'))
-	{
-		m_y += m_speed;
-		m_elementalState = ELEMENTAL_STATE::ELEMENTAL_STATE_BOTTOM;
-	}
-	if (InputManager->isStayKeyDown('A'))
-	{
-		m_x -= m_speed;
-		m_elementalState = ELEMENTAL_STATE::ELEMENTAL_STATE_LEFT;
-	}
-	if (InputManager->isStayKeyDown('D'))
-	{
-			m_x += m_speed;
-			m_elementalState = ELEMENTAL_STATE::ELEMENTAL_STATE_RIGHT;
-	}
-	if (InputManager->isOnceKeyDown('E'))
-	{
-	}
-	if (InputManager->isOnceKeyDown(VK_LEFT))
-	{
-		a = TIME->getWorldTime();
-
-		if (a + 1 < TIME->getWorldTime())
-		{
-			m_enemyAttack->fire(m_elementalRc.left, m_elementalRc.bottom - (m_elementalRc.bottom - m_elementalRc.top) / 2,
-				PI, 5.0f, "ø§∏Æ∏‡≈ªΩ∫≈≥1", "ø§∏Æ∏‡≈ªΩ∫≈≥æ÷¥œ");
-		}
-	}
-	if (InputManager->isOnceKeyDown(VK_RIGHT))
-	{
-		m_enemyAttack->fire(m_elementalRc.right, m_elementalRc.bottom - (m_elementalRc.bottom - m_elementalRc.top) / 2,
-			PI2, 5.0f, "ø§∏Æ∏‡≈ªΩ∫≈≥1", "ø§∏Æ∏‡≈ªΩ∫≈≥æ÷¥œ");
-	}
-	if (InputManager->isOnceKeyDown(VK_UP))
-	{
-		m_enemyAttack->fire(m_elementalRc.right-(m_elementalRc.right-m_elementalRc.left)/2,m_elementalRc.top,
-			PI*0.5, 5.0f, "ø§∏Æ∏‡≈ªΩ∫≈≥1", "ø§∏Æ∏‡≈ªΩ∫≈≥æ÷¥œ");
-	}
-	if (InputManager->isOnceKeyDown(VK_DOWN))
-	{
-		m_enemyAttack->fire(m_elementalRc.right - (m_elementalRc.right - m_elementalRc.left) / 2, m_elementalRc.bottom,
-			PI*1.5, 5.0f, "ø§∏Æ∏‡≈ªΩ∫≈≥1", "ø§∏Æ∏‡≈ªΩ∫≈≥æ÷¥œ");
-	}
-
-	switch (m_elementalState)
-	{
-	case ELEMENTAL_STATE::ELEMENTAL_STATE_LEFT:
-		m_elementalAnimation = ANIMATION->findAnimation("ElementalLeft");
-		ANIMATION->resume("ElementalLeft");
-		break;
-
-	case ELEMENTAL_STATE::ELEMENTAL_STATE_RIGHT:
-
-		m_elementalAnimation = ANIMATION->findAnimation("ElementalRight");
-		ANIMATION->resume("ElementalRight");
-		break;
-
-	case ELEMENTAL_STATE::ELEMENTAL_STATE_TOP:
-
-		m_elementalAnimation = ANIMATION->findAnimation("ElementalUp");
-		ANIMATION->resume("ElementalUp");
-		break;
-
-	case ELEMENTAL_STATE::ELEMENTAL_STATE_BOTTOM:
-
-		m_elementalAnimation = ANIMATION->findAnimation("ElementalDown");
-		ANIMATION->resume("ElementalDown");
-		break;
-	}
-	m_elementalRc = RectMakeCenter(m_x, m_y, m_elementalImage->getFrameWidth(), m_elementalImage->getFrameHeight());
+	move();
+	m_rc = RectMakeCenter(m_x, m_y,m_image->getFrameWidth(), m_image->getFrameHeight());
 }
 
 void Celemental::render()
 {
-	m_elementalImage->aniRender(getMapDC(), m_elementalRc.left, m_elementalRc.top, m_elementalAnimation);
-	//Rectangle(getMapDC(), m_elementalRc.left, m_elementalRc.top, m_elementalRc.right, m_elementalRc.bottom);
-	m_enemyAttack->render();
+	Rectangle(getMapDC(), m_x, m_y, m_image->getFrameWidth(), m_image->getFrameHeight());
+	m_image->aniRender(getMapDC(), m_rc.left, m_rc.top, m_ani);
+}
+
+void Celemental::move()
+{
+}
+
+void Celemental::moveAni()
+{
+}
+
+void Celemental::attack()
+{
+}
+
+void Celemental::Die()
+{
 }
