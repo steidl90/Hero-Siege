@@ -133,7 +133,9 @@ HRESULT Cimage::init()
     IMAGE->addImage("나가기버튼활성화", "images/GameOut2.bmp", 338, 62, true, RGB(255, 0, 255));
     IMAGE->addImage("선택그림자", "images/Shadow.bmp", 40, 21, true, RGB(255, 0, 255));
     IMAGE->addImage("선택효과", "images/SelectEffect.bmp", 44, 25, true, RGB(255, 0, 255));
-    IMAGE->addImage("HUD", "images/HUD.bmp", 361, 112, true, RGB(255, 0, 255));
+    IMAGE->addImage("SkillUi", "images/HUD.bmp", 361, 112, true, RGB(255, 0, 255));
+    IMAGE->addImage("StateUi", "images/StateUI.bmp", 318, 100, true, RGB(255, 0, 255));
+    IMAGE->addImage("MiniMapUi", "images/MinimapUI.bmp", 303, 357, true, RGB(255, 0, 255));
 
     IMAGE->addFrameImage("레벨업", "images/LevelUP.bmp", 183, 55, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("버튼1", "images/Button1.bmp", 208, 39, 1, 1, true, RGB(255, 0, 255));

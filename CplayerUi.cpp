@@ -24,5 +24,5 @@ void CplayerUi::update()
 
 void CplayerUi::render()
 {
-	IMAGE->findImage("HUD")->render(getMemDC(), IMAGE->findImage("HUD")->getWidth(), WINSIZEY - IMAGE->findImage("HUD")->getHeight());
+	IMAGE->findImage("SkillUi")->render(getMemDC(), IMAGE->findImage("HUD")->getWidth(), WINSIZEY - IMAGE->findImage("HUD")->getHeight());
 }
