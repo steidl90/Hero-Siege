@@ -125,7 +125,7 @@ string CTown::getImageName(OBJECTIMAGE image)
 	switch (image)
 	{
 	case OBJECTIMAGE::OBJECTIMAGE_TILE:
-		imageStr = "tilemap";
+		imageStr = "tilemap1";
 		break;
 	case OBJECTIMAGE::OBJECTIMAGE_OBJECT1:
 		imageStr = "오브젝트타일1";

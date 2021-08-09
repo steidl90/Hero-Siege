@@ -305,7 +305,7 @@ string mapToolMain::getImageName(OBJECTIMAGE image)
 	switch (image)
 	{
 	case OBJECTIMAGE::OBJECTIMAGE_TILE:
-		imageStr = "tilemap";
+		imageStr = "tilemap1";
 		break;
 	case OBJECTIMAGE::OBJECTIMAGE_OBJECT1:
 		imageStr = "오브젝트타일1";
@@ -550,7 +550,7 @@ void mapToolMain::cullingRender()
 			{
 				if (_tiles[startX + startY * TILEX].collisionObj == COLLISIONOBJECT::COLLISIONOBJ)
 				{
-					IMAGE->frameRender("tilemap", getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, 0, 0);
+					IMAGE->frameRender("tilemap1", getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, 0, 0);
 				}
 				wsprintf(str, "y:%d",startY);
 				SetBkMode(getMapDC(), TRANSPARENT);
