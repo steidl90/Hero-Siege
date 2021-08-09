@@ -156,6 +156,7 @@
     <ClInclude Include="CenemyManager.h" />
     <ClInclude Include="Cimage.h" />
     <ClInclude Include="Cinventory.h" />
+    <ClInclude Include="CinventoryUi.h" />
     <ClInclude Include="Citem.h" />
     <ClInclude Include="CmainManager.h" />
     <ClInclude Include="Cmevius.h" />
@@ -174,6 +175,7 @@
     <ClInclude Include="CsceneStart.h" />
     <ClInclude Include="Cshop.h" />
     <ClInclude Include="Cslime.h" />
+    <ClInclude Include="CtotalItem.h" />
     <ClInclude Include="Ctown.h" />
     <ClInclude Include="Cunit.h" />
     <ClInclude Include="effect.h" />
@@ -218,6 +220,7 @@
     <ClCompile Include="CenemyManager.cpp" />
     <ClCompile Include="Cimage.cpp" />
     <ClCompile Include="Cinventory.cpp" />
+    <ClCompile Include="CinventoryUi.cpp" />
     <ClCompile Include="Citem.cpp" />
     <ClCompile Include="CmainManager.cpp" />
     <ClCompile Include="Cmevius.cpp" />
@@ -235,6 +238,7 @@
     <ClCompile Include="CsceneStart.cpp" />
     <ClCompile Include="Cshop.cpp" />
     <ClCompile Include="Cslime.cpp" />
+    <ClCompile Include="CtotalItem.cpp" />
     <ClCompile Include="Ctown.cpp" />
     <ClCompile Include="Cunit.cpp" />
     <ClCompile Include="effect.cpp" />

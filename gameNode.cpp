@@ -43,6 +43,8 @@ HRESULT gameNode::init(bool managerInit)
 		IMAGE->init();
 		TIME->init();
 		SOUND->init();
+		// 새로추가
+		ITEM->init();
 	}
 
 
@@ -72,6 +74,9 @@ void gameNode::release()
 		SCENE->releaseSingleton();
 		SOUND->releaseSingleton();
 		EFFECT->releaseSingleton();
+		// 새로추가
+		ITEM->releaseSingleton();
+
 
 		EFFECT->release();
 		SCENE->release();

@@ -1,40 +1,15 @@
 #include "framework.h"
 #include "Citem.h"
-
 Citem::Citem()
+{
+}
+
+Citem::Citem(string bigImg, string smallImg, string name, ITEMTYPE type, int atk, int def, int hp, int mp, int cri, int criAtk, int speed, int level, int price, POINT frame)
+	: m_BigImage(bigImg), m_SmallImage(smallImg), m_Name(name), m_Type(type), m_atk(atk), m_def(def), m_hp(hp), m_mp(mp)
+	,m_critical(cri), m_criticalAtk(criAtk), m_speed(speed), m_limitLevel(level), m_itemBuyPrice(price), m_frame(frame)
 {
 }
 
 Citem::~Citem()
 {
-}
-
-HRESULT Citem::init()
-{
-	return S_OK;
-}
-
-void Citem::release()
-{
-}
-
-void Citem::update()
-{
-}
-
-void Citem::render()
-{
-}
-
-void Citem::load()
-{
-    HANDLE file;
-    DWORD read;
-
-    file = CreateFile("tileMap.map",
-        GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-
-    /*ReadFile(file, m_itemKind, sizeof(item), &read, NULL);
-    ReadFile(file, m_itemType, sizeof(item), &read, NULL);*/
-    CloseHandle(file);
 }

@@ -58,6 +58,8 @@ void mapToolSub::render()
 		LineMake(getMemDC(), MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth() + i * TILESIZE, 0, MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth() + i * TILESIZE, IMAGE->findImage("tilemap")->getHeight());
 	}
 	SetTextColor(getMemDC(), RGB(0, 0, 0));
+	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 120, TEXT("충돌지우개    - L"), lstrlen("충돌지우개    - L"));
+	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 140, TEXT("프레임지우개    - 컨트롤+E"), lstrlen("프레임지우개    - 컨트롤+E"));
 	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 160, TEXT("지형    - 1"), lstrlen("지형    - 1"));
 	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 180, TEXT("오브젝트    - 2"), lstrlen("오브젝트    - 2"));
 	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 200, TEXT("지우개    - E"), lstrlen("지우개    - E"));
@@ -157,6 +159,17 @@ void mapToolSub::maptoolSetup()
 // current 구조체는 main툴에 전달되어서 타일 그릴때 사용
 void mapToolSub::setMap()
 {
+	if (m_subTile == 0)
+	{
+		if (m_isButtonClick)
+		{
+			if (PtInRect(&_sampleTiles[0].rcTile, m_ptMouse))
+			{
+				_ctrSelect = static_cast<int>(CTRL::CTRL_COLLISIONTILE);
+				m_isTileClick = true;
+			}
+		}
+	}
 
 	if (m_subTile == 1)
 	{
@@ -299,7 +312,10 @@ void mapToolSub::mapLoad()
 	ReadFile(file, _pos, sizeof(int) * 2, &read, NULL);
 	CloseHandle(file);
 
+	// 로드할때 메인툴에서 초기화 해야할 것들 함수 불러다 쓰기
+
 	m_mapToolmain->initFrameObject();
+	m_mapToolmain->initTileAttribute();
 }
 
 void mapToolSub::dragTileInit()
@@ -344,6 +360,10 @@ void mapToolSub::inputFunction()
 		_ctrSelect = static_cast<int>(CTRL::CTRL_ERASER);
 		memset(&m_currentDragTile, 0, sizeof(tagDragTileIndex));
 	}
+	else if (InputManager->isStayKeyDown(VK_CONTROL) && InputManager->isOnceKeyDown('E'))
+	{
+		_ctrSelect = static_cast<int>(CTRL::CTRL_ERASERFRAME);
+	}
 	else if (InputManager->isStayKeyDown(VK_CONTROL) && InputManager->isOnceKeyDown('S'))
 	{
 		this->mapSave();
@@ -375,10 +395,11 @@ void mapToolSub::inputFunction()
 			SAFE_DELETE(tempImg2);
 		}
 	}
-	else if (InputManager->isStayKeyDown(VK_CONTROL) && InputManager->isOnceKeyDown('F'))
+	else if (InputManager->isStayKeyDown('L'))
 	{
-		_ctrSelect = static_cast<int>(CTRL::CTRL_ERASERFRAME);
+		_ctrSelect = static_cast<int>(CTRL::CTRL_ERASERCOLLISION);
 	}
+
 
 	// 샘플 타일 전환
 	if (InputManager->isStayKeyDown(VK_CONTROL) && InputManager->isOnceKeyDown(VK_TAB)) // 뒤로가기
