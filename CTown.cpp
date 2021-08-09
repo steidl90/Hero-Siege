@@ -42,7 +42,7 @@ void Ctown::load()
     HANDLE file;
     DWORD read;
 
-    file = CreateFile("tileMap.map",
+    file = CreateFile("town.map",
         GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	ReadFile(file, m_frameObjectInfo, sizeof(tagFrameObjectInfo) * TILEX * TILEY, &read, NULL);
@@ -114,7 +114,7 @@ string Ctown::getImageName(OBJECTIMAGE image)
 	switch (image)
 	{
 	case OBJECTIMAGE::OBJECTIMAGE_TILE:
-		imageStr = "tilemap";
+		imageStr = "tilemap1";
 		break;
 	case OBJECTIMAGE::OBJECTIMAGE_OBJECT1:
 		imageStr = "오브젝트타일1";

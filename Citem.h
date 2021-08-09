@@ -7,13 +7,6 @@ enum class ITEMKIND
 	ITEMKIND_TWO
 };
 
-enum class ITEMTYPE
-{
-	ITEMTYPE_ONE,
-	ITEMTYPE_TWO,
-	ITEMTYPE_THREE
-};
-
 struct item
 {
 	ITEMKIND itemKind;

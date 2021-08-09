@@ -268,7 +268,7 @@ OBJECT mapToolMain::objSelect(int frameX, int frameY)
 {
 	if (frameX == 1 && frameY == 0)
 	{
-		return OBJECT::OBJ_BLOCKS; // 부서지지 않는 오브젝트(벽)
+		//return OBJECT::OBJ_BLOCKS; // 부서지지 않는 오브젝트(벽)
 	}
 	else if (frameX == 2 && frameY == 0)
 	{
