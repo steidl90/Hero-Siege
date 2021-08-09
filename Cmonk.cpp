@@ -17,10 +17,10 @@ HRESULT Cmonk::init()
 	m_direction = MONK_DIRECTION::MONK_DIRECTION_DOWN;
 	m_beforeDirection = MONK_DIRECTION::MONK_DIRECTION_DOWN;
 
-	ANIMATION->addAnimation("根农酒贰率", "根农", 0, 5, false, true);
-	ANIMATION->addAnimation("根农哭率", "根农", 6, 11, false, true);
-	ANIMATION->addAnimation("根农坷弗率", "根农", 12, 17, false, true);
-	ANIMATION->addAnimation("根农困率", "根农", 18, 23, false, true);
+	ANIMATION->addAnimation("根农酒贰率", "根农", 0, 5, 8, false, true);
+	ANIMATION->addAnimation("根农哭率", "根农", 6, 11, 8, false, true);
+	ANIMATION->addAnimation("根农坷弗率", "根农", 12, 17, 8, false, true);
+	ANIMATION->addAnimation("根农困率", "根农", 18, 23, 8, false, true);
 
 	ANIMATION->addAnimation("根农傍拜酒贰率", "根农傍拜", 0, 4, false, true);
 	ANIMATION->addAnimation("根农傍拜哭率", "根农傍拜", 5, 9, false, true);

@@ -35,8 +35,8 @@ private:
 	RECT			m_monkRc;
 	RECT			m_monkAttackRc;
 
-	int m_speed;
-	int m_x, m_y;
+	float m_speed;
+	float m_x, m_y;
 
 	bool isWalking;
 	bool isAttack;
