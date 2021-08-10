@@ -142,6 +142,9 @@
     <Filter Include="mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Cprison">
       <UniqueIdentifier>{60ab1a8c-ee20-4aeb-ab77-72f9706d2981}</UniqueIdentifier>
     </Filter>
+    <Filter Include="mainGame\히어로시즈\Cobject\CprogressBar">
+      <UniqueIdentifier>{09b8904c-d0b6-421e-a72d-980ab76d8711}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -333,6 +336,9 @@
     <ClInclude Include="Cenemy.h">
       <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy</Filter>
     </ClInclude>
+    <ClInclude Include="CprogressBar.h">
+      <Filter>mainGame\히어로시즈\Cobject\CprogressBar</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -502,6 +508,9 @@
     </ClCompile>
     <ClCompile Include="Cenemy.cpp">
       <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy</Filter>
+    </ClCompile>
+    <ClCompile Include="CprogressBar.cpp">
+      <Filter>mainGame\히어로시즈\Cobject\CprogressBar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

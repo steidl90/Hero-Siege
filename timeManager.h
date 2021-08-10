@@ -5,6 +5,7 @@ class timeManager : public Singleton<timeManager>
 {
 private:
 	timer* _timer;
+	bool isDebug;
 public:
 	timeManager();
 	~timeManager();

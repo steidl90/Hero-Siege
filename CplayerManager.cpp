@@ -16,6 +16,7 @@ HRESULT CplayerManager::init()
 
     m_playerSkill = new CplayerSkill;
     m_playerUi = new CplayerUi;
+    m_playerUi->setPlayerMemoryLink(m_player);
 
     m_inventory = new Cinventory;
     m_inventory->init();
@@ -23,6 +24,7 @@ HRESULT CplayerManager::init()
     m_InventoryUI = new CinventoryUi;
     m_InventoryUI->init();
     m_InventoryUI->setInventoryMemory(m_inventory);
+
 
 
     isInventoryOn = false;
@@ -44,7 +46,9 @@ void CplayerManager::update()
 
     m_player->update();
     if(isInventoryOn) m_InventoryUI->update();
+    m_playerUi->update();
     m_playerSkill->update("리치스킬애니");
+
 }
 
 void CplayerManager::render()

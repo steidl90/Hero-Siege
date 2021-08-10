@@ -1,9 +1,7 @@
 #pragma once
 #include"gameNode.h"
-
 class Citem
 {
-
 private:
 	string m_BigImage;
 	string m_SmallImage;
