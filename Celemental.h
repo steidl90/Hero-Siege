@@ -15,5 +15,8 @@ public:
 	virtual void render();
 
 	virtual void move();
+	virtual void attack();
 	virtual void animation();
+	virtual bool enemyCoolTime();
+
 };

@@ -18,11 +18,15 @@ HRESULT Celemental::init()
 	isIdle = false;
 	m_state = STATE::DOWN;
 
-	ANIMATION->addAnimation("¿¤¸®¸àÅ»¾Æ·¡", "¿¤¸®¸àÅ»", 0, 3, 8, false, true);
-	ANIMATION->addAnimation("¿¤¸®¸àÅ»¾Æ·¡", "¿¤¸®¸àÅ»", 4, 7, 8, false, true);
-	ANIMATION->addAnimation("¿¤¸®¸àÅ»¾Æ·¡", "¿¤¸®¸àÅ»", 8, 11, 8, false, true);
-	ANIMATION->addAnimation("¿¤¸®¸àÅ»¾Æ·¡", "¿¤¸®¸àÅ»", 12, 15, 8, false, true);
+	ANIMATION->addAnimation("¿¤¸®¸àÅ»ÇÏ", "¿¤¸®¸àÅ»", 0, 3, 8, false, true);
+	ANIMATION->addAnimation("¿¤¸®¸àÅ»ÁÂ", "¿¤¸®¸àÅ»", 4, 7, 8, false, true);
+	ANIMATION->addAnimation("¿¤¸®¸àÅ»¿ì", "¿¤¸®¸àÅ»", 8, 11, 8, false, true);
+	ANIMATION->addAnimation("¿¤¸®¸àÅ»»ó", "¿¤¸®¸àÅ»", 12, 15, 8, false, true);
 	
+	m_walkImage = IMAGE->findImage("¿¤¸®¸àÅ»");
+	m_walkAni = ANIMATION->findAnimation("¿¤¸®¸àÅ»ÇÏ");
+	ANIMATION->start("¿¤¸®¸àÅ»ÇÏ");
+
 	m_x = WINSIZEX / 2;
 	m_y = WINSIZEY / 2;
 	m_speed = 2.0f;
@@ -32,26 +36,78 @@ HRESULT Celemental::init()
 
 void Celemental::release()
 {
-	SAFE_DELETE(m_image);
+	SAFE_DELETE(m_walkImage);
 }
 
 void Celemental::update()
 {
 	move();
-	m_rc = RectMakeCenter(m_x, m_y,m_image->getFrameWidth(), m_image->getFrameHeight());
+	m_walkRc = RectMakeCenter(m_x, m_y, m_walkImage->getFrameWidth(), m_walkImage->getFrameHeight());
 }
 
 void Celemental::render()
 {
-	Rectangle(getMapDC(), m_x, m_y, m_image->getFrameWidth(), m_image->getFrameHeight());
-	m_image->aniRender(getMapDC(), m_rc.left, m_rc.top, m_ani);
+	Rectangle(getMapDC(), m_x, m_y, m_walkImage->getFrameWidth(), m_walkImage->getFrameHeight());
+	m_walkImage->aniRender(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkAni);
 }
 
 void Celemental::move()
+{
+	if (InputManager->isStayKeyDown('W'))
+	{
+		m_y -= m_speed;
+		m_state = STATE::UP;
+	}
+	if (InputManager->isStayKeyDown('S'))
+	{
+		m_y += m_speed;
+		m_state = STATE::DOWN;
+	}
+	if (InputManager->isStayKeyDown('A'))
+	{
+		m_x -= m_speed;
+		m_state = STATE::LEFT;
+	}
+	if (InputManager->isStayKeyDown('D'))
+	{
+		m_x += m_speed;
+		m_state = STATE::RIGHT;
+	}
+}
+
+void Celemental::attack()
 {
 }
 
 void Celemental::animation()
 {
+	switch (m_state)
+	{
+	case STATE::LEFT:
+		m_walkImage = IMAGE->findImage("¿¤¸®¸àÅ»");
+		m_walkAni = ANIMATION->findAnimation("¿¤¸®¸àÅ»ÁÂ");
+		ANIMATION->start("¿¤¸®¸àÅ»ÁÂ");
+		break;
+	case STATE::RIGHT:
+		m_walkImage = IMAGE->findImage("¿¤¸®¸àÅ»");
+		m_walkAni = ANIMATION->findAnimation("¿¤¸®¸àÅ»¿ì");
+		ANIMATION->start("¿¤¸®¸àÅ»¿ì");
+		break;
+	case STATE::UP:
+		m_walkImage = IMAGE->findImage("¿¤¸®¸àÅ»");
+		m_walkAni = ANIMATION->findAnimation("¿¤¸®¸àÅ»»ó");
+		ANIMATION->start("¿¤¸®¸àÅ»»ó");
+		break;
+	case STATE::DOWN:
+		m_walkImage = IMAGE->findImage("¿¤¸®¸àÅ»");
+		m_walkAni = ANIMATION->findAnimation("¿¤¸®¸àÅ»ÇÏ");
+		ANIMATION->start("¿¤¸®¸àÅ»ÇÏ");
+		break;
+	}
+}
+
+bool Celemental::enemyCoolTime()
+{
+	return false;
 }
 

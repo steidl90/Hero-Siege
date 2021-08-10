@@ -12,6 +12,8 @@ animation::~animation()
 
 HRESULT animation::init(int totalW, int totalH, int frameW, int frameH)
 {
+	useEventWhenEnd = false;
+
 	//가로 프레임 갯수
 	_frameWidth = frameW;
 	int frameWidthNum = totalW / _frameWidth;
@@ -22,7 +24,6 @@ HRESULT animation::init(int totalW, int totalH, int frameW, int frameH)
 
 	//총 프레임 수
 	_frameNum = frameWidthNum * frameHeightNum;
-
 
 	//프레임 위치 목록 셋팅 하자.
 	_frameList.clear();
@@ -131,7 +132,6 @@ void animation::setPlayFrame(int start, int end, bool reverse, bool loop)
 
 			else
 			{
-
 				for (int i = start; i >= end; i--)
 				{
 					_playList.push_back(i);
@@ -215,6 +215,10 @@ void animation::frameUpdate(float elapsedTime)
 				}
 				else
 				{
+					if (useEventWhenEnd)
+					{
+						m_triggerWhenClick();
+					}
 					_nowPlayIndex--;
 					_play = false;
 				}

@@ -15,15 +15,21 @@ class Cenemy : public Cunit
 protected:
 	class CenemyAttack* m_enemyAttack;
 
-	image* m_image;
-	animation* m_ani;
+	image* m_walkImage;
+	animation* m_walkAni;
+	RECT m_walkRc;
+
+	image* m_attackImage;
+	animation* m_attackAni;
+	RECT m_attackRc;
+
+	image* m_dieImage;
+	animation* m_dieAni;
+	RECT m_dieRc;
+
 	effect* m_effect;
-
 	STATE m_state;
-
-	RECT m_rc;			
-	RECT m_callRc;		
-	RECT m_attackRc;	
+	RECT m_traceRc;		
 
 	float m_x, m_y;
 	float m_speed;
@@ -45,7 +51,11 @@ public:
 	virtual void render();
 
 	virtual void move();
+	virtual void attack();
+	virtual void die();
 	virtual void animation();
+
+	virtual bool enemyCoolTime();
 
 };
 
