@@ -318,17 +318,17 @@
     <ClInclude Include="CtotalItem.h">
       <Filter>mainGame\히어로시즈\Cobject\Citem</Filter>
     </ClInclude>
-    <ClInclude Include="CplayerUi.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="CsceneDungeon.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Cobject.h">
       <Filter>mainGame\히어로시즈\Cobject</Filter>
     </ClInclude>
     <ClInclude Include="rootHeader.h">
       <Filter>mainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="CsceneDungeon.h">
+      <Filter>mainGame\히어로시즈\Cscene</Filter>
+    </ClInclude>
+    <ClInclude Include="CplayerUi.h">
+      <Filter>mainGame\히어로시즈\Cunit\CplayerManager\Cplayer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -491,11 +491,11 @@
     <ClCompile Include="CtotalItem.cpp">
       <Filter>mainGame\히어로시즈\Cobject\Citem</Filter>
     </ClCompile>
-    <ClCompile Include="CplayerUi.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CsceneDungeon.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>mainGame\히어로시즈\Cscene</Filter>
+    </ClCompile>
+    <ClCompile Include="CplayerUi.cpp">
+      <Filter>mainGame\히어로시즈\Cunit\CplayerManager\Cplayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

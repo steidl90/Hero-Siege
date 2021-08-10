@@ -136,7 +136,7 @@ HRESULT Cimage::init()
     IMAGE->addImage("선택효과", "images/SelectEffect.bmp", 44, 25, true, RGB(255, 0, 255));
     IMAGE->addImage("SkillUi", "images/HUD.bmp", 361, 112, true, RGB(255, 0, 255));
     IMAGE->addImage("StateUi", "images/StateUI.bmp", 318, 100, true, RGB(255, 0, 255));
-    IMAGE->addImage("MiniMapUi", "images/MinimapUI.bmp", 303 * 0.75, 357 * 0.75, true, RGB(255, 0, 255));
+    IMAGE->addImage("MiniMapUi", "images/MinimapUI.bmp", 284 * 0.74, 357 * 0.74, true, RGB(255, 0, 255));
     IMAGE->addImage("선택테두리", "images/inventorySelectUI1.bmp", 207, 88, true, RGB(255, 0, 255));
     IMAGE->addImage("장착테두리", "images/inventorySelectUI2.bmp", 207, 88, true, RGB(255, 0, 255));
 

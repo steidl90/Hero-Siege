@@ -46,7 +46,7 @@ void CaStar::update()
     {
         tileComposition();
     }
-    if (InputManager->isOnceKeyDown(VK_SPACE) && _startPointSet && _endPointSet && _astarState == ASTAR_STATE::ASTAR_STATE_END)
+    if (_startPointSet && _endPointSet && _astarState == ASTAR_STATE::ASTAR_STATE_END)
     {
         tileInitializing();
     }
@@ -54,7 +54,7 @@ void CaStar::update()
     {
         _openList.clear(); 
         _closeList.clear();
-        init();            
+        init(); 
     }
     if (_astarState == ASTAR_STATE::ASTAR_STATE_END || _astarState == ASTAR_STATE::ASTAR_STATE_FOUND || _astarState == ASTAR_STATE::ASTAR_STATE_NOWAY) return;
 

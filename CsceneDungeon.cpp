@@ -46,6 +46,7 @@ void CsceneDungeon::update()
 void CsceneDungeon::render()
 {
 	this->getMapBuffer()->render(getMemDC(), 0, 0, m_camera->getCameraPoint().x, m_camera->getCameraPoint().y, m_camera->getCameraWidth(), m_camera->getCameraHeight());
+	this->getMapBuffer()->mapRender(getMemDC(), WINSIZEX - IMAGE->findImage("MiniMapUi")->getWidth(), 70);
 
 	m_camera->render();
 	m_dungeon->render();

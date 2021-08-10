@@ -57,28 +57,29 @@ void Cdungeon::load()
 
 void Cdungeon::cullingRender()
 {
-	// 타일 랜더 최적화
-	// 카메라 좌상단 좌표 기준부터 우하단 좌표까지를 타일 인덱스로 렌더링하게 구현
-	int index_X1 = m_camera->getCameraPoint().x / TILESIZE;
-	int index_Y1 = m_camera->getCameraPoint().y / TILESIZE;
-	int index_X2 = m_camera->getCameraPoint2().x / TILESIZE;
-	int index_Y2 = m_camera->getCameraPoint2().y / TILESIZE;
+	//// 타일 랜더 최적화
+	//// 카메라 좌상단 좌표 기준부터 우하단 좌표까지를 타일 인덱스로 렌더링하게 구현
+	//int index_X1 = m_camera->getCameraPoint().x / TILESIZE;
+	//int index_Y1 = m_camera->getCameraPoint().y / TILESIZE;
+	//int index_X2 = m_camera->getCameraPoint2().x / TILESIZE;
+	//int index_Y2 = m_camera->getCameraPoint2().y / TILESIZE;
 
-	int startX = index_X1;
-	int startY = index_Y1;
-	int endX = index_X2;
-	int endY = index_Y2;
+	//int startX = index_X1;
+	//int startY = index_Y1;
+	//int endX = index_X2;
+	//int endY = index_Y2;
 
-	for (startY = index_Y1; startY <= endY; startY++)
-	{
-		for (startX = index_X1; startX <= endX; startX++)
-		{
-			IMAGE->frameRender(this->getImageName(_tilesImage[startX + startY * TILEX].terrainImage), getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].terrainFrameX, _tiles[startX + startY * TILEX].terrainFrameY);
+	//for (startY = index_Y1; startY <= endY; startY++)
+	//{
+	//	for (startX = index_X1; startX <= endX; startX++)
+	//	{
+	//		IMAGE->frameRender(this->getImageName(_tilesImage[startX + startY * TILEX].terrainImage), getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].terrainFrameX, _tiles[startX + startY * TILEX].terrainFrameY);
 
-			if (_tiles[startX + startY * TILEX].obj == OBJECT::OBJ_NONE)continue;
-			IMAGE->frameRender(this->getImageName(_tilesImage[startX + startY * TILEX].objImage), getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
-		}
-	}
+	//		if (_tiles[startX + startY * TILEX].obj == OBJECT::OBJ_NONE)continue;
+	//		IMAGE->frameRender(this->getImageName(_tilesImage[startX + startY * TILEX].objImage), getMapDC(), _tiles[startX + startY * TILEX].rc.left, _tiles[startX + startY * TILEX].rc.top, _tiles[startX + startY * TILEX].objFrameX, _tiles[startX + startY * TILEX].objFrameY);
+	//	}
+	//}
+	this->getTileBuffer()->render(getMapDC(), 0, 0);
 }
 
 
@@ -86,6 +87,11 @@ void Cdungeon::initTileAttribute()
 {
 	for (int i = 0; i < TILEX * TILEY; i++)
 	{
+		IMAGE->frameRender(this->getImageName(_tilesImage[i].terrainImage), getTileDC(), _tiles[i].rc.left, _tiles[i].rc.top, _tiles[i].terrainFrameX, _tiles[i].terrainFrameY);
+
+		if (_tiles[i].obj == OBJECT::OBJ_NONE)continue;
+		IMAGE->frameRender(this->getImageName(_tilesImage[i].objImage), getTileDC(), _tiles[i].rc.left, _tiles[i].rc.top, _tiles[i].objFrameX, _tiles[i].objFrameY);
+
 		if (_tiles[i].collisionObj == COLLISIONOBJECT::COLLISIONOBJ)
 		{
 			m_attribute[i] = ATTRIBUTE::COLLISION_ON;
