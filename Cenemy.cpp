@@ -9,7 +9,7 @@ Cenemy::~Cenemy()
 {
 }
 
-HRESULT Cenemy::init()
+HRESULT Cenemy::init(POINT position, int HP)
 {
     return S_OK;
 }
@@ -40,9 +40,10 @@ void Cenemy::die()
 
 void Cenemy::animation()
 {
+
 }
 
-bool Cenemy::enemyCoolTime()
+bool Cenemy::enemyCooltime()
 {
     return false;
 }

@@ -25,12 +25,14 @@ private:
 	vector<tagSkill> m_vSkill;
 	vector<tagSkill>::iterator m_viSkill;
 
+	float m_range;
+	int m_skillMax;
 
 public:
 	CenemyAttack();
 	~CenemyAttack();
 
-	HRESULT init();
+	HRESULT init(int skillMax, float range);
 
 	void release();
 	void update(const char* aniName);

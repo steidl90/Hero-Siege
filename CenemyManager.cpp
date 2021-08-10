@@ -11,8 +11,6 @@ CenemyManager::~CenemyManager()
 
 HRESULT CenemyManager::init()
 {
-	m_enemyAttack = new CenemyAttack;
-	m_enemyAttack->init();
 	return S_OK;
 }
 

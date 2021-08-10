@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "Celemental.h"
 #include "CenemyAttack.h"
+#include "Cplayer.h"
 
 Celemental::Celemental()
 {
@@ -10,13 +11,25 @@ Celemental::~Celemental()
 {
 }
 
-HRESULT Celemental::init()
+HRESULT Celemental::init(POINT position, int HP)
 {
 	m_enemyAttack = new CenemyAttack;
-	m_enemyAttack->init();
+	m_enemyAttack->init(50,500);
 
-	isIdle = false;
+	m_player = new Cplayer;
+	m_player->init();
+
+	m_isIdle = false;
 	m_state = STATE::DOWN;
+
+	m_x = m_returnX = position.x;
+	m_y = m_returnY = position.y;
+
+	m_speed = 2.0f;
+	m_hp = HP;
+
+	m_cooltimeCount = 0;
+	m_rndskillCount = 1;
 
 	ANIMATION->addAnimation("ø§∏Æ∏‡≈ª«œ", "ø§∏Æ∏‡≈ª", 0, 3, 8, false, true);
 	ANIMATION->addAnimation("ø§∏Æ∏‡≈ª¡¬", "ø§∏Æ∏‡≈ª", 4, 7, 8, false, true);
@@ -26,57 +39,110 @@ HRESULT Celemental::init()
 	m_walkImage = IMAGE->findImage("ø§∏Æ∏‡≈ª");
 	m_walkAni = ANIMATION->findAnimation("ø§∏Æ∏‡≈ª«œ");
 	ANIMATION->start("ø§∏Æ∏‡≈ª«œ");
-
-	m_x = WINSIZEX / 2;
-	m_y = WINSIZEY / 2;
-	m_speed = 2.0f;
-
 	return S_OK;
 }
 
 void Celemental::release()
 {
-	SAFE_DELETE(m_walkImage);
+	SAFE_DELETE(m_enemyAttack);
+	SAFE_DELETE(m_player);
 }
 
 void Celemental::update()
 {
+	m_player->update();
+	m_enemyAttack->update("ø§∏Æ∏‡≈ªΩ∫≈≥æ÷¥œ");
+
 	move();
+	attack();
 	m_walkRc = RectMakeCenter(m_x, m_y, m_walkImage->getFrameWidth(), m_walkImage->getFrameHeight());
+	m_traceRc = RectMakeCenter(m_x, m_y, 500, 500);
+
 }
 
 void Celemental::render()
 {
-	Rectangle(getMapDC(), m_x, m_y, m_walkImage->getFrameWidth(), m_walkImage->getFrameHeight());
+	Rectangle(getMapDC(), m_traceRc.left, m_traceRc.top, m_traceRc.right, m_traceRc.bottom);
+	Rectangle(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkRc.right, m_walkRc.bottom);
+	m_enemyAttack->render();
 	m_walkImage->aniRender(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkAni);
 }
 
 void Celemental::move()
 {
-	if (InputManager->isStayKeyDown('W'))
+	RECT temp;
+	if (IntersectRect(&temp, m_player->getplayerMoveRC(),&m_traceRc))
 	{
-		m_y -= m_speed;
-		m_state = STATE::UP;
+			if (m_player->getplayerMoveRC()->right >= m_traceRc.left && m_player->getplayerMoveRC()->right < m_walkRc.left)
+			{
+				if (m_player->getplayerMoveRC()->right < m_walkRc.left - 100) m_x--;
+				m_state = STATE::LEFT;
+			}
+			if (m_player->getplayerMoveRC()->left <= m_traceRc.right && m_player->getplayerMoveRC()->left > m_walkRc.right)
+			{
+				if(m_player->getplayerMoveRC()->left > m_walkRc.right+100) m_x++;
+				m_state = STATE::RIGHT;
+			}
+			if (m_player->getplayerMoveRC()->bottom >= m_traceRc.top && m_player->getplayerMoveRC()->bottom < m_walkRc.top)
+			{
+				if(m_player->getplayerMoveRC()->bottom < m_walkRc.top-100)m_y--;
+				m_state = STATE::UP;
+			}
+			if (m_player->getplayerMoveRC()->top <= m_traceRc.bottom && m_player->getplayerMoveRC()->top > m_walkRc.bottom)
+			{
+				if(m_player->getplayerMoveRC()->top > m_walkRc.bottom+100)m_y++;
+				m_state = STATE::DOWN;
+		}
 	}
-	if (InputManager->isStayKeyDown('S'))
+	else
 	{
-		m_y += m_speed;
-		m_state = STATE::DOWN;
+		float distance = UTIL::getDistance(m_x, m_y, m_returnX, m_returnY);
+		if (distance>1)
+		{
+			m_x += (m_returnX - m_x) / distance * (m_speed * 0.8);
+			m_y += (m_returnY - m_y) / distance * (m_speed * 0.8);
+			if (m_x <= m_returnX && abs(m_x - m_returnX) > abs(m_y - m_returnY))
+			{
+				m_state = STATE::RIGHT;
+			}
+			if (m_x >= m_returnX && abs(m_x - m_returnX) > abs(m_y - m_returnY))
+			{
+				m_state = STATE::LEFT;
+			}
+			if (m_y <= m_returnY && abs(m_x - m_returnX) < abs(m_y - m_returnY))
+			{
+				m_state = STATE::DOWN;
+			}
+			if (m_y >= m_returnY && abs(m_x - m_returnX) < abs(m_y - m_returnY))
+			{
+				m_state = STATE::UP;
+			}
+		}
+		else
+		{
+			m_x = m_returnX;
+			m_y = m_returnY;
+		}
 	}
-	if (InputManager->isStayKeyDown('A'))
-	{
-		m_x -= m_speed;
-		m_state = STATE::LEFT;
-	}
-	if (InputManager->isStayKeyDown('D'))
-	{
-		m_x += m_speed;
-		m_state = STATE::RIGHT;
-	}
+	animation();
 }
 
 void Celemental::attack()
 {
+	RECT temp;
+	if (IntersectRect(&temp, m_player->getplayerMoveRC(), &m_traceRc))
+	{
+		if (enemyCooltime()) 
+		{
+				m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
+				m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top)/2,
+				UTIL::getAngle(m_walkRc.left + (m_walkRc.right - m_walkRc.left) / 2,
+				m_walkRc.bottom + (m_walkRc.top - m_walkRc.bottom) / 2,
+				m_player->getplayerMoveRC()->left + (m_player->getplayerMoveRC()->right - m_player->getplayerMoveRC()->left) / 2,
+				m_player->getplayerMoveRC()->top+(m_player->getplayerMoveRC()->bottom - m_player->getplayerMoveRC()->top) / 2),
+				5.0f, "ø§∏Æ∏‡≈ªΩ∫≈≥", "ø§∏Æ∏‡≈ªΩ∫≈≥æ÷¥œ");
+		}
+	}
 }
 
 void Celemental::animation()
@@ -86,28 +152,36 @@ void Celemental::animation()
 	case STATE::LEFT:
 		m_walkImage = IMAGE->findImage("ø§∏Æ∏‡≈ª");
 		m_walkAni = ANIMATION->findAnimation("ø§∏Æ∏‡≈ª¡¬");
-		ANIMATION->start("ø§∏Æ∏‡≈ª¡¬");
+		ANIMATION->resume("ø§∏Æ∏‡≈ª¡¬");
 		break;
 	case STATE::RIGHT:
 		m_walkImage = IMAGE->findImage("ø§∏Æ∏‡≈ª");
 		m_walkAni = ANIMATION->findAnimation("ø§∏Æ∏‡≈ªøÏ");
-		ANIMATION->start("ø§∏Æ∏‡≈ªøÏ");
+		ANIMATION->resume("ø§∏Æ∏‡≈ªøÏ");
 		break;
 	case STATE::UP:
 		m_walkImage = IMAGE->findImage("ø§∏Æ∏‡≈ª");
 		m_walkAni = ANIMATION->findAnimation("ø§∏Æ∏‡≈ªªÛ");
-		ANIMATION->start("ø§∏Æ∏‡≈ªªÛ");
+		ANIMATION->resume("ø§∏Æ∏‡≈ªªÛ");
 		break;
 	case STATE::DOWN:
 		m_walkImage = IMAGE->findImage("ø§∏Æ∏‡≈ª");
 		m_walkAni = ANIMATION->findAnimation("ø§∏Æ∏‡≈ª«œ");
-		ANIMATION->start("ø§∏Æ∏‡≈ª«œ");
+		ANIMATION->resume("ø§∏Æ∏‡≈ª«œ");
 		break;
 	}
 }
 
-bool Celemental::enemyCoolTime()
+bool Celemental::enemyCooltime()
 {
+	m_cooltimeCount++;
+
+	if (m_cooltimeCount % m_rndskillCount == 0) 
+	{
+		m_rndskillCount = 100;
+		m_cooltimeCount = 0;
+	return true;
+	}
 	return false;
 }
 
