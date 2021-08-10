@@ -59,6 +59,7 @@ HRESULT Cmonk::init(POINT position, int HP)
 
 void Cmonk::attack()
 {
+
 }
 
 void Cmonk::die()
