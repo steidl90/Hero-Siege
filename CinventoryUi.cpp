@@ -11,9 +11,6 @@ CinventoryUi::~CinventoryUi()
 
 HRESULT CinventoryUi::init()
 {
-	//m_myInventory = new Cinventory();
-	//m_myInventory->init();
-
 	// ÀüÃ¼ UI ÁÂÇ¥
 	m_uiX = 200;
 	m_uiY = 200;
@@ -85,7 +82,6 @@ HRESULT CinventoryUi::init()
 
 void CinventoryUi::release()
 {
-	SAFE_DELETE(m_myInventory);
 }
 
 void CinventoryUi::update()

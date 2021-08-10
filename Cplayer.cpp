@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "Cplayer.h"
 
-Cplayer::Cplayer() :isMoving(false), isIdle(false), isAttack(false), isLive(true), m_speed(3.0f)
+Cplayer::Cplayer() :isMoving(false), isIdle(false), isAttack(false), isLive(true)
 {
 }
 
@@ -11,6 +11,16 @@ Cplayer::~Cplayer()
 
 HRESULT Cplayer::init()
 {
+	setAtk(10);
+	setDef(10);
+	setHp(100);
+	setMp(50);
+	setCritical(5);
+	setCriticalAtk(1.5);
+	setSpeed(3.0f);
+	setLv(1);
+	setExp(0);
+
 	m_playerSkill = new CplayerSkill;
 	m_playerSkill->init();
 
@@ -37,15 +47,13 @@ HRESULT Cplayer::init()
 
    ANIMATION->addDefAnimation("리치스킬애니", "리치스킬", 15, false, true);
 
-
-
     //MOVE
    ANIMATION->addDefAnimation("위쪽걷기", "플레이어위쪽걷기",10, false, true);
    ANIMATION->addDefAnimation("아래쪽걷기", "플레이어아래쪽걷기",10, false, true);
    ANIMATION->addDefAnimation("왼쪽걷기", "플레이어왼쪽걷기",10, false, true);
    ANIMATION->addDefAnimation("오른쪽걷기", "플레이어오른쪽걷기", 10, false, true);
 
-    //IDLE
+   //IDLE
    ANIMATION->addDefAnimation("위쪽", "플레이어위쪽", 10, false, true);
    ANIMATION->addDefAnimation("아래쪽", "플레이어아래쪽", 10, false, true);
    ANIMATION->addDefAnimation("왼쪽", "플레이어왼쪽", 10, false, true);
@@ -96,57 +104,57 @@ void Cplayer::moveControl()
 {
 	if (InputManager->isStayKeyDown(VK_RIGHT) && (InputManager->isStayKeyDown(VK_UP) || InputManager->isStayKeyDown(VK_DOWN)))
 	{
-		m_playerX += m_speed;
-		if (InputManager->isStayKeyDown(VK_DOWN))m_playerY += m_speed;
-		if (InputManager->isStayKeyDown(VK_UP))m_playerY -= m_speed;
+		m_playerX += getSpeed();
+		if (InputManager->isStayKeyDown(VK_DOWN))m_playerY += getSpeed();
+		if (InputManager->isStayKeyDown(VK_UP))m_playerY -= getSpeed();
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_RIGHT;
 	}
 	else if (InputManager->isStayKeyDown(VK_LEFT) && (InputManager->isStayKeyDown(VK_UP) || InputManager->isStayKeyDown(VK_DOWN)))
 	{
-		m_playerX -= m_speed;
-		if (InputManager->isStayKeyDown(VK_DOWN))m_playerY += m_speed;
-		if (InputManager->isStayKeyDown(VK_UP))m_playerY -= m_speed;
+		m_playerX -= getSpeed();
+		if (InputManager->isStayKeyDown(VK_DOWN))m_playerY += getSpeed();
+		if (InputManager->isStayKeyDown(VK_UP))m_playerY -= getSpeed();
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_LEFT;
 	}
 	else if (InputManager->isStayKeyDown(VK_UP)&&(InputManager->isStayKeyDown(VK_RIGHT)||InputManager->isStayKeyDown(VK_LEFT)))
 	{
-		m_playerY -= m_speed;
-		if (InputManager->isStayKeyDown(VK_RIGHT))m_playerX += m_speed;
-		if (InputManager->isStayKeyDown(VK_LEFT))m_playerX -= m_speed;
+		m_playerY -= getSpeed();
+		if (InputManager->isStayKeyDown(VK_RIGHT))m_playerX += getSpeed();
+		if (InputManager->isStayKeyDown(VK_LEFT))m_playerX -= getSpeed();
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_UP;
 	}
 	else if (InputManager->isStayKeyDown(VK_DOWN) && (InputManager->isStayKeyDown(VK_RIGHT) || InputManager->isStayKeyDown(VK_LEFT)))
 	{
-		m_playerY += m_speed;
-		if (InputManager->isStayKeyDown(VK_RIGHT))m_playerX += m_speed;
-		if (InputManager->isStayKeyDown(VK_LEFT))m_playerX -= m_speed;
+		m_playerY += getSpeed();
+		if (InputManager->isStayKeyDown(VK_RIGHT))m_playerX += getSpeed();
+		if (InputManager->isStayKeyDown(VK_LEFT))m_playerX -= getSpeed();
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_DOWN;
 	}
 	else if (InputManager->isStayKeyDown(VK_LEFT))
 	{
-		m_playerX -= m_speed;
+		m_playerX -= getSpeed();
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_LEFT;
 	}
 	else if (InputManager->isStayKeyDown(VK_RIGHT))
 	{
-		m_playerX += m_speed;
+		m_playerX += getSpeed();
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_RIGHT;
 	}
 	else if (InputManager->isStayKeyDown(VK_UP))
 	{
-		m_playerY -= m_speed;
+		m_playerY -= getSpeed();
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_UP;
 	}
 	else if (InputManager->isStayKeyDown(VK_DOWN))
 	{
-		m_playerY += m_speed;
+		m_playerY += getSpeed();
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_DOWN;
 	}
@@ -162,7 +170,6 @@ void Cplayer::moveControl()
 		else if (direction == DIRECTIONS::DIRECTIONS_RIGHT)m_playerSkill->skillInformation(m_playerX+50, m_playerY+33, PI2, 7.0f, 700, "리치스킬", "리치스킬애니");
 		else if (direction == DIRECTIONS::DIRECTIONS_UP)m_playerSkill->skillInformation(m_playerX+15, m_playerY-20, PI * 0.5, 7.0f, 700, "리치스킬", "리치스킬애니");//위??
 		else if (direction == DIRECTIONS::DIRECTIONS_DOWN)m_playerSkill->skillInformation(m_playerX, m_playerY, PI * 1.5, 7.0f, 700, "리치스킬", "리치스킬애니");
-
 	}
 	else if (InputManager->isOnceKeyDown('W'))
 	{
@@ -177,23 +184,12 @@ void Cplayer::moveControl()
 		isAttack = true;
 		for (size_t i = 0; i < 30; i++)
 		{
-			m_playerSkill->skillInformation(m_playerX - 15, m_playerY +33, (i + m_angle) * 0.21, 7.0f, 350, "리치스킬", "리치스킬애니");
-		}
-		for (size_t j = 0; j < 30; j++)
-		{
-			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (j+m_angle) * 0.22, 6.0f, 300, "리치스킬", "리치스킬애니");
-		}
-		for (size_t z = 0; z < 30; z++) 
-		{
-			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (z + m_angle) * 0.26, 5.0f, 250, "리치스킬", "리치스킬애니");
-		}
-		for (size_t n = 0; n < 30; n++)
-		{
-			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (n + m_angle) * 0.65, 4.3f, 200, "리치스킬", "리치스킬애니");
+			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.21, 7.0f, 350, "리치스킬", "리치스킬애니");
+			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.22, 6.0f, 300, "리치스킬", "리치스킬애니");
+			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.26, 5.0f, 250, "리치스킬", "리치스킬애니");
+			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.65, 4.3f, 200, "리치스킬", "리치스킬애니");
 		}
 	}
-
-
 	moveAnimation();
 }
 
@@ -249,7 +245,7 @@ void Cplayer::moveAnimation()
 
 void Cplayer::playerStateRender()
 {
-	Rectangle(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerMoveRc.right, playerMoveRc.bottom);
+	//Rectangle(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerMoveRc.right, playerMoveRc.bottom);
 
 	if (isMoving)
 	{

@@ -52,5 +52,17 @@ void CplayerManager::render()
     m_player->render();
     m_playerUi->render();
 
-    if(isInventoryOn) m_InventoryUI->render();
+    if (isInventoryOn)
+    {
+        m_InventoryUI->render();
+        TCHAR str[100];
+        wsprintf(str, "Atk : %d", m_player->getAtk());
+        TextOut(getMemDC(), WINSIZEX / 2 + 210, WINSIZEY / 2 - 80, str, lstrlen(str));
+        wsprintf(str, "Def : %d", m_player->getDef());
+        TextOut(getMemDC(), WINSIZEX / 2 + 210, WINSIZEY / 2 - 60, str, lstrlen(str));
+        wsprintf(str, "Hp : %d", m_player->getHp());
+        TextOut(getMemDC(), WINSIZEX / 2 + 210, WINSIZEY / 2 - 40, str, lstrlen(str));
+        wsprintf(str, "Mp : %d", m_player->getMp());
+        TextOut(getMemDC(), WINSIZEX / 2 + 210, WINSIZEY / 2 - 20, str, lstrlen(str));
+    }
 }
