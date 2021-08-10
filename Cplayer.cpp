@@ -171,7 +171,6 @@ void Cplayer::moveControl()
 		{
 			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.21, 5.0f,150, "리치스킬", "리치스킬애니");
 		}
-
 	}
 	else if (InputManager->isOnceKeyDown('E'))
 	{
@@ -191,11 +190,9 @@ void Cplayer::moveControl()
 		for (size_t n = 0; n < 30; n++)
 		{
 			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (n + m_angle) * 0.65, 4.3f, 200, "리치스킬", "리치스킬애니");
-
 		}
-		
 	}
-	else isAttack = false;
+
 
 	moveAnimation();
 }
