@@ -57,7 +57,7 @@ HRESULT Cplayer::init()
 
    ANIMATION->addDefAnimation("리치스킬애니", "리치스킬", 15, false, true);
 
-    //MOVE
+   //MOVE
    ANIMATION->addDefAnimation("위쪽걷기", "플레이어위쪽걷기",10, false, true);
    ANIMATION->addDefAnimation("아래쪽걷기", "플레이어아래쪽걷기",10, false, true);
    ANIMATION->addDefAnimation("왼쪽걷기", "플레이어왼쪽걷기",10, false, true);
@@ -69,7 +69,7 @@ HRESULT Cplayer::init()
    ANIMATION->addDefAnimation("왼쪽", "플레이어왼쪽", 10, false, true);
    ANIMATION->addDefAnimation("오른쪽", "플레이어오른쪽", 10, false, true);
 
-    //ATTACK
+   //ATTACK
    ANIMATION->addDefAnimation("위쪽공격", "플레이어위쪽공격", 20, false, true);
    ANIMATION->addDefAnimation("아래쪽공격", "플레이어아래쪽공격", 20, false, true);
    ANIMATION->addDefAnimation("왼쪽공격", "플레이어왼쪽공격", 20, false, true);
@@ -96,8 +96,6 @@ void Cplayer::release()
 	SAFE_DELETE(m_mpBar);
 }
 
-
-
 void Cplayer::update()
 {
 	m_angle += 0.4;
@@ -105,7 +103,9 @@ void Cplayer::update()
 	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth() - 90, playerMoveDown->getFrameHeight() - 50);
 	m_playerSkill->update("리치스킬애니");
 	m_hpBar->update();
+	m_hpBar->setGauge(getHp(), m_maxHp);
 	m_mpBar->update();
+	m_mpBar->setGauge(getMp(), m_maxMp);
 }
 
 void Cplayer::render()
@@ -206,6 +206,13 @@ void Cplayer::moveControl()
 			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.65, 4.3f, 200, "리치스킬", "리치스킬애니");
 		}
 	}
+
+	if (InputManager->isStayKeyDown('Z'))
+	{
+		setHp(getHp() - 1);
+		setMp(getMp() - 1);
+	}
+
 	moveAnimation();
 }
 
