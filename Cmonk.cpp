@@ -41,12 +41,12 @@ HRESULT Cmonk::init(POINT position, int HP)
 	ANIMATION->addAnimation("根农快", "根农", 12, 17, 8, false, true);
 	ANIMATION->addAnimation("根农惑", "根农", 18, 23, 8, false, true);
 
-	ANIMATION->addAnimation("根农傍拜窍", "根农傍拜", 0, 4, 8,	true, false);
-	ANIMATION->addAnimation("根农傍拜谅", "根农傍拜", 5, 9, 8,	true, false);
-	ANIMATION->addAnimation("根农傍拜快", "根农傍拜", 10, 14, 8,	true, false);
-	ANIMATION->addAnimation("根农傍拜惑", "根农傍拜", 15, 19, 8,	true, false);
+	ANIMATION->addAnimation("根农傍拜窍", "根农傍拜", 0, 4, 8, true, false);
+	ANIMATION->addAnimation("根农傍拜谅", "根农傍拜", 5, 9, 8, true, false);
+	ANIMATION->addAnimation("根农傍拜快", "根农傍拜", 10, 14, 8, true, false);
+	ANIMATION->addAnimation("根农傍拜惑", "根农傍拜", 15, 19, 8, true, false);
 
-	ANIMATION->addAnimation("根农荤噶窍", "根农荤噶", 0, 11, 8, false,  false);
+	ANIMATION->addAnimation("根农荤噶窍", "根农荤噶", 0, 11, 8, false, false);
 	ANIMATION->addAnimation("根农荤噶谅", "根农荤噶", 12, 23, 8, false, false);
 	ANIMATION->addAnimation("根农荤噶快", "根农荤噶", 24, 35, 8, false, false);
 	ANIMATION->addAnimation("根农荤噶惑", "根农荤噶", 36, 47, 8, false, false);
@@ -57,13 +57,29 @@ HRESULT Cmonk::init(POINT position, int HP)
 	return S_OK;
 }
 
+void Cmonk::update()
+{
+	m_enemyAttack->update();
+	move();
+	attack();
+
+	m_walkRc = RectMakeCenter(m_x, m_y, m_walkImage->getFrameWidth(), m_walkImage->getFrameHeight());
+	m_attackRc = RectMakeCenter(m_x, m_y, m_attackImage->getFrameWidth(), m_attackImage->getFrameHeight());
+	m_dieRc = RectMakeCenter(m_x, m_y, m_dieImage->getFrameWidth(), m_dieImage->getFrameHeight());
+	m_traceRc = RectMakeCenter(m_x, m_y, 500, 500);
+}
+
 void Cmonk::attack()
 {
+	if (m_player->getplayerMoveRC()->right <= m_walkRc.left + 50)
+	{
 
+	}
 }
 
 void Cmonk::die()
 {
+
 }
 
 void Cmonk::animation()

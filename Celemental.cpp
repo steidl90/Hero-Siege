@@ -42,6 +42,15 @@ HRESULT Celemental::init(POINT position, int HP)
 	return S_OK;
 }
 
+void Celemental::update()
+{
+	m_enemyAttack->update();
+		move();
+		attack();
+
+	m_walkRc = RectMakeCenter(m_x, m_y, m_walkImage->getFrameWidth(), m_walkImage->getFrameHeight());
+	m_traceRc = RectMakeCenter(m_x, m_y, 500, 500);
+}
 
 void Celemental::attack()
 {
