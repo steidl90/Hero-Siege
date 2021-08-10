@@ -5,11 +5,12 @@ CenemyAttack::CenemyAttack(){}
 
 CenemyAttack::~CenemyAttack(){}
 
-HRESULT CenemyAttack::init(int skillMax, float range)
+HRESULT CenemyAttack::init(int skillMax, float range, const char* aniName)
 {
 	ANIMATION->addDefAnimation("¿¤¸®¸àÅ»½ºÅ³¾Ö´Ï", "¿¤¸®¸àÅ»½ºÅ³", 10, false, true);
 	ANIMATION->addDefAnimation("¸®Ä¡½ºÅ³¾Ö´Ï", "¸®Ä¡½ºÅ³", 15, false, true);
-
+	
+	m_ani = aniName;
 	m_skillMax = skillMax;
 	m_range = range;
 
@@ -20,7 +21,7 @@ void CenemyAttack::release()
 {
 }
 
-void CenemyAttack::update(const char* aniName)
+void CenemyAttack::update()
 {
 	for (m_viSkill = m_vSkill.begin(); m_viSkill != m_vSkill.end();)
 	{
@@ -36,16 +37,14 @@ void CenemyAttack::update(const char* aniName)
 		}
 		else ++m_viSkill;
 	}
-	ANIMATION->findAnimation(aniName);
-	ANIMATION->resume(aniName);
-	//move();	
+	ANIMATION->findAnimation(m_ani);
+	ANIMATION->resume(m_ani);
 }
 
 void CenemyAttack::render()
 {
 	for (m_viSkill = m_vSkill.begin(); m_viSkill != m_vSkill.end(); ++m_viSkill)
 	{
-		//Rectangle(getMapDC(), m_viSkill->m_rc.left, m_viSkill->m_rc.top, m_viSkill->m_rc.right, m_viSkill->m_rc.bottom);
 		m_viSkill->m_skillImage->aniRender(getMapDC(), m_viSkill->m_rc.left, m_viSkill->m_rc.top,m_viSkill->m_ani);
 	}
 }
@@ -65,31 +64,7 @@ void CenemyAttack::fire(float x, float y, float angle, float speed, const char* 
 	m_vSkill.push_back(skill);
 }
 
-void CenemyAttack::move()
-{
-	//for (m_viSkill = m_vSkill.begin(); m_viSkill != m_vSkill.end();)
-	//{
-	//	m_viSkill->m_x += cosf(m_viSkill->m_angle) * m_viSkill->m_speed;
-	//	m_viSkill->m_y -= sinf(m_viSkill->m_angle) * m_viSkill->m_speed;
-
-	//	m_viSkill->m_rc = RectMakeCenter(m_viSkill->m_x, m_viSkill->m_y, 
-	//		m_viSkill->m_skillImage->getFrameWidth(), 
-	//		m_viSkill->m_skillImage->getFrameHeight());
-
-	//	if (m_viSkill->m_y > WINSIZEY || m_viSkill->m_y<0 || m_viSkill->m_x>WINSIZEX || m_viSkill->m_x < 0)
-	//	{
-	//		m_viSkill = m_vSkill.erase(m_viSkill);
-	//	}
-	//	else ++m_viSkill;
-	//}
-	//ANIMATION->findAnimation("¿¤¸®¸àÅ»½ºÅ³¾Ö´Ï");
-	//ANIMATION->resume("¿¤¸®¸àÅ»½ºÅ³¾Ö´Ï");
-
-	//ANIMATION->findAnimation("¸®Ä¡½ºÅ³¾Ö´Ï");
-	//ANIMATION->resume("¸®Ä¡½ºÅ³¾Ö´Ï");
-}
-
-void CenemyAttack::removeBullet(int arrNum)
+void CenemyAttack::removeSkill(int arrNum)
 {
 	m_vSkill.erase(m_vSkill.begin() + arrNum);
 }

@@ -13,7 +13,6 @@ enum class STATE
 class Cenemy : public Cunit
 {
 protected:
-	class CenemyAttack* m_enemyAttack;
 	class Cplayer* m_player;
 
 	image* m_walkImage;
@@ -37,6 +36,8 @@ protected:
 	float m_speed;
 	float m_hp;
 	float m_damage;
+	float m_distance;
+	
 
 	bool m_isIdle;
 	bool m_isWalking;
@@ -47,7 +48,7 @@ protected:
 	int m_rndskillCount;
 
 public:
-
+		class CenemyAttack* m_enemyAttack;
 	Cenemy();
 	~Cenemy();
 
@@ -58,12 +59,12 @@ public:
 
 	virtual void move();
 	virtual void attack();
+
 	virtual void die();
 	virtual void animation();
-
 	virtual bool enemyCooltime();
 
+	virtual void setPlayer(Cplayer* player) { m_player = player; }
 	virtual RECT getRect() { return m_walkRc; }
-
 };
 

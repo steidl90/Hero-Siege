@@ -13,6 +13,7 @@ animation::~animation()
 HRESULT animation::init(int totalW, int totalH, int frameW, int frameH)
 {
 	useEventWhenEnd = false;
+	useEventWhenSpcificFrame = false;
 
 	//가로 프레임 갯수
 	_frameWidth = frameW;
@@ -207,6 +208,15 @@ void animation::frameUpdate(float elapsedTime)
 			_elapseSec -= _frameUpdateSec;
 			_nowPlayIndex++;
 
+			if (useEventWhenSpcificFrame)
+			{
+				if (specificFrameIndex == _nowPlayIndex)
+				{
+					m_triggerWhenSpecificFrame();
+				}
+			}
+
+
 			if (_nowPlayIndex == _playList.size())
 			{
 				if (_loop)
@@ -217,7 +227,7 @@ void animation::frameUpdate(float elapsedTime)
 				{
 					if (useEventWhenEnd)
 					{
-						m_triggerWhenClick();
+						m_triggerWhenEnd();
 					}
 					_nowPlayIndex--;
 					_play = false;

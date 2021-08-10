@@ -1,92 +1,58 @@
 #include "framework.h"
 #include "CenemyManager.h"
+#include "Celemental.h"
 
-CenemyManager::CenemyManager()
-{
-}
-
-CenemyManager::~CenemyManager()
-{
-}
+CenemyManager::CenemyManager(){}
+CenemyManager::~CenemyManager(){}
 
 HRESULT CenemyManager::init()
 {
 	return S_OK;
 }
 
-void CenemyManager::release()
-{
-	SAFE_DELETE(m_enemyAttack);
-}
+void CenemyManager::release(){}
 
 void CenemyManager::update()
 {
+	for (int i = 0; i < m_vEnemy.size(); i++)
+	{
+		m_vEnemy[i]->update();
+	}
 }
 
 void CenemyManager::render()
 {
+	for (int i = 0; i < m_vEnemy.size(); i++)
+	{
+		m_vEnemy[i]->render();
+	}
 }
 
-void CenemyManager::setElemental(int setenemy, int x, int y, int distanceX, int distanceY, int pattern)
+void CenemyManager::registerEnemy(Cenemy* enemy)
 {
+	m_vEnemy.push_back(enemy);
 }
 
-void CenemyManager::setPriest(int setenemy, int x, int y, int distanceX, int distanceY, int pattern)
+void CenemyManager::removeMinion(int arrNum)
 {
+	m_vEnemy.erase(m_vEnemy.begin() + arrNum);
 }
 
-void CenemyManager::setMonk(int setenemy, int x, int y, int distanceX, int distanceY, int pattern)
+void CenemyManager::collision()
 {
-}
-
-void CenemyManager::setPrison(int setenemy, int x, int y, int distanceX, int distanceY, int pattern)
-{
-}
-
-void CenemyManager::setSlime(int setenemy, int x, int y, int distanceX, int distanceY, int pattern)
-{
-}
-
-void CenemyManager::elementalSkill()
-{
-	//for (m_viElemental = m_vElemental.begin(); m_viElemental != m_vElemental.end(); ++m_viElemental)
-	//{
-	//	if((_))
-	//}
-}
-
-void CenemyManager::priestSkill()
-{
-}
-
-void CenemyManager::monkAttack()
-{
-}
-
-void CenemyManager::prisonAttack()
-{
-}
-
-void CenemyManager::slimeAttack()
-{
-}
-
-void CenemyManager::removeElemental(int arrNum)
-{
-}
-
-void CenemyManager::removePriest(int arrNum)
-{
-}
-
-void CenemyManager::removeMonk(int arrNum)
-{
-}
-
-void CenemyManager::removePrison(int arrNum)
-{
-}
-
-void CenemyManager::removeSlime(int arrNum)
-{
+	for (size_t i = 0; i < m_vEnemy.size(); i++)
+	{
+		if (m_vEnemy[i]->m_enemyAttack)
+		{
+			for (size_t j = 0; j < m_vEnemy[i]->m_enemyAttack->getVSkill().size(); j++)
+			{
+				RECT rc;
+				if (IntersectRect(&rc, &m_vEnemy[i]->m_enemyAttack->getVSkill()[j].m_rc, m_player->getplayerMoveRC()))
+				{
+					m_vEnemy[i]->m_enemyAttack->removeSkill(j);
+				}
+			}
+		}
+		
+	}
 }

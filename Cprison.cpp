@@ -9,19 +9,19 @@ Cprison::~Cprison()
 {
 }
 
-HRESULT Cprison::init()
+HRESULT Cprison::init(POINT position, int HP)
 {
-    return S_OK;
+	return E_NOTIMPL;
 }
 
-void Cprison::release()
-{
-}
-
-void Cprison::update()
+void Cprison::attack()
 {
 }
 
-void Cprison::render()
+void Cprison::die()
+{
+}
+
+void Cprison::animation()
 {
 }

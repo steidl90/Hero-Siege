@@ -9,19 +9,19 @@ Cslime::~Cslime()
 {
 }
 
-HRESULT Cslime::init()
+HRESULT Cslime::init(POINT position, int HP)
 {
-    return S_OK;
+	return E_NOTIMPL;
 }
 
-void Cslime::release()
-{
-}
-
-void Cslime::update()
+void Cslime::attack()
 {
 }
 
-void Cslime::render()
+void Cslime::die()
+{
+}
+
+void Cslime::animation()
 {
 }

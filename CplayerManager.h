@@ -29,6 +29,6 @@ public:
 	void release();
 	void update();
 	void render();
-
 	RECT* getplayerRect() { return m_player->getplayerMoveRC(); }
+	Cplayer* getPlayer() { return m_player; }
 };

@@ -25,6 +25,7 @@ private:
 	vector<tagSkill> m_vSkill;
 	vector<tagSkill>::iterator m_viSkill;
 
+	const char* m_ani;
 	float m_range;
 	int m_skillMax;
 
@@ -32,18 +33,18 @@ public:
 	CenemyAttack();
 	~CenemyAttack();
 
-	HRESULT init(int skillMax, float range);
+	
+	HRESULT init(int skillMax, float range, const char* aniName);
 
 	void release();
-	void update(const char* aniName);
+	void update();
 	void render();
 
 	void fire(float x, float y, float angle, float speed, const char* imageName, const char* aniName);
-	void move();
 
-	void removeBullet(int arrNum);
+	void removeSkill(int arrNum);
 
-	vector<tagSkill> getVBullet() { return m_vSkill; }
-	vector<tagSkill>::iterator getVIBullet() { return m_viSkill; }
+	vector<tagSkill> getVSkill() { return m_vSkill; }
+	vector<tagSkill>::iterator getVISkill() { return m_viSkill; }
 };
 

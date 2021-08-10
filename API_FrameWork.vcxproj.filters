@@ -130,9 +130,6 @@
     <Filter Include="mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Celemental">
       <UniqueIdentifier>{23d9a5c3-ecb7-470e-be60-4101ac85e2d9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Cslime">
-      <UniqueIdentifier>{4d73ea54-c7e7-4245-9a0b-788fb8a0f6ae}</UniqueIdentifier>
-    </Filter>
     <Filter Include="mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Cmonk">
       <UniqueIdentifier>{575dadf1-78b4-4d6d-acca-3411be7a1e7f}</UniqueIdentifier>
     </Filter>
@@ -141,6 +138,9 @@
     </Filter>
     <Filter Include="mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Cprison">
       <UniqueIdentifier>{60ab1a8c-ee20-4aeb-ab77-72f9706d2981}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Cslime">
+      <UniqueIdentifier>{4d73ea54-c7e7-4245-9a0b-788fb8a0f6ae}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -221,21 +221,6 @@
     </ClInclude>
     <ClInclude Include="CenemyManager.h">
       <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Celemental.h">
-      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Celemental</Filter>
-    </ClInclude>
-    <ClInclude Include="Cmonk.h">
-      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Cmonk</Filter>
-    </ClInclude>
-    <ClInclude Include="Cpriest.h">
-      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Cpriest</Filter>
-    </ClInclude>
-    <ClInclude Include="Cprison.h">
-      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Cprison</Filter>
-    </ClInclude>
-    <ClInclude Include="Cslime.h">
-      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Cslime</Filter>
     </ClInclude>
     <ClInclude Include="Cmevius.h">
       <Filter>mainGame\히어로시즈\Cunit\Cenemy\CbossManager\boss\Cmevius</Filter>
@@ -333,6 +318,21 @@
     <ClInclude Include="Cenemy.h">
       <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy</Filter>
     </ClInclude>
+    <ClInclude Include="Celemental.h">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Celemental</Filter>
+    </ClInclude>
+    <ClInclude Include="Cmonk.h">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Cmonk</Filter>
+    </ClInclude>
+    <ClInclude Include="Cpriest.h">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Cpriest</Filter>
+    </ClInclude>
+    <ClInclude Include="Cprison.h">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Cprison</Filter>
+    </ClInclude>
+    <ClInclude Include="Cslime.h">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Cslime</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -394,21 +394,6 @@
     </ClCompile>
     <ClCompile Include="CenemyManager.cpp">
       <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Celemental.cpp">
-      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Celemental</Filter>
-    </ClCompile>
-    <ClCompile Include="Cmonk.cpp">
-      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Cmonk</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpriest.cpp">
-      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Cpriest</Filter>
-    </ClCompile>
-    <ClCompile Include="Cprison.cpp">
-      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Cprison</Filter>
-    </ClCompile>
-    <ClCompile Include="Cslime.cpp">
-      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Cslime</Filter>
     </ClCompile>
     <ClCompile Include="Cmevius.cpp">
       <Filter>mainGame\히어로시즈\Cunit\Cenemy\CbossManager\boss\Cmevius</Filter>
@@ -502,6 +487,21 @@
     </ClCompile>
     <ClCompile Include="Cenemy.cpp">
       <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Celemental.cpp">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Celemental</Filter>
+    </ClCompile>
+    <ClCompile Include="Cmonk.cpp">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Cmonk</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpriest.cpp">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Cpriest</Filter>
+    </ClCompile>
+    <ClCompile Include="Cprison.cpp">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Cprison</Filter>
+    </ClCompile>
+    <ClCompile Include="Cslime.cpp">
+      <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager\Cenemy\Cslime</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
