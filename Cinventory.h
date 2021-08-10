@@ -1,11 +1,14 @@
 #pragma once
 #include"Citem.h"
 
+
 class Cinventory
 {
 	vector<Citem> m_vWeaponList;
 	vector<Citem> m_vArmorList;
 
+
+		
 public:
 
 	Cinventory();

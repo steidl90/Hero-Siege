@@ -61,6 +61,7 @@ private:
 
 	int m_compareTime;
 
+
 public:
 
 	CinventoryUi();
@@ -70,6 +71,9 @@ public:
 	void release();
 	void update();
 	void render();
+
+	// 인벤토리 정보 set
+	void setInventoryMemory(Cinventory* inven) { m_myInventory = inven; }
 
 	// 타입이 정해졌을때 설정된 리스트의 showIndex 설정
 	void setShowIndex();
@@ -88,5 +92,7 @@ public:
 	// 아이템 버리기버튼
 	void abandonItem();
 	bool checkEquipItem();
+
+
 };
 

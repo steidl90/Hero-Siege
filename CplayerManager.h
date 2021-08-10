@@ -10,12 +10,14 @@
 class CplayerManager :public Cunit
 {
 private:
-private:
+	camera* m_camera;
 	Cplayer* m_player;
 	CplayerSkill* m_playerSkill;
 	CplayerUi* m_playerUi;
-	camera* m_camera;
-	CinventoryUi* m_Inventory;
+	CinventoryUi* m_InventoryUI;
+	Cinventory* m_inventory;
+private:
+
 
 	bool isInventoryOn;
 
