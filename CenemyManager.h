@@ -14,13 +14,6 @@ enum class ENEMYTYPE {
 class CenemyManager :public Cenemy
 {
 private:
-	Celemental* m_elemental;
-	Cmonk* m_monk;
-	Cpriest* m_priest;
-	Cprison* m_prison;
-	Cslime* m_slime;
-
-private:
 	typedef vector<Cenemy*> m_vEnemy;
 	typedef vector<Cenemy*>::iterator m_viEnemy;
 
@@ -57,20 +50,5 @@ public:
 	void removeMonk(int arrNum);
 	void removePrison(int arrNum);
 	void removeSlime(int arrNum);
-
-	vector<Celemental*> getvElemental() { return m_vElemental; }
-	vector<Celemental*> getviElemental() { return m_viElemental; }
-
-	vector<Cpriest*> getvPriest() { return m_vPriest; }
-	vector<Cpriest*> getviPriest() { return m_viPriest; }
-
-	vector<Cmonk*> getvMonk() { return m_vMonk; }
-	vector<Cmonk*> getviMonk() { return m_viMonk; }
-
-	vector<Cprison*> getvPrison() { return m_vPrison; }
-	vector<Cprison*> getviPrison() { return m_viPrison; }
-
-	vector<Cslime*> getvSlime() { return m_vSlime; }
-	vector<Cslime*> getviSlime() { return m_viSlime; }
 };
 
