@@ -152,6 +152,7 @@
     <ClInclude Include="CbossManager.h" />
     <ClInclude Include="Cdungeon.h" />
     <ClInclude Include="Celemental.h" />
+    <ClInclude Include="Cenemy.h" />
     <ClInclude Include="CenemyAttack.h" />
     <ClInclude Include="CenemyManager.h" />
     <ClInclude Include="Cimage.h" />
@@ -216,6 +217,7 @@
     <ClCompile Include="CbossManager.cpp" />
     <ClCompile Include="Cdungeon.cpp" />
     <ClCompile Include="Celemental.cpp" />
+    <ClCompile Include="Cenemy.cpp" />
     <ClCompile Include="CenemyAttack.cpp" />
     <ClCompile Include="CenemyManager.cpp" />
     <ClCompile Include="Cimage.cpp" />
