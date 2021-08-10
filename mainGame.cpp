@@ -13,12 +13,16 @@ HRESULT mainGame::init()
 	m_image = new Cimage;
 	m_image->init();
 
+	m_astar = new CaStar;
+	m_astar->init();
+
+	SCENE->addScene("에이스타", m_astar);
 	SCENE->addScene("시작화면", new CsceneStart);
 	SCENE->addScene("선택화면", new CsceneSelect);
 	SCENE->addScene("마을", new CsceneTown);
 	SCENE->addScene("던전", new CsceneDungeon);
 
-	SCENE->changeScene("던전");
+	SCENE->changeScene("에이스타");
 	
 	return S_OK;
 }
