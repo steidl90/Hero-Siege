@@ -11,8 +11,8 @@ CinventoryUi::~CinventoryUi()
 
 HRESULT CinventoryUi::init()
 {
-	m_myInventory = new Cinventory();
-	m_myInventory->init();
+	//m_myInventory = new Cinventory();
+	//m_myInventory->init();
 
 	// ÀüÃ¼ UI ÁÂÇ¥
 	m_uiX = 200;
