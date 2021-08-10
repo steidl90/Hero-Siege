@@ -1,11 +1,6 @@
 #pragma once
 #include "Cunit.h"
-#include "Celemental.h"
-#include "Cmonk.h"
-#include "Cpriest.h"
-#include "Cprison.h"
-#include "Cslime.h"
-#include "CenemyAttack.h"
+#include "Cenemy.h"
 
 //enemy 행동패턴용도
 enum class ENEMYTYPE {
@@ -16,7 +11,7 @@ enum class ENEMYTYPE {
 	ENEMYTYPE_E
 };
 
-class CenemyManager :public Cunit
+class CenemyManager :public Cenemy
 {
 private:
 	Celemental* m_elemental;
@@ -25,22 +20,9 @@ private:
 	Cprison* m_prison;
 	Cslime* m_slime;
 
-	CenemyAttack* m_enemyAttack;
 private:
-	vector<Celemental*> m_vElemental;
-	vector<Celemental*> m_viElemental;
-
-	vector<Cpriest*> m_vPriest;
-	vector<Cpriest*> m_viPriest;
-
-	vector<Cmonk*> m_vMonk;
-	vector<Cmonk*> m_viMonk;
-
-	vector<Cprison*> m_vPrison;
-	vector<Cprison*> m_viPrison;
-
-	vector<Cslime*> m_vSlime;
-	vector<Cslime*> m_viSlime;
+	typedef vector<Cenemy*> m_vEnemy;
+	typedef vector<Cenemy*>::iterator m_viEnemy;
 
 
 private:

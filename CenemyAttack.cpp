@@ -5,10 +5,13 @@ CenemyAttack::CenemyAttack(){}
 
 CenemyAttack::~CenemyAttack(){}
 
-HRESULT CenemyAttack::init()
+HRESULT CenemyAttack::init(int skillMax, float range)
 {
-	ANIMATION->addDefAnimation("¿¤¸®¸àÅ»½ºÅ³¾Ö´Ï", "¿¤¸®¸àÅ»½ºÅ³1", 10, false, true);
+	ANIMATION->addDefAnimation("¿¤¸®¸àÅ»½ºÅ³¾Ö´Ï", "¿¤¸®¸àÅ»½ºÅ³", 10, false, true);
 	ANIMATION->addDefAnimation("¸®Ä¡½ºÅ³¾Ö´Ï", "¸®Ä¡½ºÅ³", 15, false, true);
+
+	m_skillMax = skillMax;
+	m_range = range;
 
 	return S_OK;
 }
@@ -27,8 +30,7 @@ void CenemyAttack::update(const char* aniName)
 		m_viSkill->m_rc = RectMakeCenter(m_viSkill->m_x, m_viSkill->m_y,
 			m_viSkill->m_skillImage->getFrameWidth(),
 			m_viSkill->m_skillImage->getFrameHeight());
-
-		if (m_viSkill->m_y > WINSIZEY || m_viSkill->m_y<0 || m_viSkill->m_x>WINSIZEX || m_viSkill->m_x < 0)
+		if (m_range < UTIL::getDistance(m_viSkill->m_x, m_viSkill->m_y, m_viSkill->m_fireX, m_viSkill->m_fireY))
 		{
 			m_viSkill = m_vSkill.erase(m_viSkill);
 		}
@@ -43,9 +45,8 @@ void CenemyAttack::render()
 {
 	for (m_viSkill = m_vSkill.begin(); m_viSkill != m_vSkill.end(); ++m_viSkill)
 	{
-		Rectangle(getMapDC(), m_viSkill->m_rc.left, m_viSkill->m_rc.top, m_viSkill->m_rc.right, m_viSkill->m_rc.bottom);
+		//Rectangle(getMapDC(), m_viSkill->m_rc.left, m_viSkill->m_rc.top, m_viSkill->m_rc.right, m_viSkill->m_rc.bottom);
 		m_viSkill->m_skillImage->aniRender(getMapDC(), m_viSkill->m_rc.left, m_viSkill->m_rc.top,m_viSkill->m_ani);
-		
 	}
 }
 

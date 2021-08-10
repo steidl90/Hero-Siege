@@ -9,14 +9,14 @@ enum class  DIRECTIONS
 	DIRECTIONS_DOWN
 };
 
-enum class STATE
-{
-	STATE_IDLE,
-	STATE_LEFT,
-	STATE_RIGHT,
-	STATE_UP,
-	STATE_DOWN
-};
+//enum class STATE
+//{
+//	STATE_IDLE,
+//	STATE_LEFT,
+//	STATE_RIGHT,
+//	STATE_UP,
+//	STATE_DOWN
+//};
 
 class Cplayer :public Cunit
 {

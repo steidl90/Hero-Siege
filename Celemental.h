@@ -9,7 +9,7 @@ public:
 	Celemental();
 	~Celemental();
 
-	virtual HRESULT init();
+	virtual HRESULT init(POINT position, int HP);
 	virtual void release();
 	virtual void update();
 	virtual void render();
@@ -17,6 +17,6 @@ public:
 	virtual void move();
 	virtual void attack();
 	virtual void animation();
-	virtual bool enemyCoolTime();
+	virtual bool enemyCooltime();
 
 };
