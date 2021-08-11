@@ -76,10 +76,6 @@ private:
 	bool isIdle;
 	bool isRect;
 
-
-	float time;
-	bool isRect;
-
 public:
 	Cplayer();
 	~Cplayer();
