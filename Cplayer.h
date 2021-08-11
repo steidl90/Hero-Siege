@@ -10,7 +10,6 @@ enum class DIRECTIONS
 	DIRECTIONS_DOWN
 };
 
-
 class Cplayer :public Cunit
 {
 private:
@@ -18,6 +17,8 @@ private:
 
 	DIRECTIONS direction;
 	DIRECTIONS beforeDirection;
+
+	SKILL skillState;
 
 	//대기
 	image* playerDown;
@@ -37,12 +38,28 @@ private:
 	image* playerAttackLeft;
 	image* playerAttackRight;
 
+	//라이트닝
+	image* playerSkillLightning;
+	animation* playerLightningAni;
+
 	animation* playerIdleAni;
 	animation* playerAttackAni;
 	animation* playerMoveAni;
 
+	
+
 	RECT playerAttackRc;
 	RECT playerMoveRc;
+
+	//스킬RECT
+	RECT lightningCenterRc;
+	RECT lightningRightRc;
+	RECT lightningLeftRc;
+	RECT lightningUpRc;
+	RECT lightningDownRc;
+
+	int m_skillX, m_skillY;
+	int m_count;
 
 	int m_maxHp;
 	int m_maxMp;
@@ -50,10 +67,14 @@ private:
 
 	float m_playerX, m_playerY;
 	float m_angle;
+
+	float m_time;
+
 	bool isMoving;
 	bool isAttack;
 	bool isLive;
 	bool isIdle;
+	bool isRect;
 
 
 	float time;
@@ -71,6 +92,9 @@ public:
 	void moveAnimation();
 	void playerStateRender();
 	void isAttackRender();
+
+	void playerSkillControl();
+	void playerSkillRender();
 
 	RECT* getplayerMoveRC() { return &playerMoveRc; }
 	float getplayerX() const { return m_playerX; }

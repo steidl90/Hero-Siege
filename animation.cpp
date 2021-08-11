@@ -64,7 +64,6 @@ void animation::setDefPlayFrame(bool reverse, bool loop)
 			{
 				_playList.push_back(i);
 			}
-
 		}
 		else
 		{
