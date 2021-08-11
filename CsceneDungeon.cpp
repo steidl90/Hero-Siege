@@ -1,6 +1,10 @@
 #include "framework.h"
 #include "CsceneDungeon.h"
-
+#include "Celemental.h"
+#include "Cmonk.h"
+#include "Cpriest.h"
+#include "Cprison.h"
+#include "Cslime.h"
 CsceneDungeon::CsceneDungeon()
 {
 }
@@ -21,6 +25,10 @@ HRESULT CsceneDungeon::init()
 	m_player = new CplayerManager;
 	m_player->init();
 
+	m_enemyManager = new CenemyManager;
+	m_enemyManager->init();
+	m_enemyManager->setPlayer(m_player->getPlayer());
+
 	m_changeRect = RectMake(170, MAPSIZE - 230, 100, 50);
 
 	return S_OK;
@@ -38,7 +46,8 @@ void CsceneDungeon::update()
 	m_camera->update();
 	m_dungeon->update();
 	m_player->update();
-
+	m_enemyManager->update();
+	m_enemyManager->collision();
 	m_camera->setTargetPoint(PointMake(m_player->getplayerRect()->left, m_player->getplayerRect()->top));
 
 	sceneChange();
@@ -51,6 +60,7 @@ void CsceneDungeon::render()
 
 	m_camera->render();
 	m_dungeon->render();
+	m_enemyManager->render();
 	m_player->render();
 
 	//Rectangle(getMapDC(), m_changeRect.left, m_changeRect.top, m_changeRect.right, m_changeRect.bottom);
