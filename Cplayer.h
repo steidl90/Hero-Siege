@@ -11,16 +11,6 @@ enum class DIRECTIONS
 	DIRECTIONS_DOWN
 };
 
-//enum class STATE
-//{
-//	STATE_IDLE,
-//	STATE_LEFT,
-//	STATE_RIGHT,
-//	STATE_UP,
-//	STATE_DOWN
-//};
-
-
 class Cplayer :public Cunit
 {
 private:
@@ -30,6 +20,8 @@ private:
 
 	DIRECTIONS direction;
 	DIRECTIONS beforeDirection;
+
+	SKILL skillState;
 
 	//´ë±â
 	image* playerDown;
@@ -69,7 +61,8 @@ private:
 	RECT lightningUpRc;
 	RECT lightningDownRc;
 
-
+	int m_skillX, m_skillY;
+	int m_count;
 
 	int m_maxHp;
 	int m_maxMp;

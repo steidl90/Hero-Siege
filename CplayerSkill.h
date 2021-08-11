@@ -17,6 +17,7 @@ struct tagPlayerSkill
 };
 enum class  SKILL
 {
+	SKILL_IDLE,
 	SKILL_LEFT,
 	SKILL_UP,
 	SKILL_RIGHT,
