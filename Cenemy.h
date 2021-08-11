@@ -36,8 +36,8 @@ protected:
 	float m_trace;
 	float m_speed;
 	float m_distance;
-
 	float m_hp;
+	float m_maxHp;
 	float m_damage;
 	float m_exp;
 
@@ -68,6 +68,8 @@ public:
 
 	virtual void ReturnIdleAnimation();
 
+	float getHp() { return m_hp; }
+	void setHp(float hp) { m_hp = hp; }
 
 	virtual void setPlayer(Cplayer* player) { m_player = player; }
 	virtual RECT getRect() { return m_walkRc; }

@@ -1,8 +1,10 @@
 #pragma once
 #include "Cenemy.h"
+#include "CprogressBar.h"
 class Cprison :public Cenemy
 {
 private:
+	CprogressBar* m_hpBar;
 
 
 public:

@@ -28,9 +28,13 @@ HRESULT Cprison::init(POINT position, float HP, float damage, float exp, float t
 
 	m_distance = 10.0f;
 	m_speed = 2.0f;
-	m_hp = HP;
+	m_hp = m_maxHp = HP;
 	m_damage = damage;
 	m_exp = exp;
+
+	m_hpBar = new CprogressBar;
+	m_hpBar->init("images/hp.bmp", "images/hp_back.bmp", m_x, m_y, 33, 5);
+	m_hpBar->setGauge(m_hp, m_maxHp);
 
 	m_cooltimeCount = 200;
 	m_rndskillCount = 1;
@@ -58,10 +62,12 @@ void Cprison::release()
 {
 	SAFE_DELETE(m_enemyAttack);
 	SAFE_DELETE(m_player);
+	SAFE_DELETE(m_hpBar);
 }
 
 void Cprison::update()
 {
+	m_hpBar->mapUpdate(m_x - 15, m_y - 45);
 	m_enemyAttack->update();
 	move();
 	attack();
@@ -75,6 +81,7 @@ void Cprison::update()
 
 void Cprison::render()
 {
+	m_hpBar->mapRender();
 	if (InputManager->isToggleKey(VK_TAB))
 	{
 		Rectangle(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkRc.right, m_walkRc.bottom);

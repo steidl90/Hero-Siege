@@ -1,9 +1,10 @@
 #pragma once
 #include "Cenemy.h"
+#include "CprogressBar.h"
 class Cmonk :public Cenemy
 {
 private:
-
+	CprogressBar* m_hpBar;
 
 public:
 	Cmonk();

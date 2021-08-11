@@ -14,7 +14,7 @@ Celemental::~Celemental()
 HRESULT Celemental::init(POINT position, float HP, float damage, float exp,float trace)
 {
 	m_enemyAttack = new CenemyAttack;
-	m_enemyAttack->init(50,500,false,"¿¤¸®¸àÅ»½ºÅ³¾Ö´Ï");
+	m_enemyAttack->init(50, 500, false, "¿¤¸®¸àÅ»½ºÅ³¾Ö´Ï");
 
 	m_player = new Cplayer;
 	m_player->init();
@@ -26,9 +26,13 @@ HRESULT Celemental::init(POINT position, float HP, float damage, float exp,float
 	m_y = m_returnY = position.y;
 	m_trace = trace;
 	m_speed = 2.0f;
-	m_hp = HP;
+	m_hp = m_maxHp = HP;
 	m_damage= damage;
 	m_exp=exp;
+
+	m_hpBar = new CprogressBar;
+	m_hpBar->init("images/hp.bmp", "images/hp_back.bmp", m_x, m_y, 33, 5);
+	m_hpBar->setGauge(m_hp, m_maxHp);
 
 	m_cooltimeCount = 0;
 	m_rndskillCount = 1;
@@ -48,13 +52,15 @@ void Celemental::release()
 {
 	SAFE_DELETE(m_enemyAttack);
 	SAFE_DELETE(m_player);
+	SAFE_DELETE(m_hpBar);
 }
 
 void Celemental::update()
 {
+	m_hpBar->mapUpdate(m_x - 15, m_y - 45);
 	m_enemyAttack->update();
-		move();
-		attack();
+	move();
+	attack();
 
 	m_walkRc = RectMakeCenter(m_x, m_y, m_walkImage->getFrameWidth(), m_walkImage->getFrameHeight());
 	m_traceRc = RectMakeCenter(m_x, m_y, m_trace, m_trace);
@@ -62,6 +68,7 @@ void Celemental::update()
 
 void Celemental::render()
 {
+	m_hpBar->mapRender();
 	if (InputManager->isToggleKey(VK_TAB))
 	{
 		Rectangle(getMapDC(), m_traceRc.left, m_traceRc.top, m_traceRc.right, m_traceRc.bottom);

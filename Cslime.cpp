@@ -28,9 +28,13 @@ HRESULT Cslime::init(POINT position, float HP, float damage, float exp,float tra
 
 	m_distance = 10.0f;
 	m_speed = 2.0f;
-	m_hp = HP;
+	m_hp = m_maxHp = HP;
 	m_damage = damage;
 	m_exp = exp;
+
+	m_hpBar = new CprogressBar;
+	m_hpBar->init("images/hp.bmp", "images/hp_back.bmp", m_x, m_y, 33, 5);
+	m_hpBar->setGauge(m_hp, m_maxHp);
 
 	m_cooltimeCount = 200;
 	m_rndskillCount = 1;
@@ -51,10 +55,12 @@ void Cslime::release()
 {
 	SAFE_DELETE(m_enemyAttack);
 	SAFE_DELETE(m_player);
+	SAFE_DELETE(m_hpBar);
 }
 
 void Cslime::update()
 {
+	m_hpBar->mapUpdate(m_x - 15, m_y - 25);
 	m_enemyAttack->update();
 	move();
 	attack();
@@ -67,6 +73,7 @@ void Cslime::update()
 
 void Cslime::render()
 {
+	m_hpBar->mapRender();
 	if (InputManager->isToggleKey(VK_TAB))
 	{
 		Rectangle(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkRc.right, m_walkRc.bottom);

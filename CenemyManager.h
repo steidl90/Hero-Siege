@@ -19,6 +19,7 @@ private:
 	//typedef vector<Cenemy*> vEnemy;
 
 	vector<Cenemy*>  m_vEnemy;
+	vector<Cenemy*>::iterator  m_viEnemy;
 	Cplayer* m_player;
 	CenemyAttack* m_skill;
 	float m_angle;
