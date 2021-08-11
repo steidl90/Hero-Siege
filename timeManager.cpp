@@ -31,6 +31,7 @@ void timeManager::update(float lock)
     {
         _timer->tick(lock);
     }
+    if (InputManager->isOnceKeyDown(VK_F1)) isDebug = !isDebug;
 }
 
 void timeManager::render(HDC hdc)
@@ -47,16 +48,18 @@ void timeManager::render(HDC hdc)
 
     if (_timer != nullptr)
     {
-        //FPS
-        sprintf_s(str, "FPS : %d", _timer->getFrameRate());
-        TextOut(hdc, 0, 0, str, strlen(str));
-
-        //전체 경과시간
-        sprintf_s(str, "worldTime : %f", _timer->getWorldTime());
-        TextOut(hdc, 0, 20, str, strlen(str));
-        //한프레임당 경과시간
-        sprintf_s(str, "ElapsedTime : %f", _timer->getElapsedTime());
-        TextOut(hdc, 0, 40, str, strlen(str));
+        if (isDebug)
+        {
+            //FPS
+            sprintf_s(str, "FPS : %d", _timer->getFrameRate());
+            TextOut(hdc, 0, 0, str, strlen(str));
+            //전체 경과시간
+            sprintf_s(str, "worldTime : %f", _timer->getWorldTime());
+            TextOut(hdc, 0, 20, str, strlen(str));
+            //한프레임당 경과시간
+            sprintf_s(str, "ElapsedTime : %f", _timer->getElapsedTime());
+            TextOut(hdc, 0, 40, str, strlen(str));
+        }
     }
 
 #else

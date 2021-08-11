@@ -171,6 +171,7 @@
     <ClInclude Include="CplayerUi.h" />
     <ClInclude Include="Cpriest.h" />
     <ClInclude Include="Cprison.h" />
+    <ClInclude Include="CprogressBar.h" />
     <ClInclude Include="CsceneDungeon.h" />
     <ClInclude Include="CsceneSelect.h" />
     <ClInclude Include="CsceneStart.h" />
@@ -235,6 +236,7 @@
     <ClCompile Include="CplayerUi.cpp" />
     <ClCompile Include="Cpriest.cpp" />
     <ClCompile Include="Cprison.cpp" />
+    <ClCompile Include="CprogressBar.cpp" />
     <ClCompile Include="CsceneDungeon.cpp" />
     <ClCompile Include="CsceneSelect.cpp" />
     <ClCompile Include="CsceneStart.cpp" />

@@ -1,6 +1,8 @@
 #pragma once
 #include "Cunit.h"
 #include "CplayerSkill.h"
+#include "CprogressBar.h"
+
 enum class DIRECTIONS
 {
 	DIRECTIONS_LEFT,
@@ -23,6 +25,8 @@ class Cplayer :public Cunit
 {
 private:
 	CplayerSkill* m_playerSkill;
+	CprogressBar* m_hpBar;
+	CprogressBar* m_mpBar;
 
 	DIRECTIONS direction;
 	DIRECTIONS beforeDirection;
@@ -52,9 +56,10 @@ private:
 	RECT playerAttackRc;
 	RECT playerMoveRc;
 
-	float m_playerX, m_playerY;
+	int m_maxHp;
+	int m_maxMp;
 
-	//float m_speed;
+	float m_playerX, m_playerY;
 	float m_angle;
 	bool isMoving;
 	bool isAttack;
@@ -76,6 +81,8 @@ public:
 	RECT* getplayerMoveRC() { return &playerMoveRc; }
 	float getplayerX() const { return m_playerX; }
 	float getplayerY() const { return m_playerY; }
+
+	int getMaxHp() { return m_maxHp; }
 
 	
 };
