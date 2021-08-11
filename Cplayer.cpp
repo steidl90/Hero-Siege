@@ -26,14 +26,6 @@ HRESULT Cplayer::init()
 	m_playerSkill = new CplayerSkill;
 	m_playerSkill->init();
 
-	m_hpBar = new CprogressBar;
-	m_hpBar->init("images/hp.bmp", "images/hp_back.bmp", 80, 20, 238, 10);
-	m_hpBar->setGauge(getHp(), m_maxHp);
-
-	m_mpBar = new CprogressBar;
-	m_mpBar->init("images/mp.bmp", "images/hp_back.bmp", 80, 40, 196, 10);
-	m_mpBar->setGauge(getMp(), m_maxMp);
-
    //DIRECTIONS
    direction= DIRECTIONS::DIRECTIONS_DOWN;
    beforeDirection= DIRECTIONS::DIRECTIONS_DOWN;
@@ -92,8 +84,7 @@ HRESULT Cplayer::init()
 void Cplayer::release()
 {
 	SAFE_DELETE(m_playerSkill);
-	SAFE_DELETE(m_hpBar);
-	SAFE_DELETE(m_mpBar);
+
 }
 
 void Cplayer::update()
@@ -102,18 +93,12 @@ void Cplayer::update()
 	moveControl();
 	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth() - 90, playerMoveDown->getFrameHeight() - 50);
 	m_playerSkill->update("리치스킬애니");
-	m_hpBar->update();
-	m_hpBar->setGauge(getHp(), m_maxHp);
-	m_mpBar->update();
-	m_mpBar->setGauge(getMp(), m_maxMp);
 }
 
 void Cplayer::render()
 {
 	playerStateRender();
 	m_playerSkill->render();
-	m_hpBar->render();
-	m_mpBar->render();
 }
 
 void Cplayer::moveControl()
@@ -392,30 +377,30 @@ void Cplayer::playerStateRender()
 	}
 }
 
-void Cplayer::mouseMoveAstar()
-{
-	/*if (resetMove)
-	{
-		endCount = m_fastLoadLocation->size() - 1;
-		startCount = 0;
-	}
-	while (true)
-	{
-		
-		auto iter = m_fastLoadLocation->begin();
-
-		if (m_playerX > iter[startCount].x)
-			m_playerX += m_speed;
-		else if (m_playerX < iter[startCount].x)
-			m_playerX -= m_speed;
-
-		if (m_playerY > iter[startCount].y)
-			m_playerY -= m_speed;
-		else if (m_playerY < iter[startCount].y)
-			m_playerY += m_speed;
-
-	}*/
-
-	// 에이스타 이동 -> 이동할 타일을 리스트에 담음..
-	// 리스트 하나씩 이동
-}
+//void Cplayer::mouseMoveAstar()
+//{
+//	/*if (resetMove)
+//	{
+//		endCount = m_fastLoadLocation->size() - 1;
+//		startCount = 0;
+//	}
+//	while (true)
+//	{
+//		
+//		auto iter = m_fastLoadLocation->begin();
+//
+//		if (m_playerX > iter[startCount].x)
+//			m_playerX += m_speed;
+//		else if (m_playerX < iter[startCount].x)
+//			m_playerX -= m_speed;
+//
+//		if (m_playerY > iter[startCount].y)
+//			m_playerY -= m_speed;
+//		else if (m_playerY < iter[startCount].y)
+//			m_playerY += m_speed;
+//
+//	}*/
+//
+//	// 에이스타 이동 -> 이동할 타일을 리스트에 담음..
+//	// 리스트 하나씩 이동
+//}

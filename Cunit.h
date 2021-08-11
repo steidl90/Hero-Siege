@@ -15,6 +15,7 @@ private:
 	int m_critical;
 	int m_lv;
 	int m_exp;
+	int m_gold;
 	float m_criticalAtk;
 	float m_speed;
 
@@ -36,6 +37,7 @@ public:
 	int getCritical() { return m_critical; }
 	int getLv() { return m_lv; }
 	int getExp() { return m_exp; }
+	int getGold() { return m_gold; }
 	float getCriticalAtk() { return m_criticalAtk; }
 	float getSpeed() { return m_speed; }
 
@@ -48,7 +50,8 @@ public:
 	void setCritical(int cri) { m_critical = cri; }
 	void setLv(int lv) { m_lv = lv; }
 	void setExp(int exp) { m_exp = exp; }
-	void setCriticalAtk(int criAtk) { m_criticalAtk = criAtk; }
+	void setGold(int gold) { m_gold = gold; }
+	void setCriticalAtk(float criAtk) { m_criticalAtk = criAtk; }
 	void setSpeed(float speed) { m_speed = speed; }
 
 };

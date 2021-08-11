@@ -17,14 +17,15 @@ class CtotalItem : public Singleton<CtotalItem>
 	int m_hp;
 	int m_mp;
 	int m_critical;
-	int m_criticalAtk;
-	int m_speed;
+	float m_criticalAtk;
+	float m_speed;
 	int m_limitLevel;
 	int m_itemBuyPrice;
-	int m_id;
-	// 아이템 등급 추가해야함
 	POINT m_frame;
+	int m_itemId;
+	int m_itemGrade;
 
+	int m_itemCount;
 public:
 	HRESULT init();
 	void release();
@@ -33,6 +34,7 @@ public:
 
 	void itemInit();
 
-	Citem* getItem(int id);
+	int getTotalItemCount()const { return m_itemCount / 15; }
+	Citem* getItem(int index);
 };
 

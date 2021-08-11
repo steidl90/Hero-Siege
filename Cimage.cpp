@@ -138,6 +138,7 @@ HRESULT Cimage::init()
     IMAGE->addImage("MiniMapUi", "images/MinimapUI.bmp", 284 * 0.74, 357 * 0.74, true, RGB(255, 0, 255));
     IMAGE->addImage("선택테두리", "images/inventorySelectUI1.bmp", 207, 88, true, RGB(255, 0, 255));
     IMAGE->addImage("장착테두리", "images/inventorySelectUI2.bmp", 207, 88, true, RGB(255, 0, 255));
+    IMAGE->addImage("상점창", "images/shop_window.bmp", 469, 473, true, RGB(255, 0, 255));
 
     IMAGE->addFrameImage("레벨업", "images/LevelUP.bmp", 183, 55, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("버튼1", "images/Button1.bmp", 208, 39, 1, 1, true, RGB(255, 0, 255));

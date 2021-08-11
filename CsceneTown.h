@@ -4,6 +4,7 @@
 #include "CplayerManager.h"
 #include "camera.h"
 #include "CaStar.h"
+#include "CshopUi.h"
 class CsceneTown : public gameNode
 {
 private:
@@ -11,8 +12,14 @@ private:
 	camera* m_camera;
 	CplayerManager* m_player;
 	CaStar* m_aStar;
+	Cshop* m_shop;
+	CshopUi* m_shopUi;
+
 private:
 	RECT m_changeRect;
+	RECT m_shopRect;
+
+	bool isShopOn;
 
 public:
 	CsceneTown();
@@ -24,4 +31,5 @@ public:
 	void render();
 
 	void sceneChange();
+	void shopOn();
 };

@@ -35,4 +35,10 @@ public:
 	RECT* getplayerRect() { return m_player->getplayerMoveRC(); }
 
 	void setFastLoadLocation(vector<POINT>* vp) { m_fastLoadLocation = vp; }
+
+	Cinventory* getInventoryMemory() { return m_inventory; }
+
+	void showPlayerStat();
+
+	void itemStatSet();
 };

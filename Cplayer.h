@@ -83,7 +83,7 @@ public:
 	float getplayerY() const { return m_playerY; }
 
 	int getMaxHp() { return m_maxHp; }
-
+	int getMaxMp() { return m_maxMp; }
 	
 };
 

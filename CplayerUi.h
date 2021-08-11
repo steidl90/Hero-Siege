@@ -9,6 +9,8 @@ private:
 	RECT m_hudUi;
 	Cplayer* m_player;
 	CprogressBar* m_hpBar;
+	CprogressBar* m_mpBar;
+
 public:
 	CplayerUi();
 	~CplayerUi();

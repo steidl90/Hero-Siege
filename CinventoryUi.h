@@ -1,16 +1,18 @@
 #pragma once
 #include"gameNode.h"
 #include"Cinventory.h"
-
+// 인벤토리 include 오류나면 전방참조
+class Cplayer;
 class CinventoryUi : public gameNode
 {
 private:
 	Cinventory* m_myInventory;
+	Cplayer* m_player;
 
 private:
 
 	// 기본 UI 멤버변수
-	RECT m_InventoryRc;
+	RECT m_InventoryRect;
 	int m_uiX;
 	int m_uiY;
 	int m_itemListX;
@@ -22,10 +24,10 @@ private:
 	int m_functionButtonX;
 	int m_functionButtonY;
 
-	vector<RECT> m_vInventoryItemList;
-	vector<RECT> m_vInventoryEquipItemSub;
-	vector<RECT> m_vInventoryEquipItemMain;
-	RECT m_InventoryItemInfo;
+	vector<RECT> m_vItemListRect;
+	vector<RECT> m_vEquipItemSubRect;
+	vector<RECT> m_vEquipItemMainRect;
+	RECT m_ItemInfoRect;
 
 	RECT m_exitButton;
 	RECT m_equipButton;
@@ -40,7 +42,7 @@ private:
 
 	// 버튼 클릭시 stay다운을 once처럼 쓰기위해..
 	bool isButtonClick;
-	bool isOnceClick;
+	bool isKeyUp;
 
 	// 기능 구현 멤버변수
 	ITEMTYPE m_selectType;
@@ -53,13 +55,17 @@ private:
 	int m_equipRenderY;
 	int m_clickCount;
 
+	POINT m_equipRenderPoint[5];
+
 	bool isSelectRender;
-	bool isEquipRender;
+	//bool isEquipRender;
 
 	bool isEquipWeapon;
 	bool isEquipArmor;
 
 	int m_compareTime;
+
+	RECT m_clickCheckRect;
 
 
 public:
@@ -74,25 +80,35 @@ public:
 
 	// 인벤토리 정보 set
 	void setInventoryMemory(Cinventory* inven) { m_myInventory = inven; }
+	// 플레이어 정보 set
+	void setPlayerMemory(Cplayer* player) { m_player = player; }
 
-	// 타입이 정해졌을때 설정된 리스트의 showIndex 설정
+	// 타입이 정해졌을때 설정된 리스트의 showIndex (보여줄 인덱스 범위) 설정
 	void setShowIndex();
 
-	// 아이템 리스트에 해당되는 타입의 보유 리스트 출력
+	// 타입별 아이템 출력
 	void showListItemType();
 	void showItemList(vector<Citem>* list);
+	// 장착 테두리 출력
+	void showEquipSelect();
+
 	// 리스트에서 선택시 동작
 	void selectItem();
 	void selectEquipItem();
-	// 장착한 아이템 정보 멤버변수에 set
-	void setEquipItem(int index);
+	// 아이템 장착 동작!
+	void setEquipItem(int index, int x, int y);
+	void setPlayerStat(int index);
 	// 장비창 rect 클릭시 선택 아이템 타입 변경
 	void selectItemType();
 
-	// 아이템 버리기버튼
+	// 아이템 상세정보
+
+	// 아이템 버리기 동작
 	void abandonItem();
 	bool checkEquipItem();
 
+	// 아이템 해제 동작
 
+	void unEquipItem();
 };
 

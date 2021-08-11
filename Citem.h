@@ -12,17 +12,18 @@ private:
 	int m_hp;
 	int m_mp;
 	int m_critical;
-	int m_criticalAtk;
-	int m_speed;
+	float m_criticalAtk;
+	float m_speed;
 	int m_limitLevel;
 	int m_itemBuyPrice;
-	// 아이템 등급 추가해야함
 	POINT m_frame;
+	int m_itemId;
+	int m_itemGrade;
 
 public:
 	Citem();
 	Citem(string bigImg, string smallImg, string name, ITEMTYPE type, int atk, int def, int hp, int mp,
-		int cri, int criAtk, int speed, int level, int price, POINT frame);
+		int cri, float criAtk, float speed, int level, int price, POINT frame, int itemId, int itemGrade);
 	~Citem();
 
 	string getBigImage()const { return m_BigImage; }
@@ -34,13 +35,16 @@ public:
 	int getHp()const { return m_hp; }
 	int getMp()const { return m_mp; }
 	int getCritical()const { return m_critical; }
-	int getCriticalAtk()const { return m_criticalAtk; }
-	int getSpeed()const { return m_speed; }
+	float getCriticalAtk()const { return m_criticalAtk; }
+	float getSpeed()const { return m_speed; }
 	int getLimitLevel()const { return m_limitLevel; }
 	int getBuyPrice()const { return m_itemBuyPrice; }
 	POINT getFrame()const { return m_frame; }
+	int getItemId()const { return m_itemId; }
+	string getItemGrade()const;
+	int getItemGradeInt()const { return m_itemGrade; }
 
-
+	void setItemId(int id);
 
 };
 
