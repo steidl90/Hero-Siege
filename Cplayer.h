@@ -70,6 +70,8 @@ private:
 	RECT lightningDownRc;
 
 
+	int m_skillX, y;
+	int m_count;
 
 	int m_maxHp;
 	int m_maxMp;
@@ -85,6 +87,10 @@ private:
 	bool isIdle;
 	bool isRect;
 
+	bool isSkillLeft;
+	bool isSkillLeft2;
+	bool isSkillLeft3;
+	bool isSkillLeft4;
 public:
 	Cplayer();
 	~Cplayer();
