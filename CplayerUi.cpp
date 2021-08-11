@@ -2,7 +2,7 @@
 #include "CplayerUi.h"
 #include "Cplayer.h"
 
-CplayerUi::CplayerUi()
+CplayerUi::CplayerUi() :m_timer(0.0f), isLevelUp(false)
 {
 }
 
@@ -12,6 +12,8 @@ CplayerUi::~CplayerUi()
 
 HRESULT CplayerUi::init()
 {
+	m_currentLv = m_player->getLv();
+
 	m_hpBar = new CprogressBar;
 	m_hpBar->init("images/hp.bmp", "images/hp_back.bmp", 80, 20, 238, 10);
 	m_hpBar->setGauge(m_player->getHp(), m_player->getMaxHp());
@@ -42,6 +44,14 @@ void CplayerUi::release()
 void CplayerUi::update()
 {
 	progressBarUpdate();
+
+	if (m_currentLv < m_player->getLv())
+	{
+		m_currentLv = m_player->getLv();
+		isLevelUp = true;
+		m_timer = TIME->getWorldTime();
+	}
+	if (m_timer + 3 < TIME->getWorldTime()) isLevelUp = false;
 }
 
 void CplayerUi::render()
@@ -60,6 +70,18 @@ void CplayerUi::render()
 	else IMAGE->findImage("스킬R")->render(getMemDC(), 269, (WINSIZEY - 56) - IMAGE->findImage("스킬R")->getHeight());
 
 	IMAGE->findImage("플레이어체력바")->render(getMapDC(), m_player->getplayerX() - 7, m_player->getplayerY() - 10);
+
+	if (isLevelUp)
+	{
+		IMAGE->findImage("레벨업")->render(getMemDC(), WINSIZEX / 2 - 145, WINSIZEY / 2 - 190);
+
+		TCHAR strLv[20];
+		SetTextColor(getMemDC(), RGB(255, 255, 255));
+		SetTextAlign(getMemDC(), TA_CENTER);
+		sprintf_s(strLv, "레벨업 Lv:%d", m_player->getLv());
+		TextOut(getMemDC(), WINSIZEX / 2 - 7, WINSIZEY / 2 - 163, strLv, strlen(strLv));
+		SetTextAlign(getMemDC(), TA_LEFT);
+	}
 
 	playerStateRender();
 }

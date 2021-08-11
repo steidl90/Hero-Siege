@@ -12,6 +12,11 @@ private:
 	CprogressBar* m_hpBarSecond;
 	CprogressBar* m_mpBar;
 	CprogressBar* m_expBar;
+
+	float m_timer;
+	bool isLevelUp;
+	int m_currentLv;
+
 public:
 	CplayerUi();
 	~CplayerUi();

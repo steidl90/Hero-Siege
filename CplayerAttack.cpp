@@ -11,7 +11,7 @@ CplayerAttack::~CplayerAttack()
 
 HRESULT CplayerAttack::init()
 {
-    return E_NOTIMPL;
+    return S_OK;
 }
 
 void CplayerAttack::release()

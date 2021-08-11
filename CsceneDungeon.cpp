@@ -61,7 +61,6 @@ void CsceneDungeon::render()
 	m_elemental->render();
 	m_player->render();
 
-
 	Rectangle(getMapDC(), m_changeRect.left, m_changeRect.top, m_changeRect.right, m_changeRect.bottom);
 }
 
