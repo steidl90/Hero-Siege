@@ -73,10 +73,5 @@ public:
 
 	virtual void setPlayer(Cplayer* player) { m_player = player; }
 	virtual RECT getRect() { return m_walkRc; }
-
-	// Ãß°¡
-
-	float getHp() { return m_hp; }
-	void setHp(float hp) { m_hp = hp; }
 };
 

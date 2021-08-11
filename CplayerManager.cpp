@@ -50,8 +50,6 @@ void CplayerManager::update()
     if(isInventoryOn) m_InventoryUI->update();
     m_playerUi->update();
     m_playerSkill->update("리치스킬애니");
-
-    this->collisionEnemy();
 }
 
 void CplayerManager::render()

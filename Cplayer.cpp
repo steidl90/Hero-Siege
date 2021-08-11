@@ -271,7 +271,7 @@ void Cplayer::playerStateRender()
 			else
 			{
 				playerAttackRc = RectMake(m_playerX - 99, m_playerY, 100, 40);
-				Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
+				//Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
 				playerAttackLeft->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			}
 			break;
@@ -280,7 +280,7 @@ void Cplayer::playerStateRender()
 			else
 			{
 				playerAttackRc = RectMake(m_playerX + 10, m_playerY - 89, 40, 90);
-				Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
+				//Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
 				playerAttackUp->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 76, playerAttackAni);
 			}
 			break;
@@ -289,7 +289,7 @@ void Cplayer::playerStateRender()
 			else
 			{
 				playerAttackRc = RectMake(m_playerX + 35, m_playerY, 100, 40);
-				Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
+				//Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
 				playerAttackRight->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			}
 			break;
@@ -298,7 +298,7 @@ void Cplayer::playerStateRender()
 			else
 			{
 				playerAttackRc = RectMake(m_playerX - 10, m_playerY + 67, 40, 90);
-				Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
+				//Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
 				playerAttackDown->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			}
 			break;

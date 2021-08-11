@@ -139,7 +139,7 @@ void CsceneDungeon::update()
 	m_enemyManager->update();
 	m_enemyManager->collision();
 	m_camera->setTargetPoint(PointMake(m_player->getplayerRect()->left, m_player->getplayerRect()->top));
-
+	m_player->collisionEnemy();
 	sceneChange();
 }
 

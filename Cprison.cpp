@@ -67,6 +67,7 @@ void Cprison::release()
 
 void Cprison::update()
 {
+	m_hpBar->setGauge(m_hp, m_maxHp);
 	m_hpBar->mapUpdate(m_x - 15, m_y - 45);
 	m_enemyAttack->update();
 	move();
