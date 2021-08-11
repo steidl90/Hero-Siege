@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "CplayerManager.h"
 
+
 CplayerManager::CplayerManager()
 {
 }
@@ -24,7 +25,6 @@ HRESULT CplayerManager::init()
     m_InventoryUI->init();
     m_InventoryUI->setInventoryMemory(m_inventory);
 
-
     isInventoryOn = false;
     return S_OK;
 }
@@ -45,6 +45,9 @@ void CplayerManager::update()
     m_player->update();
     if(isInventoryOn) m_InventoryUI->update();
     m_playerSkill->update("리치스킬애니");
+
+    m_player->setFastLoadLocation(m_fastLoadLocation);
+
 }
 
 void CplayerManager::render()

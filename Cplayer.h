@@ -61,6 +61,15 @@ private:
 	bool isLive;
 	bool isIdle;
 
+	// 에이스타 추가
+	vector<POINT>* m_fastLoadLocation;
+	int endCount;
+	int startCount;
+
+	bool resetMove;
+	bool isButtonClick;
+	bool isKeyup;
+
 public:
 	Cplayer();
 	~Cplayer();
@@ -76,5 +85,9 @@ public:
 	RECT* getplayerMoveRC() { return &playerMoveRc; }
 	float getplayerX() const { return m_playerX; }
 	float getplayerY() const { return m_playerY; }
+
+	// 에이스타 추가
+	void setFastLoadLocation(vector<POINT>* vp) { m_fastLoadLocation = vp; }
+	void mouseMoveAstar();
 };
 
