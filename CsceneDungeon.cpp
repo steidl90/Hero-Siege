@@ -21,10 +21,6 @@ HRESULT CsceneDungeon::init()
 	m_player = new CplayerManager;
 	m_player->init();
 
-	m_elemental = new Celemental;
-	m_elemental->init(PointMake(1000,500),1000);
-
-
 	m_changeRect = RectMake(170, MAPSIZE - 230, 100, 50);
 
 	return S_OK;
@@ -35,7 +31,6 @@ void CsceneDungeon::release()
 	SAFE_DELETE(m_camera);
 	SAFE_DELETE(m_dungeon);
 	SAFE_DELETE(m_player);
-	SAFE_DELETE(m_elemental);
 }
 
 void CsceneDungeon::update()
@@ -43,8 +38,6 @@ void CsceneDungeon::update()
 	m_camera->update();
 	m_dungeon->update();
 	m_player->update();
-
-	m_elemental->update();
 
 	m_camera->setTargetPoint(PointMake(m_player->getplayerRect()->left, m_player->getplayerRect()->top));
 
@@ -58,7 +51,6 @@ void CsceneDungeon::render()
 
 	m_camera->render();
 	m_dungeon->render();
-	m_elemental->render();
 	m_player->render();
 
 	//Rectangle(getMapDC(), m_changeRect.left, m_changeRect.top, m_changeRect.right, m_changeRect.bottom);
