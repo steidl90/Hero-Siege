@@ -49,22 +49,41 @@ private:
 	image* playerAttackLeft;
 	image* playerAttackRight;
 
+	//라이트닝
+	image* playerSkillLightning;
+	animation* playerLightningAni;
+
 	animation* playerIdleAni;
 	animation* playerAttackAni;
 	animation* playerMoveAni;
 
+	
+
 	RECT playerAttackRc;
 	RECT playerMoveRc;
+
+	//스킬RECT
+	RECT lightningCenterRc;
+	RECT lightningRightRc;
+	RECT lightningLeftRc;
+	RECT lightningUpRc;
+	RECT lightningDownRc;
+
+
 
 	int m_maxHp;
 	int m_maxMp;
 
 	float m_playerX, m_playerY;
 	float m_angle;
+
+	float m_time;
+
 	bool isMoving;
 	bool isAttack;
 	bool isLive;
 	bool isIdle;
+	bool isRect;
 
 public:
 	Cplayer();

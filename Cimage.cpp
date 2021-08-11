@@ -35,7 +35,7 @@ HRESULT Cimage::init()
     IMAGE->addFrameImage("플레이어아래쪽", "images/IdleAmazoneDown-1.bmp", 696, 107, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("플레이어아래쪽공격", "images/AttackAmazoneDown.bmp", 1368, 231, 6, 1, true, RGB(255, 0, 255));
 
-
+    IMAGE->addFrameImage("라이트닝", "images/Lightning.bmp", 576, 402, 8, 1, true, RGB(255, 0, 255));
 
 
     //=================NPC====================//

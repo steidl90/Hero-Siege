@@ -44,11 +44,6 @@ void CplayerSkill::update(const char* aniName)
 			m_viPlayerSkill->m_skillImage->getFrameWidth(),
 			m_viPlayerSkill->m_skillImage->getFrameHeight());
 
-		/*if (m_viPlayerSkill->m_skillY > m_viPlayerSkill->m_range || m_viPlayerSkill->m_skillY<0 || m_viPlayerSkill->m_skillX>WINSIZEX || m_viPlayerSkill->m_skillX < 0)
-		{
-			m_viPlayerSkill = m_vPlayerSkill.erase(m_viPlayerSkill);
-		}
-		else ++m_viPlayerSkill;*/
 		if (m_viPlayerSkill->m_range < UTIL::getDistance(m_viPlayerSkill->m_fireX, m_viPlayerSkill->m_fireY,m_viPlayerSkill->m_skillX, m_viPlayerSkill->m_skillY))
 		{
 			m_viPlayerSkill = m_vPlayerSkill.erase(m_viPlayerSkill);

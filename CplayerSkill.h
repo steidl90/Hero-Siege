@@ -14,9 +14,6 @@ struct tagPlayerSkill
 	float m_speed;
 	float m_range;
 	bool m_fire;
-
-	int m_count;
-	float m_index;
 };
 enum class  SKILL
 {
@@ -40,6 +37,7 @@ private:
 
 	animation* playerAttackAni;
 	animation* m_playerSkillAni;
+	animation* m_playerThunderSkillAni;
 
 	RECT m_skillRc;
 
