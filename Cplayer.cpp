@@ -11,8 +11,8 @@ Cplayer::~Cplayer()
 
 HRESULT Cplayer::init()
 {
-	m_maxHp = 100;
-	m_maxMp = 50;
+	m_maxHp = 1000;
+	m_maxMp = 500;
 	m_maxExp = 100;
 	setAtk(10);
 	setDef(10);
@@ -30,59 +30,59 @@ HRESULT Cplayer::init()
 
 	time = TIME->getWorldTime();
 
-   //DIRECTIONS
-   direction= DIRECTIONS::DIRECTIONS_DOWN;
-   beforeDirection= DIRECTIONS::DIRECTIONS_DOWN;
+	//DIRECTIONS
+	direction = DIRECTIONS::DIRECTIONS_DOWN;
+	beforeDirection = DIRECTIONS::DIRECTIONS_DOWN;
 
-   //IMAGE
-   playerDown= IMAGE->findImage("플레이어아래쪽");
-   playerAttackDown= IMAGE->findImage("플레이어아래쪽공격");
-   playerMoveDown = IMAGE->findImage("플레이어아래쪽걷기");
+	//IMAGE
+	playerDown = IMAGE->findImage("플레이어아래쪽");
+	playerAttackDown = IMAGE->findImage("플레이어아래쪽공격");
+	playerMoveDown = IMAGE->findImage("플레이어아래쪽걷기");
 
-   playerLeft=IMAGE->findImage("플레이어왼쪽");
-   playerMoveLeft=IMAGE->findImage("플레이어왼쪽걷기");
-   playerAttackLeft=IMAGE->findImage("플레이어왼쪽공격");
+	playerLeft = IMAGE->findImage("플레이어왼쪽");
+	playerMoveLeft = IMAGE->findImage("플레이어왼쪽걷기");
+	playerAttackLeft = IMAGE->findImage("플레이어왼쪽공격");
 
-   playerRight=IMAGE->findImage("플레이어오른쪽");
-   playerMoveRight=IMAGE->findImage("플레이어오른쪽걷기");
-   playerAttackRight=IMAGE->findImage("플레이어오른쪽공격");
+	playerRight = IMAGE->findImage("플레이어오른쪽");
+	playerMoveRight = IMAGE->findImage("플레이어오른쪽걷기");
+	playerAttackRight = IMAGE->findImage("플레이어오른쪽공격");
 
-   playerUp=IMAGE->findImage("플레이어위쪽");
-   playerMoveUp=IMAGE->findImage("플레이어위쪽걷기");
-   playerAttackUp=IMAGE->findImage("플레이어위쪽공격");
+	playerUp = IMAGE->findImage("플레이어위쪽");
+	playerMoveUp = IMAGE->findImage("플레이어위쪽걷기");
+	playerAttackUp = IMAGE->findImage("플레이어위쪽공격");
 
-   ANIMATION->addDefAnimation("리치스킬애니", "리치스킬", 15, false, true);
+	ANIMATION->addDefAnimation("리치스킬애니", "리치스킬", 15, false, true);
 
-   //MOVE
-   ANIMATION->addDefAnimation("위쪽걷기", "플레이어위쪽걷기",10, false, true);
-   ANIMATION->addDefAnimation("아래쪽걷기", "플레이어아래쪽걷기",10, false, true);
-   ANIMATION->addDefAnimation("왼쪽걷기", "플레이어왼쪽걷기",10, false, true);
-   ANIMATION->addDefAnimation("오른쪽걷기", "플레이어오른쪽걷기", 10, false, true);
+	//MOVE
+	ANIMATION->addDefAnimation("위쪽걷기", "플레이어위쪽걷기", 10, false, true);
+	ANIMATION->addDefAnimation("아래쪽걷기", "플레이어아래쪽걷기", 10, false, true);
+	ANIMATION->addDefAnimation("왼쪽걷기", "플레이어왼쪽걷기", 10, false, true);
+	ANIMATION->addDefAnimation("오른쪽걷기", "플레이어오른쪽걷기", 10, false, true);
 
-   //IDLE
-   ANIMATION->addDefAnimation("위쪽", "플레이어위쪽", 10, false, true);
-   ANIMATION->addDefAnimation("아래쪽", "플레이어아래쪽", 10, false, true);
-   ANIMATION->addDefAnimation("왼쪽", "플레이어왼쪽", 10, false, true);
-   ANIMATION->addDefAnimation("오른쪽", "플레이어오른쪽", 10, false, true);
+	//IDLE
+	ANIMATION->addDefAnimation("위쪽", "플레이어위쪽", 10, false, true);
+	ANIMATION->addDefAnimation("아래쪽", "플레이어아래쪽", 10, false, true);
+	ANIMATION->addDefAnimation("왼쪽", "플레이어왼쪽", 10, false, true);
+	ANIMATION->addDefAnimation("오른쪽", "플레이어오른쪽", 10, false, true);
 
-   //ATTACK
-   ANIMATION->addDefAnimation("위쪽공격", "플레이어위쪽공격", 20, false, true);
-   ANIMATION->addDefAnimation("아래쪽공격", "플레이어아래쪽공격", 20, false, true);
-   ANIMATION->addDefAnimation("왼쪽공격", "플레이어왼쪽공격", 20, false, true);
-   ANIMATION->addDefAnimation("오른쪽공격", "플레이어오른쪽공격", 20, false, true);
+	//ATTACK
+	ANIMATION->addDefAnimation("위쪽공격", "플레이어위쪽공격", 20, false, true);
+	ANIMATION->addDefAnimation("아래쪽공격", "플레이어아래쪽공격", 20, false, true);
+	ANIMATION->addDefAnimation("왼쪽공격", "플레이어왼쪽공격", 20, false, true);
+	ANIMATION->addDefAnimation("오른쪽공격", "플레이어오른쪽공격", 20, false, true);
 
-   //기본상태
-   playerIdleAni = ANIMATION->findAnimation("아래쪽");
-   playerAttackAni = ANIMATION->findAnimation("아래쪽공격");
-   playerMoveAni = ANIMATION->findAnimation("아래쪽걷기");
-   
-   //렉트
-   m_playerX = WINSIZEX / 2;
-   m_playerY = WINSIZEY / 2;
-   playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth(), playerMoveDown->getFrameHeight());
-   playerAttackRc = RectMake(m_playerX, m_playerY, 100, 100);
-  
-   return S_OK;
+	//기본상태
+	playerIdleAni = ANIMATION->findAnimation("아래쪽");
+	playerAttackAni = ANIMATION->findAnimation("아래쪽공격");
+	playerMoveAni = ANIMATION->findAnimation("아래쪽걷기");
+
+	//렉트
+	m_playerX = WINSIZEX / 2;
+	m_playerY = WINSIZEY / 2;
+	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth(), playerMoveDown->getFrameHeight());
+	playerAttackRc = RectMake(m_playerX, m_playerY, 100, 100);
+
+	return S_OK;
 }
 
 void Cplayer::release()
@@ -123,7 +123,7 @@ void Cplayer::moveControl()
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_LEFT;
 	}
-	else if (InputManager->isStayKeyDown(VK_UP)&&(InputManager->isStayKeyDown(VK_RIGHT)||InputManager->isStayKeyDown(VK_LEFT)))
+	else if (InputManager->isStayKeyDown(VK_UP) && (InputManager->isStayKeyDown(VK_RIGHT) || InputManager->isStayKeyDown(VK_LEFT)))
 	{
 		m_playerY -= getSpeed();
 		if (InputManager->isStayKeyDown(VK_RIGHT))m_playerX += getSpeed();
@@ -167,13 +167,13 @@ void Cplayer::moveControl()
 
 	if (InputManager->isStayKeyDown(VK_SPACE)) isAttack = true;
 	else isAttack = false;
-	
+
 	if (InputManager->isOnceKeyDown('Q'))
 	{
 		isAttack = true;
-		if (direction == DIRECTIONS::DIRECTIONS_LEFT)m_playerSkill->skillInformation(m_playerX-15, m_playerY+33, PI, 7.0f,700, "리치스킬", "리치스킬애니");
-		else if (direction == DIRECTIONS::DIRECTIONS_RIGHT)m_playerSkill->skillInformation(m_playerX+50, m_playerY+33, PI2, 7.0f, 700, "리치스킬", "리치스킬애니");
-		else if (direction == DIRECTIONS::DIRECTIONS_UP)m_playerSkill->skillInformation(m_playerX+15, m_playerY-20, PI * 0.5, 7.0f, 700, "리치스킬", "리치스킬애니");//위??
+		if (direction == DIRECTIONS::DIRECTIONS_LEFT)m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, PI, 7.0f, 700, "리치스킬", "리치스킬애니");
+		else if (direction == DIRECTIONS::DIRECTIONS_RIGHT)m_playerSkill->skillInformation(m_playerX + 50, m_playerY + 33, PI2, 7.0f, 700, "리치스킬", "리치스킬애니");
+		else if (direction == DIRECTIONS::DIRECTIONS_UP)m_playerSkill->skillInformation(m_playerX + 15, m_playerY - 20, PI * 0.5, 7.0f, 700, "리치스킬", "리치스킬애니");//위??
 		else if (direction == DIRECTIONS::DIRECTIONS_DOWN)m_playerSkill->skillInformation(m_playerX, m_playerY, PI * 1.5, 7.0f, 700, "리치스킬", "리치스킬애니");
 	}
 	else if (InputManager->isOnceKeyDown('W'))
@@ -181,7 +181,7 @@ void Cplayer::moveControl()
 		isAttack = true;
 		for (size_t i = 0; i < 30; i++)
 		{
-			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.21, 5.0f,150, "리치스킬", "리치스킬애니");
+			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.21, 5.0f, 150, "리치스킬", "리치스킬애니");
 		}
 	}
 	else if (InputManager->isOnceKeyDown('E'))
@@ -274,7 +274,7 @@ void Cplayer::playerStateRender()
 			{
 				playerAttackRc = RectMake(m_playerX - 99, m_playerY, 100, 40);
 				Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
-   				playerAttackLeft->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
+				playerAttackLeft->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			}
 			break;
 		case DIRECTIONS::DIRECTIONS_UP:
@@ -299,7 +299,7 @@ void Cplayer::playerStateRender()
 			if (!isAttack) playerMoveDown->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 13, playerMoveAni);
 			else
 			{
-				playerAttackRc = RectMake(m_playerX-10, m_playerY + 67, 40, 90);
+				playerAttackRc = RectMake(m_playerX - 10, m_playerY + 67, 40, 90);
 				Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
 				playerAttackDown->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			}

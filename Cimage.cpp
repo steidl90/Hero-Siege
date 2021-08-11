@@ -143,6 +143,7 @@ HRESULT Cimage::init()
     IMAGE->addImage("스킬W", "images/Skill_W.bmp", 38, 38, true, RGB(255, 0, 255));
     IMAGE->addImage("스킬E", "images/Skill_E.bmp", 38, 38, true, RGB(255, 0, 255));
     IMAGE->addImage("스킬R", "images/Skill_R.bmp", 38, 38, true, RGB(255, 0, 255));
+    IMAGE->addImage("플레이어체력바", "images/player_hp_bar.bmp", 49, 15, true, RGB(255, 0, 255));
 
 
     IMAGE->addFrameImage("레벨업", "images/LevelUP.bmp", 183, 55, 1, 1, true, RGB(255, 0, 255));

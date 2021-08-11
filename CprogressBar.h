@@ -20,6 +20,9 @@ public:
 	void update();
 	void render();
 
+	void mapUpdate(float x, float y);
+	void mapRender();
+
 
 	void setGauge(float currentGauge, float maxGauge);
 
