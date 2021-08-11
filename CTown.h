@@ -1,21 +1,27 @@
 #pragma once
 #include "Cobject.h"
 #include "frameObject.h"
+
 class camera;
 class Ctown :public Cobject
 {
 private:
 	camera* m_camera;
 private:
-	tagCurrentTile _currentTile;
+
+	//tagCurrentTile _currentTile;
+
 	tagTile _tiles[TILEX * TILEY];
 	tagTileImage _tilesImage[TILEX * TILEY];
 	tagFrameObjectInfo m_frameObjectInfo[TILEX * TILEY];
 	ATTRIBUTE m_attribute[TILEX * TILEY];
 	vector<tagFrameObject> m_frameObject;
 
-	DWORD _attribute[TILEX * TILEY];
+	//DWORD _attribute[TILEX * TILEY];
 	int _pos[2];
+
+	// 에이스타 추가
+	vector<POINT> m_fastLoadIndex;
 
 public:
 	Ctown();
@@ -32,7 +38,7 @@ public:
 	void cullingRender();
 	void initTileAttribute();
 
-	DWORD* getAttribute() { return _attribute; }
+	//DWORD* getAttribute() { return _attribute; }
 	tagTile* getMap() { return _tiles; }
 	int getPosFirst() { return _pos[0]; }
 	int getPosSecond() { return _pos[1]; }
@@ -42,6 +48,8 @@ public:
 
 	string getImageName(OBJECTIMAGE image);
 
-	//void attackBlock(int tileN);
+	// 에이스타 추가
+	void setFastLoadIndex(vector<POINT>* p) { m_fastLoadIndex = *p; }
+	
 };
 

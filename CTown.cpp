@@ -12,12 +12,11 @@ Ctown::~Ctown()
 
 HRESULT Ctown::init()
 {
+
     load();
 	initTileAttribute();
 
     return S_OK;
-
-
 }
 
 void Ctown::release()
@@ -38,6 +37,11 @@ void Ctown::render()
 		{
 			(*iter).frameObject->render();
 		}
+	}
+
+	for (auto iter = m_fastLoadIndex.begin(); iter != m_fastLoadIndex.end(); ++iter)
+	{
+		IMAGE->frameRender("tilemap", getMapDC(), _tiles[(*iter).x + (*iter).y * TILEX].rc.left, _tiles[(*iter).x + (*iter).y * TILEX].rc.top, 0, 0);
 	}
 }
 
@@ -98,6 +102,8 @@ void Ctown::initTileAttribute()
 		if (_tiles[i].obj == OBJECT::OBJ_NONE)continue;
 		IMAGE->frameRender(this->getImageName(_tilesImage[i].objImage), getTileDC(), _tiles[i].rc.left, _tiles[i].rc.top, _tiles[i].objFrameX, _tiles[i].objFrameY);
 
+
+
 		if (_tiles[i].collisionObj == COLLISIONOBJECT::COLLISIONOBJ)
 		{
 			m_attribute[i] = ATTRIBUTE::COLLISION_ON;
@@ -106,6 +112,12 @@ void Ctown::initTileAttribute()
 		{
 			m_attribute[i] = ATTRIBUTE::COLLISION_OFF;
 		}
+	}
+
+	for (int i = 0; i < TILEX; i++)
+	{
+		LineMake(getTileDC(), 0, i * TILESIZE, MAPSIZE, i * TILESIZE);
+		LineMake(getTileDC(), i * TILESIZE, 0, i * TILESIZE, MAPSIZE);
 	}
 }
 

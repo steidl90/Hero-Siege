@@ -3,13 +3,15 @@
 #include "Ctown.h"
 #include "CplayerManager.h"
 #include "camera.h"
+#include "CaStar.h"
 class CsceneTown : public gameNode
 {
 private:
 	Ctown* m_town;
 	camera* m_camera;
 	CplayerManager* m_player;
-
+	CaStar* m_aStar;
+private:
 	RECT m_changeRect;
 
 public:
