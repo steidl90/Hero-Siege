@@ -79,6 +79,6 @@ public:
 	int getMaxMp() { return m_maxMp; }
 	int getMaxExp() { return m_maxExp; }
 
-	
+	RECT* getPlayerAttackRC() { return &playerAttackRc; }
 };
 

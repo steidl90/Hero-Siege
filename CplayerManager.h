@@ -8,6 +8,7 @@
 #include "CinventoryUi.h"
 
 class CaStar;
+class CenemyManager;
 class CplayerManager :public Cunit
 {
 private:
@@ -17,11 +18,14 @@ private:
 	CplayerUi* m_playerUi;
 	CinventoryUi* m_InventoryUI;
 	Cinventory* m_inventory;
+	CenemyManager* m_enemy;
 private:
 
 	vector<POINT>* m_fastLoadLocation;
 
 	bool isInventoryOn;
+
+	int m_timer;
 
 public:
 	CplayerManager();
@@ -43,4 +47,9 @@ public:
 	void showPlayerStat();
 
 	void itemStatSet();
+
+	// Ãß°¡
+	void setEnemyMemory(CenemyManager* enemy) { m_enemy = enemy; }
+
+	void collisionEnemy();
 };

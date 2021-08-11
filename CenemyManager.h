@@ -40,5 +40,8 @@ public:
 	void collision();
 	void setPlayer(Cplayer* player) { m_player= player; }
 	Cplayer* getPlayer() { return m_player; }
+
+	// Ãß°¡
+	vector<Cenemy*>* getEnemy() { return &m_vEnemy; }
 };
 

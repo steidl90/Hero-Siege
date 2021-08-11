@@ -29,6 +29,8 @@ HRESULT CsceneDungeon::init()
 	m_enemyManager->init();
 	m_enemyManager->setPlayer(m_player->getPlayer());
 
+	m_player->setEnemyMemory(m_enemyManager);
+
 	m_changeRect = RectMake(170, MAPSIZE - 230, 100, 50);
 
 	//슬라임 설정 = 전역에 골고루

@@ -1,6 +1,6 @@
 #include "framework.h"
 #include "CplayerManager.h"
-
+#include "CenemyManager.h"
 CplayerManager::CplayerManager()
 {
 }
@@ -50,6 +50,8 @@ void CplayerManager::update()
     if(isInventoryOn) m_InventoryUI->update();
     m_playerUi->update();
     m_playerSkill->update("리치스킬애니");
+
+    this->collisionEnemy();
 }
 
 void CplayerManager::render()
@@ -148,4 +150,28 @@ void CplayerManager::itemStatSet()
     m_player->setSpeed(m_player->getSpeed() + itemSpeed);
 */
 
+}
+
+void CplayerManager::collisionEnemy()
+{
+    RECT temp;
+    char atk[100];
+    auto iter = m_enemy->getEnemy()->begin();
+    int i = 0;
+
+    for (iter; iter != m_enemy->getEnemy()->end(); ++iter, i++)
+    {
+        if (IntersectRect(&temp, m_player->getPlayerAttackRC(), &(*iter)->getRect()))
+        {
+            (*iter)->setHp((*iter)->getHp() - m_player->getAtk());
+            wsprintf(atk, "%d", m_player->getAtk());
+            TextOut(getMapDC(), (*iter)->getRect().left + ((*iter)->getRect().right - (*iter)->getRect().left) / 2, (*iter)->getRect().top, atk, lstrlen(atk));
+            
+            if ((*iter)->getHp() <= 0)
+            {
+                m_enemy->removeMinion(i);
+                break;
+            }
+        }
+    }
 }
