@@ -90,6 +90,9 @@ public:
 	void moveAnimation();
 	void playerStateRender();
 
+	void playerSkillControl();
+	void playerSkillRender();
+
 	RECT* getplayerMoveRC() { return &playerMoveRc; }
 	float getplayerX() const { return m_playerX; }
 	float getplayerY() const { return m_playerY; }

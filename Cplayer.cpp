@@ -34,65 +34,66 @@ HRESULT Cplayer::init()
 	m_mpBar->init("images/mp.bmp", "images/hp_back.bmp", 80, 40, 196, 10);
 	m_mpBar->setGauge(getMp(), m_maxMp);
 
-   //DIRECTIONS
-   direction= DIRECTIONS::DIRECTIONS_DOWN;
-   beforeDirection= DIRECTIONS::DIRECTIONS_DOWN;
+	//DIRECTIONS
+	direction = DIRECTIONS::DIRECTIONS_DOWN;
+	beforeDirection = DIRECTIONS::DIRECTIONS_DOWN;
 
-   //SKILL
-   skillState = SKILL::SKILL_DOWN;
+	//SKILL
+	skillState = SKILL::SKILL_IDLE;
 
-   //IMAGE
-   playerDown= IMAGE->findImage("플레이어아래쪽");
-   playerAttackDown= IMAGE->findImage("플레이어아래쪽공격");
-   playerMoveDown = IMAGE->findImage("플레이어아래쪽걷기");
+	//IMAGE
+	playerDown = IMAGE->findImage("플레이어아래쪽");
+	playerAttackDown = IMAGE->findImage("플레이어아래쪽공격");
+	playerMoveDown = IMAGE->findImage("플레이어아래쪽걷기");
 
-   playerLeft=IMAGE->findImage("플레이어왼쪽");
-   playerMoveLeft=IMAGE->findImage("플레이어왼쪽걷기");
-   playerAttackLeft=IMAGE->findImage("플레이어왼쪽공격");
+	playerLeft = IMAGE->findImage("플레이어왼쪽");
+	playerMoveLeft = IMAGE->findImage("플레이어왼쪽걷기");
+	playerAttackLeft = IMAGE->findImage("플레이어왼쪽공격");
 
-   playerRight=IMAGE->findImage("플레이어오른쪽");
-   playerMoveRight=IMAGE->findImage("플레이어오른쪽걷기");
-   playerAttackRight=IMAGE->findImage("플레이어오른쪽공격");
+	playerRight = IMAGE->findImage("플레이어오른쪽");
+	playerMoveRight = IMAGE->findImage("플레이어오른쪽걷기");
+	playerAttackRight = IMAGE->findImage("플레이어오른쪽공격");
 
-   playerUp=IMAGE->findImage("플레이어위쪽");
-   playerMoveUp=IMAGE->findImage("플레이어위쪽걷기");
-   playerAttackUp=IMAGE->findImage("플레이어위쪽공격");
+	playerUp = IMAGE->findImage("플레이어위쪽");
+	playerMoveUp = IMAGE->findImage("플레이어위쪽걷기");
+	playerAttackUp = IMAGE->findImage("플레이어위쪽공격");
 
-   //스킬
-   ANIMATION->addDefAnimation("리치스킬애니", "리치스킬", 15, false, true);
-   playerSkillLightning=IMAGE->findImage("라이트닝");
-   ANIMATION->addDefAnimation("라이트닝애니", "라이트닝", 10, false, false);
-   playerLightningAni = ANIMATION -> findAnimation("라이트닝애니");
-   //MOVE
-   ANIMATION->addDefAnimation("위쪽걷기", "플레이어위쪽걷기",10, false, true);
-   ANIMATION->addDefAnimation("아래쪽걷기", "플레이어아래쪽걷기",10, false, true);
-   ANIMATION->addDefAnimation("왼쪽걷기", "플레이어왼쪽걷기",10, false, true);
-   ANIMATION->addDefAnimation("오른쪽걷기", "플레이어오른쪽걷기", 10, false, true);
+	//스킬
+	ANIMATION->addDefAnimation("리치스킬애니", "리치스킬", 15, false, true);
+	playerSkillLightning = IMAGE->findImage("라이트닝");
 
-   //IDLE
-   ANIMATION->addDefAnimation("위쪽", "플레이어위쪽", 10, false, true);
-   ANIMATION->addDefAnimation("아래쪽", "플레이어아래쪽", 10, false, true);
-   ANIMATION->addDefAnimation("왼쪽", "플레이어왼쪽", 10, false, true);
-   ANIMATION->addDefAnimation("오른쪽", "플레이어오른쪽", 10, false, true);
+	ANIMATION->addDefAnimation("라이트닝애니", "라이트닝", 5, false, true);
+	playerLightningAni = ANIMATION->findAnimation("라이트닝애니");
+	//MOVE
+	ANIMATION->addDefAnimation("위쪽걷기", "플레이어위쪽걷기", 10, false, true);
+	ANIMATION->addDefAnimation("아래쪽걷기", "플레이어아래쪽걷기", 10, false, true);
+	ANIMATION->addDefAnimation("왼쪽걷기", "플레이어왼쪽걷기", 10, false, true);
+	ANIMATION->addDefAnimation("오른쪽걷기", "플레이어오른쪽걷기", 10, false, true);
 
-   //ATTACK
-   ANIMATION->addDefAnimation("위쪽공격", "플레이어위쪽공격", 20, false, true);
-   ANIMATION->addDefAnimation("아래쪽공격", "플레이어아래쪽공격", 20, false, true);
-   ANIMATION->addDefAnimation("왼쪽공격", "플레이어왼쪽공격", 20, false, true);
-   ANIMATION->addDefAnimation("오른쪽공격", "플레이어오른쪽공격", 20, false, true);
+	//IDLE
+	ANIMATION->addDefAnimation("위쪽", "플레이어위쪽", 10, false, true);
+	ANIMATION->addDefAnimation("아래쪽", "플레이어아래쪽", 10, false, true);
+	ANIMATION->addDefAnimation("왼쪽", "플레이어왼쪽", 10, false, true);
+	ANIMATION->addDefAnimation("오른쪽", "플레이어오른쪽", 10, false, true);
 
-   //기본상태
-   playerIdleAni = ANIMATION->findAnimation("아래쪽");
-   playerAttackAni = ANIMATION->findAnimation("아래쪽공격");
-   playerMoveAni = ANIMATION->findAnimation("아래쪽걷기");
-   
-   //렉트
-   m_playerX = WINSIZEX / 2;
-   m_playerY = WINSIZEY / 2;
-   playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth(), playerMoveDown->getFrameHeight());
-   playerAttackRc = RectMake(m_playerX, m_playerY, 100, 100);
-  
-   return S_OK;
+	//ATTACK
+	ANIMATION->addDefAnimation("위쪽공격", "플레이어위쪽공격", 20, false, true);
+	ANIMATION->addDefAnimation("아래쪽공격", "플레이어아래쪽공격", 20, false, true);
+	ANIMATION->addDefAnimation("왼쪽공격", "플레이어왼쪽공격", 20, false, true);
+	ANIMATION->addDefAnimation("오른쪽공격", "플레이어오른쪽공격", 20, false, true);
+
+	//기본상태
+	playerIdleAni = ANIMATION->findAnimation("아래쪽");
+	playerAttackAni = ANIMATION->findAnimation("아래쪽공격");
+	playerMoveAni = ANIMATION->findAnimation("아래쪽걷기");
+
+	//렉트
+	m_playerX = WINSIZEX / 2;
+	m_playerY = WINSIZEY / 2;
+	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth(), playerMoveDown->getFrameHeight());
+	playerAttackRc = RectMake(m_playerX, m_playerY, 100, 100);
+
+	return S_OK;
 }
 
 void Cplayer::release()
@@ -104,6 +105,7 @@ void Cplayer::release()
 
 void Cplayer::update()
 {
+	ANIMATION->resume("라이트닝애니");
 	m_angle += 0.4;
 	moveControl();
 	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth() - 90, playerMoveDown->getFrameHeight() - 50);
@@ -116,6 +118,8 @@ void Cplayer::update()
 
 void Cplayer::render()
 {
+	playerSkillControl();
+	playerSkillRender();
 	playerStateRender();
 	m_playerSkill->render();
 	m_hpBar->render();
@@ -140,7 +144,7 @@ void Cplayer::moveControl()
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_LEFT;
 	}
-	else if (InputManager->isStayKeyDown(VK_UP)&&(InputManager->isStayKeyDown(VK_RIGHT)||InputManager->isStayKeyDown(VK_LEFT)))
+	else if (InputManager->isStayKeyDown(VK_UP) && (InputManager->isStayKeyDown(VK_RIGHT) || InputManager->isStayKeyDown(VK_LEFT)))
 	{
 		m_playerY -= getSpeed();
 		if (InputManager->isStayKeyDown(VK_RIGHT))m_playerX += getSpeed();
@@ -184,13 +188,13 @@ void Cplayer::moveControl()
 
 	if (InputManager->isStayKeyDown(VK_SPACE)) isAttack = true;
 	else isAttack = false;
-	
+
 	if (InputManager->isOnceKeyDown('Q'))
 	{
 		isAttack = true;
-		if (direction == DIRECTIONS::DIRECTIONS_LEFT)m_playerSkill->skillInformation(m_playerX-15, m_playerY+33, PI, 7.0f,700, "리치스킬", "리치스킬애니");
-		else if (direction == DIRECTIONS::DIRECTIONS_RIGHT)m_playerSkill->skillInformation(m_playerX+50, m_playerY+33, PI2, 7.0f, 700, "리치스킬", "리치스킬애니");
-		else if (direction == DIRECTIONS::DIRECTIONS_UP)m_playerSkill->skillInformation(m_playerX+15, m_playerY-20, PI * 0.5, 7.0f, 700, "리치스킬", "리치스킬애니");
+		if (direction == DIRECTIONS::DIRECTIONS_LEFT)m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, PI, 7.0f, 700, "리치스킬", "리치스킬애니");
+		else if (direction == DIRECTIONS::DIRECTIONS_RIGHT)m_playerSkill->skillInformation(m_playerX + 50, m_playerY + 33, PI2, 7.0f, 700, "리치스킬", "리치스킬애니");
+		else if (direction == DIRECTIONS::DIRECTIONS_UP)m_playerSkill->skillInformation(m_playerX + 15, m_playerY - 20, PI * 0.5, 7.0f, 700, "리치스킬", "리치스킬애니");
 		else if (direction == DIRECTIONS::DIRECTIONS_DOWN)m_playerSkill->skillInformation(m_playerX, m_playerY, PI * 1.5, 7.0f, 700, "리치스킬", "리치스킬애니");
 	}
 	else if (InputManager->isOnceKeyDown('W'))
@@ -204,13 +208,10 @@ void Cplayer::moveControl()
 			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.65, 4.3f, 200, "리치스킬", "리치스킬애니");
 		}
 	}
-
-	else if (InputManager->isStayKeyDown('E')&&m_count==0)
+	else if (InputManager->isStayKeyDown('E') && m_count == 0)
 	{
 		m_count++;
 		isAttack = true;
-		m_time = TIME->getWorldTime();
-		isRect = true;
 		m_time = TIME->getWorldTime();
 		isRect = true;
 		m_skillX = m_playerX;
@@ -226,127 +227,10 @@ void Cplayer::moveControl()
 		skillState = SKILL::SKILL_IDLE;
 		m_count = 0;
 	}
-	if (isRect&& skillState == SKILL::SKILL_LEFT)
-	{	
-
-		lightningCenterRc = RectMake(m_skillX - 300, m_skillY, 36, 36);
-		lightningLeftRc = RectMake(m_skillX - 336, m_skillY, 36, 36);
-		lightningRightRc = RectMake(m_skillX - 264, m_skillY, 36, 36);
-		lightningUpRc = RectMake(m_skillX - 300, m_skillY - 36, 36, 36);
-		lightningDownRc = RectMake(m_skillX - 300, m_skillY + 36, 36, 36);
-		Rectangle(getMapDC(), lightningCenterRc.left, lightningCenterRc.top, lightningCenterRc.right, lightningCenterRc.bottom);
-		Rectangle(getMapDC(), lightningLeftRc.left, lightningLeftRc.top, lightningLeftRc.right, lightningLeftRc.bottom);
-		Rectangle(getMapDC(), lightningRightRc.left, lightningRightRc.top, lightningRightRc.right, lightningRightRc.bottom);
-		Rectangle(getMapDC(), lightningUpRc.left, lightningUpRc.top, lightningUpRc.right, lightningUpRc.bottom);
-		Rectangle(getMapDC(), lightningDownRc.left, lightningDownRc.top, lightningDownRc.right, lightningDownRc.bottom);
-
-		//중앙
-		playerSkillLightning->aniRender(getMapDC(), lightningCenterRc.left + (lightningCenterRc.right - lightningCenterRc.left) / 2 - 36,
-			lightningCenterRc.top + (lightningCenterRc.bottom - lightningCenterRc.top) / 2 - 402, playerLightningAni);
-		//왼쪽
-		playerSkillLightning->aniRender(getMapDC(), lightningLeftRc.left + (lightningLeftRc.right - lightningLeftRc.left) / 2 - 36,
-			lightningLeftRc.top + (lightningLeftRc.bottom - lightningLeftRc.top) / 2 - 402, playerLightningAni);
-		//오른쪽
-		playerSkillLightning->aniRender(getMapDC(), lightningRightRc.left + (lightningRightRc.right - lightningRightRc.left) / 2 - 36,
-			lightningRightRc.top + (lightningRightRc.bottom - lightningRightRc.top) / 2 - 402, playerLightningAni);
-		//위쪽
-		playerSkillLightning->aniRender(getMapDC(), lightningUpRc.left + (lightningUpRc.right - lightningUpRc.left) / 2 - 36,
-			lightningUpRc.top + (lightningUpRc.bottom - lightningUpRc.top) / 2 - 402, playerLightningAni);
-		//아래쪽
-		playerSkillLightning->aniRender(getMapDC(), lightningDownRc.left + (lightningDownRc.right - lightningDownRc.left) / 2 - 36,
-			lightningDownRc.top + (lightningDownRc.bottom - lightningDownRc.top) / 2 - 402, playerLightningAni);
-
-	}
 	
-	else if (isRect && skillState == SKILL::SKILL_RIGHT)
-	{
-		lightningCenterRc = RectMake(m_skillX + 300, m_skillY, 36,36);
-		lightningLeftRc = RectMake(m_skillX + 264, m_skillY, 36, 36);
-		lightningRightRc = RectMake(m_skillX + 336, m_skillY, 36, 36);
-		lightningUpRc = RectMake(m_skillX + 300, m_skillY - 36, 36, 36);
-		lightningDownRc = RectMake(m_skillX + 300, m_skillY + 36, 36, 36);
-		Rectangle(getMapDC(), lightningCenterRc.left, lightningCenterRc.top, lightningCenterRc.right, lightningCenterRc.bottom);
-		Rectangle(getMapDC(), lightningLeftRc.left, lightningLeftRc.top, lightningLeftRc.right, lightningLeftRc.bottom);
-		Rectangle(getMapDC(), lightningRightRc.left, lightningRightRc.top, lightningRightRc.right, lightningRightRc.bottom);
-		Rectangle(getMapDC(), lightningUpRc.left, lightningUpRc.top, lightningUpRc.right, lightningUpRc.bottom);
-		Rectangle(getMapDC(), lightningDownRc.left, lightningDownRc.top, lightningDownRc.right, lightningDownRc.bottom);
-		//중앙
-		playerSkillLightning->aniRender(getMapDC(), lightningCenterRc.left + (lightningCenterRc.right - lightningCenterRc.left) / 2 - 36,
-			lightningCenterRc.top + (lightningCenterRc.bottom - lightningCenterRc.top) / 2 - 402, playerLightningAni);
-		//왼쪽
-		playerSkillLightning->aniRender(getMapDC(), lightningLeftRc.left + (lightningLeftRc.right - lightningLeftRc.left) / 2 - 36,
-			lightningLeftRc.top + (lightningLeftRc.bottom - lightningLeftRc.top) / 2 - 402, playerLightningAni);
-		//오른쪽
-		playerSkillLightning->aniRender(getMapDC(), lightningRightRc.left + (lightningRightRc.right - lightningRightRc.left) / 2 - 36,
-			lightningRightRc.top + (lightningRightRc.bottom - lightningRightRc.top) / 2 - 402, playerLightningAni);
-		//위쪽
-		playerSkillLightning->aniRender(getMapDC(), lightningUpRc.left + (lightningUpRc.right - lightningUpRc.left) / 2 - 36,
-			lightningUpRc.top + (lightningUpRc.bottom - lightningUpRc.top) / 2 - 402, playerLightningAni);
-		//아래쪽
-		playerSkillLightning->aniRender(getMapDC(), lightningDownRc.left + (lightningDownRc.right - lightningDownRc.left) / 2 - 36,
-			lightningDownRc.top + (lightningDownRc.bottom - lightningDownRc.top) / 2 - 402, playerLightningAni);
-		//playerLightningAni = ANIMATION->findAnimation("라이트닝애니");
-	}
-	else if (isRect && skillState == SKILL::SKILL_UP)
-	{
-		lightningCenterRc = RectMake(m_skillX, m_skillY -300, 36, 36);
-		lightningLeftRc = RectMake(m_skillX -36, m_skillY -300, 36, 36);
-		lightningRightRc = RectMake(m_skillX +36 , m_skillY -300, 36, 36);
-		lightningUpRc = RectMake(m_skillX, m_skillY -336, 36, 36);
-		lightningDownRc = RectMake(m_skillX, m_skillY -264, 36, 36);
-		Rectangle(getMapDC(), lightningCenterRc.left, lightningCenterRc.top, lightningCenterRc.right, lightningCenterRc.bottom);
-		Rectangle(getMapDC(), lightningLeftRc.left, lightningLeftRc.top, lightningLeftRc.right, lightningLeftRc.bottom);
-		Rectangle(getMapDC(), lightningRightRc.left, lightningRightRc.top, lightningRightRc.right, lightningRightRc.bottom);
-		Rectangle(getMapDC(), lightningUpRc.left, lightningUpRc.top, lightningUpRc.right, lightningUpRc.bottom);
-		Rectangle(getMapDC(), lightningDownRc.left, lightningDownRc.top, lightningDownRc.right, lightningDownRc.bottom);
-		//중앙
-		playerSkillLightning->aniRender(getMapDC(), lightningCenterRc.left + (lightningCenterRc.right - lightningCenterRc.left) / 2 - 36,
-			lightningCenterRc.top + (lightningCenterRc.bottom - lightningCenterRc.top) / 2 - 402, playerLightningAni);
-		//왼쪽
-		playerSkillLightning->aniRender(getMapDC(), lightningLeftRc.left + (lightningLeftRc.right - lightningLeftRc.left) / 2 - 36,
-			lightningLeftRc.top + (lightningLeftRc.bottom - lightningLeftRc.top) / 2 - 402, playerLightningAni);
-		//오른쪽
-		playerSkillLightning->aniRender(getMapDC(), lightningRightRc.left + (lightningRightRc.right - lightningRightRc.left) / 2 - 36,
-			lightningRightRc.top + (lightningRightRc.bottom - lightningRightRc.top) / 2 - 402, playerLightningAni);
-		//위쪽
-		playerSkillLightning->aniRender(getMapDC(), lightningUpRc.left + (lightningUpRc.right - lightningUpRc.left) / 2 - 36,
-			lightningUpRc.top + (lightningUpRc.bottom - lightningUpRc.top) / 2 - 402, playerLightningAni);
-		//아래쪽
-		playerSkillLightning->aniRender(getMapDC(), lightningDownRc.left + (lightningDownRc.right - lightningDownRc.left) / 2 - 36,
-			lightningDownRc.top + (lightningDownRc.bottom - lightningDownRc.top) / 2 - 402, playerLightningAni);
-	}
-	else if (isRect && skillState == SKILL::SKILL_DOWN)
-	{
-		lightningCenterRc = RectMake(m_skillX, m_skillY + 300, 36, 36);
-		lightningLeftRc = RectMake(m_skillX - 36, m_skillY + 300, 36, 36);
-		lightningRightRc = RectMake(m_skillX + 36, m_skillY + 300, 36, 36);
-		lightningUpRc = RectMake(m_skillX, m_skillY + 264, 36, 36);
-		lightningDownRc = RectMake(m_skillX, m_skillY +336, 36, 36);
-		Rectangle(getMapDC(), lightningCenterRc.left, lightningCenterRc.top, lightningCenterRc.right, lightningCenterRc.bottom);
-		Rectangle(getMapDC(), lightningLeftRc.left, lightningLeftRc.top, lightningLeftRc.right, lightningLeftRc.bottom);
-		Rectangle(getMapDC(), lightningRightRc.left, lightningRightRc.top, lightningRightRc.right, lightningRightRc.bottom);
-		Rectangle(getMapDC(), lightningUpRc.left, lightningUpRc.top, lightningUpRc.right, lightningUpRc.bottom);
-		Rectangle(getMapDC(), lightningDownRc.left, lightningDownRc.top, lightningDownRc.right, lightningDownRc.bottom);
-		//중앙
-		playerSkillLightning->aniRender(getMapDC(), lightningCenterRc.left + (lightningCenterRc.right - lightningCenterRc.left) / 2 - 36,
-			lightningCenterRc.top + (lightningCenterRc.bottom - lightningCenterRc.top) / 2 - 402, playerLightningAni);
-		//왼쪽
-		playerSkillLightning->aniRender(getMapDC(), lightningLeftRc.left + (lightningLeftRc.right - lightningLeftRc.left) / 2 - 36,
-			lightningLeftRc.top + (lightningLeftRc.bottom - lightningLeftRc.top) / 2 - 402, playerLightningAni);
-		//오른쪽
-		playerSkillLightning->aniRender(getMapDC(), lightningRightRc.left + (lightningRightRc.right - lightningRightRc.left) / 2 - 36,
-			lightningRightRc.top + (lightningRightRc.bottom - lightningRightRc.top) / 2 - 402, playerLightningAni);
-		//위쪽
-		playerSkillLightning->aniRender(getMapDC(), lightningUpRc.left + (lightningUpRc.right - lightningUpRc.left) / 2 - 36,
-			lightningUpRc.top + (lightningUpRc.bottom - lightningUpRc.top) / 2 - 402, playerLightningAni);
-		//아래쪽
-		playerSkillLightning->aniRender(getMapDC(), lightningDownRc.left + (lightningDownRc.right - lightningDownRc.left) / 2 - 36,
-			lightningDownRc.top + (lightningDownRc.bottom - lightningDownRc.top) / 2 - 402, playerLightningAni);
-	}
-	ANIMATION->resume("라이트닝애니");
 
 
-	
+
 	if (InputManager->isStayKeyDown('Z'))
 	{
 		setHp(getHp() - 1);
@@ -420,7 +304,7 @@ void Cplayer::playerStateRender()
 			{
 				playerAttackRc = RectMake(m_playerX - 99, m_playerY, 100, 40);
 				Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
-   				playerAttackLeft->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
+				playerAttackLeft->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			}
 			break;
 		case DIRECTIONS::DIRECTIONS_UP:
@@ -445,7 +329,7 @@ void Cplayer::playerStateRender()
 			if (!isAttack) playerMoveDown->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 13, playerMoveAni);
 			else
 			{
-				playerAttackRc = RectMake(m_playerX-10, m_playerY + 67, 40, 90);
+				playerAttackRc = RectMake(m_playerX - 10, m_playerY + 67, 40, 90);
 				Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
 				playerAttackDown->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			}
@@ -529,6 +413,146 @@ void Cplayer::playerStateRender()
 			}
 			break;
 		}
+	}
+}
+
+void Cplayer::playerSkillControl()
+{
+	if (isRect && skillState == SKILL::SKILL_LEFT)
+	{
+		lightningCenterRc = RectMake(m_skillX - 300, m_skillY, 36, 36);
+		lightningLeftRc = RectMake(m_skillX - 336, m_skillY, 36, 36);
+		lightningRightRc = RectMake(m_skillX - 264, m_skillY, 36, 36);
+		lightningUpRc = RectMake(m_skillX - 300, m_skillY - 36, 36, 36);
+		lightningDownRc = RectMake(m_skillX - 300, m_skillY + 36, 36, 36);
+		Rectangle(getMapDC(), lightningCenterRc.left, lightningCenterRc.top, lightningCenterRc.right, lightningCenterRc.bottom);
+		Rectangle(getMapDC(), lightningLeftRc.left, lightningLeftRc.top, lightningLeftRc.right, lightningLeftRc.bottom);
+		Rectangle(getMapDC(), lightningRightRc.left, lightningRightRc.top, lightningRightRc.right, lightningRightRc.bottom);
+		Rectangle(getMapDC(), lightningUpRc.left, lightningUpRc.top, lightningUpRc.right, lightningUpRc.bottom);
+		Rectangle(getMapDC(), lightningDownRc.left, lightningDownRc.top, lightningDownRc.right, lightningDownRc.bottom);
+	}
+
+	else if (isRect && skillState == SKILL::SKILL_RIGHT)
+	{
+		lightningCenterRc = RectMake(m_skillX + 300, m_skillY, 36, 36);
+		lightningLeftRc = RectMake(m_skillX + 264, m_skillY, 36, 36);
+		lightningRightRc = RectMake(m_skillX + 336, m_skillY, 36, 36);
+		lightningUpRc = RectMake(m_skillX + 300, m_skillY - 36, 36, 36);
+		lightningDownRc = RectMake(m_skillX + 300, m_skillY + 36, 36, 36);
+		Rectangle(getMapDC(), lightningCenterRc.left, lightningCenterRc.top, lightningCenterRc.right, lightningCenterRc.bottom);
+		Rectangle(getMapDC(), lightningLeftRc.left, lightningLeftRc.top, lightningLeftRc.right, lightningLeftRc.bottom);
+		Rectangle(getMapDC(), lightningRightRc.left, lightningRightRc.top, lightningRightRc.right, lightningRightRc.bottom);
+		Rectangle(getMapDC(), lightningUpRc.left, lightningUpRc.top, lightningUpRc.right, lightningUpRc.bottom);
+		Rectangle(getMapDC(), lightningDownRc.left, lightningDownRc.top, lightningDownRc.right, lightningDownRc.bottom);
+
+		//playerLightningAni = ANIMATION->findAnimation("라이트닝애니");
+	}
+	else if (isRect && skillState == SKILL::SKILL_UP)
+	{
+		lightningCenterRc = RectMake(m_skillX, m_skillY - 300, 36, 36);
+		lightningLeftRc = RectMake(m_skillX - 36, m_skillY - 300, 36, 36);
+		lightningRightRc = RectMake(m_skillX + 36, m_skillY - 300, 36, 36);
+		lightningUpRc = RectMake(m_skillX, m_skillY - 336, 36, 36);
+		lightningDownRc = RectMake(m_skillX, m_skillY - 264, 36, 36);
+		Rectangle(getMapDC(), lightningCenterRc.left, lightningCenterRc.top, lightningCenterRc.right, lightningCenterRc.bottom);
+		Rectangle(getMapDC(), lightningLeftRc.left, lightningLeftRc.top, lightningLeftRc.right, lightningLeftRc.bottom);
+		Rectangle(getMapDC(), lightningRightRc.left, lightningRightRc.top, lightningRightRc.right, lightningRightRc.bottom);
+		Rectangle(getMapDC(), lightningUpRc.left, lightningUpRc.top, lightningUpRc.right, lightningUpRc.bottom);
+		Rectangle(getMapDC(), lightningDownRc.left, lightningDownRc.top, lightningDownRc.right, lightningDownRc.bottom);
+
+	}
+	else if (isRect && skillState == SKILL::SKILL_DOWN)
+	{
+		lightningCenterRc = RectMake(m_skillX, m_skillY + 300, 36, 36);
+		lightningLeftRc = RectMake(m_skillX - 36, m_skillY + 300, 36, 36);
+		lightningRightRc = RectMake(m_skillX + 36, m_skillY + 300, 36, 36);
+		lightningUpRc = RectMake(m_skillX, m_skillY + 264, 36, 36);
+		lightningDownRc = RectMake(m_skillX, m_skillY + 336, 36, 36);
+		Rectangle(getMapDC(), lightningCenterRc.left, lightningCenterRc.top, lightningCenterRc.right, lightningCenterRc.bottom);
+		Rectangle(getMapDC(), lightningLeftRc.left, lightningLeftRc.top, lightningLeftRc.right, lightningLeftRc.bottom);
+		Rectangle(getMapDC(), lightningRightRc.left, lightningRightRc.top, lightningRightRc.right, lightningRightRc.bottom);
+		Rectangle(getMapDC(), lightningUpRc.left, lightningUpRc.top, lightningUpRc.right, lightningUpRc.bottom);
+		Rectangle(getMapDC(), lightningDownRc.left, lightningDownRc.top, lightningDownRc.right, lightningDownRc.bottom);
+	}
+
+}
+
+void Cplayer::playerSkillRender()
+{
+	switch (skillState)
+	{
+	case SKILL::SKILL_IDLE:
+		break;
+	case SKILL::SKILL_LEFT:
+		//중앙
+		playerSkillLightning->aniRender(getMapDC(), lightningCenterRc.left + (lightningCenterRc.right - lightningCenterRc.left) / 2 - 36,
+			lightningCenterRc.top + (lightningCenterRc.bottom - lightningCenterRc.top) / 2 - 402, playerLightningAni);
+		//왼쪽
+		playerSkillLightning->aniRender(getMapDC(), lightningLeftRc.left + (lightningLeftRc.right - lightningLeftRc.left) / 2 - 36,
+			lightningLeftRc.top + (lightningLeftRc.bottom - lightningLeftRc.top) / 2 - 402, playerLightningAni);
+		//오른쪽
+		playerSkillLightning->aniRender(getMapDC(), lightningRightRc.left + (lightningRightRc.right - lightningRightRc.left) / 2 - 36,
+			lightningRightRc.top + (lightningRightRc.bottom - lightningRightRc.top) / 2 - 402, playerLightningAni);
+		//위쪽
+		playerSkillLightning->aniRender(getMapDC(), lightningUpRc.left + (lightningUpRc.right - lightningUpRc.left) / 2 - 36,
+			lightningUpRc.top + (lightningUpRc.bottom - lightningUpRc.top) / 2 - 402, playerLightningAni);
+		//아래쪽
+		playerSkillLightning->aniRender(getMapDC(), lightningDownRc.left + (lightningDownRc.right - lightningDownRc.left) / 2 - 36,
+			lightningDownRc.top + (lightningDownRc.bottom - lightningDownRc.top) / 2 - 402, playerLightningAni);
+		break;
+	case SKILL::SKILL_UP:
+		//중앙
+		playerSkillLightning->aniRender(getMapDC(), lightningCenterRc.left + (lightningCenterRc.right - lightningCenterRc.left) / 2 - 36,
+			lightningCenterRc.top + (lightningCenterRc.bottom - lightningCenterRc.top) / 2 - 402, playerLightningAni);
+		//왼쪽
+		playerSkillLightning->aniRender(getMapDC(), lightningLeftRc.left + (lightningLeftRc.right - lightningLeftRc.left) / 2 - 36,
+			lightningLeftRc.top + (lightningLeftRc.bottom - lightningLeftRc.top) / 2 - 402, playerLightningAni);
+		//오른쪽
+		playerSkillLightning->aniRender(getMapDC(), lightningRightRc.left + (lightningRightRc.right - lightningRightRc.left) / 2 - 36,
+			lightningRightRc.top + (lightningRightRc.bottom - lightningRightRc.top) / 2 - 402, playerLightningAni);
+		//위쪽
+		playerSkillLightning->aniRender(getMapDC(), lightningUpRc.left + (lightningUpRc.right - lightningUpRc.left) / 2 - 36,
+			lightningUpRc.top + (lightningUpRc.bottom - lightningUpRc.top) / 2 - 402, playerLightningAni);
+		//아래쪽
+		playerSkillLightning->aniRender(getMapDC(), lightningDownRc.left + (lightningDownRc.right - lightningDownRc.left) / 2 - 36,
+			lightningDownRc.top + (lightningDownRc.bottom - lightningDownRc.top) / 2 - 402, playerLightningAni);
+		break;
+	case SKILL::SKILL_RIGHT:
+		//중앙
+		playerSkillLightning->aniRender(getMapDC(), lightningCenterRc.left + (lightningCenterRc.right - lightningCenterRc.left) / 2 - 36,
+			lightningCenterRc.top + (lightningCenterRc.bottom - lightningCenterRc.top) / 2 - 402, playerLightningAni);
+		//왼쪽
+		playerSkillLightning->aniRender(getMapDC(), lightningLeftRc.left + (lightningLeftRc.right - lightningLeftRc.left) / 2 - 36,
+			lightningLeftRc.top + (lightningLeftRc.bottom - lightningLeftRc.top) / 2 - 402, playerLightningAni);
+		//오른쪽
+		playerSkillLightning->aniRender(getMapDC(), lightningRightRc.left + (lightningRightRc.right - lightningRightRc.left) / 2 - 36,
+			lightningRightRc.top + (lightningRightRc.bottom - lightningRightRc.top) / 2 - 402, playerLightningAni);
+		//위쪽
+		playerSkillLightning->aniRender(getMapDC(), lightningUpRc.left + (lightningUpRc.right - lightningUpRc.left) / 2 - 36,
+			lightningUpRc.top + (lightningUpRc.bottom - lightningUpRc.top) / 2 - 402, playerLightningAni);
+		//아래쪽
+		playerSkillLightning->aniRender(getMapDC(), lightningDownRc.left + (lightningDownRc.right - lightningDownRc.left) / 2 - 36,
+			lightningDownRc.top + (lightningDownRc.bottom - lightningDownRc.top) / 2 - 402, playerLightningAni);
+		break;
+	case SKILL::SKILL_DOWN:
+		//중앙
+		playerSkillLightning->aniRender(getMapDC(), lightningCenterRc.left + (lightningCenterRc.right - lightningCenterRc.left) / 2 - 36,
+			lightningCenterRc.top + (lightningCenterRc.bottom - lightningCenterRc.top) / 2 - 402, playerLightningAni);
+		//왼쪽
+		playerSkillLightning->aniRender(getMapDC(), lightningLeftRc.left + (lightningLeftRc.right - lightningLeftRc.left) / 2 - 36,
+			lightningLeftRc.top + (lightningLeftRc.bottom - lightningLeftRc.top) / 2 - 402, playerLightningAni);
+		//오른쪽
+		playerSkillLightning->aniRender(getMapDC(), lightningRightRc.left + (lightningRightRc.right - lightningRightRc.left) / 2 - 36,
+			lightningRightRc.top + (lightningRightRc.bottom - lightningRightRc.top) / 2 - 402, playerLightningAni);
+		//위쪽
+		playerSkillLightning->aniRender(getMapDC(), lightningUpRc.left + (lightningUpRc.right - lightningUpRc.left) / 2 - 36,
+			lightningUpRc.top + (lightningUpRc.bottom - lightningUpRc.top) / 2 - 402, playerLightningAni);
+		//아래쪽
+		playerSkillLightning->aniRender(getMapDC(), lightningDownRc.left + (lightningDownRc.right - lightningDownRc.left) / 2 - 36,
+			lightningDownRc.top + (lightningDownRc.bottom - lightningDownRc.top) / 2 - 402, playerLightningAni);
+		break;
+	default:
+		break;
 	}
 }
 
