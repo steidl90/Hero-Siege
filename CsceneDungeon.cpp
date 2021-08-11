@@ -25,7 +25,7 @@ HRESULT CsceneDungeon::init()
 	m_elemental->init(PointMake(1000,500),1000);
 
 
-	m_changeRect = RectMake(100, 100, 100, 100);
+	m_changeRect = RectMake(170, MAPSIZE - 230, 100, 50);
 
 	return S_OK;
 }
@@ -61,7 +61,7 @@ void CsceneDungeon::render()
 	m_elemental->render();
 	m_player->render();
 
-	Rectangle(getMapDC(), m_changeRect.left, m_changeRect.top, m_changeRect.right, m_changeRect.bottom);
+	//Rectangle(getMapDC(), m_changeRect.left, m_changeRect.top, m_changeRect.right, m_changeRect.bottom);
 }
 
 void CsceneDungeon::sceneChange()

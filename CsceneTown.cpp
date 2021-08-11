@@ -21,7 +21,8 @@ HRESULT CsceneTown::init()
 	m_player = new CplayerManager;
 	m_player->init();
 
-	m_changeRect = RectMake(100, 100, 100, 100);
+	m_changeRect = RectMake(MAPSIZE - 10, MAPSIZE * 0.25 + 120, 100, 100);
+
 
 	return S_OK;
 }
@@ -52,7 +53,7 @@ void CsceneTown::render()
 	m_town->render();
 	m_player->render();
 
-	Rectangle(getMapDC(), m_changeRect.left, m_changeRect.top, m_changeRect.right, m_changeRect.bottom);
+	//Rectangle(getMapDC(), m_changeRect.left, m_changeRect.top, m_changeRect.right, m_changeRect.bottom);
 }
 
 void CsceneTown::sceneChange()
