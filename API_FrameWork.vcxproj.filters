@@ -339,6 +339,9 @@
     <ClInclude Include="CprogressBar.h">
       <Filter>mainGame\히어로시즈\Cobject\CprogressBar</Filter>
     </ClInclude>
+    <ClInclude Include="CshopUi.h">
+      <Filter>mainGame\히어로시즈\Cobject\Cshop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -511,6 +514,9 @@
     </ClCompile>
     <ClCompile Include="CprogressBar.cpp">
       <Filter>mainGame\히어로시즈\Cobject\CprogressBar</Filter>
+    </ClCompile>
+    <ClCompile Include="CshopUi.cpp">
+      <Filter>mainGame\히어로시즈\Cobject\Cshop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

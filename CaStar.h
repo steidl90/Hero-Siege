@@ -1,10 +1,10 @@
 #pragma once
 #include "gameNode.h"
 
-#define TILE_X 20
-#define TILE_Y 20
-#define WIDTH  35
-#define HEIGHT 35
+#define TILE_X 50
+#define TILE_Y 50
+#define WIDTH  36
+#define HEIGHT 36
 #define BIGNUM 5000
 
 enum class TILE_TYPE
@@ -31,20 +31,32 @@ struct aStarTile
 	int i, j;
 	int F, G, H;
 	char str[128];
+
 	aStarTile* parent;	
 	TILE_TYPE type;		
 };
 
+
+class camera;
 class CaStar :public gameNode
 {
+
+private:
+	camera* m_camera;
 private:
 	aStarTile _tile[TILE_X][TILE_Y];
 	vector<aStarTile*> _openList;
 	vector<aStarTile*> _closeList;
+	// 추가
+	vector<POINT> m_fastLoad;
+	vector<POINT> m_fastLoadLocation;
+	POINT m_playerIndex;
 
 	ASTAR_STATE _astarState;
 	TILE_TYPE _selectType;
 	COLORREF _selectedTypeColor;
+
+	
 
 	int _startX, _startY;
 	int _endX, _endY;
@@ -52,6 +64,9 @@ private:
 
 	bool _startPointSet;
 	bool _endPointSet;
+
+	bool isButtonClick;
+	bool isKeyUp;
 
 	int Ci;
 	int Cj;
@@ -61,11 +76,14 @@ private:
 	HBRUSH newBrush, oldBrush;
 	HFONT newFont, oldFont;
 
+
+
 public:
 	CaStar();
 	~CaStar();
 
 	HRESULT init();
+	HRESULT init2();
 	void release();
 	void update();
 	void render();
@@ -79,6 +97,12 @@ public:
 	void checkArrive();		
 	void showWay(aStarTile* tile);
 	void typeColor(TILE_TYPE type);
+
+	// 추가
+	void setPlayerIndex(POINT index) { m_playerIndex = index; }
+	vector<POINT>* getFastLoad() { return &m_fastLoad; }
+	vector<POINT>* getFastLoadLocation() { return &m_fastLoadLocation; }
+	void setCameraMemory(camera* cm) { m_camera = cm; }
 };
 
 

@@ -176,6 +176,7 @@
     <ClInclude Include="CsceneSelect.h" />
     <ClInclude Include="CsceneStart.h" />
     <ClInclude Include="Cshop.h" />
+    <ClInclude Include="CshopUi.h" />
     <ClInclude Include="Cslime.h" />
     <ClInclude Include="CtotalItem.h" />
     <ClInclude Include="Ctown.h" />
@@ -241,6 +242,7 @@
     <ClCompile Include="CsceneSelect.cpp" />
     <ClCompile Include="CsceneStart.cpp" />
     <ClCompile Include="Cshop.cpp" />
+    <ClCompile Include="CshopUi.cpp" />
     <ClCompile Include="Cslime.cpp" />
     <ClCompile Include="CtotalItem.cpp" />
     <ClCompile Include="Ctown.cpp" />

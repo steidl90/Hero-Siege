@@ -25,6 +25,8 @@ HRESULT CplayerManager::init()
 
     m_InventoryUI = new CinventoryUi;
     m_InventoryUI->setInventoryMemory(m_inventory);
+
+    m_InventoryUI->setPlayerMemory(m_player);
     m_InventoryUI->init();
 
     isInventoryOn = false;
@@ -58,14 +60,92 @@ void CplayerManager::render()
     if (isInventoryOn)
     {
         m_InventoryUI->render();
-        TCHAR str[100];
-        wsprintf(str, "Atk : %d", m_player->getAtk());
-        TextOut(getMemDC(), WINSIZEX / 2 + 210, WINSIZEY / 2 - 80, str, lstrlen(str));
-        wsprintf(str, "Def : %d", m_player->getDef());
-        TextOut(getMemDC(), WINSIZEX / 2 + 210, WINSIZEY / 2 - 60, str, lstrlen(str));
-        wsprintf(str, "Hp : %d", m_player->getHp());
-        TextOut(getMemDC(), WINSIZEX / 2 + 210, WINSIZEY / 2 - 40, str, lstrlen(str));
-        wsprintf(str, "Mp : %d", m_player->getMp());
-        TextOut(getMemDC(), WINSIZEX / 2 + 210, WINSIZEY / 2 - 20, str, lstrlen(str));
+        this->showPlayerStat();
     }
+}
+
+void CplayerManager::showPlayerStat()
+{
+    vector<Citem*> equipSet;
+    if(m_inventory->getEquipWeapon() != nullptr) equipSet.push_back(m_inventory->getEquipWeapon());
+    if (m_inventory->getEquipArmor() != nullptr) equipSet.push_back(m_inventory->getEquipArmor());
+    if (m_inventory->getEquipShoes() != nullptr) equipSet.push_back(m_inventory->getEquipShoes());
+    if (m_inventory->getEquipGloves() != nullptr) equipSet.push_back(m_inventory->getEquipGloves());
+    if (m_inventory->getEquipPendant() != nullptr) equipSet.push_back(m_inventory->getEquipPendant());
+   
+    int itemAtk = 0;
+    int itemDef = 0;
+    int itemHp = 0;
+    int itemMp = 0;
+    int itemCri = 0;
+    float itemCriAtk = 0;
+    float itemSpeed = 0;
+
+    for (auto iter = equipSet.begin(); iter != equipSet.end(); ++iter)
+    {
+        itemAtk += (*iter)->getAtk();
+        itemDef += (*iter)->getDef();
+        itemHp += (*iter)->getHp();
+        itemMp += (*iter)->getMp();
+        itemCri += (*iter)->getCritical();
+        itemCriAtk += (*iter)->getCriticalAtk();
+        itemSpeed += (*iter)->getSpeed();
+    }
+    // 인벤토리창 옮길거면 좌표값도 UI것 해줘야한다, 현재는 임시
+
+    TCHAR str[100];
+    wsprintf(str, "Atk: %d + %d", m_player->getAtk() - itemAtk, itemAtk);
+    TextOut(getMemDC(), WINSIZEX / 2 + 210, 330, str, lstrlen(str));
+    wsprintf(str, "Def: %d + %d", m_player->getDef() - itemDef, itemDef);
+    TextOut(getMemDC(), WINSIZEX / 2 + 210, 350, str, lstrlen(str));
+    wsprintf(str, "Hp: %d + %d", m_player->getHp() - itemHp, itemHp);
+    TextOut(getMemDC(), WINSIZEX / 2 + 210, 370, str, lstrlen(str));
+    wsprintf(str, "Mp: %d + %d", m_player->getMp() - itemMp, itemMp);
+    TextOut(getMemDC(), WINSIZEX / 2 + 210, 390, str, lstrlen(str)); 
+    wsprintf(str, "Critical: %d + %d", m_player->getCritical() - itemCri, itemCri);
+    TextOut(getMemDC(), WINSIZEX / 2 + 210, 410, str, lstrlen(str));
+    sprintf(str, "CriAtk: %.1f + %.1f", m_player->getCriticalAtk() - itemCriAtk, itemCriAtk);
+    TextOut(getMemDC(), WINSIZEX / 2 + 210, 430, str, lstrlen(str));
+    sprintf(str, "Speed: %.1f + %.1f", m_player->getSpeed() - itemSpeed, itemSpeed);
+    TextOut(getMemDC(), WINSIZEX / 2 + 210, 450, str, lstrlen(str));
+
+}
+
+void CplayerManager::itemStatSet()
+{
+ /*   vector<Citem*> equipSet;
+    if (m_inventory->getEquipWeapon() != nullptr) equipSet.push_back(m_inventory->getEquipWeapon());
+    if (m_inventory->getEquipArmor() != nullptr) equipSet.push_back(m_inventory->getEquipArmor());
+    if (m_inventory->getEquipShoes() != nullptr) equipSet.push_back(m_inventory->getEquipShoes());
+    if (m_inventory->getEquipGloves() != nullptr) equipSet.push_back(m_inventory->getEquipGloves());
+    if (m_inventory->getEquipPendant() != nullptr) equipSet.push_back(m_inventory->getEquipPendant());
+
+    int itemAtk = 0;
+    int itemDef = 0;
+    int itemHp = 0;
+    int itemMp = 0;
+    int itemCri = 0;
+    int itemCriAtk = 0;
+    int itemSpeed = 0;
+
+    for (auto iter = equipSet.begin(); iter != equipSet.end(); ++iter)
+    {
+        itemAtk += (*iter)->getAtk();
+        itemDef += (*iter)->getDef();
+        itemHp += (*iter)->getHp();
+        itemMp += (*iter)->getMp();
+        itemCri += (*iter)->getCritical();
+        itemCriAtk += (*iter)->getCriticalAtk();
+        itemSpeed += (*iter)->getSpeed();
+    }
+
+    m_player->setAtk(m_player->getAtk() + itemAtk);
+    m_player->setDef(m_player->getDef() + itemDef);
+    m_player->setHp(m_player->getHp() + itemHp);
+    m_player->setMp(m_player->getMp() + itemMp);
+    m_player->setCritical(m_player->getCritical() + itemCri);
+    m_player->setCriticalAtk(m_player->getCriticalAtk() + itemCriAtk);
+    m_player->setSpeed(m_player->getSpeed() + itemSpeed);
+*/
+
 }

@@ -7,6 +7,7 @@
 #include "CplayerUi.h"
 #include "CinventoryUi.h"
 
+class CaStar;
 class CplayerManager :public Cunit
 {
 private:
@@ -18,6 +19,7 @@ private:
 	Cinventory* m_inventory;
 private:
 
+	vector<POINT>* m_fastLoadLocation;
 
 	bool isInventoryOn;
 
@@ -29,6 +31,14 @@ public:
 	void release();
 	void update();
 	void render();
+
 	RECT* getplayerRect() { return m_player->getplayerMoveRC(); }
-	Cplayer* getPlayer() { return m_player; }
+
+	void setFastLoadLocation(vector<POINT>* vp) { m_fastLoadLocation = vp; }
+
+	Cinventory* getInventoryMemory() { return m_inventory; }
+
+	void showPlayerStat();
+
+	void itemStatSet();
 };

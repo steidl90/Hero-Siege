@@ -1,7 +1,12 @@
 #include "framework.h"
 #include "CaStar.h"
+#include "camera.h"
 
-CaStar::CaStar(){}
+CaStar::CaStar()
+{
+    isButtonClick = false;
+    isKeyUp = false;
+}
 
 CaStar::~CaStar(){}
 
@@ -29,32 +34,71 @@ HRESULT CaStar::init()
                 WINSIZEX / 3 + 9 - (TILE_Y / 2) * HEIGHT + HEIGHT * i, WIDTH, HEIGHT);
         }
     }
-    for (size_t i = 0; i < 5; i++)
+    //for (size_t i = 0; i < 5; i++)
+    //{
+    //    rc[i] = RectMake(15, 300 + i * 50, 25, 25);
+    //}
+    return S_OK;
+}
+
+HRESULT CaStar::init2()
+{
+    _astarState = ASTAR_STATE::ASTAR_STATE_END;
+    _selectedTypeColor = RGB(255, 255, 255);
+
+    _endPointSet = false;
+
+    for (size_t i = 0; i < TILE_Y; i++)
     {
-        rc[i] = RectMake(15, 300 + i * 50, 25, 25);
+        for (size_t j = 0; j < TILE_X; j++)
+        {
+            //_tile[i][j].type = TILE_TYPE::TILE_TYPE_EMPTY;
+            _tile[i][j].color = RGB(255, 255, 255);
+            _tile[i][j].parent = NULL;
+            _tile[i][j].F = BIGNUM;
+            _tile[i][j].H = 0;
+            _tile[i][j].i = i;
+            _tile[i][j].j = j;
+            _tile[i][j].rc = RectMake(WIDTH * j,
+               WIDTH * i, WIDTH, HEIGHT);
+        }
     }
     return S_OK;
 }
 
 void CaStar::release()
 {
+
 }
 
 void CaStar::update()
 {
+    if (InputManager->isOnceKeyDown(VK_RBUTTON))
+    {
+        //if (_endPointSet)
+        {
+            _openList.clear();
+            _closeList.clear();
+            init2();
+        }
+    }
+
+    if (InputManager->isStayKeyDown(VK_RBUTTON))
+    {
+        isButtonClick = true;
+    }
+    else
+    {
+        isButtonClick = false;
+    }
+  
     if (_astarState == ASTAR_STATE::ASTAR_STATE_END)
     {
         tileComposition();
     }
-    if (_startPointSet && _endPointSet && _astarState == ASTAR_STATE::ASTAR_STATE_END)
+   if (_startPointSet && _endPointSet && _astarState == ASTAR_STATE::ASTAR_STATE_END)
     {
         tileInitializing();
-    }
-    if (InputManager->isOnceKeyDown('5'))
-    {
-        _openList.clear(); 
-        _closeList.clear();
-        init(); 
     }
     if (_astarState == ASTAR_STATE::ASTAR_STATE_END || _astarState == ASTAR_STATE::ASTAR_STATE_FOUND || _astarState == ASTAR_STATE::ASTAR_STATE_NOWAY) return;
 
@@ -67,15 +111,15 @@ void CaStar::update()
 
 void CaStar::render()
 {
-    TextOut(getMemDC(), 15, 75, "1 : 지우개", strlen("1 : 지우개"));
-    TextOut(getMemDC(), 15, 95, "2 : 시작", strlen("2 : 시작"));
-    TextOut(getMemDC(), 15, 115, "3 : 끝", strlen("3 : 끝"));
-    TextOut(getMemDC(), 15, 135, "4 : 장애물", strlen("4 : 장애물"));
-    TextOut(getMemDC(), 15, 155, "5 : 초기화", strlen("5 : 초기화"));
+    //TextOut(getMemDC(), 15, 75, "1 : 지우개", strlen("1 : 지우개"));
+    //TextOut(getMemDC(), 15, 95, "2 : 시작", strlen("2 : 시작"));
+    //TextOut(getMemDC(), 15, 115, "3 : 끝", strlen("3 : 끝"));
+    //TextOut(getMemDC(), 15, 135, "4 : 장애물", strlen("4 : 장애물"));
+    //TextOut(getMemDC(), 15, 155, "5 : 초기화", strlen("5 : 초기화"));
 
-    char str[128];
+    //char str[128];
 
-    switch (_astarState)
+    /*switch (_astarState)
     {
     case ASTAR_STATE::ASTAR_STATE_END:
         sprintf_s(str, "스페이스 눌러");
@@ -90,10 +134,10 @@ void CaStar::render()
         sprintf_s(str, "찾는중");
         break;
     }
-    TextOut(getMemDC(), 15, 200, str, strlen(str));
+    TextOut(getMemDC(), 15, 200, str, strlen(str));*/
 
-    newFont = CreateFont(9, 0, 0, 0, FW_NORMAL, false, false, 0, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, PROOF_QUALITY, DEFAULT_PITCH | FF_SWISS, "굴림");
-    oldFont = (HFONT)SelectObject(getMemDC(), newFont);
+   /* newFont = CreateFont(9, 0, 0, 0, FW_NORMAL, false, false, 0, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, PROOF_QUALITY, DEFAULT_PITCH | FF_SWISS, "굴림");
+    oldFont = (HFONT)SelectObject(getMemDC(), newFont);*/
 
     //타일렌더
     for (size_t i = 0; i < TILE_Y; i++)
@@ -109,10 +153,10 @@ void CaStar::render()
             if (_tile[i][j].parent == NULL)continue;
         }
     }
-    SelectObject(getMemDC(), oldFont);
-    DeleteObject(newFont);
+    //SelectObject(getMemDC(), oldFont);
+    //DeleteObject(newFont);
 
-    for (size_t i = 0; i < 5; i++)
+   /* for (size_t i = 0; i < 5; i++)
     {
         if (i == 0)
         {
@@ -150,57 +194,95 @@ void CaStar::render()
             DeleteObject(newBrush);
         }
         TextOut(getMemDC(), rc[i].right + 15, rc[i].top + 5, str, strlen(str));
-    }
+    }*/
 }
 
 void CaStar::tileComposition()
 {
-    if (InputManager->isOnceKeyDown('1'))_selectType = TILE_TYPE::TILE_TYPE_EMPTY;
+    /*if (InputManager->isOnceKeyDown('1'))_selectType = TILE_TYPE::TILE_TYPE_EMPTY;
     else if (InputManager->isOnceKeyDown('2'))_selectType = TILE_TYPE::TILE_TYPE_START;
     else if (InputManager->isOnceKeyDown('3'))_selectType = TILE_TYPE::TILE_TYPE_END;
-    else if (InputManager->isOnceKeyDown('4'))_selectType = TILE_TYPE::TILE_TYPE_WALL;
+    else if (InputManager->isOnceKeyDown('4'))_selectType = TILE_TYPE::TILE_TYPE_WALL;*/
     typeColor(_selectType);
 
-    if (InputManager->isStayKeyDown(VK_LBUTTON))
+    //_startPointSet = false;
+
+    for (size_t i = 0; i < TILE_Y; i++)
     {
-        for (size_t i = 0; i < TILE_Y; i++)
+        for (size_t j = 0; j < TILE_X; j++)
         {
-            for (size_t j = 0; j < TILE_X; j++)
+            if (m_playerIndex.y + 1 == i && m_playerIndex.x == j)
             {
-                if (PtInRect(&_tile[i][j].rc, m_ptMouse))
+                 _selectType = TILE_TYPE::TILE_TYPE_START;
+                if (_tile[i][j].type == TILE_TYPE::TILE_TYPE_START)_startPointSet = false;
+                //if (_tile[i][j].type == TILE_TYPE::TILE_TYPE_END)_endPointSet = false;
+
+                _tile[i][j].type = _selectType;
+                _tile[i][j].color = _selectedTypeColor;
+
+                if (_selectType == TILE_TYPE::TILE_TYPE_START)
                 {
-                    if (_tile[i][j].type == TILE_TYPE::TILE_TYPE_START)_startPointSet = false;
-                    if (_tile[i][j].type == TILE_TYPE::TILE_TYPE_END)_endPointSet = false;
-
-                    _tile[i][j].type = _selectType;
-                    _tile[i][j].color = _selectedTypeColor;
-
-                    if (_selectType == TILE_TYPE::TILE_TYPE_START)
+                    if (_startPointSet)
                     {
-                        if (_startPointSet)
-                        {
-                            _tile[_startY][_startX].color = RGB(255, 255, 255);
-                            _tile[_startY][_startX].type = TILE_TYPE::TILE_TYPE_EMPTY;
-                        }
-                        _startPointSet = true;
-                        _startX = j;
-                        _startY = i;
+                        _tile[_startY][_startX].color = RGB(255, 255, 255);
+                        _tile[_startY][_startX].type = TILE_TYPE::TILE_TYPE_EMPTY;
                     }
+                    _startPointSet = true;
+                    _startX = j;
+                    _startY = i;
+                }
+                /*   if (_selectType == TILE_TYPE::TILE_TYPE_END)
+                   {
+                       if (_endPointSet)
+                       {
+                           _tile[_endY][_endX].color = RGB(255, 255, 255);
+                           _tile[_endY][_endX].type = TILE_TYPE::TILE_TYPE_EMPTY;
+                       }
+                       _endPointSet = true;
+                       _endX = j;
+                       _endY = i;
+                   }
+                 */
+            }
+        }
+    }
+    POINT cameraMouse = m_ptMouse;
+    cameraMouse.x += m_camera->getCameraPoint().x;
+    cameraMouse.y += m_camera->getCameraPoint().y;
 
-                    if (_selectType == TILE_TYPE::TILE_TYPE_END)
+    if (isButtonClick)
+    {
+        if (isKeyUp)
+        {
+            for (size_t i = 0; i < TILE_Y; i++)
+            {
+                for (size_t j = 0; j < TILE_X; j++)
+                {
+                    if (PtInRect(&_tile[i][j].rc, cameraMouse))
                     {
-                        if (_endPointSet)
+                        _selectType = TILE_TYPE::TILE_TYPE_END;
+                        if (_tile[i][j].type == TILE_TYPE::TILE_TYPE_END)_endPointSet = false;
+   
+                        if (_selectType == TILE_TYPE::TILE_TYPE_END)
                         {
-                            _tile[_endY][_endX].color = RGB(255, 255, 255);
-                            _tile[_endY][_endX].type = TILE_TYPE::TILE_TYPE_EMPTY;
+                            if (_endPointSet)
+                            {
+                                _tile[_endY][_endX].color = RGB(255, 255, 255);
+                                _tile[_endY][_endX].type = TILE_TYPE::TILE_TYPE_EMPTY;
+                            }
+                            _endPointSet = true;
+                            _endX = j;
+                            _endY = i;
                         }
-                        _endPointSet = true;
-                        _endX = j;
-                        _endY = i;
                     }
                 }
             }
+            isKeyUp = false;
         }
+    }
+    else
+    {
+        isKeyUp = true;
     }
 }
 
@@ -276,7 +358,7 @@ void CaStar::addOpenList()
         if (Cj != 0) //좌상단 : 0번째 열이 아니라면
         {
             //좌상단 타일의 왼쪽이나 아래에 벽이 없다면
-            if (_tile[Ci - 1][Cj - 1].walkable && _tile[Ci - 1][Cj].walkable && _tile[Ci][Cj - 1].walkable)
+            if (_tile[Ci - 1][Cj - 1].walkable && (_tile[Ci - 1][Cj].walkable && _tile[Ci][Cj - 1].walkable))
             {
                 if (!_tile[Ci - 1][Cj - 1].listOn)
                 {
@@ -299,7 +381,7 @@ void CaStar::addOpenList()
         if (Cj != TILE_X - 1) //우상단 : 마지막열이 아니라면
         {
             //우상단 타일의 왼쪽이나 아래에 벽이 없다면
-            if (_tile[Ci - 1][Cj + 1].walkable && _tile[Ci - 1][Cj].walkable && _tile[Ci][Cj + 1].walkable)
+            if (_tile[Ci - 1][Cj + 1].walkable && (_tile[Ci - 1][Cj].walkable && _tile[Ci][Cj + 1].walkable))
             {
                 if (!_tile[Ci - 1][Cj + 1].listOn)
                 {
@@ -389,7 +471,7 @@ void CaStar::addOpenList()
         if (Cj != 0) //좌하단 : 0번째 열이 아니라면
         {
             //좌하단 타일의 오른쪽이나 위에 벽이 없다면
-            if (_tile[Ci + 1][Cj - 1].walkable && _tile[Ci + 1][Cj].walkable && _tile[Ci][Cj - 1].walkable)
+            if (_tile[Ci + 1][Cj - 1].walkable && (_tile[Ci + 1][Cj].walkable && _tile[Ci][Cj - 1].walkable))
             {
                 if (!_tile[Ci + 1][Cj - 1].listOn)
                 {
@@ -412,7 +494,7 @@ void CaStar::addOpenList()
         if (Cj != TILE_X - 1) //우하단 : 마지막 열이 아니라면
         {
             //우하단 타일의 오른쪽이나 위가 이동가능하다면
-            if (_tile[Ci + 1][Cj + 1].walkable && _tile[Ci + 1][Cj].walkable && _tile[Ci][Cj + 1].walkable)
+            if (_tile[Ci + 1][Cj + 1].walkable && (_tile[Ci + 1][Cj].walkable && _tile[Ci][Cj + 1].walkable))
             {
                 if (!_tile[Ci + 1][Cj + 1].listOn)
                 {
@@ -489,13 +571,20 @@ void CaStar::checkArrive()
         _astarState = ASTAR_STATE::ASTAR_STATE_FOUND;
         _closeList[_lastIndex]->color = RGB(255, 100, 100);
         showWay(_closeList[_lastIndex]);
+
     }
 }
 
 void CaStar::showWay(aStarTile* tile)
 {
     if (!(tile->i == _endY && tile->j == _endX))
+    {
         tile->color = RGB(255, 180, 180);
+        m_fastLoad.push_back(PointMake(tile->j, tile->i));
+        int centerX = tile->rc.left + (tile->rc.right - tile->rc.left) / 2;
+        int centerY = tile->rc.top + (tile->rc.bottom - tile->rc.top) / 2;
+        m_fastLoadLocation.push_back(PointMake(centerX, centerY));
+    }
     tile = tile->parent;
 
     if (tile->parent == NULL)return;
