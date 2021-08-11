@@ -167,6 +167,7 @@ void CplayerManager::collisionEnemy()
             
             if ((*iter)->getHp() <= 0)
             {
+                m_player->setExp(m_player->getExp() + (*iter)->getExp());
                 m_enemy->removeMinion(i);
                 break;
             }

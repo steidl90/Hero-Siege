@@ -79,7 +79,6 @@ HRESULT Cplayer::init()
 	m_playerX = WINSIZEX / 2;
 	m_playerY = WINSIZEY / 2;
 	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth(), playerMoveDown->getFrameHeight());
-	playerAttackRc = RectMake(m_playerX, m_playerY, 100, 100);
 
 	return S_OK;
 }
@@ -91,6 +90,7 @@ void Cplayer::release()
 
 void Cplayer::update()
 {
+	Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
 	m_angle += 0.4;
 	moveControl();
 	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth() - 90, playerMoveDown->getFrameHeight() - 50);
@@ -101,6 +101,7 @@ void Cplayer::render()
 {
 	playerStateRender();
 	m_playerSkill->render();
+	if (isAttack) isAttackRender();
 }
 
 void Cplayer::moveControl()
@@ -164,7 +165,11 @@ void Cplayer::moveControl()
 	else isMoving = false;
 
 	if (InputManager->isStayKeyDown(VK_SPACE)) isAttack = true;
-	else isAttack = false;
+	else
+	{
+		isAttack = false;
+		playerAttackRc = RectMake(-100, -100, 0, 0); //임시? 더 좋은 방법 있으면 바꿀 예정
+	}
 
 	if (InputManager->isOnceKeyDown('Q'))
 	{
@@ -204,6 +209,13 @@ void Cplayer::moveControl()
 			setExp(0);
 			setLv(getLv() + 1);
 		}
+	}
+
+	//임시 레벨업
+	if (getExp() >= 100)
+	{
+		setExp(0);
+		setLv(getLv() + 1);
 	}
 
 	moveAnimation();
@@ -262,45 +274,92 @@ void Cplayer::moveAnimation()
 void Cplayer::playerStateRender()
 {
 	//Rectangle(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerMoveRc.right, playerMoveRc.bottom);
+	if (!isAttack)
+	{
+		if (isMoving)
+		{
+			switch (direction)
+			{
+			case DIRECTIONS::DIRECTIONS_LEFT:
+				playerMoveLeft->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 13, playerMoveAni);
+				break;
+			case DIRECTIONS::DIRECTIONS_UP:
+				playerMoveUp->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 15, playerMoveAni);
+				break;
+			case DIRECTIONS::DIRECTIONS_RIGHT:
+				playerMoveRight->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 13, playerMoveAni);
+				break;
+			case DIRECTIONS::DIRECTIONS_DOWN:
+				playerMoveDown->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 13, playerMoveAni);
+				break;
+			}
+		}
+		else
+		{
+			switch (direction)
+			{
+			case DIRECTIONS::DIRECTIONS_LEFT:
+				playerLeft->aniRender(getMapDC(), playerMoveRc.left - 40, playerMoveRc.top - 3, playerIdleAni);
+				if (isIdle == false)
+				{
+					playerIdleAni = ANIMATION->findAnimation("왼쪽");
+					ANIMATION->start("왼쪽");
+					isIdle = true;
+				}
+				break;
+			case DIRECTIONS::DIRECTIONS_UP:
+				playerUp->aniRender(getMapDC(), playerMoveRc.left - 39, playerMoveRc.top - 4, playerIdleAni);
+				if (!isIdle)
+				{
+					playerIdleAni = ANIMATION->findAnimation("위쪽");
+					ANIMATION->start("위쪽");
+					isIdle = true;
+				}
+				break;
+			case DIRECTIONS::DIRECTIONS_RIGHT:
+				playerRight->aniRender(getMapDC(), playerMoveRc.left - 39, playerMoveRc.top - 3, playerIdleAni);
+				if (!isIdle)
+				{
+					playerIdleAni = ANIMATION->findAnimation("오른쪽");
+					ANIMATION->start("오른쪽");
+					isIdle = true;
+				}
+				break;
+			case DIRECTIONS::DIRECTIONS_DOWN:
+				playerDown->aniRender(getMapDC(), playerMoveRc.left - 39, playerMoveRc.top - 3, playerIdleAni);
+				if (!isIdle)
+				{
+					playerIdleAni = ANIMATION->findAnimation("아래쪽");
+					ANIMATION->start("아래쪽");
+					isIdle = true;
+				}
+				break;
+			}
+		}
+	}
+}
+
+void Cplayer::isAttackRender()
+{
 	if (isMoving)
 	{
 		switch (direction)
 		{
 		case DIRECTIONS::DIRECTIONS_LEFT:
-			if (!isAttack) playerMoveLeft->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 13, playerMoveAni);
-			else
-			{
-				playerAttackRc = RectMake(m_playerX - 99, m_playerY, 100, 40);
-				//Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
-				playerAttackLeft->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
-			}
+			playerAttackRc = RectMake(m_playerX - 99, m_playerY, 100, 40);
+			playerAttackLeft->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			break;
 		case DIRECTIONS::DIRECTIONS_UP:
-			if (!isAttack) playerMoveUp->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 15, playerMoveAni);
-			else
-			{
-				playerAttackRc = RectMake(m_playerX + 10, m_playerY - 89, 40, 90);
-				//Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
-				playerAttackUp->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 76, playerAttackAni);
-			}
+			playerAttackRc = RectMake(m_playerX + 10, m_playerY - 89, 40, 90);
+			playerAttackUp->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 76, playerAttackAni);
 			break;
 		case DIRECTIONS::DIRECTIONS_RIGHT:
-			if (!isAttack) playerMoveRight->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 13, playerMoveAni);
-			else
-			{
-				playerAttackRc = RectMake(m_playerX + 35, m_playerY, 100, 40);
-				//Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
-				playerAttackRight->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
-			}
+			playerAttackRc = RectMake(m_playerX + 35, m_playerY, 100, 40);
+			playerAttackRight->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			break;
 		case DIRECTIONS::DIRECTIONS_DOWN:
-			if (!isAttack) playerMoveDown->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 13, playerMoveAni);
-			else
-			{
-				playerAttackRc = RectMake(m_playerX - 10, m_playerY + 67, 40, 90);
-				//Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
-				playerAttackDown->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
-			}
+			playerAttackRc = RectMake(m_playerX - 10, m_playerY + 67, 40, 90);
+			playerAttackDown->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			break;
 		}
 	}
@@ -309,76 +368,20 @@ void Cplayer::playerStateRender()
 		switch (direction)
 		{
 		case DIRECTIONS::DIRECTIONS_LEFT:
-			if (!isAttack)
-			{
-				playerLeft->aniRender(getMapDC(), playerMoveRc.left - 40, playerMoveRc.top - 3, playerIdleAni);
-				if (isIdle == false)
-				{
-					playerIdleAni = ANIMATION->findAnimation("왼쪽");
-					ANIMATION->start("왼쪽");
-					isIdle = true;
-				}
-			}
-			else
-			{
-				playerAttackRc = RectMake(m_playerX - 99, m_playerY, 100, 40);
-				//Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
-				playerAttackLeft->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
-			}
+			playerAttackRc = RectMake(m_playerX - 99, m_playerY, 100, 40);
+			playerAttackLeft->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			break;
 		case DIRECTIONS::DIRECTIONS_UP:
-			if (!isAttack)
-			{
-				playerUp->aniRender(getMapDC(), playerMoveRc.left - 39, playerMoveRc.top - 4, playerIdleAni);
-				if (!isIdle)
-				{
-					playerIdleAni = ANIMATION->findAnimation("위쪽");
-					ANIMATION->start("위쪽");
-					isIdle = true;
-				}
-			}
-			else
-			{
-				playerAttackRc = RectMake(m_playerX + 10, m_playerY - 89, 40, 90);
-				//Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
-				playerAttackUp->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
-			}
+			playerAttackRc = RectMake(m_playerX + 10, m_playerY - 89, 40, 90);
+			playerAttackUp->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			break;
 		case DIRECTIONS::DIRECTIONS_RIGHT:
-			if (!isAttack)
-			{
-				playerRight->aniRender(getMapDC(), playerMoveRc.left - 39, playerMoveRc.top - 3, playerIdleAni);
-				if (!isIdle)
-				{
-					playerIdleAni = ANIMATION->findAnimation("오른쪽");
-					ANIMATION->start("오른쪽");
-					isIdle = true;
-				}
-			}
-			else
-			{
-				playerAttackRc = RectMake(m_playerX + 35, m_playerY, 100, 40);
-				//Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
-				playerAttackRight->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
-			}
+			playerAttackRc = RectMake(m_playerX + 35, m_playerY, 100, 40);
+			playerAttackRight->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			break;
 		case DIRECTIONS::DIRECTIONS_DOWN:
-			if (!isAttack)
-			{
-				playerDown->aniRender(getMapDC(), playerMoveRc.left - 39, playerMoveRc.top - 3, playerIdleAni);
-				if (!isIdle)
-				{
-					playerIdleAni = ANIMATION->findAnimation("아래쪽");
-					ANIMATION->start("아래쪽");
-					isIdle = true;
-				}
-			}
-			else
-			{
-				playerAttackRc = RectMake(m_playerX - 10, m_playerY + 67, 40, 90);
-				//Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
-				playerAttackDown->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
-			}
+			playerAttackRc = RectMake(m_playerX - 10, m_playerY + 67, 40, 90);
+			playerAttackDown->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			break;
 		}
 	}

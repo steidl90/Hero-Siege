@@ -12,7 +12,7 @@ Cmonk::~Cmonk()
 {
 }
 
-HRESULT Cmonk::init(POINT position, float HP, float damage, float exp,float trace)
+HRESULT Cmonk::init(POINT position, float HP, float damage, int exp,float trace)
 {
 	m_enemyAttack = new CenemyAttack;
 	m_enemyAttack->init(5, 100, true , "몽크공격하");

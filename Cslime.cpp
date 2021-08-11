@@ -11,7 +11,7 @@ Cslime::~Cslime()
 {
 }
 
-HRESULT Cslime::init(POINT position, float HP, float damage, float exp,float trace)
+HRESULT Cslime::init(POINT position, float HP, float damage, int exp,float trace)
 {
 	m_enemyAttack = new CenemyAttack;
 	m_enemyAttack->init(5, 100, true, "슬라임공격하");

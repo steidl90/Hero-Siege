@@ -11,7 +11,7 @@ Cprison::~Cprison()
 {
 }
 
-HRESULT Cprison::init(POINT position, float HP, float damage, float exp, float trace)
+HRESULT Cprison::init(POINT position, float HP, float damage, int exp, float trace)
 {
 	m_enemyAttack = new CenemyAttack;
 	m_enemyAttack->init(5, 100, true, "교도관공격하");

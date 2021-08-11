@@ -39,7 +39,7 @@ protected:
 	float m_hp;
 	float m_maxHp;
 	float m_damage;
-	float m_exp;
+	int m_exp;
 
 	bool m_isIdle;
 	bool m_isWalking;
@@ -70,6 +70,9 @@ public:
 
 	float getHp() { return m_hp; }
 	void setHp(float hp) { m_hp = hp; }
+
+	int getExp() { return m_exp; }
+	void setExp(int exp) { m_exp = exp; }
 
 	virtual void setPlayer(Cplayer* player) { m_player = player; }
 	virtual RECT getRect() { return m_walkRc; }

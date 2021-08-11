@@ -11,7 +11,7 @@ Cpriest::~Cpriest()
 {
 }
 
-HRESULT Cpriest::init(POINT position, float HP, float damage, float exp,float trace)
+HRESULT Cpriest::init(POINT position, float HP, float damage, int exp,float trace)
 {
 	m_enemyAttack = new CenemyAttack;
 	m_enemyAttack->init(50, 500, false, "리치스킬애니");

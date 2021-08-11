@@ -70,6 +70,7 @@ public:
 	void moveControl();
 	void moveAnimation();
 	void playerStateRender();
+	void isAttackRender();
 
 	RECT* getplayerMoveRC() { return &playerMoveRc; }
 	float getplayerX() const { return m_playerX; }

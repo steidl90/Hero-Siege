@@ -11,7 +11,7 @@ Celemental::~Celemental()
 {
 }
 
-HRESULT Celemental::init(POINT position, float HP, float damage, float exp,float trace)
+HRESULT Celemental::init(POINT position, float HP, float damage, int exp,float trace)
 {
 	m_enemyAttack = new CenemyAttack;
 	m_enemyAttack->init(50, 500, false, "ø§∏Æ∏‡≈ªΩ∫≈≥æ÷¥œ");
