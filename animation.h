@@ -4,9 +4,17 @@
 class animation
 {
 private:
-    function<void()> m_triggerWhenClick;
     bool useEventWhenEnd;
+    function<void()> m_triggerWhenEnd;
+
+    bool useEventWhenSpcificFrame;
+    int specificFrameIndex;
+    function<void()> m_triggerWhenSpecificFrame;
+
+
     typedef vector<POINT> _vFrameList;
+
+
     typedef vector<int> _vPlayList;
 
     _vFrameList  _frameList;//프레임  위치 목록
@@ -23,6 +31,7 @@ private:
     float _frameUpdateSec;
     float _elapseSec;
     DWORD _nowPlayIndex;
+    DWORD _endPlayIndex;
 
 public:
     animation();
@@ -44,6 +53,7 @@ public:
     void frameUpdate(float elapsedTime);
 
     void start();
+    void fullstart();
     void stop();
     void pause();
     void resume();
@@ -57,6 +67,13 @@ public:
     void SetTriggerWhenClick(T* pObj, void(T::* func)())
     {
         useEventWhenEnd = true;
-        m_triggerWhenClick = bind(func, pObj);
+        m_triggerWhenEnd = bind(func, pObj);
+    }
+
+    template <typename T>
+    void SetTriggerWhenSpecificFrame(T* pObj, void(T::* func)())
+    {
+        useEventWhenSpcificFrame = true;
+        m_triggerWhenSpecificFrame = bind(func, pObj);
     }
 };

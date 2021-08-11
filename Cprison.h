@@ -1,6 +1,6 @@
 #pragma once
-#include "Cunit.h"
-class Cprison :public Cunit
+#include "Cenemy.h"
+class Cprison :public Cenemy
 {
 private:
 
@@ -9,9 +9,13 @@ public:
 	Cprison();
 	~Cprison();
 
-	HRESULT init();
-	void release();
-	void update();
-	void render();
+	virtual HRESULT init(POINT position, float HP, float damage, float exp,float trace);
+	virtual void release();
+	virtual void update();
+	virtual void render();
+	virtual void attack();
+	virtual void die();
+	virtual void animation();
+	virtual bool enemyCooltime();
 };
 

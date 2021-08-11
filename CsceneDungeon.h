@@ -2,15 +2,15 @@
 #include "gameNode.h"
 #include "Cdungeon.h"
 #include "CplayerManager.h"
+#include "CenemyManager.h"
 #include "camera.h"
-#include "Celemental.h"
 class CsceneDungeon : public gameNode
 {
 private:
 	Cdungeon* m_dungeon;
 	camera* m_camera;
 	CplayerManager* m_player;
-	Celemental* m_elemental;
+	CenemyManager* m_enemyManager;
 
 	RECT m_changeRect;
 

@@ -1,6 +1,9 @@
 #pragma once
 #include "Cunit.h"
 #include "Cmevius.h"
+
+//필요없음..
+
 class CbossManager :public Cunit
 {
 private:

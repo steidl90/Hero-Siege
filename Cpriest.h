@@ -8,16 +8,15 @@ public:
 	Cpriest();
 	~Cpriest();
 
-	virtual HRESULT init();
+	virtual HRESULT init(POINT position, float HP, float damage, float exp,float trace);
 	virtual void release();
 	virtual void update();
 	virtual void render();
-
-	virtual void move();
 	virtual void attack();
 	virtual void die();
 	virtual void animation();
+	virtual bool enemyCooltime();
 
-	virtual bool enemyCoolTime();
+	void fire();
 };
 

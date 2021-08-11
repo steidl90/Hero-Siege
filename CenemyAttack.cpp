@@ -5,13 +5,41 @@ CenemyAttack::CenemyAttack(){}
 
 CenemyAttack::~CenemyAttack(){}
 
-HRESULT CenemyAttack::init(int skillMax, float range)
+HRESULT CenemyAttack::init(int skillMax, float range, bool melee, const char* aniName)
 {
 	ANIMATION->addDefAnimation("엘리멘탈스킬애니", "엘리멘탈스킬", 10, false, true);
 	ANIMATION->addDefAnimation("리치스킬애니", "리치스킬", 15, false, true);
 
+	ANIMATION->addAnimation("몽크공격하", "몽크공격", 0, 4,	 8, true, true);
+	ANIMATION->addAnimation("몽크공격좌", "몽크공격", 5, 9,	 8, true, true);
+	ANIMATION->addAnimation("몽크공격우", "몽크공격", 10, 14,	 8, true, true);
+	ANIMATION->addAnimation("몽크공격상", "몽크공격", 15, 19,	 8, true, true);
+
+	ANIMATION->addAnimation("교도관공격하", "교도관공격", 0, 7, 8, true, true);
+	ANIMATION->addAnimation("교도관공격좌", "교도관공격", 8, 15, 8, true, true);
+	ANIMATION->addAnimation("교도관공격우", "교도관공격", 16, 23, 8, true, true);
+	ANIMATION->addAnimation("교도관공격상", "교도관공격", 24, 31, 8, true, true);
+
+	ANIMATION->addAnimation("슬라임공격하", "슬라임공격", 0, 10, 12,  false, true);
+	ANIMATION->addAnimation("슬라임공격좌", "슬라임공격", 12, 23, 12, false, true);
+	ANIMATION->addAnimation("슬라임공격우", "슬라임공격", 24, 35, 12, false, true);
+	ANIMATION->addAnimation("슬라임공격상", "슬라임공격", 36, 47, 12, false, true);
+
+
+	m_ani = aniName;
 	m_skillMax = skillMax;
 	m_range = range;
+	m_melee = melee;
+
+	return S_OK;
+}
+
+HRESULT CenemyAttack::init2(int skillMax, float range, bool melee, const char* aniName)
+{
+	m_ani = aniName;
+	m_skillMax = skillMax;
+	m_range = range;
+	m_melee = melee;
 
 	return S_OK;
 }
@@ -20,32 +48,54 @@ void CenemyAttack::release()
 {
 }
 
-void CenemyAttack::update(const char* aniName)
+void CenemyAttack::update()
 {
-	for (m_viSkill = m_vSkill.begin(); m_viSkill != m_vSkill.end();)
+	if (m_melee)
 	{
-		m_viSkill->m_x += cosf(m_viSkill->m_angle) * m_viSkill->m_speed;
-		m_viSkill->m_y -= sinf(m_viSkill->m_angle) * m_viSkill->m_speed;
-
-		m_viSkill->m_rc = RectMakeCenter(m_viSkill->m_x, m_viSkill->m_y,
-			m_viSkill->m_skillImage->getFrameWidth(),
-			m_viSkill->m_skillImage->getFrameHeight());
-		if (m_range < UTIL::getDistance(m_viSkill->m_x, m_viSkill->m_y, m_viSkill->m_fireX, m_viSkill->m_fireY))
+		for (m_viSkill = m_vSkill.begin(); m_viSkill != m_vSkill.end();)
 		{
-			m_viSkill = m_vSkill.erase(m_viSkill);
+			m_viSkill->m_rc = RectMakeCenter(m_viSkill->m_x, m_viSkill->m_y,
+				m_viSkill->m_skillImage->getFrameWidth(),
+				m_viSkill->m_skillImage->getFrameHeight());
+		m_count++;
+			if (m_count >= m_range)
+			{
+				m_viSkill = m_vSkill.erase(m_viSkill);
+				m_count = 0;
+			}
+			else ++m_viSkill;
 		}
-		else ++m_viSkill;
+		ANIMATION->findAnimation(m_ani);
+		ANIMATION->resume(m_ani);
+		//ANIMATION->fullstart(m_ani);
 	}
-	ANIMATION->findAnimation(aniName);
-	ANIMATION->resume(aniName);
-	//move();	
+	if (!m_melee)
+	{
+		for (m_viSkill = m_vSkill.begin(); m_viSkill != m_vSkill.end();)
+		{
+			m_viSkill->m_x += cosf(m_viSkill->m_angle) * m_viSkill->m_speed;
+			m_viSkill->m_y -= sinf(m_viSkill->m_angle) * m_viSkill->m_speed;
+
+			m_viSkill->m_rc = RectMakeCenter(m_viSkill->m_x, m_viSkill->m_y,
+				m_viSkill->m_skillImage->getFrameWidth(),
+				m_viSkill->m_skillImage->getFrameHeight());
+			if (m_range < UTIL::getDistance(m_viSkill->m_x, m_viSkill->m_y, m_viSkill->m_fireX, m_viSkill->m_fireY))
+			{
+				m_viSkill = m_vSkill.erase(m_viSkill);
+			}
+			else ++m_viSkill;
+		}
+		ANIMATION->findAnimation(m_ani);
+		ANIMATION->resume(m_ani);
+	}
+
 }
 
 void CenemyAttack::render()
 {
 	for (m_viSkill = m_vSkill.begin(); m_viSkill != m_vSkill.end(); ++m_viSkill)
 	{
-		//Rectangle(getMapDC(), m_viSkill->m_rc.left, m_viSkill->m_rc.top, m_viSkill->m_rc.right, m_viSkill->m_rc.bottom);
+	//Rectangle(getMapDC(), m_viSkill->m_rc.left, m_viSkill->m_rc.top, m_viSkill->m_rc.right, m_viSkill->m_rc.bottom);
 		m_viSkill->m_skillImage->aniRender(getMapDC(), m_viSkill->m_rc.left, m_viSkill->m_rc.top,m_viSkill->m_ani);
 	}
 }
@@ -65,31 +115,7 @@ void CenemyAttack::fire(float x, float y, float angle, float speed, const char* 
 	m_vSkill.push_back(skill);
 }
 
-void CenemyAttack::move()
-{
-	//for (m_viSkill = m_vSkill.begin(); m_viSkill != m_vSkill.end();)
-	//{
-	//	m_viSkill->m_x += cosf(m_viSkill->m_angle) * m_viSkill->m_speed;
-	//	m_viSkill->m_y -= sinf(m_viSkill->m_angle) * m_viSkill->m_speed;
-
-	//	m_viSkill->m_rc = RectMakeCenter(m_viSkill->m_x, m_viSkill->m_y, 
-	//		m_viSkill->m_skillImage->getFrameWidth(), 
-	//		m_viSkill->m_skillImage->getFrameHeight());
-
-	//	if (m_viSkill->m_y > WINSIZEY || m_viSkill->m_y<0 || m_viSkill->m_x>WINSIZEX || m_viSkill->m_x < 0)
-	//	{
-	//		m_viSkill = m_vSkill.erase(m_viSkill);
-	//	}
-	//	else ++m_viSkill;
-	//}
-	//ANIMATION->findAnimation("엘리멘탈스킬애니");
-	//ANIMATION->resume("엘리멘탈스킬애니");
-
-	//ANIMATION->findAnimation("리치스킬애니");
-	//ANIMATION->resume("리치스킬애니");
-}
-
-void CenemyAttack::removeBullet(int arrNum)
+void CenemyAttack::removeSkill(int arrNum)
 {
 	m_vSkill.erase(m_vSkill.begin() + arrNum);
 }

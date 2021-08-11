@@ -13,16 +13,15 @@ enum class STATE
 class Cenemy : public Cunit
 {
 protected:
-	class CenemyAttack* m_enemyAttack;
 	class Cplayer* m_player;
 
 	image* m_walkImage;
 	animation* m_walkAni;
 	RECT m_walkRc;
 
-	image* m_attackImage;
-	animation* m_attackAni;
-	RECT m_attackRc;
+	//image* m_attackImage;
+	//animation* m_attackAni;
+	//RECT m_attackRc;
 
 	image* m_dieImage;
 	animation* m_dieAni;
@@ -34,9 +33,13 @@ protected:
 
 	float m_x, m_y;
 	float m_returnX, m_returnY;
+	float m_trace;
 	float m_speed;
+	float m_distance;
+
 	float m_hp;
 	float m_damage;
+	float m_exp;
 
 	bool m_isIdle;
 	bool m_isWalking;
@@ -47,23 +50,26 @@ protected:
 	int m_rndskillCount;
 
 public:
-
+		class CenemyAttack* m_enemyAttack;
 	Cenemy();
 	~Cenemy();
 
-	virtual HRESULT init(POINT position,int HP);
+	virtual HRESULT init(POINT position,float HP,float damage, float exp,float trace);
 	virtual void release();
 	virtual void update();
 	virtual void render();
 
 	virtual void move();
 	virtual void attack();
+
 	virtual void die();
 	virtual void animation();
-
 	virtual bool enemyCooltime();
 
-	virtual RECT getRect() { return m_walkRc; }
+	virtual void ReturnIdleAnimation();
 
+
+	virtual void setPlayer(Cplayer* player) { m_player = player; }
+	virtual RECT getRect() { return m_walkRc; }
 };
 
