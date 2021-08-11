@@ -21,7 +21,7 @@ void CplayerUi::release()
 void CplayerUi::update()
 {
 }
-
+//TODO::¹Ì´Ï¸Ê UI ¼³Á¤
 void CplayerUi::render()
 {
 	IMAGE->findImage("SkillUi")->render(getMemDC(), 0, (WINSIZEY - 39) - IMAGE->findImage("SkillUi")->getHeight());

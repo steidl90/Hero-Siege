@@ -31,6 +31,7 @@ private:
     float _frameUpdateSec;
     float _elapseSec;
     DWORD _nowPlayIndex;
+    DWORD _endPlayIndex;
 
 public:
     animation();
@@ -52,6 +53,7 @@ public:
     void frameUpdate(float elapsedTime);
 
     void start();
+    void fullstart();
     void stop();
     void pause();
     void resume();

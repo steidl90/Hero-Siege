@@ -22,6 +22,10 @@ void CenemyManager::update()
 
 void CenemyManager::render()
 {
+	CHAR str[128];
+	sprintf_s(str, "¸î¸¶¸® : %d", m_vEnemy.size());
+	TextOut(getMemDC(), 100, 100, str, strlen(str));
+
 	for (int i = 0; i < m_vEnemy.size(); i++)
 	{
 		m_vEnemy[i]->render();
@@ -42,17 +46,32 @@ void CenemyManager::collision()
 {
 	for (size_t i = 0; i < m_vEnemy.size(); i++)
 	{
-		if (m_vEnemy[i]->m_enemyAttack)
+		if (!m_vEnemy[i]->m_enemyAttack->getMeleeAttack())
 		{
-			for (size_t j = 0; j < m_vEnemy[i]->m_enemyAttack->getVSkill().size(); j++)
+			if (m_vEnemy[i]->m_enemyAttack)
 			{
-				RECT rc;
-				if (IntersectRect(&rc, &m_vEnemy[i]->m_enemyAttack->getVSkill()[j].m_rc, m_player->getplayerMoveRC()))
+				for (size_t j = 0; j < m_vEnemy[i]->m_enemyAttack->getVSkill().size(); j++)
 				{
-					m_vEnemy[i]->m_enemyAttack->removeSkill(j);
+					RECT rc;
+					if (IntersectRect(&rc, &m_vEnemy[i]->m_enemyAttack->getVSkill()[j].m_rc, m_player->getplayerMoveRC()))
+					{
+						m_vEnemy[i]->m_enemyAttack->removeSkill(j);
+					}
 				}
 			}
 		}
-		
+		else if (m_vEnemy[i]->m_enemyAttack->getMeleeAttack())
+		{
+			if (m_vEnemy[i]->m_enemyAttack)
+			{
+				for (size_t j = 0; j < m_vEnemy[i]->m_enemyAttack->getVSkill().size(); j++)
+				{
+					RECT rc;
+					if (IntersectRect(&rc, &m_vEnemy[i]->m_enemyAttack->getVSkill()[j].m_rc, m_player->getplayerMoveRC()))
+					{
+					}
+				}
+			}
+		}
 	}
 }

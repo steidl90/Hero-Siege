@@ -11,10 +11,10 @@ Celemental::~Celemental()
 {
 }
 
-HRESULT Celemental::init(POINT position, int HP)
+HRESULT Celemental::init(POINT position, float HP, float damage, float exp,float trace)
 {
 	m_enemyAttack = new CenemyAttack;
-	m_enemyAttack->init(50,500,"ø§∏Æ∏‡≈ªΩ∫≈≥æ÷¥œ");
+	m_enemyAttack->init(50,500,false,"ø§∏Æ∏‡≈ªΩ∫≈≥æ÷¥œ");
 
 	m_player = new Cplayer;
 	m_player->init();
@@ -24,9 +24,11 @@ HRESULT Celemental::init(POINT position, int HP)
 	m_distance = 100;
 	m_x = m_returnX = position.x;
 	m_y = m_returnY = position.y;
-
+	m_trace = trace;
 	m_speed = 2.0f;
 	m_hp = HP;
+	m_damage= damage;
+	m_exp=exp;
 
 	m_cooltimeCount = 0;
 	m_rndskillCount = 1;
@@ -42,6 +44,12 @@ HRESULT Celemental::init(POINT position, int HP)
 	return S_OK;
 }
 
+void Celemental::release()
+{
+	SAFE_DELETE(m_enemyAttack);
+	SAFE_DELETE(m_player);
+}
+
 void Celemental::update()
 {
 	m_enemyAttack->update();
@@ -49,7 +57,18 @@ void Celemental::update()
 		attack();
 
 	m_walkRc = RectMakeCenter(m_x, m_y, m_walkImage->getFrameWidth(), m_walkImage->getFrameHeight());
-	m_traceRc = RectMakeCenter(m_x, m_y, 500, 500);
+	m_traceRc = RectMakeCenter(m_x, m_y, m_trace, m_trace);
+}
+
+void Celemental::render()
+{
+	if (InputManager->isToggleKey(VK_TAB))
+	{
+		Rectangle(getMapDC(), m_traceRc.left, m_traceRc.top, m_traceRc.right, m_traceRc.bottom);
+		Rectangle(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkRc.right, m_walkRc.bottom);
+	}
+	if (m_isWalking)m_walkImage->aniRender(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkAni);
+	m_enemyAttack->render();
 }
 
 void Celemental::attack()
@@ -95,6 +114,19 @@ void Celemental::animation()
 		ANIMATION->resume("ø§∏Æ∏‡≈ª«œ");
 		break;
 	}
+}
+
+bool Celemental::enemyCooltime()
+{
+	m_cooltimeCount++;
+
+	if (m_cooltimeCount % m_rndskillCount == 0)
+	{
+		m_rndskillCount = 100;
+		m_cooltimeCount = 0;
+		return true;
+	}
+	return false;
 }
 
 

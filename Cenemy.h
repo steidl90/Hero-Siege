@@ -19,9 +19,9 @@ protected:
 	animation* m_walkAni;
 	RECT m_walkRc;
 
-	image* m_attackImage;
-	animation* m_attackAni;
-	RECT m_attackRc;
+	//image* m_attackImage;
+	//animation* m_attackAni;
+	//RECT m_attackRc;
 
 	image* m_dieImage;
 	animation* m_dieAni;
@@ -33,11 +33,13 @@ protected:
 
 	float m_x, m_y;
 	float m_returnX, m_returnY;
+	float m_trace;
 	float m_speed;
+	float m_distance;
+
 	float m_hp;
 	float m_damage;
-	float m_distance;
-	
+	float m_exp;
 
 	bool m_isIdle;
 	bool m_isWalking;
@@ -52,7 +54,7 @@ public:
 	Cenemy();
 	~Cenemy();
 
-	virtual HRESULT init(POINT position,int HP);
+	virtual HRESULT init(POINT position,float HP,float damage, float exp,float trace);
 	virtual void release();
 	virtual void update();
 	virtual void render();
@@ -63,6 +65,9 @@ public:
 	virtual void die();
 	virtual void animation();
 	virtual bool enemyCooltime();
+
+	virtual void ReturnIdleAnimation();
+
 
 	virtual void setPlayer(Cplayer* player) { m_player = player; }
 	virtual RECT getRect() { return m_walkRc; }

@@ -52,10 +52,10 @@ HRESULT Cplayer::init()
    ANIMATION->addDefAnimation("오른쪽", "플레이어오른쪽", 10, false, true);
 
     //ATTACK
-   ANIMATION->addDefAnimation("위쪽공격", "플레이어위쪽공격", 20, false, true);
-   ANIMATION->addDefAnimation("아래쪽공격", "플레이어아래쪽공격", 20, false, true);
-   ANIMATION->addDefAnimation("왼쪽공격", "플레이어왼쪽공격", 20, false, true);
-   ANIMATION->addDefAnimation("오른쪽공격", "플레이어오른쪽공격", 20, false, true);
+   ANIMATION->addDefAnimation("위쪽공격", "플레이어위쪽공격", 20, true, true);
+   ANIMATION->addDefAnimation("아래쪽공격", "플레이어아래쪽공격", 20, true, true);
+   ANIMATION->addDefAnimation("왼쪽공격", "플레이어왼쪽공격", 20, true, true);
+   ANIMATION->addDefAnimation("오른쪽공격", "플레이어오른쪽공격", 20, true, true);
 
    //기본상태
    playerIdleAni = ANIMATION->findAnimation("아래쪽");
@@ -63,8 +63,8 @@ HRESULT Cplayer::init()
    playerMoveAni = ANIMATION->findAnimation("아래쪽걷기");
    
    //렉트
-   m_playerX = WINSIZEX / 2;
-   m_playerY = WINSIZEY / 2;
+   m_playerX = 200;
+   m_playerY = 1600;
    playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth(), playerMoveDown->getFrameHeight());
    playerAttackRc = RectMake(m_playerX, m_playerY, 100, 100);
   
