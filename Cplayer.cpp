@@ -13,6 +13,7 @@ HRESULT Cplayer::init()
 {
 	m_maxHp = 100;
 	m_maxMp = 50;
+	m_maxExp = 100;
 	setAtk(10);
 	setDef(10);
 	setHp(m_maxHp);
@@ -26,13 +27,8 @@ HRESULT Cplayer::init()
 	m_playerSkill = new CplayerSkill;
 	m_playerSkill->init();
 
-	m_hpBar = new CprogressBar;
-	m_hpBar->init("images/hp.bmp", "images/hp_back.bmp", 80, 20, 238, 10);
-	m_hpBar->setGauge(getHp(), m_maxHp);
 
-	m_mpBar = new CprogressBar;
-	m_mpBar->init("images/mp.bmp", "images/hp_back.bmp", 80, 40, 196, 10);
-	m_mpBar->setGauge(getMp(), m_maxMp);
+	time = TIME->getWorldTime();
 
    //DIRECTIONS
    direction= DIRECTIONS::DIRECTIONS_DOWN;
@@ -92,8 +88,7 @@ HRESULT Cplayer::init()
 void Cplayer::release()
 {
 	SAFE_DELETE(m_playerSkill);
-	SAFE_DELETE(m_hpBar);
-	SAFE_DELETE(m_mpBar);
+
 }
 
 void Cplayer::update()
@@ -102,18 +97,12 @@ void Cplayer::update()
 	moveControl();
 	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth() - 90, playerMoveDown->getFrameHeight() - 50);
 	m_playerSkill->update("리치스킬애니");
-	m_hpBar->update();
-	m_hpBar->setGauge(getHp(), m_maxHp);
-	m_mpBar->update();
-	m_mpBar->setGauge(getMp(), m_maxMp);
 }
 
 void Cplayer::render()
 {
 	playerStateRender();
 	m_playerSkill->render();
-	m_hpBar->render();
-	m_mpBar->render();
 }
 
 void Cplayer::moveControl()
@@ -211,6 +200,12 @@ void Cplayer::moveControl()
 	{
 		setHp(getHp() - 1);
 		setMp(getMp() - 1);
+		if (getExp() < 100)setExp(getExp() + 1);
+		else
+		{
+			setExp(0);
+			setLv(getLv() + 1);
+		}
 	}
 
 	moveAnimation();
@@ -269,7 +264,6 @@ void Cplayer::moveAnimation()
 void Cplayer::playerStateRender()
 {
 	//Rectangle(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerMoveRc.right, playerMoveRc.bottom);
-
 	if (isMoving)
 	{
 		switch (direction)

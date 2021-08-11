@@ -1,7 +1,6 @@
 #pragma once
 #include "Cunit.h"
 #include "CplayerSkill.h"
-#include "CprogressBar.h"
 
 enum class DIRECTIONS
 {
@@ -11,22 +10,11 @@ enum class DIRECTIONS
 	DIRECTIONS_DOWN
 };
 
-//enum class STATE
-//{
-//	STATE_IDLE,
-//	STATE_LEFT,
-//	STATE_RIGHT,
-//	STATE_UP,
-//	STATE_DOWN
-//};
-
 
 class Cplayer :public Cunit
 {
 private:
 	CplayerSkill* m_playerSkill;
-	CprogressBar* m_hpBar;
-	CprogressBar* m_mpBar;
 
 	DIRECTIONS direction;
 	DIRECTIONS beforeDirection;
@@ -58,6 +46,7 @@ private:
 
 	int m_maxHp;
 	int m_maxMp;
+	int m_maxExp;
 
 	float m_playerX, m_playerY;
 	float m_angle;
@@ -65,6 +54,10 @@ private:
 	bool isAttack;
 	bool isLive;
 	bool isIdle;
+
+
+	float time;
+	bool isRect;
 
 public:
 	Cplayer();
@@ -83,6 +76,8 @@ public:
 	float getplayerY() const { return m_playerY; }
 
 	int getMaxHp() { return m_maxHp; }
+	int getMaxMp() { return m_maxMp; }
+	int getMaxExp() { return m_maxExp; }
 
 	
 };

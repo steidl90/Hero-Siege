@@ -12,31 +12,76 @@ CplayerUi::~CplayerUi()
 
 HRESULT CplayerUi::init()
 {
-	/*m_hpBar = new CprogressBar;
-	m_hpBar->init("images/progressBarFront.bmp", "images/progressBarBack.bmp", 50, 100, 100, 10);
-	m_hpBar->setGauge(m_player->getHp(), m_player->getMaxHp());*/
+	m_hpBar = new CprogressBar;
+	m_hpBar->init("images/hp.bmp", "images/hp_back.bmp", 80, 20, 238, 10);
+	m_hpBar->setGauge(m_player->getHp(), m_player->getMaxHp());
+
+	m_mpBar = new CprogressBar;
+	m_mpBar->init("images/mp.bmp", "images/hp_back.bmp", 80, 40, 196, 10);
+	m_mpBar->setGauge(m_player->getMp(), m_player->getMaxMp());
+
+	m_expBar = new CprogressBar;
+	m_expBar->init("images/exp.bmp", "images/hp_back.bmp", 110, WINSIZEY - 115, 200, 10);
+	m_expBar->setGauge(m_player->getExp(), m_player->getMaxExp());
 
 	return S_OK;
 }
 
 void CplayerUi::release()
 {
-	//SAFE_DELETE(m_hpBar);
+	SAFE_DELETE(m_hpBar);
+	SAFE_DELETE(m_mpBar);
+	SAFE_DELETE(m_expBar);
 }
 
 void CplayerUi::update()
 {
-	/*m_hpBar->setX(49);
-	m_hpBar->setY(23);
-
-	m_hpBar->setGauge(m_player->getHp(), m_player->getMaxHp());
-	m_hpBar->update();*/
+	progressBarUpdate();
 }
 
 void CplayerUi::render()
 {
-	//m_hpBar->render();
+	progressBarRender();
+
 	IMAGE->findImage("SkillUi")->render(getMemDC(), 0, (WINSIZEY - 39) - IMAGE->findImage("SkillUi")->getHeight());
 	IMAGE->findImage("StateUi")->render(getMemDC(), 0, 0);
 	IMAGE->findImage("MiniMapUi")->render(getMemDC(), (WINSIZEX - 15) - IMAGE->findImage("MiniMapUi")->getWidth(), 0);
+	IMAGE->findImage("스킬Q")->render(getMemDC(), 143, (WINSIZEY - 56) - IMAGE->findImage("스킬Q")->getHeight());
+	if (m_player->getLv() < 3) IMAGE->findImage("스킬잠금")->render(getMemDC(), 185, (WINSIZEY - 56) - IMAGE->findImage("스킬잠금")->getHeight());
+	else IMAGE->findImage("스킬W")->render(getMemDC(), 185, (WINSIZEY - 56) - IMAGE->findImage("스킬W")->getHeight());
+	if (m_player->getLv() < 7) IMAGE->findImage("스킬잠금")->render(getMemDC(), 227, (WINSIZEY - 56) - IMAGE->findImage("스킬잠금")->getHeight());
+	else IMAGE->findImage("스킬E")->render(getMemDC(), 227, (WINSIZEY - 56) - IMAGE->findImage("스킬E")->getHeight());
+	if (m_player->getLv() < 10) IMAGE->findImage("스킬잠금")->render(getMemDC(), 269, (WINSIZEY - 56) - IMAGE->findImage("스킬잠금")->getHeight());
+	else IMAGE->findImage("스킬R")->render(getMemDC(), 269, (WINSIZEY - 56) - IMAGE->findImage("스킬R")->getHeight());
+
+
+	playerStateRender();
+}
+
+void CplayerUi::progressBarUpdate()
+{
+	m_hpBar->update();
+	m_hpBar->setGauge(m_player->getHp(), m_player->getMaxHp());
+	m_mpBar->update();
+	m_mpBar->setGauge(m_player->getMp(), m_player->getMaxMp());
+	m_expBar->update();
+	m_expBar->setGauge(m_player->getExp(), m_player->getMaxExp());
+}
+
+void CplayerUi::progressBarRender()
+{
+	m_hpBar->render();
+	m_mpBar->render();
+	m_expBar->render();
+}
+
+void CplayerUi::playerStateRender()
+{
+	// Player Level 좌상단 표시
+	TCHAR str[20];
+	SetTextColor(getMemDC(), RGB(255, 255, 255));
+	SetTextAlign(getMemDC(), TA_CENTER);
+	sprintf_s(str, "%d", m_player->getLv());
+	TextOut(getMemDC(), 36, 75, str, strlen(str));
+	SetTextAlign(getMemDC(), TA_LEFT);
 }
