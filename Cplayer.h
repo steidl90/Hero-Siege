@@ -7,7 +7,8 @@ enum class DIRECTIONS
 	DIRECTIONS_LEFT,
 	DIRECTIONS_UP,
 	DIRECTIONS_RIGHT,
-	DIRECTIONS_DOWN
+	DIRECTIONS_DOWN,
+	DIRECTIONS_IDLE
 };
 
 class Cplayer :public Cunit
@@ -75,6 +76,9 @@ private:
 	bool isIdle;
 	bool isRect;
 
+	tagTile* m_CheckTile;
+	ATTRIBUTE* m_attribute;
+
 public:
 	Cplayer();
 	~Cplayer();
@@ -103,5 +107,9 @@ public:
 	int getMaxExp() { return m_maxExp; }
 
 	RECT* getPlayerAttackRC() { return &playerAttackRc; }
+
+	void blockCheck(float speed, RECT* playerRC, DIRECTIONS direct);
+	void setCheckTile(tagTile* tile) { m_CheckTile = tile; }
+	void setAttribute(ATTRIBUTE* att) { m_attribute = att; }
 };
 

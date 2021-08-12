@@ -32,7 +32,7 @@ HRESULT Cplayer::init()
 	m_time = 0;
 
 	//DIRECTIONS
-	direction = DIRECTIONS::DIRECTIONS_DOWN;
+	direction = DIRECTIONS::DIRECTIONS_IDLE;
 	beforeDirection = DIRECTIONS::DIRECTIONS_DOWN;
 
 	//SKILL
@@ -123,57 +123,97 @@ void Cplayer::moveControl()
 {
 	if (InputManager->isStayKeyDown(VK_RIGHT) && (InputManager->isStayKeyDown(VK_UP) || InputManager->isStayKeyDown(VK_DOWN)))
 	{
-		m_playerX += getSpeed();
-		if (InputManager->isStayKeyDown(VK_DOWN))m_playerY += getSpeed();
-		if (InputManager->isStayKeyDown(VK_UP))m_playerY -= getSpeed();
+		//m_playerX += getSpeed();
+		this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_RIGHT);
+		if (InputManager->isStayKeyDown(VK_DOWN))
+		{
+			//m_playerY += getSpeed();
+			this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_DOWN);
+		}
+		if (InputManager->isStayKeyDown(VK_UP))
+		{
+			//m_playerY -= getSpeed();
+			this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_UP);
+		}
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_RIGHT;
 	}
 	else if (InputManager->isStayKeyDown(VK_LEFT) && (InputManager->isStayKeyDown(VK_UP) || InputManager->isStayKeyDown(VK_DOWN)))
 	{
-		m_playerX -= getSpeed();
-		if (InputManager->isStayKeyDown(VK_DOWN))m_playerY += getSpeed();
-		if (InputManager->isStayKeyDown(VK_UP))m_playerY -= getSpeed();
+		//m_playerX -= getSpeed();
+		this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_LEFT);
+		if (InputManager->isStayKeyDown(VK_DOWN))
+		{
+			//m_playerY += getSpeed();
+			this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_DOWN);
+		}
+		if (InputManager->isStayKeyDown(VK_UP))
+		{
+			//m_playerY -= getSpeed();
+			this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_UP);
+		}
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_LEFT;
 	}
 	else if (InputManager->isStayKeyDown(VK_UP) && (InputManager->isStayKeyDown(VK_RIGHT) || InputManager->isStayKeyDown(VK_LEFT)))
 	{
-		m_playerY -= getSpeed();
-		if (InputManager->isStayKeyDown(VK_RIGHT))m_playerX += getSpeed();
-		if (InputManager->isStayKeyDown(VK_LEFT))m_playerX -= getSpeed();
+		//m_playerY -= getSpeed();
+		this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_UP);
+		if (InputManager->isStayKeyDown(VK_RIGHT))
+		{
+			//m_playerX += getSpeed();
+			this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_RIGHT);
+		}
+		if (InputManager->isStayKeyDown(VK_LEFT))
+		{
+			//m_playerX -= getSpeed();
+			this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_LEFT);
+		}
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_UP;
 	}
 	else if (InputManager->isStayKeyDown(VK_DOWN) && (InputManager->isStayKeyDown(VK_RIGHT) || InputManager->isStayKeyDown(VK_LEFT)))
 	{
-		m_playerY += getSpeed();
-		if (InputManager->isStayKeyDown(VK_RIGHT))m_playerX += getSpeed();
-		if (InputManager->isStayKeyDown(VK_LEFT))m_playerX -= getSpeed();
+		//m_playerY += getSpeed();
+		this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_DOWN);
+		if (InputManager->isStayKeyDown(VK_RIGHT))
+		{
+			//m_playerX += getSpeed();
+			this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_RIGHT);
+		}
+		if (InputManager->isStayKeyDown(VK_LEFT))
+		{
+			//m_playerX -= getSpeed();
+			this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_LEFT);
+		}
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_DOWN;
 	}
 	else if (InputManager->isStayKeyDown(VK_LEFT))
 	{
-		m_playerX -= getSpeed();
+		//m_playerX -= getSpeed();
+		this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_LEFT);
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_LEFT;
 	}
 	else if (InputManager->isStayKeyDown(VK_RIGHT))
 	{
-		m_playerX += getSpeed();
+		//m_playerX += getSpeed();
+		this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_RIGHT);
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_RIGHT;
 	}
 	else if (InputManager->isStayKeyDown(VK_UP))
 	{
-		m_playerY -= getSpeed();
+		//m_playerY -= getSpeed();
+		this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_UP);
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_UP;
 	}
 	else if (InputManager->isStayKeyDown(VK_DOWN))
 	{
-		m_playerY += getSpeed();
+		//m_playerY += getSpeed();
+		this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_DOWN);
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_DOWN;
 	}
@@ -196,33 +236,39 @@ void Cplayer::moveControl()
 	}
 	else if (InputManager->isOnceKeyDown('W'))
 	{
-		isAttack = true;
-		for (size_t i = 0; i < 30; i++)
+		if (this->getLv() >= 3)
 		{
-			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.21, 7.0f, 350, "리치스킬", "리치스킬애니");
-			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.22, 6.0f, 300, "리치스킬", "리치스킬애니");
-			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.26, 5.0f, 250, "리치스킬", "리치스킬애니");
-			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.65, 4.3f, 200, "리치스킬", "리치스킬애니");
+			isAttack = true;
+			for (size_t i = 0; i < 30; i++)
+			{
+				m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.21, 7.0f, 350, "리치스킬", "리치스킬애니");
+				m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.22, 6.0f, 300, "리치스킬", "리치스킬애니");
+				m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.26, 5.0f, 250, "리치스킬", "리치스킬애니");
+				m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.65, 4.3f, 200, "리치스킬", "리치스킬애니");
+			}
 		}
 	}
 	else if (InputManager->isStayKeyDown('E') && m_count == 0)
 	{
-		m_count++;
-		isAttack = true;
-		m_time = TIME->getWorldTime();
-		isRect = true;
-		m_skillX = m_playerX;
-		m_skillY = m_playerY;
-		if (direction == DIRECTIONS::DIRECTIONS_LEFT) skillState = SKILL::SKILL_LEFT;
-		else if (direction == DIRECTIONS::DIRECTIONS_RIGHT)  skillState = SKILL::SKILL_RIGHT;
-		else if (direction == DIRECTIONS::DIRECTIONS_UP)  skillState = SKILL::SKILL_UP;
-		else if (direction == DIRECTIONS::DIRECTIONS_DOWN) skillState = SKILL::SKILL_DOWN;
+		if (this->getLv() >= 7)
+		{
+			m_count++;
+			isAttack = true;
+			m_time = TIME->getWorldTime();
+			isRect = true;
+			m_skillX = m_playerX;
+			m_skillY = m_playerY;
+			if (direction == DIRECTIONS::DIRECTIONS_LEFT) skillState = SKILL::SKILL_LEFT;
+			else if (direction == DIRECTIONS::DIRECTIONS_RIGHT)  skillState = SKILL::SKILL_RIGHT;
+			else if (direction == DIRECTIONS::DIRECTIONS_UP)  skillState = SKILL::SKILL_UP;
+			else if (direction == DIRECTIONS::DIRECTIONS_DOWN) skillState = SKILL::SKILL_DOWN;
+		}
 	}
 	if (m_time + 2 < TIME->getWorldTime())
 	{
-		isRect = false;
-		skillState = SKILL::SKILL_IDLE;
-		m_count = 0;
+			isRect = false;
+			skillState = SKILL::SKILL_IDLE;
+			m_count = 0;
 	}
 
 
@@ -553,18 +599,93 @@ void Cplayer::playerSkillRender()
 	}
 }
 
-void Cplayer::setPlayerDate()
+void Cplayer::blockCheck(float speed, RECT* playerRC, DIRECTIONS direct)
 {
-	DATA->setData(getAtk(),
-		getDef(),
-		getHp(),
-		getMp(),
-		getCritical(),
-		getLv(),
-		getExp(),
-		getGold(),
-		getCriticalAtk(),
-		getSpeed());
+	RECT rcCollision;
+	int tileIndex[2];
+	rcCollision = playerMoveRc;
+
+	int tileX;
+	int tileY;
+
+	switch (direct)
+	{
+	case DIRECTIONS::DIRECTIONS_LEFT:
+		m_playerX -= this->getSpeed();
+		rcCollision = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth(), playerMoveDown->getFrameHeight());
+		break;
+	case DIRECTIONS::DIRECTIONS_UP:
+		m_playerY -= this->getSpeed();
+		rcCollision = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth(), playerMoveDown->getFrameHeight());
+		break;
+	case DIRECTIONS::DIRECTIONS_RIGHT:
+		m_playerX += this->getSpeed();
+		rcCollision = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth(), playerMoveDown->getFrameHeight());
+		break;
+	case DIRECTIONS::DIRECTIONS_DOWN:
+		m_playerY += this->getSpeed();
+		rcCollision = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth(), playerMoveDown->getFrameHeight());
+		break;
+	}
+
+	tileX = rcCollision.left / TILESIZE;
+	tileY = (rcCollision.top + TILESIZE) / TILESIZE;
+
+	switch (direct)
+	{
+	case DIRECTIONS::DIRECTIONS_LEFT:
+		tileIndex[0] = tileX + tileY * TILEX;
+		tileIndex[1] = tileX + (tileY+1) * TILEX;
+		break;
+	case DIRECTIONS::DIRECTIONS_UP:
+		tileIndex[0] = tileX + tileY * TILEX;
+		tileIndex[1] = tileX + 1 + tileY * TILEX;
+		break;
+	case DIRECTIONS::DIRECTIONS_RIGHT:
+		tileIndex[0] = (tileX + tileY * TILEX) + 1;
+		tileIndex[1] = (tileX + (tileY + 1) * TILEX) + 1;
+		break;
+	case DIRECTIONS::DIRECTIONS_DOWN:
+		tileIndex[0] = (tileX + tileY * TILEX) + TILEX;
+		tileIndex[1] = (tileX + 1 + tileY * TILEX) + TILEX;
+		break;
+	}
+
+	for (int i = 0; i < 2; i++)
+	{
+		RECT temp;
+
+		if((m_attribute[tileIndex[i]] == ATTRIBUTE::COLLISION_ON) &&
+			IntersectRect(&temp, &m_CheckTile[tileIndex[i]].rc, &rcCollision))
+		{
+			switch (direct)
+			{
+			case DIRECTIONS::DIRECTIONS_LEFT:
+				playerMoveRc.left = m_CheckTile[tileIndex[i]].rc.right;
+				//playerMoveRc.right = playerMoveRc.left + playerMoveDown->getFrameWidth();
+				m_playerX = playerMoveRc.left;
+				break;
+			case DIRECTIONS::DIRECTIONS_UP:
+				playerMoveRc.top = m_CheckTile[tileIndex[i]].rc.bottom - (playerMoveRc.bottom - playerMoveRc.top)/2;
+				//playerMoveRc.bottom = playerMoveRc.top + playerMoveDown->getFrameHeight();
+				m_playerY = playerMoveRc.top;
+				break;
+			case DIRECTIONS::DIRECTIONS_RIGHT:
+				playerMoveRc.right = m_CheckTile[tileIndex[i]].rc.left;
+				//playerMoveRc.left = playerMoveRc.right - playerMoveDown->getFrameWidth();
+				m_playerX = playerMoveRc.left;
+				break;
+			case DIRECTIONS::DIRECTIONS_DOWN:
+				playerMoveRc.bottom = m_CheckTile[tileIndex[i]].rc.top;
+				//playerMoveRc.top = playerMoveRc.bottom - playerMoveDown->getFrameHeight();
+				m_playerY = playerMoveRc.top;
+				break;
+			}
+			return;
+		}
+	}
+	rcCollision = RectMake(m_playerX, m_playerY, TILESIZE, TILESIZE * 2);
+	playerMoveRc = rcCollision;
 }
 
 

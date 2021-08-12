@@ -38,7 +38,7 @@ public:
 	void cullingRender();
 	void initTileAttribute();
 
-	//DWORD* getAttribute() { return _attribute; }
+	ATTRIBUTE* getAttribute() { return m_attribute; }
 	tagTile* getMap() { return _tiles; }
 	int getPosFirst() { return _pos[0]; }
 	int getPosSecond() { return _pos[1]; }

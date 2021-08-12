@@ -55,4 +55,7 @@ public:
 	void setEnemyMemory(CenemyManager* enemy) { m_enemy = enemy; }
 
 	void collisionEnemy();
+
+	void setCheckTile(tagTile* tile) { m_player->setCheckTile(tile); }
+	void setTileAttribute(ATTRIBUTE* att) { m_player->setAttribute(att); }
 };
