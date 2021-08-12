@@ -27,6 +27,9 @@ HRESULT CsceneDungeon::init()
 	m_player->setCheckTile(m_dungeon->getMap());
 	m_player->setTileAttribute(m_dungeon->getAttribute());
 
+	m_boss = new Cmevius;
+	m_boss->init();
+
 	m_enemyManager = new CenemyManager;
 	m_enemyManager->init();
 	m_enemyManager->setPlayer(m_player->getPlayer());
@@ -50,14 +53,14 @@ HRESULT CsceneDungeon::init()
 	int exp = 10;
 
 	//슬라임 설정 = 전역에 골고루
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 1; i++)
 	{
-		for (int j = 0; j < 4; j++)
+		for (int j = 0; j < 1; j++)
 		{
 			Cslime* m_slime = new Cslime;
 			m_slime->init(PointMake(RND->getFromIntTo(800, 1000) + i * RND->getFromIntTo(130, 180),
 				RND->getFromIntTo(250, 350) + j * RND->getFromIntTo(100, 150)),
-				900, 20, exp, 500);
+				900, 1, exp, 500);
 			m_slime->setPlayer(m_player->getPlayer());
 			m_enemyManager->registerEnemy(m_slime);
 		}
@@ -70,7 +73,7 @@ HRESULT CsceneDungeon::init()
 			Cslime* m_slime2 = new Cslime;
 			m_slime2->init(PointMake(RND->getFromIntTo(100, 150) + i * RND->getFromIntTo(100, 180),
 				RND->getFromIntTo(600, 650) + j * RND->getFromIntTo(120, 150)),
-				900, 20, exp, 500);
+				900, 1, exp, 500);
 			m_slime2->setPlayer(m_player->getPlayer());
 			m_enemyManager->registerEnemy(m_slime2);
 		}
@@ -114,12 +117,12 @@ HRESULT CsceneDungeon::init()
 			m_enemyManager->registerEnemy(m_monk);
 		}
 	}
-	////프리스트 설정 = 중 상단, 좌 중단 1마리씩
-	for (int i = 0; i < 2; i++)
+	//프리스트 설정 = 중 상단, 좌 중단 1마리씩
+	for (int i = 0; i <1 ; i++)
 	{
 		Cpriest* m_priest = new Cpriest;
 		m_priest->init(PointMake(900 + i * 650, 200 + i * 400),
-			700, 20, exp, 500);
+			900, 20, exp, 500);
 		m_priest->setPlayer(m_player->getPlayer());
 		m_enemyManager->registerEnemy(m_priest);
 	}
@@ -157,6 +160,7 @@ void CsceneDungeon::update()
 	m_enemyManager->collision();
 	m_camera->setTargetPoint(PointMake(m_player->getplayerRect()->left, m_player->getplayerRect()->top));
 	m_player->collisionEnemy();
+	if (m_enemyManager->getEnemy()->size() == 0) m_boss->update();
 	sceneChange();
 }
 
@@ -168,6 +172,7 @@ void CsceneDungeon::render()
 	m_camera->render();
 	m_dungeon->render();
 	m_enemyManager->render();
+	m_boss->render();
 	m_player->render();
 
 	//Rectangle(getMapDC(), m_changeRect.left, m_changeRect.top, m_changeRect.right, m_changeRect.bottom);

@@ -101,6 +101,7 @@ public:
 
 	int getSaveDate() { return m_saveDate; }
 	int getMaxHp() { return m_maxHp; }
+	void setMaxHp(int hp) { m_maxHp = hp; }
 	int getMaxMp() { return m_maxMp; }
 	int getMaxExp() { return m_maxExp; }
 

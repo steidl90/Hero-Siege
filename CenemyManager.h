@@ -23,6 +23,7 @@ private:
 	Cplayer* m_player;
 	CenemyAttack* m_skill;
 	float m_angle;
+	int hitCount;
 
 public:
 

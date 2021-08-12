@@ -16,8 +16,6 @@ HRESULT mainGame::init()
 	m_astar = new CaStar;
 	m_astar->init();
 
-	m_playerDate = new CplayerDate;
-	
 	SCENE->addScene("에이스타", m_astar);
 	SCENE->addScene("시작화면", new CsceneStart);
 	SCENE->addScene("선택화면", new CsceneSelect);
@@ -25,8 +23,6 @@ HRESULT mainGame::init()
 	SCENE->addScene("던전", new CsceneDungeon);
 
 	SCENE->changeScene("시작화면");
-
-	
 	return S_OK;
 }
 
@@ -35,17 +31,17 @@ void mainGame::release()
 	gameNode::release();
 	SAFE_DELETE(m_image);
 	SAFE_DELETE(m_astar);
-	SAFE_DELETE(m_playerDate);
-	SCENE->release();
 	EFFECT->release();
+	SCENE->release();
 }
 
 void mainGame::update()
 {
 	gameNode::update();
-	EFFECT->update();
 	SCENE->update();
+	EFFECT->update();
 	ANIMATION->update();
+
 }
 
 void mainGame::render()
@@ -58,9 +54,9 @@ void mainGame::render()
 	// 카메라의 시작 x,y 좌표부터 가로 세로 길이만큼 크기의 이미지를 잘라서 (sour 인수가 그런기능)
 	// 우리가 볼 화면인 backBuffer쪽 getMemDC에다가 그려준다
 
-	EFFECT->render();
 	SCENE->render();
 	TIME->render(getMemDC());
+
 
 	/////////////////////////////////////////////////////////
 	this->getBackBuffer()->render(getHDC(), 0, 0);

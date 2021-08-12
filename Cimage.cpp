@@ -11,6 +11,7 @@ Cimage::~Cimage()
 
 HRESULT Cimage::init()
 {
+    m_imageSize = 1;
     /*  모든 이미지 이미지매니저에 추가하는 용도  */
     /*  모든 이미지 이미지매니저에 추가하는 용도  */
     /*  모든 이미지 이미지매니저에 추가하는 용도  */
@@ -54,9 +55,9 @@ HRESULT Cimage::init()
 
 
     //=================Enemy=================//
-    IMAGE->addFrameImage("리치", "images/Priest.bmp", 300 * 1.5, 316 * 1.5, 6, 4, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("리치공격", "images/PriestAttack.bmp", 848 * 1.5, 316 * 1.5, 16, 4, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("리치사망", "images/PriestDie.bmp", 490 * 1.5, 564 * 1.5, 10, 4, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("리치", "images/Priest.bmp", 300, 316, 6, 4, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("리치공격", "images/PriestAttack.bmp", 848, 316, 16, 4, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("리치사망", "images/PriestDie.bmp", 490 , 564 , 10, 4, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("리치스킬", "images/PriestSkill.bmp", 696 * 2, 61 * 2, 12, 1, true, RGB(255, 0, 255));
 
     IMAGE->addFrameImage("엘리멘탈", "images/Elemental.bmp", 252, 268, 4, 4, true, RGB(255, 0, 255));
@@ -64,7 +65,7 @@ HRESULT Cimage::init()
 
     IMAGE->addFrameImage("슬라임", "images/GreenSlime.bmp", 138 * 1.5, 18 * 1.5, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("슬라임공격", "images/GreenSlimeAttack.bmp", 480 * 1.5, 152 * 1.5, 12, 4, true, RGB(255, 0, 255));
-
+                
     IMAGE->addFrameImage("몽크", "images/Monk.bmp", 264, 300, 6, 4, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("몽크공격", "images/MonkAttack.bmp", 360, 336, 5, 4, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("몽크사망", "images/MonkDie.bmp", 912, 444, 12, 4, true, RGB(255, 0, 255));
@@ -75,17 +76,15 @@ HRESULT Cimage::init()
 
 
     //=================Boss==================//
-    IMAGE->addFrameImage("보스", "images/Mevius.bmp", 360, 143, 4, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("보스캐스팅", "images/MeviusCasting.bmp", 1800, 143, 20, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("보스체인", "images/MeviusChains.bmp", 211, 17, 1, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("보스공중", "images/MeviusLevitating.bmp", 90, 146, 1, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("보스빛", "images/MeviusLight.bmp", 87, 1042, 1, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("보스몬스터", "images/MeviusMonster.bmp", 1218, 153, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("보스걷기", "images/MeviusWalking.bmp", 720, 148, 8, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("보스걷기1", "images/MeviusWalking-1.bmp", 2160, 444, 8, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("보스걷기2", "images/MeviusWalking-2.bmp", 1440, 296, 8, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("보스", "images/Mevius.bmp", 360 * m_imageSize, 143* m_imageSize, 4, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("보스캐스팅", "images/MeviusCasting.bmp", 1800 * m_imageSize, 143 * m_imageSize, 20, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("보스체인", "images/MeviusChains.bmp", 211 * m_imageSize, 17 * m_imageSize, 1, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("보스공중", "images/MeviusLevitating.bmp", 90 * m_imageSize, 146 * m_imageSize, 1, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("보스빛", "images/MeviusLight.bmp", 87 * m_imageSize, 1042 * m_imageSize, 1, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("보스몬스터", "images/MeviusMonster.bmp", 1218 * m_imageSize, 153 * m_imageSize, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("보스걷기", "images/MeviusWalking.bmp", 720 * m_imageSize, 148 * m_imageSize, 8, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("보스벽", "images/MeviusWall.bmp", 256, 192, 1, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("보스공", "images/MeviusSpikeBall.bmp", 329, 54, 7, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("보스공", "images/MeviusSpikeBall.bmp", 329 * m_imageSize, 54 * m_imageSize, 7, 1, true, RGB(255, 0, 255));
 
 
     //=================Object=================//
@@ -144,6 +143,9 @@ HRESULT Cimage::init()
     IMAGE->addImage("스킬E", "images/Skill_E.bmp", 38, 38, true, RGB(255, 0, 255));
     IMAGE->addImage("스킬R", "images/Skill_R.bmp", 38, 38, true, RGB(255, 0, 255));
     IMAGE->addImage("플레이어체력바", "images/player_hp_bar.bmp", 49, 15, true, RGB(255, 0, 255));
+    IMAGE->addImage("일반몬스터체력바", "images/Enemy/NomalMonsterHpbar.bmp", 45, 11, true, RGB(255, 0, 255));
+    IMAGE->addImage("레어몬스터체력바", "images/Enemy/RareMonsterHpbar.bmp", 57, 14, true, RGB(255, 0, 255));
+    IMAGE->addImage("보스체력바", "images/Enemy/BossHpbar.bmp", 855, 65, true, RGB(255, 0, 255));
     IMAGE->addImage("레벨업", "images/LevelUP.bmp", 183 * 1.5, 55 * 1.5, true, RGB(255, 0, 255));
     IMAGE->addImage("상점창", "images/shop_window.bmp", 469, 473, true, RGB(255, 0, 255));
 

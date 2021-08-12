@@ -4,7 +4,7 @@
 #include "CplayerManager.h"
 #include "CenemyManager.h"
 #include "camera.h"
-#include "CplayerDate.h"
+#include "Cmevius.h"
 class CsceneDungeon : public gameNode
 {
 private:
@@ -12,7 +12,8 @@ private:
 	camera* m_camera;
 	CplayerManager* m_player;
 	CenemyManager* m_enemyManager;
-	CplayerDate* m_playerDate;
+	Cmevius* m_boss;
+
 	RECT m_changeRect;
 
 public:
