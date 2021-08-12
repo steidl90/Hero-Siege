@@ -106,8 +106,6 @@ void Cplayer::update()
 	moveControl();
 	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth() - 90, playerMoveDown->getFrameHeight() - 50);
 	m_playerSkill->update("리치스킬애니");
-
-	//setPlayerDate();
 }
 
 void Cplayer::render()
@@ -407,6 +405,15 @@ void Cplayer::playerStateRender()
 					isIdle = true;
 				}
 				break;
+			case DIRECTIONS::DIRECTIONS_IDLE:
+				playerDown->aniRender(getMapDC(), playerMoveRc.left - 39, playerMoveRc.top - 3, playerIdleAni);
+				if (!isIdle)
+				{
+					playerIdleAni = ANIMATION->findAnimation("아래쪽");
+					ANIMATION->start("아래쪽");
+					isIdle = true;
+				}
+				break;
 			}
 		}
 	}
@@ -655,8 +662,8 @@ void Cplayer::blockCheck(float speed, RECT* playerRC, DIRECTIONS direct)
 	{
 		RECT temp;
 
-		if((m_attribute[tileIndex[i]] == ATTRIBUTE::COLLISION_ON) &&
-			IntersectRect(&temp, &m_CheckTile[tileIndex[i]].rc, &rcCollision))
+		if((m_attribute[tileIndex[i]] == ATTRIBUTE::COLLISION_ON)/* &&
+			IntersectRect(&temp, &m_CheckTile[tileIndex[i]].rc, &rcCollision)*/)
 		{
 			switch (direct)
 			{

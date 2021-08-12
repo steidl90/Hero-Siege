@@ -95,8 +95,6 @@ public:
 	void playerSkillControl();
 	void playerSkillRender();
 
-	void setPlayerDate();
-
 	RECT* getplayerMoveRC() { return &playerMoveRc; }
 	float getplayerX() const { return m_playerX; }
 	float getplayerY() const { return m_playerY; }
