@@ -19,9 +19,9 @@ protected:
 	animation* m_walkAni;
 	RECT m_walkRc;
 
-	//image* m_attackImage;
-	//animation* m_attackAni;
-	//RECT m_attackRc;
+	image* m_attackImage;
+	animation* m_attackAni;
+	RECT m_attackRc;
 
 	image* m_dieImage;
 	animation* m_dieAni;
@@ -33,13 +33,20 @@ protected:
 
 	float m_x, m_y;
 	float m_returnX, m_returnY;
-	float m_trace;
 	float m_speed;
+<<<<<<< HEAD
 	float m_distance;
+=======
+>>>>>>> parent of 35abb8d (몬스터 최종)
 	float m_hp;
 	float m_maxHp;
 	float m_damage;
+<<<<<<< HEAD
 	int m_exp;
+=======
+	float m_distance;
+	
+>>>>>>> parent of 35abb8d (몬스터 최종)
 
 	bool m_isIdle;
 	bool m_isWalking;
@@ -54,7 +61,7 @@ public:
 	Cenemy();
 	~Cenemy();
 
-	virtual HRESULT init(POINT position,float HP,float damage, float exp,float trace);
+	virtual HRESULT init(POINT position,int HP);
 	virtual void release();
 	virtual void update();
 	virtual void render();
@@ -66,6 +73,7 @@ public:
 	virtual void animation();
 	virtual bool enemyCooltime();
 
+<<<<<<< HEAD
 	virtual void ReturnIdleAnimation();
 
 	float getHp() { return m_hp; }
@@ -74,6 +82,8 @@ public:
 	int getExp() { return m_exp; }
 	void setExp(int exp) { m_exp = exp; }
 
+=======
+>>>>>>> parent of 35abb8d (몬스터 최종)
 	virtual void setPlayer(Cplayer* player) { m_player = player; }
 	virtual RECT getRect() { return m_walkRc; }
 };

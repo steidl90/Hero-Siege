@@ -11,10 +11,17 @@ Celemental::~Celemental()
 {
 }
 
+<<<<<<< HEAD
 HRESULT Celemental::init(POINT position, float HP, float damage, int exp,float trace)
 {
 	m_enemyAttack = new CenemyAttack;
 	m_enemyAttack->init(50, 500, false, "ø§∏Æ∏‡≈ªΩ∫≈≥æ÷¥œ");
+=======
+HRESULT Celemental::init(POINT position, int HP)
+{
+	m_enemyAttack = new CenemyAttack;
+	m_enemyAttack->init(50,500,"ø§∏Æ∏‡≈ªΩ∫≈≥æ÷¥œ");
+>>>>>>> parent of 35abb8d (Î™¨Ïä§ÌÑ∞ ÏµúÏ¢Ö)
 
 	m_player = new Cplayer;
 	m_player->init();
@@ -24,11 +31,15 @@ HRESULT Celemental::init(POINT position, float HP, float damage, int exp,float t
 	m_distance = 100;
 	m_x = m_returnX = position.x;
 	m_y = m_returnY = position.y;
-	m_trace = trace;
+
 	m_speed = 2.0f;
+<<<<<<< HEAD
 	m_hp = m_maxHp = HP;
 	m_damage= damage;
 	m_exp=exp;
+=======
+	m_hp = HP;
+>>>>>>> parent of 35abb8d (Î™¨Ïä§ÌÑ∞ ÏµúÏ¢Ö)
 
 	m_hpBar = new CprogressBar;
 	m_hpBar->init("images/hp.bmp", "images/hp_back.bmp", m_x, m_y, 33, 5);
@@ -48,6 +59,7 @@ HRESULT Celemental::init(POINT position, float HP, float damage, int exp,float t
 	return S_OK;
 }
 
+<<<<<<< HEAD
 void Celemental::release()
 {
 	SAFE_DELETE(m_enemyAttack);
@@ -55,6 +67,8 @@ void Celemental::release()
 	SAFE_DELETE(m_hpBar);
 }
 
+=======
+>>>>>>> parent of 35abb8d (Î™¨Ïä§ÌÑ∞ ÏµúÏ¢Ö)
 void Celemental::update()
 {
 	m_hpBar->setGauge(m_hp, m_maxHp);
@@ -64,6 +78,7 @@ void Celemental::update()
 	attack();
 
 	m_walkRc = RectMakeCenter(m_x, m_y, m_walkImage->getFrameWidth(), m_walkImage->getFrameHeight());
+<<<<<<< HEAD
 	m_traceRc = RectMakeCenter(m_x, m_y, m_trace, m_trace);
 }
 
@@ -77,6 +92,9 @@ void Celemental::render()
 	}
 	if (m_isWalking)m_walkImage->aniRender(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkAni);
 	m_enemyAttack->render();
+=======
+	m_traceRc = RectMakeCenter(m_x, m_y, 500, 500);
+>>>>>>> parent of 35abb8d (Î™¨Ïä§ÌÑ∞ ÏµúÏ¢Ö)
 }
 
 void Celemental::attack()
@@ -122,19 +140,6 @@ void Celemental::animation()
 		ANIMATION->resume("ø§∏Æ∏‡≈ª«œ");
 		break;
 	}
-}
-
-bool Celemental::enemyCooltime()
-{
-	m_cooltimeCount++;
-
-	if (m_cooltimeCount % m_rndskillCount == 0)
-	{
-		m_rndskillCount = 100;
-		m_cooltimeCount = 0;
-		return true;
-	}
-	return false;
 }
 
 

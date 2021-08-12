@@ -428,7 +428,6 @@ void image::mapRender(HDC hdc, const int destX, const int destY)
 			_imageInfo->height,			//복사영역 세로크기
 			_transColor);
 	}
-	//TODO::미니맵 사이즈 수정할곳 _imageInfo->width/10, _imageInfo->height/10,
 	else {
 		//이미지의 크기를 조절하여 화면에 출력해주는 함수
 		SetStretchBltMode(hdc, COLORONCOLOR);

@@ -78,12 +78,6 @@ void animationManager::start(string animationKeyName)
     iter->second->start();
 }
 
-void animationManager::fullstart(string animationKeyName)
-{
-    iterArrAnimation iter = _animation.find(animationKeyName);
-    iter->second->fullstart();
-}
-
 void animationManager::stop(string animationKeyName)
 {
     iterArrAnimation iter = _animation.find(animationKeyName);

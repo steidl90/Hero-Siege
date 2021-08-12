@@ -5,17 +5,20 @@
 
 Cmonk::Cmonk()
 {
-	m_walkImage = nullptr;
 }
 
 Cmonk::~Cmonk()
 {
 }
 
+<<<<<<< HEAD
 HRESULT Cmonk::init(POINT position, float HP, float damage, int exp,float trace)
+=======
+HRESULT Cmonk::init(POINT position, int HP)
+>>>>>>> parent of 35abb8d (ëª¬ìŠ¤í„° ìµœì¢…)
 {
 	m_enemyAttack = new CenemyAttack;
-	m_enemyAttack->init(5, 100, true , "¸ùÅ©°ø°ÝÇÏ");
+	m_enemyAttack->init(50, 500, "¿¤¸®¸àÅ»½ºÅ³¾Ö´Ï");
 
 	m_player = new Cplayer;
 	m_player->init();
@@ -25,10 +28,10 @@ HRESULT Cmonk::init(POINT position, float HP, float damage, int exp,float trace)
 
 	m_x = m_returnX = position.x;
 	m_y = m_returnY = position.y;
-	m_trace = trace;
 
 	m_distance = 10.0f;
 	m_speed = 2.0f;
+<<<<<<< HEAD
 	m_hp = m_maxHp = HP;
 	m_damage = damage;
 	m_exp = exp;
@@ -38,15 +41,26 @@ HRESULT Cmonk::init(POINT position, float HP, float damage, int exp,float trace)
 	m_hpBar->setGauge(m_hp, m_maxHp);
 
 	m_cooltimeCount = 200;
+=======
+	m_hp = HP;
+
+	m_cooltimeCount = 0;
+>>>>>>> parent of 35abb8d (ëª¬ìŠ¤í„° ìµœì¢…)
 	m_rndskillCount = 1;
 
 	m_isWalking = true;
+	m_isAttack = false;
 	m_isDie = false;
 
 	ANIMATION->addAnimation("¸ùÅ©ÇÏ", "¸ùÅ©", 0, 5, 8, false, true);
 	ANIMATION->addAnimation("¸ùÅ©ÁÂ", "¸ùÅ©", 6, 11, 8, false, true);
 	ANIMATION->addAnimation("¸ùÅ©¿ì", "¸ùÅ©", 12, 17, 8, false, true);
 	ANIMATION->addAnimation("¸ùÅ©»ó", "¸ùÅ©", 18, 23, 8, false, true);
+
+	ANIMATION->addAnimation("¸ùÅ©°ø°ÝÇÏ", "¸ùÅ©°ø°Ý", 0, 4, 8, true, false);
+	ANIMATION->addAnimation("¸ùÅ©°ø°ÝÁÂ", "¸ùÅ©°ø°Ý", 5, 9, 8, true, false);
+	ANIMATION->addAnimation("¸ùÅ©°ø°Ý¿ì", "¸ùÅ©°ø°Ý", 10, 14, 8, true, false);
+	ANIMATION->addAnimation("¸ùÅ©°ø°Ý»ó", "¸ùÅ©°ø°Ý", 15, 19, 8, true, false);
 
 	ANIMATION->addAnimation("¸ùÅ©»ç¸ÁÇÏ", "¸ùÅ©»ç¸Á", 0, 11, 8, false, false);
 	ANIMATION->addAnimation("¸ùÅ©»ç¸ÁÁÂ", "¸ùÅ©»ç¸Á", 12, 23, 8, false, false);
@@ -59,6 +73,7 @@ HRESULT Cmonk::init(POINT position, float HP, float damage, int exp,float trace)
 	return S_OK;
 }
 
+<<<<<<< HEAD
 void Cmonk::release()
 {
 	SAFE_DELETE(m_enemyAttack);
@@ -66,6 +81,8 @@ void Cmonk::release()
 	SAFE_DELETE(m_hpBar);
 }
 
+=======
+>>>>>>> parent of 35abb8d (ëª¬ìŠ¤í„° ìµœì¢…)
 void Cmonk::update()
 {
 	m_hpBar->setGauge(m_hp, m_maxHp);
@@ -73,6 +90,7 @@ void Cmonk::update()
 	m_enemyAttack->update();
 	move();
 	attack();
+<<<<<<< HEAD
 	
 	if (m_walkImage != nullptr)
 	{
@@ -92,70 +110,26 @@ void Cmonk::render()
 	}
 		if (m_isWalking)m_walkImage->aniRender(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkAni);
 	m_enemyAttack->render();
+=======
+>>>>>>> parent of 35abb8d (ëª¬ìŠ¤í„° ìµœì¢…)
 
+	m_walkRc = RectMakeCenter(m_x, m_y, m_walkImage->getFrameWidth(), m_walkImage->getFrameHeight());
+	m_attackRc = RectMakeCenter(m_x, m_y, m_attackImage->getFrameWidth(), m_attackImage->getFrameHeight());
+	m_dieRc = RectMakeCenter(m_x, m_y, m_dieImage->getFrameWidth(), m_dieImage->getFrameHeight());
+	m_traceRc = RectMakeCenter(m_x, m_y, 500, 500);
 }
 
 void Cmonk::attack()
 {
-	RECT temp;
-	if (IntersectRect(&temp, m_player->getplayerMoveRC(), &m_traceRc))
+	if (m_player->getplayerMoveRC()->right <= m_walkRc.left + 50)
 	{
-		if (m_player->getplayerMoveRC()->right >= m_walkRc.left - m_distance && m_state == STATE::LEFT)
-		{
 
-			m_isWalking = false;
-				m_enemyAttack->init2(1, 1, true, "¸ùÅ©°ø°ÝÁÂ");
-				m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
-					m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2, 0, 1.0f, "¸ùÅ©°ø°Ý", "¸ùÅ©°ø°ÝÁÂ");
-		}
-
-		else if (m_player->getplayerMoveRC()->left <= m_walkRc.right + m_distance && m_state == STATE::RIGHT)
-		{
-			m_isWalking = false;
-				m_enemyAttack->init2(1, 1, true, "¸ùÅ©°ø°Ý¿ì");
-				m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
-					m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2, 0, 1.0f, "¸ùÅ©°ø°Ý", "¸ùÅ©°ø°Ý¿ì");
-		}
-
-		if (m_player->getplayerMoveRC()->bottom >= m_walkRc.top - m_distance && m_state == STATE::UP)
-		{
-			m_isWalking = false;
-			m_enemyAttack->init2(1, 1, true, "¸ùÅ©°ø°Ý»ó");
-			m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
-				m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2, 0, 1.0f, "¸ùÅ©°ø°Ý", "¸ùÅ©°ø°Ý»ó");
-		}
-
-		if (m_player->getplayerMoveRC()->top <= m_walkRc.bottom + m_distance && m_state == STATE::DOWN)
-		{
-			m_isWalking = false;
-			m_enemyAttack->init2(1, 1, true, "¸ùÅ©°ø°ÝÇÏ");
-			m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
-				m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2+10, 0, 1.0f, "¸ùÅ©°ø°Ý", "¸ùÅ©°ø°ÝÇÏ");
-		}
 	}
 }
 
 void Cmonk::die()
 {
-	if (m_hp <= 0)
-	{
-		if (m_state == STATE::LEFT)
-		{
 
-		}
-		if (m_state == STATE::RIGHT)
-		{
-
-		}
-		if (m_state == STATE::UP)
-		{
-
-		}
-		if (m_state == STATE::DOWN)
-		{
-
-		}
-	}
 }
 
 void Cmonk::animation()
@@ -166,65 +140,47 @@ void Cmonk::animation()
 		m_walkImage = IMAGE->findImage("¸ùÅ©");
 		m_walkAni = ANIMATION->findAnimation("¸ùÅ©ÁÂ");
 		ANIMATION->resume("¸ùÅ©ÁÂ");
-		//m_attackImage = IMAGE->findImage("¸ùÅ©°ø°Ý");
-		//m_attackAni = ANIMATION->findAnimation("¸ùÅ©°ø°ÝÁÂ");
-		//ANIMATION->start("¸ùÅ©°ø°ÝÁÂ");
-		//m_dieImage = IMAGE->findImage("¸ùÅ©»ç¸Á");
-		//m_dieAni = ANIMATION->findAnimation("¸ùÅ©»ç¸ÁÁÂ");
-		//ANIMATION->resume("¸ùÅ©»ç¸ÁÁÂ");
+		m_attackImage = IMAGE->findImage("¸ùÅ©°ø°Ý");
+		m_attackAni = ANIMATION->findAnimation("¸ùÅ©°ø°ÝÁÂ");
+		ANIMATION->start("¸ùÅ©°ø°ÝÁÂ");
+		m_dieImage = IMAGE->findImage("¸ùÅ©»ç¸Á");
+		m_dieAni = ANIMATION->findAnimation("¸ùÅ©»ç¸ÁÁÂ");
+		ANIMATION->resume("¸ùÅ©»ç¸ÁÁÂ");
 		break;
 	case STATE::RIGHT:
 		m_walkImage = IMAGE->findImage("¸ùÅ©");
 		m_walkAni = ANIMATION->findAnimation("¸ùÅ©¿ì");
 		ANIMATION->resume("¸ùÅ©¿ì");
-		//m_attackImage = IMAGE->findImage("¸ùÅ©°ø°Ý¿ì");
-		//m_attackAni = ANIMATION->findAnimation("¸ùÅ©°ø°Ý¿ì");
-		//ANIMATION->start("¸ùÅ©°ø°Ý¿ì");
-		//m_dieImage = IMAGE->findImage("¸ùÅ©»ç¸Á");
-		//m_dieAni = ANIMATION->findAnimation("¸ùÅ©»ç¸Á¿ì");
-		//ANIMATION->resume("¸ùÅ©»ç¸Á¿ì");
+		m_attackImage = IMAGE->findImage("¸ùÅ©°ø°Ý¿ì");
+		m_attackAni = ANIMATION->findAnimation("¸ùÅ©°ø°Ý¿ì");
+		ANIMATION->start("¸ùÅ©°ø°Ý¿ì");
+		m_dieImage = IMAGE->findImage("¸ùÅ©»ç¸Á");
+		m_dieAni = ANIMATION->findAnimation("¸ùÅ©»ç¸Á¿ì");
+		ANIMATION->resume("¸ùÅ©»ç¸Á¿ì");
 		break;
 	case STATE::UP:
 		m_walkImage = IMAGE->findImage("¸ùÅ©");
 		m_walkAni = ANIMATION->findAnimation("¸ùÅ©»ó");
 		ANIMATION->resume("¸ùÅ©»ó");
-		//m_attackImage = IMAGE->findImage("¸ùÅ©°ø°Ý");
-		//m_attackAni = ANIMATION->findAnimation("¸ùÅ©°ø°Ý»ó");
-		//ANIMATION->start("¸ùÅ©°ø°Ý»ó");
-		//m_dieImage = IMAGE->findImage("¸ùÅ©»ç¸Á");
-		//m_dieAni = ANIMATION->findAnimation("¸ùÅ©»ç¸Á»ó");
-		//ANIMATION->resume("¸ùÅ©»ç¸Á»ó");
+		m_attackImage = IMAGE->findImage("¸ùÅ©°ø°Ý");
+		m_attackAni = ANIMATION->findAnimation("¸ùÅ©°ø°Ý»ó");
+		ANIMATION->start("¸ùÅ©°ø°Ý»ó");
+		m_dieImage = IMAGE->findImage("¸ùÅ©»ç¸Á");
+		m_dieAni = ANIMATION->findAnimation("¸ùÅ©»ç¸Á»ó");
+		ANIMATION->resume("¸ùÅ©»ç¸Á»ó");
 		break;
 	case STATE::DOWN:
 		m_walkImage = IMAGE->findImage("¸ùÅ©");
 		m_walkAni = ANIMATION->findAnimation("¸ùÅ©ÇÏ");
 		ANIMATION->resume("¸ùÅ©ÇÏ");
-		//m_attackImage = IMAGE->findImage("¸ùÅ©°ø°Ý");
-		//m_attackAni = ANIMATION->findAnimation("¸ùÅ©°ø°ÝÇÏ");
-		//ANIMATION->start("¸ùÅ©°ø°ÝÇÏ");
-		//m_dieImage = IMAGE->findImage("¸ùÅ©»ç¸Á");
-		//m_dieAni = ANIMATION->findAnimation("¸ùÅ©»ç¸ÁÇÏ");
-		//ANIMATION->resume("¸ùÅ©»ç¸ÁÇÏ");
+		m_attackImage = IMAGE->findImage("¸ùÅ©°ø°Ý");
+		m_attackAni = ANIMATION->findAnimation("¸ùÅ©°ø°ÝÇÏ");
+		ANIMATION->start("¸ùÅ©°ø°ÝÇÏ");
+		m_dieImage = IMAGE->findImage("¸ùÅ©»ç¸Á");
+		m_dieAni = ANIMATION->findAnimation("¸ùÅ©»ç¸ÁÇÏ");
+		ANIMATION->resume("¸ùÅ©»ç¸ÁÇÏ");
 		break;
 	}
-}
-
-bool Cmonk::enemyCooltime()
-{
-	m_cooltimeCount++;
-
-	if (m_cooltimeCount % m_rndskillCount == 0)
-	{
-		m_rndskillCount = 100;
-		m_cooltimeCount = 0;
-		return true;
-	}
-	return false;
-}
-
-void Cmonk::ReturnIdleAnimation()
-{
-	m_isAttack = false;
 }
 
 

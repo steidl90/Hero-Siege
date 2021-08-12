@@ -2,7 +2,7 @@
 #include "animation.h"
 
 animation::animation() :_frameNum(0), _frameWidth(0), _frameHeight(0), _loop(false),
-_elapseSec(0), _nowPlayIndex(0), _play(false),_endPlayIndex(0)
+_elapseSec(0), _nowPlayIndex(0), _play(false)
 {
 }
 
@@ -206,6 +206,18 @@ void animation::frameUpdate(float elapsedTime)
 			_elapseSec -= _frameUpdateSec;
 			_nowPlayIndex++;
 
+<<<<<<< HEAD
+=======
+			if (useEventWhenSpcificFrame)
+			{
+				if (specificFrameIndex == _nowPlayIndex)
+				{
+					m_triggerWhenSpecificFrame();
+				}
+			}
+
+
+>>>>>>> parent of 35abb8d (몬스터 최종)
 			if (_nowPlayIndex == _playList.size())
 			{
 				if (_loop)
@@ -226,15 +238,6 @@ void animation::start()
 {
 	_play = true;
 	_nowPlayIndex = 0;
-}
-
-void animation::fullstart()
-{
-	_play = true;;
-	if (_nowPlayIndex >= _endPlayIndex)
-	{
-		stop();
-	}
 }
 
 void animation::stop()

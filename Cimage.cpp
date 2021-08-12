@@ -54,16 +54,16 @@ HRESULT Cimage::init()
 
 
     //=================Enemy=================//
-    IMAGE->addFrameImage("리치", "images/Priest.bmp", 300 * 1.5, 316 * 1.5, 6, 4, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("리치공격", "images/PriestAttack.bmp", 848 * 1.5, 316 * 1.5, 16, 4, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("리치사망", "images/PriestDie.bmp", 490 * 1.5, 564 * 1.5, 10, 4, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("리치스킬", "images/PriestSkill.bmp", 696 * 2, 61 * 2, 12, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("리치", "images/Priest.bmp", 300, 316, 6, 4, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("리치공격", "images/PriestAttack.bmp", 848, 316, 16, 4, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("리치사망", "images/PriestDie.bmp", 490, 564, 10, 4, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("리치스킬", "images/PriestSkill.bmp", 696, 61, 12, 1, true, RGB(255, 0, 255));
 
     IMAGE->addFrameImage("엘리멘탈", "images/Elemental.bmp", 252, 268, 4, 4, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("엘리멘탈스킬", "images/ElementalSkill1.bmp", 162, 18, 6, 1, true, RGB(255, 0, 255));
 
-    IMAGE->addFrameImage("슬라임", "images/GreenSlime.bmp", 138 * 1.5, 18 * 1.5, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("슬라임공격", "images/GreenSlimeAttack.bmp", 480 * 1.5, 152 * 1.5, 12, 4, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("슬라임", "images/GreenSlime.bmp", 138, 18, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("슬라임공격", "images/GreenSlimeAttack.bmp", 480, 152, 12, 4, true, RGB(255, 0, 255));
 
     IMAGE->addFrameImage("몽크", "images/Monk.bmp", 264, 300, 6, 4, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("몽크공격", "images/MonkAttack.bmp", 360, 336, 5, 4, true, RGB(255, 0, 255));

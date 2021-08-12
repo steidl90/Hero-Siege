@@ -53,7 +53,7 @@ void CplayerUi::update()
 	}
 	if (m_timer + 3 < TIME->getWorldTime()) isLevelUp = false;
 }
-//TODO::¹Ì´Ï¸Ê UI ¼³Á¤
+
 void CplayerUi::render()
 {
 	progressBarRender();

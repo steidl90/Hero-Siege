@@ -1,7 +1,5 @@
 #include "framework.h"
 #include "Cslime.h"
-#include "CenemyAttack.h"
-#include "Cplayer.h"
 
 Cslime::Cslime()
 {
@@ -11,6 +9,7 @@ Cslime::~Cslime()
 {
 }
 
+<<<<<<< HEAD
 HRESULT Cslime::init(POINT position, float HP, float damage, int exp,float trace)
 {
 	m_enemyAttack = new CenemyAttack;
@@ -83,76 +82,21 @@ void Cslime::render()
 	}
 	if (m_isWalking)m_walkImage->aniRender(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkAni);
 	m_enemyAttack->render();
+=======
+HRESULT Cslime::init(POINT position, int HP)
+{
+	return E_NOTIMPL;
+>>>>>>> parent of 35abb8d (Î™¨Ïä§ÌÑ∞ ÏµúÏ¢Ö)
 }
 
 void Cslime::attack()
 {
-	RECT temp;
-	if (IntersectRect(&temp, m_player->getplayerMoveRC(), &m_traceRc))
-	{
-		if (m_player->getplayerMoveRC()->right >= m_walkRc.left - m_distance && m_state == STATE::LEFT)
-		{
+}
 
-			m_isWalking = false;
-			m_enemyAttack->init2(1, 1, true, "ΩΩ∂Û¿”∞¯∞›¡¬");
-			m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
-				m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2, 0, 1.0f, "ΩΩ∂Û¿”∞¯∞›", "ΩΩ∂Û¿”∞¯∞›¡¬");
-		}
-
-		else if (m_player->getplayerMoveRC()->left <= m_walkRc.right + m_distance && m_state == STATE::RIGHT)
-		{
-			m_isWalking = false;
-			m_enemyAttack->init2(1, 1, true, "ΩΩ∂Û¿”∞¯∞›øÏ");
-			m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
-				m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2, 0, 1.0f, "ΩΩ∂Û¿”∞¯∞›", "ΩΩ∂Û¿”∞¯∞›øÏ");
-		}
-
-		if (m_player->getplayerMoveRC()->bottom >= m_walkRc.top - m_distance && m_state == STATE::UP)
-		{
-			m_isWalking = false;
-			m_enemyAttack->init2(1, 1, true, "ΩΩ∂Û¿”∞¯∞›ªÛ");
-			m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
-				m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2, 0, 1.0f, "ΩΩ∂Û¿”∞¯∞›", "ΩΩ∂Û¿”∞¯∞›ªÛ");
-		}
-
-		if (m_player->getplayerMoveRC()->top <= m_walkRc.bottom + m_distance && m_state == STATE::DOWN)
-		{
-			m_isWalking = false;
-			m_enemyAttack->init2(1, 1, true, "ΩΩ∂Û¿”∞¯∞›«œ");
-			m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
-				m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2 + 10, 0, 1.0f, "ΩΩ∂Û¿”∞¯∞›", "ΩΩ∂Û¿”∞¯∞›«œ");
-		}
-	}
+void Cslime::die()
+{
 }
 
 void Cslime::animation()
 {
-	switch (m_state)
-	{
-	case STATE::LEFT:
-		m_walkImage = IMAGE->findImage("ΩΩ∂Û¿”");
-		m_walkAni = ANIMATION->findAnimation("ΩΩ∂Û¿”æ÷¥œ");
-		ANIMATION->resume("ΩΩ∂Û¿”æ÷¥œ");
-		break;
-	case STATE::RIGHT:
-		m_walkImage = IMAGE->findImage("ΩΩ∂Û¿”");
-		m_walkAni = ANIMATION->findAnimation("ΩΩ∂Û¿”æ÷¥œ");
-		ANIMATION->resume("ΩΩ∂Û¿”æ÷¥œ");
-		break;
-	case STATE::UP:
-		m_walkImage = IMAGE->findImage("ΩΩ∂Û¿”");
-		m_walkAni = ANIMATION->findAnimation("ΩΩ∂Û¿”æ÷¥œ");
-		ANIMATION->resume("ΩΩ∂Û¿”æ÷¥œ");
-		break;
-	case STATE::DOWN:
-		m_walkImage = IMAGE->findImage("ΩΩ∂Û¿”");
-		m_walkAni = ANIMATION->findAnimation("ΩΩ∂Û¿”æ÷¥œ");
-		ANIMATION->resume("ΩΩ∂Û¿”æ÷¥œ");
-		break;
-	}
-}
-
-bool Cslime::enemyCooltime()
-{
-	return false;
 }

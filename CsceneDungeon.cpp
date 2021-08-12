@@ -2,9 +2,6 @@
 #include "CsceneDungeon.h"
 #include "Celemental.h"
 #include "Cmonk.h"
-#include "Cpriest.h"
-#include "Cprison.h"
-#include "Cslime.h"
 CsceneDungeon::CsceneDungeon()
 {
 }
@@ -24,6 +21,8 @@ HRESULT CsceneDungeon::init()
 
 	m_player = new CplayerManager;
 	m_player->init();
+	
+
 
 	//m_boss = new Cmevius;
 	//m_boss->init();
@@ -31,6 +30,7 @@ HRESULT CsceneDungeon::init()
 	m_enemyManager = new CenemyManager;
 	m_enemyManager->init();
 	m_enemyManager->setPlayer(m_player->getPlayer());
+<<<<<<< HEAD
 
 	m_player->setEnemyMemory(m_enemyManager);
 
@@ -125,6 +125,20 @@ HRESULT CsceneDungeon::init()
 	//		m_enemyManager->registerEnemy(m_prison);
 	//	}
 	//}
+=======
+	for (int i = 0; i < 5; i++)
+	{
+	Celemental* m_elemental = new Celemental;
+	m_elemental->init(PointMake(1200+i*50,500),10);
+	m_elemental->setPlayer(m_player->getPlayer());
+	m_enemyManager->registerEnemy(m_elemental);
+
+	Cmonk* m_monk = new Cmonk;
+	m_monk->init(PointMake(1200 + i * 50, 600), 10);
+	m_monk->setPlayer(m_player->getPlayer());
+	m_enemyManager->registerEnemy(m_monk);
+	}
+>>>>>>> parent of 35abb8d (몬스터 최종)
 
 	return S_OK;
 }

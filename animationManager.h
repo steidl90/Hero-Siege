@@ -29,7 +29,6 @@ public:
 
 
 	void start(string animationKeyName);
-	void fullstart(string animationKeyName);
 	void stop(string animationKeyName);
 	void pause(string animationKeyName);
 	void resume(string animationKeyName);

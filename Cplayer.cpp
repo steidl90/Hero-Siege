@@ -27,6 +27,7 @@ HRESULT Cplayer::init()
 	m_playerSkill = new CplayerSkill;
 	m_playerSkill->init();
 
+<<<<<<< HEAD
 	m_time = 0;
 
 	//DIRECTIONS
@@ -89,6 +90,63 @@ HRESULT Cplayer::init()
 	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth(), playerMoveDown->getFrameHeight());
 
 	return S_OK;
+=======
+   //DIRECTIONS
+   direction= DIRECTIONS::DIRECTIONS_DOWN;
+   beforeDirection= DIRECTIONS::DIRECTIONS_DOWN;
+
+   //IMAGE
+   playerDown= IMAGE->findImage("ÇÃ·¹ÀÌ¾î¾Æ·¡ÂÊ");
+   playerAttackDown= IMAGE->findImage("ÇÃ·¹ÀÌ¾î¾Æ·¡ÂÊ°ø°Ý");
+   playerMoveDown = IMAGE->findImage("ÇÃ·¹ÀÌ¾î¾Æ·¡ÂÊ°È±â");
+
+   playerLeft=IMAGE->findImage("ÇÃ·¹ÀÌ¾î¿ÞÂÊ");
+   playerMoveLeft=IMAGE->findImage("ÇÃ·¹ÀÌ¾î¿ÞÂÊ°È±â");
+   playerAttackLeft=IMAGE->findImage("ÇÃ·¹ÀÌ¾î¿ÞÂÊ°ø°Ý");
+
+   playerRight=IMAGE->findImage("ÇÃ·¹ÀÌ¾î¿À¸¥ÂÊ");
+   playerMoveRight=IMAGE->findImage("ÇÃ·¹ÀÌ¾î¿À¸¥ÂÊ°È±â");
+   playerAttackRight=IMAGE->findImage("ÇÃ·¹ÀÌ¾î¿À¸¥ÂÊ°ø°Ý");
+
+   playerUp=IMAGE->findImage("ÇÃ·¹ÀÌ¾îÀ§ÂÊ");
+   playerMoveUp=IMAGE->findImage("ÇÃ·¹ÀÌ¾îÀ§ÂÊ°È±â");
+   playerAttackUp=IMAGE->findImage("ÇÃ·¹ÀÌ¾îÀ§ÂÊ°ø°Ý");
+
+   ANIMATION->addDefAnimation("¸®Ä¡½ºÅ³¾Ö´Ï", "¸®Ä¡½ºÅ³", 15, false, true);
+
+
+
+    //MOVE
+   ANIMATION->addDefAnimation("À§ÂÊ°È±â", "ÇÃ·¹ÀÌ¾îÀ§ÂÊ°È±â",10, false, true);
+   ANIMATION->addDefAnimation("¾Æ·¡ÂÊ°È±â", "ÇÃ·¹ÀÌ¾î¾Æ·¡ÂÊ°È±â",10, false, true);
+   ANIMATION->addDefAnimation("¿ÞÂÊ°È±â", "ÇÃ·¹ÀÌ¾î¿ÞÂÊ°È±â",10, false, true);
+   ANIMATION->addDefAnimation("¿À¸¥ÂÊ°È±â", "ÇÃ·¹ÀÌ¾î¿À¸¥ÂÊ°È±â", 10, false, true);
+
+    //IDLE
+   ANIMATION->addDefAnimation("À§ÂÊ", "ÇÃ·¹ÀÌ¾îÀ§ÂÊ", 10, false, true);
+   ANIMATION->addDefAnimation("¾Æ·¡ÂÊ", "ÇÃ·¹ÀÌ¾î¾Æ·¡ÂÊ", 10, false, true);
+   ANIMATION->addDefAnimation("¿ÞÂÊ", "ÇÃ·¹ÀÌ¾î¿ÞÂÊ", 10, false, true);
+   ANIMATION->addDefAnimation("¿À¸¥ÂÊ", "ÇÃ·¹ÀÌ¾î¿À¸¥ÂÊ", 10, false, true);
+
+    //ATTACK
+   ANIMATION->addDefAnimation("À§ÂÊ°ø°Ý", "ÇÃ·¹ÀÌ¾îÀ§ÂÊ°ø°Ý", 20, false, true);
+   ANIMATION->addDefAnimation("¾Æ·¡ÂÊ°ø°Ý", "ÇÃ·¹ÀÌ¾î¾Æ·¡ÂÊ°ø°Ý", 20, false, true);
+   ANIMATION->addDefAnimation("¿ÞÂÊ°ø°Ý", "ÇÃ·¹ÀÌ¾î¿ÞÂÊ°ø°Ý", 20, false, true);
+   ANIMATION->addDefAnimation("¿À¸¥ÂÊ°ø°Ý", "ÇÃ·¹ÀÌ¾î¿À¸¥ÂÊ°ø°Ý", 20, false, true);
+
+   //±âº»»óÅÂ
+   playerIdleAni = ANIMATION->findAnimation("¾Æ·¡ÂÊ");
+   playerAttackAni = ANIMATION->findAnimation("¾Æ·¡ÂÊ°ø°Ý");
+   playerMoveAni = ANIMATION->findAnimation("¾Æ·¡ÂÊ°È±â");
+   
+   //·ºÆ®
+   m_playerX = WINSIZEX / 2;
+   m_playerY = WINSIZEY / 2;
+   playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth(), playerMoveDown->getFrameHeight());
+   playerAttackRc = RectMake(m_playerX, m_playerY, 100, 100);
+  
+   return S_OK;
+>>>>>>> parent of 35abb8d (ëª¬ìŠ¤í„° ìµœì¢…)
 }
 
 void Cplayer::release()

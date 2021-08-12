@@ -1,7 +1,6 @@
 #include "framework.h"
 #include "Cpriest.h"
 #include "CenemyAttack.h"
-#include "Cplayer.h"
 
 Cpriest::Cpriest()
 {
@@ -11,6 +10,7 @@ Cpriest::~Cpriest()
 {
 }
 
+<<<<<<< HEAD
 HRESULT Cpriest::init(POINT position, float HP, float damage, int exp,float trace)
 {
 	m_enemyAttack = new CenemyAttack;
@@ -96,120 +96,21 @@ void Cpriest::render()
 	}
 	if (m_isWalking)m_walkImage->aniRender(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkAni);
 	m_enemyAttack->render();
+=======
+HRESULT Cpriest::init(POINT position, int HP)
+{
+	return E_NOTIMPL;
+>>>>>>> parent of 35abb8d (ëª¬ìŠ¤í„° ìµœì¢…)
 }
 
 void Cpriest::attack()
 {
-	RECT temp;
-	if (IntersectRect(&temp, m_player->getplayerMoveRC(), &m_traceRc))
-	{
-		m_cooltimeCount++;
-
-		if (m_state == STATE::LEFT)
-		{
-			m_walkImage = IMAGE->findImage("¸®Ä¡°ø°Ý");
-			m_walkAni = ANIMATION->findAnimation("¸®Ä¡°ø°ÝÁÂ");
-			ANIMATION->fullstart("¸®Ä¡°ø°ÝÁÂ");
-			fire();
-
-		}
-		if (m_state == STATE::RIGHT)
-		{
-			m_walkImage = IMAGE->findImage("¸®Ä¡°ø°Ý");
-			m_walkAni = ANIMATION->findAnimation("¸®Ä¡°ø°Ý¿ì");
-			ANIMATION->fullstart("¸®Ä¡°ø°Ý¿ì");
-			fire();
-
-		}
-		if (m_state == STATE::UP)
-		{
-			m_walkImage = IMAGE->findImage("¸®Ä¡°ø°Ý");
-			m_walkAni = ANIMATION->findAnimation("¸®Ä¡°ø°Ý»ó");
-			ANIMATION->fullstart("¸®Ä¡°ø°Ý»ó");
-			fire();
-		}
-		if (m_state == STATE::DOWN)
-		{
-			m_walkImage = IMAGE->findImage("¸®Ä¡°ø°Ý");
-			m_walkAni = ANIMATION->findAnimation("¸®Ä¡°ø°ÝÇÏ");
-			ANIMATION->fullstart("¸®Ä¡°ø°ÝÇÏ");
-			fire();
-
-		}
-	}
 }
 
 void Cpriest::die()
 {
-	if (m_hp <= 0)
-	{
-		if (m_state == STATE::LEFT)
-		{
-
-		}
-		if (m_state == STATE::RIGHT)
-		{
-
-		}
-		if (m_state == STATE::UP)
-		{
-
-		}
-		if (m_state == STATE::DOWN)
-		{
-
-		}
-	}
 }
 
 void Cpriest::animation()
 {
-	switch (m_state)
-	{
-	case STATE::LEFT:
-		m_walkImage = IMAGE->findImage("¸®Ä¡");
-		m_walkAni = ANIMATION->findAnimation("¸®Ä¡ÁÂ");
-		ANIMATION->resume("¸®Ä¡ÁÂ");
-		break;
-	case STATE::RIGHT:
-		m_walkImage = IMAGE->findImage("¸®Ä¡");
-		m_walkAni = ANIMATION->findAnimation("¸®Ä¡¿ì");
-		ANIMATION->resume("¸®Ä¡¿ì");
-		break;
-	case STATE::UP:
-		m_walkImage = IMAGE->findImage("¸®Ä¡");
-		m_walkAni = ANIMATION->findAnimation("¸®Ä¡»ó");
-		ANIMATION->resume("¸®Ä¡»ó");
-		break;
-	case STATE::DOWN:
-		m_walkImage = IMAGE->findImage("¸®Ä¡");
-		m_walkAni = ANIMATION->findAnimation("¸®Ä¡ÇÏ");
-		ANIMATION->resume("¸®Ä¡ÇÏ");
-		break;
-	}
-}
-
-bool Cpriest::enemyCooltime()
-{
-
-	if (m_cooltimeCount % m_rndskillCount == 0)
-	{
-		m_rndskillCount = 100;
-		m_cooltimeCount = 0;
-		return true;
-	}
-	return false;
-}
-
-void Cpriest::fire()
-{
-	if (enemyCooltime()) {
-		m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
-			m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2,
-			UTIL::getAngle(m_walkRc.left + (m_walkRc.right - m_walkRc.left) / 2,
-				m_walkRc.bottom + (m_walkRc.top - m_walkRc.bottom) / 2,
-				m_player->getplayerMoveRC()->left + (m_player->getplayerMoveRC()->right - m_player->getplayerMoveRC()->left) / 2,
-				m_player->getplayerMoveRC()->top + (m_player->getplayerMoveRC()->bottom - m_player->getplayerMoveRC()->top) / 2),
-			5.0f, "¸®Ä¡½ºÅ³", "¸®Ä¡½ºÅ³¾Ö´Ï");
-	}
 }

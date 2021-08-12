@@ -1,7 +1,5 @@
 #include "framework.h"
 #include "Cprison.h"
-#include "CenemyAttack.h"
-#include "Cplayer.h"
 
 Cprison::Cprison()
 {
@@ -11,6 +9,7 @@ Cprison::~Cprison()
 {
 }
 
+<<<<<<< HEAD
 HRESULT Cprison::init(POINT position, float HP, float damage, int exp, float trace)
 {
 	m_enemyAttack = new CenemyAttack;
@@ -91,99 +90,21 @@ void Cprison::render()
 	}
 	if (m_isWalking)m_walkImage->aniRender(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkAni);
 	m_enemyAttack->render();
+=======
+HRESULT Cprison::init(POINT position, int HP)
+{
+	return E_NOTIMPL;
+>>>>>>> parent of 35abb8d (ëª¬ìŠ¤í„° ìµœì¢…)
 }
 
 void Cprison::attack()
 {
-	RECT temp;
-	if (IntersectRect(&temp, m_player->getplayerMoveRC(), &m_traceRc))
-	{
-		if (m_player->getplayerMoveRC()->right >= m_walkRc.left - m_distance && m_state == STATE::LEFT)
-		{
-
-			m_isWalking = false;
-			m_enemyAttack->init2(1, 1, true, "±³µµ°ü°ø°ÝÁÂ");
-			m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
-				m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2, 0, 1.0f, "±³µµ°ü°ø°Ý", "±³µµ°ü°ø°ÝÁÂ");
-		}
-
-		else if (m_player->getplayerMoveRC()->left <= m_walkRc.right + m_distance && m_state == STATE::RIGHT)
-		{
-			m_isWalking = false;
-			m_enemyAttack->init2(1, 1, true, "±³µµ°ü°ø°Ý¿ì");
-			m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
-				m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2, 0, 1.0f, "±³µµ°ü°ø°Ý", "±³µµ°ü°ø°Ý¿ì");
-		}
-
-		if (m_player->getplayerMoveRC()->bottom >= m_walkRc.top - m_distance && m_state == STATE::UP)
-		{
-			m_isWalking = false;
-			m_enemyAttack->init2(1, 1, true, "±³µµ°ü°ø°Ý»ó");
-			m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
-				m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2, 0, 1.0f, "±³µµ°ü°ø°Ý", "±³µµ°ü°ø°Ý»ó");
-		}
-
-		if (m_player->getplayerMoveRC()->top <= m_walkRc.bottom + m_distance && m_state == STATE::DOWN)
-		{
-			m_isWalking = false;
-			m_enemyAttack->init2(1, 1, true, "±³µµ°ü°ø°ÝÇÏ");
-			m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
-				m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2 + 10, 0, 1.0f, "±³µµ°ü°ø°Ý", "±³µµ°ü°ø°ÝÇÏ");
-		}
-	}
 }
 
 void Cprison::die()
 {
-	if (m_hp <= 0)
-	{
-		if (m_state == STATE::LEFT)
-		{
-
-		}
-		if (m_state == STATE::RIGHT)
-		{
-
-		}
-		if (m_state == STATE::UP)
-		{
-
-		}
-		if (m_state == STATE::DOWN)
-		{
-
-		}
-	}
 }
 
 void Cprison::animation()
 {
-	switch (m_state)
-	{
-	case STATE::LEFT:
-		m_walkImage = IMAGE->findImage("±³µµ°ü");
-		m_walkAni = ANIMATION->findAnimation("±³µµ°üÁÂ");
-		ANIMATION->resume("±³µµ°üÁÂ");
-		break;
-	case STATE::RIGHT:
-		m_walkImage = IMAGE->findImage("±³µµ°ü");
-		m_walkAni = ANIMATION->findAnimation("±³µµ°ü¿ì");
-		ANIMATION->resume("±³µµ°ü¿ì");
-		break;
-	case STATE::UP:
-		m_walkImage = IMAGE->findImage("±³µµ°ü");
-		m_walkAni = ANIMATION->findAnimation("±³µµ°ü»ó");
-		ANIMATION->resume("±³µµ°ü»ó");
-		break;
-	case STATE::DOWN:
-		m_walkImage = IMAGE->findImage("±³µµ°ü");
-		m_walkAni = ANIMATION->findAnimation("±³µµ°üÇÏ");
-		ANIMATION->resume("±³µµ°üÇÏ");
-		break;
-	}
-}
-
-bool Cprison::enemyCooltime()
-{
-	return false;
 }
