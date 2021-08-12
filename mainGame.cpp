@@ -21,9 +21,9 @@ HRESULT mainGame::init()
 	SCENE->addScene("선택화면", new CsceneSelect);
 	SCENE->addScene("마을", new CsceneTown);
 	SCENE->addScene("던전", new CsceneDungeon);
+    EFFECT->addEffect("라이트닝", "images/Lightning.bmp", 576, 402, 72, 402, 5, 1, 100);
 
-	SCENE->changeScene("던전");
-	
+	SCENE->changeScene("마을");
 	return S_OK;
 }
 
@@ -32,6 +32,7 @@ void mainGame::release()
 	gameNode::release();
 	SAFE_DELETE(m_image);
 	SAFE_DELETE(m_astar);
+	EFFECT->release();
 	SCENE->release();
 }
 

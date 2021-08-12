@@ -98,9 +98,9 @@ void animation::setPlayFrame(int* playArr, int arrLen, bool loop)
 
 void animation::setPlayFrame(int start, int end, bool reverse, bool loop)
 {
+	_endPlayIndex = end;
 	_loop = loop;
 	_playList.clear();
-	_endPlayIndex = end;
 
 	//시작과 끝이 같은경우(프레임구간) 재생 하지 말자
 	if (start == end)
