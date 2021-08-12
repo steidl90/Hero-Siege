@@ -96,8 +96,10 @@ public:
 	void playerSkillRender();
 
 	RECT* getplayerMoveRC() { return &playerMoveRc; }
-	float getplayerX() const { return m_playerX; }
-	float getplayerY() const { return m_playerY; }
+	float getPlayerX() const { return m_playerX; }
+	void setPlayerX(float playerx) { m_playerX = playerx; }
+	float getPlayerY() const { return m_playerY; }
+	void setPlayerY(float playery) { m_playerY = playery; }
 
 	int getSaveDate() { return m_saveDate; }
 	int getMaxHp() { return m_maxHp; }

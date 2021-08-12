@@ -46,7 +46,10 @@ HRESULT CsceneDungeon::init()
 	m_player->getPlayer()->setLv(DATA->getLv());
 	m_player->getPlayer()->setMp(DATA->getMp());
 	m_player->getPlayer()->setSpeed(DATA->getSpeed());
+	m_player->getPlayer()->setPlayerX(200);
+	m_player->getPlayer()->setPlayerY(MAPSIZE - 300);
 
+	
 
 	m_changeRect = RectMake(170, MAPSIZE - 230, 100, 50);
 
@@ -149,6 +152,7 @@ void CsceneDungeon::release()
 	SAFE_DELETE(m_dungeon);
 	SAFE_DELETE(m_player);
 	SAFE_DELETE(m_enemyManager);
+	SAFE_DELETE(m_boss);
 }
 
 void CsceneDungeon::update()
@@ -192,7 +196,25 @@ void CsceneDungeon::sceneChange()
 			m_player->getPlayer()->getExp(),
 			m_player->getPlayer()->getGold(),
 			m_player->getPlayer()->getCriticalAtk(),
-			m_player->getPlayer()->getSpeed());
+			m_player->getPlayer()->getSpeed(),
+			MAPSIZE - 50,
+			WINSIZEY / 2 + 150);
+		SCENE->changeScene("마을");
+	}
+	else if (m_player->getPlayer()->getHp() < 0)
+	{
+		DATA->setData(m_player->getPlayer()->getAtk(),
+			m_player->getPlayer()->getDef(),
+			m_player->getPlayer()->getHp() + 10,
+			m_player->getPlayer()->getMp(),
+			m_player->getPlayer()->getCritical(),
+			m_player->getPlayer()->getLv(),
+			m_player->getPlayer()->getExp(),
+			m_player->getPlayer()->getGold(),
+			m_player->getPlayer()->getCriticalAtk(),
+			m_player->getPlayer()->getSpeed(),
+			WINSIZEX - 400,
+			WINSIZEY / 2 + 270);
 		SCENE->changeScene("마을");
 	}
 }

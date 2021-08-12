@@ -14,6 +14,8 @@ private:
 	int m_gold;
 	float m_criticalAtk;
 	float m_speed;
+	float m_x;
+	float m_y;
 
 public:
 	CplayerDate();
@@ -24,7 +26,7 @@ public:
 	void update();
 	void render();
 
-	void setData(int atk, int def, int hp, int mp, int cri, int lv, int exp, int gold, float criatk, float speed);
+	void setData(int atk, int def, int hp, int mp, int cri, int lv, int exp, int gold, float criatk, float speed, float x, float y);
 
 	int getAtk() { return m_atk; }
 	int getDef() { return m_def; }
@@ -36,6 +38,8 @@ public:
 	int getGold() { return m_gold; }
 	float getCriticalAtk() { return m_criticalAtk; }
 	float getSpeed() { return m_speed; }
+	float getX() { return m_x; }
+	float getY() { return m_y; }
 
 };
 

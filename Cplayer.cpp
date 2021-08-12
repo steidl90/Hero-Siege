@@ -25,6 +25,9 @@ HRESULT Cplayer::init()
 	setSpeed(3.0f);
 	setLv(1);
 	setExp(0);
+	setGold(1000);
+	m_playerX = 50;
+	m_playerY = WINSIZEY / 2 + 270;
 
 	m_playerSkill = new CplayerSkill;
 	m_playerSkill->init();
@@ -86,8 +89,6 @@ HRESULT Cplayer::init()
 	playerMoveAni = ANIMATION->findAnimation("아래쪽걷기");
 
 	//렉트
-	m_playerX = WINSIZEX / 2;
-	m_playerY = WINSIZEY / 2;
 	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth(), playerMoveDown->getFrameHeight());
 
 	return S_OK;
@@ -112,25 +113,22 @@ void Cplayer::render()
 {
 	playerSkillControl();
 	playerSkillRender();
-	playerStateRender();
 	m_playerSkill->render();
 	if (isAttack) isAttackRender();
+	else playerStateRender();
 }
 
 void Cplayer::moveControl()
 {
 	if (InputManager->isStayKeyDown(VK_RIGHT) && (InputManager->isStayKeyDown(VK_UP) || InputManager->isStayKeyDown(VK_DOWN)))
 	{
-		//m_playerX += getSpeed();
 		this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_RIGHT);
 		if (InputManager->isStayKeyDown(VK_DOWN))
 		{
-			//m_playerY += getSpeed();
 			this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_DOWN);
 		}
 		if (InputManager->isStayKeyDown(VK_UP))
 		{
-			//m_playerY -= getSpeed();
 			this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_UP);
 		}
 		isMoving = true;
@@ -138,16 +136,13 @@ void Cplayer::moveControl()
 	}
 	else if (InputManager->isStayKeyDown(VK_LEFT) && (InputManager->isStayKeyDown(VK_UP) || InputManager->isStayKeyDown(VK_DOWN)))
 	{
-		//m_playerX -= getSpeed();
 		this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_LEFT);
 		if (InputManager->isStayKeyDown(VK_DOWN))
 		{
-			//m_playerY += getSpeed();
 			this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_DOWN);
 		}
 		if (InputManager->isStayKeyDown(VK_UP))
 		{
-			//m_playerY -= getSpeed();
 			this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_UP);
 		}
 		isMoving = true;
@@ -155,16 +150,13 @@ void Cplayer::moveControl()
 	}
 	else if (InputManager->isStayKeyDown(VK_UP) && (InputManager->isStayKeyDown(VK_RIGHT) || InputManager->isStayKeyDown(VK_LEFT)))
 	{
-		//m_playerY -= getSpeed();
 		this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_UP);
 		if (InputManager->isStayKeyDown(VK_RIGHT))
 		{
-			//m_playerX += getSpeed();
 			this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_RIGHT);
 		}
 		if (InputManager->isStayKeyDown(VK_LEFT))
 		{
-			//m_playerX -= getSpeed();
 			this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_LEFT);
 		}
 		isMoving = true;
@@ -172,16 +164,13 @@ void Cplayer::moveControl()
 	}
 	else if (InputManager->isStayKeyDown(VK_DOWN) && (InputManager->isStayKeyDown(VK_RIGHT) || InputManager->isStayKeyDown(VK_LEFT)))
 	{
-		//m_playerY += getSpeed();
 		this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_DOWN);
 		if (InputManager->isStayKeyDown(VK_RIGHT))
 		{
-			//m_playerX += getSpeed();
 			this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_RIGHT);
 		}
 		if (InputManager->isStayKeyDown(VK_LEFT))
 		{
-			//m_playerX -= getSpeed();
 			this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_LEFT);
 		}
 		isMoving = true;
@@ -189,28 +178,24 @@ void Cplayer::moveControl()
 	}
 	else if (InputManager->isStayKeyDown(VK_LEFT))
 	{
-		//m_playerX -= getSpeed();
 		this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_LEFT);
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_LEFT;
 	}
 	else if (InputManager->isStayKeyDown(VK_RIGHT))
 	{
-		//m_playerX += getSpeed();
 		this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_RIGHT);
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_RIGHT;
 	}
 	else if (InputManager->isStayKeyDown(VK_UP))
 	{
-		//m_playerY -= getSpeed();
 		this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_UP);
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_UP;
 	}
 	else if (InputManager->isStayKeyDown(VK_DOWN))
 	{
-		//m_playerY += getSpeed();
 		this->blockCheck(getSpeed(), &playerMoveRc, DIRECTIONS::DIRECTIONS_DOWN);
 		isMoving = true;
 		direction = DIRECTIONS::DIRECTIONS_DOWN;
@@ -232,45 +217,38 @@ void Cplayer::moveControl()
 		else if (direction == DIRECTIONS::DIRECTIONS_UP)m_playerSkill->skillInformation(m_playerX + 15, m_playerY - 20, PI * 0.5, 7.0f, 700, "리치스킬", "리치스킬애니");
 		else if (direction == DIRECTIONS::DIRECTIONS_DOWN)m_playerSkill->skillInformation(m_playerX, m_playerY, PI * 1.5, 7.0f, 700, "리치스킬", "리치스킬애니");
 	}
-	else if (InputManager->isOnceKeyDown('W'))
+	else if (InputManager->isOnceKeyDown('W') && this->getLv() >= 3)
 	{
-		if (this->getLv() >= 3)
+		isAttack = true;
+		for (size_t i = 0; i < 30; i++)
 		{
-			isAttack = true;
-			for (size_t i = 0; i < 30; i++)
-			{
-				m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.21, 7.0f, 350, "리치스킬", "리치스킬애니");
-				m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.22, 6.0f, 300, "리치스킬", "리치스킬애니");
-				m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.26, 5.0f, 250, "리치스킬", "리치스킬애니");
-				m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.65, 4.3f, 200, "리치스킬", "리치스킬애니");
-			}
+			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.21, 7.0f, 350, "리치스킬", "리치스킬애니");
+			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.22, 6.0f, 300, "리치스킬", "리치스킬애니");
+			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.26, 5.0f, 250, "리치스킬", "리치스킬애니");
+			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.65, 4.3f, 200, "리치스킬", "리치스킬애니");
 		}
 	}
-	else if (InputManager->isStayKeyDown('E') && m_count == 0)
+	else if (InputManager->isStayKeyDown('E') && this->getLv() >= 7 && m_count == 0)
 	{
-		if (this->getLv() >= 7)
-		{
-			m_count++;
-			isAttack = true;
-			m_time = TIME->getWorldTime();
-			isRect = true;
-			m_skillX = m_playerX;
-			m_skillY = m_playerY;
-			if (direction == DIRECTIONS::DIRECTIONS_LEFT) skillState = SKILL::SKILL_LEFT;
-			else if (direction == DIRECTIONS::DIRECTIONS_RIGHT)  skillState = SKILL::SKILL_RIGHT;
-			else if (direction == DIRECTIONS::DIRECTIONS_UP)  skillState = SKILL::SKILL_UP;
-			else if (direction == DIRECTIONS::DIRECTIONS_DOWN) skillState = SKILL::SKILL_DOWN;
-		}
+		m_count++;
+		isAttack = true;
+		m_time = TIME->getWorldTime();
+		isRect = true;
+		m_skillX = m_playerX;
+		m_skillY = m_playerY;
+		if (direction == DIRECTIONS::DIRECTIONS_LEFT) skillState = SKILL::SKILL_LEFT;
+		else if (direction == DIRECTIONS::DIRECTIONS_RIGHT)  skillState = SKILL::SKILL_RIGHT;
+		else if (direction == DIRECTIONS::DIRECTIONS_UP)  skillState = SKILL::SKILL_UP;
+		else if (direction == DIRECTIONS::DIRECTIONS_DOWN) skillState = SKILL::SKILL_DOWN;
 	}
 	if (m_time + 2 < TIME->getWorldTime())
 	{
-			isRect = false;
-			skillState = SKILL::SKILL_IDLE;
-			m_count = 0;
+		isRect = false;
+		skillState = SKILL::SKILL_IDLE;
+		m_count = 0;
 	}
 
-
-	if (InputManager->isStayKeyDown('Z'))
+	if (InputManager->isStayKeyDown('Z')) // 디버깅
 	{
 		setHp(getHp() - 1);
 		setMp(getMp() - 1);
@@ -287,6 +265,7 @@ void Cplayer::moveControl()
 	{
 		setExp(0);
 		setLv(getLv() + 1);
+		setHp(m_maxHp);
 	}
 
 	moveAnimation();
@@ -345,76 +324,73 @@ void Cplayer::moveAnimation()
 void Cplayer::playerStateRender()
 {
 	//Rectangle(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerMoveRc.right, playerMoveRc.bottom);
-	if (!isAttack)
+	if (isMoving)
 	{
-		if (isMoving)
+		switch (direction)
 		{
-			switch (direction)
-			{
-			case DIRECTIONS::DIRECTIONS_LEFT:
-				playerMoveLeft->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 13, playerMoveAni);
-				break;
-			case DIRECTIONS::DIRECTIONS_UP:
-				playerMoveUp->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 15, playerMoveAni);
-				break;
-			case DIRECTIONS::DIRECTIONS_RIGHT:
-				playerMoveRight->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 13, playerMoveAni);
-				break;
-			case DIRECTIONS::DIRECTIONS_DOWN:
-				playerMoveDown->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 13, playerMoveAni);
-				break;
-			}
+		case DIRECTIONS::DIRECTIONS_LEFT:
+			playerMoveLeft->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 13, playerMoveAni);
+			break;
+		case DIRECTIONS::DIRECTIONS_UP:
+			playerMoveUp->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 15, playerMoveAni);
+			break;
+		case DIRECTIONS::DIRECTIONS_RIGHT:
+			playerMoveRight->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 13, playerMoveAni);
+			break;
+		case DIRECTIONS::DIRECTIONS_DOWN:
+			playerMoveDown->aniRender(getMapDC(), playerMoveRc.left - 45, playerMoveRc.top - 13, playerMoveAni);
+			break;
 		}
-		else
+	}
+	else
+	{
+		switch (direction)
 		{
-			switch (direction)
+		case DIRECTIONS::DIRECTIONS_LEFT:
+			playerLeft->aniRender(getMapDC(), playerMoveRc.left - 40, playerMoveRc.top - 3, playerIdleAni);
+			if (isIdle == false)
 			{
-			case DIRECTIONS::DIRECTIONS_LEFT:
-				playerLeft->aniRender(getMapDC(), playerMoveRc.left - 40, playerMoveRc.top - 3, playerIdleAni);
-				if (isIdle == false)
-				{
-					playerIdleAni = ANIMATION->findAnimation("왼쪽");
-					ANIMATION->start("왼쪽");
-					isIdle = true;
-				}
-				break;
-			case DIRECTIONS::DIRECTIONS_UP:
-				playerUp->aniRender(getMapDC(), playerMoveRc.left - 39, playerMoveRc.top - 4, playerIdleAni);
-				if (!isIdle)
-				{
-					playerIdleAni = ANIMATION->findAnimation("위쪽");
-					ANIMATION->start("위쪽");
-					isIdle = true;
-				}
-				break;
-			case DIRECTIONS::DIRECTIONS_RIGHT:
-				playerRight->aniRender(getMapDC(), playerMoveRc.left - 39, playerMoveRc.top - 3, playerIdleAni);
-				if (!isIdle)
-				{
-					playerIdleAni = ANIMATION->findAnimation("오른쪽");
-					ANIMATION->start("오른쪽");
-					isIdle = true;
-				}
-				break;
-			case DIRECTIONS::DIRECTIONS_DOWN:
-				playerDown->aniRender(getMapDC(), playerMoveRc.left - 39, playerMoveRc.top - 3, playerIdleAni);
-				if (!isIdle)
-				{
-					playerIdleAni = ANIMATION->findAnimation("아래쪽");
-					ANIMATION->start("아래쪽");
-					isIdle = true;
-				}
-				break;
-			case DIRECTIONS::DIRECTIONS_IDLE:
-				playerDown->aniRender(getMapDC(), playerMoveRc.left - 39, playerMoveRc.top - 3, playerIdleAni);
-				if (!isIdle)
-				{
-					playerIdleAni = ANIMATION->findAnimation("아래쪽");
-					ANIMATION->start("아래쪽");
-					isIdle = true;
-				}
-				break;
+				playerIdleAni = ANIMATION->findAnimation("왼쪽");
+				ANIMATION->start("왼쪽");
+				isIdle = true;
 			}
+			break;
+		case DIRECTIONS::DIRECTIONS_UP:
+			playerUp->aniRender(getMapDC(), playerMoveRc.left - 39, playerMoveRc.top - 4, playerIdleAni);
+			if (!isIdle)
+			{
+				playerIdleAni = ANIMATION->findAnimation("위쪽");
+				ANIMATION->start("위쪽");
+				isIdle = true;
+			}
+			break;
+		case DIRECTIONS::DIRECTIONS_RIGHT:
+			playerRight->aniRender(getMapDC(), playerMoveRc.left - 39, playerMoveRc.top - 3, playerIdleAni);
+			if (!isIdle)
+			{
+				playerIdleAni = ANIMATION->findAnimation("오른쪽");
+				ANIMATION->start("오른쪽");
+				isIdle = true;
+			}
+			break;
+		case DIRECTIONS::DIRECTIONS_DOWN:
+			playerDown->aniRender(getMapDC(), playerMoveRc.left - 39, playerMoveRc.top - 3, playerIdleAni);
+			if (!isIdle)
+			{
+				playerIdleAni = ANIMATION->findAnimation("아래쪽");
+				ANIMATION->start("아래쪽");
+				isIdle = true;
+			}
+			break;
+		case DIRECTIONS::DIRECTIONS_IDLE:
+			playerDown->aniRender(getMapDC(), playerMoveRc.left - 39, playerMoveRc.top - 3, playerIdleAni);
+			if (!isIdle)
+			{
+				playerIdleAni = ANIMATION->findAnimation("아래쪽");
+				ANIMATION->start("아래쪽");
+				isIdle = true;
+			}
+			break;
 		}
 	}
 }

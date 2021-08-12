@@ -23,6 +23,9 @@ private:
 
 	bool isShopOn;
 
+	float m_timerHp;
+	float m_timerMp;
+
 public:
 	CsceneTown();
 	~CsceneTown();

@@ -22,7 +22,7 @@ HRESULT mainGame::init()
 	SCENE->addScene("마을", new CsceneTown);
 	SCENE->addScene("던전", new CsceneDungeon);
 
-	SCENE->changeScene("시작화면");
+	SCENE->changeScene("마을");
 	return S_OK;
 }
 
@@ -41,7 +41,6 @@ void mainGame::update()
 	SCENE->update();
 	EFFECT->update();
 	ANIMATION->update();
-
 }
 
 void mainGame::render()

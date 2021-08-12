@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "CsceneTown.h"
 
-CsceneTown::CsceneTown()
+CsceneTown::CsceneTown() :m_timerHp(NULL), m_timerMp(NULL)
 {
 }
 
@@ -33,6 +33,8 @@ HRESULT CsceneTown::init()
 	m_player->getPlayer()->setLv(DATA->getLv());
 	m_player->getPlayer()->setMp(DATA->getMp());
 	m_player->getPlayer()->setSpeed(DATA->getSpeed());
+	m_player->getPlayer()->setPlayerX(DATA->getX());
+	m_player->getPlayer()->setPlayerY(DATA->getY());
 
 	m_aStar = new CaStar;
 	m_aStar->setCameraMemory(m_camera);
@@ -60,6 +62,9 @@ void CsceneTown::release()
 	SAFE_DELETE(m_camera);
 	SAFE_DELETE(m_town);
 	SAFE_DELETE(m_player);
+	SAFE_DELETE(m_aStar);
+	SAFE_DELETE(m_shop);
+	SAFE_DELETE(m_shopUi);
 }
 
 void CsceneTown::update()
@@ -75,6 +80,34 @@ void CsceneTown::update()
 
 	shopOn();
 
+	//체력 리젠
+	if (m_player->getPlayer()->getHp() < m_player->getPlayer()->getMaxHp())
+	{
+		if (m_timerHp + 3 < TIME->getWorldTime())
+		{
+			m_player->getPlayer()->setHp(m_player->getPlayer()->getHp() + 10);
+			m_timerHp = TIME->getWorldTime();
+		}
+		if (m_player->getPlayer()->getHp() > m_player->getPlayer()->getMaxHp())
+		{
+			m_player->getPlayer()->setHp(m_player->getPlayer()->getMaxHp());
+		}
+	}
+
+	//마나 리젠
+	if (m_player->getPlayer()->getMp() < m_player->getPlayer()->getMaxMp())
+	{
+		if (m_timerMp + 3 < TIME->getWorldTime())
+		{
+			m_player->getPlayer()->setMp(m_player->getPlayer()->getMp() + 5);
+			m_timerMp = TIME->getWorldTime();
+		}
+		if (m_player->getPlayer()->getMp() > m_player->getPlayer()->getMaxMp())
+		{
+			m_player->getPlayer()->setMp(m_player->getPlayer()->getMaxMp());
+		}
+	}
+
 	sceneChange();
 }
 
@@ -89,7 +122,6 @@ void CsceneTown::render()
 
 	if (isShopOn) m_shopUi->render();
 
-	//Rectangle(getMapDC(), m_changeRect.left, m_changeRect.top, m_changeRect.right, m_changeRect.bottom);
 	Rectangle(getMapDC(), m_shopRect.left, m_shopRect.top, m_shopRect.right, m_shopRect.bottom);
 }
 
@@ -107,7 +139,9 @@ void CsceneTown::sceneChange()
 			m_player->getPlayer()->getExp(),
 			m_player->getPlayer()->getGold(),
 			m_player->getPlayer()->getCriticalAtk(),
-			m_player->getPlayer()->getSpeed());
+			m_player->getPlayer()->getSpeed(),
+			m_player->getPlayer()->getPlayerX(),
+			m_player->getPlayer()->getPlayerY());
 		SCENE->changeScene("던전");
 	}
 }
