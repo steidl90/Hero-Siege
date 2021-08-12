@@ -20,6 +20,8 @@ HRESULT CsceneTown::init()
 
 	m_player = new CplayerManager;
 	m_player->init();
+	m_player->setCheckTile(m_town->getMap());
+	m_player->setTileAttribute(m_town->getAttribute());
 
 	m_aStar = new CaStar;
 	m_aStar->setCameraMemory(m_camera);

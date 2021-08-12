@@ -40,7 +40,7 @@ void mapToolSub::update()
 void mapToolSub::render()
 {
 	//오른쪽 타일 이미지
-	if (m_subTile == 0)IMAGE->render("tilemap", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth(), 0);
+	if (m_subTile == 0)IMAGE->render("tilemap1", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("tilemap1")->getWidth(), 0);
 	if (m_subTile == 1)IMAGE->render("오브젝트타일1", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("오브젝트타일1")->getWidth(), 0);
 	if (m_subTile == 2)IMAGE->render("오브젝트타일2", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("오브젝트타일2")->getWidth(), 0);
 	if (m_subTile == 3)IMAGE->render("오브젝트타일3", getMemDC(), MAPTOOLPOINT - IMAGE->findImage("오브젝트타일3")->getWidth(), 0);
@@ -51,11 +51,11 @@ void mapToolSub::render()
 	//오른쪽 타일 그리드
 	for (int i = 0; i < SAMPLETILEY; i++)
 	{
-		LineMake(getMemDC(), MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth(), i * TILESIZE, MAPTOOLPOINT, i * TILESIZE);
+		LineMake(getMemDC(), MAPTOOLPOINT - IMAGE->findImage("tilemap1")->getWidth(), i * TILESIZE, MAPTOOLPOINT, i * TILESIZE);
 	}
 	for (int i = 0; i < SAMPLETILEX; i++)
 	{
-		LineMake(getMemDC(), MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth() + i * TILESIZE, 0, MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth() + i * TILESIZE, IMAGE->findImage("tilemap")->getHeight());
+		LineMake(getMemDC(), MAPTOOLPOINT - IMAGE->findImage("tilemap1")->getWidth() + i * TILESIZE, 0, MAPTOOLPOINT - IMAGE->findImage("tilemap1")->getWidth() + i * TILESIZE, IMAGE->findImage("tilemap1")->getHeight());
 	}
 	SetTextColor(getMemDC(), RGB(0, 0, 0));
 	TextOut(getMemDC(), CAMERAWIDTH + 30, WINSIZEY / 2 + 120, TEXT("충돌지우개    - L"), lstrlen("충돌지우개    - L"));
@@ -92,8 +92,8 @@ void mapToolSub::maptoolSetup()
 			if (m_subTile == 0)
 			{
 				SetRect(&_sampleTiles[i * SAMPLETILEX + j].rcTile,
-					(MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth()) + j * TILESIZE,
-					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("tilemap")->getWidth()) + j * TILESIZE + TILESIZE,
+					(MAPTOOLPOINT - IMAGE->findImage("tilemap1")->getWidth()) + j * TILESIZE,
+					i * TILESIZE, (MAPTOOLPOINT - IMAGE->findImage("tilemap1")->getWidth()) + j * TILESIZE + TILESIZE,
 					i * TILESIZE + TILESIZE);
 
 				_sampleTileImage[i * SAMPLETILEX + j].terrainImage = OBJECTIMAGE::OBJECTIMAGE_TILE;
@@ -303,7 +303,7 @@ void mapToolSub::mapLoad()
 	HANDLE file;
 	DWORD read;
 
-	file = CreateFile("tileMap.map",
+	file = CreateFile("townMap.map",
 		GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	ReadFile(file, m_mapToolmain->getFrameObjectInfo(), sizeof(tagFrameObjectInfo) * TILEX * TILEY, &read, NULL);
@@ -427,7 +427,7 @@ void mapToolSub::clickAlphaRender()
 	{
 		if (_ctrSelect == static_cast<int>(CTRL::CTRL_FILL))
 		{
-			if (m_subTile == 0)IMAGE->findImage("tilemap")->alphaframeRender(getMemDC(), m_ptMouse.x - 10, m_ptMouse.y - 10, _currentTile.frame_x, _currentTile.frame_y, 128);
+			if (m_subTile == 0)IMAGE->findImage("tilemap1")->alphaframeRender(getMemDC(), m_ptMouse.x - 10, m_ptMouse.y - 10, _currentTile.frame_x, _currentTile.frame_y, 128);
 			if (m_subTile == 1)IMAGE->findImage("오브젝트타일1")->alphaframeRender(getMemDC(), m_ptMouse.x - 10, m_ptMouse.y - 10, _currentTile.frame_x, _currentTile.frame_y, 128);
 			if (m_subTile == 2)IMAGE->findImage("오브젝트타일2")->alphaframeRender(getMemDC(), m_ptMouse.x - 10, m_ptMouse.y - 10, _currentTile.frame_x, _currentTile.frame_y, 128);
 			if (m_subTile == 3)IMAGE->findImage("오브젝트타일3")->alphaframeRender(getMemDC(), m_ptMouse.x - 10, m_ptMouse.y - 10, _currentTile.frame_x, _currentTile.frame_y, 128);
@@ -443,7 +443,7 @@ void mapToolSub::clickAlphaRender()
 			{
 				for (countJ = 0, j = m_currentDragTile.frame_StartX; j <= m_currentDragTile.frame_EndX; countJ++, j++)
 				{
-					if (m_subTile == 0)IMAGE->findImage("tilemap")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
+					if (m_subTile == 0)IMAGE->findImage("tilemap1")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
 					if (m_subTile == 1)IMAGE->findImage("오브젝트타일1")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
 					if (m_subTile == 2)IMAGE->findImage("오브젝트타일2")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
 					if (m_subTile == 3)IMAGE->findImage("오브젝트타일3")->alphaframeRender(getMemDC(), m_ptMouse.x + countJ * TILESIZE, m_ptMouse.y + countI * TILESIZE, j, i, 128);
