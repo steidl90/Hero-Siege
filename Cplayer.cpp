@@ -27,7 +27,7 @@ HRESULT Cplayer::init()
 	setExp(0);
 	setGold(1000);
 	m_playerX = 50;
-	m_playerY = WINSIZEY / 2 + 270;
+	m_playerY = WINSIZEY / 2 + 230;
 
 	m_playerSkill = new CplayerSkill;
 	m_playerSkill->init();
