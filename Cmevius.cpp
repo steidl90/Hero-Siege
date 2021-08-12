@@ -12,6 +12,7 @@ Cmevius::~Cmevius()
 HRESULT Cmevius::init()
 {
     m_em = new CenemyManager;
+    m_player = new Cplayer;
 	ANIMATION->addDefAnimation("애니공중", "보스공중", 10, false, true);
     ANIMATION->addDefAnimation("애니보스", "보스", 5, false, true);
     ANIMATION->addDefAnimation("애니캐스팅", "보스캐스팅", 10, false, false);
@@ -128,7 +129,6 @@ void Cmevius::render()
     if (m_meviusImage != nullptr) {
         m_meviusImage->aniRender(getMapDC(), m_x, m_y, m_meviusAnimation);
         EFFECT->render();
-
     }
 }
 

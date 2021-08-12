@@ -71,6 +71,9 @@ public:
 	float getHp() { return m_hp; }
 	void setHp(float hp) { m_hp = hp; }
 
+	float getDamage() { return m_damage; }
+	void setDamage(float damage) { m_damage = damage; }
+
 	int getExp() { return m_exp; }
 	void setExp(int exp) { m_exp = exp; }
 

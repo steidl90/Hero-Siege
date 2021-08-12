@@ -33,7 +33,7 @@ HRESULT Cslime::init(POINT position, float HP, float damage, int exp,float trace
 	m_exp = exp;
 
 	m_hpBar = new CprogressBar;
-	m_hpBar->init("images/hp.bmp", "images/hp_back.bmp", m_x, m_y, 33, 5);
+	m_hpBar->init("images/hp.bmp", "images/hp_back.bmp", m_x, m_y, 33, 4);
 	m_hpBar->setGauge(m_hp, m_maxHp);
 
 	m_cooltimeCount = 200;
@@ -81,6 +81,7 @@ void Cslime::render()
 		Rectangle(getMapDC(), m_traceRc.left, m_traceRc.top, m_traceRc.right, m_traceRc.bottom);
 		Rectangle(getMapDC(), m_dieRc.left, m_dieRc.top, m_dieRc.right, m_dieRc.bottom);
 	}
+	IMAGE->findImage("일반몬스터체력바")->render(getMapDC(), m_x - 21, m_y - 28);
 	if (m_isWalking)m_walkImage->aniRender(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkAni);
 	m_enemyAttack->render();
 }

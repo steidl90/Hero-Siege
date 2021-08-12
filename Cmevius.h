@@ -1,6 +1,7 @@
 #pragma once
 #include "Cunit.h"
 #include "CenemyManager.h"
+#include "Cplayer.h"
 enum class BOSS_STATE
 {
 	BOSS_STATE_IDLE,
@@ -18,6 +19,7 @@ private:
 	BOSS_STATE m_meviusState;
 
 	CenemyManager* m_em;
+	Cplayer* m_player;
 
 	RECT m_meviusRc;		//보스 이미지 RC
 	RECT m_meviusSkillRc;	//보스 스킬 RC(가시공)
