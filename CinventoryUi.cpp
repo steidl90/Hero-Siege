@@ -773,41 +773,170 @@ void CinventoryUi::showItemCompare()
 		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 200, criAtk, lstrlen(criAtk));
 		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 220, speed, lstrlen(speed));
 		break;
-	/*
+	
 	case ITEMTYPE::ITEMTYPE_SHOES:
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 120, grade, lstrlen(grade));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 140, atk, lstrlen(atk));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 160, def, lstrlen(def));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 180, hp, lstrlen(hp));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 200, mp, lstrlen(mp));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 220, cri, lstrlen(cri));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 240, criAtk, lstrlen(criAtk));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 260, speed, lstrlen(speed));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 280, level, lstrlen(level));
+		if (m_myInventory->getEquipShoes() == nullptr)
+		{
+			temp_atk = temp_def = temp_hp = temp_mp = temp_cri = 0;
+			temp_criAtk = temp_speed = 0;
+		}
+		else
+		{
+			temp_atk = m_myInventory->getEquipShoes()->getAtk();
+			temp_def = m_myInventory->getEquipShoes()->getDef();
+			temp_hp = m_myInventory->getEquipShoes()->getHp();
+			temp_mp = m_myInventory->getEquipShoes()->getMp();
+			temp_cri = m_myInventory->getEquipShoes()->getCritical();
+			temp_criAtk = m_myInventory->getEquipShoes()->getCriticalAtk();
+			temp_speed = m_myInventory->getEquipShoes()->getSpeed();
+		}
+
+		if (m_selectItem->getAtk() - temp_atk > 0)
+			wsprintf(atk, "+%d", (m_selectItem->getAtk() - temp_atk));
+		else
+			wsprintf(atk, "%d", (m_selectItem->getAtk() - temp_atk));
+		if (m_selectItem->getDef() - temp_def > 0)
+			wsprintf(def, "+%d", (m_selectItem->getDef() - temp_def));
+		else
+			wsprintf(def, "%d", (m_selectItem->getDef() - temp_def));
+		if (m_selectItem->getHp() - temp_hp > 0)
+			wsprintf(hp, "+%d", (m_selectItem->getHp() - temp_hp));
+		else
+			wsprintf(hp, "%d", (m_selectItem->getHp() - temp_hp));
+		if (m_selectItem->getMp() - temp_mp > 0)
+			wsprintf(mp, "+%d", (m_selectItem->getMp() - temp_mp));
+		else
+			wsprintf(mp, "%d", (m_selectItem->getMp() - temp_mp));
+		if (m_selectItem->getCritical() - temp_cri > 0)
+			wsprintf(cri, "+%d", (m_selectItem->getCritical() - temp_cri));
+		else
+			wsprintf(cri, "%d", (m_selectItem->getCritical() - temp_cri));
+		if (m_selectItem->getCriticalAtk() - temp_criAtk > 0)
+			sprintf(criAtk, "+%.1f", m_selectItem->getCriticalAtk() - temp_criAtk);
+		else
+			sprintf(criAtk, "%.1f", m_selectItem->getCriticalAtk() - temp_criAtk);
+		if (m_selectItem->getSpeed() - temp_speed > 0)
+			sprintf(speed, "+%.1f", m_selectItem->getSpeed() - temp_speed);
+		else
+			sprintf(speed, "%.1f", m_selectItem->getSpeed() - temp_speed);
+
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 100, atk, lstrlen(atk));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 120, def, lstrlen(def));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 140, hp, lstrlen(hp));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 160, mp, lstrlen(mp));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 180, cri, lstrlen(cri));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 200, criAtk, lstrlen(criAtk));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 220, speed, lstrlen(speed));
 		break;
 	case ITEMTYPE::ITEMTYPE_GLOVES:
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 120, grade, lstrlen(grade));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 140, atk, lstrlen(atk));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 160, def, lstrlen(def));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 180, hp, lstrlen(hp));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 200, mp, lstrlen(mp));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 220, cri, lstrlen(cri));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 240, criAtk, lstrlen(criAtk));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 260, speed, lstrlen(speed));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 280, level, lstrlen(level));
+		if (m_myInventory->getEquipGloves() == nullptr)
+		{
+			temp_atk = temp_def = temp_hp = temp_mp = temp_cri = 0;
+			temp_criAtk = temp_speed = 0;
+		}
+		else
+		{
+			temp_atk = m_myInventory->getEquipGloves()->getAtk();
+			temp_def = m_myInventory->getEquipGloves()->getDef();
+			temp_hp = m_myInventory->getEquipGloves()->getHp();
+			temp_mp = m_myInventory->getEquipGloves()->getMp();
+			temp_cri = m_myInventory->getEquipGloves()->getCritical();
+			temp_criAtk = m_myInventory->getEquipGloves()->getCriticalAtk();
+			temp_speed = m_myInventory->getEquipGloves()->getSpeed();
+		}
+
+		if (m_selectItem->getAtk() - temp_atk > 0)
+			wsprintf(atk, "+%d", (m_selectItem->getAtk() - temp_atk));
+		else
+			wsprintf(atk, "%d", (m_selectItem->getAtk() - temp_atk));
+		if (m_selectItem->getDef() - temp_def > 0)
+			wsprintf(def, "+%d", (m_selectItem->getDef() - temp_def));
+		else
+			wsprintf(def, "%d", (m_selectItem->getDef() - temp_def));
+		if (m_selectItem->getHp() - temp_hp > 0)
+			wsprintf(hp, "+%d", (m_selectItem->getHp() - temp_hp));
+		else
+			wsprintf(hp, "%d", (m_selectItem->getHp() - temp_hp));
+		if (m_selectItem->getMp() - temp_mp > 0)
+			wsprintf(mp, "+%d", (m_selectItem->getMp() - temp_mp));
+		else
+			wsprintf(mp, "%d", (m_selectItem->getMp() - temp_mp));
+		if (m_selectItem->getCritical() - temp_cri > 0)
+			wsprintf(cri, "+%d", (m_selectItem->getCritical() - temp_cri));
+		else
+			wsprintf(cri, "%d", (m_selectItem->getCritical() - temp_cri));
+		if (m_selectItem->getCriticalAtk() - temp_criAtk > 0)
+			sprintf(criAtk, "+%.1f", m_selectItem->getCriticalAtk() - temp_criAtk);
+		else
+			sprintf(criAtk, "%.1f", m_selectItem->getCriticalAtk() - temp_criAtk);
+		if (m_selectItem->getSpeed() - temp_speed > 0)
+			sprintf(speed, "+%.1f", m_selectItem->getSpeed() - temp_speed);
+		else
+			sprintf(speed, "%.1f", m_selectItem->getSpeed() - temp_speed);
+
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 100, atk, lstrlen(atk));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 120, def, lstrlen(def));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 140, hp, lstrlen(hp));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 160, mp, lstrlen(mp));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 180, cri, lstrlen(cri));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 200, criAtk, lstrlen(criAtk));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 220, speed, lstrlen(speed));
 		break;
 	case ITEMTYPE::ITEMTYPE_PENDANT:
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 120, grade, lstrlen(grade));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 140, atk, lstrlen(atk));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 160, def, lstrlen(def));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 180, hp, lstrlen(hp));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 200, mp, lstrlen(mp));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 220, cri, lstrlen(cri));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 240, criAtk, lstrlen(criAtk));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 260, speed, lstrlen(speed));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 280, level, lstrlen(level));
+		if (m_myInventory->getEquipPendant() == nullptr)
+		{
+			temp_atk = temp_def = temp_hp = temp_mp = temp_cri = 0;
+			temp_criAtk = temp_speed = 0;
+		}
+		else
+		{
+			temp_atk = m_myInventory->getEquipPendant()->getAtk();
+			temp_def = m_myInventory->getEquipPendant()->getDef();
+			temp_hp = m_myInventory->getEquipPendant()->getHp();
+			temp_mp = m_myInventory->getEquipPendant()->getMp();
+			temp_cri = m_myInventory->getEquipPendant()->getCritical();
+			temp_criAtk = m_myInventory->getEquipPendant()->getCriticalAtk();
+			temp_speed = m_myInventory->getEquipPendant()->getSpeed();
+		}
+
+		if (m_selectItem->getAtk() - temp_atk > 0)
+			wsprintf(atk, "+%d", (m_selectItem->getAtk() - temp_atk));
+		else
+			wsprintf(atk, "%d", (m_selectItem->getAtk() - temp_atk));
+		if (m_selectItem->getDef() - temp_def > 0)
+			wsprintf(def, "+%d", (m_selectItem->getDef() - temp_def));
+		else
+			wsprintf(def, "%d", (m_selectItem->getDef() - temp_def));
+		if (m_selectItem->getHp() - temp_hp > 0)
+			wsprintf(hp, "+%d", (m_selectItem->getHp() - temp_hp));
+		else
+			wsprintf(hp, "%d", (m_selectItem->getHp() - temp_hp));
+		if (m_selectItem->getMp() - temp_mp > 0)
+			wsprintf(mp, "+%d", (m_selectItem->getMp() - temp_mp));
+		else
+			wsprintf(mp, "%d", (m_selectItem->getMp() - temp_mp));
+		if (m_selectItem->getCritical() - temp_cri > 0)
+			wsprintf(cri, "+%d", (m_selectItem->getCritical() - temp_cri));
+		else
+			wsprintf(cri, "%d", (m_selectItem->getCritical() - temp_cri));
+		if (m_selectItem->getCriticalAtk() - temp_criAtk > 0)
+			sprintf(criAtk, "+%.1f", m_selectItem->getCriticalAtk() - temp_criAtk);
+		else
+			sprintf(criAtk, "%.1f", m_selectItem->getCriticalAtk() - temp_criAtk);
+		if (m_selectItem->getSpeed() - temp_speed > 0)
+			sprintf(speed, "+%.1f", m_selectItem->getSpeed() - temp_speed);
+		else
+			sprintf(speed, "%.1f", m_selectItem->getSpeed() - temp_speed);
+
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 100, atk, lstrlen(atk));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 120, def, lstrlen(def));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 140, hp, lstrlen(hp));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 160, mp, lstrlen(mp));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 180, cri, lstrlen(cri));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 200, criAtk, lstrlen(criAtk));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 220, speed, lstrlen(speed));
 		break;
-	*/
+
 	default:
 		break;
 	}
