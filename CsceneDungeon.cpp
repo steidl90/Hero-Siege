@@ -24,6 +24,8 @@ HRESULT CsceneDungeon::init()
 
 	m_player = new CplayerManager;
 	m_player->init();
+	m_player->setCheckTile(m_dungeon->getMap());
+	m_player->setTileAttribute(m_dungeon->getAttribute());
 
 	m_enemyManager = new CenemyManager;
 	m_enemyManager->init();

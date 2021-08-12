@@ -97,21 +97,13 @@ void Ctown::initTileAttribute()
 {
 	for (int i = 0; i < TILEX * TILEY; i++)
 	{
+		if (_tiles[i].collisionObj == COLLISIONOBJECT::COLLISIONOBJ) m_attribute[i] = ATTRIBUTE::COLLISION_ON;
+		else m_attribute[i] = ATTRIBUTE::COLLISION_OFF;
+
 		IMAGE->frameRender(this->getImageName(_tilesImage[i].terrainImage), getTileDC(), _tiles[i].rc.left, _tiles[i].rc.top, _tiles[i].terrainFrameX, _tiles[i].terrainFrameY);
 
 		if (_tiles[i].obj == OBJECT::OBJ_NONE)continue;
 		IMAGE->frameRender(this->getImageName(_tilesImage[i].objImage), getTileDC(), _tiles[i].rc.left, _tiles[i].rc.top, _tiles[i].objFrameX, _tiles[i].objFrameY);
-
-
-
-		if (_tiles[i].collisionObj == COLLISIONOBJECT::COLLISIONOBJ)
-		{
-			m_attribute[i] = ATTRIBUTE::COLLISION_ON;
-		}
-		else
-		{
-			m_attribute[i] = ATTRIBUTE::COLLISION_OFF;
-		}
 	}
 
 	for (int i = 0; i < TILEX; i++)

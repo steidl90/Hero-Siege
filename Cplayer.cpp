@@ -510,7 +510,6 @@ void Cplayer::playerSkillControl()
 		Rectangle(getMapDC(), lightningRightRc.left, lightningRightRc.top, lightningRightRc.right, lightningRightRc.bottom);
 		Rectangle(getMapDC(), lightningUpRc.left, lightningUpRc.top, lightningUpRc.right, lightningUpRc.bottom);
 		Rectangle(getMapDC(), lightningDownRc.left, lightningDownRc.top, lightningDownRc.right, lightningDownRc.bottom);*/
-
 	}
 	else if (isRect && skillState == SKILL::SKILL_DOWN)
 	{
@@ -619,19 +618,19 @@ void Cplayer::blockCheck(float speed, RECT* playerRC, DIRECTIONS direct)
 	{
 	case DIRECTIONS::DIRECTIONS_LEFT:
 		m_playerX -= this->getSpeed();
-		rcCollision = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth(), playerMoveDown->getFrameHeight());
+		rcCollision = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth()/4, playerMoveDown->getFrameHeight()/2);
 		break;
 	case DIRECTIONS::DIRECTIONS_UP:
 		m_playerY -= this->getSpeed();
-		rcCollision = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth(), playerMoveDown->getFrameHeight());
+		rcCollision = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth() / 4, playerMoveDown->getFrameHeight() / 2);
 		break;
 	case DIRECTIONS::DIRECTIONS_RIGHT:
 		m_playerX += this->getSpeed();
-		rcCollision = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth(), playerMoveDown->getFrameHeight());
+		rcCollision = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth() / 4, playerMoveDown->getFrameHeight() / 2);
 		break;
 	case DIRECTIONS::DIRECTIONS_DOWN:
 		m_playerY += this->getSpeed();
-		rcCollision = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth(), playerMoveDown->getFrameHeight());
+		rcCollision = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth() / 4, playerMoveDown->getFrameHeight() / 2);
 		break;
 	}
 
@@ -661,36 +660,32 @@ void Cplayer::blockCheck(float speed, RECT* playerRC, DIRECTIONS direct)
 	for (int i = 0; i < 2; i++)
 	{
 		RECT temp;
-
-		if((m_attribute[tileIndex[i]] == ATTRIBUTE::COLLISION_ON)/* &&
-			IntersectRect(&temp, &m_CheckTile[tileIndex[i]].rc, &rcCollision)*/)
+		if((m_attribute[tileIndex[i]] == ATTRIBUTE::COLLISION_ON) &&
+			IntersectRect(&temp, &m_CheckTile[tileIndex[i]].rc, &rcCollision))
 		{
 			switch (direct)
 			{
 			case DIRECTIONS::DIRECTIONS_LEFT:
 				playerMoveRc.left = m_CheckTile[tileIndex[i]].rc.right;
-				//playerMoveRc.right = playerMoveRc.left + playerMoveDown->getFrameWidth();
 				m_playerX = playerMoveRc.left;
 				break;
 			case DIRECTIONS::DIRECTIONS_UP:
 				playerMoveRc.top = m_CheckTile[tileIndex[i]].rc.bottom - (playerMoveRc.bottom - playerMoveRc.top)/2;
-				//playerMoveRc.bottom = playerMoveRc.top + playerMoveDown->getFrameHeight();
 				m_playerY = playerMoveRc.top;
 				break;
 			case DIRECTIONS::DIRECTIONS_RIGHT:
 				playerMoveRc.right = m_CheckTile[tileIndex[i]].rc.left;
-				//playerMoveRc.left = playerMoveRc.right - playerMoveDown->getFrameWidth();
 				m_playerX = playerMoveRc.left;
 				break;
 			case DIRECTIONS::DIRECTIONS_DOWN:
 				playerMoveRc.bottom = m_CheckTile[tileIndex[i]].rc.top;
-				//playerMoveRc.top = playerMoveRc.bottom - playerMoveDown->getFrameHeight();
 				m_playerY = playerMoveRc.top;
 				break;
 			}
 			return;
 		}
 	}
+	//Rectangle(getMapDC(), rcCollision.left, rcCollision.top, rcCollision.right, rcCollision.bottom);
 	rcCollision = RectMake(m_playerX, m_playerY, TILESIZE, TILESIZE * 2);
 	playerMoveRc = rcCollision;
 }
