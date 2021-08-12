@@ -49,7 +49,7 @@ void effect::render()
 {
 	if (_isRunning)
 	{
-		_effectImage->aniRender(getMapDC(), _x, _y, _effectAni);
+		_effectImage->aniRender(getMemDC(), _x, _y, _effectAni);
 	}
 }
 
@@ -57,7 +57,7 @@ void effect::startEffect(int x, int y)
 {
 	//À§Ä¡ ÁÂÇ¥¸¦ ¼¾ÅÍ ÁÂÇ¥·Î ¸¸µé±â
 	_x = x - (_effectAni->getFrameWidth() / 2);
-	_y = y - (_effectAni->getFrameHeight() / 2);
+	_y = y - (_effectAni->getFrameHeight());
 
 	_isRunning = true;
 	_effectAni->start();

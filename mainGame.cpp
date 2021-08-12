@@ -22,7 +22,7 @@ HRESULT mainGame::init()
 	SCENE->addScene("마을", new CsceneTown);
 	SCENE->addScene("던전", new CsceneDungeon);
 
-	SCENE->changeScene("마을");
+	SCENE->changeScene("던전");
 	
 	return S_OK;
 }
@@ -41,6 +41,11 @@ void mainGame::update()
 	SCENE->update();
 
 	ANIMATION->update();
+	if (InputManager->isOnceKeyDown(VK_LBUTTON))
+	{
+		EFFECT->play("라이트닝", m_ptMouse.x, m_ptMouse.y);
+	}
+
 }
 
 void mainGame::render()
@@ -54,6 +59,7 @@ void mainGame::render()
 	// 우리가 볼 화면인 backBuffer쪽 getMemDC에다가 그려준다
 
 	SCENE->render();
+	EFFECT->render();
 	TIME->render(getMemDC());
 
 

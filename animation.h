@@ -1,20 +1,9 @@
 #pragma once
-#include <functional>
-
 class animation
 {
 private:
-    bool useEventWhenEnd;
-    function<void()> m_triggerWhenEnd;
-
-    bool useEventWhenSpcificFrame;
-    int specificFrameIndex;
-    function<void()> m_triggerWhenSpecificFrame;
-
 
     typedef vector<POINT> _vFrameList;
-
-
     typedef vector<int> _vPlayList;
 
     _vFrameList  _frameList;//프레임  위치 목록
@@ -62,18 +51,4 @@ public:
     inline POINT getFramePos()const { return _frameList[_playList[_nowPlayIndex]]; }
     inline int getFrameWidth()const { return _frameWidth; }
     inline int getFrameHeight()const { return _frameHeight; }
-
-    template <typename T>
-    void SetTriggerWhenClick(T* pObj, void(T::* func)())
-    {
-        useEventWhenEnd = true;
-        m_triggerWhenEnd = bind(func, pObj);
-    }
-
-    template <typename T>
-    void SetTriggerWhenSpecificFrame(T* pObj, void(T::* func)())
-    {
-        useEventWhenSpcificFrame = true;
-        m_triggerWhenSpecificFrame = bind(func, pObj);
-    }
 };

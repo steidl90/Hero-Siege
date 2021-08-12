@@ -58,10 +58,10 @@ void Cmevius::update()
 {
     m_effectCount++;
 
-    if (InputManager->isOnceKeyDown(VK_LBUTTON))
-    {
-        EFFECT->play("¶óÀÌÆ®´×", m_ptMouse.x, m_ptMouse.y);
-    }
+    //if (InputManager->isOnceKeyDown(VK_LBUTTON))
+    //{
+    //    EFFECT->play("¶óÀÌÆ®´×", m_ptMouse.x, m_ptMouse.y);
+    //}
 
     if (InputManager->isOnceKeyDown('1'))
     {
@@ -151,7 +151,6 @@ void Cmevius::render()
     if (m_meviusImage != nullptr) {
         Rectangle(getMapDC(), m_meviusRc.left, m_meviusRc.top, m_meviusRc.right, m_meviusRc.bottom);
         m_meviusImage->aniRender(getMapDC(), m_x, m_y, m_meviusAnimation);
-        
     }
 }
 
