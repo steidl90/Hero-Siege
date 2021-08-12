@@ -76,6 +76,7 @@ void gameNode::release()
 		EFFECT->releaseSingleton();
 		// 새로추가
 		ITEM->releaseSingleton();
+		DATA->releaseSingleton();
 
 
 		EFFECT->release();

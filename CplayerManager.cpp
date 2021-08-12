@@ -9,10 +9,13 @@ CplayerManager::~CplayerManager()
 {
 }
 
+
 HRESULT CplayerManager::init()
 {
     m_player = new Cplayer;
     m_player->init();
+
+    //m_playerDate = new CplayerDate;
 
     m_playerSkill = new CplayerSkill;
 

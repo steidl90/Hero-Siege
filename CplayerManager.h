@@ -6,6 +6,7 @@
 #include "camera.h"
 #include "CplayerUi.h"
 #include "CinventoryUi.h"
+//#include "CplayerDate.h"
 
 class CaStar;
 class CenemyManager;
@@ -19,6 +20,7 @@ private:
 	CinventoryUi* m_InventoryUI;
 	Cinventory* m_inventory;
 	CenemyManager* m_enemy;
+	//CplayerDate* m_playerDate;
 private:
 
 	vector<POINT>* m_fastLoadLocation;
@@ -26,6 +28,7 @@ private:
 	bool isInventoryOn;
 
 	int m_timer;
+	int saveDate;
 
 public:
 	CplayerManager();

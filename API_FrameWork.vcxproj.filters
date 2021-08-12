@@ -145,6 +145,9 @@
     <Filter Include="mainGame\히어로시즈\Cobject\CprogressBar">
       <UniqueIdentifier>{09b8904c-d0b6-421e-a72d-980ab76d8711}</UniqueIdentifier>
     </Filter>
+    <Filter Include="mainGame\히어로시즈\Cunit\CplayerManager\Cplayer\CplayerDate">
+      <UniqueIdentifier>{595e05b2-627c-43a0-80cf-2c52fca64c06}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -342,6 +345,9 @@
     <ClInclude Include="CshopUi.h">
       <Filter>mainGame\히어로시즈\Cobject\Cshop</Filter>
     </ClInclude>
+    <ClInclude Include="CplayerDate.h">
+      <Filter>mainGame\히어로시즈\Cunit\CplayerManager\Cplayer\CplayerDate</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -517,6 +523,9 @@
     </ClCompile>
     <ClCompile Include="CshopUi.cpp">
       <Filter>mainGame\히어로시즈\Cobject\Cshop</Filter>
+    </ClCompile>
+    <ClCompile Include="CplayerDate.cpp">
+      <Filter>mainGame\히어로시즈\Cunit\CplayerManager\Cplayer\CplayerDate</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

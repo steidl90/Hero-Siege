@@ -166,6 +166,7 @@
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="Cplayer.h" />
     <ClInclude Include="CplayerAttack.h" />
+    <ClInclude Include="CplayerDate.h" />
     <ClInclude Include="CplayerManager.h" />
     <ClInclude Include="CplayerSkill.h" />
     <ClInclude Include="CplayerUi.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="Cobject.cpp" />
     <ClCompile Include="Cplayer.cpp" />
     <ClCompile Include="CplayerAttack.cpp" />
+    <ClCompile Include="CplayerDate.cpp" />
     <ClCompile Include="CplayerManager.cpp" />
     <ClCompile Include="CplayerSkill.cpp" />
     <ClCompile Include="CplayerUi.cpp" />

@@ -11,10 +11,12 @@ Cplayer::~Cplayer()
 
 HRESULT Cplayer::init()
 {
+	m_saveDate = 0;
+	m_saveDate++;
 	m_maxHp = 1000;
 	m_maxMp = 500;
 	m_maxExp = 100;
-	setAtk(10);
+	setAtk(10),
 	setDef(10);
 	setHp(m_maxHp);
 	setMp(m_maxMp);
@@ -104,6 +106,8 @@ void Cplayer::update()
 	moveControl();
 	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth() - 90, playerMoveDown->getFrameHeight() - 50);
 	m_playerSkill->update("리치스킬애니");
+
+	//setPlayerDate();
 }
 
 void Cplayer::render()
@@ -547,6 +551,20 @@ void Cplayer::playerSkillRender()
 	default:
 		break;
 	}
+}
+
+void Cplayer::setPlayerDate()
+{
+	DATA->setData(getAtk(),
+		getDef(),
+		getHp(),
+		getMp(),
+		getCritical(),
+		getLv(),
+		getExp(),
+		getGold(),
+		getCriticalAtk(),
+		getSpeed());
 }
 
 

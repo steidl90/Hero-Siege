@@ -46,8 +46,6 @@ private:
 	animation* playerAttackAni;
 	animation* playerMoveAni;
 
-	
-
 	RECT playerAttackRc;
 	RECT playerMoveRc;
 
@@ -64,6 +62,7 @@ private:
 	int m_maxHp;
 	int m_maxMp;
 	int m_maxExp;
+	int m_saveDate;
 
 	float m_playerX, m_playerY;
 	float m_angle;
@@ -92,10 +91,13 @@ public:
 	void playerSkillControl();
 	void playerSkillRender();
 
+	void setPlayerDate();
+
 	RECT* getplayerMoveRC() { return &playerMoveRc; }
 	float getplayerX() const { return m_playerX; }
 	float getplayerY() const { return m_playerY; }
 
+	int getSaveDate() { return m_saveDate; }
 	int getMaxHp() { return m_maxHp; }
 	int getMaxMp() { return m_maxMp; }
 	int getMaxExp() { return m_maxExp; }

@@ -21,6 +21,17 @@ HRESULT CsceneTown::init()
 	m_player = new CplayerManager;
 	m_player->init();
 
+	m_player->getPlayer()->setAtk(DATA->getAtk());
+	m_player->getPlayer()->setCritical(DATA->getCritical());
+	m_player->getPlayer()->setCriticalAtk(DATA->getCriticalAtk());
+	m_player->getPlayer()->setDef(DATA->getDef());
+	m_player->getPlayer()->setExp(DATA->getExp());
+	m_player->getPlayer()->setGold(DATA->getGold());
+	m_player->getPlayer()->setHp(DATA->getHp());
+	m_player->getPlayer()->setLv(DATA->getLv());
+	m_player->getPlayer()->setMp(DATA->getMp());
+	m_player->getPlayer()->setSpeed(DATA->getSpeed());
+
 	m_aStar = new CaStar;
 	m_aStar->setCameraMemory(m_camera);
 	m_aStar->init();
@@ -83,9 +94,18 @@ void CsceneTown::render()
 void CsceneTown::sceneChange()
 {
 	RECT temp;
-
 	if (IntersectRect(&temp, m_player->getplayerRect(), &m_changeRect))
 	{
+		DATA->setData(m_player->getPlayer()->getAtk(),
+			m_player->getPlayer()->getDef(),
+			m_player->getPlayer()->getHp(),
+			m_player->getPlayer()->getMp(),
+			m_player->getPlayer()->getCritical(),
+			m_player->getPlayer()->getLv(),
+			m_player->getPlayer()->getExp(),
+			m_player->getPlayer()->getGold(),
+			m_player->getPlayer()->getCriticalAtk(),
+			m_player->getPlayer()->getSpeed());
 		SCENE->changeScene("´øÀü");
 	}
 }
