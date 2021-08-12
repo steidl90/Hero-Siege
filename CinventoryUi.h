@@ -101,7 +101,9 @@ public:
 	// 장비창 rect 클릭시 선택 아이템 타입 변경
 	void selectItemType();
 
-	// 아이템 상세정보
+	// 아이템 상세정보 창
+	void showItemInfo();
+	void showItemCompare();
 
 	// 아이템 버리기 동작
 	void abandonItem();

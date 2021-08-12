@@ -119,7 +119,7 @@ void CinventoryUi::render()
 	{
 		//Rectangle(getMemDC(), (*iter).left, (*iter).top, (*iter).right, (*iter).bottom);
 	}
-	Rectangle(getMemDC(), m_ItemInfoRect.left, m_ItemInfoRect.top, m_ItemInfoRect.right, m_ItemInfoRect.bottom);
+	//Rectangle(getMemDC(), m_ItemInfoRect.left, m_ItemInfoRect.top, m_ItemInfoRect.right, m_ItemInfoRect.bottom);
 
 	Rectangle(getMemDC(), m_equipButton.left, m_equipButton.top, m_equipButton.right, m_equipButton.bottom);
 	Rectangle(getMemDC(), m_unEquipButton.left, m_unEquipButton.top, m_unEquipButton.right, m_unEquipButton.bottom);
@@ -130,8 +130,12 @@ void CinventoryUi::render()
 	this->showListItemType();
 	// 장착 테두리
 	this->showEquipSelect();
-	if(isSelectRender)
+	// 선택시 출력 부분
+	if (isSelectRender)
+	{
 		IMAGE->findImage("선택테두리")->render(getMemDC(), m_selectRenderX, m_selectRenderY);
+		this->showItemInfo();
+	}
 	// 장비창 렌더
 	if (isEquipWeapon)
 	{
@@ -146,6 +150,7 @@ void CinventoryUi::render()
 
 // 아직 예외처리 완성 안됨.. 스크롤 끝까지 내렸을때 예외처리 필요
 // 스크롤 기능이 있을때, 인벤토리 리스트에 보여줄 4개 인덱스 범위
+// 나머지 타입 추가 필요
 void CinventoryUi::setShowIndex()
 {
 	switch (m_selectType)
@@ -162,12 +167,23 @@ void CinventoryUi::setShowIndex()
 		else
 			m_showEndIndex = m_showIndex + 4;
 		break;
+	case ITEMTYPE::ITEMTYPE_SHOES:
+		if (m_myInventory->getvShoesList()->size() < 4)
+			m_showEndIndex = m_myInventory->getvShoesList()->size() + m_showIndex;
+		else
+			m_showEndIndex = m_showIndex + 4;
+		break;
+	case ITEMTYPE::ITEMTYPE_GLOVES:
+		break;
+	case ITEMTYPE::ITEMTYPE_PENDANT:
+		break;
 	default:
 		break;
 	}
 }
 
 // 선택한 타입의 아이템 타입만 인벤토리 리스트에 보여짐
+// 나머지 타입 추가 필요
 void CinventoryUi::showListItemType()
 {
 	switch (m_selectType)
@@ -205,6 +221,7 @@ void CinventoryUi::showItemList(vector<Citem>* list)
 		}
 }
 
+// 나머지 타입 추가 필요
 void CinventoryUi::showEquipSelect()
 {
 	switch (m_selectType)
@@ -226,8 +243,7 @@ void CinventoryUi::showEquipSelect()
 // 마우스 1클릭으로 아이템 선택표시
 void CinventoryUi::selectItem()
 {
-	vector<Citem>::iterator weaponIter;
-	vector<Citem>::iterator armorIter;
+	vector<Citem>::iterator itemIter;
 
 	int i = m_showIndex;
 	for (auto iter = m_vItemListRect.begin(); iter != m_vItemListRect.end() && i < m_showEndIndex; ++iter, i++)
@@ -241,15 +257,16 @@ void CinventoryUi::selectItem()
 				m_selectRenderY = (*iter).top - 3;
 				
 				// 선택한 아이템 정보 inventory 에서 가져와서 selectItem 변수에 담기
+				// 나머지 타입 추가 필요
 				switch (m_selectType)
 				{
 				case ITEMTYPE::ITEMTYPE_WEAPON:
-					weaponIter = m_myInventory->getvWeaponList()->begin() + i;
-					m_selectItem = &(*weaponIter);
+					itemIter = m_myInventory->getvWeaponList()->begin() + i;
+					m_selectItem = &(*itemIter);
 					break;
 				case ITEMTYPE::ITEMTYPE_ARMOR:
-					armorIter = m_myInventory->getvArmorList()->begin() + i;
-					m_selectItem = &(*armorIter);
+					itemIter = m_myInventory->getvArmorList()->begin() + i;
+					m_selectItem = &(*itemIter);
 					break;
 				default:
 					break;
@@ -294,7 +311,6 @@ void CinventoryUi::selectEquipItem()
 						isKeyUp = false;
 					}
 				}
-				
 			}
 			else
 			{
@@ -308,6 +324,7 @@ void CinventoryUi::selectEquipItem()
 }
 // 아이템 장착!
 // 아이템 장착시 필요한 변수에 장착할 아이템 정보 넣어주기
+// 나머지 타입 추가 필요
 void CinventoryUi::setEquipItem(int index, int x, int y)
 {
 	Citem* weaponTemp;
@@ -344,6 +361,7 @@ void CinventoryUi::setEquipItem(int index, int x, int y)
 	}
 }
 
+// 나머지 타입 추가 필요
 void CinventoryUi::setPlayerStat(int index)
 {
 	Citem* Temp;
@@ -469,12 +487,195 @@ void CinventoryUi::selectItemType()
 							m_equipWeapon = nullptr;
 						}
 					}
+					isKeyUp = false;
 				}
 			}
 		}
 	}
 	if (m_compareTime + 1 < TIME->getWorldTime())
 		m_clickCount = 0;
+}
+
+void CinventoryUi::showItemInfo()
+{
+	char str[100];
+
+	IMAGE->findImage(m_selectItem->getSmallImage())->frameRender(getMemDC(), m_ItemInfoRect.left + 11, m_ItemInfoRect.top
+		, m_selectItem->getFrame().x, m_selectItem->getFrame().y);
+
+	SetTextColor(getMemDC(), RGB(255, 255, 255));
+	TextOut(getMemDC(), m_ItemInfoRect.left + 80, m_ItemInfoRect.top + 10, m_selectItem->getName().c_str(), lstrlen(m_selectItem->getName().c_str()));
+	wsprintf(str, "필요 레벨: %d", m_selectItem->getLimitLevel());
+	TextOut(getMemDC(), m_ItemInfoRect.left + 80, m_ItemInfoRect.top + 30, str, lstrlen(str));
+	wsprintf(str, "골드: %d", m_selectItem->getBuyPrice());
+	TextOut(getMemDC(), m_ItemInfoRect.left + 80, m_ItemInfoRect.top + 50, str, lstrlen(str));
+
+	this->showItemCompare();
+
+}
+
+void CinventoryUi::showItemCompare()
+{
+	char atk[100];
+	char def[100];
+	char hp[100];
+	char mp[100];
+	char cri[100];
+	char criAtk[100];
+	char speed[100];
+
+	int temp_atk, temp_def, temp_hp, temp_mp, temp_cri;
+	float temp_criAtk, temp_speed;
+
+	switch (m_selectItem->getType())
+	{
+	case ITEMTYPE::ITEMTYPE_WEAPON:
+		if (m_myInventory->getEquipWeapon() == nullptr)
+		{
+			temp_atk = temp_def = temp_hp = temp_mp = temp_cri = 0;
+			temp_criAtk = temp_speed = 0;
+		}
+		else
+		{
+			temp_atk = m_myInventory->getEquipWeapon()->getAtk();
+			temp_def = m_myInventory->getEquipWeapon()->getDef();
+			temp_hp = m_myInventory->getEquipWeapon()->getHp();
+			temp_mp = m_myInventory->getEquipWeapon()->getMp();
+			temp_cri = m_myInventory->getEquipWeapon()->getCritical();
+			temp_criAtk = m_myInventory->getEquipWeapon()->getCriticalAtk();
+			temp_speed = m_myInventory->getEquipWeapon()->getSpeed();
+		}
+
+		if (m_selectItem->getAtk() - temp_atk > 0)
+			wsprintf(atk, "+%d", (m_selectItem->getAtk() - temp_atk));
+		else
+			wsprintf(atk, "%d", (m_selectItem->getAtk() - temp_atk));
+		if (m_selectItem->getDef() - temp_def > 0)
+			wsprintf(def, "+%d", (m_selectItem->getDef() - temp_def));
+		else
+			wsprintf(def, "%d", (m_selectItem->getDef() - temp_def));
+		if (m_selectItem->getHp() - temp_hp > 0)
+			wsprintf(hp, "+%d", (m_selectItem->getHp() - temp_hp));
+		else
+			wsprintf(hp, "%d", (m_selectItem->getHp() - temp_hp));
+		if (m_selectItem->getMp() - temp_mp > 0)
+			wsprintf(mp, "+%d", (m_selectItem->getMp() - temp_mp));
+		else
+			wsprintf(mp, "%d", (m_selectItem->getMp() - temp_mp));
+		if (m_selectItem->getCritical() - temp_cri > 0)
+			wsprintf(cri, "+%d", (m_selectItem->getCritical() - temp_cri));
+		else
+			wsprintf(cri, "%d", (m_selectItem->getCritical() - temp_cri));
+		if (m_selectItem->getCriticalAtk() - temp_criAtk > 0)
+			sprintf(criAtk, "+%.1f", m_selectItem->getCriticalAtk() - temp_criAtk);
+		else
+			sprintf(criAtk, "%.1f", m_selectItem->getCriticalAtk() - temp_criAtk);
+		if (m_selectItem->getSpeed() - temp_speed > 0)
+			sprintf(speed, "+%.1f", m_selectItem->getSpeed() - temp_speed);
+		else
+			sprintf(speed, "%.1f", m_selectItem->getSpeed() - temp_speed);
+
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 100, atk, lstrlen(atk));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 120, def, lstrlen(def));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 140, hp, lstrlen(hp));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 160, mp, lstrlen(mp));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 180, cri, lstrlen(cri));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 200, criAtk, lstrlen(criAtk));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 220, speed, lstrlen(speed));
+
+		break;
+	case ITEMTYPE::ITEMTYPE_ARMOR:
+		if (m_myInventory->getEquipArmor() == nullptr)
+		{
+			temp_atk = temp_def = temp_hp = temp_mp = temp_cri = 0;
+			temp_criAtk = temp_speed = 0;
+		}
+		else
+		{
+			temp_atk = m_myInventory->getEquipArmor()->getAtk();
+			temp_def = m_myInventory->getEquipArmor()->getDef();
+			temp_hp = m_myInventory->getEquipArmor()->getHp();
+			temp_mp = m_myInventory->getEquipArmor()->getMp();
+			temp_cri = m_myInventory->getEquipArmor()->getCritical();
+			temp_criAtk = m_myInventory->getEquipArmor()->getCriticalAtk();
+			temp_speed = m_myInventory->getEquipArmor()->getSpeed();
+		}
+
+		if (m_selectItem->getAtk() - temp_atk > 0)
+			wsprintf(atk, "+%d", (m_selectItem->getAtk() - temp_atk));
+		else
+			wsprintf(atk, "%d", (m_selectItem->getAtk() - temp_atk));
+		if (m_selectItem->getDef() - temp_def > 0)
+			wsprintf(def, "+%d", (m_selectItem->getDef() - temp_def));
+		else
+			wsprintf(def, "%d", (m_selectItem->getDef() - temp_def));
+		if (m_selectItem->getHp() - temp_hp > 0)
+			wsprintf(hp, "+%d", (m_selectItem->getHp() - temp_hp));
+		else
+			wsprintf(hp, "%d", (m_selectItem->getHp() - temp_hp));
+		if (m_selectItem->getMp() - temp_mp > 0)
+			wsprintf(mp, "+%d", (m_selectItem->getMp() - temp_mp));
+		else
+			wsprintf(mp, "%d", (m_selectItem->getMp() - temp_mp));
+		if (m_selectItem->getCritical() - temp_cri > 0)
+			wsprintf(cri, "+%d", (m_selectItem->getCritical() - temp_cri));
+		else
+			wsprintf(cri, "%d", (m_selectItem->getCritical() - temp_cri));
+		if (m_selectItem->getCriticalAtk() - temp_criAtk > 0)
+			sprintf(criAtk, "+%.1f", m_selectItem->getCriticalAtk() - temp_criAtk);
+		else
+			sprintf(criAtk, "%.1f", m_selectItem->getCriticalAtk() - temp_criAtk);
+		if (m_selectItem->getSpeed() - temp_speed > 0)
+			sprintf(speed, "+%.1f", m_selectItem->getSpeed() - temp_speed);
+		else
+			sprintf(speed, "%.1f", m_selectItem->getSpeed() - temp_speed);
+
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 100, atk, lstrlen(atk));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 120, def, lstrlen(def));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 140, hp, lstrlen(hp));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 160, mp, lstrlen(mp));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 180, cri, lstrlen(cri));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 200, criAtk, lstrlen(criAtk));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 220, speed, lstrlen(speed));
+		break;
+	/*
+	case ITEMTYPE::ITEMTYPE_SHOES:
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 120, grade, lstrlen(grade));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 140, atk, lstrlen(atk));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 160, def, lstrlen(def));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 180, hp, lstrlen(hp));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 200, mp, lstrlen(mp));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 220, cri, lstrlen(cri));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 240, criAtk, lstrlen(criAtk));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 260, speed, lstrlen(speed));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 280, level, lstrlen(level));
+		break;
+	case ITEMTYPE::ITEMTYPE_GLOVES:
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 120, grade, lstrlen(grade));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 140, atk, lstrlen(atk));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 160, def, lstrlen(def));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 180, hp, lstrlen(hp));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 200, mp, lstrlen(mp));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 220, cri, lstrlen(cri));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 240, criAtk, lstrlen(criAtk));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 260, speed, lstrlen(speed));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 280, level, lstrlen(level));
+		break;
+	case ITEMTYPE::ITEMTYPE_PENDANT:
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 120, grade, lstrlen(grade));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 140, atk, lstrlen(atk));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 160, def, lstrlen(def));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 180, hp, lstrlen(hp));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 200, mp, lstrlen(mp));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 220, cri, lstrlen(cri));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 240, criAtk, lstrlen(criAtk));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 260, speed, lstrlen(speed));
+		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 280, level, lstrlen(level));
+		break;
+	*/
+	default:
+		break;
+	}
 }
 
 void CinventoryUi::abandonItem()
@@ -515,7 +716,7 @@ bool CinventoryUi::checkEquipItem()
 	}
 	return true;
 }
-
+// 나머지 타입 추가 필요
 void CinventoryUi::unEquipItem()
 {
 
