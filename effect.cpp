@@ -1,11 +1,11 @@
 #include "framework.h"
 #include "effect.h"
 
-effect::effect():
-_effectImage(nullptr)
-,_effectAni(nullptr)
-,_isRunning(NULL)
-,_x(0),_y(0)
+effect::effect() :
+	_effectImage(nullptr)
+	, _effectAni(nullptr)
+	, _isRunning(NULL)
+	, _x(0), _y(0)
 {
 }
 

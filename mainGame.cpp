@@ -22,8 +22,7 @@ HRESULT mainGame::init()
 	SCENE->addScene("마을", new CsceneTown);
 	SCENE->addScene("던전", new CsceneDungeon);
 
-	SCENE->changeScene("마을");
-	
+	SCENE->changeScene("시작화면");
 	return S_OK;
 }
 
@@ -32,6 +31,7 @@ void mainGame::release()
 	gameNode::release();
 	SAFE_DELETE(m_image);
 	SAFE_DELETE(m_astar);
+	EFFECT->release();
 	SCENE->release();
 }
 
@@ -39,8 +39,9 @@ void mainGame::update()
 {
 	gameNode::update();
 	SCENE->update();
-
+	EFFECT->update();
 	ANIMATION->update();
+
 }
 
 void mainGame::render()

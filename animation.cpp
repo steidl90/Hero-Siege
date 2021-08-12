@@ -2,7 +2,7 @@
 #include "animation.h"
 
 animation::animation() :_frameNum(0), _frameWidth(0), _frameHeight(0), _loop(false),
-_elapseSec(0), _nowPlayIndex(0), _play(false),_endPlayIndex(0)
+_elapseSec(0), _nowPlayIndex(0), _play(false)
 {
 }
 
@@ -12,9 +12,6 @@ animation::~animation()
 
 HRESULT animation::init(int totalW, int totalH, int frameW, int frameH)
 {
-	useEventWhenEnd = false;
-	useEventWhenSpcificFrame = false;
-
 	//가로 프레임 갯수
 	_frameWidth = frameW;
 	int frameWidthNum = totalW / _frameWidth;
@@ -25,6 +22,7 @@ HRESULT animation::init(int totalW, int totalH, int frameW, int frameH)
 
 	//총 프레임 수
 	_frameNum = frameWidthNum * frameHeightNum;
+
 
 	//프레임 위치 목록 셋팅 하자.
 	_frameList.clear();
@@ -64,6 +62,7 @@ void animation::setDefPlayFrame(bool reverse, bool loop)
 			{
 				_playList.push_back(i);
 			}
+
 		}
 		else
 		{
@@ -100,9 +99,9 @@ void animation::setPlayFrame(int* playArr, int arrLen, bool loop)
 
 void animation::setPlayFrame(int start, int end, bool reverse, bool loop)
 {
+	_endPlayIndex = end;
 	_loop = loop;
 	_playList.clear();
-	_endPlayIndex = end;
 
 	//시작과 끝이 같은경우(프레임구간) 재생 하지 말자
 	if (start == end)
@@ -133,6 +132,7 @@ void animation::setPlayFrame(int start, int end, bool reverse, bool loop)
 
 			else
 			{
+
 				for (int i = start; i >= end; i--)
 				{
 					_playList.push_back(i);
@@ -208,15 +208,6 @@ void animation::frameUpdate(float elapsedTime)
 			_elapseSec -= _frameUpdateSec;
 			_nowPlayIndex++;
 
-			//if (useEventWhenSpcificFrame)
-			//{
-			//	if (specificFrameIndex == _nowPlayIndex)
-			//	{
-			//		m_triggerWhenSpecificFrame();
-			//	}
-			//}
-
-
 			if (_nowPlayIndex == _playList.size())
 			{
 				if (_loop)
@@ -225,10 +216,6 @@ void animation::frameUpdate(float elapsedTime)
 				}
 				else
 				{
-					if (useEventWhenEnd)
-					{
-						m_triggerWhenEnd();
-					}
 					_nowPlayIndex--;
 					_play = false;
 				}
@@ -245,8 +232,8 @@ void animation::start()
 
 void animation::fullstart()
 {
-	_play = true;;
-	if (_nowPlayIndex >= _endPlayIndex)
+	_play = true;
+	if (_nowPlayIndex == _endPlayIndex)
 	{
 		stop();
 	}
