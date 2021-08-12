@@ -11,6 +11,7 @@ Cimage::~Cimage()
 
 HRESULT Cimage::init()
 {
+    m_imageSize = 1.5f;
     /*  모든 이미지 이미지매니저에 추가하는 용도  */
     /*  모든 이미지 이미지매니저에 추가하는 용도  */
     /*  모든 이미지 이미지매니저에 추가하는 용도  */
@@ -75,17 +76,15 @@ HRESULT Cimage::init()
 
 
     //=================Boss==================//
-    IMAGE->addFrameImage("보스", "images/Mevius.bmp", 360, 143, 4, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("보스캐스팅", "images/MeviusCasting.bmp", 1800, 143, 20, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("보스체인", "images/MeviusChains.bmp", 211, 17, 1, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("보스공중", "images/MeviusLevitating.bmp", 90, 146, 1, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("보스빛", "images/MeviusLight.bmp", 87, 1042, 1, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("보스몬스터", "images/MeviusMonster.bmp", 1218, 153, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("보스걷기", "images/MeviusWalking.bmp", 720, 148, 8, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("보스걷기1", "images/MeviusWalking-1.bmp", 2160, 444, 8, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("보스걷기2", "images/MeviusWalking-2.bmp", 1440, 296, 8, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("보스", "images/Mevius.bmp", 360 * m_imageSize, 143* m_imageSize, 4, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("보스캐스팅", "images/MeviusCasting.bmp", 1800 * m_imageSize, 143 * m_imageSize, 20, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("보스체인", "images/MeviusChains.bmp", 211 * m_imageSize, 17 * m_imageSize, 1, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("보스공중", "images/MeviusLevitating.bmp", 90 * m_imageSize, 146 * m_imageSize, 1, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("보스빛", "images/MeviusLight.bmp", 87 * m_imageSize, 1042 * m_imageSize, 1, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("보스몬스터", "images/MeviusMonster.bmp", 1218 * m_imageSize, 153 * m_imageSize, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("보스걷기", "images/MeviusWalking.bmp", 720 * m_imageSize, 148 * m_imageSize, 8, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("보스벽", "images/MeviusWall.bmp", 256, 192, 1, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("보스공", "images/MeviusSpikeBall.bmp", 329, 54, 7, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("보스공", "images/MeviusSpikeBall.bmp", 329 * m_imageSize, 54 * m_imageSize, 7, 1, true, RGB(255, 0, 255));
 
 
     //=================Object=================//

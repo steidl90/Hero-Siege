@@ -25,8 +25,8 @@ HRESULT CsceneDungeon::init()
 	m_player = new CplayerManager;
 	m_player->init();
 
-	//m_boss = new Cmevius;
-	//m_boss->init();
+	m_boss = new Cmevius;
+	m_boss->init();
 
 	m_enemyManager = new CenemyManager;
 	m_enemyManager->init();
@@ -103,15 +103,15 @@ HRESULT CsceneDungeon::init()
 	//		m_enemyManager->registerEnemy(m_monk);
 	//	}
 	//}
-	//////프리스트 설정 = 중 상단, 좌 중단 1마리씩
-	//for (int i = 0; i < 2; i++)
-	//{
-	//	Cpriest* m_priest = new Cpriest;
-	//	m_priest->init(PointMake(900 + i * 650, 200 + i * 400),
-	//		700, 20, exp, 500);
-	//	m_priest->setPlayer(m_player->getPlayer());
-	//	m_enemyManager->registerEnemy(m_priest);
-	//}
+	////프리스트 설정 = 중 상단, 좌 중단 1마리씩
+	for (int i = 0; i <1 ; i++)
+	{
+		Cpriest* m_priest = new Cpriest;
+		m_priest->init(PointMake(900 + i * 650, 200 + i * 400),
+			100, 20, exp, 500);
+		m_priest->setPlayer(m_player->getPlayer());
+		m_enemyManager->registerEnemy(m_priest);
+	}
 
 	////교도관 설정 = 중앙 하단
 	//for (int i = 0; i < 4; i++)
@@ -145,7 +145,7 @@ void CsceneDungeon::update()
 	m_enemyManager->collision();
 	m_camera->setTargetPoint(PointMake(m_player->getplayerRect()->left, m_player->getplayerRect()->top));
 	m_player->collisionEnemy();
-	//m_boss->update();
+	if (m_enemyManager->getEnemy()->size() == 0) m_boss->update();
 	sceneChange();
 }
 
@@ -157,9 +157,8 @@ void CsceneDungeon::render()
 	m_camera->render();
 	m_dungeon->render();
 	m_enemyManager->render();
-	//m_boss->render();
+	m_boss->render();
 	m_player->render();
-	//EFFECT->render();
 
 	//Rectangle(getMapDC(), m_changeRect.left, m_changeRect.top, m_changeRect.right, m_changeRect.bottom);
 }

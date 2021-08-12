@@ -2,7 +2,7 @@
 #include "animation.h"
 
 animation::animation() :_frameNum(0), _frameWidth(0), _frameHeight(0), _loop(false),
-_elapseSec(0), _nowPlayIndex(0), _play(false),_endPlayIndex(0)
+_elapseSec(0), _nowPlayIndex(0), _play(false)
 {
 }
 
@@ -12,7 +12,6 @@ animation::~animation()
 
 HRESULT animation::init(int totalW, int totalH, int frameW, int frameH)
 {
-
 	//가로 프레임 갯수
 	_frameWidth = frameW;
 	int frameWidthNum = totalW / _frameWidth;
@@ -23,6 +22,7 @@ HRESULT animation::init(int totalW, int totalH, int frameW, int frameH)
 
 	//총 프레임 수
 	_frameNum = frameWidthNum * frameHeightNum;
+
 
 	//프레임 위치 목록 셋팅 하자.
 	_frameList.clear();
@@ -62,6 +62,7 @@ void animation::setDefPlayFrame(bool reverse, bool loop)
 			{
 				_playList.push_back(i);
 			}
+
 		}
 		else
 		{
@@ -131,6 +132,7 @@ void animation::setPlayFrame(int start, int end, bool reverse, bool loop)
 
 			else
 			{
+
 				for (int i = start; i >= end; i--)
 				{
 					_playList.push_back(i);
@@ -230,8 +232,8 @@ void animation::start()
 
 void animation::fullstart()
 {
-	_play = true;;
-	if (_nowPlayIndex >= _endPlayIndex)
+	_play = true;
+	if (_nowPlayIndex == _endPlayIndex)
 	{
 		stop();
 	}

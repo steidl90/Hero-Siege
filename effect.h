@@ -1,6 +1,6 @@
 #pragma once
 #include"gameNode.h"
-class effect  : public gameNode
+class effect : public gameNode
 {
 private:
 
