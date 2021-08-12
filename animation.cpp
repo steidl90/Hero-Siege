@@ -99,6 +99,7 @@ void animation::setPlayFrame(int* playArr, int arrLen, bool loop)
 
 void animation::setPlayFrame(int start, int end, bool reverse, bool loop)
 {
+	_endPlayIndex = end;
 	_loop = loop;
 	_playList.clear();
 
@@ -227,6 +228,15 @@ void animation::start()
 {
 	_play = true;
 	_nowPlayIndex = 0;
+}
+
+void animation::fullstart()
+{
+	_play = true;
+	if (_nowPlayIndex == _endPlayIndex)
+	{
+		stop();
+	}
 }
 
 void animation::stop()
