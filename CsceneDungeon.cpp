@@ -145,7 +145,7 @@ void CsceneDungeon::release()
 	SAFE_DELETE(m_camera);
 	SAFE_DELETE(m_dungeon);
 	SAFE_DELETE(m_player);
-
+	SAFE_DELETE(m_enemyManager);
 }
 
 void CsceneDungeon::update()
