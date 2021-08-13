@@ -1,6 +1,7 @@
 #pragma once
 #include"singleton.h"
 
+class Citem;
 class CplayerDate : public Singleton<CplayerDate>
 {
 private:
@@ -17,6 +18,21 @@ private:
 	float m_x;
 	float m_y;
 
+	//보유 아이템
+	vector<Citem*> m_vWeaponList;
+	vector<Citem*> m_vArmorList;
+	vector<Citem*> m_vShoesList;
+	vector<Citem*> m_vGlovesList;
+	vector<Citem*> m_vPendantList;
+
+	//장착 아이템
+	vector<Citem*> m_vEquipList;
+	Citem* m_equipWeapon;
+	Citem* m_equipArmor;
+	Citem* m_equipShoes;
+	Citem* m_equipGloves;
+	Citem* m_equipPendant;
+
 public:
 	CplayerDate();
 	~CplayerDate();
@@ -27,6 +43,18 @@ public:
 	void render();
 
 	void setData(int atk, int def, int hp, int mp, int cri, int lv, int exp, int gold, float criatk, float speed, float x, float y);
+	
+	Citem* getWeaponEquip() { return m_equipWeapon; }
+	void setWeaponEquip(Citem* Weapon) { m_equipWeapon = Weapon; }
+	Citem* getArmorEquip() { return m_equipArmor; }
+	void setArmorEquip(Citem* Armor) { m_equipArmor = Armor; }
+	Citem* getShoesEquip() { return m_equipShoes; }
+	void setShoesEquip(Citem* Shoes) { m_equipShoes = Shoes; }
+	Citem* getGlovesEquip() { return m_equipGloves; }
+	void setGlovesEquip(Citem* Gloves) { m_equipGloves = Gloves; }
+	Citem* getPendantEquip() { return m_equipPendant; }
+	void setPendantEquip(Citem* Pendant) { m_equipPendant = Pendant; }
+
 
 	int getAtk() { return m_atk; }
 	int getDef() { return m_def; }
@@ -40,6 +68,5 @@ public:
 	float getSpeed() { return m_speed; }
 	float getX() { return m_x; }
 	float getY() { return m_y; }
-
 };
 

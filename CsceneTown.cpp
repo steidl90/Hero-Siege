@@ -36,6 +36,12 @@ HRESULT CsceneTown::init()
 	m_player->getPlayer()->setPlayerX(DATA->getX());
 	m_player->getPlayer()->setPlayerY(DATA->getY());
 
+	m_player->getInventoryMemory()->setEquipWeapon(DATA->getWeaponEquip());
+	m_player->getInventoryMemory()->setEquipArmor(DATA->getArmorEquip());
+	m_player->getInventoryMemory()->setEquipShoes(DATA->getShoesEquip());
+	m_player->getInventoryMemory()->setEquipGloves(DATA->getGlovesEquip());
+	m_player->getInventoryMemory()->setEquipPendant(DATA->getPendantEquip());
+
 	m_aStar = new CaStar;
 	m_aStar->setCameraMemory(m_camera);
 	m_aStar->init();
@@ -148,6 +154,12 @@ void CsceneTown::sceneChange()
 			m_player->getPlayer()->getSpeed(),
 			m_player->getPlayer()->getPlayerX(),
 			m_player->getPlayer()->getPlayerY());
+		DATA->setWeaponEquip(m_player->getInventoryMemory()->getEquipWeapon());
+		DATA->setArmorEquip(m_player->getInventoryMemory()->getEquipArmor());
+		DATA->setShoesEquip(m_player->getInventoryMemory()->getEquipShoes());
+		DATA->setGlovesEquip(m_player->getInventoryMemory()->getEquipGloves());
+		DATA->setPendantEquip(m_player->getInventoryMemory()->getEquipPendant());
+
 		SCENE->changeScene("´øÀü");
 	}
 }

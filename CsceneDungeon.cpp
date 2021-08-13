@@ -49,7 +49,11 @@ HRESULT CsceneDungeon::init()
 	m_player->getPlayer()->setPlayerX(200);
 	m_player->getPlayer()->setPlayerY(MAPSIZE - 300);
 
-	
+	m_player->getInventoryMemory()->setEquipWeapon(DATA->getWeaponEquip());
+	m_player->getInventoryMemory()->setEquipArmor(DATA->getArmorEquip());
+	m_player->getInventoryMemory()->setEquipShoes(DATA->getShoesEquip());
+	m_player->getInventoryMemory()->setEquipGloves(DATA->getGlovesEquip());
+	m_player->getInventoryMemory()->setEquipPendant(DATA->getPendantEquip());
 
 	m_changeRect = RectMake(170, MAPSIZE - 230, 100, 50);
 

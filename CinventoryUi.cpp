@@ -1,4 +1,4 @@
-#include"framework.h"
+#include "framework.h"
 #include "CinventoryUi.h"
 #include "Cplayer.h"
 CinventoryUi::CinventoryUi()
@@ -61,8 +61,8 @@ HRESULT CinventoryUi::init()
 	m_functionButtonX = m_uiX + 430;
 	m_functionButtonY = m_uiY + 390;
 
-	m_equipButton = RectMake(m_functionButtonX - 5, m_functionButtonY, 70, 20);
-	m_abandonButton = RectMake(m_functionButtonX + 90, m_functionButtonY, 70, 20);
+	m_equipButton = RectMake(m_functionButtonX - 5, m_functionButtonY + 10, 70, 20);
+	m_abandonButton = RectMake(m_functionButtonX + 90, m_functionButtonY + 10, 70, 20);
 
 	isKeyUp = false;
 	isButtonClick = false;
@@ -122,10 +122,10 @@ void CinventoryUi::render()
 	}
 	//Rectangle(getMemDC(), m_ItemInfoRect.left, m_ItemInfoRect.top, m_ItemInfoRect.right, m_ItemInfoRect.bottom);
 
-	SetTextColor(getMemDC(), RGB(0, 0, 0));
-	Rectangle(getMemDC(), m_equipButton.left, m_equipButton.top, m_equipButton.right, m_equipButton.bottom);
+	SetTextColor(getMemDC(), RGB(255, 255, 255));
+	//Rectangle(getMemDC(), m_equipButton.left, m_equipButton.top, m_equipButton.right, m_equipButton.bottom);
 	TextOut(getMemDC(), m_equipButton.left, m_equipButton.top, TEXT("ÀåÂø"), lstrlen("ÀåÂø"));
-	Rectangle(getMemDC(), m_abandonButton.left, m_abandonButton.top, m_abandonButton.right, m_abandonButton.bottom);
+	//Rectangle(getMemDC(), m_abandonButton.left, m_abandonButton.top, m_abandonButton.right, m_abandonButton.bottom);
 	TextOut(getMemDC(), m_abandonButton.left, m_abandonButton.top, TEXT("¹ö¸®±â"), lstrlen("¹ö¸®±â"));
 	SetTextColor(getMemDC(), RGB(255, 255, 255));
 	char strGold[100];

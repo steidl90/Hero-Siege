@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "CplayerDate.h"
+#include "Citem.h"
 
 CplayerDate::CplayerDate() :m_hp(1000), m_mp(500), m_exp(0), m_atk(10), m_def(10), m_critical(5), m_criticalAtk(1.5), m_speed(3.0), m_lv(1), m_gold(1000),m_x(50),m_y(WINSIZEY / 2 + 230)
 {
