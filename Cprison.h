@@ -11,7 +11,7 @@ public:
 	Cprison();
 	~Cprison();
 
-	virtual HRESULT init(POINT position, float HP, float damage, int exp,float trace);
+	virtual HRESULT init(POINT position, float HP, float damage, float def, int exp, float trace);
 	virtual void release();
 	virtual void update();
 	virtual void render();

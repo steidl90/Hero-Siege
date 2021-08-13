@@ -2,17 +2,20 @@
 #include "Cunit.h"
 #include "CenemyManager.h"
 #include "Cplayer.h"
+#include "CprogressBar.h"
 enum class BOSS_STATE
 {
 	BOSS_STATE_IDLE,
 	BOSS_STATE_WALKING,
 	BOSS_STATE_CASTING,
-	BOSS_STATE_LEVITATIN,
+	BOSS_STATE_LEVITATING,
 	BOSS_STATE_DIE
 };
 class Cmevius :public Cunit
 {
 private:
+
+	CprogressBar* m_hpBar;
 	image* m_meviusImage;
 	animation* m_meviusAnimation;
 	effect* m_meviusEffect;
@@ -29,7 +32,10 @@ private:
 	float m_x, m_y;
 	float m_speed;
 
+	float m_maxHp;
 	float m_hp;
+	float m_def;
+	float m_exp;
 	float m_skillDamagePattern1;
 	float m_skillDamagePattern2;
 	float m_skillDamagePattern3;
@@ -49,7 +55,7 @@ public:
 	Cmevius();
 	~Cmevius();
 
-	HRESULT init();
+	HRESULT init(POINT position,float hp, float p1Damage1, float p1Damage2, float p1Damage3);
 	void release();
 	void update();
 	void render();

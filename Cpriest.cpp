@@ -11,7 +11,7 @@ Cpriest::~Cpriest()
 {
 }
 
-HRESULT Cpriest::init(POINT position, float HP, float damage, int exp,float trace)
+HRESULT Cpriest::init(POINT position, float HP, float damage, float def, int exp, float trace)
 {
 	m_enemyAttack = new CenemyAttack;
 	m_enemyAttack->init(50, 500, false, "리치스킬애니");
@@ -30,6 +30,7 @@ HRESULT Cpriest::init(POINT position, float HP, float damage, int exp,float trac
 	m_speed = 2.0f;
 	m_hp = m_maxHp = HP;
 	m_damage = damage;
+	m_def = def;
 	m_exp = exp;
 
 	m_hpBar = new CprogressBar;

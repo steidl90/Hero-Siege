@@ -22,6 +22,7 @@ public:
 
 	void mapUpdate(float x, float y);
 	void mapRender();
+	void mapBossRender();
 
 
 	void setGauge(float currentGauge, float maxGauge);

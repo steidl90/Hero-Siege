@@ -7,7 +7,9 @@ CenemyAttack::~CenemyAttack(){}
 
 HRESULT CenemyAttack::init(int skillMax, float range, bool melee, const char* aniName)
 {
-	ANIMATION->addDefAnimation("郡府膏呕胶懦局聪", "郡府膏呕胶懦", 10, false, true);
+	//ANIMATION->addDefAnimation("郡府膏呕胶懦局聪", "郡府膏呕胶懦", 10, false, true);
+	//ANIMATION->addDefAnimation("郡府膏呕胶懦局聪", "郡府膏呕胶懦2", 10, false, true);
+	ANIMATION->addDefAnimation("郡府膏呕胶懦局聪", "郡府膏呕胶懦3", 10, false, true);
 	ANIMATION->addDefAnimation("府摹胶懦局聪", "府摹胶懦", 15, false, true);
 
 	ANIMATION->addAnimation("根农傍拜窍", "根农傍拜", 0, 4,	 8, true, true);
