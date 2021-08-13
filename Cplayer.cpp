@@ -667,30 +667,29 @@ void Cplayer::blockCheck(float speed, RECT* playerRC, DIRECTIONS direct)
 }
 
 
-//void Cplayer::mouseMoveAstar()
-//{
-//	/*if (resetMove)
-//	{
-//		endCount = m_fastLoadLocation->size() - 1;
-//		startCount = 0;
-//	}
-//	while (true)
-//	{
-//		
-//		auto iter = m_fastLoadLocation->begin();
-//
-//		if (m_playerX > iter[startCount].x)
-//			m_playerX += m_speed;
-//		else if (m_playerX < iter[startCount].x)
-//			m_playerX -= m_speed;
-//
-//		if (m_playerY > iter[startCount].y)
-//			m_playerY -= m_speed;
-//		else if (m_playerY < iter[startCount].y)
-//			m_playerY += m_speed;
-//
-//	}*/
-//
-//	// 에이스타 이동 -> 이동할 타일을 리스트에 담음..
-//	// 리스트 하나씩 이동
+void Cplayer::mouseMoveAstar()
+{
+	///*if (resetMove)
+	//{
+	//	endCount = m_fastLoadLocation->size() - 1;
+	//	startCount = 0;
+	//}
+	/*while (true)
+	{
+		auto iter = m_fastLoadLocation->begin();
+
+		if (m_playerX > iter[startCount].x)
+			m_playerX += getSpeed();
+		else if (m_playerX < iter[startCount].x)
+			m_playerX -= getSpeed();
+
+		if (m_playerY > iter[startCount].y)
+			m_playerY -= getSpeed();
+		else if (m_playerY < iter[startCount].y)
+			m_playerY += getSpeed();
+	}*/
+
+	// 에이스타 이동 -> 이동할 타일을 리스트에 담음..
+	// 리스트 하나씩 이동
+}
 

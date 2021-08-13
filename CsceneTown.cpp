@@ -69,6 +69,8 @@ void CsceneTown::release()
 
 void CsceneTown::update()
 {
+	m_aStar->update();
+	m_aStar->setPlayerIndex(PointMake(m_player->getplayerRect()->left / TILESIZE, m_player->getplayerRect()->top / TILESIZE));
 	m_camera->update();
 	m_camera->setTargetPoint(PointMake(m_player->getplayerRect()->left, m_player->getplayerRect()->top));
 	m_town->update();

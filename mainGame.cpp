@@ -13,10 +13,6 @@ HRESULT mainGame::init()
 	m_image = new Cimage;
 	m_image->init();
 
-	m_astar = new CaStar;
-	m_astar->init();
-
-	SCENE->addScene("에이스타", m_astar);
 	SCENE->addScene("시작화면", new CsceneStart);
 	SCENE->addScene("선택화면", new CsceneSelect);
 	SCENE->addScene("마을", new CsceneTown);
@@ -30,7 +26,6 @@ void mainGame::release()
 {
 	gameNode::release();
 	SAFE_DELETE(m_image);
-	SAFE_DELETE(m_astar);
 	EFFECT->release();
 	SCENE->release();
 }
@@ -47,7 +42,6 @@ void mainGame::render()
 {
 	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	/////////////////////////////////////////////////////////
-	///* astar */ _aStar->render();
 
 	// MapBuffer에는 getMapDC에 그려진 맵 전체 크기의 이미지가 들어있다, MapBuffer의 render 함수를 통해
 	// 카메라의 시작 x,y 좌표부터 가로 세로 길이만큼 크기의 이미지를 잘라서 (sour 인수가 그런기능)

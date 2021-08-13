@@ -8,12 +8,10 @@
 #include"CsceneSelect.h"
 #include"CsceneTown.h"
 #include"CsceneDungeon.h"
-#include"CaStar.h"
 #include"CplayerDate.h"
 class mainGame : public gameNode
 {
 private:
-	CaStar* m_astar;
 	Cimage* m_image;
 	CplayerDate* m_playerDate;
 	bool isDebug;

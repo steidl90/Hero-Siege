@@ -148,6 +148,9 @@
     <Filter Include="mainGame\히어로시즈\Cunit\CplayerManager\Cplayer\CplayerDate">
       <UniqueIdentifier>{595e05b2-627c-43a0-80cf-2c52fca64c06}</UniqueIdentifier>
     </Filter>
+    <Filter Include="mainGame\히어로시즈\Cobject\CNPC">
+      <UniqueIdentifier>{05663bb4-d63d-4af2-9f15-4b693f243689}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -348,6 +351,9 @@
     <ClInclude Include="CplayerDate.h">
       <Filter>mainGame\히어로시즈\Cunit\CplayerManager\Cplayer\CplayerDate</Filter>
     </ClInclude>
+    <ClInclude Include="CNPC.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -526,6 +532,9 @@
     </ClCompile>
     <ClCompile Include="CplayerDate.cpp">
       <Filter>mainGame\히어로시즈\Cunit\CplayerManager\Cplayer\CplayerDate</Filter>
+    </ClCompile>
+    <ClCompile Include="CNPC.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

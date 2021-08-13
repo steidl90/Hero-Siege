@@ -75,28 +75,22 @@ void CaStar::update()
 {
     if (InputManager->isOnceKeyDown(VK_RBUTTON))
     {
-        //if (_endPointSet)
-        {
-            _openList.clear();
-            _closeList.clear();
-            init2();
-        }
-    }
-
-    if (InputManager->isStayKeyDown(VK_RBUTTON))
-    {
+        _openList.clear();
+        _closeList.clear();
+        init2();
         isButtonClick = true;
     }
     else
     {
         isButtonClick = false;
+        isKeyUp = true;
     }
   
     if (_astarState == ASTAR_STATE::ASTAR_STATE_END)
     {
         tileComposition();
     }
-   if (_startPointSet && _endPointSet && _astarState == ASTAR_STATE::ASTAR_STATE_END)
+    if (_startPointSet && _endPointSet && _astarState == ASTAR_STATE::ASTAR_STATE_END)
     {
         tileInitializing();
     }
@@ -279,10 +273,6 @@ void CaStar::tileComposition()
             }
             isKeyUp = false;
         }
-    }
-    else
-    {
-        isKeyUp = true;
     }
 }
 
@@ -571,7 +561,6 @@ void CaStar::checkArrive()
         _astarState = ASTAR_STATE::ASTAR_STATE_FOUND;
         _closeList[_lastIndex]->color = RGB(255, 100, 100);
         showWay(_closeList[_lastIndex]);
-
     }
 }
 

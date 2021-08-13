@@ -12,7 +12,6 @@ Ctown::~Ctown()
 
 HRESULT Ctown::init()
 {
-
     load();
 	initTileAttribute();
 

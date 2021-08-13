@@ -162,6 +162,7 @@
     <ClInclude Include="CmainManager.h" />
     <ClInclude Include="Cmevius.h" />
     <ClInclude Include="Cmonk.h" />
+    <ClInclude Include="CNPC.h" />
     <ClInclude Include="Cobject.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="Cplayer.h" />
@@ -230,6 +231,7 @@
     <ClCompile Include="CmainManager.cpp" />
     <ClCompile Include="Cmevius.cpp" />
     <ClCompile Include="Cmonk.cpp" />
+    <ClCompile Include="CNPC.cpp" />
     <ClCompile Include="Cobject.cpp" />
     <ClCompile Include="Cplayer.cpp" />
     <ClCompile Include="CplayerAttack.cpp" />

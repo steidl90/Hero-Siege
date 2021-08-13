@@ -79,6 +79,8 @@ private:
 	tagTile* m_CheckTile;
 	ATTRIBUTE* m_attribute;
 
+	vector<POINT> m_fastLoadIndex;
+
 public:
 	Cplayer();
 	~Cplayer();
@@ -94,6 +96,8 @@ public:
 
 	void playerSkillControl();
 	void playerSkillRender();
+
+	void mouseMoveAstar();
 
 	RECT* getplayerMoveRC() { return &playerMoveRc; }
 	float getPlayerX() const { return m_playerX; }
