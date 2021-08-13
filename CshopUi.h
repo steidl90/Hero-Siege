@@ -9,7 +9,6 @@ class CshopUi : public gameNode
 private:
 	Cinventory* m_myInventory;
 	Cshop* m_shop;
-	Cplayer* m_player;
 private:
 	
 	// 인벤토리 파트
@@ -68,7 +67,6 @@ public:
 	// 클래스 메모리 set
 	void setInventoryMemory(Cinventory* inven) { m_myInventory = inven; }
 	void setShopMemory(Cshop* shop) { m_shop = shop; }
-	void setPlayerMemory(Cplayer* player) { m_player = player; }
 
 	void showItemType();
 	void showInvenItemList(vector<Citem>* item);

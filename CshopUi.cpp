@@ -26,7 +26,9 @@ HRESULT CshopUi::init()
 	m_shopButtonX = m_shopUiX + 30;
 	m_shopButtonY = m_shopUiY + 390;
 
-	m_buyButton = RectMake(m_shopButtonX, m_shopButtonY, 100, 50);
+	m_buyButton = RectMake(m_shopButtonX, m_shopButtonY, 80, 50);
+
+	m_exitButton = RectMake(m_shopButtonX + 120, m_shopButtonY, 80, 50);
 
 	m_inventoryUiX = 570;
 	m_inventoryUiY = 150;
@@ -52,6 +54,7 @@ HRESULT CshopUi::init()
 	m_inventoryButtonY = m_inventoryUiY + 390;
 
 	m_sellButton = RectMake(m_inventoryButtonX, m_inventoryButtonY, 70, 20);
+
 
 	m_selectType = ITEMTYPE::ITEMTYPE_WEAPON;
 	m_showIndex = 0;
@@ -106,8 +109,19 @@ void CshopUi::render()
 	{
 		//Rectangle(getMemDC(), (*iter).left, (*iter).top, (*iter).right, (*iter).bottom);
 	}
+
+	SetTextColor(getMemDC(), RGB(0, 0, 0));
 	Rectangle(getMemDC(), m_sellButton.left, m_sellButton.top, m_sellButton.right, m_sellButton.bottom);
 	Rectangle(getMemDC(), m_buyButton.left, m_buyButton.top, m_buyButton.right, m_buyButton.bottom);
+	Rectangle(getMemDC(), m_exitButton.left, m_exitButton.top, m_exitButton.right, m_exitButton.bottom);
+	TextOut(getMemDC(), m_sellButton.left + 10, m_sellButton.top + 5, TEXT("판매"), lstrlen("판매"));
+	TextOut(getMemDC(), m_buyButton.left + 10, m_buyButton.top + 5, TEXT("구매"), lstrlen("구매"));
+	TextOut(getMemDC(), m_exitButton.left + 10, m_exitButton.top + 5, TEXT("나가기"), lstrlen("나가기"));
+	char strGold[100];
+	wsprintf(strGold, "소지금액: %d gold", m_shop->getPlayer()->getGold());
+	SetTextColor(getMemDC(), RGB(255, 255, 255));
+	TextOut(getMemDC(), m_sellButton.left + 10, m_sellButton.top + 35, strGold, lstrlen(strGold));
+	
 	//Rectangle(getMemDC(), m_ItemInfoRect.left, m_ItemInfoRect.top, m_ItemInfoRect.right, m_ItemInfoRect.bottom);
 
 
@@ -303,6 +317,45 @@ void CshopUi::setShowIndex()
 		else if (m_shop->getInventory()->getvArmorList()->size() - 4 < m_showIndex)
 		{
 			m_showIndex = m_shop->getInventory()->getvArmorList()->size() - 4;
+			m_showEndIndex = m_showIndex + 4;
+		}
+		else m_showEndIndex = m_showIndex + 4;
+		break;
+	case ITEMTYPE::ITEMTYPE_SHOES:
+		if (m_shop->getInventory()->getvShoesList()->size() < 4)
+		{
+			m_showIndex = 0;
+			m_showEndIndex = m_shop->getInventory()->getvShoesList()->size();
+		}
+		else if (m_shop->getInventory()->getvShoesList()->size() - 4 < m_showIndex)
+		{
+			m_showIndex = m_shop->getInventory()->getvShoesList()->size() - 4;
+			m_showEndIndex = m_showIndex + 4;
+		}
+		else m_showEndIndex = m_showIndex + 4;
+		break;
+	case ITEMTYPE::ITEMTYPE_GLOVES:
+		if (m_shop->getInventory()->getvGlovesList()->size() < 4)
+		{
+			m_showIndex = 0;
+			m_showEndIndex = m_shop->getInventory()->getvGlovesList()->size();
+		}
+		else if (m_shop->getInventory()->getvGlovesList()->size() - 4 < m_showIndex)
+		{
+			m_showIndex = m_shop->getInventory()->getvGlovesList()->size() - 4;
+			m_showEndIndex = m_showIndex + 4;
+		}
+		else m_showEndIndex = m_showIndex + 4;
+		break;
+	case ITEMTYPE::ITEMTYPE_PENDANT:
+		if (m_shop->getInventory()->getvPendantList()->size() < 4)
+		{
+			m_showIndex = 0;
+			m_showEndIndex = m_shop->getInventory()->getvPendantList()->size();
+		}
+		else if (m_shop->getInventory()->getvPendantList()->size() - 4 < m_showIndex)
+		{
+			m_showIndex = m_shop->getInventory()->getvPendantList()->size() - 4;
 			m_showEndIndex = m_showIndex + 4;
 		}
 		else m_showEndIndex = m_showIndex + 4;
