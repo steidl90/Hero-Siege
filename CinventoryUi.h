@@ -2,6 +2,9 @@
 #include"gameNode.h"
 #include"Cinventory.h"
 // 인벤토리 include 오류나면 전방참조
+
+
+
 class Cplayer;
 class CinventoryUi : public gameNode
 {
@@ -29,16 +32,18 @@ private:
 	vector<RECT> m_vEquipItemMainRect;
 	RECT m_ItemInfoRect;
 
-	RECT m_exitButton;
 	RECT m_equipButton;
-	RECT m_unEquipButton;
 	RECT m_abandonButton;
 
 	Citem* m_equipWeapon;
 	Citem* m_equipArmor;
+	Citem* m_equipShoes;
+	Citem* m_equipGloves;
+	Citem* m_equipPendant;
+
 	Citem* m_selectItem;
 
-	Citem m_itemInit[2];
+	Citem m_itemInit[5];
 
 	// 버튼 클릭시 stay다운을 once처럼 쓰기위해..
 	bool isButtonClick;
@@ -58,10 +63,14 @@ private:
 	POINT m_equipRenderPoint[5];
 
 	bool isSelectRender;
+	int m_SelectIndex;
 	//bool isEquipRender;
 
 	bool isEquipWeapon;
 	bool isEquipArmor;
+	bool isEquipShoes;
+	bool isEquipGloves;
+	bool isEquipPendant;
 
 	int m_compareTime;
 
@@ -98,6 +107,7 @@ public:
 	// 아이템 장착 동작!
 	void setEquipItem(int index, int x, int y);
 	void setPlayerStat(int index);
+	void clickEquipButton();
 	// 장비창 rect 클릭시 선택 아이템 타입 변경
 	void selectItemType();
 

@@ -61,19 +61,18 @@ HRESULT CinventoryUi::init()
 	m_functionButtonX = m_uiX + 430;
 	m_functionButtonY = m_uiY + 390;
 
-	m_equipButton = RectMake(m_functionButtonX, m_functionButtonY, 70, 20);
-	m_unEquipButton = RectMake(m_functionButtonX + 90, m_functionButtonY, 70, 20);
-	m_abandonButton = RectMake(m_functionButtonX, m_functionButtonY + 24, 70, 20);
-	m_exitButton = RectMake(m_functionButtonX + 90, m_functionButtonY + 24, 70, 20);
+	m_equipButton = RectMake(m_functionButtonX - 5, m_functionButtonY, 70, 20);
+	m_abandonButton = RectMake(m_functionButtonX + 90, m_functionButtonY, 70, 20);
 
 	isKeyUp = false;
 	isButtonClick = false;
 
 	m_showIndex = 0;
 	m_showEndIndex = 0;
-	m_selectType = ITEMTYPE::ITEMTYPE_ARMOR;
+	m_selectType = ITEMTYPE::ITEMTYPE_WEAPON;
 	isSelectRender = false;
 	m_clickCount = 0;
+	m_SelectIndex = 0;
 
 	isEquipWeapon = false;
 	return S_OK;
@@ -121,11 +120,12 @@ void CinventoryUi::render()
 	}
 	//Rectangle(getMemDC(), m_ItemInfoRect.left, m_ItemInfoRect.top, m_ItemInfoRect.right, m_ItemInfoRect.bottom);
 
+	SetTextColor(getMemDC(), RGB(0, 0, 0));
 	Rectangle(getMemDC(), m_equipButton.left, m_equipButton.top, m_equipButton.right, m_equipButton.bottom);
-	Rectangle(getMemDC(), m_unEquipButton.left, m_unEquipButton.top, m_unEquipButton.right, m_unEquipButton.bottom);
+	TextOut(getMemDC(), m_equipButton.left, m_equipButton.top, TEXT("장착"), lstrlen("장착"));
 	Rectangle(getMemDC(), m_abandonButton.left, m_abandonButton.top, m_abandonButton.right, m_abandonButton.bottom);
-	Rectangle(getMemDC(), m_exitButton.left, m_exitButton.top, m_exitButton.right, m_exitButton.bottom);
-	
+	TextOut(getMemDC(), m_abandonButton.left, m_abandonButton.top, TEXT("버리기"), lstrlen("버리기"));
+
 	// 선택된 타입별 아이템 출력
 	this->showListItemType();
 	// 장착 테두리
@@ -157,33 +157,72 @@ void CinventoryUi::setShowIndex()
 	{
 	case ITEMTYPE::ITEMTYPE_WEAPON:
 		if (m_myInventory->getvWeaponList()->size() < 4)
-			m_showEndIndex = m_myInventory->getvWeaponList()->size() + m_showIndex;
-		else
+		{
+			m_showIndex = 0;
+			m_showEndIndex = m_myInventory->getvWeaponList()->size();
+		}
+		else if(m_myInventory->getvWeaponList()->size() - 4 < m_showIndex)	// 끝까지 스크롤했을 때
+		{
+			m_showIndex = m_myInventory->getvWeaponList()->size() - 4;
 			m_showEndIndex = m_showIndex + 4;
+		}
+		else m_showEndIndex = m_showIndex + 4;
+
 		break;
 	case ITEMTYPE::ITEMTYPE_ARMOR:
-		if (m_myInventory->getvArmorList()->size() < 4)
-			m_showEndIndex = m_myInventory->getvArmorList()->size() + m_showIndex;
-		else
+		if (m_myInventory->getvArmorList()->size() < 5)
+		{
+			m_showIndex = 0;
+			m_showEndIndex = m_myInventory->getvArmorList()->size();
+		}
+		else if (m_myInventory->getvArmorList()->size() - 4 < m_showIndex)	// 끝까지 스크롤했을 때 예외처리
+		{
+			m_showIndex = m_myInventory->getvArmorList()->size() - 4;
 			m_showEndIndex = m_showIndex + 4;
+		}
+		else m_showEndIndex = m_showIndex + 4;
+
 		break;
 	case ITEMTYPE::ITEMTYPE_SHOES:
 		if (m_myInventory->getvShoesList()->size() < 4)
-			m_showEndIndex = m_myInventory->getvShoesList()->size() + m_showIndex;
-		else
+		{
+			m_showIndex = 0;
+			m_showEndIndex = m_myInventory->getvShoesList()->size();
+		}
+		else if (m_myInventory->getvShoesList()->size() - 4 < m_showIndex)	// 끝까지 스크롤했을 때
+		{
+			m_showIndex = m_myInventory->getvShoesList()->size() - 4;
 			m_showEndIndex = m_showIndex + 4;
+		}
+		else m_showEndIndex = m_showIndex + 4;
+
 		break;
 	case ITEMTYPE::ITEMTYPE_GLOVES:
 		if (m_myInventory->getvGlovesList()->size() < 4)
-			m_showEndIndex = m_myInventory->getvGlovesList()->size() + m_showIndex;
-		else
+		{
+			m_showIndex = 0;
+			m_showEndIndex = m_myInventory->getvGlovesList()->size();
+		}
+		else if (m_myInventory->getvGlovesList()->size() - 4 < m_showIndex)	// 끝까지 스크롤했을 때
+		{
+			m_showIndex = m_myInventory->getvGlovesList()->size() - 4;
 			m_showEndIndex = m_showIndex + 4;
+		}
+		else m_showEndIndex = m_showIndex + 4;
 		break;
 	case ITEMTYPE::ITEMTYPE_PENDANT:
 		if (m_myInventory->getvPendantList()->size() < 4)
-			m_showEndIndex = m_myInventory->getvPendantList()->size() + m_showIndex;
-		else
+		{
+			m_showIndex = 0;
+			m_showEndIndex = m_myInventory->getvPendantList()->size();
+		}
+		else if (m_myInventory->getvPendantList()->size() - 4 < m_showIndex)	// 끝까지 스크롤했을 때
+		{
+			m_showIndex = m_myInventory->getvPendantList()->size() - 4;
 			m_showEndIndex = m_showIndex + 4;
+		}
+		else m_showEndIndex = m_showIndex + 4;
+		
 		break;
 	default:
 		break;
@@ -222,12 +261,14 @@ void CinventoryUi::showListItemType()
 // 인덱스 기준으로 벡터를 참조하여
 void CinventoryUi::showItemList(vector<Citem>* list)
 {
-
 	char str[100];
-	// show 인덱스는 기본 0~3까지만 보여준다, 이후 스크롤로 1~4 이런식으로 보여주기
+	// show 인덱스는 시작인덱스를 적용하면 거기부터 아이템 정보를 보여주는 역할 (최대 4개)
+	// j 인덱스는 렉트 0~3까지 접근하기 위한 인덱스
+	// i 인덱스는 show인덱스의 대리 역할(showIndex값은 변하면 안되니)
 	int	i = m_showIndex;
 	int j = 0;
-		for (auto iter = list->begin() + i; iter != list->end() && i < m_showEndIndex; ++iter, i++, j++)
+	vector<Citem>::iterator iter;
+		for ( iter = list->begin() + i; i < m_showEndIndex; ++iter, i++, j++)
 		{
 			IMAGE->findImage((*iter).getSmallImage())->frameRender(getMemDC()
 				,m_vItemListRect[j].left, m_vItemListRect[j].top, (*iter).getFrame().x, (*iter).getFrame().y);
@@ -255,21 +296,21 @@ void CinventoryUi::showEquipSelect()
 		if (isEquipArmor)
 			IMAGE->findImage("장착테두리")->render(getMemDC(), m_equipRenderPoint[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].x,
 				m_equipRenderPoint[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].y);
+		break;
 	case ITEMTYPE::ITEMTYPE_GLOVES:
-		if (isEquipWeapon)
+		if (isEquipGloves)
 			IMAGE->findImage("장착테두리")->render(getMemDC(), m_equipRenderPoint[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].x,
 				m_equipRenderPoint[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].y);
 		break;
 	case ITEMTYPE::ITEMTYPE_SHOES:
-		if (isEquipWeapon)
+		if (isEquipShoes)
 			IMAGE->findImage("장착테두리")->render(getMemDC(), m_equipRenderPoint[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].x,
 				m_equipRenderPoint[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].y);
 		break;
 	case ITEMTYPE::ITEMTYPE_PENDANT:
-		if (isEquipWeapon)
+		if (isEquipPendant)
 			IMAGE->findImage("장착테두리")->render(getMemDC(), m_equipRenderPoint[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].x,
 				m_equipRenderPoint[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].y);
-		break;
 		break;
 	}
 
@@ -290,7 +331,7 @@ void CinventoryUi::selectItem()
 				isSelectRender = true;
 				m_selectRenderX = (*iter).left - 5;
 				m_selectRenderY = (*iter).top - 3;
-				
+				m_SelectIndex = i;
 				// 선택한 아이템 정보 inventory 에서 가져와서 selectItem 변수에 담기
 				// 나머지 타입 추가 필요
 				switch (m_selectType)
@@ -323,7 +364,6 @@ void CinventoryUi::selectItem()
 	}
 }
 // 마우스 2클릭으로 아이템 장착표시 / 장착
-// 일단 같은렉트 클릭조건 예외처리는 안함 -> 추후에 추가필요
 void CinventoryUi::selectEquipItem()
 {
 	int i = m_showIndex;
@@ -374,8 +414,7 @@ void CinventoryUi::selectEquipItem()
 // 나머지 타입 추가 필요
 void CinventoryUi::setEquipItem(int index, int x, int y)
 {
-	Citem* weaponTemp;
-	Citem* armorTemp;
+	Citem* itemTemp;
 	
 	this->setPlayerStat(index);
 
@@ -385,10 +424,10 @@ void CinventoryUi::setEquipItem(int index, int x, int y)
 	case ITEMTYPE::ITEMTYPE_WEAPON:
 		// 이터레이터 접근해서 받은 원소는 해당 원소 포인터 변수에 직접 못넣어서 다시 변환해줌
 		m_myInventory->setEquipWeapon(&(*(m_myInventory->getvWeaponList()->begin() + index)));
-		weaponTemp = m_myInventory->getEquipWeapon();
+		itemTemp = m_myInventory->getEquipWeapon();
 		// 이유는 모르겠지만 직접 인벤토리 리스트 정보 전달하면 나중에 인벤토리에서 다른거 지워질때 영향받음
 		// 임시 아이템 배열에 복사해서 그걸 UI 장착변수에 담음
-		m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)] = (*weaponTemp);
+		m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)] = (*itemTemp);
 		m_equipWeapon = &m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)];
 
 		m_equipRenderPoint[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)] = PointMake(x, y);
@@ -396,12 +435,39 @@ void CinventoryUi::setEquipItem(int index, int x, int y)
 		break;
 	case ITEMTYPE::ITEMTYPE_ARMOR:
 		m_myInventory->setEquipArmor(&(*(m_myInventory->getvArmorList()->begin() + index)));
-		armorTemp = m_myInventory->getEquipArmor();
-		m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)] = (*armorTemp);
+		itemTemp = m_myInventory->getEquipArmor();
+		m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)] = (*itemTemp);
 		m_equipArmor = &m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)];
 
 		m_equipRenderPoint[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)] = PointMake(x, y);
 		isEquipArmor = true;
+		break;
+	case ITEMTYPE::ITEMTYPE_SHOES:
+		m_myInventory->setEquipShoes(&(*(m_myInventory->getvShoesList()->begin() + index)));
+		itemTemp = m_myInventory->getEquipShoes();
+		m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)] = (*itemTemp);
+		m_equipShoes = &m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)];
+
+		m_equipRenderPoint[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)] = PointMake(x, y);
+		isEquipShoes = true;
+		break;
+	case ITEMTYPE::ITEMTYPE_GLOVES:
+		m_myInventory->setEquipGloves(&(*(m_myInventory->getvGlovesList()->begin() + index)));
+		itemTemp = m_myInventory->getEquipGloves();
+		m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)] = (*itemTemp);
+		m_equipGloves = &m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)];
+
+		m_equipRenderPoint[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)] = PointMake(x, y);
+		isEquipGloves = true;
+		break;
+	case ITEMTYPE::ITEMTYPE_PENDANT:
+		m_myInventory->setEquipPendant(&(*(m_myInventory->getvPendantList()->begin() + index)));
+		itemTemp = m_myInventory->getEquipPendant();
+		m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)] = (*itemTemp);
+		m_equipPendant = &m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)];
+
+		m_equipRenderPoint[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)] = PointMake(x, y);
+		isEquipGloves = true;
 		break;
 	default:
 		break;
@@ -572,6 +638,23 @@ void CinventoryUi::setPlayerStat(int index)
 		break;
 	default:
 		break;
+	}
+}
+
+void CinventoryUi::clickEquipButton()
+{
+	if (PtInRect(&m_equipButton, m_ptMouse))
+	{
+		if (isButtonClick)
+		{
+			if (isKeyUp)
+			{
+				m_equipRenderX = m_selectRenderX;
+				m_equipRenderY = m_selectRenderY;
+				this->setEquipItem(m_SelectIndex, m_equipRenderX, m_equipRenderY);
+				isKeyUp = false;
+			}
+		}
 	}
 }
 
