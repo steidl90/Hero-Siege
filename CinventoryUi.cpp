@@ -144,29 +144,45 @@ void CinventoryUi::render()
 	}
 	// 장비창 렌더
 	// equipMain렉트 - 0,2: 무기 / 1:갑옷, equipSub렉트 - 0: 팬던트, 3:장갑, 4:신발
+	//TODO::할꺼 - 완
 	if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)].isEquip)
 	{
-		IMAGE->findImage(m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)].m_equipItem->getBigImage())->frameRender(getMemDC(), m_vEquipItemMainRect[0].left - 10, m_vEquipItemMainRect[0].top + 10
+		IMAGE->findImage(m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)].m_equipItem->getBigImage())->frameRender(getMemDC(), 
+			m_vEquipItemMainRect[0].left - 10, m_vEquipItemMainRect[0].top + 10
 			, m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)].m_equipItem->getFrame().x
 			, m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)].m_equipItem->getFrame().y);
-		IMAGE->findImage(m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)].m_equipItem->getBigImage())->frameRender(getMemDC(), m_vEquipItemMainRect[2].left - 10, m_vEquipItemMainRect[2].top + 10
+		IMAGE->findImage(m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)].m_equipItem->getBigImage())->frameRender(getMemDC(), 
+			m_vEquipItemMainRect[2].left - 10, m_vEquipItemMainRect[2].top + 10
 			, m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)].m_equipItem->getFrame().x
 			, m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)].m_equipItem->getFrame().y);
 	}
 	if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].isEquip)
 	{
-		IMAGE->findImage(m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_equipItem->getBigImage())->frameRender(getMemDC(), m_vEquipItemMainRect[1].left - 10, m_vEquipItemMainRect[1].top + 10
+		IMAGE->findImage(m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_equipItem->getBigImage())->frameRender(getMemDC(), 
+			m_vEquipItemMainRect[1].left - 10, m_vEquipItemMainRect[1].top + 10
 			, m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_equipItem->getFrame().x
 			, m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_equipItem->getFrame().y);
 	}
 	if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].isEquip)
 	{
+		IMAGE->findImage(m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_equipItem->getBigImage())->frameRender(getMemDC(),
+			m_vEquipItemSubRect[4].left - 10, m_vEquipItemSubRect[4].top + 10
+			, m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_equipItem->getFrame().x
+			, m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_equipItem->getFrame().y);
 	}
 	if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].isEquip)
 	{
+		IMAGE->findImage(m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_equipItem->getBigImage())->frameRender(getMemDC(),
+			m_vEquipItemSubRect[3].left - 10, m_vEquipItemSubRect[3].top + 10
+			, m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_equipItem->getFrame().x
+			, m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_equipItem->getFrame().y);
 	}
 	if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].isEquip)
 	{
+		IMAGE->findImage(m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_equipItem->getBigImage())->frameRender(getMemDC(),
+			m_vEquipItemSubRect[0].left - 10, m_vEquipItemSubRect[0].top + 10
+			, m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_equipItem->getFrame().x
+			, m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_equipItem->getFrame().y);
 	}
 }
 
@@ -316,7 +332,7 @@ void CinventoryUi::showEquipSelect()
 			m_equipItem[static_cast<int>(m_selectType)].m_renderPoint.y = m_vItemListRect[i].top - 3;
 		}
 	}
-
+	//TODO::할꺼 - 완
 	if (isEquipSelectRender)
 	{
 		switch (m_selectType)
@@ -332,19 +348,19 @@ void CinventoryUi::showEquipSelect()
 					m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_renderPoint.y);
 			break;
 		case ITEMTYPE::ITEMTYPE_GLOVES:
-			if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].isEquip)
-				IMAGE->findImage("장착테두리")->render(getMemDC(), m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_renderPoint.x,
-					m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_renderPoint.y);
+			if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].isEquip)
+				IMAGE->findImage("장착테두리")->render(getMemDC(), m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_renderPoint.x,
+					m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_renderPoint.y);
 			break;
 		case ITEMTYPE::ITEMTYPE_SHOES:
-			if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].isEquip)
-				IMAGE->findImage("장착테두리")->render(getMemDC(), m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_renderPoint.x,
-					m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_renderPoint.y);
+			if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].isEquip)
+				IMAGE->findImage("장착테두리")->render(getMemDC(), m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_renderPoint.x,
+					m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_renderPoint.y);
 			break;
 		case ITEMTYPE::ITEMTYPE_PENDANT:
-			if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].isEquip)
-				IMAGE->findImage("장착테두리")->render(getMemDC(), m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_renderPoint.x,
-					m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_renderPoint.y);
+			if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].isEquip)
+				IMAGE->findImage("장착테두리")->render(getMemDC(), m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_renderPoint.x,
+					m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_renderPoint.y);
 			break;
 		}
 	}
@@ -367,7 +383,6 @@ void CinventoryUi::selectItem()
 				m_selectRenderY = (*iter).top - 3;
 				m_SelectIndex = i;
 				// 선택한 아이템 정보 inventory 에서 가져와서 selectItem 변수에 담기
-				// 나머지 타입 추가 필요
 				switch (m_selectType)
 				{
 				case ITEMTYPE::ITEMTYPE_WEAPON:
@@ -446,6 +461,7 @@ void CinventoryUi::selectEquipItem()
 // 아이템 장착!
 // 아이템 장착시 구조체배열 에 장착할 아이템 정보 넣어주기
 // 나머지 타입 추가 필요
+//TODO::할꺼 - 완
 void CinventoryUi::setEquipItem(int index, int x, int y)
 {
 	Citem* itemTemp;
@@ -483,28 +499,28 @@ void CinventoryUi::setEquipItem(int index, int x, int y)
 		m_myInventory->setEquipShoes(&(*(m_myInventory->getvShoesList()->begin() + index)));
 		itemTemp = m_myInventory->getEquipShoes();
 		m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)] = (*itemTemp);
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_equipItem = &m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)];
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_itemIndex = index;
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_renderPoint = PointMake(x, y);
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].isEquip = true;
+		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_equipItem = &m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)];
+		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_itemIndex = index;
+		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_renderPoint = PointMake(x, y);
+		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].isEquip = true;
 		break;
 	case ITEMTYPE::ITEMTYPE_GLOVES:
 		m_myInventory->setEquipGloves(&(*(m_myInventory->getvGlovesList()->begin() + index)));
 		itemTemp = m_myInventory->getEquipGloves();
 		m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)] = (*itemTemp);
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_equipItem = &m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)];
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_itemIndex = index;
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_renderPoint = PointMake(x, y);
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].isEquip = true;
+		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_equipItem = &m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)];
+		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_itemIndex = index;
+		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_renderPoint = PointMake(x, y);
+		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].isEquip = true;
 		break;
 	case ITEMTYPE::ITEMTYPE_PENDANT:
 		m_myInventory->setEquipPendant(&(*(m_myInventory->getvPendantList()->begin() + index)));
 		itemTemp = m_myInventory->getEquipPendant();
 		m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)] = (*itemTemp);
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_equipItem = &m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)];
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_itemIndex = index;
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_renderPoint = PointMake(x, y);
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].isEquip = true;
+		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_equipItem = &m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)];
+		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_itemIndex = index;
+		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_renderPoint = PointMake(x, y);
+		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].isEquip = true;
 		break;
 	default:
 		break;
@@ -754,6 +770,7 @@ void CinventoryUi::selectItemTypeMain()
 
 // 주변 부위 장비창 칸 클릭시
 // 나머지 타입 추가 필요!
+//TODO::할꺼 - 완
 void CinventoryUi::selectItemTypeSub()
 {
 	vector<RECT>::iterator iter;
@@ -794,7 +811,17 @@ void CinventoryUi::selectItemTypeSub()
 						}
 						else if ((*iter).left == m_vEquipItemSubRect[3].left) // 장갑
 						{
-
+							if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_equipItem != nullptr)
+								this->unEquipItem();
+							m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].isEquip = false;
+							m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_equipItem = nullptr;
+						}
+						else if ((*iter).left == m_vEquipItemSubRect[4].left) // 신발
+						{
+							if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_equipItem != nullptr)
+								this->unEquipItem();
+							m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].isEquip = false;
+							m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_equipItem = nullptr;
 						}
 					}
 					isKeyUp = false;
@@ -1145,6 +1172,7 @@ void CinventoryUi::abandonItem()
 
 // Id로 비교하도록 수정
 // 나머지 타입 추가 필요
+//TODO::할꺼 - 완
 bool CinventoryUi::checkEquipItem()
 {
 	if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)].m_equipItem != nullptr)
@@ -1155,6 +1183,21 @@ bool CinventoryUi::checkEquipItem()
 	if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_equipItem != nullptr )
 	{
 		if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_equipItem->getItemId() == m_selectItem->getItemId())
+			return false;
+	}
+	if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_equipItem != nullptr)
+	{
+		if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_equipItem->getItemId() == m_selectItem->getItemId())
+			return false;
+	}
+	if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_equipItem != nullptr)
+	{
+		if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_equipItem->getItemId() == m_selectItem->getItemId())
+			return false;
+	}
+	if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_equipItem != nullptr)
+	{
+		if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_equipItem->getItemId() == m_selectItem->getItemId())
 			return false;
 	}
 	return true;
