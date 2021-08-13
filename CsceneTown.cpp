@@ -41,10 +41,14 @@ HRESULT CsceneTown::init()
 	m_aStar->init();
 
 	m_shop = new Cshop;
+	m_shop->setInventoryMemory(m_player->getInventoryMemory());
+	m_shop->setPlayerMemory(m_player->getPlayer());
 	m_shop->init();
+	
 
 	m_shopUi = new CshopUi;
-	m_shopUi->setInventoryMemory(m_player->getInventoryMemory());
+	//m_shopUi->setInventoryMemory(m_player->getInventoryMemory());
+	//m_shopUi->setPlayerMemory(m_player->getPlayer());
 	m_shopUi->setShopMemory(m_shop);
 	m_shopUi->init();
 

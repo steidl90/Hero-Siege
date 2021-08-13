@@ -2,6 +2,15 @@
 #include"gameNode.h"
 #include"Cinventory.h"
 // 인벤토리 include 오류나면 전방참조
+
+struct EquipItem
+{
+	Citem* m_equipItem;
+	int m_itemIndex;
+	POINT m_renderPoint;
+	bool isEquip;
+};
+
 class Cplayer;
 class CinventoryUi : public gameNode
 {
@@ -29,16 +38,8 @@ private:
 	vector<RECT> m_vEquipItemMainRect;
 	RECT m_ItemInfoRect;
 
-	RECT m_exitButton;
 	RECT m_equipButton;
-	RECT m_unEquipButton;
 	RECT m_abandonButton;
-
-	Citem* m_equipWeapon;
-	Citem* m_equipArmor;
-	Citem* m_selectItem;
-
-	Citem m_itemInit[2];
 
 	// 버튼 클릭시 stay다운을 once처럼 쓰기위해..
 	bool isButtonClick;
@@ -46,6 +47,10 @@ private:
 
 	// 기능 구현 멤버변수
 	ITEMTYPE m_selectType;
+	Citem* m_selectItem;
+	Citem m_itemInit[5];
+	// 구조 수정
+	EquipItem m_equipItem[5];
 
 	int m_showIndex;
 	int m_showEndIndex;
@@ -55,19 +60,26 @@ private:
 	int m_equipRenderY;
 	int m_clickCount;
 
-	POINT m_equipRenderPoint[5];
-
 	bool isSelectRender;
-	//bool isEquipRender;
-
-	bool isEquipWeapon;
-	bool isEquipArmor;
-
+	int m_SelectIndex;
 	int m_compareTime;
 
 	RECT m_clickCheckRect;
 
+	POINT m_equipRenderPoint[5];  // 필요없는 변수인데 이걸 없애면 오류가 나네... ???
 
+
+	//bool isEquipRender;
+	//bool isEquipWeapon;
+	//bool isEquipArmor;
+	//bool isEquipShoes;
+	//bool isEquipGloves;
+	//bool isEquipPendant;
+	//Citem* m_equipWeapon;
+	//Citem* m_equipArmor;
+	//Citem* m_equipShoes;
+	//Citem* m_equipGloves;
+	//Citem* m_equipPendant;
 public:
 
 	CinventoryUi();
@@ -98,17 +110,21 @@ public:
 	// 아이템 장착 동작!
 	void setEquipItem(int index, int x, int y);
 	void setPlayerStat(int index);
+	void clickEquipButton();
 	// 장비창 rect 클릭시 선택 아이템 타입 변경
-	void selectItemType();
+	void selectItemTypeMain();
+	void selectItemTypeSub();
 
-	// 아이템 상세정보
+	// 아이템 상세정보 창
+	void showItemInfo();
+	void showItemCompare();
 
 	// 아이템 버리기 동작
 	void abandonItem();
 	bool checkEquipItem();
 
 	// 아이템 해제 동작
-
 	void unEquipItem();
+	
 };
 

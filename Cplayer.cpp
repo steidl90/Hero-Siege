@@ -25,7 +25,7 @@ HRESULT Cplayer::init()
 	setSpeed(3.0f);
 	setLv(1);
 	setExp(0);
-	setGold(1000);
+	setGold(5000);
 	m_playerX = 50;
 	m_playerY = WINSIZEY / 2 + 230;
 
