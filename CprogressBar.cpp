@@ -58,6 +58,12 @@ void CprogressBar::mapRender()
 	m_progressBarFront->render(getMapDC(), m_rcProgress.left, m_rcProgress.top, 0, 0, m_width, m_progressBarBack->getHeight());
 }
 
+void CprogressBar::mapBossRender()
+{
+	m_progressBarBack->render(getMemDC(), m_rcProgress.left, m_rcProgress.top, 0, 0, m_progressBarBack->getWidth(), m_progressBarBack->getHeight());
+	m_progressBarFront->render(getMemDC(), m_rcProgress.left, m_rcProgress.top, 0, 0, m_width, m_progressBarBack->getHeight());
+}
+
 void CprogressBar::setGauge(float currentGauge, float maxGauge)
 {
 	m_width = (currentGauge / maxGauge) * m_progressBarBack->getWidth();

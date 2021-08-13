@@ -9,10 +9,15 @@ Cmevius::~Cmevius()
 {
 }
 
-HRESULT Cmevius::init()
+HRESULT Cmevius::init(POINT position, float hp, float p1Damage1, float p1Damage2, float p1Damage3)
 {
     m_em = new CenemyManager;
     m_player = new Cplayer;
+
+    m_hpBar = new CprogressBar;
+    m_hpBar->init("images/hp.bmp", "images/hp_back.bmp", m_x, m_y, 596, 16);
+    m_hpBar->setGauge(m_hp, m_maxHp);
+
 	ANIMATION->addDefAnimation("애니공중", "보스공중", 10, false, true);
     ANIMATION->addDefAnimation("애니보스", "보스", 5, false, true);
     ANIMATION->addDefAnimation("애니캐스팅", "보스캐스팅", 10, false, false);
@@ -30,9 +35,18 @@ HRESULT Cmevius::init()
 	m_isIdle = false;
 	m_isDie = false;
 
-    m_x = WINSIZEX / 2;
-    m_y = -50;
+    m_x = position.x ;
+    m_y = position.y;
     m_speed = 2;
+
+    m_hp = m_maxHp = hp;
+    //m_def = def;
+    //m_exp = exp;
+
+    m_skillDamagePattern1= p1Damage1;
+    m_skillDamagePattern2= p1Damage2;
+    m_skillDamagePattern3= p1Damage3;
+
     return S_OK;
 }
 
@@ -43,6 +57,11 @@ void Cmevius::release()
 
 void Cmevius::update()
 {
+    m_hpBar->setGauge(m_hp, m_maxHp);
+    m_hpBar->mapUpdate(344,70);
+
+
+    //등장씬 시작
    if (m_isAppear)
    {
        m_isLevitating = true;
@@ -100,6 +119,8 @@ void Cmevius::update()
         m_isIdle = false;
         m_isCasting = true;
     }
+    //등장씬 끝
+
 
     if (m_isCasting && InputManager->isOnceKeyDown('3'))
     {
@@ -111,7 +132,6 @@ void Cmevius::update()
 
     if (InputManager->isOnceKeyDown('2'))
     {
-        init();
     }
     if (m_meviusImage != nullptr) {
         m_meviusRc = RectMake(m_x, m_y, m_meviusImage->getFrameWidth(), m_meviusImage->getFrameHeight());
@@ -127,6 +147,8 @@ void Cmevius::render()
     //wsprintf(str1, "idle : %d walk : %d  casting : %d", m_isIdle,m_isWalking,m_isCasting);
     //TextOut(getMemDC(), 100, 130, str1, lstrlen(str1));
     if (m_meviusImage != nullptr) {
+        m_hpBar->mapBossRender();
+        IMAGE->findImage("보스체력바")->render(getMemDC(),300,50 );
         m_meviusImage->aniRender(getMapDC(), m_x, m_y, m_meviusAnimation);
         EFFECT->render();
     }
@@ -151,7 +173,7 @@ void Cmevius::meviusState()
         m_meviusAnimation = ANIMATION->findAnimation("애니캐스팅");
         ANIMATION->start("애니캐스팅");
         break;
-    case BOSS_STATE::BOSS_STATE_LEVITATIN:
+    case BOSS_STATE::BOSS_STATE_LEVITATING:
         m_meviusImage = IMAGE->findImage("보스공중");
         m_meviusAnimation = ANIMATION->findAnimation("애니공중");
         ANIMATION->start("애니공중");

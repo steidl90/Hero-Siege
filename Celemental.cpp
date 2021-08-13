@@ -11,7 +11,7 @@ Celemental::~Celemental()
 {
 }
 
-HRESULT Celemental::init(POINT position, float HP, float damage, int exp,float trace)
+HRESULT Celemental::init(POINT position, float HP, float damage, float def, int exp, float trace)
 {
 	m_enemyAttack = new CenemyAttack;
 	m_enemyAttack->init(50, 500, false, "ø§∏Æ∏‡≈ªΩ∫≈≥æ÷¥œ");
@@ -28,6 +28,7 @@ HRESULT Celemental::init(POINT position, float HP, float damage, int exp,float t
 	m_speed = 2.0f;
 	m_hp = m_maxHp = HP;
 	m_damage= damage;
+	m_def = def;
 	m_exp=exp;
 
 	m_hpBar = new CprogressBar;
@@ -74,9 +75,11 @@ void Celemental::render()
 		Rectangle(getMapDC(), m_traceRc.left, m_traceRc.top, m_traceRc.right, m_traceRc.bottom);
 		Rectangle(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkRc.right, m_walkRc.bottom);
 	}
+	//IMAGE->findImage("º±≈√±◊∏≤¿⁄")->render(getMapDC(), m_x-18, m_y+20);
+	//IMAGE->findImage("º±≈√±◊∏≤¿⁄")->alphaRender(getMapDC(), m_x - 18, m_y + 20, 100);
 	m_hpBar->mapRender();
 	IMAGE->findImage("¿œπ›∏ÛΩ∫≈Õ√º∑¬πŸ")->render(getMapDC(), m_x-21, m_y - 48);
-	if (m_isWalking)m_walkImage->aniRender(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkAni);
+	if (m_isWalking)m_walkImage->aniRender(getMapDC(), m_walkRc.left-4, m_walkRc.top, m_walkAni);
 	m_enemyAttack->render();
 }
 
@@ -93,7 +96,7 @@ void Celemental::attack()
 				m_walkRc.bottom + (m_walkRc.top - m_walkRc.bottom) / 2,
 				m_player->getplayerMoveRC()->left + (m_player->getplayerMoveRC()->right - m_player->getplayerMoveRC()->left) / 2,
 				m_player->getplayerMoveRC()->top+(m_player->getplayerMoveRC()->bottom - m_player->getplayerMoveRC()->top) / 2),
-				5.0f, "ø§∏Æ∏‡≈ªΩ∫≈≥", "ø§∏Æ∏‡≈ªΩ∫≈≥æ÷¥œ");
+				5.0f, "ø§∏Æ∏‡≈ªΩ∫≈≥3", "ø§∏Æ∏‡≈ªΩ∫≈≥æ÷¥œ");
 		}
 	}
 }

@@ -11,7 +11,7 @@ Cimage::~Cimage()
 
 HRESULT Cimage::init()
 {
-    m_imageSize = 1;
+    m_imageSize = 1.5;
     /*  모든 이미지 이미지매니저에 추가하는 용도  */
     /*  모든 이미지 이미지매니저에 추가하는 용도  */
     /*  모든 이미지 이미지매니저에 추가하는 용도  */
@@ -62,8 +62,10 @@ HRESULT Cimage::init()
 
     IMAGE->addFrameImage("엘리멘탈", "images/Elemental.bmp", 252, 268, 4, 4, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("엘리멘탈스킬", "images/ElementalSkill1.bmp", 162, 18, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("엘리멘탈스킬2", "images/ElementalSkill3.bmp", 161, 25, 7, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("엘리멘탈스킬3", "images/ElementalSkill4.bmp", 322, 50, 7, 1, true, RGB(255, 0, 255));
 
-    IMAGE->addFrameImage("슬라임", "images/GreenSlime.bmp", 138 * 1.5, 18 * 1.5, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("슬라임", "images/GreenSlime.bmp", 138 * 2, 18 * 2, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("슬라임공격", "images/GreenSlimeAttack.bmp", 480 * 1.5, 152 * 1.5, 12, 4, true, RGB(255, 0, 255));
                 
     IMAGE->addFrameImage("몽크", "images/Monk.bmp", 264, 300, 6, 4, true, RGB(255, 0, 255));
@@ -131,6 +133,7 @@ HRESULT Cimage::init()
     IMAGE->addImage("나가기버튼비활성화", "images/GameOut1.bmp", 338, 62, true, RGB(255, 0, 255));
     IMAGE->addImage("나가기버튼활성화", "images/GameOut2.bmp", 338, 62, true, RGB(255, 0, 255));
     IMAGE->addImage("선택그림자", "images/Shadow.bmp", 40, 21, true, RGB(255, 0, 255));
+    IMAGE->addImage("몬스터그림자", "images/Shadow.bmp", 45, 26, true, RGB(255, 0, 255));
     IMAGE->addImage("선택효과", "images/SelectEffect.bmp", 44, 25, true, RGB(255, 0, 255));
     IMAGE->addImage("SkillUi", "images/HUD.bmp", 361, 112, true, RGB(255, 0, 255));
     IMAGE->addImage("StateUi", "images/StateUI.bmp", 318, 100, true, RGB(255, 0, 255));
@@ -145,7 +148,7 @@ HRESULT Cimage::init()
     IMAGE->addImage("플레이어체력바", "images/player_hp_bar.bmp", 49, 15, true, RGB(255, 0, 255));
     IMAGE->addImage("일반몬스터체력바", "images/Enemy/NomalMonsterHpbar.bmp", 45, 11, true, RGB(255, 0, 255));
     IMAGE->addImage("레어몬스터체력바", "images/Enemy/RareMonsterHpbar.bmp", 57, 14, true, RGB(255, 0, 255));
-    IMAGE->addImage("보스체력바", "images/Enemy/BossHpbar.bmp", 855, 65, true, RGB(255, 0, 255));
+    IMAGE->addImage("보스체력바", "images/Enemy/BossHpbar.bmp", 855 * 0.8, 65 * 0.8, true, RGB(255, 0, 255));
     IMAGE->addImage("레벨업", "images/LevelUP.bmp", 183 * 1.5, 55 * 1.5, true, RGB(255, 0, 255));
     IMAGE->addImage("상점창", "images/shop_window.bmp", 469, 473, true, RGB(255, 0, 255));
 

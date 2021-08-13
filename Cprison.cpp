@@ -11,7 +11,7 @@ Cprison::~Cprison()
 {
 }
 
-HRESULT Cprison::init(POINT position, float HP, float damage, int exp, float trace)
+HRESULT Cprison::init(POINT position, float HP, float damage, float def, int exp, float trace)
 {
 	m_enemyAttack = new CenemyAttack;
 	m_enemyAttack->init(5, 100, true, "교도관공격하");
@@ -30,6 +30,7 @@ HRESULT Cprison::init(POINT position, float HP, float damage, int exp, float tra
 	m_speed = 2.0f;
 	m_hp = m_maxHp = HP;
 	m_damage = damage;
+	m_def = def;
 	m_exp = exp;
 
 	m_hpBar = new CprogressBar;
@@ -88,6 +89,7 @@ void Cprison::render()
 		Rectangle(getMapDC(), m_traceRc.left, m_traceRc.top, m_traceRc.right, m_traceRc.bottom);
 		Rectangle(getMapDC(), m_dieRc.left, m_dieRc.top, m_dieRc.right, m_dieRc.bottom);
 	}
+	//IMAGE->findImage("몽크그림자")->alphaRender(getMapDC(), m_x - 27, m_y + 20, 100);
 	m_hpBar->mapRender();
 	IMAGE->findImage("일반몬스터체력바")->render(getMapDC(), m_x -21, m_y - 48);
 	if (m_isWalking)m_walkImage->aniRender(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkAni);
