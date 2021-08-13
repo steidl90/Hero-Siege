@@ -292,7 +292,7 @@ void mapToolSub::mapSave()
 	HANDLE file;
 	DWORD write;
 
-	file = CreateFile("tileMap.map",
+	file = CreateFile("dungeon.map",
 		GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	WriteFile(file, m_mapToolmain->getFrameObjectInfo(), sizeof(tagFrameObjectInfo) * TILEX * TILEY, &write, NULL);
@@ -307,7 +307,7 @@ void mapToolSub::mapLoad()
 	HANDLE file;
 	DWORD read;
 
-	file = CreateFile("tileMap.map",
+	file = CreateFile("dungeon.map",
 		GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	ReadFile(file, m_mapToolmain->getFrameObjectInfo(), sizeof(tagFrameObjectInfo) * TILEX * TILEY, &read, NULL);
