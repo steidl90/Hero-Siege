@@ -9,7 +9,7 @@ Cmevius::~Cmevius()
 {
 }
 
-HRESULT Cmevius::init(POINT position, float hp, float p1Damage1, float p1Damage2, float p1Damage3)
+HRESULT Cmevius::init(POINT position, int hp, float p1Damage1, float p1Damage2, float p1Damage3)
 {
     m_em = new CenemyManager;
     m_player = new Cplayer;
@@ -146,11 +146,19 @@ void Cmevius::render()
     //TCHAR str1[100];
     //wsprintf(str1, "idle : %d walk : %d  casting : %d", m_isIdle,m_isWalking,m_isCasting);
     //TextOut(getMemDC(), 100, 130, str1, lstrlen(str1));
-    if (m_meviusImage != nullptr) {
+    if (m_meviusImage != nullptr) 
+    {
+        EFFECT->render();
+        m_meviusImage->aniRender(getMapDC(), m_x, m_y, m_meviusAnimation);
+
         m_hpBar->mapBossRender();
         IMAGE->findImage("보스체력바")->render(getMemDC(),300,50 );
-        m_meviusImage->aniRender(getMapDC(), m_x, m_y, m_meviusAnimation);
-        EFFECT->render();
+        TCHAR strhp[128];
+        SetTextColor(getMemDC(), RGB(255, 255, 255));
+        SetTextAlign(getMemDC(), TA_CENTER);
+        sprintf_s(strhp, "%d/%d", m_hp, m_maxHp);
+        TextOut(getMemDC(), 640, 70, strhp, strlen(strhp));
+        SetTextAlign(getMemDC(), TA_LEFT);
     }
 }
 
@@ -182,15 +190,6 @@ void Cmevius::meviusState()
         m_isDie = true;
         break;
     }
-
-    m_effectCount++;
-    if (m_effectCount % 4 == 0)
-    {
-        EFFECT->play("라이트닝", RND->getFromIntTo(100, WINSIZEX - 100), RND->getFromIntTo(100, WINSIZEY - 100));
-        //EFFECT->play("라이트닝", RND->getFromIntTo(100, WINSIZEX - 100), RND->getFromIntTo(100, WINSIZEY - 100));
-    }
-
-
 }
 
 void Cmevius::coolTime(float time, bool idle, bool walk, bool cast)

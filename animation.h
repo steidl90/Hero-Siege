@@ -60,11 +60,5 @@ public:
 	inline int getFrameWidth()const { return _frameWidth; }
 	inline int getFrameHeight()const { return _frameHeight; }
 
-
-
-
-
-
-
 };
 

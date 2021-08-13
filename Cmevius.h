@@ -32,8 +32,8 @@ private:
 	float m_x, m_y;
 	float m_speed;
 
-	float m_maxHp;
-	float m_hp;
+	int m_maxHp;
+	int m_hp;
 	float m_def;
 	float m_exp;
 	float m_skillDamagePattern1;
@@ -55,7 +55,7 @@ public:
 	Cmevius();
 	~Cmevius();
 
-	HRESULT init(POINT position,float hp, float p1Damage1, float p1Damage2, float p1Damage3);
+	HRESULT init(POINT position,int hp, float p1Damage1, float p1Damage2, float p1Damage3);
 	void release();
 	void update();
 	void render();
