@@ -1,6 +1,6 @@
 #include "framework.h"
 #include "CshopUi.h"
-
+#include "Cplayer.h"
 HRESULT CshopUi::init()
 {
 	m_shopUiX = 100;
@@ -71,32 +71,25 @@ void CshopUi::release()
 void CshopUi::update()
 {
 	this->selectItem();
-	this->setShowIndex();
 	this->selectShopItem();
 
-	if (InputManager->isStayKeyDown(VK_LBUTTON))
-	{
-		isButtonClick = true;
-	}
+	if (InputManager->isStayKeyDown(VK_LBUTTON)) isButtonClick = true;
 	else
 	{
 		isButtonClick = false;
 		isKeyUp = true;
 	}
-
 	if (isButtonClick)
 	{
 		if (isKeyUp)
 		{
 			this->buyItem();
-			
+			this->sellItem();
 		}
 	}
+	if (m_selectShopItem != nullptr) m_selectType = m_selectShopItem->getType();
 
-	if (m_selectShopItem != nullptr)
-	{
-		m_selectType = m_selectShopItem->getType();
-	}
+	this->setShowIndex();
 }
 
 void CshopUi::render()
@@ -117,26 +110,31 @@ void CshopUi::render()
 	Rectangle(getMemDC(), m_buyButton.left, m_buyButton.top, m_buyButton.right, m_buyButton.bottom);
 	//Rectangle(getMemDC(), m_ItemInfoRect.left, m_ItemInfoRect.top, m_ItemInfoRect.right, m_ItemInfoRect.bottom);
 
+
 	this->showItemType();
+
 	if (isSelectRender)
+	{
 		IMAGE->findImage("선택테두리")->render(getMemDC(), m_selectRenderX, m_selectRenderY);
-	if (isSelectRender)
 		this->showItemInfo();
+	}
 
 	if (isSelectShop)
 		this->showShopInfo();
 
-	this->showShopItemList(m_shopItem->getTotalList());
+	this->showShopItemList(m_shop->getTotalList());
 }
 
 
 void CshopUi::showInvenItemList(vector<Citem>* item)
 {
 	char str[100];
+
 	// show 인덱스는 기본 0~3까지만 보여준다, 이후 스크롤로 1~4 이런식으로 보여주기
 	int	i = m_showIndex;
 	int j = 0;
-	for (auto iter = item->begin() + i; iter != item->end() && i < m_showEndIndex; ++iter, i++, j++)
+	vector<Citem>::iterator iter;
+	for (iter = item->begin() + i; i < m_showEndIndex; ++iter, i++, j++)
 	{
 		IMAGE->findImage((*iter).getSmallImage())->frameRender(getMemDC()
 			, m_vItemListRect[j].left, m_vItemListRect[j].top, (*iter).getFrame().x, (*iter).getFrame().y);
@@ -258,19 +256,19 @@ void CshopUi::showItemType()
 	switch (m_selectType)
 	{
 	case ITEMTYPE::ITEMTYPE_WEAPON:
-		showInvenItemList(m_myInventory->getvWeaponList());
+		showInvenItemList(m_shop->getInventory()->getvWeaponList());
 		break;
 	case ITEMTYPE::ITEMTYPE_ARMOR:
-		showInvenItemList(m_myInventory->getvArmorList());
+		showInvenItemList(m_shop->getInventory()->getvArmorList());
 		break;
 	case ITEMTYPE::ITEMTYPE_SHOES:
-		showInvenItemList(m_myInventory->getvShoesList());
+		showInvenItemList(m_shop->getInventory()->getvShoesList());
 		break;
 	case ITEMTYPE::ITEMTYPE_GLOVES:
-		showInvenItemList(m_myInventory->getvGlovesList());
+		showInvenItemList(m_shop->getInventory()->getvGlovesList());
 		break;
 	case ITEMTYPE::ITEMTYPE_PENDANT:
-		showInvenItemList(m_myInventory->getvPendantList());
+		showInvenItemList(m_shop->getInventory()->getvPendantList());
 		break;
 	default:
 		break;
@@ -283,18 +281,31 @@ void CshopUi::setShowIndex()
 	switch (m_selectType)
 	{
 	case ITEMTYPE::ITEMTYPE_WEAPON:
-		if (m_myInventory->getvWeaponList()->size() < 4)
-			m_showEndIndex = m_myInventory->getvWeaponList()->size() + m_showIndex;
-		else
+		if (m_shop->getInventory()->getvWeaponList()->size() < 4)
+		{
+			m_showIndex = 0;
+			m_showEndIndex = m_shop->getInventory()->getvWeaponList()->size();
+		}
+		else if (m_shop->getInventory()->getvWeaponList()->size() - 4 < m_showIndex)
+		{
+			m_showIndex = m_shop->getInventory()->getvWeaponList()->size() - 4;
 			m_showEndIndex = m_showIndex + 4;
+		}
+		else m_showEndIndex = m_showIndex + 4;
+
 		break;
 	case ITEMTYPE::ITEMTYPE_ARMOR:
-		if (m_myInventory->getvArmorList()->size() < 4)
-			m_showEndIndex = m_myInventory->getvArmorList()->size() + m_showIndex;
-		else
+		if (m_shop->getInventory()->getvArmorList()->size() < 4)
+		{
+			m_showIndex = 0;
+			m_showEndIndex = m_shop->getInventory()->getvArmorList()->size();
+		}
+		else if (m_shop->getInventory()->getvArmorList()->size() - 4 < m_showIndex)
+		{
+			m_showIndex = m_shop->getInventory()->getvArmorList()->size() - 4;
 			m_showEndIndex = m_showIndex + 4;
-		break;
-	default:
+		}
+		else m_showEndIndex = m_showIndex + 4;
 		break;
 	}
 }
@@ -302,10 +313,9 @@ void CshopUi::setShowIndex()
 // 인벤토리 아이템 선택
 void CshopUi::selectItem()
 {
-	vector<Citem>::iterator weaponIter;
-	vector<Citem>::iterator armorIter;
+	vector<Citem>::iterator itemIter;
 	int i = m_showIndex;
-	for (auto iter = m_vItemListRect.begin(); iter != m_vItemListRect.end() && i < m_showEndIndex; ++iter, i++)
+	for (auto iter = m_vItemListRect.begin(); i < m_showEndIndex; ++iter, i++)
 	{
 		if (PtInRect(&(*iter), m_ptMouse))
 		{
@@ -321,18 +331,15 @@ void CshopUi::selectItem()
 					switch (m_selectType)
 					{
 					case ITEMTYPE::ITEMTYPE_WEAPON:
-						weaponIter = m_myInventory->getvWeaponList()->begin() + i;
-						m_selectItem = &(*weaponIter);
+						itemIter = m_shop->getInventory()->getvWeaponList()->begin() + i;
+						m_selectItem = &(*itemIter);
 						break;
 					case ITEMTYPE::ITEMTYPE_ARMOR:
-						armorIter = m_myInventory->getvArmorList()->begin() + i;
-						m_selectItem = &(*armorIter);
+						itemIter = m_shop->getInventory()->getvArmorList()->begin() + i;
+						m_selectItem = &(*itemIter);
 						break;
-					default:
-						break;
-
-						isKeyUp = false;
 					}
+					isKeyUp = false;
 				}
 			}
 		}
@@ -342,25 +349,21 @@ void CshopUi::selectItem()
 void CshopUi::showEquipSelect()
 {
 	// 현재 장착중인 아이템들은 myInventory에서 정보 가져오기 -> 해당 아이템 인덱스를 토대로 장착테두리 표시... 
-
-	/*switch (m_selectType)
-	{
-	case ITEMTYPE::ITEMTYPE_WEAPON:
-		if (isEquipWeapon)
-			IMAGE->findImage("장착테두리")->render(getMemDC(), m_equipRenderPoint[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)].x,
-				m_equipRenderPoint[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)].y);
-		break;
-	case ITEMTYPE::ITEMTYPE_ARMOR:
-		if (isEquipArmor)
-			IMAGE->findImage("장착테두리")->render(getMemDC(), m_equipRenderPoint[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].x,
-				m_equipRenderPoint[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].y);
-		break;
-	}*/
 }
 
 
 void CshopUi::sellItem()
 {
+	if (PtInRect(&m_sellButton, m_ptMouse))
+	{
+		if (m_selectItem != nullptr)
+		{
+			m_shop->sellItem(m_selectItem);
+			m_selectItem = nullptr;
+			isSelectRender = false;
+		}
+		isKeyUp = false;
+	}
 }
 
 void CshopUi::buyItem()
@@ -369,7 +372,7 @@ void CshopUi::buyItem()
 	{
 		if (m_selectShopItem != nullptr)
 		{
-			m_myInventory->addItem(m_selectShopItem);
+			m_shop->buyItem(m_selectShopItem);
 		}
 		isKeyUp = false;
 	}
@@ -406,8 +409,11 @@ void CshopUi::selectShopItem()
 			if (InputManager->isOnceKeyDown(VK_LBUTTON))
 			{
 				isSelectShop = true;
-				shopItemIter = m_shopItem->getTotalList()->begin() + i;
+				shopItemIter = m_shop->getTotalList()->begin() + i;
 				m_selectShopItem = &(*shopItemIter);
+
+				m_selectItem = nullptr;
+				isSelectRender = false;
 			}
 		}
 	}

@@ -31,6 +31,12 @@ HRESULT Cinventory::init()
 	m_vArmorList.push_back(*(ITEM->getItem(10)));
 	m_vArmorList.push_back(*(ITEM->getItem(11)));
 
+	m_vEquipList.push_back(m_equipWeapon);
+	m_vEquipList.push_back(m_equipArmor);
+	m_vEquipList.push_back(m_equipShoes);
+	m_vEquipList.push_back(m_equipGloves);
+	m_vEquipList.push_back(m_equipPendant);
+
 	//this->setItemId();
 	return S_OK;
 }
@@ -67,9 +73,6 @@ void Cinventory::addItem(Citem* item)
 	}
 }
 
-void Cinventory::EquipItem(Citem* item)
-{
-}
 
 void Cinventory::UnEquipItem(Citem* item)
 {
