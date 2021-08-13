@@ -51,9 +51,13 @@ HRESULT CsceneTown::init()
 	m_changeRect = RectMake(MAPSIZE - 10, MAPSIZE * 0.25 + 120, 100, 100);
 
 	m_shopRect = RectMake(300, 300, 100, 100);
+	//m_garNorRect = RectMake(1500 , 500, 100, 100);
 
+
+	m_npc = new CNPC;
+	m_npc->init();
 	isShopOn = false;
-
+	isGarNorCollison = false;
 	return S_OK;
 }
 
@@ -65,6 +69,7 @@ void CsceneTown::release()
 	SAFE_DELETE(m_aStar);
 	SAFE_DELETE(m_shop);
 	SAFE_DELETE(m_shopUi);
+	SAFE_DELETE(m_npc);
 }
 
 void CsceneTown::update()
@@ -77,10 +82,14 @@ void CsceneTown::update()
 	m_town->setFastLoadIndex(m_aStar->getFastLoad());
 	m_player->update();
 	m_player->setFastLoadLocation(m_aStar->getFastLoadLocation());
+	//NPC
+	m_npc->update();
 
 	if (isShopOn) m_shopUi->update();
 
 	shopOn();
+
+	if(isGarNorCollison)garNORCollison();
 
 	//Ã¼·Â ¸®Á¨
 	if (m_player->getPlayer()->getHp() < m_player->getPlayer()->getMaxHp())
@@ -121,10 +130,17 @@ void CsceneTown::render()
 	m_camera->render();
 	m_town->render();
 	m_player->render();
+	//NPC
+	m_npc->render();
 
 	if (isShopOn) m_shopUi->render();
 
 	Rectangle(getMapDC(), m_shopRect.left, m_shopRect.top, m_shopRect.right, m_shopRect.bottom);
+
+	if (!isGarNorCollison)
+	{
+		Rectangle(getMapDC(), m_garNorRect.left, m_garNorRect.top, m_garNorRect.bottom, m_garNorRect.right);
+	}
 }
 
 void CsceneTown::sceneChange()
@@ -164,3 +180,17 @@ void CsceneTown::shopOn()
 	}
 	//isShopOn = true;
 }
+
+void CsceneTown::garNORCollison()
+{
+	RECT temp;
+	if (IntersectRect(&temp, m_player->getplayerRect(), m_npc->getGaNorRect()))
+	{
+		if (InputManager->isOnceKeyDown('B'))
+		{
+			isGarNorCollison = !isGarNorCollison;
+		}
+	}
+	else isGarNorCollison = false;
+}
+
