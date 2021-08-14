@@ -225,9 +225,6 @@
     <ClInclude Include="Cplayer.h">
       <Filter>mainGame\히어로시즈\Cunit\CplayerManager\Cplayer</Filter>
     </ClInclude>
-    <ClInclude Include="Cunit.h">
-      <Filter>mainGame\히어로시즈\Cunit</Filter>
-    </ClInclude>
     <ClInclude Include="CenemyManager.h">
       <Filter>mainGame\히어로시즈\Cunit\Cenemy\CenemyManager</Filter>
     </ClInclude>
@@ -352,7 +349,10 @@
       <Filter>mainGame\히어로시즈\Cunit\CplayerManager\Cplayer\CplayerDate</Filter>
     </ClInclude>
     <ClInclude Include="CNPC.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>mainGame\히어로시즈\Cobject\CNPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Cunit.h">
+      <Filter>mainGame\히어로시즈\Cunit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -534,7 +534,7 @@
       <Filter>mainGame\히어로시즈\Cunit\CplayerManager\Cplayer\CplayerDate</Filter>
     </ClCompile>
     <ClCompile Include="CNPC.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>mainGame\히어로시즈\Cobject\CNPC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

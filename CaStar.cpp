@@ -240,9 +240,11 @@ void CaStar::tileComposition()
             }
         }
     }
-    POINT cameraMouse = m_ptMouse;
+    POINT cameraMouse = m_ptMouse; // x y
     cameraMouse.x += m_camera->getCameraPoint().x;
     cameraMouse.y += m_camera->getCameraPoint().y;
+
+    
 
     if (isButtonClick)
     {
