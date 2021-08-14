@@ -7,8 +7,7 @@ CenemyAttack::~CenemyAttack(){}
 
 HRESULT CenemyAttack::init(int skillMax, float range, bool melee, const char* aniName)
 {
-	//ANIMATION->addDefAnimation("¿¤¸®¸àÅ»½ºÅ³¾Ö´Ï", "¿¤¸®¸àÅ»½ºÅ³", 10, false, true);
-	//ANIMATION->addDefAnimation("¿¤¸®¸àÅ»½ºÅ³¾Ö´Ï", "¿¤¸®¸àÅ»½ºÅ³2", 10, false, true);
+	ANIMATION->addDefAnimation("º¸½º½ºÅ³¾Ö´Ï", "º¸½º°ø", 10, false, true);
 	ANIMATION->addDefAnimation("¿¤¸®¸àÅ»½ºÅ³¾Ö´Ï", "¿¤¸®¸àÅ»½ºÅ³3", 10, false, true);
 	ANIMATION->addDefAnimation("¸®Ä¡½ºÅ³¾Ö´Ï", "¸®Ä¡½ºÅ³", 15, false, true);
 

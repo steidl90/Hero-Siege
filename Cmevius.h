@@ -23,6 +23,7 @@ private:
 
 	CenemyManager* m_em;
 	Cplayer* m_player;
+	CenemyAttack* m_attack;
 
 	RECT m_meviusRc;		//보스 이미지 RC
 	RECT m_meviusSkillRc;	//보스 스킬 RC(가시공)
@@ -31,6 +32,7 @@ private:
 
 	float m_x, m_y;
 	float m_speed;
+	float m_angle;
 
 	int m_maxHp;
 	int m_hp;
@@ -42,6 +44,7 @@ private:
 
 	int m_effectCount;
 	int m_coolTime;
+	int m_skillCount;
 
 	bool m_isEffect;		//이펙트상태
 	bool m_isAppear;		//등장상태
@@ -60,8 +63,10 @@ public:
 	void update();
 	void render();
 
-	void meviusState();
-	void coolTime(float time,bool idle, bool walk, bool cast);
+	void meviusphase1();
+	void meviusphase2();
+	void meviusphase3();
+	bool meviusCooltime(int skillcount);
 
 };
 

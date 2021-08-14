@@ -61,7 +61,6 @@ void timeManager::render(HDC hdc)
             TextOut(hdc, 0, 40, str, strlen(str));
         }
     }
-
 #else
 
     if (_timer != nullptr)
@@ -70,6 +69,7 @@ void timeManager::render(HDC hdc)
         sprintf_s(str, "FPS : %d", _timer->getFrameRate());
         TextOut(hdc, 0, 0, str, strlen(str));
     }
+
 
 
 
