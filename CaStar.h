@@ -33,7 +33,7 @@ struct aStarTile
 	char str[128];
 
 	aStarTile* parent;	
-	TILE_TYPE type;		
+	TILE_TYPE type;
 };
 
 
@@ -55,8 +55,6 @@ private:
 	ASTAR_STATE _astarState;
 	TILE_TYPE _selectType;
 	COLORREF _selectedTypeColor;
-
-	
 
 	int _startX, _startY;
 	int _endX, _endY;

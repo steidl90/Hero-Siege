@@ -19,7 +19,7 @@ HRESULT CplayerUi::init()
 	m_hpBar->setGauge(m_player->getHp(), m_player->getMaxHp());
 
 	m_hpBarSecond = new CprogressBar;
-	m_hpBarSecond->init("images/hp.bmp", "images/hp_back.bmp", m_player->getplayerX(), m_player->getplayerY(), 33, 5);
+	m_hpBarSecond->init("images/hp.bmp", "images/hp_back.bmp", m_player->getPlayerX(), m_player->getPlayerY(), 33, 5);
 	m_hpBarSecond->setGauge(m_player->getHp(), m_player->getMaxHp());
 
 	m_mpBar = new CprogressBar;
@@ -69,7 +69,7 @@ void CplayerUi::render()
 	if (m_player->getLv() < 10) IMAGE->findImage("스킬잠금")->render(getMemDC(), 269, (WINSIZEY - 56) - IMAGE->findImage("스킬잠금")->getHeight());
 	else IMAGE->findImage("스킬R")->render(getMemDC(), 269, (WINSIZEY - 56) - IMAGE->findImage("스킬R")->getHeight());
 
-	IMAGE->findImage("플레이어체력바")->render(getMapDC(), m_player->getplayerX() - 7, m_player->getplayerY() - 10);
+	IMAGE->findImage("플레이어체력바")->render(getMapDC(), m_player->getPlayerX() - 7, m_player->getPlayerY() - 10);
 
 	if (isLevelUp)
 	{
@@ -90,7 +90,7 @@ void CplayerUi::progressBarUpdate()
 {
 	m_hpBar->update();
 	m_hpBar->setGauge(m_player->getHp(), m_player->getMaxHp());
-	m_hpBarSecond->mapUpdate(m_player->getplayerX() + 1, m_player->getplayerY() - 3);
+	m_hpBarSecond->mapUpdate(m_player->getPlayerX() + 1, m_player->getPlayerY() - 3);
 	m_hpBarSecond->setGauge(m_player->getHp(), m_player->getMaxHp());
 	m_mpBar->update();
 	m_mpBar->setGauge(m_player->getMp(), m_player->getMaxMp());

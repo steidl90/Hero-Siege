@@ -26,7 +26,6 @@ private:
 	bool isInventoryOn;
 
 	int m_timer;
-
 public:
 	CplayerManager();
 	~CplayerManager();

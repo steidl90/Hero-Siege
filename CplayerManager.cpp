@@ -9,10 +9,13 @@ CplayerManager::~CplayerManager()
 {
 }
 
+
 HRESULT CplayerManager::init()
 {
     m_player = new Cplayer;
     m_player->init();
+
+    //m_playerDate = new CplayerDate;
 
     m_playerSkill = new CplayerSkill;
 
@@ -161,8 +164,8 @@ void CplayerManager::collisionEnemy()
     {
         if (IntersectRect(&temp, m_player->getPlayerAttackRC(), &(*iter)->getRect()))
         {
-            (*iter)->setHp((*iter)->getHp() - m_player->getAtk());
-            wsprintf(atk, "%d", m_player->getAtk());
+            (*iter)->setHp((*iter)->getHp() - (m_player->getAtk()-(*iter)->getDef()));
+            wsprintf(atk, "%d", (m_player->getAtk() - (*iter)->getDef()));
             TextOut(getMapDC(), (*iter)->getRect().left + ((*iter)->getRect().right - (*iter)->getRect().left) / 2, (*iter)->getRect().top, atk, lstrlen(atk));
             
             if ((*iter)->getHp() <= 0)

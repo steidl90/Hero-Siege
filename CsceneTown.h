@@ -5,6 +5,7 @@
 #include "camera.h"
 #include "CaStar.h"
 #include "CshopUi.h"
+#include "CplayerDate.h"
 class CsceneTown : public gameNode
 {
 private:
@@ -14,12 +15,16 @@ private:
 	CaStar* m_aStar;
 	Cshop* m_shop;
 	CshopUi* m_shopUi;
+	CplayerDate* m_playerDate;
 
 private:
 	RECT m_changeRect;
 	RECT m_shopRect;
 
 	bool isShopOn;
+
+	float m_timerHp;
+	float m_timerMp;
 
 public:
 	CsceneTown();
@@ -32,4 +37,5 @@ public:
 
 	void sceneChange();
 	void shopOn();
+	void setPlayerMemory(CplayerDate* playerdate){ m_playerDate = playerdate;}
 };

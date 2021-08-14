@@ -105,6 +105,36 @@ void Cinventory::AbandonItem(Citem* item)
 			}
 		}
 		break;
+	case ITEMTYPE::ITEMTYPE_GLOVES:
+		for (auto iter = m_vGlovesList.begin(); iter != m_vGlovesList.end(); ++iter)
+		{
+			if ((*iter).getName() == item->getName())
+			{
+				m_vGlovesList.erase(iter);
+				break;
+			}
+		}
+		break;
+	case ITEMTYPE::ITEMTYPE_SHOES:
+		for (auto iter = m_vShoesList.begin(); iter != m_vShoesList.end(); ++iter)
+		{
+			if ((*iter).getName() == item->getName())
+			{
+				m_vShoesList.erase(iter);
+				break;
+			}
+		}
+		break;
+	case ITEMTYPE::ITEMTYPE_PENDANT:
+		for (auto iter = m_vPendantList.begin(); iter != m_vPendantList.end(); ++iter)
+		{
+			if ((*iter).getName() == item->getName())
+			{
+				m_vPendantList.erase(iter);
+				break;
+			}
+		}
+		break;
 	default:
 		break;
 	}

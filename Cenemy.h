@@ -37,6 +37,7 @@ protected:
 	float m_speed;
 	float m_distance;
 	float m_hp;
+	float m_def;
 	float m_maxHp;
 	float m_damage;
 	int m_exp;
@@ -71,8 +72,17 @@ public:
 	float getHp() { return m_hp; }
 	void setHp(float hp) { m_hp = hp; }
 
+	float getDamage() { return m_damage; }
+	void setDamage(float damage) { m_damage = damage; }
+
+	int getDef() { return m_def; }
+	void setDef(int def) { m_def = def; }
+
 	int getExp() { return m_exp; }
 	void setExp(int exp) { m_exp = exp; }
+
+	int getX() { return m_x; }
+	int getY() { return m_y; }
 
 	virtual void setPlayer(Cplayer* player) { m_player = player; }
 	virtual RECT getRect() { return m_walkRc; }

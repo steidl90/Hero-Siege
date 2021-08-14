@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "CsceneTown.h"
 
-CsceneTown::CsceneTown()
+CsceneTown::CsceneTown() :m_timerHp(NULL), m_timerMp(NULL)
 {
 }
 
@@ -22,6 +22,25 @@ HRESULT CsceneTown::init()
 	m_player->init();
 	m_player->setCheckTile(m_town->getMap());
 	m_player->setTileAttribute(m_town->getAttribute());
+
+	m_player->getPlayer()->setAtk(DATA->getAtk());
+	m_player->getPlayer()->setCritical(DATA->getCritical());
+	m_player->getPlayer()->setCriticalAtk(DATA->getCriticalAtk());
+	m_player->getPlayer()->setDef(DATA->getDef());
+	m_player->getPlayer()->setExp(DATA->getExp());
+	m_player->getPlayer()->setGold(DATA->getGold());
+	m_player->getPlayer()->setHp(DATA->getHp());
+	m_player->getPlayer()->setLv(DATA->getLv());
+	m_player->getPlayer()->setMp(DATA->getMp());
+	m_player->getPlayer()->setSpeed(DATA->getSpeed());
+	m_player->getPlayer()->setPlayerX(DATA->getX());
+	m_player->getPlayer()->setPlayerY(DATA->getY());
+
+	m_player->getInventoryMemory()->setEquipWeapon(DATA->getWeaponEquip());
+	m_player->getInventoryMemory()->setEquipArmor(DATA->getArmorEquip());
+	m_player->getInventoryMemory()->setEquipShoes(DATA->getShoesEquip());
+	m_player->getInventoryMemory()->setEquipGloves(DATA->getGlovesEquip());
+	m_player->getInventoryMemory()->setEquipPendant(DATA->getPendantEquip());
 
 	m_aStar = new CaStar;
 	m_aStar->setCameraMemory(m_camera);
@@ -53,10 +72,15 @@ void CsceneTown::release()
 	SAFE_DELETE(m_camera);
 	SAFE_DELETE(m_town);
 	SAFE_DELETE(m_player);
+	SAFE_DELETE(m_aStar);
+	SAFE_DELETE(m_shop);
+	SAFE_DELETE(m_shopUi);
 }
 
 void CsceneTown::update()
 {
+	m_aStar->update();
+	m_aStar->setPlayerIndex(PointMake(m_player->getplayerRect()->left / TILESIZE, m_player->getplayerRect()->top / TILESIZE));
 	m_camera->update();
 	m_camera->setTargetPoint(PointMake(m_player->getplayerRect()->left, m_player->getplayerRect()->top));
 	m_town->update();
@@ -67,6 +91,34 @@ void CsceneTown::update()
 	if (isShopOn) m_shopUi->update();
 
 	shopOn();
+
+	//체력 리젠
+	if (m_player->getPlayer()->getHp() < m_player->getPlayer()->getMaxHp())
+	{
+		if (m_timerHp + 3 < TIME->getWorldTime())
+		{
+			m_player->getPlayer()->setHp(m_player->getPlayer()->getHp() + 10);
+			m_timerHp = TIME->getWorldTime();
+		}
+		if (m_player->getPlayer()->getHp() > m_player->getPlayer()->getMaxHp())
+		{
+			m_player->getPlayer()->setHp(m_player->getPlayer()->getMaxHp());
+		}
+	}
+
+	//마나 리젠
+	if (m_player->getPlayer()->getMp() < m_player->getPlayer()->getMaxMp())
+	{
+		if (m_timerMp + 3 < TIME->getWorldTime())
+		{
+			m_player->getPlayer()->setMp(m_player->getPlayer()->getMp() + 5);
+			m_timerMp = TIME->getWorldTime();
+		}
+		if (m_player->getPlayer()->getMp() > m_player->getPlayer()->getMaxMp())
+		{
+			m_player->getPlayer()->setMp(m_player->getPlayer()->getMaxMp());
+		}
+	}
 
 	sceneChange();
 }
@@ -82,16 +134,32 @@ void CsceneTown::render()
 
 	if (isShopOn) m_shopUi->render();
 
-	//Rectangle(getMapDC(), m_changeRect.left, m_changeRect.top, m_changeRect.right, m_changeRect.bottom);
 	Rectangle(getMapDC(), m_shopRect.left, m_shopRect.top, m_shopRect.right, m_shopRect.bottom);
 }
 
 void CsceneTown::sceneChange()
 {
 	RECT temp;
-
 	if (IntersectRect(&temp, m_player->getplayerRect(), &m_changeRect))
 	{
+		DATA->setData(m_player->getPlayer()->getAtk(),
+			m_player->getPlayer()->getDef(),
+			m_player->getPlayer()->getHp(),
+			m_player->getPlayer()->getMp(),
+			m_player->getPlayer()->getCritical(),
+			m_player->getPlayer()->getLv(),
+			m_player->getPlayer()->getExp(),
+			m_player->getPlayer()->getGold(),
+			m_player->getPlayer()->getCriticalAtk(),
+			m_player->getPlayer()->getSpeed(),
+			m_player->getPlayer()->getPlayerX(),
+			m_player->getPlayer()->getPlayerY());
+		DATA->setWeaponEquip(m_player->getInventoryMemory()->getEquipWeapon());
+		DATA->setArmorEquip(m_player->getInventoryMemory()->getEquipArmor());
+		DATA->setShoesEquip(m_player->getInventoryMemory()->getEquipShoes());
+		DATA->setGlovesEquip(m_player->getInventoryMemory()->getEquipGloves());
+		DATA->setPendantEquip(m_player->getInventoryMemory()->getEquipPendant());
+
 		SCENE->changeScene("던전");
 	}
 }
