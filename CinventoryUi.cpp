@@ -741,17 +741,17 @@ void CinventoryUi::selectItemTypeMain()
 					{
 						if ((*iter).left == m_vEquipItemMainRect[1].left)
 						{
-							if(m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_equipItem != nullptr)
+							if(m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_ARMOR)->m_item != nullptr)
 								this->unEquipItem();
-							m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].isEquip = false;
-							m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_equipItem = nullptr;
+							m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_ARMOR)->isEquip = false;
+							m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_ARMOR)->m_item = nullptr;
 						}
 						else
 						{
-							if(m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)].m_equipItem != nullptr)
+							if(m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_WEAPON)->m_item != nullptr)
 								this->unEquipItem();
-							m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)].isEquip = false;
-							m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)].m_equipItem = nullptr;
+							m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_WEAPON)->isEquip = false;
+							m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_WEAPON)->m_item = nullptr;
 						}
 					}
 					isKeyUp = false;
@@ -800,24 +800,24 @@ void CinventoryUi::selectItemTypeSub()
 					{
 						if ((*iter).left == m_vEquipItemSubRect[0].left) // 0: ÆÒ´øÆ®
 						{
-							if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_equipItem != nullptr)
+							if (m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_PENDANT)->m_item != nullptr)
 								this->unEquipItem();
-							m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].isEquip = false;
-							m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_equipItem = nullptr;
+							m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_PENDANT)->isEquip = false;
+							m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_PENDANT)->m_item = nullptr;
 						}
 						else if ((*iter).left == m_vEquipItemSubRect[3].left) // Àå°©
 						{
-							if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_equipItem != nullptr)
+							if (m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_GLOVES)->m_item != nullptr)
 								this->unEquipItem();
-							m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].isEquip = false;
-							m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_equipItem = nullptr;
+							m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_GLOVES)->isEquip = false;
+							m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_GLOVES)->m_item = nullptr;
 						}
 						else if ((*iter).left == m_vEquipItemSubRect[4].left) // ½Å¹ß
 						{
-							if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_equipItem != nullptr)
+							if (m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_SHOES)->m_item != nullptr)
 								this->unEquipItem();
-							m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].isEquip = false;
-							m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_equipItem = nullptr;
+							m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_SHOES)->isEquip = false;
+							m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_SHOES)->m_item = nullptr;
 						}
 					}
 					isKeyUp = false;
@@ -1196,7 +1196,7 @@ bool CinventoryUi::checkEquipItem()
 	}
 	if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_equipItem != nullptr)
 	{
-		if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_equipItem->getItemId() == m_selectItem->getItemId())
+		if (m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_PENDANT)->m_item->getItemId() == m_selectItem->getItemId())
 			return false;
 	}
 	return true;
