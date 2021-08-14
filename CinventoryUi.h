@@ -3,19 +3,13 @@
 #include"Cinventory.h"
 // 인벤토리 include 오류나면 전방참조
 
-struct EquipItem
-{
-	Citem* m_equipItem;
-	int m_itemIndex;
-	POINT m_renderPoint;
-	bool isEquip;
-};
+
 
 class Cplayer;
 class CinventoryUi : public gameNode
 {
 private:
-	Cinventory* m_myInventory;
+	Cinventory* m_Inventory;
 	Cplayer* m_player;
 
 private:
@@ -47,7 +41,7 @@ private:
 
 	// 기능 구현 멤버변수
 	ITEMTYPE m_selectType;
-	Citem* m_selectItem;
+	//Citem* m_selectItem;
 	Citem m_itemInit[5];
 	// 구조 수정
 	EquipItem m_equipItem[5];
@@ -91,7 +85,7 @@ public:
 	void render();
 
 	// 인벤토리 정보 set
-	void setInventoryMemory(Cinventory* inven) { m_myInventory = inven; }
+	void setInventoryMemory(Cinventory* inven) { m_Inventory = inven; }
 	// 플레이어 정보 set
 	void setPlayerMemory(Cplayer* player) { m_player = player; }
 
@@ -100,7 +94,7 @@ public:
 
 	// 타입별 아이템 출력
 	void showListItemType();
-	void showItemList(vector<Citem>* list);
+	void showItemList(vector<Citem*>* list);
 	// 장착 테두리 출력
 	void showEquipSelect();
 
