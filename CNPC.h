@@ -39,6 +39,30 @@ private:
 	int m_halsteinX;
 	int m_halsteinY;
 
+	RECT m_kaylaRc;
+	image* m_kaylaImage;
+	animation* m_kaylaAni;
+	int m_kaylaX;
+	int m_kaylaY;
+
+	RECT m_sarcasterRc;
+	image* m_sarcasterImage;
+	animation* m_sarcasterAni;
+	int m_sarcasterX;
+	int m_sarcasterY;
+
+	RECT m_torsteinRc;
+	image* m_torsteinImage;
+	animation* m_torsteinAni;
+	int m_torsteinX;
+	int m_torsteinY;
+
+	RECT m_witchRc;
+	image* m_witchImage;
+	animation* m_witchAni;
+	int m_witchX;
+	int m_witchY;
+
 	bool a;
 public:
 	HRESULT init();
@@ -46,7 +70,18 @@ public:
 	void update();
 	void render();
 	void getNpcAni();
-	
+	void getNpcRectangle();
+
 	RECT* getGaNorRect() { return &m_garNorRc; }
+	RECT* getShopKeeperRect() { return &m_shopKeeperRc; }
+	RECT* getBlackMarketRect() { return &m_blackMarketRc; }
+	RECT* getEdwardRect() { return &m_edwardRc; }
+	RECT* getEricRect() { return &m_ericRc; }
+	RECT* getHalsteinRect() { return &m_halsteinRc; }
+	RECT* getKaylaRect() { return &m_kaylaRc; }
+	RECT* getSarcasterRect() { return &m_sarcasterRc; }
+	RECT* getTorsteinRect() { return &m_torsteinRc; }
+	RECT* getWitchRect() { return &m_witchRc; }
+
 };
 
