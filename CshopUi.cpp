@@ -63,7 +63,7 @@ HRESULT CshopUi::init()
 
 	isButtonClick = false;
 	isKeyUp = true;
-
+	m_exit = false;
 	return S_OK;
 }
 
@@ -88,6 +88,7 @@ void CshopUi::update()
 		{
 			this->buyItem();
 			this->sellItem();
+			this->exitShop();
 		}
 	}
 	if (m_selectShopItem != nullptr) m_selectType = m_selectShopItem->getType();
@@ -428,6 +429,14 @@ void CshopUi::buyItem()
 			m_shop->buyItem(m_selectShopItem);
 		}
 		isKeyUp = false;
+	}
+}
+
+void CshopUi::exitShop()
+{
+	if (PtInRect(&m_exitButton, m_ptMouse))
+	{
+		m_exit = true;
 	}
 }
 

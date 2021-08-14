@@ -101,14 +101,16 @@ void CsceneTown::shopOn()
 	RECT temp;
 	if (IntersectRect(&temp, m_player->getplayerRect(), &m_shopRect))
 	{
-		if (InputManager->isOnceKeyDown('P'))
+		if (InputManager->isOnceKeyDown('P')) isShopOn = !isShopOn;
+		
+		if (m_shopUi->getExit() == true)
 		{
-			isShopOn = !isShopOn;
+			isShopOn = false;
+			m_shopUi->setExit(false);
 		}
 	}
 	else
 	{
 		isShopOn = false;
 	}
-	//isShopOn = true;
 }

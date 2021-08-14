@@ -90,6 +90,7 @@ void CinventoryUi::update()
 	this->selectItem();
 	this->selectEquipItem();
 	this->selectItemTypeMain();
+	this->selectItemTypeSub();
 	this->abandonItem();
 	this->clickEquipButton();
 
