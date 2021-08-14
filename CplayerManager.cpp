@@ -52,6 +52,8 @@ void CplayerManager::update()
     if (InputManager->isOnceKeyDown('I')) isInventoryOn = !isInventoryOn;
     EFFECT->update();
     m_player->update();
+    if(m_fastLoadLocation != nullptr)
+        m_player->setAstarMove(m_fastLoadLocation);
     if(isInventoryOn) m_InventoryUI->update();
     m_playerUi->update();
     m_playerSkill->update("리치스킬애니");

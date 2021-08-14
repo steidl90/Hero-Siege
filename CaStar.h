@@ -74,8 +74,6 @@ private:
 	HBRUSH newBrush, oldBrush;
 	HFONT newFont, oldFont;
 
-
-
 public:
 	CaStar();
 	~CaStar();

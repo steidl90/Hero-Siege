@@ -92,7 +92,8 @@ HRESULT Cplayer::init()
 
 	//렉트
 	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth(), playerMoveDown->getFrameHeight());
-
+	isAstarMove = true;
+	m_index = 0;
 	return S_OK;
 }
 
@@ -111,6 +112,9 @@ void Cplayer::update()
 	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth() - 90, playerMoveDown->getFrameHeight() - 50);
 	m_playerSkill->update("리치스킬애니");
 	
+	if (InputManager->isStayKeyDown(VK_RBUTTON))
+		isAstarMove = true;
+	playerAStarMove();
 }
 
 void Cplayer::render()
@@ -327,7 +331,7 @@ void Cplayer::moveAnimation()
 
 void Cplayer::playerStateRender()
 {
-	//Rectangle(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerMoveRc.right, playerMoveRc.bottom);
+	Rectangle(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerMoveRc.right, playerMoveRc.bottom);
 	if (isMoving)
 	{
 		switch (direction)
@@ -443,6 +447,43 @@ void Cplayer::isAttackRender()
 			playerAttackRc = RectMake(m_playerX - 10, m_playerY + 67, 40, 90);
 			playerAttackDown->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			break;
+		}
+	}
+}
+
+void Cplayer::playerAStarMove()
+{
+	vector<POINT>::iterator iter;
+	
+
+	if ( m_fastLoadLocation != nullptr)
+	{
+		/*if(isAstarMove == true)
+			iter = m_fastLoadLocation.begin();*/
+
+		//if (iter == m_fastLoadLocation.end())
+		//{
+		//	m_fastLoadLocation.clear();
+		//	isAstarMove = false;
+		//	return;
+		//}
+
+		if (m_index == m_fastLoadLocation->size())
+		{
+			m_fastLoadLocation->clear();
+			m_index = 0;
+			return;
+		}
+
+		if (m_playerX < (*m_fastLoadLocation)[m_index].x) m_playerX++;
+		else if (m_playerX > (*m_fastLoadLocation)[m_index].x)m_playerX--;
+		if (m_playerY < (*m_fastLoadLocation)[m_index].y) m_playerY++;
+		else if (m_playerY > (*m_fastLoadLocation)[m_index].y)m_playerY--;
+
+		if ((*m_fastLoadLocation)[m_index].x < m_playerX + 1 && (*m_fastLoadLocation)[m_index].x > m_playerX - 1
+			&& (*m_fastLoadLocation)[m_index].y < m_playerY + 1 && (*m_fastLoadLocation)[m_index].y > m_playerY - 1)
+		{
+			m_index++;
 		}
 	}
 }
@@ -668,32 +709,5 @@ void Cplayer::blockCheck(float speed, RECT* playerRC, DIRECTIONS direct)
 	//Rectangle(getMapDC(), rcCollision.left, rcCollision.top, rcCollision.right, rcCollision.bottom);
 	rcCollision = RectMake(m_playerX, m_playerY, TILESIZE, TILESIZE * 2);
 	playerMoveRc = rcCollision;
-}
-
-
-void Cplayer::mouseMoveAstar()
-{
-	///*if (resetMove)
-	//{
-	//	endCount = m_fastLoadLocation->size() - 1;
-	//	startCount = 0;
-	//}
-	/*while (true)
-	{
-		auto iter = m_fastLoadLocation->begin();
-
-		if (m_playerX > iter[startCount].x)
-			m_playerX += getSpeed();
-		else if (m_playerX < iter[startCount].x)
-			m_playerX -= getSpeed();
-
-		if (m_playerY > iter[startCount].y)
-			m_playerY -= getSpeed();
-		else if (m_playerY < iter[startCount].y)
-			m_playerY += getSpeed();
-	}*/
-
-	// 에이스타 이동 -> 이동할 타일을 리스트에 담음..
-	// 리스트 하나씩 이동
 }
 

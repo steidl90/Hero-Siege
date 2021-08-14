@@ -20,7 +20,7 @@ private:
 	Cinventory* m_inventory;
 	CenemyManager* m_enemy;
 private:
-
+	
 	vector<POINT>* m_fastLoadLocation;
 
 	bool isInventoryOn;

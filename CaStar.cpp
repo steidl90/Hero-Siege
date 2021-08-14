@@ -77,6 +77,8 @@ void CaStar::update()
     {
         _openList.clear();
         _closeList.clear();
+        m_fastLoad.clear();
+        m_fastLoadLocation.clear();
         init2();
         isButtonClick = true;
     }
@@ -105,98 +107,10 @@ void CaStar::update()
 
 void CaStar::render()
 {
-    //TextOut(getMemDC(), 15, 75, "1 : 지우개", strlen("1 : 지우개"));
-    //TextOut(getMemDC(), 15, 95, "2 : 시작", strlen("2 : 시작"));
-    //TextOut(getMemDC(), 15, 115, "3 : 끝", strlen("3 : 끝"));
-    //TextOut(getMemDC(), 15, 135, "4 : 장애물", strlen("4 : 장애물"));
-    //TextOut(getMemDC(), 15, 155, "5 : 초기화", strlen("5 : 초기화"));
-
-    //char str[128];
-
-    /*switch (_astarState)
-    {
-    case ASTAR_STATE::ASTAR_STATE_END:
-        sprintf_s(str, "스페이스 눌러");
-        break;
-    case ASTAR_STATE::ASTAR_STATE_FOUND:
-        sprintf_s(str, "찾음");
-        break;
-    case ASTAR_STATE::ASTAR_STATE_NOWAY:
-        sprintf_s(str, "길없음");
-        break;
-    case ASTAR_STATE::ASTAR_STATE_SEARCHING:
-        sprintf_s(str, "찾는중");
-        break;
-    }
-    TextOut(getMemDC(), 15, 200, str, strlen(str));*/
-
-   /* newFont = CreateFont(9, 0, 0, 0, FW_NORMAL, false, false, 0, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, PROOF_QUALITY, DEFAULT_PITCH | FF_SWISS, "굴림");
-    oldFont = (HFONT)SelectObject(getMemDC(), newFont);*/
-
-    //타일렌더
-    for (size_t i = 0; i < TILE_Y; i++)
-    {
-        for (size_t j = 0; j < TILE_X; j++)
-        {
-            newBrush = CreateSolidBrush(_tile[i][j].color);
-            oldBrush = (HBRUSH)SelectObject(getMemDC(), newBrush);
-            RectangleMake(getMemDC(), _tile[i][j].rc);
-            SelectObject(getMemDC(), oldBrush);
-            DeleteObject(newBrush);
-
-            if (_tile[i][j].parent == NULL)continue;
-        }
-    }
-    //SelectObject(getMemDC(), oldFont);
-    //DeleteObject(newFont);
-
-   /* for (size_t i = 0; i < 5; i++)
-    {
-        if (i == 0)
-        {
-            BeginSolidColor(getMemDC(), &newBrush, RGB(100, 255, 100));
-            RectangleMake(getMemDC(), rc[i]);
-            sprintf_s(str, "시작점");
-            DeleteObject(newBrush);
-        }
-        if (i == 1)
-        {
-            BeginSolidColor(getMemDC(), &newBrush, RGB(255, 0, 0));
-            RectangleMake(getMemDC(), rc[i]);
-            sprintf_s(str, "도착");
-            DeleteObject(newBrush);
-        }
-        if (i == 2)
-        {
-            BeginSolidColor(getMemDC(), &newBrush, RGB(220, 255, 220));
-            RectangleMake(getMemDC(), rc[i]);
-            sprintf_s(str, "openList");
-            DeleteObject(newBrush);
-        }
-        if (i == 3)
-        {
-            BeginSolidColor(getMemDC(), &newBrush, RGB(180, 180, 255));
-            RectangleMake(getMemDC(), rc[i]);
-            sprintf_s(str, "closeList");
-            DeleteObject(newBrush);
-        }
-        if (i == 4)
-        {
-            BeginSolidColor(getMemDC(), &newBrush, RGB(255, 100, 100));
-            RectangleMake(getMemDC(), rc[i]);
-            sprintf_s(str, "path");
-            DeleteObject(newBrush);
-        }
-        TextOut(getMemDC(), rc[i].right + 15, rc[i].top + 5, str, strlen(str));
-    }*/
 }
 
 void CaStar::tileComposition()
 {
-    /*if (InputManager->isOnceKeyDown('1'))_selectType = TILE_TYPE::TILE_TYPE_EMPTY;
-    else if (InputManager->isOnceKeyDown('2'))_selectType = TILE_TYPE::TILE_TYPE_START;
-    else if (InputManager->isOnceKeyDown('3'))_selectType = TILE_TYPE::TILE_TYPE_END;
-    else if (InputManager->isOnceKeyDown('4'))_selectType = TILE_TYPE::TILE_TYPE_WALL;*/
     typeColor(_selectType);
 
     //_startPointSet = false;
@@ -243,8 +157,6 @@ void CaStar::tileComposition()
     POINT cameraMouse = m_ptMouse; // x y
     cameraMouse.x += m_camera->getCameraPoint().x;
     cameraMouse.y += m_camera->getCameraPoint().y;
-
-    
 
     if (isButtonClick)
     {
@@ -578,7 +490,7 @@ void CaStar::showWay(aStarTile* tile)
     }
     tile = tile->parent;
 
-    if (tile->parent == NULL)return;
+    if (tile->parent == NULL) return;
     else showWay(tile);
 }
 

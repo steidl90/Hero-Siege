@@ -6,7 +6,6 @@
 #include "CaStar.h"
 #include "CshopUi.h"
 #include "CplayerDate.h"
-
 #include "CNPC.h"
 class CsceneTown : public gameNode
 {

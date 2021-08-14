@@ -1,6 +1,7 @@
 #pragma once
 #include "Cunit.h"
 #include "CplayerSkill.h"
+#include "CaStar.h"
 
 enum class DIRECTIONS
 {
@@ -15,7 +16,7 @@ class Cplayer :public Cunit
 {
 private:
 	CplayerSkill* m_playerSkill;
-
+	CaStar* m_astar;
 	DIRECTIONS direction;
 	DIRECTIONS beforeDirection;
 
@@ -79,8 +80,10 @@ private:
 	tagTile* m_CheckTile;
 	ATTRIBUTE* m_attribute;
 
-	vector<POINT> m_fastLoadIndex;
+	vector<POINT>* m_fastLoadLocation;
 
+	bool isAstarMove;
+	int m_index;
 public:
 	Cplayer();
 	~Cplayer();
@@ -94,10 +97,12 @@ public:
 	void playerStateRender();
 	void isAttackRender();
 
+	void playerAStarMove();
+
 	void playerSkillControl();
 	void playerSkillRender();
 
-	void mouseMoveAstar();
+	//void mouseMoveAstar();
 
 	RECT* getplayerMoveRC() { return &playerMoveRc; }
 	float getPlayerX() const { return m_playerX; }
@@ -116,5 +121,6 @@ public:
 	void blockCheck(float speed, RECT* playerRC, DIRECTIONS direct);
 	void setCheckTile(tagTile* tile) { m_CheckTile = tile; }
 	void setAttribute(ATTRIBUTE* att) { m_attribute = att; }
+	void setAstarMove(vector<POINT>* fastload) { m_fastLoadLocation = fastload; }
 };
 
