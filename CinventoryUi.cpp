@@ -164,26 +164,26 @@ void CinventoryUi::render()
 			, m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_ARMOR)->m_item->getFrame().x
 			, m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_ARMOR)->m_item->getFrame().y);
 	}
-	if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].isEquip)
+	if (m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_SHOES)->isEquip)
 	{
-		IMAGE->findImage(m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_equipItem->getBigImage())->frameRender(getMemDC(),
+		IMAGE->findImage(m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_SHOES)->m_item->getBigImage())->frameRender(getMemDC(),
 			m_vEquipItemSubRect[4].left - 10, m_vEquipItemSubRect[4].top + 10
-			, m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_equipItem->getFrame().x
-			, m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_equipItem->getFrame().y);
+			, m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_SHOES)->m_item->getFrame().x
+			, m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_SHOES)->m_item->getFrame().y);
 	}
-	if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].isEquip)
+	if (m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_GLOVES)->isEquip)
 	{
-		IMAGE->findImage(m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_equipItem->getBigImage())->frameRender(getMemDC(),
+		IMAGE->findImage(m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_GLOVES)->m_item->getBigImage())->frameRender(getMemDC(),
 			m_vEquipItemSubRect[3].left - 10, m_vEquipItemSubRect[3].top + 10
-			, m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_equipItem->getFrame().x
-			, m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_equipItem->getFrame().y);
+			, m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_GLOVES)->m_item->getFrame().x
+			, m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_GLOVES)->m_item->getFrame().y);
 	}
-	if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].isEquip)
+	if (m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_PENDANT)->isEquip)
 	{
-		IMAGE->findImage(m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_equipItem->getBigImage())->frameRender(getMemDC(),
+		IMAGE->findImage(m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_GLOVES)->m_item->getBigImage())->frameRender(getMemDC(),
 			m_vEquipItemSubRect[0].left - 10, m_vEquipItemSubRect[0].top + 10
-			, m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_equipItem->getFrame().x
-			, m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_equipItem->getFrame().y);
+			, m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_GLOVES)->m_item->getFrame().x
+			, m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_GLOVES)->m_item->getFrame().y);
 	}
 }
 
