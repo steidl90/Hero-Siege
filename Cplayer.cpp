@@ -71,6 +71,8 @@ HRESULT Cplayer::init()
 	ANIMATION->addDefAnimation("왼쪽걷기", "플레이어왼쪽걷기", 10, false, true);
 	ANIMATION->addDefAnimation("오른쪽걷기", "플레이어오른쪽걷기", 10, false, true);
 
+	//EFFECT
+
 	//IDLE
 	ANIMATION->addDefAnimation("위쪽", "플레이어위쪽", 10, false, true);
 	ANIMATION->addDefAnimation("아래쪽", "플레이어아래쪽", 10, false, true);
@@ -101,12 +103,14 @@ void Cplayer::release()
 
 void Cplayer::update()
 {
+	EFFECT->update();
 	//Rectangle(getMapDC(), playerAttackRc.left, playerAttackRc.top, playerAttackRc.right, playerAttackRc.bottom);
 	ANIMATION->resume("라이트닝애니");
 	m_angle += 0.4;
 	moveControl();
 	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth() - 90, playerMoveDown->getFrameHeight() - 50);
 	m_playerSkill->update("리치스킬애니");
+	
 }
 
 void Cplayer::render()

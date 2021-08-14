@@ -12,6 +12,8 @@ CplayerManager::~CplayerManager()
 
 HRESULT CplayerManager::init()
 {
+    EFFECT->addEffect("히트1", "images/Hit.bmp", 414, 71, 69, 71, 1, 0.2f, 5);
+
     m_player = new Cplayer;
     m_player->init();
 
@@ -48,7 +50,7 @@ void CplayerManager::release()
 void CplayerManager::update()
 {
     if (InputManager->isOnceKeyDown('I')) isInventoryOn = !isInventoryOn;
-
+    EFFECT->update();
     m_player->update();
     if(isInventoryOn) m_InventoryUI->update();
     m_playerUi->update();
@@ -59,7 +61,7 @@ void CplayerManager::render()
 {
     m_player->render();
     m_playerUi->render();
-
+    EFFECT->render();
     if (isInventoryOn)
     {
         m_InventoryUI->render();
@@ -174,6 +176,9 @@ void CplayerManager::collisionEnemy()
                 m_enemy->removeMinion(i);
                 break;
             }
+            
+            EFFECT->play("히트1", (*iter)->getRect().left + ((*iter)->getRect().right - (*iter)->getRect().left) / 2 + RND->getFromIntTo(0, 30),
+                (*iter)->getRect().top + ((*iter)->getRect().bottom - (*iter)->getRect().top) / 2 + RND->getFromIntTo(0, 30));
         }
     }
 }
