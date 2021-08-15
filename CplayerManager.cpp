@@ -51,15 +51,18 @@ void CplayerManager::update()
 {
     if (InputManager->isOnceKeyDown('I')) isInventoryOn = !isInventoryOn;
     EFFECT->update();
+    m_playerUi->update();
     m_player->update();
     if(m_fastLoadLocation != nullptr)
         m_player->setAstarMove(m_fastLoadLocation);
     if(isInventoryOn) m_InventoryUI->update();
-    m_playerUi->update();
+
+    getItem();
 }
 
 void CplayerManager::render()
 {
+    m_dropItem->render();
     m_player->render();
     m_playerUi->render();
     EFFECT->render();
@@ -68,7 +71,6 @@ void CplayerManager::render()
         m_InventoryUI->render();
         this->showPlayerStat();
     }
-    m_dropItem->render();
 }
 
 void CplayerManager::showPlayerStat()
@@ -222,4 +224,16 @@ void CplayerManager::collisionEnemy()
         PostQuitMessage(0);
     }
     
+}
+
+void CplayerManager::getItem()
+{
+    RECT temp;
+    for (int i = 0; i < m_dropItem->getDropItemList().size(); i++)
+    {
+        if (IntersectRect(&temp, m_player->getplayerMoveRC(), &m_dropItem->getDropItemList()[i].itemRect))
+        {
+            if (InputManager->isOnceKeyDown('Z')) m_dropItem->removeItem(i);
+        }
+    }
 }

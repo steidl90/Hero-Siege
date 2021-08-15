@@ -20,12 +20,18 @@ void CdropItem::update()
 
 void CdropItem::render()
 {
+	TCHAR str[128];
 	for (m_viDropItem = m_vDropItem.begin(); m_viDropItem != m_vDropItem.end(); ++m_viDropItem)
 	{
 		// Rectangle(getMapDC(), m_viDropItem->itemRect.left, m_viDropItem->itemRect.top, m_viDropItem->itemRect.right, m_viDropItem->itemRect.bottom);
 		IMAGE->findImage(m_viDropItem->item->getSmallImage())->frameRender(getMapDC()
 			, m_viDropItem->itemRect.left, m_viDropItem->itemRect.top
 			, m_viDropItem->item->getFrame().x, m_viDropItem->item->getFrame().y);
+
+		sprintf_s(str, "%s", m_viDropItem->item->getName().c_str());
+		SetBkMode(getMapDC(), TRANSPARENT);
+		SetTextColor(getMapDC(), RGB(255, 255, 255));
+		TextOut(getMapDC(), m_viDropItem->x - (IMAGE->findImage(m_viDropItem->item->getSmallImage())->getFrameWidth() / 2), m_viDropItem->y - 10, str, lstrlen(str));
 	}
 }
 
@@ -62,7 +68,7 @@ Citem* CdropItem::getItem()
 	}
 	else
 	{
-		return &m_vDropItemList[0];
+		return &m_vDropItemList[20];
 	}
 
 }
@@ -81,4 +87,5 @@ void CdropItem::makeItem(float x, float y)
 
 void CdropItem::removeItem(int num)
 {
+	m_vDropItem.erase(m_vDropItem.begin() + num);
 }

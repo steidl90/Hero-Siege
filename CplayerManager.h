@@ -54,6 +54,7 @@ public:
 	void setBossMemory(Cmevius* boss) { m_boss = boss; }
 
 	void collisionEnemy();
+	void getItem();
 
 	void setCheckTile(tagTile* tile) { m_player->setCheckTile(tile); }
 	void setTileAttribute(ATTRIBUTE* att) { m_player->setAttribute(att); }

@@ -115,6 +115,7 @@ void Cplayer::update()
 
 void Cplayer::render()
 {
+	IMAGE->findImage("NPC±×¸²ÀÚ")->alphaRender(getMapDC(), m_playerX - 1, m_playerY + 55, 100);
 	playerSkillControl();
 	playerSkillRender();
 	m_playerSkill->render();
