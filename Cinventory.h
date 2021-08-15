@@ -1,21 +1,7 @@
 #pragma once
 #include"Citem.h"
 
-struct EquipItem
-{
-	Citem* m_item;
-	int m_itemIndex;
-	POINT m_renderPoint;
-	bool isEquip;
-};
 
-struct SelectItem
-{
-	Citem* m_item;
-	int m_itemIndex;
-	POINT m_renderPoint;
-	bool isSelect;
-};
 
 class Cinventory
 {
@@ -34,8 +20,8 @@ class Cinventory
 	Citem* m_equipPendant;
 
 	// 기능 구현 멤버변수
-	SelectItem m_selectItem;
 	// 구조 수정
+	SelectItem m_selectItem;
 	EquipItem m_equipItem[5];
 	Citem m_tempItem[5];
 
@@ -61,6 +47,7 @@ public:
 	//bool checkEquipItem(ITEMTYPE type);
 	void AbandonItem();
 
+
 	// 아이템 장착할때
 	void setEquipWeapon(Citem* item) { m_equipWeapon = item; }
 	void setEquipArmor(Citem* item) { m_equipArmor = item; }
@@ -85,7 +72,6 @@ public:
 
 	EquipItem* getEquipItem() { return m_equipItem; }
 	EquipItem* getEquipItem(ITEMTYPE type);
-	void setEquipItem(ITEMTYPE type, Citem* item, int index, POINT point, bool isEquip);
 
 	SelectItem* getSelectItem() { return &m_selectItem; }
 	void setSelectItem(Citem* item, int index, POINT point, bool isSelect);
