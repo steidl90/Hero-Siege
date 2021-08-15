@@ -180,10 +180,10 @@ void CinventoryUi::render()
 	}
 	if (m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_PENDANT)->isEquip)
 	{
-		IMAGE->findImage(m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_GLOVES)->m_item->getBigImage())->frameRender(getMemDC(),
+		IMAGE->findImage(m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_PENDANT)->m_item->getBigImage())->frameRender(getMemDC(),
 			m_vEquipItemSubRect[0].left - 10, m_vEquipItemSubRect[0].top + 10
-			, m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_GLOVES)->m_item->getFrame().x
-			, m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_GLOVES)->m_item->getFrame().y);
+			, m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_PENDANT)->m_item->getFrame().x
+			, m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_PENDANT)->m_item->getFrame().y);
 	}
 }
 
@@ -341,31 +341,6 @@ void CinventoryUi::showEquipSelect()
 		if ( m_Inventory->getEquipItem(m_selectType)->isEquip )
 			IMAGE->findImage("장착테두리")->render(getMemDC(), m_Inventory->getEquipItem(m_selectType)->m_renderPoint.x,
 				m_Inventory->getEquipItem(m_selectType)->m_renderPoint.y);
-		/*switch (m_selectType)
-		{
-		case ITEMTYPE::ITEMTYPE_WEAPON:
-			break;
-		case ITEMTYPE::ITEMTYPE_ARMOR:
-			if (m_Inventory->getEquipItem(m_selectType)->isEquip)
-				IMAGE->findImage("장착테두리")->render(getMemDC(), m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_renderPoint.x,
-					m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_renderPoint.y);
-			break;
-		case ITEMTYPE::ITEMTYPE_GLOVES:
-			if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].isEquip)
-				IMAGE->findImage("장착테두리")->render(getMemDC(), m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_renderPoint.x,
-					m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_renderPoint.y);
-			break;
-		case ITEMTYPE::ITEMTYPE_SHOES:
-			if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].isEquip)
-				IMAGE->findImage("장착테두리")->render(getMemDC(), m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_renderPoint.x,
-					m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_renderPoint.y);
-			break;
-		case ITEMTYPE::ITEMTYPE_PENDANT:
-			if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].isEquip)
-				IMAGE->findImage("장착테두리")->render(getMemDC(), m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_renderPoint.x,
-					m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_renderPoint.y);
-			break;
-		}*/
 	}
 }
 
@@ -381,8 +356,6 @@ void CinventoryUi::selectItem()
 		{
 			if (InputManager->isOnceKeyDown(VK_LBUTTON))
 			{
-				/*isSelectRender = true;
-				m_SelectIndex = i;*/
 				// 선택한 아이템 정보 inventory 에서 가져와서 selectItem 변수에 담기
 				m_selectRenderX = (*iter).left - 5;
 				m_selectRenderY = (*iter).top - 3;
@@ -440,8 +413,6 @@ void CinventoryUi::selectEquipItem()
 						// 아이템 장착에 관한 모든 것 세팅
 						if (m_clickCount > 1)
 						{
-							//m_equipItem[static_cast<int>(m_selectType)].m_itemIndex = i;
-							//this->setEquipItem(i, m_selectRenderX, m_selectRenderY);
 							this->setPlayerStat(i);
 							m_Inventory->equipItem();
 						}
@@ -468,65 +439,6 @@ void CinventoryUi::setEquipItem(int index, int x, int y)
 	this->setPlayerStat(index);
 	m_Inventory->equipItem();
 
-	/*Citem* itemTemp;
-
-	 장착 아이템변수에 담기
-	switch (m_selectType)
-	{
-	case ITEMTYPE::ITEMTYPE_WEAPON:
-		 이터레이터 접근해서 받은 원소는 해당 원소 포인터 변수에 직접 못넣어서 다시 변환해줌
-		 이유는 모르겠지만 직접 이터레이터값으로 넣으면 나중에 인벤토리에서 다른거 지워질때 영향받음
-		 그래서 임시 아이템 배열에 복사해서 그걸 구조체 배열에 담음
-
-		m_Inventory->setEquipWeapon(&(*(m_Inventory->getvWeaponList()->begin() + index)));
-		itemTemp = m_Inventory->getEquipWeapon();
-		m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)] = (*itemTemp);
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)].m_equipItem = &m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)];
-		 여기서 인덱스는 인벤토리내의 해당아이템 리스트에서 위치를 나타낸다!
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)].m_itemIndex = index;
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)].m_renderPoint = PointMake(x, y);
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)].isEquip = true;
-
-		break;
-	case ITEMTYPE::ITEMTYPE_ARMOR:
-		m_Inventory->setEquipArmor(&(*(m_Inventory->getvArmorList()->begin() + index)));
-		itemTemp = m_Inventory->getEquipArmor();
-		m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)] = (*itemTemp);
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_equipItem = &m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)];
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_itemIndex = index;
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_renderPoint = PointMake(x, y);
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].isEquip = true;
-		break;
-	case ITEMTYPE::ITEMTYPE_SHOES:
-		m_Inventory->setEquipShoes(&(*(m_Inventory->getvShoesList()->begin() + index)));
-		itemTemp = m_Inventory->getEquipShoes();
-		m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)] = (*itemTemp);
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_equipItem = &m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)];
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_itemIndex = index;
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_renderPoint = PointMake(x, y);
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].isEquip = true;
-		break;
-	case ITEMTYPE::ITEMTYPE_GLOVES:
-		m_Inventory->setEquipGloves(&(*(m_Inventory->getvGlovesList()->begin() + index)));
-		itemTemp = m_Inventory->getEquipGloves();
-		m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)] = (*itemTemp);
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_equipItem = &m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)];
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_itemIndex = index;
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_renderPoint = PointMake(x, y);
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].isEquip = true;
-		break;
-	case ITEMTYPE::ITEMTYPE_PENDANT:
-		m_Inventory->setEquipPendant(&(*(m_Inventory->getvPendantList()->begin() + index)));
-		itemTemp = m_Inventory->getEquipPendant();
-		m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)] = (*itemTemp);
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_equipItem = &m_itemInit[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)];
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_itemIndex = index;
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_renderPoint = PointMake(x, y);
-		m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].isEquip = true;
-		break;
-	default:
-		break;
-	}*/
 }
 
 // 수정 완료
@@ -572,167 +484,6 @@ void CinventoryUi::setPlayerStat(int index)
 			}
 		}
 	}
-	//switch (m_selectType)
-	//{
-	//case ITEMTYPE::ITEMTYPE_WEAPON:
-	//	Temp = (*(m_Inventory->getvWeaponList()->begin() + index));
-	//	if (m_Inventory->getEquipWeapon() == nullptr)
-	//	{
-	//		m_player->setAtk(m_player->getAtk() + Temp->getAtk());
-	//		m_player->setDef(m_player->getDef() + Temp->getDef());
-	//		m_player->setHp(m_player->getHp() + Temp->getHp());
-	//		m_player->setMp(m_player->getMp() + Temp->getMp());
-	//		m_player->setCritical(m_player->getCritical() + Temp->getCritical());
-	//		m_player->setCriticalAtk(m_player->getCriticalAtk() + Temp->getCriticalAtk());
-	//		m_player->setSpeed(m_player->getSpeed() + Temp->getSpeed());
-	//	}
-	//	else
-	//	{	// 이미 장착중 아이템 능력치 해제
-	//		m_player->setAtk(m_player->getAtk() - m_Inventory->getEquipWeapon()->getAtk());
-	//		m_player->setDef(m_player->getDef() - m_Inventory->getEquipWeapon()->getDef());
-	//		m_player->setHp(m_player->getHp() - m_Inventory->getEquipWeapon()->getHp());
-	//		m_player->setMp(m_player->getMp() - m_Inventory->getEquipWeapon()->getMp());
-	//		m_player->setCritical(m_player->getCritical() - m_Inventory->getEquipWeapon()->getCritical());
-	//		m_player->setCriticalAtk(m_player->getCriticalAtk() - m_Inventory->getEquipWeapon()->getCriticalAtk());
-	//		m_player->setSpeed(m_player->getSpeed() - m_Inventory->getEquipWeapon()->getSpeed());
-
-	//		m_player->setAtk(m_player->getAtk() + Temp->getAtk());
-	//		m_player->setDef(m_player->getDef() + Temp->getDef());
-	//		m_player->setHp(m_player->getHp() + Temp->getHp());
-	//		m_player->setMp(m_player->getMp() + Temp->getMp());
-	//		m_player->setCritical(m_player->getCritical() + Temp->getCritical());
-	//		m_player->setCriticalAtk(m_player->getCriticalAtk() + Temp->getCriticalAtk());
-	//		m_player->setSpeed(m_player->getSpeed() + Temp->getSpeed());
-	//	}
-	//	break;
-	//case ITEMTYPE::ITEMTYPE_ARMOR:
-	//	Temp = (*(m_Inventory->getvArmorList()->begin() + index));
-	//	if (m_Inventory->getEquipArmor() == nullptr)
-	//	{
-	//		m_player->setAtk(m_player->getAtk() + Temp->getAtk());
-	//		m_player->setDef(m_player->getDef() + Temp->getDef());
-	//		m_player->setHp(m_player->getHp() + Temp->getHp());
-	//		m_player->setMp(m_player->getMp() + Temp->getMp());
-	//		m_player->setCritical(m_player->getCritical() + Temp->getCritical());
-	//		m_player->setCriticalAtk(m_player->getCriticalAtk() + Temp->getCriticalAtk());
-	//		m_player->setSpeed(m_player->getSpeed() + Temp->getSpeed());
-	//	}
-	//	else
-	//	{	// 이미 장착중 아이템 능력치 해제
-	//		m_player->setAtk(m_player->getAtk() - m_Inventory->getEquipArmor()->getAtk());
-	//		m_player->setDef(m_player->getDef() - m_Inventory->getEquipArmor()->getDef());
-	//		m_player->setHp(m_player->getHp() - m_Inventory->getEquipArmor()->getHp());
-	//		m_player->setMp(m_player->getMp() - m_Inventory->getEquipArmor()->getMp());
-	//		m_player->setCritical(m_player->getCritical() - m_Inventory->getEquipArmor()->getCritical());
-	//		m_player->setCriticalAtk(m_player->getCriticalAtk() - m_Inventory->getEquipArmor()->getCriticalAtk());
-	//		m_player->setSpeed(m_player->getSpeed() - m_Inventory->getEquipArmor()->getSpeed());
-
-	//		m_player->setAtk(m_player->getAtk() + Temp->getAtk());
-	//		m_player->setDef(m_player->getDef() + Temp->getDef());
-	//		m_player->setHp(m_player->getHp() + Temp->getHp());
-	//		m_player->setMp(m_player->getMp() + Temp->getMp());
-	//		m_player->setCritical(m_player->getCritical() + Temp->getCritical());
-	//		m_player->setCriticalAtk(m_player->getCriticalAtk() + Temp->getCriticalAtk());
-	//		m_player->setSpeed(m_player->getSpeed() + Temp->getSpeed());
-	//	}
-	//	break;
-	//case ITEMTYPE::ITEMTYPE_SHOES:
-	//	Temp = (*(m_Inventory->getvShoesList()->begin() + index));
-	//	if (m_Inventory->getEquipShoes() == nullptr)
-	//	{
-	//		m_player->setAtk(m_player->getAtk() + Temp->getAtk());
-	//		m_player->setDef(m_player->getDef() + Temp->getDef());
-	//		m_player->setHp(m_player->getHp() + Temp->getHp());
-	//		m_player->setMp(m_player->getMp() + Temp->getMp());
-	//		m_player->setCritical(m_player->getCritical() + Temp->getCritical());
-	//		m_player->setCriticalAtk(m_player->getCriticalAtk() + Temp->getCriticalAtk());
-	//		m_player->setSpeed(m_player->getSpeed() + Temp->getSpeed());
-	//	}
-	//	else
-	//	{	// 이미 장착중 아이템 능력치 해제
-	//		m_player->setAtk(m_player->getAtk() - m_Inventory->getEquipShoes()->getAtk());
-	//		m_player->setDef(m_player->getDef() - m_Inventory->getEquipShoes()->getDef());
-	//		m_player->setHp(m_player->getHp() - m_Inventory->getEquipShoes()->getHp());
-	//		m_player->setMp(m_player->getMp() - m_Inventory->getEquipShoes()->getMp());
-	//		m_player->setCritical(m_player->getCritical() - m_Inventory->getEquipShoes()->getCritical());
-	//		m_player->setCriticalAtk(m_player->getCriticalAtk() - m_Inventory->getEquipShoes()->getCriticalAtk());
-	//		m_player->setSpeed(m_player->getSpeed() - m_Inventory->getEquipShoes()->getSpeed());
-
-	//		m_player->setAtk(m_player->getAtk() + Temp->getAtk());
-	//		m_player->setDef(m_player->getDef() + Temp->getDef());
-	//		m_player->setHp(m_player->getHp() + Temp->getHp());
-	//		m_player->setMp(m_player->getMp() + Temp->getMp());
-	//		m_player->setCritical(m_player->getCritical() + Temp->getCritical());
-	//		m_player->setCriticalAtk(m_player->getCriticalAtk() + Temp->getCriticalAtk());
-	//		m_player->setSpeed(m_player->getSpeed() + Temp->getSpeed());
-	//	}
-	//	break;
-	//case ITEMTYPE::ITEMTYPE_GLOVES:
-	//	Temp = (*(m_Inventory->getvShoesList()->begin() + index));
-	//	if (m_Inventory->getEquipShoes() == nullptr)
-	//	{
-	//		m_player->setAtk(m_player->getAtk() + Temp->getAtk());
-	//		m_player->setDef(m_player->getDef() + Temp->getDef());
-	//		m_player->setHp(m_player->getHp() + Temp->getHp());
-	//		m_player->setMp(m_player->getMp() + Temp->getMp());
-	//		m_player->setCritical(m_player->getCritical() + Temp->getCritical());
-	//		m_player->setCriticalAtk(m_player->getCriticalAtk() + Temp->getCriticalAtk());
-	//		m_player->setSpeed(m_player->getSpeed() + Temp->getSpeed());
-	//	}
-	//	else
-	//	{	// 이미 장착중 아이템 능력치 해제
-	//		m_player->setAtk(m_player->getAtk() - m_Inventory->getEquipGloves()->getAtk());
-	//		m_player->setDef(m_player->getDef() - m_Inventory->getEquipGloves()->getDef());
-	//		m_player->setHp(m_player->getHp() - m_Inventory->getEquipGloves()->getHp());
-	//		m_player->setMp(m_player->getMp() - m_Inventory->getEquipGloves()->getMp());
-	//		m_player->setCritical(m_player->getCritical() - m_Inventory->getEquipGloves()->getCritical());
-	//		m_player->setCriticalAtk(m_player->getCriticalAtk() - m_Inventory->getEquipGloves()->getCriticalAtk());
-	//		m_player->setSpeed(m_player->getSpeed() - m_Inventory->getEquipGloves()->getSpeed());
-
-	//		m_player->setAtk(m_player->getAtk() + Temp->getAtk());
-	//		m_player->setDef(m_player->getDef() + Temp->getDef());
-	//		m_player->setHp(m_player->getHp() + Temp->getHp());
-	//		m_player->setMp(m_player->getMp() + Temp->getMp());
-	//		m_player->setCritical(m_player->getCritical() + Temp->getCritical());
-	//		m_player->setCriticalAtk(m_player->getCriticalAtk() + Temp->getCriticalAtk());
-	//		m_player->setSpeed(m_player->getSpeed() + Temp->getSpeed());
-	//	}
-	//	break;
-
-	//case ITEMTYPE::ITEMTYPE_PENDANT:
-	//	Temp = (*(m_Inventory->getvPendantList()->begin() + index));
-	//	if (m_Inventory->getEquipPendant() == nullptr)
-	//	{
-	//		m_player->setAtk(m_player->getAtk() + Temp->getAtk());
-	//		m_player->setDef(m_player->getDef() + Temp->getDef());
-	//		m_player->setHp(m_player->getHp() + Temp->getHp());
-	//		m_player->setMp(m_player->getMp() + Temp->getMp());
-	//		m_player->setCritical(m_player->getCritical() + Temp->getCritical());
-	//		m_player->setCriticalAtk(m_player->getCriticalAtk() + Temp->getCriticalAtk());
-	//		m_player->setSpeed(m_player->getSpeed() + Temp->getSpeed());
-	//	}
-	//	else
-	//	{	// 이미 장착중 아이템 능력치 해제
-	//		m_player->setAtk(m_player->getAtk() - m_Inventory->getEquipPendant()->getAtk());
-	//		m_player->setDef(m_player->getDef() - m_Inventory->getEquipPendant()->getDef());
-	//		m_player->setHp(m_player->getHp() - m_Inventory->getEquipPendant()->getHp());
-	//		m_player->setMp(m_player->getMp() - m_Inventory->getEquipPendant()->getMp());
-	//		m_player->setCritical(m_player->getCritical() - m_Inventory->getEquipPendant()->getCritical());
-	//		m_player->setCriticalAtk(m_player->getCriticalAtk() - m_Inventory->getEquipPendant()->getCriticalAtk());
-	//		m_player->setSpeed(m_player->getSpeed() - m_Inventory->getEquipPendant()->getSpeed());
-
-	//		m_player->setAtk(m_player->getAtk() + Temp->getAtk());
-	//		m_player->setDef(m_player->getDef() + Temp->getDef());
-	//		m_player->setHp(m_player->getHp() + Temp->getHp());
-	//		m_player->setMp(m_player->getMp() + Temp->getMp());
-	//		m_player->setCritical(m_player->getCritical() + Temp->getCritical());
-	//		m_player->setCriticalAtk(m_player->getCriticalAtk() + Temp->getCriticalAtk());
-	//		m_player->setSpeed(m_player->getSpeed() + Temp->getSpeed());
-	//	}
-	//	break;
-	//default:
-	//	break;
-	//}
 }
 
 // 수정 완료
@@ -792,15 +543,11 @@ void CinventoryUi::selectItemTypeMain()
 						{
 							if(m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_ARMOR)->m_item != nullptr)
 								this->unEquipItem();
-							//m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_ARMOR)->isEquip = false;
-							//m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_ARMOR)->m_item = nullptr;
 						}
 						else
 						{
 							if(m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_WEAPON)->m_item != nullptr)
 								this->unEquipItem();
-							//m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_WEAPON)->isEquip = false;
-							//m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_WEAPON)->m_item = nullptr;
 						}
 					}
 					isKeyUp = false;
@@ -850,22 +597,16 @@ void CinventoryUi::selectItemTypeSub()
 						{
 							if (m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_PENDANT)->m_item != nullptr)
 								this->unEquipItem();
-							//m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_PENDANT)->isEquip = false;
-							//m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_PENDANT)->m_item = nullptr;
 						}
 						else if ((*iter).left == m_vEquipItemSubRect[3].left) // 장갑
 						{
 							if (m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_GLOVES)->m_item != nullptr)
 								this->unEquipItem();
-							//m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_GLOVES)->isEquip = false;
-							//m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_GLOVES)->m_item = nullptr;
 						}
 						else if ((*iter).left == m_vEquipItemSubRect[4].left) // 신발
 						{
 							if (m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_SHOES)->m_item != nullptr)
 								this->unEquipItem();
-							//m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_SHOES)->isEquip = false;
-							//m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_SHOES)->m_item = nullptr;
 						}
 					}
 					isKeyUp = false;
@@ -1204,13 +945,7 @@ void CinventoryUi::abandonItem()
 			{
 				// 선택 아이템이 있을때만 실행
 				// 장착중이지 않은 아이템만 실행
-				//if (m_Inventory->getSelectItem()->m_item != nullptr && this->checkEquipItem())
-				//{
-				//	if (m_equipItem[static_cast<int>(m_selectType)].m_itemIndex > m_SelectIndex)
-				//		m_equipItem[static_cast<int>(m_selectType)].m_itemIndex--;
 
-				//	isSelectRender = false;
-				//}
 				m_Inventory->AbandonItem();
 				m_Inventory->clearSelectItem();
 				isKeyUp = false;
@@ -1218,39 +953,6 @@ void CinventoryUi::abandonItem()
 		}
 	}
 }
-
-// Id로 비교하도록 수정
-// 나머지 타입 추가 필요
-//TODO::할꺼 - 완
-//bool CinventoryUi::checkEquipItem()
-//{
-//	/*if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)].m_equipItem != nullptr)
-//	{
-//		if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_WEAPON)].m_equipItem->getItemId() == m_selectItem->getItemId())
-//			return false;
-//	}
-//	if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_equipItem != nullptr )
-//	{
-//		if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_ARMOR)].m_equipItem->getItemId() == m_selectItem->getItemId())
-//			return false;
-//	}
-//	if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_equipItem != nullptr)
-//	{
-//		if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_GLOVES)].m_equipItem->getItemId() == m_selectItem->getItemId())
-//			return false;
-//	}
-//	if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_equipItem != nullptr)
-//	{
-//		if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_SHOES)].m_equipItem->getItemId() == m_selectItem->getItemId())
-//			return false;
-//	}
-//	if (m_equipItem[static_cast<int>(ITEMTYPE::ITEMTYPE_PENDANT)].m_equipItem != nullptr)
-//	{
-//		if (m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_PENDANT)->m_item->getItemId() == m_selectItem->getItemId())
-//			return false;
-//	}
-//	return true;*/
-//}
 
 // 수정완료
 void CinventoryUi::unEquipItem()
@@ -1265,68 +967,4 @@ void CinventoryUi::unEquipItem()
 	m_player->setSpeed(m_player->getSpeed() - m_Inventory->getEquipItem(m_selectType)->m_item->getSpeed());
 
 	m_Inventory->clearEquipItem(m_selectType);
-
-	/*switch (m_selectType)
-	{
-	case ITEMTYPE::ITEMTYPE_WEAPON:
-		m_player->setAtk(m_player->getAtk() - m_Inventory->getEquipWeapon()->getAtk());
-		m_player->setDef(m_player->getDef() - m_Inventory->getEquipWeapon()->getDef());
-		m_player->setHp(m_player->getHp() - m_Inventory->getEquipWeapon()->getHp());
-		m_player->setMp(m_player->getMp() - m_Inventory->getEquipWeapon()->getMp());
-		m_player->setCritical(m_player->getCritical() - m_Inventory->getEquipWeapon()->getCritical());
-		m_player->setCriticalAtk(m_player->getCriticalAtk() - m_Inventory->getEquipWeapon()->getCriticalAtk());
-		m_player->setSpeed(m_player->getSpeed() - m_Inventory->getEquipWeapon()->getSpeed());
-
-		m_Inventory->setEquipWeapon(nullptr);
-		break;
-	case ITEMTYPE::ITEMTYPE_ARMOR:
-		m_player->setAtk(m_player->getAtk() - m_Inventory->getEquipArmor()->getAtk());
-		m_player->setDef(m_player->getDef() - m_Inventory->getEquipArmor()->getDef());
-		m_player->setHp(m_player->getHp() - m_Inventory->getEquipArmor()->getHp());
-		m_player->setMp(m_player->getMp() - m_Inventory->getEquipArmor()->getMp());
-		m_player->setCritical(m_player->getCritical() - m_Inventory->getEquipArmor()->getCritical());
-		m_player->setCriticalAtk(m_player->getCriticalAtk() - m_Inventory->getEquipArmor()->getCriticalAtk());
-		m_player->setSpeed(m_player->getSpeed() - m_Inventory->getEquipArmor()->getSpeed());
-
-		m_Inventory->setEquipArmor(nullptr);
-		break;
-	case ITEMTYPE::ITEMTYPE_SHOES:
-		m_player->setAtk(m_player->getAtk() - m_Inventory->getEquipShoes()->getAtk());
-		m_player->setDef(m_player->getDef() - m_Inventory->getEquipShoes()->getDef());
-		m_player->setHp(m_player->getHp() - m_Inventory->getEquipShoes()->getHp());
-		m_player->setMp(m_player->getMp() - m_Inventory->getEquipShoes()->getMp());
-		m_player->setCritical(m_player->getCritical() - m_Inventory->getEquipShoes()->getCritical());
-		m_player->setCriticalAtk(m_player->getCriticalAtk() - m_Inventory->getEquipShoes()->getCriticalAtk());
-		m_player->setSpeed(m_player->getSpeed() - m_Inventory->getEquipShoes()->getSpeed());
-
-		m_Inventory->setEquipShoes(nullptr);
-
-		break;
-	case ITEMTYPE::ITEMTYPE_GLOVES:
-		m_player->setAtk(m_player->getAtk() - m_Inventory->getEquipGloves()->getAtk());
-		m_player->setDef(m_player->getDef() - m_Inventory->getEquipGloves()->getDef());
-		m_player->setHp(m_player->getHp() - m_Inventory->getEquipGloves()->getHp());
-		m_player->setMp(m_player->getMp() - m_Inventory->getEquipGloves()->getMp());
-		m_player->setCritical(m_player->getCritical() - m_Inventory->getEquipGloves()->getCritical());
-		m_player->setCriticalAtk(m_player->getCriticalAtk() - m_Inventory->getEquipGloves()->getCriticalAtk());
-		m_player->setSpeed(m_player->getSpeed() - m_Inventory->getEquipGloves()->getSpeed());
-
-		m_Inventory->setEquipGloves(nullptr);
-
-		break;
-	case ITEMTYPE::ITEMTYPE_PENDANT:
-		m_player->setAtk(m_player->getAtk() - m_Inventory->getEquipPendant()->getAtk());
-		m_player->setDef(m_player->getDef() - m_Inventory->getEquipPendant()->getDef());
-		m_player->setHp(m_player->getHp() - m_Inventory->getEquipPendant()->getHp());
-		m_player->setMp(m_player->getMp() - m_Inventory->getEquipPendant()->getMp());
-		m_player->setCritical(m_player->getCritical() - m_Inventory->getEquipPendant()->getCritical());
-		m_player->setCriticalAtk(m_player->getCriticalAtk() - m_Inventory->getEquipPendant()->getCriticalAtk());
-		m_player->setSpeed(m_player->getSpeed() - m_Inventory->getEquipPendant()->getSpeed());
-
-		m_Inventory->setEquipPendant(nullptr);
-
-		break;
-	default:
-		break;
-	}*/
 }

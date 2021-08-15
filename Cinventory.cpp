@@ -13,28 +13,64 @@ HRESULT Cinventory::init()
 {
 	// 일단 push할때 타입 예외처리 안함.. 그냥 실험용
 
-	Citem tempWeapon = *(ITEM->getItem(0));
+	Citem tempWeapon1 = *(ITEM->getItem(0));
 	Citem tempWeapon2 = *(ITEM->getItem(1));
 	Citem tempWeapon3 = *(ITEM->getItem(2));
 	Citem tempWeapon4 = *(ITEM->getItem(3));
 	Citem tempWeapon5 = *(ITEM->getItem(4));
-	m_vWeaponList.push_back(tempWeapon);
+	m_vWeaponList.push_back(tempWeapon1);
 	m_vWeaponList.push_back(tempWeapon2);
 	m_vWeaponList.push_back(tempWeapon3);
 	m_vWeaponList.push_back(tempWeapon4);
 	m_vWeaponList.push_back(tempWeapon5);
 
-	Citem tempWeapon6 = *(ITEM->getItem(7));
-	Citem tempWeapon7 = *(ITEM->getItem(8));
-	Citem tempWeapon8 = *(ITEM->getItem(9));
-	Citem tempWeapon9 = *(ITEM->getItem(10));
-	Citem tempWeapon10 = *(ITEM->getItem(11));
+	Citem tempArmor1 = *(ITEM->getItem(7));
+	Citem tempArmor2= *(ITEM->getItem(8));
+	Citem tempArmor3= *(ITEM->getItem(9));
+	Citem tempArmor4= *(ITEM->getItem(10));
+	Citem tempArmor5 = *(ITEM->getItem(11));
 
-	m_vArmorList.push_back(tempWeapon6);
-	m_vArmorList.push_back(tempWeapon7);
-	m_vArmorList.push_back(tempWeapon8);
-	m_vArmorList.push_back(tempWeapon9);
-	m_vArmorList.push_back(tempWeapon10);
+	m_vArmorList.push_back(tempArmor1);
+	m_vArmorList.push_back(tempArmor2);
+	m_vArmorList.push_back(tempArmor3);
+	m_vArmorList.push_back(tempArmor4);
+	m_vArmorList.push_back(tempArmor5);
+
+	Citem tempShoes1 = *(ITEM->getItem(14));
+	Citem tempShoes2 = *(ITEM->getItem(15));
+	Citem tempShoes3 = *(ITEM->getItem(16));
+	Citem tempShoes4 = *(ITEM->getItem(17));
+	Citem tempShoes5 = *(ITEM->getItem(18));
+
+	m_vShoesList.push_back(tempShoes1);
+	m_vShoesList.push_back(tempShoes2);
+	m_vShoesList.push_back(tempShoes3);
+	m_vShoesList.push_back(tempShoes4);
+	m_vShoesList.push_back(tempShoes5);
+
+	Citem tempGloves1 = *(ITEM->getItem(21));
+	Citem tempGloves2 = *(ITEM->getItem(22));
+	Citem tempGloves3 = *(ITEM->getItem(23));
+	Citem tempGloves4 = *(ITEM->getItem(24));
+	Citem tempGloves5 = *(ITEM->getItem(25));
+
+	m_vGlovesList.push_back(tempGloves1);
+	m_vGlovesList.push_back(tempGloves2);
+	m_vGlovesList.push_back(tempGloves3);
+	m_vGlovesList.push_back(tempGloves4);
+	m_vGlovesList.push_back(tempGloves5);
+
+	Citem tempPendant1 = *(ITEM->getItem(28));
+	Citem tempPendant2 = *(ITEM->getItem(29));
+	Citem tempPendant3 = *(ITEM->getItem(30));
+	Citem tempPendant4 = *(ITEM->getItem(31));
+	Citem tempPendant5 = *(ITEM->getItem(32));
+
+	m_vPendantList.push_back(tempPendant1);
+	m_vPendantList.push_back(tempPendant2);
+	m_vPendantList.push_back(tempPendant3);
+	m_vPendantList.push_back(tempPendant4);
+	m_vPendantList.push_back(tempPendant5);
 
 	m_vEquipList.push_back(m_equipWeapon);
 	m_vEquipList.push_back(m_equipArmor);

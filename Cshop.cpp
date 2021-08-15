@@ -32,7 +32,7 @@ void Cshop::buyItem(Citem* item)
 
 void Cshop::sellItem(Citem* item)
 {
-	vector<Citem>::iterator iter;
+	/*vector<Citem>::iterator iter;
 	int i = 0;
 	for (iter = m_myInventory->getvEquipList()->begin(); iter != m_myInventory->getvEquipList()->end(); ++iter, i++)
 	{
@@ -53,5 +53,5 @@ void Cshop::sellItem(Citem* item)
 				m_myInventory->AbandonItem(item);
 			}
 		}
-	}
+	}*/
 }

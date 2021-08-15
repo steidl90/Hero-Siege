@@ -7,7 +7,7 @@ class Cplayer;
 class CshopUi : public gameNode
 {
 private:
-	//Cinventory* m_myInventory;
+	Cinventory* m_myInventory;
 	Cshop* m_shop;
 private:
 	
@@ -24,7 +24,7 @@ private:
 	RECT m_sellButton;
 	int m_inventoryButtonX;
 	int m_inventoryButtonY;
-	//Citem* m_selectItem;
+	Citem* m_selectItem;
 
 	// 상점 파트
 	RECT m_shopRect;
@@ -36,7 +36,7 @@ private:
 	RECT m_buyButton;
 	int m_shopButtonX;
 	int m_shopButtonY;
-	//Citem* m_selectShopItem;
+	Citem* m_selectShopItem;
 	RECT m_shopInfo;
 	int m_shopInfoX;
 	int m_shopInfoY;
