@@ -23,11 +23,13 @@ enum class  SKILL
 	SKILL_RIGHT,
 	SKILL_DOWN
 };
+
+class Cenemy;
 class CplayerSkill :public Cunit
 {
 private:
 	SKILL skillDirection;
-
+	Cenemy* m_enemy;
 	vector<tagPlayerSkill> m_vPlayerSkill;
 	vector<tagPlayerSkill>::iterator m_viPlayerSkill;
 
@@ -51,9 +53,11 @@ public:
 	void update(const char* aniName);
 	void render();
 	void skillInformation(float x, float y, float angle, float speed, float range, const char* fileName, const char* aniName);
-	void skillQ();
-	void skillW();
-	void skillE();
 	void removeSkill(int arrNum);
+
+	vector<tagPlayerSkill> getvSkill() { return m_vPlayerSkill; }
+
+	void setEnemyMemory(Cenemy* enemy) { m_enemy = enemy; }
+
 };
 

@@ -61,7 +61,6 @@ void CplayerSkill::render()
 	{
 		//Rectangle(getMapDC(), m_viPlayerSkill->m_skillRc.left, m_viPlayerSkill->m_skillRc.top, m_viPlayerSkill->m_skillRc.right, m_viPlayerSkill->m_skillRc.bottom);
 		m_viPlayerSkill->m_skillImage->aniRender(getMapDC(), m_viPlayerSkill->m_skillRc.left, m_viPlayerSkill->m_skillRc.top, m_viPlayerSkill->m_skillAni);
-
 	}
 }
 
@@ -79,20 +78,6 @@ void CplayerSkill::skillInformation(float x, float y, float angle, float speed, 
 	skill.m_range = range;
 	skill.m_skillRc = RectMakeCenter(skill.m_skillX, skill.m_skillY, skill.m_skillImage->getFrameWidth(), skill.m_skillImage->getFrameHeight());
 	m_vPlayerSkill.push_back(skill);
-	
-}
-
-void CplayerSkill::skillQ()
-{
-	
-}
-
-void CplayerSkill::skillW()
-{
-}
-
-void CplayerSkill::skillE()
-{
 }
 
 void CplayerSkill::removeSkill(int arrNum)

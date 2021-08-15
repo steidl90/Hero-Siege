@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "Cplayer.h"
 
-Cplayer::Cplayer() :isMoving(false), isIdle(false), isAttack(false), isLive(true), isRect(false)
+Cplayer::Cplayer() :isMoving(false), isIdle(false), isAttack(false), isLive(true), isRect(false), m_maxHp(1000), m_maxMp(500), m_maxExp(100)
 {
 	m_fastLoadLocation = nullptr;
 }
@@ -12,11 +12,6 @@ Cplayer::~Cplayer()
 
 HRESULT Cplayer::init()
 {
-	m_saveDate = 0;
-	m_saveDate++;
-	m_maxHp = 1000;
-	m_maxMp = 500;
-	m_maxExp = 100;
 	setAtk(10),
 	setDef(10);
 	setHp(m_maxHp);
@@ -218,16 +213,18 @@ void Cplayer::moveControl()
 		playerAttackRc = RectMake(-100, -100, 0, 0); //임시? 더 좋은 방법 있으면 바꿀 예정
 	}
 
-	if (InputManager->isOnceKeyDown('Q'))
+	if (InputManager->isOnceKeyDown('Q') && this->getMp() > 10)
 	{
-		isAttack = true;
+		this->isAttack = true;
+		setMp(getMp() - 10);
 		if (direction == DIRECTIONS::DIRECTIONS_LEFT)m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, PI, 7.0f, 700, "리치스킬", "리치스킬애니");
 		else if (direction == DIRECTIONS::DIRECTIONS_RIGHT)m_playerSkill->skillInformation(m_playerX + 50, m_playerY + 33, PI2, 7.0f, 700, "리치스킬", "리치스킬애니");
 		else if (direction == DIRECTIONS::DIRECTIONS_UP)m_playerSkill->skillInformation(m_playerX + 15, m_playerY - 20, PI * 0.5, 7.0f, 700, "리치스킬", "리치스킬애니");
 		else if (direction == DIRECTIONS::DIRECTIONS_DOWN)m_playerSkill->skillInformation(m_playerX, m_playerY, PI * 1.5, 7.0f, 700, "리치스킬", "리치스킬애니");
 	}
-	else if (InputManager->isOnceKeyDown('W') && this->getLv() >= 3)
+	else if (InputManager->isOnceKeyDown('W') && this->getLv() >= 3 && this->getMp() > 30)
 	{
+		this->setMp(getMp() - 30);
 		isAttack = true;
 		for (size_t i = 0; i < 30; i++)
 		{
@@ -237,8 +234,9 @@ void Cplayer::moveControl()
 			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.65, 4.3f, 200, "리치스킬", "리치스킬애니");
 		}
 	}
-	else if (InputManager->isStayKeyDown('E') && this->getLv() >= 7 && m_count == 0)
+	else if (InputManager->isStayKeyDown('E') && this->getLv() >= 7 && m_count == 0 && this->getMp() > 50)
 	{
+		this->setMp(getMp() - 50);
 		m_count++;
 		isAttack = true;
 		m_time = TIME->getWorldTime();
@@ -275,6 +273,8 @@ void Cplayer::moveControl()
 		setExp(0);
 		setLv(getLv() + 1);
 		setHp(m_maxHp);
+		setMp(getMp() + 200);
+		if (getMp() > m_maxMp)setMp(m_maxMp);
 	}
 
 	moveAnimation();
@@ -332,7 +332,7 @@ void Cplayer::moveAnimation()
 
 void Cplayer::playerStateRender()
 {
-	Rectangle(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerMoveRc.right, playerMoveRc.bottom);
+	//Rectangle(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerMoveRc.right, playerMoveRc.bottom);
 	if (isMoving)
 	{
 		switch (direction)

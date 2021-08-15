@@ -435,10 +435,8 @@ void CinventoryUi::selectEquipItem()
 // 수정 완료
 void CinventoryUi::setEquipItem(int index, int x, int y)
 {
-
 	this->setPlayerStat(index);
 	m_Inventory->equipItem();
-
 }
 
 // 수정 완료
@@ -458,8 +456,8 @@ void CinventoryUi::setPlayerStat(int index)
 			{
 				m_player->setAtk(m_player->getAtk() + Temp[i]->getAtk());
 				m_player->setDef(m_player->getDef() + Temp[i]->getDef());
-				m_player->setHp(m_player->getHp() + Temp[i]->getHp());
-				m_player->setMp(m_player->getMp() + Temp[i]->getMp());
+				m_player->setMaxHp(m_player->getMaxHp() + Temp[i]->getHp());
+				m_player->setMaxMp(m_player->getMaxMp() + Temp[i]->getMp());
 				m_player->setCritical(m_player->getCritical() + Temp[i]->getCritical());
 				m_player->setCriticalAtk(m_player->getCriticalAtk() + Temp[i]->getCriticalAtk());
 				m_player->setSpeed(m_player->getSpeed() + Temp[i]->getSpeed());
@@ -468,16 +466,16 @@ void CinventoryUi::setPlayerStat(int index)
 			{	// 이미 장착중 아이템 능력치 해제
 				m_player->setAtk(m_player->getAtk() - m_Inventory->getEquipItem()[i].m_item->getAtk());
 				m_player->setDef(m_player->getDef() - m_Inventory->getEquipItem()[i].m_item->getDef());
-				m_player->setHp(m_player->getHp() - m_Inventory->getEquipItem()[i].m_item->getHp());
-				m_player->setMp(m_player->getMp() - m_Inventory->getEquipItem()[i].m_item->getMp());
+				m_player->setMaxHp(m_player->getMaxHp() - m_Inventory->getEquipItem()[i].m_item->getHp());
+				m_player->setMaxMp(m_player->getMaxMp() - m_Inventory->getEquipItem()[i].m_item->getMp());
 				m_player->setCritical(m_player->getCritical() - m_Inventory->getEquipItem()[i].m_item->getCritical());
 				m_player->setCriticalAtk(m_player->getCriticalAtk() - m_Inventory->getEquipItem()[i].m_item->getCriticalAtk());
 				m_player->setSpeed(m_player->getSpeed() - m_Inventory->getEquipItem()[i].m_item->getSpeed());
 
 				m_player->setAtk(m_player->getAtk() + Temp[i]->getAtk());
 				m_player->setDef(m_player->getDef() + Temp[i]->getDef());
-				m_player->setHp(m_player->getHp() + Temp[i]->getHp());
-				m_player->setMp(m_player->getMp() + Temp[i]->getMp());
+				m_player->setMaxHp(m_player->getMaxHp() + Temp[i]->getHp());
+				m_player->setMaxMp(m_player->getMaxMp() + Temp[i]->getMp());
 				m_player->setCritical(m_player->getCritical() + Temp[i]->getCritical());
 				m_player->setCriticalAtk(m_player->getCriticalAtk() + Temp[i]->getCriticalAtk());
 				m_player->setSpeed(m_player->getSpeed() + Temp[i]->getSpeed());

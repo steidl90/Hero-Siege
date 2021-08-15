@@ -64,7 +64,6 @@ private:
 	int m_maxHp;
 	int m_maxMp;
 	int m_maxExp;
-	int m_saveDate;
 
 	float m_playerX, m_playerY;
 	float m_angle;
@@ -110,10 +109,10 @@ public:
 	float getPlayerY() const { return m_playerY; }
 	void setPlayerY(float playery) { m_playerY = playery; }
 
-	int getSaveDate() { return m_saveDate; }
 	int getMaxHp() { return m_maxHp; }
 	void setMaxHp(int hp) { m_maxHp = hp; }
 	int getMaxMp() { return m_maxMp; }
+	void setMaxMp(int mp) { m_maxMp = mp; }
 	int getMaxExp() { return m_maxExp; }
 
 	RECT* getPlayerAttackRC() { return &playerAttackRc; }
@@ -122,5 +121,8 @@ public:
 	void setCheckTile(tagTile* tile) { m_CheckTile = tile; }
 	void setAttribute(ATTRIBUTE* att) { m_attribute = att; }
 	void setAstarMove(vector<POINT>* fastload) { m_fastLoadLocation = fastload; }
+
+	CplayerSkill* getSkill() { return m_playerSkill; }
+
 };
 

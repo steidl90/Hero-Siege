@@ -18,8 +18,6 @@ HRESULT CplayerManager::init()
     m_player = new Cplayer;
     m_player->init();
 
-    m_playerSkill = new CplayerSkill;
-
     m_playerUi = new CplayerUi;
     m_playerUi->setPlayerMemoryLink(m_player);
     m_playerUi->init();
@@ -40,7 +38,6 @@ HRESULT CplayerManager::init()
 void CplayerManager::release()
 {
     SAFE_DELETE(m_player);
-    SAFE_DELETE(m_playerSkill);
     SAFE_DELETE(m_playerUi);
     SAFE_DELETE(m_inventory);
     SAFE_DELETE(m_InventoryUI);
@@ -55,7 +52,6 @@ void CplayerManager::update()
         m_player->setAstarMove(m_fastLoadLocation);
     if(isInventoryOn) m_InventoryUI->update();
     m_playerUi->update();
-    m_playerSkill->update("리치스킬애니");
 }
 
 void CplayerManager::render()
@@ -167,19 +163,30 @@ void CplayerManager::collisionEnemy()
     {
         if (IntersectRect(&temp, m_player->getPlayerAttackRC(), &(*iter)->getRect()))
         {
-            (*iter)->setHp((*iter)->getHp() - (m_player->getAtk()-(*iter)->getDef()));
+            (*iter)->setHp((*iter)->getHp() - (m_player->getAtk() - (*iter)->getDef()));
             wsprintf(atk, "%d", (m_player->getAtk() - (*iter)->getDef()));
             TextOut(getMapDC(), (*iter)->getRect().left + ((*iter)->getRect().right - (*iter)->getRect().left) / 2, (*iter)->getRect().top, atk, lstrlen(atk));
-            
-            if ((*iter)->getHp() <= 0)
-            {
-                m_player->setExp(m_player->getExp() + (*iter)->getExp());
-                m_enemy->removeMinion(i);
-                break;
-            }
-            
+
             EFFECT->play("히트1", (*iter)->getRect().left + ((*iter)->getRect().right - (*iter)->getRect().left) / 2 + RND->getFromIntTo(0, 30),
                 (*iter)->getRect().top + ((*iter)->getRect().bottom - (*iter)->getRect().top) / 2 + RND->getFromIntTo(0, 30));
+        }
+
+        for (int j = 0; j < m_player->getSkill()->getvSkill().size(); j++)
+        {
+            if (IntersectRect(&temp, &m_player->getSkill()->getvSkill()[j].m_skillRc, &(*iter)->getRect()))
+            {
+                (*iter)->setHp((*iter)->getHp() - (m_player->getAtk() - (*iter)->getDef()));
+                //m_player->getSkill()->removeSkill(j);
+                EFFECT->play("히트1", (*iter)->getRect().left + ((*iter)->getRect().right - (*iter)->getRect().left) / 2 + RND->getFromIntTo(0, 30),
+                    (*iter)->getRect().top + ((*iter)->getRect().bottom - (*iter)->getRect().top) / 2 + RND->getFromIntTo(0, 30));
+            }
+        }
+
+        if ((*iter)->getHp() <= 0)
+        {
+            m_player->setExp(m_player->getExp() + (*iter)->getExp());
+            m_enemy->removeMinion(i);
+            break;
         }
     }
 
@@ -187,11 +194,25 @@ void CplayerManager::collisionEnemy()
     if (IntersectRect(&tempBoss, m_player->getPlayerAttackRC(), m_boss->getRect()))
     {
         m_boss->setHp(m_boss->getHp() - m_player->getAtk());
-        if (m_boss->getHp() <= 0)
-        {
-            PostQuitMessage(0);
-        }
+        
         EFFECT->play("히트1", m_boss->getRect()->left + (m_boss->getRect()->right - m_boss->getRect()->left) / 2 + RND->getFromIntTo(0, 30),
             m_boss->getRect()->top + (m_boss->getRect()->bottom - m_boss->getRect()->top) / 2 + RND->getFromIntTo(0, 30));
     }
+
+    for (int j = 0; j < m_player->getSkill()->getvSkill().size(); j++)
+    {
+        if (IntersectRect(&tempBoss, &m_player->getSkill()->getvSkill()[j].m_skillRc, m_boss->getRect()))
+        {
+            m_boss->setHp(m_boss->getHp() - m_player->getAtk());
+            m_player->getSkill()->removeSkill(j);
+            EFFECT->play("히트1", m_boss->getRect()->left + (m_boss->getRect()->right - m_boss->getRect()->left) / 2 + RND->getFromIntTo(0, 30),
+                m_boss->getRect()->top + (m_boss->getRect()->bottom - m_boss->getRect()->top) / 2 + RND->getFromIntTo(0, 30));
+        }
+    }
+
+    if (m_boss->getHp() <= 0)
+    {
+        PostQuitMessage(0);
+    }
+    
 }
