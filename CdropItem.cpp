@@ -22,14 +22,14 @@ void CdropItem::render()
 {
 	for (m_viDropItem = m_vDropItem.begin(); m_viDropItem != m_vDropItem.end(); ++m_viDropItem)
 	{
-		Rectangle(getMapDC(), m_viDropItem->itemRect.left, m_viDropItem->itemRect.top, m_viDropItem->itemRect.right, m_viDropItem->itemRect.bottom);
+		// Rectangle(getMapDC(), m_viDropItem->itemRect.left, m_viDropItem->itemRect.top, m_viDropItem->itemRect.right, m_viDropItem->itemRect.bottom);
 		IMAGE->findImage(m_viDropItem->item->getSmallImage())->frameRender(getMapDC()
 			, m_viDropItem->itemRect.left, m_viDropItem->itemRect.top
 			, m_viDropItem->item->getFrame().x, m_viDropItem->item->getFrame().y);
 	}
 }
 
-Citem CdropItem::getItem()
+Citem* CdropItem::getItem()
 {
 	int isDrop, itemType, dropItem = 0;
 	isDrop = RND->getInt(2);
@@ -58,19 +58,20 @@ Citem CdropItem::getItem()
 		{
 			dropItem = RND->getFromIntTo(29, 33);
 		}
+   		return &m_vDropItemList[dropItem];
 	}
-	/*IMAGE->findImage(m_vDropItemList[dropItem].getSmallImage())->frameRender(getMapDC(), m_x, m_y
-		, m_vDropItemList[dropItem].getFrame().x, m_vDropItemList[dropItem].getFrame().y);
-	TextOut(getMapDC(), m_x, m_y, m_vDropItemList[dropItem].getName().c_str(), lstrlen(m_vDropItemList[dropItem].getName().c_str()));*/
-   	return m_vDropItemList[dropItem];
+	else
+	{
+		return &m_vDropItemList[0];
+	}
 
 }
 
 void CdropItem::makeItem(float x, float y)
 {
+	//if (this->getItem() == nullptr) return;
 	DropItem tempItem;
-	tempItem.item = &this->getItem();
-  	int i = 0;
+	tempItem.item = this->getItem();
 	tempItem.itemRect = RectMake(x, y, IMAGE->findImage(tempItem.item->getSmallImage())->getFrameWidth(),
 		IMAGE->findImage(tempItem.item->getSmallImage())->getFrameHeight());
 	tempItem.x = x;
