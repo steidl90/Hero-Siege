@@ -7,7 +7,7 @@
 HINSTANCE m_hInstance;
 HWND m_hWnd;
 POINT m_ptMouse = { 0,0 };
-
+int zDelta = 0;
 
 //메인게임
 mainGame mg;
@@ -117,6 +117,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 //imessage : 메세지 구분번호
 //wParam : 마우스 버튼의 상태, 키보드 조합키의 상태를 전달한다.
 //lParam :  마우스 클릭 좌표를 전달
+
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
 	return mg.MainProc(hWnd, iMessage, wParam, lParam);

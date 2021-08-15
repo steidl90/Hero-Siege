@@ -82,3 +82,4 @@
 extern HINSTANCE m_hInstance;
 extern HWND m_hWnd;
 extern POINT m_ptMouse;
+extern int zDelta;
