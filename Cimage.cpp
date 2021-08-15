@@ -38,20 +38,17 @@ HRESULT Cimage::init()
 
     IMAGE->addFrameImage("라이트닝", "images/Lightning.bmp", 576, 402, 8, 1, true, RGB(255, 0, 255));
 
-
     //=================NPC====================//
-    IMAGE->addFrameImage("NPC블랙마켓", "images/BlackMarketNPC.bmp", 798*1.5, 121 * 1.5, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("NPC에드워드", "images/Edward.bmp", 136 * 1.5, 34 * 1.5, 4, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("NPC에릭", "images/Eric.bmp", 120 * 1.5, 31 * 1.5, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("NPC가노르", "images/GarNor.bmp", 280 * 1.5, 34 * 1.5, 8, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("NPC할스테인", "images/Halstein.bmp", 152 * 1.5, 46 * 1.5, 4, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("NPC카일리아", "images/Kayla.bmp", 120 * 1.5, 32 * 1.5, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("NPC사캐스터", "images/Sarcaster.bmp", 184 * 1.5, 33 * 1.5, 8, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("NPC샵키퍼", "images/ShopKeeper.bmp", 184 * 1.5, 37 * 1.5, 8, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("NPC블랙마켓", "images/BlackMarketNPC.bmp", 1200, 182, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("NPC에드워드", "images/Edward.bmp", 204, 51, 4, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("NPC에릭", "images/Eric.bmp", 180, 47, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("NPC가노르", "images/GarNor.bmp", 424, 51, 8, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("NPC할스테인", "images/Halstein.bmp", 228, 69, 4, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("NPC카일리아", "images/Kayla.bmp", 180, 48, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("NPC사캐스터", "images/Sarcaster.bmp", 280, 51, 8, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("NPC샵키퍼", "images/ShopKeeper.bmp", 280, 57, 8, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("NPC토스테인", "images/Torstein.bmp", 612 * 1.5, 41 * 1.5, 17, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("NPC위치", "images/Witch.bmp", 120 * 1.5, 62 * 1.5, 5, 1, true, RGB(255, 0, 255));
-
-    
+    IMAGE->addFrameImage("NPC위치", "images/Witch.bmp", 180, 93, 5, 1, true, RGB(255, 0, 255));
 
 
     //=================Enemy=================//
@@ -134,6 +131,7 @@ HRESULT Cimage::init()
     IMAGE->addImage("나가기버튼활성화", "images/GameOut2.bmp", 338, 62, true, RGB(255, 0, 255));
     IMAGE->addImage("선택그림자", "images/Shadow.bmp", 40, 21, true, RGB(255, 0, 255));
     IMAGE->addImage("몬스터그림자", "images/Shadow.bmp", 45, 26, true, RGB(255, 0, 255));
+    IMAGE->addImage("NPC그림자", "images/Shadow.bmp", 36, 18, true, RGB(255, 0, 255));
     IMAGE->addImage("선택효과", "images/SelectEffect.bmp", 44, 25, true, RGB(255, 0, 255));
     IMAGE->addImage("SkillUi", "images/HUD.bmp", 361, 112, true, RGB(255, 0, 255));
     IMAGE->addImage("StateUi", "images/StateUI.bmp", 318, 100, true, RGB(255, 0, 255));
@@ -157,7 +155,6 @@ HRESULT Cimage::init()
     IMAGE->addFrameImage("인벤토리1", "images/Inventory1.bmp", 469, 473, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("인벤토리2", "images/Inventory2.bmp", 389, 465, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("인벤토리3", "images/Inventory3.bmp", 858, 473, 1, 1, true, RGB(255, 0, 255));
-
 
     IMAGE->addFrameImage("선택아마존", "images/Choose/ChooseAmazon.bmp", 372, 138, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("선택데몬", "images/Choose/ChooseDemon.bmp", 528, 92, 6, 1, true, RGB(255, 0, 255));

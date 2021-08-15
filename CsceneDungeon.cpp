@@ -185,6 +185,10 @@ void CsceneDungeon::render()
 	m_player->render();
 
 	//Rectangle(getMapDC(), m_changeRect.left, m_changeRect.top, m_changeRect.right, m_changeRect.bottom);
+
+	TCHAR str[256];
+	sprintf_s(str, "메비우스의 거처");
+	TextOut(getMemDC(), WINSIZEX - 177, 20, str, strlen(str));
 }
 
 void CsceneDungeon::sceneChange()

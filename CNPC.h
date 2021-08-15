@@ -63,7 +63,7 @@ private:
 	int m_witchX;
 	int m_witchY;
 
-	bool a;
+	bool m_isAni;
 public:
 	HRESULT init();
 	void release();

@@ -139,6 +139,7 @@ void CsceneTown::render()
 	this->getMapBuffer()->render(getMemDC(), 0, 0, m_camera->getCameraPoint().x, m_camera->getCameraPoint().y, m_camera->getCameraWidth(), m_camera->getCameraHeight());
 	this->getMapBuffer()->mapRender(getMemDC(), WINSIZEX - IMAGE->findImage("MiniMapUi")->getWidth(), 70);
 
+
 	m_camera->render();
 	m_town->render();
 	//NPC
@@ -153,6 +154,9 @@ void CsceneTown::render()
 	{
 		Rectangle(getMemDC(), m_npcRect.left, m_npcRect.top, m_npcRect.right, m_npcRect.bottom);
 	}
+	TCHAR str[256];
+	sprintf_s(str, "이노야 마을");
+	TextOut(getMemDC(), WINSIZEX - 165, 20, str, strlen(str));
 }
 
 void CsceneTown::sceneChange()
@@ -218,7 +222,6 @@ void CsceneTown::npcCollison()
 			isNpcCollison = !isNpcCollison;
 		}
 	}
-	else isNpcCollison = false;
 }
 
 
