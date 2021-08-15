@@ -44,6 +44,8 @@ HRESULT CsceneTown::init()
 
 	m_aStar = new CaStar;
 	m_aStar->setCameraMemory(m_camera);
+	m_aStar->setPlayer(m_player->getPlayer());
+	m_aStar->setAttribute(m_town->getAttribute());
 	m_aStar->init();
 
 	m_shop = new Cshop;

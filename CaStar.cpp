@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "CaStar.h"
 #include "camera.h"
-
+#include "Cplayer.h"
 CaStar::CaStar()
 {
     isButtonClick = false;
@@ -73,6 +73,15 @@ void CaStar::release()
 
 void CaStar::update()
 {
+    if (!m_fastLoadLocation.empty())
+    {
+        if (m_player->getPlayerX() > m_fastLoadLocation.begin()->x - 1 && m_player->getPlayerX() < m_fastLoadLocation.begin()->x + 1
+            && m_player->getPlayerY() > m_fastLoadLocation.begin()->y - 1 && m_player->getPlayerY() < m_fastLoadLocation.begin()->y + 1)
+        {
+            m_fastLoad.clear();
+            m_fastLoadLocation.clear();
+        }
+    }
     if (InputManager->isOnceKeyDown(VK_RBUTTON))
     {
         _openList.clear();
@@ -119,6 +128,9 @@ void CaStar::tileComposition()
     {
         for (size_t j = 0; j < TILE_X; j++)
         {
+            if (m_attribute[i * TILEX + j] == ATTRIBUTE::COLLISION_ON)
+                _tile[i][j].type = TILE_TYPE::TILE_TYPE_WALL;
+
             if (m_playerIndex.y + 1 == i && m_playerIndex.x == j)
             {
                  _selectType = TILE_TYPE::TILE_TYPE_START;

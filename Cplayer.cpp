@@ -3,6 +3,7 @@
 
 Cplayer::Cplayer() :isMoving(false), isIdle(false), isAttack(false), isLive(true), isRect(false)
 {
+	m_fastLoadLocation = nullptr;
 }
 
 Cplayer::~Cplayer()
@@ -454,9 +455,8 @@ void Cplayer::isAttackRender()
 void Cplayer::playerAStarMove()
 {
 	vector<POINT>::iterator iter;
-	
 
-	if ( m_fastLoadLocation != nullptr)
+	if (m_fastLoadLocation != nullptr && m_fastLoadLocation->size() > 0)
 	{
 		/*if(isAstarMove == true)
 			iter = m_fastLoadLocation.begin();*/
@@ -468,23 +468,43 @@ void Cplayer::playerAStarMove()
 		//	return;
 		//}
 
-		if (m_index == m_fastLoadLocation->size())
+		/*if (m_index == m_fastLoadLocation->size())
 		{
 			m_fastLoadLocation->clear();
 			m_index = 0;
 			return;
+		}*/
+
+		if (m_playerX < (*m_fastLoadLocation)[m_index].x)
+		{
+			direction = DIRECTIONS::DIRECTIONS_RIGHT;
+			isMoving = true;
+			m_playerX += 2.0f;
+		}
+		else if (m_playerX > (*m_fastLoadLocation)[m_index].x)
+		{
+			direction = DIRECTIONS::DIRECTIONS_LEFT;
+			isMoving = true;
+			m_playerX -= 2.0f;
+		}
+		if (m_playerY < (*m_fastLoadLocation)[m_index].y)
+		{
+			direction = DIRECTIONS::DIRECTIONS_DOWN;
+			isMoving = true;
+			m_playerY += 2.0f;
+		}
+		else if (m_playerY > (*m_fastLoadLocation)[m_index].y)
+		{
+			direction = DIRECTIONS::DIRECTIONS_UP;
+			isMoving = true;
+			m_playerY -= 2.0f;
 		}
 
-		if (m_playerX < (*m_fastLoadLocation)[m_index].x) m_playerX++;
-		else if (m_playerX > (*m_fastLoadLocation)[m_index].x)m_playerX--;
-		if (m_playerY < (*m_fastLoadLocation)[m_index].y) m_playerY++;
-		else if (m_playerY > (*m_fastLoadLocation)[m_index].y)m_playerY--;
-
-		if ((*m_fastLoadLocation)[m_index].x < m_playerX + 1 && (*m_fastLoadLocation)[m_index].x > m_playerX - 1
+		/*if ((*m_fastLoadLocation)[m_index].x < m_playerX + 1 && (*m_fastLoadLocation)[m_index].x > m_playerX - 1
 			&& (*m_fastLoadLocation)[m_index].y < m_playerY + 1 && (*m_fastLoadLocation)[m_index].y > m_playerY - 1)
 		{
-			m_index++;
-		}
+			if(m_index < m_fastLoadLocation->size()) m_index++;
+		}*/
 	}
 }
 

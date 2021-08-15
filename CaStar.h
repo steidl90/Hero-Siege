@@ -36,13 +36,14 @@ struct aStarTile
 	TILE_TYPE type;
 };
 
-
+class Cplayer;
 class camera;
 class CaStar :public gameNode
 {
 
 private:
 	camera* m_camera;
+	Cplayer* m_player;
 private:
 	aStarTile _tile[TILE_X][TILE_Y];
 	vector<aStarTile*> _openList;
@@ -55,6 +56,8 @@ private:
 	ASTAR_STATE _astarState;
 	TILE_TYPE _selectType;
 	COLORREF _selectedTypeColor;
+
+	ATTRIBUTE* m_attribute;
 
 	int _startX, _startY;
 	int _endX, _endY;
@@ -96,9 +99,11 @@ public:
 
 	// Ãß°¡
 	void setPlayerIndex(POINT index) { m_playerIndex = index; }
+	void setPlayer(Cplayer* player) { m_player = player; }
 	vector<POINT>* getFastLoad() { return &m_fastLoad; }
 	vector<POINT>* getFastLoadLocation() { return &m_fastLoadLocation; }
 	void setCameraMemory(camera* cm) { m_camera = cm; }
+	void setAttribute(ATTRIBUTE* att) { m_attribute = att; }
 };
 
 
