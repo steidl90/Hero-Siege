@@ -19,11 +19,11 @@ struct SelectItem
 
 class Cinventory
 {
-	vector<Citem*> m_vWeaponList;
-	vector<Citem*> m_vArmorList;
-	vector<Citem*> m_vShoesList;
-	vector<Citem*> m_vGlovesList;
-	vector<Citem*> m_vPendantList;
+	vector<Citem> m_vWeaponList;
+	vector<Citem> m_vArmorList;
+	vector<Citem> m_vShoesList;
+	vector<Citem> m_vGlovesList;
+	vector<Citem> m_vPendantList;
 
 	vector<Citem*> m_vEquipList;
 
@@ -34,10 +34,10 @@ class Cinventory
 	Citem* m_equipPendant;
 
 	// 기능 구현 멤버변수
-	SelectItem* m_selectItem;
-	Citem m_itemInit[5];
+	SelectItem m_selectItem;
 	// 구조 수정
 	EquipItem m_equipItem[5];
+	Citem m_tempItem[5];
 
 
 public:
@@ -52,10 +52,14 @@ public:
 
 	// 아이템 얻었을때
 	void addItem(Citem* item);
+	// 아이템 장착
+	void equipItem();
+	void setEquipRender(ITEMTYPE type, POINT renderPoint);
 	// 아이템 장착 해제할때
 	void UnEquipItem(Citem* item);
 	// 아이템 버릴때
-	void AbandonItem(Citem* item);
+	//bool checkEquipItem(ITEMTYPE type);
+	void AbandonItem();
 
 	// 아이템 장착할때
 	void setEquipWeapon(Citem* item) { m_equipWeapon = item; }
@@ -67,11 +71,11 @@ public:
 	// 장착중인 아이템 리스트 
 	vector<Citem*>* getvEquipList() { return &m_vEquipList; }
 
-	vector<Citem*>* getvWeaponList() { return &m_vWeaponList; }
-	vector<Citem*>* getvArmorList() { return &m_vArmorList; }
-	vector<Citem*>* getvShoesList() { return &m_vShoesList; }
-	vector<Citem*>* getvGlovesList() { return &m_vGlovesList; }
-	vector<Citem*>* getvPendantList() { return &m_vPendantList; }
+	vector<Citem>* getvWeaponList() { return &m_vWeaponList; }
+	vector<Citem>* getvArmorList() { return &m_vArmorList; }
+	vector<Citem>* getvShoesList() { return &m_vShoesList; }
+	vector<Citem>* getvGlovesList() { return &m_vGlovesList; }
+	vector<Citem>* getvPendantList() { return &m_vPendantList; }
 
 	Citem* getEquipWeapon() { return m_equipWeapon; }
 	Citem* getEquipArmor() { return m_equipArmor; }
@@ -83,7 +87,7 @@ public:
 	EquipItem* getEquipItem(ITEMTYPE type);
 	void setEquipItem(ITEMTYPE type, Citem* item, int index, POINT point, bool isEquip);
 
-	SelectItem* getSelectItem() { return m_selectItem; }
+	SelectItem* getSelectItem() { return &m_selectItem; }
 	void setSelectItem(Citem* item, int index, POINT point, bool isSelect);
 
 	void clearSelectItem();
