@@ -25,9 +25,10 @@ HRESULT Cmevius::init(POINT position, int hp, float p1Damage1)
     ANIMATION->addDefAnimation("애니캐스팅2", "보스캐스팅", 10, true, false);
     ANIMATION->addDefAnimation("애니걷기", "보스걷기", 3, false, false);
     ANIMATION->addDefAnimation("애니공", "보스공", 10, false, true);
+    ANIMATION->addDefAnimation("보스페이즈2", "보스몬스터", 5, false, true);
     EFFECT->addEffect("라이트닝", "images/Lightning.bmp", 576, 402, 72, 402, 1, 0.25f, 100);
-    EFFECT->addEffect("스텀프", "images/Stomp.bmp", 819*2, 78*2, 91*2, 78*2, 1, 0.2f, 200);
-
+    EFFECT->addEffect("스텀프", "images/Stomp.bmp", 819*3, 78*3, 91*3, 78*3, 1, 0.1f, 200);
+    EFFECT->addEffect("보스텔레포트", "images/Teleport.bmp", 1254*3, 316*3, 114*3,316*3, 1, 0.13f, 100);
     m_isAppear = true;
     m_isEffect = false;
     m_isLevitating = false;
@@ -106,9 +107,17 @@ void Cmevius::update()
 
     if (m_meviusRc.top >= 450 && m_isIdle)
     {
-        m_meviusImage = IMAGE->findImage("보스");
-        m_meviusAnimation = ANIMATION->findAnimation("애니보스");
-        ANIMATION->resume("애니보스");
+        if (!m_isTeleport) {
+            m_meviusImage = IMAGE->findImage("보스");
+            m_meviusAnimation = ANIMATION->findAnimation("애니보스");
+            ANIMATION->resume("애니보스");
+        }
+        else
+        {
+            m_meviusImage = IMAGE->findImage("보스몬스터");
+            m_meviusAnimation = ANIMATION->findAnimation("보스페이즈2");
+            ANIMATION->resume("보스페이즈2");
+        }
         meviusphase1();
 
     }
@@ -125,14 +134,23 @@ void Cmevius::update()
     if (m_hp <= m_maxHp *0.8)
     {
         meviusphase2();
-    }
+    }   
     if (m_hp <= m_maxHp * 0.5)
     {
+        if (!m_isTeleport)
+        {
+            m_hp = m_maxHp;
+            EFFECT->play("보스텔레포트", m_x+ (m_meviusImage->getFrameWidth()/2)-20, m_y-50);
+
+        }
+        m_isTeleport = true;
         meviusphase3();
+        m_x = 900;
+        m_y = 900;
     }
     if (InputManager->isStayKeyDown('6'))
     {
-        m_hp -= 10;
+        m_hp -= 100;
     }
 
     if (m_meviusImage != nullptr) {
@@ -144,6 +162,7 @@ void Cmevius::render()
 {
     if (m_meviusImage != nullptr) 
     {
+        //Rectangle(getMapDC(), m_meviusRc.left, m_meviusRc.top, m_meviusRc.right, m_meviusRc.bottom);
         EFFECT->render();
         m_attack->render();
         m_meviusImage->aniRender(getMapDC(), m_x, m_y, m_meviusAnimation);

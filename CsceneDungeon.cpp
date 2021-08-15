@@ -28,7 +28,7 @@ HRESULT CsceneDungeon::init()
 	m_player->setTileAttribute(m_dungeon->getAttribute());
 
 	m_boss = new Cmevius;
-	m_boss->init(PointMake(WINSIZEX / 2, -50), 10000, 50);
+	m_boss->init(PointMake(WINSIZEX / 2, -50), 15000, 50);
 	m_boss->setPlayer(m_player->getPlayer());
 
 	m_enemyManager = new CenemyManager;

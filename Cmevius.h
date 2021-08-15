@@ -48,6 +48,7 @@ private:
 	int m_skillCount[3];
 
 	bool m_isEffect;		//이펙트상태
+	bool m_isTeleport;		//텔레포트상태
 	bool m_isAppear;		//등장상태
 	bool m_isLevitating;	//떠있는 상태
 	bool m_isWalking;		//걷는상태
