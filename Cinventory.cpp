@@ -158,15 +158,21 @@ void Cinventory::UnEquipItem(Citem* item)
 // 제거할때 고유 아이디로 제거해야할 필요가 있음.. 지금은 일단 동일 이름기준 제거
 void Cinventory::AbandonItem()
 {
+	if (m_selectItem.isSelect == false)
+		return;
+
 	ITEMTYPE type = m_selectItem.m_item->getType();
+	if (m_equipItem[static_cast<int>(type)].isEquip)
+	{
+		if (m_equipItem[static_cast<int>(type)].m_item->getItemId() == m_selectItem.m_item->getItemId())
+			return;
+	}
 
-	if (m_selectItem.m_item == nullptr)
-		return;
-	if (m_equipItem[static_cast<int>(type)].m_item->getItemId() == m_selectItem.m_item->getItemId())
-		return;
-
-	if (m_equipItem[static_cast<int>(type)].m_itemIndex > m_selectItem.m_itemIndex)
-		m_equipItem[static_cast<int>(type)].m_itemIndex--;
+	if (m_equipItem[static_cast<int>(type)].isEquip)
+	{
+		if (m_equipItem[static_cast<int>(type)].m_itemIndex > m_selectItem.m_itemIndex)
+			m_equipItem[static_cast<int>(type)].m_itemIndex--;
+	}
 
 	switch (type)
 	{
@@ -223,18 +229,12 @@ void Cinventory::AbandonItem()
 	}
 }
 
+
 EquipItem* Cinventory::getEquipItem(ITEMTYPE type)
 {
 	return &m_equipItem[static_cast<int>(type)];
 }
 
-void Cinventory::setEquipItem(ITEMTYPE type, Citem* item, int index, POINT point, bool isEquip)
-{
-	/*m_equipItem[static_cast<int>(type)].m_item = item;
-	m_equipItem[static_cast<int>(type)].m_itemIndex = index;
-	m_equipItem[static_cast<int>(type)].m_renderPoint = point;
-	m_equipItem[static_cast<int>(type)].isEquip = isEquip;*/
-}
 
 void Cinventory::setSelectItem(Citem* item, int index, POINT point, bool isSelect)
 {

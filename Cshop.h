@@ -13,6 +13,10 @@ private:
 
 	vector<Citem> m_vTotalList;
 
+	SelectItem m_selectItem;
+
+	Citem m_shopSelectItem;
+
 public:
 
 	HRESULT init();
@@ -22,8 +26,14 @@ public:
 
 	vector<Citem>* getTotalList() { return &m_vTotalList; }
 
+	Citem* getShopSelectItem() { return &m_shopSelectItem; }
+	SelectItem* getSelectItem() { return &m_selectItem; }
+
+	void setShopSelectItem(Citem* item) { m_shopSelectItem = *item; }
+
+
 	void buyItem(Citem* item);
-	void sellItem(Citem* item);
+	void sellItem();
 
 	void setPlayerMemory(Cplayer* p) { m_player = p; }
 	void setInventoryMemory(Cinventory* inven) { m_myInventory = inven; }

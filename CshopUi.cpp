@@ -91,7 +91,7 @@ void CshopUi::update()
 			this->exitShop();
 		}
 	}
-	if (m_selectShopItem != nullptr) m_selectType = m_selectShopItem->getType();
+	if (m_shop->getShopSelectItem() != nullptr) m_selectType = m_shop->getShopSelectItem()->getType();
 
 	this->setShowIndex();
 }
@@ -127,6 +127,8 @@ void CshopUi::render()
 
 
 	this->showItemType();
+
+	this->showEquipSelect();
 
 	if (isSelectRender)
 	{
@@ -167,14 +169,14 @@ void CshopUi::showItemInfo()
 {
 	char str[100];
 
-	IMAGE->findImage(m_selectItem->getSmallImage())->frameRender(getMemDC(), m_ItemInfoRect.left + 11, m_ItemInfoRect.top
-		, m_selectItem->getFrame().x, m_selectItem->getFrame().y);
+	IMAGE->findImage(m_myInventory->getSelectItem()->m_item ->getSmallImage())->frameRender(getMemDC(), m_ItemInfoRect.left + 11, m_ItemInfoRect.top
+		, m_myInventory->getSelectItem()->m_item->getFrame().x, m_myInventory->getSelectItem()->m_item->getFrame().y);
 
 	SetTextColor(getMemDC(), RGB(255, 255, 255));
-	TextOut(getMemDC(), m_ItemInfoRect.left + 80, m_ItemInfoRect.top + 10, m_selectItem->getName().c_str(), lstrlen(m_selectItem->getName().c_str()));
-	wsprintf(str, "필요 레벨: %d", m_selectItem->getLimitLevel());
+	TextOut(getMemDC(), m_ItemInfoRect.left + 80, m_ItemInfoRect.top + 10, m_myInventory->getSelectItem()->m_item->getName().c_str(), lstrlen(m_myInventory->getSelectItem()->m_item->getName().c_str()));
+	wsprintf(str, "필요 레벨: %d", m_myInventory->getSelectItem()->m_item->getLimitLevel());
 	TextOut(getMemDC(), m_ItemInfoRect.left + 80, m_ItemInfoRect.top + 30, str, lstrlen(str));
-	wsprintf(str, "골드: %d", m_selectItem->getBuyPrice());
+	wsprintf(str, "골드: %d", m_myInventory->getSelectItem()->m_item->getBuyPrice());
 	TextOut(getMemDC(), m_ItemInfoRect.left + 80, m_ItemInfoRect.top + 50, str, lstrlen(str));
 	
 	this->itemStatInfo();
@@ -194,17 +196,17 @@ void CshopUi::itemStatInfo()
 	char speed[100];
 	char level[100];
 	
-	wsprintf(grade, "등급 : %s", m_selectItem->getItemGrade().c_str());
-	wsprintf(atk, "공격력: %d", m_selectItem->getAtk());
-	wsprintf(def, "방어력: %d", m_selectItem->getDef());
-	wsprintf(hp, "HP: %d", m_selectItem->getHp());
-	wsprintf(mp, "MP: %d", m_selectItem->getMp());
-	wsprintf(cri, "크리율: %d%", m_selectItem->getCritical());
-	sprintf(criAtk, "크리공격력: %.1f", m_selectItem->getCriticalAtk());
-	sprintf(speed, "이동속도: %.1f", m_selectItem->getSpeed());
-	wsprintf(level, "제한레벨: %d", m_selectItem->getLimitLevel());
+	wsprintf(grade, "등급 : %s", m_myInventory->getSelectItem()->m_item->getItemGrade().c_str());
+	wsprintf(atk, "공격력: %d", m_myInventory->getSelectItem()->m_item->getAtk());
+	wsprintf(def, "방어력: %d", m_myInventory->getSelectItem()->m_item->getDef());
+	wsprintf(hp, "HP: %d", m_myInventory->getSelectItem()->m_item->getHp());
+	wsprintf(mp, "MP: %d", m_myInventory->getSelectItem()->m_item->getMp());
+	wsprintf(cri, "크리율: %d%", m_myInventory->getSelectItem()->m_item->getCritical());
+	sprintf(criAtk, "크리공격력: %.1f", m_myInventory->getSelectItem()->m_item->getCriticalAtk());
+	sprintf(speed, "이동속도: %.1f", m_myInventory->getSelectItem()->m_item->getSpeed());
+	wsprintf(level, "제한레벨: %d", m_myInventory->getSelectItem()->m_item->getLimitLevel());
 
-	switch (m_selectItem->getType())
+	switch (m_myInventory->getSelectItem()->m_item->getType())
 	{
 	case ITEMTYPE::ITEMTYPE_WEAPON:
 		TextOut(getMemDC(), m_ItemInfoRect.left + 10, m_ItemInfoRect.top + 120, grade, lstrlen(grade));
@@ -365,6 +367,8 @@ void CshopUi::setShowIndex()
 }
 
 // 인벤토리 아이템 선택
+// TODO:: 나머지타입 추가필요
+
 void CshopUi::selectItem()
 {
 	vector<Citem>::iterator itemIter;
@@ -386,13 +390,22 @@ void CshopUi::selectItem()
 					{
 					case ITEMTYPE::ITEMTYPE_WEAPON:
 						itemIter = m_shop->getInventory()->getvWeaponList()->begin() + i;
-						m_selectItem = &(*itemIter);
 						break;
 					case ITEMTYPE::ITEMTYPE_ARMOR:
 						itemIter = m_shop->getInventory()->getvArmorList()->begin() + i;
-						m_selectItem = &(*itemIter);
+						break;
+					case ITEMTYPE::ITEMTYPE_SHOES:
+						itemIter = m_shop->getInventory()->getvShoesList()->begin() + i;
+						break;
+					case ITEMTYPE::ITEMTYPE_GLOVES:
+						itemIter = m_shop->getInventory()->getvGlovesList()->begin() + i;
+						break;
+					case ITEMTYPE::ITEMTYPE_PENDANT:
+						itemIter = m_shop->getInventory()->getvPendantList()->begin() + i;
 						break;
 					}
+
+					m_myInventory->setSelectItem(&(*itemIter), i, PointMake(m_selectRenderX, m_selectRenderY), true);
 					isKeyUp = false;
 				}
 			}
@@ -400,9 +413,33 @@ void CshopUi::selectItem()
 	}
 }
 
+// 현재 장착중인 아이템들은 myInventory에서 정보 가져오기 -> 해당 아이템 인덱스를 토대로 장착테두리 표시... 
 void CshopUi::showEquipSelect()
 {
-	// 현재 장착중인 아이템들은 myInventory에서 정보 가져오기 -> 해당 아이템 인덱스를 토대로 장착테두리 표시... 
+	int renderIndex;
+	int m_equipRenderX;
+	int m_equipRenderY;
+	bool isEquipSelectRender = true;
+	//renderIndex = m_equipItem[static_cast<int>(m_selectType)].m_itemIndex - m_showIndex;
+	renderIndex = m_myInventory->getEquipItem(m_selectType)->m_itemIndex - m_showIndex;
+	if (renderIndex < 0 || renderIndex > 3)
+		isEquipSelectRender = false;
+	for (int i = 0; i < 4; i++)
+	{
+		if (i == renderIndex)
+		{
+			m_equipRenderX = m_vItemListRect[i].left - 5;
+			m_equipRenderY = m_vItemListRect[i].top - 3;
+			m_myInventory->setEquipRender(m_selectType, PointMake(m_equipRenderX, m_equipRenderY));
+		}
+	}
+
+	if (isEquipSelectRender)
+	{
+		if (m_myInventory->getEquipItem(m_selectType)->isEquip)
+			IMAGE->findImage("장착테두리")->render(getMemDC(), m_myInventory->getEquipItem(m_selectType)->m_renderPoint.x,
+				m_myInventory->getEquipItem(m_selectType)->m_renderPoint.y);
+	}
 }
 
 
@@ -410,10 +447,9 @@ void CshopUi::sellItem()
 {
 	if (PtInRect(&m_sellButton, m_ptMouse))
 	{
-		if (m_selectItem != nullptr)
+		if (m_myInventory->getSelectItem()->m_item != nullptr)
 		{
-			m_shop->sellItem(m_selectItem);
-			m_selectItem = nullptr;
+			m_shop->sellItem();
 			isSelectRender = false;
 		}
 		isKeyUp = false;
@@ -424,9 +460,9 @@ void CshopUi::buyItem()
 {
 	if (PtInRect(&m_buyButton, m_ptMouse))
 	{
-		if (m_selectShopItem != nullptr)
+		if (m_shop->getShopSelectItem() != nullptr)
 		{
-			m_shop->buyItem(m_selectShopItem);
+			m_shop->buyItem(m_shop->getShopSelectItem());
 		}
 		isKeyUp = false;
 	}
@@ -436,6 +472,7 @@ void CshopUi::exitShop()
 {
 	if (PtInRect(&m_exitButton, m_ptMouse))
 	{
+		m_myInventory->clearSelectItem();
 		m_exit = true;
 	}
 }
@@ -472,9 +509,9 @@ void CshopUi::selectShopItem()
 			{
 				isSelectShop = true;
 				shopItemIter = m_shop->getTotalList()->begin() + i;
-				m_selectShopItem = &(*shopItemIter);
+				m_shop->setShopSelectItem(&(*shopItemIter));
 
-				m_selectItem = nullptr;
+				m_myInventory->clearSelectItem();
 				isSelectRender = false;
 			}
 		}
@@ -485,14 +522,14 @@ void CshopUi::showShopInfo()
 {
 	char str[100];
 
-	IMAGE->findImage(m_selectShopItem->getSmallImage())->frameRender(getMemDC(), m_shopInfo.left + 11, m_shopInfo.top
-		, m_selectShopItem->getFrame().x, m_selectShopItem->getFrame().y);
+	IMAGE->findImage(m_shop->getShopSelectItem()->getSmallImage())->frameRender(getMemDC(), m_shopInfo.left + 11, m_shopInfo.top
+		, m_shop->getShopSelectItem()->getFrame().x, m_shop->getShopSelectItem()->getFrame().y);
 
 	SetTextColor(getMemDC(), RGB(255, 255, 255));
-	TextOut(getMemDC(), m_shopInfo.left + 80, m_shopInfo.top + 10, m_selectShopItem->getName().c_str(), lstrlen(m_selectShopItem->getName().c_str()));
-	wsprintf(str, "필요 레벨: %d", m_selectShopItem->getLimitLevel());
+	TextOut(getMemDC(), m_shopInfo.left + 80, m_shopInfo.top + 10, m_shop->getShopSelectItem()->getName().c_str(), lstrlen(m_shop->getShopSelectItem()->getName().c_str()));
+	wsprintf(str, "필요 레벨: %d", m_shop->getShopSelectItem()->getLimitLevel());
 	TextOut(getMemDC(), m_shopInfo.left + 80, m_shopInfo.top + 30, str, lstrlen(str));
-	wsprintf(str, "골드: %d", m_selectShopItem->getBuyPrice());
+	wsprintf(str, "골드: %d", m_shop->getShopSelectItem()->getBuyPrice());
 	TextOut(getMemDC(), m_shopInfo.left + 80, m_shopInfo.top + 50, str, lstrlen(str));
 
 	this->shopItemStatInfo();
@@ -510,17 +547,17 @@ void CshopUi::shopItemStatInfo()
 	char speed[100];
 	char level[100];
 
-	wsprintf(grade, "등급 : %s", m_selectShopItem->getItemGrade().c_str());
-	wsprintf(atk, "공격력: %d", m_selectShopItem->getAtk());
-	wsprintf(def, "방어력: %d", m_selectShopItem->getDef());
-	wsprintf(hp, "HP: %d", m_selectShopItem->getHp());
-	wsprintf(mp, "MP: %d", m_selectShopItem->getMp());
-	wsprintf(cri, "크리율: %d%", m_selectShopItem->getCritical());
-	sprintf(criAtk, "크리공격력: %.1f", m_selectShopItem->getCriticalAtk());
-	sprintf(speed, "이동속도: %.1f", m_selectShopItem->getSpeed());
-	wsprintf(level, "제한레벨: %d", m_selectShopItem->getLimitLevel());
+	wsprintf(grade, "등급 : %s", m_shop->getShopSelectItem()->getItemGrade().c_str());
+	wsprintf(atk, "공격력: %d", m_shop->getShopSelectItem()->getAtk());
+	wsprintf(def, "방어력: %d", m_shop->getShopSelectItem()->getDef());
+	wsprintf(hp, "HP: %d", m_shop->getShopSelectItem()->getHp());
+	wsprintf(mp, "MP: %d", m_shop->getShopSelectItem()->getMp());
+	wsprintf(cri, "크리율: %d%", m_shop->getShopSelectItem()->getCritical());
+	sprintf(criAtk, "크리공격력: %.1f", m_shop->getShopSelectItem()->getCriticalAtk());
+	sprintf(speed, "이동속도: %.1f", m_shop->getShopSelectItem()->getSpeed());
+	wsprintf(level, "제한레벨: %d", m_shop->getShopSelectItem()->getLimitLevel());
 
-	switch (m_selectShopItem->getType())
+	switch (m_shop->getShopSelectItem()->getType())
 	{
 	case ITEMTYPE::ITEMTYPE_WEAPON:
 		TextOut(getMemDC(), m_shopInfo.left + 10, m_shopInfo.top + 120, grade, lstrlen(grade));

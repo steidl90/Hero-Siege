@@ -19,6 +19,7 @@
 */
 //////////////////////////////////////////////
 class frameObject;
+class Citem;
 // Åø¿ë
 // »ùÇÃ Å¸ÀÏ °¹¼ö
 #define SAMPLETILEX 18
@@ -185,4 +186,20 @@ enum class ITEMTYPE
 	ITEMTYPE_SHOES,
 	ITEMTYPE_GLOVES,
 	ITEMTYPE_PENDANT
+};
+
+struct EquipItem
+{
+	Citem* m_item;
+	int m_itemIndex;
+	POINT m_renderPoint;
+	bool isEquip;
+};
+
+struct SelectItem
+{
+	Citem* m_item;
+	int m_itemIndex;
+	POINT m_renderPoint;
+	bool isSelect;
 };

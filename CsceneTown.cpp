@@ -55,7 +55,7 @@ HRESULT CsceneTown::init()
 	
 
 	m_shopUi = new CshopUi;
-	//m_shopUi->setInventoryMemory(m_player->getInventoryMemory());
+	m_shopUi->setInventoryMemory(m_player->getInventoryMemory());
 	//m_shopUi->setPlayerMemory(m_player->getPlayer());
 	m_shopUi->setShopMemory(m_shop);
 	m_shopUi->init();
