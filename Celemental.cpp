@@ -36,7 +36,7 @@ HRESULT Celemental::init(POINT position, float HP, float damage, float def, int 
 	m_hpBar->setGauge(m_hp, m_maxHp);
 
 	m_cooltimeCount = 0;
-	m_rndskillCount = 1;
+	m_rndskillCount = 100;
 
 	ANIMATION->addAnimation("¿¤¸®¸àÅ»ÇÏ", "¿¤¸®¸àÅ»", 0, 3, 8, false, true);
 	ANIMATION->addAnimation("¿¤¸®¸àÅ»ÁÂ", "¿¤¸®¸àÅ»", 4, 7, 8, false, true);
@@ -75,8 +75,6 @@ void Celemental::render()
 		Rectangle(getMapDC(), m_traceRc.left, m_traceRc.top, m_traceRc.right, m_traceRc.bottom);
 		Rectangle(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkRc.right, m_walkRc.bottom);
 	}
-	//IMAGE->findImage("¼±ÅÃ±×¸²ÀÚ")->render(getMapDC(), m_x-18, m_y+20);
-	//IMAGE->findImage("¼±ÅÃ±×¸²ÀÚ")->alphaRender(getMapDC(), m_x - 18, m_y + 20, 100);
 	m_hpBar->mapRender();
 	IMAGE->findImage("ÀÏ¹Ý¸ó½ºÅÍÃ¼·Â¹Ù")->render(getMapDC(), m_x-21, m_y - 48);
 	if (m_isWalking)m_walkImage->aniRender(getMapDC(), m_walkRc.left-4, m_walkRc.top, m_walkAni);
@@ -134,7 +132,6 @@ bool Celemental::enemyCooltime()
 
 	if (m_cooltimeCount % m_rndskillCount == 0)
 	{
-		m_rndskillCount = 100;
 		m_cooltimeCount = 0;
 		return true;
 	}

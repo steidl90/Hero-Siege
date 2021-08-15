@@ -11,7 +11,7 @@ Cimage::~Cimage()
 
 HRESULT Cimage::init()
 {
-    m_imageSize = 1.5;
+    m_imageSize = 2;
     /*  모든 이미지 이미지매니저에 추가하는 용도  */
     /*  모든 이미지 이미지매니저에 추가하는 용도  */
     /*  모든 이미지 이미지매니저에 추가하는 용도  */
@@ -55,7 +55,7 @@ HRESULT Cimage::init()
     IMAGE->addFrameImage("리치", "images/Priest.bmp", 300, 316, 6, 4, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("리치공격", "images/PriestAttack.bmp", 848, 316, 16, 4, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("리치사망", "images/PriestDie.bmp", 490 , 564 , 10, 4, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("리치스킬", "images/PriestSkill.bmp", 696 * 2, 61 * 2, 12, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("리치스킬", "images/PriestSkill.bmp", 696 * 3, 61 * 3, 12, 1, true, RGB(255, 0, 255));
 
     IMAGE->addFrameImage("엘리멘탈", "images/Elemental.bmp", 252, 268, 4, 4, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("엘리멘탈스킬", "images/ElementalSkill1.bmp", 162, 18, 6, 1, true, RGB(255, 0, 255));
@@ -84,6 +84,8 @@ HRESULT Cimage::init()
     IMAGE->addFrameImage("보스걷기", "images/MeviusWalking.bmp", 720 * m_imageSize, 148 * m_imageSize, 8, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("보스벽", "images/MeviusWall.bmp", 256, 192, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("보스공", "images/MeviusSpikeBall.bmp", 329 * m_imageSize, 54 * m_imageSize, 7, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("보스블랙홀5", "images/BlackHole1.bmp",3750, 300, 10, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("보스블랙홀", "images/BlackHole.bmp",750, 60, 10, 1, true, RGB(255, 0, 255));
 
 
     //=================Object=================//

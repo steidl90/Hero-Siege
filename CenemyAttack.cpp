@@ -7,8 +7,9 @@ CenemyAttack::~CenemyAttack(){}
 
 HRESULT CenemyAttack::init(int skillMax, float range, bool melee, const char* aniName)
 {
-	//ANIMATION->addDefAnimation("¿¤¸®¸àÅ»½ºÅ³¾Ö´Ï", "¿¤¸®¸àÅ»½ºÅ³", 10, false, true);
-	//ANIMATION->addDefAnimation("¿¤¸®¸àÅ»½ºÅ³¾Ö´Ï", "¿¤¸®¸àÅ»½ºÅ³2", 10, false, true);
+	ANIMATION->addDefAnimation("º¸½º½ºÅ³¾Ö´Ï", "º¸½º°ø", 10, false, true);
+	ANIMATION->addDefAnimation("º¸½ººí·¢È¦¾Ö´Ï", "º¸½ººí·¢È¦", 10, false, true);
+	ANIMATION->addDefAnimation("º¸½ººí·¢È¦5¾Ö´Ï", "º¸½ººí·¢È¦5", 10, false, true);
 	ANIMATION->addDefAnimation("¿¤¸®¸àÅ»½ºÅ³¾Ö´Ï", "¿¤¸®¸àÅ»½ºÅ³3", 10, false, true);
 	ANIMATION->addDefAnimation("¸®Ä¡½ºÅ³¾Ö´Ï", "¸®Ä¡½ºÅ³", 15, false, true);
 
@@ -68,8 +69,8 @@ void CenemyAttack::update()
 			else ++m_viSkill;
 		}
 		ANIMATION->findAnimation(m_ani);
-		ANIMATION->resume(m_ani);
-		//ANIMATION->fullstart(m_ani);
+		//ANIMATION->resume(m_ani);
+		ANIMATION->fullstart(m_ani);
 	}
 	if (!m_melee)
 	{
