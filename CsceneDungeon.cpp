@@ -26,7 +26,8 @@ HRESULT CsceneDungeon::init()
 	m_player->init();
 
 	m_boss = new Cmevius;
-	m_boss->init(PointMake(WINSIZEX / 2, -50),3000,10,10,10);
+	m_boss->init(PointMake(WINSIZEX / 2, -50),10000,50);
+	m_boss->setPlayer(m_player->getPlayer());
 
 	m_enemyManager = new CenemyManager;
 	m_enemyManager->init();
@@ -146,7 +147,11 @@ void CsceneDungeon::update()
 	m_enemyManager->collision();
 	m_camera->setTargetPoint(PointMake(m_player->getplayerRect()->left, m_player->getplayerRect()->top));
 	m_player->collisionEnemy();
-	if (m_enemyManager->getEnemy()->size() == 0) m_boss->update();
+	if (m_enemyManager->getEnemy()->size() == 0)
+	{
+		m_boss->update();
+		m_boss->collision();
+	}
 	sceneChange();
 }
 
@@ -158,8 +163,8 @@ void CsceneDungeon::render()
 	m_camera->render();
 	m_dungeon->render();
 	m_enemyManager->render();
-	m_boss->render();
 	m_player->render();
+	m_boss->render();
 
 	//Rectangle(getMapDC(), m_changeRect.left, m_changeRect.top, m_changeRect.right, m_changeRect.bottom);
 }

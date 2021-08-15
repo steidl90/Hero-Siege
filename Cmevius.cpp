@@ -9,13 +9,12 @@ Cmevius::~Cmevius()
 {
 }
 
-HRESULT Cmevius::init(POINT position, int hp, float p1Damage1, float p1Damage2, float p1Damage3)
+HRESULT Cmevius::init(POINT position, int hp, float p1Damage1)
 {
     m_em = new CenemyManager;
-    m_player = new Cplayer;
     
     m_attack = new CenemyAttack;
-    m_attack->init(100,1000,false,"보스스킬애니");
+    m_attack->init(100,500,false,"리치스킬애니");
     m_hpBar = new CprogressBar;
     m_hpBar->init("images/hp.bmp", "images/hp_back.bmp", m_x, m_y, 596, 16);
     m_hpBar->setGauge(m_hp, m_maxHp);
@@ -46,8 +45,7 @@ HRESULT Cmevius::init(POINT position, int hp, float p1Damage1, float p1Damage2, 
     //m_exp = exp;
 
     m_skillDamagePattern1= p1Damage1;
-    m_skillDamagePattern2= p1Damage2;
-    m_skillDamagePattern3= p1Damage3;
+
 
     return S_OK;
 }
@@ -82,8 +80,8 @@ void Cmevius::update()
         if (m_meviusRc.top <= 400) m_y += m_speed;
 		else
 		{
-			m_coolTime++;
-			if (m_coolTime == 50)
+            m_ActionCount++;
+			if (m_ActionCount == 50)
 			{
 				m_isEffect = false;
                 m_isLevitating = false;
@@ -108,10 +106,11 @@ void Cmevius::update()
 
     if (m_meviusRc.top >= 450 && m_isIdle)
     {
-        meviusphase1();
         m_meviusImage = IMAGE->findImage("보스");
         m_meviusAnimation = ANIMATION->findAnimation("애니보스");
         ANIMATION->resume("애니보스");
+        meviusphase1();
+
     }
     //등장씬 끝
 
@@ -121,8 +120,21 @@ void Cmevius::update()
         m_meviusAnimation = ANIMATION->findAnimation("애니캐스팅2");
         ANIMATION->resume("애니캐스팅2");
         m_isIdle = true;
-
     }
+
+    if (m_hp <= m_maxHp *0.8)
+    {
+        meviusphase2();
+    }
+    if (m_hp <= m_maxHp * 0.5)
+    {
+        meviusphase3();
+    }
+    if (InputManager->isStayKeyDown('6'))
+    {
+        m_hp -= 10;
+    }
+
     if (m_meviusImage != nullptr) {
         m_meviusRc = RectMake(m_x, m_y, m_meviusImage->getFrameWidth(), m_meviusImage->getFrameHeight());
     }
@@ -151,48 +163,89 @@ void Cmevius::render()
 
 void Cmevius::meviusphase1()
 {
-    if (m_meviusImage != nullptr){
-        if (meviusCooltime(10)){
-            for (size_t i = 0; i < 1; i++){
-                int count = 4;
+    if (m_meviusImage != nullptr) {
+        if (meviusCooltime(0, 50)) {
+            for (size_t i = 0; i < 1; i++) {
+                int count = 6;
                 m_angle += 0.05;
                 float tempAngle = 2 / (float)count;
                 for (size_t j = 0; j < count; j++) {
                     m_attack->fire(m_meviusRc.right - (m_meviusRc.right - m_meviusRc.left) / 2,
                         m_meviusRc.bottom - (m_meviusRc.bottom - m_meviusRc.top) / 2,
-                        (i * 0.2) + PI * tempAngle * j + m_angle, 2.5f, "보스공", "보스스킬애니");
-                }}}}
+                        (i * 0.2) + PI * tempAngle * j + m_angle, 4.0f, "보스공", "보스스킬애니");
+                }
+            }
+        }
+    }
 }
 
 void Cmevius::meviusphase2()
 {
+    if (m_meviusImage != nullptr) {
+        if (meviusCooltime(1,10)) {
+            for (size_t i = 0; i < 1; i++) {
+                int count = 4;
+                m_angle += 0.10;
+                float tempAngle = 2 / (float)count;
+                for (size_t j = 0; j < count; j++) {
+                    m_attack->fire(m_meviusRc.right - (m_meviusRc.right - m_meviusRc.left) / 2,
+                        m_meviusRc.bottom - (m_meviusRc.bottom - m_meviusRc.top) / 2,
+                        (i * 0.2) + PI * tempAngle * j + m_angle, 5.0f, "보스공", "보스스킬애니");
+                }
+            }
+        }
+    }
 }
 
 void Cmevius::meviusphase3()
 {
+    if (m_meviusImage != nullptr) {
+        if (meviusCooltime(2, 100)) {
+            for (size_t i = 0; i < 1; i++) {
+                int count = 3;
+                m_angle += 0.1;
+                float tempAngle = 2 / (float)count;
+                for (size_t j = 0; j < count; j++) {
+                    m_attack->fire(m_meviusRc.right - (m_meviusRc.right - m_meviusRc.left) / 2,
+                        m_meviusRc.bottom - (m_meviusRc.bottom - m_meviusRc.top) / 2,
+                        (i * 0.2) + PI * tempAngle * j - m_angle, 2.5f, "리치스킬", "리치스킬애니");
+                }
+            }
+        }
+    }
 }
 
-//void Cmevius::coolTime(float time, bool idle, bool walk, bool cast)
-//{
-//    TIME->getWorldTime();
-//    float waitTime;
-//    waitTime = TIME->getWorldTime();
-//    if (waitTime + time <= TIME->getWorldTime())
-//    {
-//        m_isWalking = walk;
-//        m_isCasting = cast;
-//        m_isIdle = idle;
-//    }
-//}
-
-bool Cmevius::meviusCooltime(int skillcount)
+void Cmevius::collision()
 {
-    m_coolTime++;
-    m_skillCount = skillcount;
-
-    if (m_coolTime % skillcount == 0)
+    if (m_attack)
     {
-        m_coolTime = 0;
+        for (size_t j = 0; j < m_attack->getVSkill().size(); j++)
+        {
+            RECT rc;
+            if (IntersectRect(&rc, &m_attack->getVSkill()[j].m_rc, m_player->getplayerMoveRC()))
+            {
+                if (m_skillDamagePattern1 <= m_player->getDef())
+                {
+                    m_attack->removeSkill(j);
+                }
+                else
+                {
+                  m_attack->removeSkill(j);
+                    m_player->setHp(m_player->getHp() - (m_skillDamagePattern1 - m_player->getDef()));
+                }
+            }
+        }
+    }
+}
+
+bool Cmevius::meviusCooltime(int ArrNum,int skillcount)
+{
+    m_coolTime[ArrNum]++;
+    m_skillCount[ArrNum] = skillcount;
+
+    if (m_coolTime[ArrNum] % skillcount == 0)
+    {
+        m_coolTime[ArrNum] = 0;
         return true;
     }
     return false;

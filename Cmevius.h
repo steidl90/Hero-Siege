@@ -43,8 +43,9 @@ private:
 	float m_skillDamagePattern3;
 
 	int m_effectCount;
-	int m_coolTime;
-	int m_skillCount;
+	int m_ActionCount;
+	int m_coolTime[3];
+	int m_skillCount[3];
 
 	bool m_isEffect;		//이펙트상태
 	bool m_isAppear;		//등장상태
@@ -58,7 +59,7 @@ public:
 	Cmevius();
 	~Cmevius();
 
-	HRESULT init(POINT position,int hp, float p1Damage1, float p1Damage2, float p1Damage3);
+	HRESULT init(POINT position,int hp, float p1Damage1);
 	void release();
 	void update();
 	void render();
@@ -66,7 +67,11 @@ public:
 	void meviusphase1();
 	void meviusphase2();
 	void meviusphase3();
-	bool meviusCooltime(int skillcount);
 
+	void collision();
+
+	bool meviusCooltime(int ArrNum, int skillcount);
+
+	void setPlayer(Cplayer* player) { m_player = player; }
 };
 
