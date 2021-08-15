@@ -150,6 +150,7 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="CaStar.h" />
     <ClInclude Include="CbossManager.h" />
+    <ClInclude Include="CdropItem.h" />
     <ClInclude Include="Cdungeon.h" />
     <ClInclude Include="Celemental.h" />
     <ClInclude Include="Cenemy.h" />
@@ -219,6 +220,7 @@
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="CaStar.cpp" />
     <ClCompile Include="CbossManager.cpp" />
+    <ClCompile Include="CdropItem.cpp" />
     <ClCompile Include="Cdungeon.cpp" />
     <ClCompile Include="Celemental.cpp" />
     <ClCompile Include="Cenemy.cpp" />

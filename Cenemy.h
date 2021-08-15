@@ -1,6 +1,7 @@
 #pragma once
 #include "Cunit.h"
 
+
 enum class STATE
 {
 	LEFT,
@@ -86,5 +87,6 @@ public:
 
 	virtual void setPlayer(Cplayer* player) { m_player = player; }
 	virtual RECT getRect() { return m_walkRc; }
+
 };
 

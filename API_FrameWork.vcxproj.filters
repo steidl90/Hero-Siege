@@ -354,6 +354,9 @@
     <ClInclude Include="Cunit.h">
       <Filter>mainGame\히어로시즈\Cunit</Filter>
     </ClInclude>
+    <ClInclude Include="CdropItem.h">
+      <Filter>mainGame\히어로시즈\Cobject\Citem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -535,6 +538,9 @@
     </ClCompile>
     <ClCompile Include="CNPC.cpp">
       <Filter>mainGame\히어로시즈\Cobject\CNPC</Filter>
+    </ClCompile>
+    <ClCompile Include="CdropItem.cpp">
+      <Filter>mainGame\히어로시즈\Cobject\Citem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

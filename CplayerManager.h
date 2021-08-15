@@ -5,6 +5,7 @@
 #include "camera.h"
 #include "CplayerUi.h"
 #include "CinventoryUi.h"
+#include "CdropItem.h"
 
 class CaStar;
 class CenemyManager;
@@ -19,6 +20,7 @@ private:
 	Cinventory* m_inventory;
 	CenemyManager* m_enemy;
 	Cmevius* m_boss;
+	CdropItem* m_dropItem;
 private:
 	
 	vector<POINT>* m_fastLoadLocation;

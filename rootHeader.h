@@ -203,3 +203,19 @@ struct SelectItem
 	POINT m_renderPoint;
 	bool isSelect;
 };
+
+////////////////////////////////////
+/*
+
+	몬스터 드랍 아이템
+
+*/
+////////////////////////////////////
+
+struct DropItem
+{
+	Citem* item;
+	float x;
+	float y;
+	RECT itemRect;
+};

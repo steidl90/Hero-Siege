@@ -2,7 +2,6 @@
 #include "Cenemy.h"
 #include "Cplayer.h"
 #include "CenemyAttack.h"
-
 Cenemy::Cenemy()
 {
 }
@@ -13,6 +12,7 @@ Cenemy::~Cenemy()
 
 HRESULT Cenemy::init(POINT position, float HP, float damage, float exp, float trace)
 {
+
     return S_OK;
 }
 
@@ -122,3 +122,4 @@ bool Cenemy::enemyCooltime()
 void Cenemy::ReturnIdleAnimation()
 {
 }
+
