@@ -9,7 +9,6 @@ class CshopUi : public gameNode
 private:
 	Cinventory* m_myInventory;
 	Cshop* m_shop;
-	Cplayer* m_player;
 private:
 	
 	// 인벤토리 파트
@@ -59,6 +58,8 @@ private:
 	//int m_selectShopX; 이미지없음 보류
 	//int m_selectShopY;
 
+	bool m_exit;
+
 public:
 
 	HRESULT init();
@@ -66,9 +67,11 @@ public:
 	void update();
 	void render();
 	// 클래스 메모리 set
+
+	bool getExit() { return m_exit; }
+	void setExit(bool b) { m_exit = b; }
 	void setInventoryMemory(Cinventory* inven) { m_myInventory = inven; }
 	void setShopMemory(Cshop* shop) { m_shop = shop; }
-	void setPlayerMemory(Cplayer* player) { m_player = player; }
 
 	void showItemType();
 	void showInvenItemList(vector<Citem>* item);
@@ -82,9 +85,10 @@ public:
 	void selectItem();
 	void showEquipSelect();
 
-	void sellItem();
 	// 상점
+	void sellItem();
 	void buyItem();
+	void exitShop();
 
 	void showShopItemList(vector<Citem>* item);
 	void selectShopItem();

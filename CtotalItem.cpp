@@ -26,7 +26,6 @@ HRESULT CtotalItem::init()
 
 void CtotalItem::release()
 {
-
 }
 void CtotalItem::update(){}
 
