@@ -100,6 +100,11 @@ void gameNode::render(/*HDC hdc*/)
 {
 }
 
+void CALLBACK zDeltaReset(HWND hWnd, UINT iMessage, UINT_PTR nIDEvent, DWORD dwTime)
+{
+	zDelta = 0;
+}
+
 LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
 	PAINTSTRUCT ps;
@@ -115,6 +120,12 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 		this->render(hdc);
 		EndPaint(hWnd, &ps);
 		break;*/
+	case WM_MOUSEWHEEL:
+		zDelta = GET_WHEEL_DELTA_WPARAM(wParam);
+		break;
+	case WM_TIMER:
+		SetTimer(hWnd, 1, 25, zDeltaReset);
+		break;
 	case WM_MOUSEMOVE:
 		m_ptMouse.x = LOWORD(lParam);
 		m_ptMouse.y = HIWORD(lParam);
@@ -129,6 +140,7 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 		}
 		break;
 	case WM_DESTROY:
+		KillTimer(hWnd, 1);
 		PostQuitMessage(0);
 		break;
 	}//end of switch

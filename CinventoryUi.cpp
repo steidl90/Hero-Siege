@@ -32,6 +32,7 @@ HRESULT CinventoryUi::init()
 			m_vEquipItemSubRect.push_back(temp);
 		}
 	}
+
 	// 메인템 rect
 	for (int i = 0; i < 3; i++)
 	{
@@ -87,6 +88,8 @@ void CinventoryUi::release()
 
 void CinventoryUi::update()
 {
+
+	
 	this->selectItem();
 	this->selectEquipItem();
 	this->selectItemTypeMain();
@@ -95,6 +98,10 @@ void CinventoryUi::update()
 	this->clickEquipButton();
 
 	// 서순 중요 인덱스 계산은 아이템 버리기 등 변경사항 후에 바로 해주기
+	if (zDelta > 0)
+		m_showIndex--;
+	else if (zDelta < 0)
+		m_showIndex++;
 	this->setShowIndex();
 
 	if (InputManager->isStayKeyDown(VK_LBUTTON)) isButtonClick = true;
@@ -195,12 +202,17 @@ void CinventoryUi::setShowIndex()
 	switch (m_selectType)
 	{
 	case ITEMTYPE::ITEMTYPE_WEAPON:
-		if (m_Inventory->getvWeaponList()->size() < 4)
+		if (m_Inventory->getvWeaponList()->size() < 5)
 		{
 			m_showIndex = 0;
 			m_showEndIndex = m_Inventory->getvWeaponList()->size();
 		}
-		else if(m_Inventory->getvWeaponList()->size() - 4 < m_showIndex)	// 끝까지 스크롤했을 때
+		else if (m_showIndex < 0)
+		{
+			m_showIndex = 0;
+			m_showEndIndex = m_showIndex + 4;
+		}
+		else if (m_Inventory->getvWeaponList()->size() - 4 < m_showIndex)	// 끝까지 스크롤했을 때
 		{
 			m_showIndex = m_Inventory->getvWeaponList()->size() - 4;
 			m_showEndIndex = m_showIndex + 4;
@@ -214,6 +226,11 @@ void CinventoryUi::setShowIndex()
 			m_showIndex = 0;
 			m_showEndIndex = m_Inventory->getvArmorList()->size();
 		}
+		else if (m_showIndex < 0)
+		{
+			m_showIndex = 0;
+			m_showEndIndex = m_showIndex + 4;
+		}
 		else if (m_Inventory->getvArmorList()->size() - 4 < m_showIndex)	// 끝까지 스크롤했을 때 예외처리
 		{
 			m_showIndex = m_Inventory->getvArmorList()->size() - 4;
@@ -223,10 +240,15 @@ void CinventoryUi::setShowIndex()
 
 		break;
 	case ITEMTYPE::ITEMTYPE_SHOES:
-		if (m_Inventory->getvShoesList()->size() < 4)
+		if (m_Inventory->getvShoesList()->size() < 5)
 		{
 			m_showIndex = 0;
 			m_showEndIndex = m_Inventory->getvShoesList()->size();
+		}
+		else if (m_showIndex < 0)
+		{
+			m_showIndex = 0;
+			m_showEndIndex = m_showIndex + 4;
 		}
 		else if (m_Inventory->getvShoesList()->size() - 4 < m_showIndex)	// 끝까지 스크롤했을 때
 		{
@@ -237,10 +259,15 @@ void CinventoryUi::setShowIndex()
 
 		break;
 	case ITEMTYPE::ITEMTYPE_GLOVES:
-		if (m_Inventory->getvGlovesList()->size() < 4)
+		if (m_Inventory->getvGlovesList()->size() < 5)
 		{
 			m_showIndex = 0;
 			m_showEndIndex = m_Inventory->getvGlovesList()->size();
+		}
+		else if (m_showIndex < 0)
+		{
+			m_showIndex = 0;
+			m_showEndIndex = m_showIndex + 4;
 		}
 		else if (m_Inventory->getvGlovesList()->size() - 4 < m_showIndex)	// 끝까지 스크롤했을 때
 		{
@@ -250,10 +277,15 @@ void CinventoryUi::setShowIndex()
 		else m_showEndIndex = m_showIndex + 4;
 		break;
 	case ITEMTYPE::ITEMTYPE_PENDANT:
-		if (m_Inventory->getvPendantList()->size() < 4)
+		if (m_Inventory->getvPendantList()->size() < 5)
 		{
 			m_showIndex = 0;
 			m_showEndIndex = m_Inventory->getvPendantList()->size();
+		}
+		else if (m_showIndex < 0)
+		{
+			m_showIndex = 0;
+			m_showEndIndex = m_showIndex + 4;
 		}
 		else if (m_Inventory->getvPendantList()->size() - 4 < m_showIndex)	// 끝까지 스크롤했을 때
 		{
@@ -581,9 +613,13 @@ void CinventoryUi::selectItemTypeSub()
 						m_compareTime = TIME->getWorldTime();
 					m_clickCount++;
 
-					if ((*iter).left == m_vEquipItemSubRect[0].left) m_selectType = ITEMTYPE::ITEMTYPE_PENDANT;
-					else if ((*iter).left == m_vEquipItemSubRect[3].left) m_selectType = ITEMTYPE::ITEMTYPE_GLOVES;
-					else if ((*iter).left == m_vEquipItemSubRect[4].left) m_selectType = ITEMTYPE::ITEMTYPE_SHOES;
+					// 높이도 체크해야
+					if ((*iter).left == m_vEquipItemSubRect[0].left && (*iter).top == m_vEquipItemSubRect[0].top)
+						m_selectType = ITEMTYPE::ITEMTYPE_PENDANT;
+					else if ((*iter).left == m_vEquipItemSubRect[3].left && (*iter).top == m_vEquipItemSubRect[3].top)
+						m_selectType = ITEMTYPE::ITEMTYPE_GLOVES;
+					else if ((*iter).left == m_vEquipItemSubRect[4].left && (*iter).top == m_vEquipItemSubRect[4].top)
+						m_selectType = ITEMTYPE::ITEMTYPE_SHOES;
 
 					m_Inventory->clearSelectItem();
 					isSelectRender = false;
