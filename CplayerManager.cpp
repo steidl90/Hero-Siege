@@ -204,7 +204,7 @@ void CplayerManager::collisionEnemy()
         if (IntersectRect(&tempBoss, &m_player->getSkill()->getvSkill()[j].m_skillRc, m_boss->getRect()))
         {
             m_boss->setHp(m_boss->getHp() - m_player->getAtk());
-            m_player->getSkill()->removeSkill(j);
+            //m_player->getSkill()->removeSkill(j);
             EFFECT->play("È÷Æ®1", m_boss->getRect()->left + (m_boss->getRect()->right - m_boss->getRect()->left) / 2 + RND->getFromIntTo(0, 30),
                 m_boss->getRect()->top + (m_boss->getRect()->bottom - m_boss->getRect()->top) / 2 + RND->getFromIntTo(0, 30));
         }
