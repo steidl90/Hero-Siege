@@ -9,7 +9,6 @@ HRESULT CenemyAttack::init(int skillMax, float range, bool melee, const char* an
 {
 	ANIMATION->addDefAnimation("보스스킬애니", "보스공", 10, false, true);
 	ANIMATION->addDefAnimation("보스블랙홀애니", "보스블랙홀", 10, false, true);
-	ANIMATION->addDefAnimation("보스블랙홀5애니", "보스블랙홀5", 10, false, true);
 	ANIMATION->addDefAnimation("엘리멘탈스킬애니", "엘리멘탈스킬3", 10, false, true);
 	ANIMATION->addDefAnimation("리치스킬애니", "리치스킬", 15, false, true);
 

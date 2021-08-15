@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "CplayerManager.h"
 #include "CenemyManager.h"
+#include "Cmevius.h"
 CplayerManager::CplayerManager()
 {
 }
@@ -16,8 +17,6 @@ HRESULT CplayerManager::init()
 
     m_player = new Cplayer;
     m_player->init();
-
-    //m_playerDate = new CplayerDate;
 
     m_playerSkill = new CplayerSkill;
 
@@ -182,5 +181,17 @@ void CplayerManager::collisionEnemy()
             EFFECT->play("히트1", (*iter)->getRect().left + ((*iter)->getRect().right - (*iter)->getRect().left) / 2 + RND->getFromIntTo(0, 30),
                 (*iter)->getRect().top + ((*iter)->getRect().bottom - (*iter)->getRect().top) / 2 + RND->getFromIntTo(0, 30));
         }
+    }
+
+    RECT tempBoss;
+    if (IntersectRect(&tempBoss, m_player->getPlayerAttackRC(), m_boss->getRect()))
+    {
+        m_boss->setHp(m_boss->getHp() - m_player->getAtk());
+        if (m_boss->getHp() <= 0)
+        {
+            PostQuitMessage(0);
+        }
+        EFFECT->play("히트1", m_boss->getRect()->left + (m_boss->getRect()->right - m_boss->getRect()->left) / 2 + RND->getFromIntTo(0, 30),
+            m_boss->getRect()->top + (m_boss->getRect()->bottom - m_boss->getRect()->top) / 2 + RND->getFromIntTo(0, 30));
     }
 }

@@ -9,6 +9,7 @@
 
 class CaStar;
 class CenemyManager;
+class Cmevius;
 class CplayerManager :public Cunit
 {
 private:
@@ -19,6 +20,7 @@ private:
 	CinventoryUi* m_InventoryUI;
 	Cinventory* m_inventory;
 	CenemyManager* m_enemy;
+	Cmevius* m_boss;
 private:
 	
 	vector<POINT>* m_fastLoadLocation;
@@ -49,6 +51,7 @@ public:
 
 	// Ãß°¡
 	void setEnemyMemory(CenemyManager* enemy) { m_enemy = enemy; }
+	void setBossMemory(Cmevius* boss) { m_boss = boss; }
 
 	void collisionEnemy();
 
