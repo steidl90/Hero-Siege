@@ -22,11 +22,11 @@ private:
 private:
 	RECT m_changeRect;
 	RECT m_shopRect;
-	RECT m_garNorRect;
+	RECT m_npcRect;
 
 	bool isShopOn;
 
-	bool isGarNorCollison;
+	bool isNpcCollison;
 
 	float m_timerHp;
 	float m_timerMp;
@@ -42,6 +42,8 @@ public:
 
 	void sceneChange();
 	void shopOn();
-	void garNORCollison();
+	void npcCollison();
+	
+
 	void setPlayerMemory(CplayerDate* playerdate){ m_playerDate = playerdate;}
 };

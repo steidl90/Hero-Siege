@@ -63,13 +63,13 @@ HRESULT CsceneTown::init()
 	m_changeRect = RectMake(MAPSIZE - 10, MAPSIZE * 0.25 + 120, 100, 100);
 
 	m_shopRect = RectMake(300, 300, 100, 100);
-	//m_garNorRect = RectMake(1500 , 500, 100, 100);
+	m_npcRect = RectMake(WINSIZEX/2 , WINSIZEY/2, 100, 100);
 
 
 	m_npc = new CNPC;
 	m_npc->init();
 	isShopOn = false;
-	isGarNorCollison = false;
+	isNpcCollison = false;
 	return S_OK;
 }
 
@@ -101,7 +101,7 @@ void CsceneTown::update()
 
 	shopOn();
 
-	if(isGarNorCollison)garNORCollison();
+	npcCollison();
 
 	//Ã¼·Â ¸®Á¨
 	if (m_player->getPlayer()->getHp() < m_player->getPlayer()->getMaxHp())
@@ -141,17 +141,17 @@ void CsceneTown::render()
 
 	m_camera->render();
 	m_town->render();
-	m_player->render();
 	//NPC
 	m_npc->render();
+	m_player->render();
 
 	if (isShopOn) m_shopUi->render();
 
 	Rectangle(getMapDC(), m_shopRect.left, m_shopRect.top, m_shopRect.right, m_shopRect.bottom);
 
-	if (!isGarNorCollison)
+	if (isNpcCollison)
 	{
-		Rectangle(getMapDC(), m_garNorRect.left, m_garNorRect.top, m_garNorRect.bottom, m_garNorRect.right);
+		Rectangle(getMemDC(), m_npcRect.left, m_npcRect.top, m_npcRect.right, m_npcRect.bottom);
 	}
 }
 
@@ -199,16 +199,26 @@ void CsceneTown::shopOn()
 	//isShopOn = true;
 }
 
-void CsceneTown::garNORCollison()
+void CsceneTown::npcCollison()
 {
-	RECT temp;
-	if (IntersectRect(&temp, m_player->getplayerRect(), m_npc->getGaNorRect()))
+	if (InputManager->isOnceKeyDown('B'))
 	{
-		if (InputManager->isOnceKeyDown('B'))
+		RECT temp;
+		if (IntersectRect(&temp, m_player->getplayerRect(), m_npc->getGaNorRect())||
+		IntersectRect(&temp, m_player->getplayerRect(), m_npc->getShopKeeperRect())||
+		IntersectRect(&temp, m_player->getplayerRect(), m_npc->getBlackMarketRect())||
+		IntersectRect(&temp, m_player->getplayerRect(), m_npc->getEdwardRect())||
+		IntersectRect(&temp, m_player->getplayerRect(), m_npc->getEricRect())||
+		IntersectRect(&temp, m_player->getplayerRect(), m_npc->getHalsteinRect())||
+		IntersectRect(&temp, m_player->getplayerRect(), m_npc->getKaylaRect())||
+		IntersectRect(&temp, m_player->getplayerRect(), m_npc->getSarcasterRect())||
+		IntersectRect(&temp, m_player->getplayerRect(), m_npc->getTorsteinRect())||
+		IntersectRect(&temp, m_player->getplayerRect(), m_npc->getWitchRect()))
 		{
-			isGarNorCollison = !isGarNorCollison;
+			isNpcCollison = !isNpcCollison;
 		}
 	}
-	else isGarNorCollison = false;
+	else isNpcCollison = false;
 }
+
 
