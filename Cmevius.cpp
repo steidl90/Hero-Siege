@@ -1,5 +1,7 @@
 #include "framework.h"
 #include "Cmevius.h"
+#include "CdropItem.h"
+
 Cmevius::Cmevius()
 {
     m_meviusImage = nullptr;
@@ -140,8 +142,8 @@ void Cmevius::update()
         if (!m_isTeleport)
         {
             m_hp = m_maxHp;
+            m_dropItem->makeFinalItem(m_x, m_y);
             EFFECT->play("보스텔레포트", m_x+ (m_meviusImage->getFrameWidth()/2)-20, m_y-50);
-
         }
         m_isTeleport = true;
         meviusphase3();

@@ -58,4 +58,6 @@ public:
 
 	void setCheckTile(tagTile* tile) { m_player->setCheckTile(tile); }
 	void setTileAttribute(ATTRIBUTE* att) { m_player->setAttribute(att); }
+
+	CdropItem* getDropItem() { return m_dropItem; }
 };

@@ -21,6 +21,7 @@ public:
 
 	Citem* getItem();
 	void makeItem(float x, float y);
+	void makeFinalItem(float x, float y);
 	void removeItem(int num);
 
 	vector<DropItem> getDropItemList() { return m_vDropItem; }

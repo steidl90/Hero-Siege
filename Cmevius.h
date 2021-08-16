@@ -3,6 +3,7 @@
 #include "CenemyManager.h"
 #include "Cplayer.h"
 #include "CprogressBar.h"
+
 enum class BOSS_STATE
 {
 	BOSS_STATE_IDLE,
@@ -11,9 +12,12 @@ enum class BOSS_STATE
 	BOSS_STATE_LEVITATING,
 	BOSS_STATE_DIE
 };
+class CdropItem;
 class Cmevius :public Cunit
 {
 private:
+	
+	CdropItem* m_dropItem;
 
 	CprogressBar* m_hpBar;
 	image* m_meviusImage;
@@ -79,5 +83,6 @@ public:
 	void setHp(int hp) { m_hp = hp; }
 
 	void setPlayer(Cplayer* player) { m_player = player; }
+	void setDropItem(CdropItem* drop) { m_dropItem = drop; }
 };
 
