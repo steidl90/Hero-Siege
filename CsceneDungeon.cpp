@@ -30,6 +30,7 @@ HRESULT CsceneDungeon::init()
 	m_boss = new Cmevius;
 	m_boss->init(PointMake(WINSIZEX / 2, -50), 30000, 50);
 	m_boss->setPlayer(m_player->getPlayer());
+	m_boss->setDropItem(m_player->getDropItem());
 
 	m_enemyManager = new CenemyManager;
 	m_enemyManager->init();
