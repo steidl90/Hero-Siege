@@ -28,7 +28,7 @@ HRESULT CsceneDungeon::init()
 	m_player->setTileAttribute(m_dungeon->getAttribute());
 
 	m_boss = new Cmevius;
-	m_boss->init(PointMake(WINSIZEX / 2, -50), 15000, 50);
+	m_boss->init(PointMake(WINSIZEX / 2, -50), 30000, 50);
 	m_boss->setPlayer(m_player->getPlayer());
 
 	m_enemyManager = new CenemyManager;
@@ -128,7 +128,7 @@ HRESULT CsceneDungeon::init()
 		}
 	}
 	//프리스트 설정 = 중 상단, 좌 중단 1마리씩
-	for (int i = 0; i <1 ; i++)
+	for (int i = 0; i <2 ; i++)
 	{
 		Cpriest* m_priest = new Cpriest;
 		m_priest->init(PointMake(900 + i * 650, 200 + i * 400),

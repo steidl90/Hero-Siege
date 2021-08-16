@@ -223,9 +223,9 @@ void Cplayer::moveControl()
 		else if (direction == DIRECTIONS::DIRECTIONS_UP)m_playerSkill->skillInformation(m_playerX + 15, m_playerY - 20, PI * 0.5, 7.0f, 700, "리치스킬", "리치스킬애니");
 		else if (direction == DIRECTIONS::DIRECTIONS_DOWN)m_playerSkill->skillInformation(m_playerX, m_playerY, PI * 1.5, 7.0f, 700, "리치스킬", "리치스킬애니");
 	}
-	else if (InputManager->isOnceKeyDown('W') && this->getLv() >= 3 && this->getMp() > 30)
+	else if (InputManager->isOnceKeyDown('W') && this->getLv() >= 3 && this->getMp() > 100)
 	{
-		this->setMp(getMp() - 30);
+		this->setMp(getMp() - 100);
 		isAttack = true;
 		for (size_t i = 0; i < 30; i++)
 		{

@@ -34,8 +34,8 @@ private:
 	float m_speed;
 	float m_angle;
 
-	int m_maxHp;
-	int m_hp;
+	float m_maxHp;
+	float m_hp;
 	float m_def;
 	float m_exp;
 	float m_skillDamagePattern1;
@@ -75,7 +75,7 @@ public:
 
 	RECT* getRect() { return &m_meviusRc; }
 
-	int getHp() { return m_hp; }
+	float getHp() { return m_hp; }
 	void setHp(int hp) { m_hp = hp; }
 
 	void setPlayer(Cplayer* player) { m_player = player; }

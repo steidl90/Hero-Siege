@@ -216,13 +216,13 @@ void CplayerManager::collisionEnemy()
     if (IntersectRect(&tempBoss, m_player->getPlayerAttackRC(), m_boss->getRect()))
     {
         m_boss->setHp(m_boss->getHp() - (m_player->getAtk() * 0.5));
-        sprintf(atk, "-%.1f", ((m_player->getAtk() * 0.5) - (*iter)->getDef()));
+        sprintf(atk, "-%.1f", m_player->getAtk() * 0.5);
         HFONT font, saveFont;
         font = CreateFont(25, 0, 0, 0, 100, false, false, false, HANGEUL_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("ÈÞ¸ÕµÕ±ÙÇìµå¶óÀÎ"));
         saveFont = (HFONT)SelectObject(getMapDC(), font);
         SetBkMode(getMapDC(), TRANSPARENT);
         SetTextColor(getMapDC(), RGB(255, 0, 0));
-        TextOut(getMapDC(), (*iter)->getRect().left + m_boss->getRect()->right - m_boss->getRect()->left / 2, m_boss->getRect()->top + 10, atk, lstrlen(atk));
+        TextOut(getMapDC(), m_boss->getRect()->left + m_boss->getRect()->right - m_boss->getRect()->left / 2, m_boss->getRect()->top + 10, atk, lstrlen(atk));
         DeleteObject(SelectObject(getMapDC(), saveFont));
         EFFECT->play("È÷Æ®1", m_boss->getRect()->left + (m_boss->getRect()->right - m_boss->getRect()->left) / 2 + RND->getFromIntTo(0, 30),
             m_boss->getRect()->top + (m_boss->getRect()->bottom - m_boss->getRect()->top) / 2 + RND->getFromIntTo(0, 30));
@@ -234,13 +234,13 @@ void CplayerManager::collisionEnemy()
         {
             m_boss->setHp(m_boss->getHp() - (m_player->getAtk() * 0.5));
             m_player->getSkill()->removeSkill(j);
-            sprintf(atk, "-%.1f", ((m_player->getAtk() * 0.5) - (*iter)->getDef()));
+            sprintf(atk, "-%.1f", m_player->getAtk() * 0.5);
             HFONT font, saveFont;
             font = CreateFont(25, 0, 0, 0, 100, false, false, false, HANGEUL_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("ÈÞ¸ÕµÕ±ÙÇìµå¶óÀÎ"));
             saveFont = (HFONT)SelectObject(getMapDC(), font);
             SetBkMode(getMapDC(), TRANSPARENT);
             SetTextColor(getMapDC(), RGB(255, 0, 0));
-            TextOut(getMapDC(), (*iter)->getRect().left + m_boss->getRect()->right - m_boss->getRect()->left / 2, m_boss->getRect()->top + 10, atk, lstrlen(atk));
+            TextOut(getMapDC(), m_boss->getRect()->left + m_boss->getRect()->right - m_boss->getRect()->left / 2, m_boss->getRect()->top + 10, atk, lstrlen(atk));
             DeleteObject(SelectObject(getMapDC(), saveFont));
             EFFECT->play("È÷Æ®1", m_boss->getRect()->left + (m_boss->getRect()->right - m_boss->getRect()->left) / 2 + RND->getFromIntTo(0, 30),
                 m_boss->getRect()->top + (m_boss->getRect()->bottom - m_boss->getRect()->top) / 2 + RND->getFromIntTo(0, 30));

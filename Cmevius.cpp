@@ -173,7 +173,7 @@ void Cmevius::render()
         TCHAR strcoolTime[128];
         SetTextColor(getMemDC(), RGB(255, 255, 255));
         SetTextAlign(getMemDC(), TA_CENTER);
-        sprintf_s(strhp, "%d/%d", m_hp, m_maxHp);
+        sprintf_s(strhp, "%.0f/%.0f   ", m_hp, m_maxHp);
         TextOut(getMemDC(), 640, 70, strhp, strlen(strhp));
         SetTextAlign(getMemDC(), TA_LEFT);
 
