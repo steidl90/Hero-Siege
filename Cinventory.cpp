@@ -98,9 +98,11 @@ void Cinventory::update()
 
 void Cinventory::addItem(Citem* item)
 {
+	item->setItemId(item->getItemId() + 1);
 	switch (item->getType())
 	{
 	case ITEMTYPE::ITEMTYPE_WEAPON:
+
 		m_vWeaponList.push_back(*item);
 		break;
 	case ITEMTYPE::ITEMTYPE_ARMOR:

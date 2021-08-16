@@ -60,8 +60,8 @@ private:
 
 	RECT m_clickCheckRect;
 
-	//POINT m_equipRenderPoint[5];  // 필요없는 변수인데 이걸 없애면 오류가 나네... ???
-
+	POINT m_equipRenderPoint[5];  // 필요없는 변수인데 이걸 없애면 오류가 나네... ???
+	
 
 	//bool isEquipRender;
 	//bool isEquipWeapon;

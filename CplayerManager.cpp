@@ -233,7 +233,12 @@ void CplayerManager::getItem()
     {
         if (IntersectRect(&temp, m_player->getplayerMoveRC(), &m_dropItem->getDropItemList()[i].itemRect))
         {
-            if (InputManager->isOnceKeyDown('Z')) m_dropItem->removeItem(i);
+            if (InputManager->isOnceKeyDown('Z'))
+            {
+                m_inventory->addItem(m_dropItem->getDropItemList()[i].item);
+
+                m_dropItem->removeItem(i);
+            }
         }
     }
 }

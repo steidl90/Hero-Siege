@@ -5,7 +5,8 @@ HRESULT CdropItem::init()
 {
 	for (int i = 0; i < ITEM->getTotalItemCount(); i++)
 	{
-		m_vDropItemList.push_back(*ITEM->getItem(i));
+		OutputDebugString(_TEXT("!\n"));
+		m_vDropItemList.push_back((ITEM->getItem(i)));
 	}
 	return S_OK;
 }
@@ -64,11 +65,12 @@ Citem* CdropItem::getItem()
 		{
 			dropItem = RND->getFromIntTo(29, 33);
 		}
-   		return &m_vDropItemList[dropItem];
+
+   		return m_vDropItemList[dropItem];
 	}
 	else
 	{
-		return &m_vDropItemList[20];
+		return m_vDropItemList[20];
 	}
 
 }

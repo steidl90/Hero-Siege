@@ -5,10 +5,9 @@ class CdropItem : public Cobject
 {
 private:
 
-	vector<Citem> m_vDropItemList;
+	vector<Citem*> m_vDropItemList;
 	vector<DropItem> m_vDropItem;
 	vector<DropItem>::iterator m_viDropItem;
-
 	int m_count;
 
 public:
