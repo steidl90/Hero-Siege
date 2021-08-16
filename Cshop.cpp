@@ -8,7 +8,7 @@ HRESULT Cshop::init()
 	{
 		if (ITEM->getItem(i)->getItemGradeInt() == 1) continue;
 
-		m_vTotalList.push_back(*(ITEM->getItem(i)));
+		m_vTotalList.push_back((ITEM->getItem(i)));
 	}
 	return S_OK;
 }

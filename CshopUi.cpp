@@ -143,24 +143,24 @@ void CshopUi::render()
 }
 
 
-void CshopUi::showInvenItemList(vector<Citem>* item)
+void CshopUi::showInvenItemList(vector<Citem*>* item)
 {
 	char str[100];
 
 	// show 인덱스는 기본 0~3까지만 보여준다, 이후 스크롤로 1~4 이런식으로 보여주기
 	int	i = m_showIndex;
 	int j = 0;
-	vector<Citem>::iterator iter;
+	vector<Citem*>::iterator iter;
 	for (iter = item->begin() + i; i < m_showEndIndex; ++iter, i++, j++)
 	{
-		IMAGE->findImage((*iter).getSmallImage())->frameRender(getMemDC()
-			, m_vItemListRect[j].left, m_vItemListRect[j].top, (*iter).getFrame().x, (*iter).getFrame().y);
+		IMAGE->findImage((*iter)->getSmallImage())->frameRender(getMemDC()
+			, m_vItemListRect[j].left, m_vItemListRect[j].top, (*iter)->getFrame().x, (*iter)->getFrame().y);
 
 		SetTextColor(getMemDC(), RGB(255, 255, 255));
-		TextOut(getMemDC(), m_vItemListRect[j].left + 80, m_vItemListRect[j].top + 10, (*iter).getName().c_str(), lstrlen((*iter).getName().c_str()));
-		wsprintf(str, "필요 레벨: %d", (*iter).getLimitLevel());
+		TextOut(getMemDC(), m_vItemListRect[j].left + 80, m_vItemListRect[j].top + 10, (*iter)->getName().c_str(), lstrlen((*iter)->getName().c_str()));
+		wsprintf(str, "필요 레벨: %d", (*iter)->getLimitLevel());
 		TextOut(getMemDC(), m_vItemListRect[j].left + 80, m_vItemListRect[j].top + 30, str, lstrlen(str));
-		wsprintf(str, "골드: %d", (*iter).getBuyPrice());
+		wsprintf(str, "골드: %d", (*iter)->getBuyPrice());
 		TextOut(getMemDC(), m_vItemListRect[j].left + 80, m_vItemListRect[j].top + 50, str, lstrlen(str));
 	}
 }
@@ -371,7 +371,7 @@ void CshopUi::setShowIndex()
 
 void CshopUi::selectItem()
 {
-	vector<Citem>::iterator itemIter;
+	vector<Citem*>::iterator itemIter;
 	int i = m_showIndex;
 	for (auto iter = m_vItemListRect.begin(); i < m_showEndIndex; ++iter, i++)
 	{
@@ -405,7 +405,7 @@ void CshopUi::selectItem()
 						break;
 					}
 
-					m_myInventory->setSelectItem(&(*itemIter), i, PointMake(m_selectRenderX, m_selectRenderY), true);
+					m_myInventory->setSelectItem((*itemIter), i, PointMake(m_selectRenderX, m_selectRenderY), true);
 					isKeyUp = false;
 				}
 			}
@@ -477,28 +477,28 @@ void CshopUi::exitShop()
 	}
 }
 
-void CshopUi::showShopItemList(vector<Citem>* item)
+void CshopUi::showShopItemList(vector<Citem*>* item)
 {
 	char str[100];
 
 	int i = 0;
 	for (auto iter = item->begin(); iter != item->end(); ++iter, i++)
 	{
-		IMAGE->findImage((*iter).getSmallImage())->frameRender(getMemDC()
-			, m_vShopListRect[i].left, m_vShopListRect[i].top, (*iter).getFrame().x, (*iter).getFrame().y);
+		IMAGE->findImage((*iter)->getSmallImage())->frameRender(getMemDC()
+			, m_vShopListRect[i].left, m_vShopListRect[i].top, (*iter)->getFrame().x, (*iter)->getFrame().y);
 
 		SetTextColor(getMemDC(), RGB(255, 255, 255));
-		TextOut(getMemDC(), m_vShopListRect[i].left + 40, m_vShopListRect[i].top + 15, (*iter).getName().c_str(), lstrlen((*iter).getName().c_str()));
+		TextOut(getMemDC(), m_vShopListRect[i].left + 40, m_vShopListRect[i].top + 15, (*iter)->getName().c_str(), lstrlen((*iter)->getName().c_str()));
 	/*	wsprintf(str, "필요 레벨: %d", (*iter).getLimitLevel());
 		TextOut(getMemDC(), m_vShopListRect[i].left + 80, m_vShopListRect[i].top + 30, str, lstrlen(str));*/
-		wsprintf(str, "골드: %d", (*iter).getBuyPrice());
+		wsprintf(str, "골드: %d", (*iter)->getBuyPrice());
 		TextOut(getMemDC(), m_vShopListRect[i].left + 130, m_vShopListRect[i].top + 15, str, lstrlen(str));
 	}
 }
 
 void CshopUi::selectShopItem()
 {
-	vector<Citem>::iterator shopItemIter;
+	vector<Citem*>::iterator shopItemIter;
 
 	int i = 0;
 	for (auto iter = m_vShopListRect.begin(); iter != m_vShopListRect.end() && i < 5; ++iter, i++)
@@ -509,7 +509,7 @@ void CshopUi::selectShopItem()
 			{
 				isSelectShop = true;
 				shopItemIter = m_shop->getTotalList()->begin() + i;
-				m_shop->setShopSelectItem(&(*shopItemIter));
+				m_shop->setShopSelectItem((*shopItemIter));
 
 				m_myInventory->clearSelectItem();
 				isSelectRender = false;

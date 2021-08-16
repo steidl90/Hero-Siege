@@ -73,7 +73,7 @@ public:
 	void setShopMemory(Cshop* shop) { m_shop = shop; }
 
 	void showItemType();
-	void showInvenItemList(vector<Citem>* item);
+	void showInvenItemList(vector<Citem*>* item);
 	void showItemInfo();
 
 	void itemStatInfo();
@@ -89,7 +89,7 @@ public:
 	void buyItem();
 	void exitShop();
 
-	void showShopItemList(vector<Citem>* item);
+	void showShopItemList(vector<Citem*>* item);
 	void selectShopItem();
 
 	void showShopInfo();

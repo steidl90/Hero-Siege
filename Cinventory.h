@@ -5,13 +5,12 @@
 
 class Cinventory
 {
-	vector<Citem> m_vWeaponList;
-	vector<Citem> m_vArmorList;
-	vector<Citem> m_vShoesList;
-	vector<Citem> m_vGlovesList;
-	vector<Citem> m_vPendantList;
+	vector<Citem*> m_vWeaponList;
+	vector<Citem*> m_vArmorList;
+	vector<Citem*> m_vShoesList;
+	vector<Citem*> m_vGlovesList;
+	vector<Citem*> m_vPendantList;
 
-	vector<Citem*> m_vEquipList;
 
 	Citem* m_equipWeapon;
 	Citem* m_equipArmor;
@@ -44,7 +43,6 @@ public:
 	// 아이템 장착 해제할때
 	void UnEquipItem(Citem* item);
 	// 아이템 버릴때
-	//bool checkEquipItem(ITEMTYPE type);
 	void AbandonItem();
 
 
@@ -56,13 +54,12 @@ public:
 	void setEquipPendant(Citem* item) { m_equipPendant = item; }
 
 	// 장착중인 아이템 리스트 
-	vector<Citem*>* getvEquipList() { return &m_vEquipList; }
 
-	vector<Citem>* getvWeaponList() { return &m_vWeaponList; }
-	vector<Citem>* getvArmorList() { return &m_vArmorList; }
-	vector<Citem>* getvShoesList() { return &m_vShoesList; }
-	vector<Citem>* getvGlovesList() { return &m_vGlovesList; }
-	vector<Citem>* getvPendantList() { return &m_vPendantList; }
+	vector<Citem*>* getvWeaponList() { return &m_vWeaponList; }
+	vector<Citem*>* getvArmorList() { return &m_vArmorList; }
+	vector<Citem*>* getvShoesList() { return &m_vShoesList; }
+	vector<Citem*>* getvGlovesList() { return &m_vGlovesList; }
+	vector<Citem*>* getvPendantList() { return &m_vPendantList; }
 
 	Citem* getEquipWeapon() { return m_equipWeapon; }
 	Citem* getEquipArmor() { return m_equipArmor; }

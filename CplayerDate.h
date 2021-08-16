@@ -26,7 +26,6 @@ private:
 	vector<Citem*> m_vPendantList;
 
 	//장착 아이템
-	vector<Citem*> m_vEquipList;
 	Citem* m_equipWeapon;
 	Citem* m_equipArmor;
 	Citem* m_equipShoes;

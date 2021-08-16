@@ -92,7 +92,7 @@ public:
 
 	// 타입별 아이템 출력
 	void showListItemType();
-	void showItemList(vector<Citem>* list);
+	void showItemList(vector<Citem*>* list);
 
 	// 장착 테두리 출력
 	void showEquipSelect();

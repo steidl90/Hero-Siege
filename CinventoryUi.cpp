@@ -325,7 +325,7 @@ void CinventoryUi::showListItemType()
 	}
 }
 // 인덱스 기준으로 벡터를 참조하여
-void CinventoryUi::showItemList(vector<Citem>* list)
+void CinventoryUi::showItemList(vector<Citem*>* list)
 {
 	char str[100];
 	// show 인덱스는 시작인덱스를 적용하면 거기부터 아이템 정보를 보여주는 역할 (최대 4개)
@@ -333,17 +333,17 @@ void CinventoryUi::showItemList(vector<Citem>* list)
 	// i 인덱스는 show인덱스의 대리 역할(showIndex값은 변하면 안되니)
 	int	i = m_showIndex;
 	int j = 0;
-	vector<Citem>::iterator iter;
+	vector<Citem*>::iterator iter;
 		for ( iter = list->begin() + i; i < m_showEndIndex; ++iter, i++, j++)
 		{
-			IMAGE->findImage((*iter).getSmallImage())->frameRender(getMemDC()
-				,m_vItemListRect[j].left, m_vItemListRect[j].top, (*iter).getFrame().x, (*iter).getFrame().y);
+			IMAGE->findImage((*iter)->getSmallImage())->frameRender(getMemDC()
+				,m_vItemListRect[j].left, m_vItemListRect[j].top, (*iter)->getFrame().x, (*iter)->getFrame().y);
 
 			SetTextColor(getMemDC(), RGB(255, 255, 255));
-			TextOut(getMemDC(), m_vItemListRect[j].left + 80, m_vItemListRect[j].top + 10, (*iter).getName().c_str(), lstrlen((*iter).getName().c_str()));
-			wsprintf(str, "필요 레벨: %d", (*iter).getLimitLevel());
+			TextOut(getMemDC(), m_vItemListRect[j].left + 80, m_vItemListRect[j].top + 10, (*iter)->getName().c_str(), lstrlen((*iter)->getName().c_str()));
+			wsprintf(str, "필요 레벨: %d", (*iter)->getLimitLevel());
 			TextOut(getMemDC(), m_vItemListRect[j].left + 80, m_vItemListRect[j].top + 30, str, lstrlen(str));
-			wsprintf(str, "골드: %d", (*iter).getBuyPrice());
+			wsprintf(str, "골드: %d", (*iter)->getBuyPrice());
 			TextOut(getMemDC(), m_vItemListRect[j].left + 80, m_vItemListRect[j].top + 50, str, lstrlen(str));
 		}
 }
@@ -381,7 +381,7 @@ void CinventoryUi::showEquipSelect()
 void CinventoryUi::selectItem()
 {
 	int i = m_showIndex;
-	vector<Citem>::iterator itemIter;
+	vector<Citem*>::iterator itemIter;
 	for (auto iter = m_vItemListRect.begin(); i < m_showEndIndex; ++iter, i++)
 	{
 		if (PtInRect(&(*iter), m_ptMouse))
@@ -409,7 +409,7 @@ void CinventoryUi::selectItem()
 					itemIter = m_Inventory->getvPendantList()->begin() + i;
 					break;
 				}
-				m_Inventory->setSelectItem(&(*itemIter), i
+				m_Inventory->setSelectItem((*itemIter), i
 					, PointMake(m_selectRenderX, m_selectRenderY), true);
 			}
 		}

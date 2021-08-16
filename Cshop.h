@@ -11,7 +11,7 @@ private:
 	Cinventory* m_myInventory;
 private:
 
-	vector<Citem> m_vTotalList;
+	vector<Citem*> m_vTotalList;
 
 	SelectItem m_selectItem;
 
@@ -24,7 +24,7 @@ public:
 	void update();
 	//void render();
 
-	vector<Citem>* getTotalList() { return &m_vTotalList; }
+	vector<Citem*>* getTotalList() { return &m_vTotalList; }
 
 	Citem* getShopSelectItem() { return &m_shopSelectItem; }
 	SelectItem* getSelectItem() { return &m_selectItem; }
