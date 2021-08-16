@@ -42,7 +42,7 @@ void CtotalItem::itemInit()
 		if (stoi(itemList[i+1]) == 0)
 		{
 			m_bigImage = "¹«±âºò";
-			m_smallImage = "¹«±âºò";
+			m_smallImage = "¹«±â½º¸ô";
 			m_Type = ITEMTYPE::ITEMTYPE_WEAPON;
 		}
 		else if (stoi(itemList[i+1]) == 1)

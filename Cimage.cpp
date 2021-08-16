@@ -117,6 +117,7 @@ HRESULT Cimage::init()
     IMAGE->addFrameImage("∞©ø ∫Ú", "images/∞©ø ∫Ú.bmp", 528, 528, 6, 6, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("∞©ø Ω∫∏Ù", "images/∞©ø Ω∫∏Ù.bmp", 264, 264, 6, 6, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("π´±‚∫Ú", "images/π´±‚∫Ú.bmp", 623, 111, 7, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("π´±‚Ω∫∏Ù", "images/π´±‚Ω∫∏Ù.bmp", 350, 46, 7, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("∆Ê¥¯∆Æ∫Ú", "images/∆Ê¥¯∆Æ∫Ú.bmp", 384, 256, 6, 4, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("∆Ê¥¯∆ÆΩ∫∏Ù", "images/∆Ê¥¯∆ÆΩ∫∏Ù.bmp", 210, 140, 6, 4, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("¿Â∞©∫Ú", "images/¿Â∞©∫Ú.bmp", 576, 192, 9, 3, true, RGB(255, 0, 255));

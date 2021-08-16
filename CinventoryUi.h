@@ -3,8 +3,6 @@
 #include"Cinventory.h"
 // 인벤토리 include 오류나면 전방참조
 
-
-
 class Cplayer;
 class CinventoryUi : public gameNode
 {
@@ -60,7 +58,7 @@ private:
 
 	RECT m_clickCheckRect;
 
-	//POINT m_equipRenderPoint[5];  // 필요없는 변수인데 이걸 없애면 오류가 나네... ???
+	POINT m_equipRenderPoint[5];  // 필요없는 변수인데 이걸 없애면 오류가 나네... ???
 
 
 	//bool isEquipRender;
