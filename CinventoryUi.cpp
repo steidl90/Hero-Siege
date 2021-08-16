@@ -627,17 +627,17 @@ void CinventoryUi::selectItemTypeSub()
 					// 0: ÆÒ´øÆ®, 3: Àå°©, 4: ½Å¹ß
 					if (m_clickCount > 1)
 					{
-						if ((*iter).left == m_vEquipItemSubRect[0].left) // 0: ÆÒ´øÆ®
+						if ((*iter).left == m_vEquipItemSubRect[0].left && (*iter).top == m_vEquipItemSubRect[0].top) // 0: ÆÒ´øÆ®
 						{
 							if (m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_PENDANT)->m_item != nullptr)
 								this->unEquipItem();
 						}
-						else if ((*iter).left == m_vEquipItemSubRect[3].left) // Àå°©
+						else if ((*iter).left == m_vEquipItemSubRect[3].left && (*iter).top == m_vEquipItemSubRect[3].top) // Àå°©
 						{
 							if (m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_GLOVES)->m_item != nullptr)
 								this->unEquipItem();
 						}
-						else if ((*iter).left == m_vEquipItemSubRect[4].left) // ½Å¹ß
+						else if ((*iter).left == m_vEquipItemSubRect[4].left && (*iter).top == m_vEquipItemSubRect[4].top) // ½Å¹ß
 						{
 							if (m_Inventory->getEquipItem(ITEMTYPE::ITEMTYPE_SHOES)->m_item != nullptr)
 								this->unEquipItem();

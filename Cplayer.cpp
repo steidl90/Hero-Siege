@@ -274,7 +274,7 @@ void Cplayer::moveControl()
 		setExp(0);
 		setLv(getLv() + 1);
 		setHp(m_maxHp);
-		setMp(getMp() + 200);
+		setMp(getMp() + 50);
 		if (getMp() > m_maxMp)setMp(m_maxMp);
 	}
 

@@ -263,6 +263,7 @@ void CplayerManager::getItem()
         {
             if (InputManager->isOnceKeyDown('Z'))
             {
+                m_inventory->addItem(m_dropItem->getDropItemList()[i].item);
                 m_dropItem->removeItem(i);
             }
         }
