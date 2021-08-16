@@ -24,13 +24,9 @@ private:
 	vector<Citem*> m_vShoesList;
 	vector<Citem*> m_vGlovesList;
 	vector<Citem*> m_vPendantList;
-
+	
 	//¿Â¬¯ æ∆¿Ã≈€
-	Citem* m_equipWeapon;
-	Citem* m_equipArmor;
-	Citem* m_equipShoes;
-	Citem* m_equipGloves;
-	Citem* m_equipPendant;
+	EquipItem m_equipItem[5];
 
 public:
 	CplayerDate();
@@ -43,17 +39,19 @@ public:
 
 	void setData(int atk, int def, int hp, int mp, int cri, int lv, int exp, int gold, float criatk, float speed, float x, float y);
 	
-	Citem* getWeaponEquip() { return m_equipWeapon; }
-	void setWeaponEquip(Citem* Weapon) { m_equipWeapon = Weapon; }
-	Citem* getArmorEquip() { return m_equipArmor; }
-	void setArmorEquip(Citem* Armor) { m_equipArmor = Armor; }
-	Citem* getShoesEquip() { return m_equipShoes; }
-	void setShoesEquip(Citem* Shoes) { m_equipShoes = Shoes; }
-	Citem* getGlovesEquip() { return m_equipGloves; }
-	void setGlovesEquip(Citem* Gloves) { m_equipGloves = Gloves; }
-	Citem* getPendantEquip() { return m_equipPendant; }
-	void setPendantEquip(Citem* Pendant) { m_equipPendant = Pendant; }
+	EquipItem* getEquipItem() { return m_equipItem; }
+	void setEquipItem(EquipItem* equipItem);
 
+	vector<Citem*>* getvWeaponList() { return &m_vWeaponList; }
+	void setvWeaponList(vector<Citem*>* weaponList) { m_vWeaponList = *weaponList; }
+	vector<Citem*>* getvArmorList() { return &m_vArmorList; }
+	void setvArmorList(vector<Citem*>* armorList) { m_vArmorList = *armorList; }
+	vector<Citem*>* getvShoesList() { return &m_vShoesList; }
+	void setvShoesList(vector<Citem*>* shoesList) { m_vShoesList = *shoesList; }
+	vector<Citem*>* getvGlovesList() { return &m_vGlovesList; }
+	void setvGlovesList(vector<Citem*>* glovesList) { m_vGlovesList = *glovesList; }
+	vector<Citem*>* getvPendantList() { return &m_vPendantList; }
+	void setvPendantList(vector<Citem*>* pendantList) { m_vPendantList = *pendantList; }
 
 	int getAtk() { return m_atk; }
 	int getDef() { return m_def; }

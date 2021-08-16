@@ -6,7 +6,7 @@ class Cplayer;
 class CshopUi : public gameNode
 {
 private:
-	Cinventory* m_myInventory;
+	//Cinventory* m_myInventory;
 	Cshop* m_shop;
 private:
 	
@@ -69,7 +69,7 @@ public:
 
 	bool getExit() { return m_exit; }
 	void setExit(bool b) { m_exit = b; }
-	void setInventoryMemory(Cinventory* inven) { m_myInventory = inven; }
+	//void setInventoryMemory(Cinventory* inven) { m_myInventory = inven; }
 	void setShopMemory(Cshop* shop) { m_shop = shop; }
 
 	void showItemType();

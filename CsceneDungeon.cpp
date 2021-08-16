@@ -51,11 +51,12 @@ HRESULT CsceneDungeon::init()
 	m_player->getPlayer()->setPlayerX(200);
 	m_player->getPlayer()->setPlayerY(MAPSIZE - 300);
 
-	m_player->getInventoryMemory()->setEquipWeapon(DATA->getWeaponEquip());
-	m_player->getInventoryMemory()->setEquipArmor(DATA->getArmorEquip());
-	m_player->getInventoryMemory()->setEquipShoes(DATA->getShoesEquip());
-	m_player->getInventoryMemory()->setEquipGloves(DATA->getGlovesEquip());
-	m_player->getInventoryMemory()->setEquipPendant(DATA->getPendantEquip());
+	m_player->getInventoryMemory()->setEquipItem(DATA->getEquipItem());
+	m_player->getInventoryMemory()->setvWeaponList(DATA->getvWeaponList());
+	m_player->getInventoryMemory()->setvArmorList(DATA->getvArmorList());
+	m_player->getInventoryMemory()->setvShoesList(DATA->getvShoesList());
+	m_player->getInventoryMemory()->setvGlovesList(DATA->getvGlovesList());
+	m_player->getInventoryMemory()->setvPendantList(DATA->getvPendantList());
 
 	m_changeRect = RectMake(170, MAPSIZE - 230, 100, 50);
 
@@ -214,6 +215,14 @@ void CsceneDungeon::sceneChange()
 			m_player->getPlayer()->getSpeed(),
 			MAPSIZE - 50,
 			WINSIZEY / 2 + 150);
+
+		DATA->setEquipItem(m_player->getInventoryMemory()->getEquipItem());
+		DATA->setvWeaponList(m_player->getInventoryMemory()->getvWeaponList());
+		DATA->setvArmorList(m_player->getInventoryMemory()->getvArmorList());
+		DATA->setvShoesList(m_player->getInventoryMemory()->getvShoesList());
+		DATA->setvGlovesList(m_player->getInventoryMemory()->getvGlovesList());
+		DATA->setvPendantList(m_player->getInventoryMemory()->getvPendantList());
+
 		SCENE->changeScene("마을");
 	}
 	else if (m_player->getPlayer()->getHp() < 0)
@@ -230,6 +239,14 @@ void CsceneDungeon::sceneChange()
 			m_player->getPlayer()->getSpeed(),
 			WINSIZEX - 400,
 			WINSIZEY / 2 + 270);
+
+		DATA->setEquipItem(m_player->getInventoryMemory()->getEquipItem());
+		DATA->setvWeaponList(m_player->getInventoryMemory()->getvWeaponList());
+		DATA->setvArmorList(m_player->getInventoryMemory()->getvArmorList());
+		DATA->setvShoesList(m_player->getInventoryMemory()->getvShoesList());
+		DATA->setvGlovesList(m_player->getInventoryMemory()->getvGlovesList());
+		DATA->setvPendantList(m_player->getInventoryMemory()->getvPendantList());
+
 		SCENE->changeScene("마을");
 	}
 }

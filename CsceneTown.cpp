@@ -36,11 +36,12 @@ HRESULT CsceneTown::init()
 	m_player->getPlayer()->setPlayerX(DATA->getX());
 	m_player->getPlayer()->setPlayerY(DATA->getY());
 
-	m_player->getInventoryMemory()->setEquipWeapon(DATA->getWeaponEquip());
-	m_player->getInventoryMemory()->setEquipArmor(DATA->getArmorEquip());
-	m_player->getInventoryMemory()->setEquipShoes(DATA->getShoesEquip());
-	m_player->getInventoryMemory()->setEquipGloves(DATA->getGlovesEquip());
-	m_player->getInventoryMemory()->setEquipPendant(DATA->getPendantEquip());
+	m_player->getInventoryMemory()->setEquipItem(DATA->getEquipItem());
+	m_player->getInventoryMemory()->setvWeaponList(DATA->getvWeaponList());
+	m_player->getInventoryMemory()->setvArmorList(DATA->getvArmorList());
+	m_player->getInventoryMemory()->setvShoesList(DATA->getvShoesList());
+	m_player->getInventoryMemory()->setvGlovesList(DATA->getvGlovesList());
+	m_player->getInventoryMemory()->setvPendantList(DATA->getvPendantList());
 
 	m_aStar = new CaStar;
 	m_aStar->setCameraMemory(m_camera);
@@ -55,7 +56,7 @@ HRESULT CsceneTown::init()
 	
 
 	m_shopUi = new CshopUi;
-	m_shopUi->setInventoryMemory(m_player->getInventoryMemory());
+	//m_shopUi->setInventoryMemory(m_player->getInventoryMemory());
 	//m_shopUi->setPlayerMemory(m_player->getPlayer());
 	m_shopUi->setShopMemory(m_shop);
 	m_shopUi->init();
@@ -176,11 +177,12 @@ void CsceneTown::sceneChange()
 			m_player->getPlayer()->getSpeed(),
 			m_player->getPlayer()->getPlayerX(),
 			m_player->getPlayer()->getPlayerY());
-		DATA->setWeaponEquip(m_player->getInventoryMemory()->getEquipWeapon());
-		DATA->setArmorEquip(m_player->getInventoryMemory()->getEquipArmor());
-		DATA->setShoesEquip(m_player->getInventoryMemory()->getEquipShoes());
-		DATA->setGlovesEquip(m_player->getInventoryMemory()->getEquipGloves());
-		DATA->setPendantEquip(m_player->getInventoryMemory()->getEquipPendant());
+		DATA->setEquipItem(m_player->getInventoryMemory()->getEquipItem());
+		DATA->setvWeaponList(m_player->getInventoryMemory()->getvWeaponList());
+		DATA->setvArmorList(m_player->getInventoryMemory()->getvArmorList());
+		DATA->setvShoesList(m_player->getInventoryMemory()->getvShoesList());
+		DATA->setvGlovesList(m_player->getInventoryMemory()->getvGlovesList());
+		DATA->setvPendantList(m_player->getInventoryMemory()->getvPendantList());
 
 		SCENE->changeScene("´øÀü");
 	}

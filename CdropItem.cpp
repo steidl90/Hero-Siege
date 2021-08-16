@@ -43,8 +43,8 @@ Citem* CdropItem::getItem()
 	itemType = RND->getInt(5);
 
 
-	if (isDrop == 1)
-	{
+	/*if (isDrop == 1)
+	{*/
 		if (itemType == 0) // ¹«±â
 		{
 			dropItem = RND->getFromIntTo(1, 5);
@@ -67,17 +67,18 @@ Citem* CdropItem::getItem()
 		}
 
    		return m_vDropItemList[dropItem];
-	}
-	else
+	//}
+	/*else
 	{
-		return m_vDropItemList[20];
-	}
+		return m_vDropItemList[0];
+	}*/
 
 }
 
 void CdropItem::makeItem(float x, float y)
 {
-	//if (this->getItem() == nullptr) return;
+	//if (this->getItem()->getItemId() == m_vDropItemList[0]->getItemId()) return;
+
 	DropItem tempItem;
 	tempItem.item = this->getItem();
 	tempItem.itemRect = RectMake(x, y, IMAGE->findImage(tempItem.item->getSmallImage())->getFrameWidth(),

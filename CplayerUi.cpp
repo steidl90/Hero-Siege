@@ -70,7 +70,7 @@ void CplayerUi::render()
 	if (m_player->getLv() < 10) IMAGE->findImage("스킬잠금")->render(getMemDC(), 269, (WINSIZEY - 56) - IMAGE->findImage("스킬잠금")->getHeight());
 	else IMAGE->findImage("스킬R")->render(getMemDC(), 269, (WINSIZEY - 56) - IMAGE->findImage("스킬R")->getHeight());
 
-	IMAGE->findImage("플레이어체력바")->render(getMapDC(), m_player->getPlayerX() - 7, m_player->getPlayerY() - 10);
+	IMAGE->findImage("플레이어체력바")->render(getMapDC(), m_player->getPlayerX() - 7, m_player->getPlayerY() + 100);
 
 	if (isLevelUp)
 	{

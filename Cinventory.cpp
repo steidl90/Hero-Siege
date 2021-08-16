@@ -38,7 +38,6 @@ void Cinventory::addItem(Citem* item)
 	switch (item->getType())
 	{
 	case ITEMTYPE::ITEMTYPE_WEAPON:
-
 		m_vWeaponList.push_back(item);
 		break;
 	case ITEMTYPE::ITEMTYPE_ARMOR:
@@ -154,6 +153,15 @@ void Cinventory::AbandonItem()
 		}
 		break;
 	}
+}
+
+void Cinventory::setEquipItem(EquipItem* equipItem)
+{
+	m_equipItem[0] = equipItem[0];
+	m_equipItem[1] = equipItem[1];
+	m_equipItem[2] = equipItem[2];
+	m_equipItem[3] = equipItem[3];
+	m_equipItem[4] = equipItem[4];
 }
 
 

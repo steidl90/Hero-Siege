@@ -49,7 +49,8 @@ void CplayerManager::release()
 
 void CplayerManager::update()
 {
-    if (InputManager->isOnceKeyDown('I')) isInventoryOn = !isInventoryOn;
+    if (InputManager->isOnceKeyDown('I'))
+        isInventoryOn = !isInventoryOn;
     EFFECT->update();
     m_playerUi->update();
     m_player->update();
@@ -76,11 +77,15 @@ void CplayerManager::render()
 void CplayerManager::showPlayerStat()
 {
     vector<Citem*> equipSet;
-    if(m_inventory->getEquipWeapon() != nullptr) equipSet.push_back(m_inventory->getEquipWeapon());
-    if (m_inventory->getEquipArmor() != nullptr) equipSet.push_back(m_inventory->getEquipArmor());
-    if (m_inventory->getEquipShoes() != nullptr) equipSet.push_back(m_inventory->getEquipShoes());
-    if (m_inventory->getEquipGloves() != nullptr) equipSet.push_back(m_inventory->getEquipGloves());
-    if (m_inventory->getEquipPendant() != nullptr) equipSet.push_back(m_inventory->getEquipPendant());
+    if(m_inventory->getEquipItem(ITEMTYPE::ITEMTYPE_WEAPON)->m_item != nullptr) equipSet.push_back(m_inventory->getEquipItem(ITEMTYPE::ITEMTYPE_WEAPON)->m_item);
+    if(m_inventory->getEquipItem(ITEMTYPE::ITEMTYPE_ARMOR)->m_item != nullptr) equipSet.push_back(m_inventory->getEquipItem(ITEMTYPE::ITEMTYPE_ARMOR)->m_item);
+    if(m_inventory->getEquipItem(ITEMTYPE::ITEMTYPE_SHOES)->m_item != nullptr) equipSet.push_back(m_inventory->getEquipItem(ITEMTYPE::ITEMTYPE_SHOES)->m_item);
+    if(m_inventory->getEquipItem(ITEMTYPE::ITEMTYPE_GLOVES)->m_item != nullptr) equipSet.push_back(m_inventory->getEquipItem(ITEMTYPE::ITEMTYPE_GLOVES)->m_item);
+    if(m_inventory->getEquipItem(ITEMTYPE::ITEMTYPE_PENDANT)->m_item != nullptr) equipSet.push_back(m_inventory->getEquipItem(ITEMTYPE::ITEMTYPE_PENDANT)->m_item);
+    //if (m_inventory->getEquipArmor() != nullptr) equipSet.push_back(m_inventory->getEquipArmor());
+    //if (m_inventory->getEquipShoes() != nullptr) equipSet.push_back(m_inventory->getEquipShoes());
+    //if (m_inventory->getEquipGloves() != nullptr) equipSet.push_back(m_inventory->getEquipGloves());
+    //if (m_inventory->getEquipPendant() != nullptr) equipSet.push_back(m_inventory->getEquipPendant());
    
     int itemAtk = 0;
     int itemDef = 0;
@@ -222,7 +227,7 @@ void CplayerManager::collisionEnemy()
         saveFont = (HFONT)SelectObject(getMapDC(), font);
         SetBkMode(getMapDC(), TRANSPARENT);
         SetTextColor(getMapDC(), RGB(255, 0, 0));
-        TextOut(getMapDC(), m_boss->getRect()->left + m_boss->getRect()->right - m_boss->getRect()->left / 2, m_boss->getRect()->top + 10, atk, lstrlen(atk));
+        TextOut(getMapDC(), m_boss->getRect()->left + (m_boss->getRect()->right - m_boss->getRect()->left) / 2, m_boss->getRect()->top + 10, atk, lstrlen(atk));
         DeleteObject(SelectObject(getMapDC(), saveFont));
         EFFECT->play("히트1", m_boss->getRect()->left + (m_boss->getRect()->right - m_boss->getRect()->left) / 2 + RND->getFromIntTo(0, 30),
             m_boss->getRect()->top + (m_boss->getRect()->bottom - m_boss->getRect()->top) / 2 + RND->getFromIntTo(0, 30));
@@ -240,7 +245,7 @@ void CplayerManager::collisionEnemy()
             saveFont = (HFONT)SelectObject(getMapDC(), font);
             SetBkMode(getMapDC(), TRANSPARENT);
             SetTextColor(getMapDC(), RGB(255, 0, 0));
-            TextOut(getMapDC(), m_boss->getRect()->left + m_boss->getRect()->right - m_boss->getRect()->left / 2, m_boss->getRect()->top + 10, atk, lstrlen(atk));
+            TextOut(getMapDC(), m_boss->getRect()->left + (m_boss->getRect()->right - m_boss->getRect()->left) / 2, m_boss->getRect()->top + 10, atk, lstrlen(atk));
             DeleteObject(SelectObject(getMapDC(), saveFont));
             EFFECT->play("히트1", m_boss->getRect()->left + (m_boss->getRect()->right - m_boss->getRect()->left) / 2 + RND->getFromIntTo(0, 30),
                 m_boss->getRect()->top + (m_boss->getRect()->bottom - m_boss->getRect()->top) / 2 + RND->getFromIntTo(0, 30));

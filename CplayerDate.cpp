@@ -42,3 +42,13 @@ void CplayerDate::setData(int atk, int def, int hp, int mp, int cri, int lv, int
 	m_x = x;
 	m_y = y;
 }
+
+void CplayerDate::setEquipItem(EquipItem* equipItem)
+{
+	m_equipItem[0] = equipItem[0];
+	m_equipItem[1] = equipItem[1];
+	m_equipItem[2] = equipItem[2];
+	m_equipItem[3] = equipItem[3];
+	m_equipItem[4] = equipItem[4];
+}
+

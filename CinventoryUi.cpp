@@ -607,7 +607,7 @@ void CinventoryUi::selectItemTypeSub()
 			{
 				if (isKeyUp)
 				{
-					if (m_clickCount == 0)
+					if (m_clickCount == 0) 
 						m_compareTime = TIME->getWorldTime();
 					m_clickCount++;
 
@@ -688,7 +688,62 @@ void CinventoryUi::showItemCompare()
 	int temp_atk, temp_def, temp_hp, temp_mp, temp_cri;
 	float temp_criAtk, temp_speed;
 
-	switch (m_Inventory->getSelectItem()->m_item->getType())
+
+	if (m_Inventory->getEquipItem()[static_cast<int>(m_selectType)].m_item == nullptr)
+	{
+		temp_atk = temp_def = temp_hp = temp_mp = temp_cri = 0;
+		temp_criAtk = temp_speed = 0;
+	}
+	else
+	{
+		temp_atk = m_Inventory->getEquipItem()[static_cast<int>(m_selectType)].m_item->getAtk();
+		temp_def = m_Inventory->getEquipItem()[static_cast<int>(m_selectType)].m_item->getDef();
+		temp_hp = m_Inventory->getEquipItem()[static_cast<int>(m_selectType)].m_item->getHp();
+		temp_mp = m_Inventory->getEquipItem()[static_cast<int>(m_selectType)].m_item->getMp();
+		temp_cri = m_Inventory->getEquipItem()[static_cast<int>(m_selectType)].m_item->getCritical();
+		temp_criAtk = m_Inventory->getEquipItem()[static_cast<int>(m_selectType)].m_item->getCriticalAtk();
+		temp_speed = m_Inventory->getEquipItem()[static_cast<int>(m_selectType)].m_item->getSpeed();
+	}
+
+	if (m_Inventory->getSelectItem()->m_item->getAtk() - temp_atk > 0)
+		wsprintf(atk, "+%d", (m_Inventory->getSelectItem()->m_item->getAtk() - temp_atk));
+	else
+		wsprintf(atk, "%d", (m_Inventory->getSelectItem()->m_item->getAtk() - temp_atk));
+	if (m_Inventory->getSelectItem()->m_item->getDef() - temp_def > 0)
+		wsprintf(def, "+%d", (m_Inventory->getSelectItem()->m_item->getDef() - temp_def));
+	else
+		wsprintf(def, "%d", (m_Inventory->getSelectItem()->m_item->getDef() - temp_def));
+	if (m_Inventory->getSelectItem()->m_item->getHp() - temp_hp > 0)
+		wsprintf(hp, "+%d", (m_Inventory->getSelectItem()->m_item->getHp() - temp_hp));
+	else
+		wsprintf(hp, "%d", (m_Inventory->getSelectItem()->m_item->getHp() - temp_hp));
+	if (m_Inventory->getSelectItem()->m_item->getMp() - temp_mp > 0)
+		wsprintf(mp, "+%d", (m_Inventory->getSelectItem()->m_item->getMp() - temp_mp));
+	else
+		wsprintf(mp, "%d", (m_Inventory->getSelectItem()->m_item->getMp() - temp_mp));
+	if (m_Inventory->getSelectItem()->m_item->getCritical() - temp_cri > 0)
+		wsprintf(cri, "+%d", (m_Inventory->getSelectItem()->m_item->getCritical() - temp_cri));
+	else
+		wsprintf(cri, "%d", (m_Inventory->getSelectItem()->m_item->getCritical() - temp_cri));
+	if (m_Inventory->getSelectItem()->m_item->getCriticalAtk() - temp_criAtk > 0)
+		sprintf(criAtk, "+%.1f", m_Inventory->getSelectItem()->m_item->getCriticalAtk() - temp_criAtk);
+	else
+		sprintf(criAtk, "%.1f", m_Inventory->getSelectItem()->m_item->getCriticalAtk() - temp_criAtk);
+	if (m_Inventory->getSelectItem()->m_item->getSpeed() - temp_speed > 0)
+		sprintf(speed, "+%.1f", m_Inventory->getSelectItem()->m_item->getSpeed() - temp_speed);
+	else
+		sprintf(speed, "%.1f", m_Inventory->getSelectItem()->m_item->getSpeed() - temp_speed);
+
+	TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 100, atk, lstrlen(atk));
+	TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 120, def, lstrlen(def));
+	TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 140, hp, lstrlen(hp));
+	TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 160, mp, lstrlen(mp));
+	TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 180, cri, lstrlen(cri));
+	TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 200, criAtk, lstrlen(criAtk));
+	TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 220, speed, lstrlen(speed));
+
+
+	/*switch (m_Inventory->getSelectItem()->m_item->getType())
 	{
 	case ITEMTYPE::ITEMTYPE_WEAPON:
 		if (m_Inventory->getEquipWeapon() == nullptr)
@@ -965,7 +1020,7 @@ void CinventoryUi::showItemCompare()
 
 	default:
 		break;
-	}
+	}*/
 }
 
 void CinventoryUi::abandonItem()

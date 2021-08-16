@@ -333,7 +333,7 @@ void Cplayer::moveAnimation()
 
 void Cplayer::playerStateRender()
 {
-	//Rectangle(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerMoveRc.right, playerMoveRc.bottom);
+	Rectangle(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerMoveRc.right, playerMoveRc.bottom);
 	if (isMoving)
 	{
 		switch (direction)
@@ -660,7 +660,7 @@ void Cplayer::blockCheck(float speed, RECT* playerRC, DIRECTIONS direct)
 	{
 	case DIRECTIONS::DIRECTIONS_LEFT:
 		m_playerX -= this->getSpeed();
-		rcCollision = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth()/4, playerMoveDown->getFrameHeight()/2);
+		rcCollision = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth() / 4, playerMoveDown->getFrameHeight() / 2);
 		break;
 	case DIRECTIONS::DIRECTIONS_UP:
 		m_playerY -= this->getSpeed();
