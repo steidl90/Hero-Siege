@@ -36,8 +36,7 @@ public:
 
 	//Ã£¾Æ¶ó
 	animation* findAnimation(string animationKeyName);
-	int findNowPlayIndex(string animationKeyName);
-	int findEndPlayIndex(string animationKeyName);
+	void findFrame(string animationKeyName, int frameNum);
 	void deleteAll();
 
 };

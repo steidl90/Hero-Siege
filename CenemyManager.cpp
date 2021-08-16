@@ -17,7 +17,7 @@ void CenemyManager::release()
 
 void CenemyManager::update()
 {
-	hitCount++;
+	m_hitCount++;
 	for (int i = 0; i < m_vEnemy.size(); i++)
 	{
 		m_vEnemy[i]->update();
@@ -50,9 +50,9 @@ void CenemyManager::registerEnemy(Cenemy* enemy)
 
 void CenemyManager::removeMinion(int arrNum)
 {
-	Cenemy* temp = *(m_vEnemy.begin() + arrNum);
-	m_vEnemy.erase(m_vEnemy.begin() + arrNum);
-	delete temp;
+		Cenemy* temp = *(m_vEnemy.begin() + arrNum);
+		m_vEnemy.erase(m_vEnemy.begin() + arrNum);
+		delete temp;
 }
 
 void CenemyManager::collision()
@@ -91,7 +91,7 @@ void CenemyManager::collision()
 					if (IntersectRect(&rc, &m_vEnemy[i]->m_enemyAttack->getVSkill()[j].m_rc, m_player->getplayerMoveRC()))
 					{
 
-						if (hitCount % 75 == 0)
+						if (m_hitCount % 75 == 0)
 						{
 							if (m_vEnemy[i]->getDamage() <= m_player->getDef())
 							{

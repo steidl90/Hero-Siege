@@ -73,7 +73,6 @@ HRESULT Cimage::init()
     IMAGE->addFrameImage("교도관공격", "images/PrisonGuardAttack.bmp", 1120, 440, 8, 4, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("교도관사망", "images/PrisonGuardDie.bmp", 1261, 360, 13, 4, true, RGB(255, 0, 255));
 
-
     //=================Boss==================//
     IMAGE->addFrameImage("보스", "images/Mevius.bmp", 360 * m_imageSize, 143* m_imageSize, 4, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("보스캐스팅", "images/MeviusCasting.bmp", 1800 * m_imageSize, 143 * m_imageSize, 20, 1, true, RGB(255, 0, 255));
@@ -102,6 +101,7 @@ HRESULT Cimage::init()
 
     IMAGE->addFrameImage("커피집", "images/CoffeeHouse.bmp", 904, 152, 8, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("풍차날개", "images/WindmillWing.bmp", 2016, 339, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("풍차날개그림자", "images/WindmillWingShadow.bmp", 2016, 339, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("tilemap1", "images/Tile2.bmp", 648, 504, 18, 14, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("tilemap", "images/Tile4.bmp", 648, 504, 18, 14, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("오브젝트타일1", "images/ObjectTile.bmp", 648, 504, 18, 14, true, RGB(255, 0, 255));

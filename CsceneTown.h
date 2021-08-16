@@ -23,7 +23,6 @@ private:
 	RECT m_changeRect;
 	RECT m_shopRect;
 	RECT m_npcRect;
-
 	bool isShopOn;
 
 	bool isNpcCollison;
@@ -31,6 +30,13 @@ private:
 	float m_timerHp;
 	float m_timerMp;
 
+	RECT m_wingRect;
+	image* m_wingImage;
+	animation* m_wingAni;
+	RECT m_wingShadowRect;
+	image* m_wingShadowImage;
+	animation* m_wingShadowAni;
+	int m_wingX[2], m_wingY[2];
 public:
 	CsceneTown();
 	~CsceneTown();

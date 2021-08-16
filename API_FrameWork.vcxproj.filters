@@ -357,6 +357,9 @@
     <ClInclude Include="CdropItem.h">
       <Filter>mainGame\히어로시즈\Cobject\Citem</Filter>
     </ClInclude>
+    <ClInclude Include="Cquest.h">
+      <Filter>mainGame\히어로시즈\Cobject\CNPC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -541,6 +544,9 @@
     </ClCompile>
     <ClCompile Include="CdropItem.cpp">
       <Filter>mainGame\히어로시즈\Cobject\Citem</Filter>
+    </ClCompile>
+    <ClCompile Include="Cquest.cpp">
+      <Filter>mainGame\히어로시즈\Cobject\CNPC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

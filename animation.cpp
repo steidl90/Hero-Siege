@@ -245,6 +245,7 @@ void animation::stop()
 	_nowPlayIndex = 0;
 }
 
+
 void animation::pause()
 {
 	_play = false;

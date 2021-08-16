@@ -20,10 +20,6 @@ protected:
 	animation* m_walkAni;
 	RECT m_walkRc;
 
-	//image* m_attackImage;
-	//animation* m_attackAni;
-	//RECT m_attackRc;
-
 	image* m_dieImage;
 	animation* m_dieAni;
 	RECT m_dieRc;

@@ -53,10 +53,7 @@ HRESULT Cpriest::init(POINT position, float HP, float damage, float def, int exp
 	ANIMATION->addAnimation("¸®Ä¡°ø°Ý¿ì", "¸®Ä¡°ø°Ý", 32, 47, 8,  true, true);
 	ANIMATION->addAnimation("¸®Ä¡°ø°Ý»ó", "¸®Ä¡°ø°Ý", 48, 63, 8,  true, true);
 
-	ANIMATION->addAnimation("¸®Ä¡»ç¸ÁÇÏ", "¸®Ä¡»ç¸Á", 0, 9, 8, false, false);
-	ANIMATION->addAnimation("¸®Ä¡»ç¸ÁÁÂ", "¸®Ä¡»ç¸Á", 10, 19, 8, false, false);
-	ANIMATION->addAnimation("¸®Ä¡»ç¸Á¿ì", "¸®Ä¡»ç¸Á", 20, 29, 8, false, false);
-	ANIMATION->addAnimation("¸®Ä¡»ç¸Á»ó", "¸®Ä¡»ç¸Á", 30, 39, 8, false, false);
+
 
 	m_walkImage = IMAGE->findImage("¸®Ä¡");
 	m_walkAni = ANIMATION->findAnimation("¸®Ä¡ÇÏ");
@@ -78,11 +75,16 @@ void Cpriest::update()
 	m_enemyAttack->update();
 	move();
 	attack();
-	die();
-	if (m_walkImage != nullptr)
+	if (m_hp <= 0)
 	{
-		m_walkRc = RectMakeCenter(m_x, m_y, m_walkImage->getFrameWidth(), m_walkImage->getFrameHeight());
+		m_isDie = true;
+		if (m_isDie)
+		{
+			die();
+			m_isDie = false;
+		}
 	}
+	m_walkRc = RectMakeCenter(m_x, m_y, m_walkImage->getFrameWidth(), m_walkImage->getFrameHeight());
 	m_traceRc = RectMakeCenter(m_x, m_y, m_trace, m_trace);
 }
 
@@ -143,24 +145,29 @@ void Cpriest::attack()
 
 void Cpriest::die()
 {
-	if (m_hp <= 0)
+	if (m_state == STATE::LEFT)
 	{
-		if (m_state == STATE::LEFT)
-		{
-
-		}
-		if (m_state == STATE::RIGHT)
-		{
-
-		}
-		if (m_state == STATE::UP)
-		{
-
-		}
-		if (m_state == STATE::DOWN)
-		{
-
-		}
+	EFFECT->addEffect("¸®Ä¡»ç¸ÁÁÂ", "images/DieMotion/LeftPriestDie.bmp", 490, 141, 49, 141, 1, 0.05f, 1);
+		EFFECT->play("¸®Ä¡»ç¸ÁÁÂ", m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
+			m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2);
+	}
+	if (m_state == STATE::RIGHT)
+	{
+	EFFECT->addEffect("¸®Ä¡»ç¸Á¿ì", "images/DieMotion/RightPriestDie.bmp", 490, 141, 49, 141, 1, 0.05f, 1);
+		EFFECT->play("¸®Ä¡»ç¸Á¿ì", m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
+			m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2);
+	}
+	if (m_state == STATE::UP)
+	{
+	EFFECT->addEffect("¸®Ä¡»ç¸Á»ó", "images/DieMotion/UpPriestDie.bmp", 490, 141, 49, 141, 1, 0.05f, 1);
+		EFFECT->play("¸®Ä¡»ç¸Á»ó", m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
+			m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2);
+	}
+	if (m_state == STATE::DOWN)
+	{
+	EFFECT->addEffect("¸®Ä¡»ç¸ÁÇÏ", "images/DieMotion/DownPriestDie.bmp", 490, 141, 49, 141, 1, 0.05f, 1);
+		EFFECT->play("¸®Ä¡»ç¸ÁÇÏ", m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
+			m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2);
 	}
 }
 

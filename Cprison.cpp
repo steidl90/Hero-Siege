@@ -48,11 +48,6 @@ HRESULT Cprison::init(POINT position, float HP, float damage, float def, int exp
 	ANIMATION->addAnimation("교도관우", "교도관", 16, 23, 8, false, true);
 	ANIMATION->addAnimation("교도관상", "교도관", 24, 31, 8, false, true);
 
-	ANIMATION->addAnimation("교도관사망하", "교도관사망", 0, 12, 8, false, false);
-	ANIMATION->addAnimation("교도관사망좌", "교도관사망", 13, 25, 8, false, false);
-	ANIMATION->addAnimation("교도관사망우", "교도관사망", 26, 38, 8, false, false);
-	ANIMATION->addAnimation("교도관사망상", "교도관사망", 39, 51, 8, false, false);
-
 	m_walkImage = IMAGE->findImage("교도관");
 	m_walkAni = ANIMATION->findAnimation("교도관하");
 	ANIMATION->start("교도관하");
@@ -73,11 +68,16 @@ void Cprison::update()
 	m_enemyAttack->update();
 	move();
 	attack();
-	die();
-	if (m_walkImage != nullptr)
+	if (m_hp <= 0)
 	{
-		m_walkRc = RectMakeCenter(m_x, m_y, m_walkImage->getFrameWidth(), m_walkImage->getFrameHeight());
+		m_isDie = true;
+		if (m_isDie)
+		{
+			die();
+			m_isDie = false;
+		}
 	}
+	m_walkRc = RectMakeCenter(m_x, m_y, m_walkImage->getFrameWidth(), m_walkImage->getFrameHeight());
 	m_traceRc = RectMakeCenter(m_x, m_y, m_trace, m_trace);
 }
 
@@ -89,7 +89,6 @@ void Cprison::render()
 		Rectangle(getMapDC(), m_traceRc.left, m_traceRc.top, m_traceRc.right, m_traceRc.bottom);
 		Rectangle(getMapDC(), m_dieRc.left, m_dieRc.top, m_dieRc.right, m_dieRc.bottom);
 	}
-	//IMAGE->findImage("몽크그림자")->alphaRender(getMapDC(), m_x - 27, m_y + 20, 100);
 	m_hpBar->mapRender();
 	IMAGE->findImage("일반몬스터체력바")->render(getMapDC(), m_x -21, m_y - 48);
 	if (m_isWalking)m_walkImage->aniRender(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkAni);
@@ -138,24 +137,25 @@ void Cprison::attack()
 
 void Cprison::die()
 {
-	if (m_hp <= 0)
+	if (m_state == STATE::LEFT)
 	{
-		if (m_state == STATE::LEFT)
-		{
-
-		}
-		if (m_state == STATE::RIGHT)
-		{
-
-		}
-		if (m_state == STATE::UP)
-		{
-
-		}
-		if (m_state == STATE::DOWN)
-		{
-
-		}
+		EFFECT->addEffect("교도관사망좌", "images/DieMotion/LeftPrisonGuardDie.bmp", 1261, 90, 97, 90, 1, 0.05f, 1);
+		EFFECT->play("교도관사망좌", m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2, m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2);
+	}
+	if (m_state == STATE::RIGHT)
+	{
+		EFFECT->addEffect("교도관사망우", "images/DieMotion/RightPrisonGuardDie.bmp", 1261, 90, 97, 90, 1, 0.05f, 1);
+		EFFECT->play("교도관사망우", m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2);
+	}
+	if (m_state == STATE::UP)
+	{
+		EFFECT->addEffect("교도관사망상", "images/DieMotion/UpPrisonGuardDie.bmp", 1261, 90, 97, 90, 1, 0.05f, 1);
+		EFFECT->play("교도관사망상", m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2, m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2);
+	}
+	if (m_state == STATE::DOWN) 
+	{
+		EFFECT->addEffect("교도관사망하", "images/DieMotion/DownPrisonGuardDie.bmp", 1261, 90, 97, 90, 1, 0.05f, 1);
+		EFFECT->play("교도관사망하", m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2);
 	}
 }
 

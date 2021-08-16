@@ -209,10 +209,13 @@ void CplayerManager::collisionEnemy()
 
         if ((*iter)->getHp() <= 0)
         {
-            m_player->setExp(m_player->getExp() + (*iter)->getExp());
-            // 여기서 아이템 드랍
-            m_dropItem->makeItem((*iter)->getX(), (*iter)->getY());
-            m_enemy->removeMinion(i);
+            m_deathCount++;
+            if (m_deathCount % 2 == 0) {
+                m_player->setExp(m_player->getExp() + (*iter)->getExp());
+                // 여기서 아이템 드랍
+                m_dropItem->makeItem((*iter)->getX(), (*iter)->getY());
+                m_enemy->removeMinion(i);
+            }
             break;
         }
     }
