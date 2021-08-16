@@ -21,6 +21,7 @@ private:
 	CenemyManager* m_enemy;
 	Cmevius* m_boss;
 	CdropItem* m_dropItem;
+	int m_deathCount;
 private:
 	
 	vector<POINT>* m_fastLoadLocation;

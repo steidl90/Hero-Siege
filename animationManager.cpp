@@ -114,6 +114,12 @@ animation* animationManager::findAnimation(string animationKeyName)
     return nullptr;
 }
 
+void animationManager::findFrame(string animationKeyName, int frameNum)
+{
+    iterArrAnimation iter = _animation.find(animationKeyName);
+    iter->second->getFrameIndex(frameNum);
+}
+
 void animationManager::deleteAll()
 {
     iterArrAnimation  iter = _animation.begin();

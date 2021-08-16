@@ -83,7 +83,7 @@ void CNPC::release()
 
 void CNPC::update()
 {
-    m_garNorRc = RectMake(m_garNorX, m_garNorY, m_garNorImage->getFrameWidth(), m_garNorImage->getFrameHeight());
+    m_garNorRc = RectMake(m_garNorX-25, m_garNorY, m_garNorImage->getFrameWidth()+50, m_garNorImage->getFrameHeight()+50);
     m_shopKeeperRc = RectMake(m_shopKeeperX, m_shopKeeperY, m_shopKeeperImage->getFrameWidth(), m_shopKeeperImage->getFrameHeight());
     m_blackMarketRc = RectMake(m_blackMarketX, m_blackMarketY, m_blackMarketImage->getFrameWidth(), m_blackMarketImage->getFrameHeight());
     m_edwardRc = RectMake(m_edwardX, m_edwardY, m_edwardImage->getFrameWidth(), m_edwardImage->getFrameHeight());
@@ -154,13 +154,4 @@ void CNPC::getNpcAni()
 void CNPC::getNpcRectangle()
 {
     Rectangle(getMapDC(),m_garNorRc.left, m_garNorRc.top, m_garNorRc.right, m_garNorRc.bottom);
-    Rectangle(getMapDC(), m_shopKeeperRc.left, m_shopKeeperRc.top, m_shopKeeperRc.right, m_shopKeeperRc.bottom);
-    Rectangle(getMapDC(), m_blackMarketRc.left, m_blackMarketRc.top, m_blackMarketRc.right, m_blackMarketRc.bottom);
-    Rectangle(getMapDC(), m_edwardRc.left, m_edwardRc.top, m_edwardRc.right, m_edwardRc.bottom);
-    Rectangle(getMapDC(), m_ericRc.left, m_ericRc.top, m_ericRc.right, m_ericRc.bottom);
-    Rectangle(getMapDC(), m_halsteinRc.left, m_halsteinRc.top, m_halsteinRc.right, m_halsteinRc.bottom);
-    Rectangle(getMapDC(), m_kaylaRc.left, m_kaylaRc.top, m_kaylaRc.right, m_kaylaRc.bottom);
-    Rectangle(getMapDC(), m_sarcasterRc.left, m_sarcasterRc.top, m_sarcasterRc.right, m_sarcasterRc.bottom);
-    Rectangle(getMapDC(), m_torsteinRc.left, m_torsteinRc.top, m_torsteinRc.right, m_torsteinRc.bottom);
-    Rectangle(getMapDC(), m_witchRc.left, m_witchRc.top, m_witchRc.right, m_witchRc.bottom);
 }

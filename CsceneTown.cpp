@@ -11,6 +11,15 @@ CsceneTown::~CsceneTown()
 
 HRESULT CsceneTown::init()
 {
+	m_wingImage = IMAGE->findImage("Ç³Â÷³¯°³");
+	ANIMATION->addDefAnimation("Ç³Â÷", "Ç³Â÷³¯°³", 10, false, true);
+	m_wingAni = ANIMATION->findAnimation("Ç³Â÷");
+	ANIMATION->start("Ç³Â÷");
+
+	m_wingX[0] = 575;
+	m_wingY[0] = 200;
+
+
 	m_camera = new camera;
 	m_camera->init();
 
@@ -86,6 +95,7 @@ void CsceneTown::release()
 
 void CsceneTown::update()
 {
+
 	m_aStar->update();
 	m_aStar->setPlayerIndex(PointMake(m_player->getplayerRect()->left / TILESIZE, m_player->getplayerRect()->top / TILESIZE));
 	m_camera->update();
@@ -132,6 +142,7 @@ void CsceneTown::update()
 	}
 
 	sceneChange();
+	m_wingRect = RectMakeCenter(m_wingX[0], m_wingY[0], m_wingImage->getFrameWidth(), m_wingImage->getFrameHeight());
 }
 
 void CsceneTown::render()
@@ -154,6 +165,7 @@ void CsceneTown::render()
 	{
 		Rectangle(getMemDC(), m_npcRect.left, m_npcRect.top, m_npcRect.right, m_npcRect.bottom);
 	}
+	m_wingImage->aniRender(getMapDC(), m_wingX[0], m_wingY[0], m_wingAni);
 	TCHAR str[256];
 	sprintf_s(str, "ÀÌ³ë¾ß ¸¶À»");
 	TextOut(getMemDC(), WINSIZEX - 165, 20, str, strlen(str));

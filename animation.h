@@ -57,8 +57,11 @@ public:
 
 	inline bool isPlay()const { return _play; }
 	inline POINT getFramePos()const { return _frameList[_playList[_nowPlayIndex]]; }
+	inline DWORD getNowFrameIndex()const { return _nowPlayIndex; }
+	inline DWORD getEndFrameIndex()const { return _endPlayIndex; }
 	inline int getFrameWidth()const { return _frameWidth; }
 	inline int getFrameHeight()const { return _frameHeight; }
+	inline int getFrameIndex(int frameNum)const { return _playList[frameNum]; }
 
 };
 
