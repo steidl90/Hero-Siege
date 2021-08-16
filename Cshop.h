@@ -15,7 +15,7 @@ private:
 
 	SelectItem m_selectItem;
 
-	Citem m_shopSelectItem;
+	Citem* m_shopSelectItem;
 
 public:
 
@@ -26,10 +26,10 @@ public:
 
 	vector<Citem*>* getTotalList() { return &m_vTotalList; }
 
-	Citem* getShopSelectItem() { return &m_shopSelectItem; }
+	Citem* getShopSelectItem() { return m_shopSelectItem; }
 	SelectItem* getSelectItem() { return &m_selectItem; }
 
-	void setShopSelectItem(Citem* item) { m_shopSelectItem = *item; }
+	void setShopSelectItem(Citem* item) { m_shopSelectItem = item; }
 
 
 	void buyItem(Citem* item);
