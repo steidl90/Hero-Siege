@@ -38,7 +38,7 @@
 //새로등록
 #include"CtotalItem.h"
 #include"rootHeader.h"
-#include"CplayerDate.h"
+#include"CplayerData.h"
 
 //======================================
 //##			매니저들			  ##
@@ -54,7 +54,7 @@
 #define EFFECT			effectManager::getSingleton()
 // 새로등록
 #define ITEM			CtotalItem::getSingleton()
-#define DATA			CplayerDate::getSingleton()
+#define DATA			CplayerData::getSingleton()
 
 //==========================================
 //				 매크로 설정

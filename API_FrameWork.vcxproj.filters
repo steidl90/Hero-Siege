@@ -345,7 +345,7 @@
     <ClInclude Include="CshopUi.h">
       <Filter>mainGame\히어로시즈\Cobject\Cshop</Filter>
     </ClInclude>
-    <ClInclude Include="CplayerDate.h">
+    <ClInclude Include="CplayerData.h">
       <Filter>mainGame\히어로시즈\Cunit\CplayerManager\Cplayer\CplayerDate</Filter>
     </ClInclude>
     <ClInclude Include="CNPC.h">
@@ -536,7 +536,7 @@
     <ClCompile Include="CshopUi.cpp">
       <Filter>mainGame\히어로시즈\Cobject\Cshop</Filter>
     </ClCompile>
-    <ClCompile Include="CplayerDate.cpp">
+    <ClCompile Include="CplayerData.cpp">
       <Filter>mainGame\히어로시즈\Cunit\CplayerManager\Cplayer\CplayerDate</Filter>
     </ClCompile>
     <ClCompile Include="CNPC.cpp">

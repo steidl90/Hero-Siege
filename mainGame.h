@@ -8,12 +8,12 @@
 #include"CsceneSelect.h"
 #include"CsceneTown.h"
 #include"CsceneDungeon.h"
-#include"CplayerDate.h"
+#include"CplayerData.h"
 class mainGame : public gameNode
 {
 private:
 	Cimage* m_image;
-	CplayerDate* m_playerDate;
+	CplayerData* m_playerData;
 	bool isDebug;
 
 public:

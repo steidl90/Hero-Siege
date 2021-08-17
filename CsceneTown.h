@@ -5,7 +5,7 @@
 #include "camera.h"
 #include "CaStar.h"
 #include "CshopUi.h"
-#include "CplayerDate.h"
+#include "CplayerData.h"
 #include "CNPC.h"
 class CsceneTown : public gameNode
 {
@@ -16,7 +16,7 @@ private:
 	CaStar* m_aStar;
 	Cshop* m_shop;
 	CshopUi* m_shopUi;
-	CplayerDate* m_playerDate;
+	CplayerData* m_playerData;
 
 	CNPC* m_npc;
 private:
@@ -51,5 +51,5 @@ public:
 	void npcCollison();
 	
 
-	void setPlayerMemory(CplayerDate* playerdate){ m_playerDate = playerdate;}
+	void setPlayerMemory(CplayerData* playerdate){ m_playerData = playerdate;}
 };

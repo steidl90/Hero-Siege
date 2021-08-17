@@ -9,7 +9,7 @@ mainGame::~mainGame()
 HRESULT mainGame::init()
 {
 	gameNode::init(true);
-	
+	   
 	m_image = new Cimage;
 	m_image->init();
 
@@ -18,7 +18,7 @@ HRESULT mainGame::init()
 	SCENE->addScene("마을", new CsceneTown);
 	SCENE->addScene("던전", new CsceneDungeon);
 
-	SCENE->changeScene("마을");
+	SCENE->changeScene("시작화면");
 	return S_OK;
 }
 

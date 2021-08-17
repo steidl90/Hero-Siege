@@ -73,9 +73,8 @@ HRESULT CsceneTown::init()
 
 	m_changeRect = RectMake(MAPSIZE - 10, MAPSIZE * 0.25 + 120, 100, 100);
 
-	m_shopRect = RectMake(300, 300, 100, 100);
+	m_shopRect = RectMake(310, 230, IMAGE->findImage("NPC에릭")->getFrameWidth() * 2, IMAGE->findImage("NPC에릭")->getFrameHeight() * 2);
 	m_npcRect = RectMake(WINSIZEX/2 , WINSIZEY/2, 100, 100);
-
 
 	m_npc = new CNPC;
 	m_npc->init();
@@ -151,7 +150,6 @@ void CsceneTown::render()
 	this->getMapBuffer()->render(getMemDC(), 0, 0, m_camera->getCameraPoint().x, m_camera->getCameraPoint().y, m_camera->getCameraWidth(), m_camera->getCameraHeight());
 	this->getMapBuffer()->mapRender(getMemDC(), WINSIZEX - IMAGE->findImage("MiniMapUi")->getWidth(), 70);
 
-
 	m_camera->render();
 	m_town->render();
 	//NPC
@@ -160,7 +158,6 @@ void CsceneTown::render()
 
 	if (isShopOn) m_shopUi->render();
 
-	Rectangle(getMapDC(), m_shopRect.left, m_shopRect.top, m_shopRect.right, m_shopRect.bottom);
 
 	if (isNpcCollison)
 	{
@@ -170,6 +167,7 @@ void CsceneTown::render()
 	TCHAR str[256];
 	sprintf_s(str, "이노야 마을");
 	TextOut(getMemDC(), WINSIZEX - 165, 20, str, strlen(str));
+
 }
 
 void CsceneTown::sceneChange()

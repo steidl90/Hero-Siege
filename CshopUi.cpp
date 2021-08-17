@@ -111,16 +111,12 @@ void CshopUi::render()
 		//Rectangle(getMemDC(), (*iter).left, (*iter).top, (*iter).right, (*iter).bottom);
 	}
 
-	SetTextColor(getMemDC(), RGB(0, 0, 0));
-	Rectangle(getMemDC(), m_sellButton.left, m_sellButton.top, m_sellButton.right, m_sellButton.bottom);
-	Rectangle(getMemDC(), m_buyButton.left, m_buyButton.top, m_buyButton.right, m_buyButton.bottom);
-	Rectangle(getMemDC(), m_exitButton.left, m_exitButton.top, m_exitButton.right, m_exitButton.bottom);
+	SetTextColor(getMemDC(), RGB(255, 255, 255));
 	TextOut(getMemDC(), m_sellButton.left + 10, m_sellButton.top + 5, TEXT("판매"), lstrlen("판매"));
 	TextOut(getMemDC(), m_buyButton.left + 10, m_buyButton.top + 5, TEXT("구매"), lstrlen("구매"));
 	TextOut(getMemDC(), m_exitButton.left + 10, m_exitButton.top + 5, TEXT("나가기"), lstrlen("나가기"));
 	char strGold[100];
 	wsprintf(strGold, "소지금액: %d gold", m_shop->getPlayer()->getGold());
-	SetTextColor(getMemDC(), RGB(255, 255, 255));
 	TextOut(getMemDC(), m_sellButton.left + 10, m_sellButton.top + 35, strGold, lstrlen(strGold));
 	
 	//Rectangle(getMemDC(), m_ItemInfoRect.left, m_ItemInfoRect.top, m_ItemInfoRect.right, m_ItemInfoRect.bottom);

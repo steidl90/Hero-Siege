@@ -12,7 +12,7 @@ Cplayer::~Cplayer()
 
 HRESULT Cplayer::init()
 {
-	setAtk(10),
+	setAtk(10);
 	setDef(10);
 	setHp(m_maxHp);
 	setMp(m_maxMp);
