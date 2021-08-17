@@ -48,8 +48,6 @@ public:
 
 	void showPlayerStat();
 
-	void itemStatSet();
-
 	// Ãß°¡
 	void setEnemyMemory(CenemyManager* enemy) { m_enemy = enemy; }
 	void setBossMemory(Cmevius* boss) { m_boss = boss; }

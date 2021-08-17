@@ -46,8 +46,10 @@ HRESULT CsceneDungeon::init()
 	m_player->getPlayer()->setExp(DATA->getExp());
 	m_player->getPlayer()->setGold(DATA->getGold());
 	m_player->getPlayer()->setHp(DATA->getHp());
+	m_player->getPlayer()->setMaxHp(DATA->getMaxHp());
 	m_player->getPlayer()->setLv(DATA->getLv());
 	m_player->getPlayer()->setMp(DATA->getMp());
+	m_player->getPlayer()->setMaxMp(DATA->getMaxMp());
 	m_player->getPlayer()->setSpeed(DATA->getSpeed());
 	m_player->getPlayer()->setPlayerX(200);
 	m_player->getPlayer()->setPlayerY(MAPSIZE - 300);
@@ -203,7 +205,9 @@ void CsceneDungeon::sceneChange()
 		DATA->setData(m_player->getPlayer()->getAtk(), 
 			m_player->getPlayer()->getDef(), 
 			m_player->getPlayer()->getHp(), 
+			m_player->getPlayer()->getMaxHp(),
 			m_player->getPlayer()->getMp(),
+			m_player->getPlayer()->getMaxMp(),
 			m_player->getPlayer()->getCritical(),
 			m_player->getPlayer()->getLv(),
 			m_player->getPlayer()->getExp(),
@@ -224,10 +228,13 @@ void CsceneDungeon::sceneChange()
 	}
 	else if (m_player->getPlayer()->getHp() < 0)
 	{
+		m_player->getPlayer()->setHp(50);
 		DATA->setData(m_player->getPlayer()->getAtk(),
 			m_player->getPlayer()->getDef(),
-			m_player->getPlayer()->getHp() + 10,
+			m_player->getPlayer()->getHp(),
+			m_player->getPlayer()->getMaxHp(),
 			m_player->getPlayer()->getMp(),
+			m_player->getPlayer()->getMaxMp(),
 			m_player->getPlayer()->getCritical(),
 			m_player->getPlayer()->getLv(),
 			m_player->getPlayer()->getExp(),

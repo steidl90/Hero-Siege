@@ -106,7 +106,7 @@ HRESULT Cimage::init()
 
     IMAGE->addFrameImage("커피집", "images/CoffeeHouse.bmp", 904, 152, 8, 1, true, RGB(255, 0, 255));
     //IMAGE->addFrameImage("풍차날개", "images/WindmillWing.bmp", 2016, 339, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("풍차날개", "images/WindmillWing1.bmp", 7056, 339, 21, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("풍차날개", "images/WindmillWing1.bmp", 7140, 339, 21, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("풍차날개그림자", "images/WindmillWingShadow.bmp", 2016, 339, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("tilemap1", "images/Tile2.bmp", 648, 504, 18, 14, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("tilemap", "images/Tile4.bmp", 648, 504, 18, 14, true, RGB(255, 0, 255));

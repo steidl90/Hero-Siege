@@ -12,13 +12,12 @@ CsceneTown::~CsceneTown()
 HRESULT CsceneTown::init()
 {
 	m_wingImage = IMAGE->findImage("Ç³Â÷³¯°³");
-	ANIMATION->addDefAnimation("Ç³Â÷", "Ç³Â÷³¯°³", 12, false, true);
+	ANIMATION->addDefAnimation("Ç³Â÷", "Ç³Â÷³¯°³", 10, false, true);
 	m_wingAni = ANIMATION->findAnimation("Ç³Â÷");
 	ANIMATION->start("Ç³Â÷");
 
 	m_wingX[0] = 575;
 	m_wingY[0] = 200;
-
 
 	m_camera = new camera;
 	m_camera->init();
@@ -39,8 +38,10 @@ HRESULT CsceneTown::init()
 	m_player->getPlayer()->setExp(DATA->getExp());
 	m_player->getPlayer()->setGold(DATA->getGold());
 	m_player->getPlayer()->setHp(DATA->getHp());
-	m_player->getPlayer()->setLv(DATA->getLv());
+	m_player->getPlayer()->setMaxHp(DATA->getMaxHp());
 	m_player->getPlayer()->setMp(DATA->getMp());
+	m_player->getPlayer()->setMaxMp(DATA->getMaxMp());
+	m_player->getPlayer()->setLv(DATA->getLv());
 	m_player->getPlayer()->setSpeed(DATA->getSpeed());
 	m_player->getPlayer()->setPlayerX(DATA->getX());
 	m_player->getPlayer()->setPlayerY(DATA->getY());
@@ -96,7 +97,6 @@ void CsceneTown::release()
 
 void CsceneTown::update()
 {
-
 	m_aStar->update();
 	m_aStar->setPlayerIndex(PointMake(m_player->getplayerRect()->left / TILESIZE, m_player->getplayerRect()->top / TILESIZE));
 	m_camera->update();
@@ -122,10 +122,10 @@ void CsceneTown::update()
 			m_player->getPlayer()->setHp(m_player->getPlayer()->getHp() + 10);
 			m_timerHp = TIME->getWorldTime();
 		}
-		if (m_player->getPlayer()->getHp() > m_player->getPlayer()->getMaxHp())
-		{
-			m_player->getPlayer()->setHp(m_player->getPlayer()->getMaxHp());
-		}
+	}
+	else if (m_player->getPlayer()->getHp() > m_player->getPlayer()->getMaxHp())
+	{
+		m_player->getPlayer()->setHp(m_player->getPlayer()->getMaxHp());
 	}
 
 	//¸¶³ª ¸®Á¨
@@ -136,10 +136,10 @@ void CsceneTown::update()
 			m_player->getPlayer()->setMp(m_player->getPlayer()->getMp() + 5);
 			m_timerMp = TIME->getWorldTime();
 		}
-		if (m_player->getPlayer()->getMp() > m_player->getPlayer()->getMaxMp())
-		{
-			m_player->getPlayer()->setMp(m_player->getPlayer()->getMaxMp());
-		}
+	}
+	else if (m_player->getPlayer()->getMp() > m_player->getPlayer()->getMaxMp())
+	{
+		m_player->getPlayer()->setMp(m_player->getPlayer()->getMaxMp());
 	}
 
 	sceneChange();
@@ -180,7 +180,9 @@ void CsceneTown::sceneChange()
 		DATA->setData(m_player->getPlayer()->getAtk(),
 			m_player->getPlayer()->getDef(),
 			m_player->getPlayer()->getHp(),
+			m_player->getPlayer()->getMaxHp(),
 			m_player->getPlayer()->getMp(),
+			m_player->getPlayer()->getMaxMp(),
 			m_player->getPlayer()->getCritical(),
 			m_player->getPlayer()->getLv(),
 			m_player->getPlayer()->getExp(),

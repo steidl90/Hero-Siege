@@ -95,7 +95,7 @@ public:
 	void moveAnimation();
 	void playerStateRender();
 	void isAttackRender();
-
+	void playerLevelUp();
 	void playerAStarMove();
 
 	void playerSkillControl();

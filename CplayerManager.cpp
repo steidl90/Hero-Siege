@@ -125,45 +125,6 @@ void CplayerManager::showPlayerStat()
 
 }
 
-void CplayerManager::itemStatSet()
-{
- /*   vector<Citem*> equipSet;
-    if (m_inventory->getEquipWeapon() != nullptr) equipSet.push_back(m_inventory->getEquipWeapon());
-    if (m_inventory->getEquipArmor() != nullptr) equipSet.push_back(m_inventory->getEquipArmor());
-    if (m_inventory->getEquipShoes() != nullptr) equipSet.push_back(m_inventory->getEquipShoes());
-    if (m_inventory->getEquipGloves() != nullptr) equipSet.push_back(m_inventory->getEquipGloves());
-    if (m_inventory->getEquipPendant() != nullptr) equipSet.push_back(m_inventory->getEquipPendant());
-
-    int itemAtk = 0;
-    int itemDef = 0;
-    int itemHp = 0;
-    int itemMp = 0;
-    int itemCri = 0;
-    int itemCriAtk = 0;
-    int itemSpeed = 0;
-
-    for (auto iter = equipSet.begin(); iter != equipSet.end(); ++iter)
-    {
-        itemAtk += (*iter)->getAtk();
-        itemDef += (*iter)->getDef();
-        itemHp += (*iter)->getHp();
-        itemMp += (*iter)->getMp();
-        itemCri += (*iter)->getCritical();
-        itemCriAtk += (*iter)->getCriticalAtk();
-        itemSpeed += (*iter)->getSpeed();
-    }
-
-    m_player->setAtk(m_player->getAtk() + itemAtk);
-    m_player->setDef(m_player->getDef() + itemDef);
-    m_player->setHp(m_player->getHp() + itemHp);
-    m_player->setMp(m_player->getMp() + itemMp);
-    m_player->setCritical(m_player->getCritical() + itemCri);
-    m_player->setCriticalAtk(m_player->getCriticalAtk() + itemCriAtk);
-    m_player->setSpeed(m_player->getSpeed() + itemSpeed);
-*/
-
-}
-
 void CplayerManager::collisionEnemy()
 {
     RECT temp;
@@ -192,9 +153,9 @@ void CplayerManager::collisionEnemy()
         {
             if (IntersectRect(&temp, &m_player->getSkill()->getvSkill()[j].m_skillRc, &(*iter)->getRect()))
             {
-                (*iter)->setHp((*iter)->getHp() - (m_player->getAtk() - (*iter)->getDef()));
-                m_player->getSkill()->removeSkill(j);
-                sprintf(atk, "-%.1f", ((m_player->getAtk() * 0.5) - (*iter)->getDef()));
+                (*iter)->setHp((*iter)->getHp() - 1);
+                //m_player->getSkill()->removeSkill(j);
+                sprintf(atk, "-%.1f", 1.0f);
                 HFONT font, saveFont;
                 font = CreateFont(25, 0, 0, 0, 100, false, false, false, HANGEUL_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("»ﬁ∏’µ’±Ÿ«ÏµÂ∂Û¿Œ"));
                 saveFont = (HFONT)SelectObject(getMapDC(), font);
@@ -240,9 +201,8 @@ void CplayerManager::collisionEnemy()
     {
         if (IntersectRect(&tempBoss, &m_player->getSkill()->getvSkill()[j].m_skillRc, m_boss->getRect()))
         {
-            m_boss->setHp(m_boss->getHp() - (m_player->getAtk() * 0.5));
-            m_player->getSkill()->removeSkill(j);
-            sprintf(atk, "-%.1f", m_player->getAtk() * 0.5);
+            m_boss->setHp(m_boss->getHp() - 1);
+            sprintf(atk, "-%.1f", 1.0f);
             HFONT font, saveFont;
             font = CreateFont(25, 0, 0, 0, 100, false, false, false, HANGEUL_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("»ﬁ∏’µ’±Ÿ«ÏµÂ∂Û¿Œ"));
             saveFont = (HFONT)SelectObject(getMapDC(), font);

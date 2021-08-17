@@ -110,10 +110,8 @@ void Cplayer::update()
 	ANIMATION->resume("라이트닝애니");
 	m_angle += 0.4;
 	moveControl();
-	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth() - 90, playerMoveDown->getFrameHeight() - 50);
-	
-	if (InputManager->isStayKeyDown(VK_RBUTTON))
-		isAstarMove = true;
+	playerLevelUp();
+	if (InputManager->isStayKeyDown(VK_RBUTTON)) isAstarMove = true;
 	playerAStarMove();
 
 	if (direction == DIRECTIONS::DIRECTIONS_LEFT) m_playerSkill->update("왼쪽창스킬");
@@ -276,17 +274,7 @@ void Cplayer::moveControl()
 			setLv(getLv() + 1);
 		}
 	}
-
-	//임시 레벨업
-	if (getExp() >= 100)
-	{
-		setExp(0);
-		setLv(getLv() + 1);
-		setHp(m_maxHp);
-		setMp(getMp() + 50);
-		if (getMp() > m_maxMp)setMp(m_maxMp);
-	}
-
+	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth() - 90, playerMoveDown->getFrameHeight() - 50);
 	moveAnimation();
 }
 
@@ -459,6 +447,20 @@ void Cplayer::isAttackRender()
 			playerAttackDown->aniRender(getMapDC(), playerMoveRc.left - 98, playerMoveRc.top - 75, playerAttackAni);
 			break;
 		}
+	}
+}
+
+void Cplayer::playerLevelUp()
+{
+	if (getExp() >= 100)
+	{
+		setExp(0);
+		setLv(getLv() + 1);
+		m_maxHp += 50;
+		setHp(m_maxHp);
+		m_maxMp += 20;
+		setMp(getMp() + 50);
+		if (getMp() > m_maxMp) setMp(m_maxMp);
 	}
 }
 

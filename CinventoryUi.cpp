@@ -334,18 +334,18 @@ void CinventoryUi::showItemList(vector<Citem*>* list)
 	int	i = m_showIndex;
 	int j = 0;
 	vector<Citem*>::iterator iter;
-		for ( iter = list->begin() + i; i < m_showEndIndex; ++iter, i++, j++)
-		{
-			IMAGE->findImage((*iter)->getSmallImage())->frameRender(getMemDC()
-				,m_vItemListRect[j].left, m_vItemListRect[j].top, (*iter)->getFrame().x, (*iter)->getFrame().y);
+	for ( iter = list->begin() + i; i < m_showEndIndex; ++iter, i++, j++)
+	{
+		IMAGE->findImage((*iter)->getSmallImage())->frameRender(getMemDC()
+			,m_vItemListRect[j].left, m_vItemListRect[j].top, (*iter)->getFrame().x, (*iter)->getFrame().y);
 
-			SetTextColor(getMemDC(), RGB(255, 255, 255));
-			TextOut(getMemDC(), m_vItemListRect[j].left + 80, m_vItemListRect[j].top + 10, (*iter)->getName().c_str(), lstrlen((*iter)->getName().c_str()));
-			wsprintf(str, "필요 레벨: %d", (*iter)->getLimitLevel());
-			TextOut(getMemDC(), m_vItemListRect[j].left + 80, m_vItemListRect[j].top + 30, str, lstrlen(str));
-			wsprintf(str, "골드: %d", (*iter)->getBuyPrice());
-			TextOut(getMemDC(), m_vItemListRect[j].left + 80, m_vItemListRect[j].top + 50, str, lstrlen(str));
-		}
+		SetTextColor(getMemDC(), RGB(255, 255, 255));
+		TextOut(getMemDC(), m_vItemListRect[j].left + 80, m_vItemListRect[j].top + 10, (*iter)->getName().c_str(), lstrlen((*iter)->getName().c_str()));
+		wsprintf(str, "필요 레벨: %d", (*iter)->getLimitLevel());
+		TextOut(getMemDC(), m_vItemListRect[j].left + 80, m_vItemListRect[j].top + 30, str, lstrlen(str));
+		wsprintf(str, "골드: %d", (*iter)->getBuyPrice());
+		TextOut(getMemDC(), m_vItemListRect[j].left + 80, m_vItemListRect[j].top + 50, str, lstrlen(str));
+	}
 }
 
 // 랜더 인덱스를 계산해서 장착 아이템 테두리 위치 셋팅
@@ -1061,8 +1061,8 @@ void CinventoryUi::unEquipItem()
 
 	m_player->setAtk(m_player->getAtk() - m_Inventory->getEquipItem(m_selectType)->m_item->getAtk());
 	m_player->setDef(m_player->getDef() - m_Inventory->getEquipItem(m_selectType)->m_item->getDef());
-	m_player->setHp(m_player->getHp() - m_Inventory->getEquipItem(m_selectType)->m_item->getHp());
-	m_player->setMp(m_player->getMp() - m_Inventory->getEquipItem(m_selectType)->m_item->getMp());
+	m_player->setMaxHp(m_player->getMaxHp() - m_Inventory->getEquipItem(m_selectType)->m_item->getHp());
+	m_player->setMaxMp(m_player->getMaxMp() - m_Inventory->getEquipItem(m_selectType)->m_item->getMp());
 	m_player->setCritical(m_player->getCritical() - m_Inventory->getEquipItem(m_selectType)->m_item->getCritical());
 	m_player->setCriticalAtk(m_player->getCriticalAtk() - m_Inventory->getEquipItem(m_selectType)->m_item->getCriticalAtk());
 	m_player->setSpeed(m_player->getSpeed() - m_Inventory->getEquipItem(m_selectType)->m_item->getSpeed());
