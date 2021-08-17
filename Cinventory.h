@@ -17,6 +17,11 @@ class Cinventory
 	EquipItem m_equipItem[5];
 	Citem m_tempItem[5];
 
+	int m_weaponCount;
+	int m_armorCount;
+	int m_shoesCount;
+	int m_glovesCount;
+	int m_pendantCount;
 
 public:
 

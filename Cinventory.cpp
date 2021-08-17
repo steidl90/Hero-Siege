@@ -20,7 +20,11 @@ HRESULT Cinventory::init()
 		ZeroMemory(&m_selectItem, sizeof(SelectItem));
 	}
 
-	//this->setItemId();
+	m_weaponCount = 0;
+	m_armorCount = 0;
+	m_shoesCount = 0;
+	m_glovesCount = 0;
+	m_pendantCount = 0;
 	return S_OK;
 }
 
@@ -34,23 +38,36 @@ void Cinventory::update()
 
 void Cinventory::addItem(Citem* item)
 {
-	item->setItemId(item->getItemId() + 1);
+	Citem* tempItem = new Citem(item->getBigImage(), item->getSmallImage(), item->getName(), item->getType(), item->getAtk(),
+		item->getDef(), item->getHp(), item->getMp(), item->getCritical(), item->getCriticalAtk(), item->getSpeed(), item->getLimitLevel(),
+		item->getBuyPrice(), item->getFrame(), item->getItemId(), item->getItemGradeInt());
+
 	switch (item->getType())
 	{
 	case ITEMTYPE::ITEMTYPE_WEAPON:
-		m_vWeaponList.push_back(item);
+		m_weaponCount++;
+		tempItem->setItemId(m_weaponCount);
+		m_vWeaponList.push_back(tempItem);
 		break;
 	case ITEMTYPE::ITEMTYPE_ARMOR:
-		m_vArmorList.push_back(item);
+		m_armorCount++;
+		tempItem->setItemId(m_armorCount);
+		m_vArmorList.push_back(tempItem);
 		break;
 	case ITEMTYPE::ITEMTYPE_SHOES:
-		m_vShoesList.push_back(item);
+		m_shoesCount++;
+		tempItem->setItemId(m_shoesCount);
+		m_vShoesList.push_back(tempItem);
 		break;
 	case ITEMTYPE::ITEMTYPE_GLOVES:
-		m_vGlovesList.push_back(item);
+		m_glovesCount++;
+		tempItem->setItemId(m_glovesCount);
+		m_vGlovesList.push_back(tempItem);
 		break;
 	case ITEMTYPE::ITEMTYPE_PENDANT:
-		m_vPendantList.push_back(item);
+		m_pendantCount++;
+		tempItem->setItemId(m_pendantCount);
+		m_vPendantList.push_back(tempItem);
 		break;
 	default:
 		break;
@@ -107,7 +124,9 @@ void Cinventory::AbandonItem()
 		{
 			if ((*iter)->getItemId() == m_selectItem.m_item->getItemId())
 			{
+				Citem* temp = *iter;
 				m_vWeaponList.erase(iter);
+				SAFE_DELETE(temp);
 				break;
 			}
 		}
@@ -117,7 +136,9 @@ void Cinventory::AbandonItem()
 		{
 			if ((*iter)->getName() == m_selectItem.m_item->getName())
 			{
+				Citem* temp = *iter;
 				m_vArmorList.erase(iter);
+				SAFE_DELETE(temp);
 				break;
 			}
 		}
@@ -127,7 +148,9 @@ void Cinventory::AbandonItem()
 		{
 			if ((*iter)->getName() == m_selectItem.m_item->getName())
 			{
+				Citem* temp = *iter;
 				m_vGlovesList.erase(iter);
+				SAFE_DELETE(temp);
 				break;
 			}
 		}
@@ -137,7 +160,9 @@ void Cinventory::AbandonItem()
 		{
 			if ((*iter)->getName() == m_selectItem.m_item->getName())
 			{
+				Citem* temp = *iter;
 				m_vShoesList.erase(iter);
+				SAFE_DELETE(temp);
 				break;
 			}
 		}
@@ -147,7 +172,9 @@ void Cinventory::AbandonItem()
 		{
 			if ((*iter)->getName() == m_selectItem.m_item->getName())
 			{
+				Citem* temp = *iter;
 				m_vPendantList.erase(iter);
+				SAFE_DELETE(temp);
 				break;
 			}
 		}
