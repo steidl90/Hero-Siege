@@ -37,6 +37,11 @@ HRESULT Cimage::init()
     IMAGE->addFrameImage("플레이어아래쪽공격", "images/AttackAmazoneDown.bmp", 1368, 231, 6, 1, true, RGB(255, 0, 255));
 
     IMAGE->addFrameImage("라이트닝", "images/Lightning.bmp", 576, 402, 8, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("왼쪽창던지기", "images/Player/LeftShotLance1.bmp", 320, 20, 5, 1, true, RGB(255, 255, 255));
+    IMAGE->addFrameImage("오른쪽창던지기", "images/Player/RightShotLance1.bmp", 320, 20, 5, 1, true, RGB(255, 255, 255));
+    IMAGE->addFrameImage("아래쪽창던지기", "images/Player/DownShotLance1.bmp", 100, 72, 5, 1, true, RGB(255, 255, 255));
+    IMAGE->addFrameImage("위쪽창던지기", "images/Player/UpShotLance1.bmp", 100, 72, 5, 1, true, RGB(255, 255, 255));
+
 
     //=================NPC====================//
     IMAGE->addFrameImage("NPC블랙마켓", "images/BlackMarketNPC.bmp", 1200, 182, 6, 1, true, RGB(255, 0, 255));

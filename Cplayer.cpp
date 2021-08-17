@@ -56,8 +56,13 @@ HRESULT Cplayer::init()
 
 	//스킬
 	ANIMATION->addDefAnimation("리치스킬애니", "리치스킬", 15, false, true);
-	playerSkillLightning = IMAGE->findImage("라이트닝");
 
+	ANIMATION->addDefAnimation("왼쪽창스킬", "왼쪽창던지기", 15, false, true);
+	ANIMATION->addDefAnimation("오른쪽창스킬", "오른쪽창던지기", 15, false, true);
+	ANIMATION->addDefAnimation("아래쪽창스킬", "아래쪽창던지기", 15, false, true);
+	ANIMATION->addDefAnimation("위쪽창스킬", "위쪽창던지기", 15, false, true);
+
+	playerSkillLightning = IMAGE->findImage("라이트닝");
 	ANIMATION->addDefAnimation("라이트닝애니", "라이트닝", 10, false, true);
 	playerLightningAni = ANIMATION->findAnimation("라이트닝애니");
 
@@ -106,11 +111,15 @@ void Cplayer::update()
 	m_angle += 0.4;
 	moveControl();
 	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth() - 90, playerMoveDown->getFrameHeight() - 50);
-	m_playerSkill->update("리치스킬애니");
 	
 	if (InputManager->isStayKeyDown(VK_RBUTTON))
 		isAstarMove = true;
 	playerAStarMove();
+
+	if (direction == DIRECTIONS::DIRECTIONS_LEFT) m_playerSkill->update("왼쪽창스킬");
+	else if (direction == DIRECTIONS::DIRECTIONS_RIGHT) m_playerSkill->update("오른쪽창스킬");
+	else if (direction == DIRECTIONS::DIRECTIONS_UP) m_playerSkill->update("위쪽창스킬");
+	else if (direction == DIRECTIONS::DIRECTIONS_DOWN) m_playerSkill->update("아래쪽창스킬");
 }
 
 void Cplayer::render()
@@ -218,10 +227,10 @@ void Cplayer::moveControl()
 	{
 		this->isAttack = true;
 		setMp(getMp() - 10);
-		if (direction == DIRECTIONS::DIRECTIONS_LEFT)m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, PI, 7.0f, 700, "리치스킬", "리치스킬애니");
-		else if (direction == DIRECTIONS::DIRECTIONS_RIGHT)m_playerSkill->skillInformation(m_playerX + 50, m_playerY + 33, PI2, 7.0f, 700, "리치스킬", "리치스킬애니");
-		else if (direction == DIRECTIONS::DIRECTIONS_UP)m_playerSkill->skillInformation(m_playerX + 15, m_playerY - 20, PI * 0.5, 7.0f, 700, "리치스킬", "리치스킬애니");
-		else if (direction == DIRECTIONS::DIRECTIONS_DOWN)m_playerSkill->skillInformation(m_playerX, m_playerY, PI * 1.5, 7.0f, 700, "리치스킬", "리치스킬애니");
+		if (direction == DIRECTIONS::DIRECTIONS_LEFT) m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, PI, 7.0f, 700, "왼쪽창던지기", "왼쪽창스킬");
+		else if (direction == DIRECTIONS::DIRECTIONS_RIGHT) m_playerSkill->skillInformation(m_playerX + 50, m_playerY + 33, PI2, 7.0f, 700, "오른쪽창던지기", "오른쪽창스킬");
+		else if (direction == DIRECTIONS::DIRECTIONS_UP) m_playerSkill->skillInformation(m_playerX + 15, m_playerY - 20, PI * 0.5, 7.0f, 700, "위쪽창던지기", "위쪽창스킬");
+		else if (direction == DIRECTIONS::DIRECTIONS_DOWN) m_playerSkill->skillInformation(m_playerX + 15, m_playerY + 100, PI * 1.5, 7.0f, 700, "아래쪽창던지기", "아래쪽창스킬");
 	}
 	else if (InputManager->isOnceKeyDown('W') && this->getLv() >= 3 && this->getMp() > 100)
 	{
@@ -256,7 +265,7 @@ void Cplayer::moveControl()
 		m_count = 0;
 	}
 
-	if (InputManager->isStayKeyDown('Z')) // 디버깅
+	if (InputManager->isToggleKey(VK_F8)) // 디버깅
 	{
 		setHp(getHp() - 1);
 		setMp(getMp() - 1);
