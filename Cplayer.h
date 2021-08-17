@@ -103,6 +103,8 @@ public:
 
 	//void mouseMoveAstar();
 
+	void playerRectangle();
+
 	RECT* getplayerMoveRC() { return &playerMoveRc; }
 	float getPlayerX() const { return m_playerX; }
 	void setPlayerX(float playerx) { m_playerX = playerx; }
@@ -115,7 +117,16 @@ public:
 	void setMaxMp(int mp) { m_maxMp = mp; }
 	int getMaxExp() { return m_maxExp; }
 
+	
+
 	RECT* getPlayerAttackRC() { return &playerAttackRc; }
+
+	RECT* getPlayerLightningCenterRC() { return &lightningCenterRc; }
+	RECT* getPlayerLightningLeftRC() { return &lightningLeftRc; }
+	RECT* getPlayerLightningRightRC() { return &lightningRightRc; }
+	RECT* getPlayerLightningUpRC() { return &lightningUpRc; }
+	RECT* getPlayerLightningDownRC() { return &lightningDownRc; }
+
 
 	void blockCheck(float speed, RECT* playerRC, DIRECTIONS direct);
 	void setCheckTile(tagTile* tile) { m_CheckTile = tile; }

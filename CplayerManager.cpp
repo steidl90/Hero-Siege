@@ -147,7 +147,29 @@ void CplayerManager::collisionEnemy()
             DeleteObject(SelectObject(getMapDC(), saveFont));
             EFFECT->play("»˜∆Æ1", (*iter)->getRect().left + ((*iter)->getRect().right - (*iter)->getRect().left) / 2 + RND->getFromIntTo(0, 30),
                 (*iter)->getRect().top + ((*iter)->getRect().bottom - (*iter)->getRect().top) / 2 + RND->getFromIntTo(0, 30));
+            
         }
+
+        if (IntersectRect(&temp, m_player->getPlayerLightningCenterRC(), &(*iter)->getRect()) ||
+            IntersectRect(&temp, m_player->getPlayerLightningLeftRC(), &(*iter)->getRect()) || 
+            IntersectRect(&temp, m_player->getPlayerLightningUpRC(), &(*iter)->getRect()) || 
+            IntersectRect(&temp, m_player->getPlayerLightningRightRC(), &(*iter)->getRect()) || 
+            IntersectRect(&temp, m_player->getPlayerLightningDownRC(), &(*iter)->getRect()))
+        {
+            (*iter)->setHp((*iter)->getHp() - ((m_player->getAtk() * 0.3) - (*iter)->getDef()));
+            sprintf(atk, "-%.1f", ((m_player->getAtk()*0.3) - (*iter)->getDef()));
+            HFONT font, saveFont;
+            font = CreateFont(25, 0, 0, 0, 100, false, false, false, HANGEUL_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("»ﬁ∏’µ’±Ÿ«ÏµÂ∂Û¿Œ"));
+            saveFont = (HFONT)SelectObject(getMapDC(), font);
+            SetBkMode(getMapDC(), TRANSPARENT);
+            SetTextColor(getMapDC(), RGB(255, 0, 0));
+            TextOut(getMapDC(), (*iter)->getRect().left + ((*iter)->getRect().right - (*iter)->getRect().left) / 2, (*iter)->getRect().top + 10, atk, lstrlen(atk));
+            DeleteObject(SelectObject(getMapDC(), saveFont));
+            EFFECT->play("»˜∆Æ1", (*iter)->getRect().left + ((*iter)->getRect().right - (*iter)->getRect().left) / 2 + RND->getFromIntTo(0, 30),
+                (*iter)->getRect().top + ((*iter)->getRect().bottom - (*iter)->getRect().top) / 2 + RND->getFromIntTo(0, 30));
+
+        }
+
 
         for (int j = 0; j < m_player->getSkill()->getvSkill().size(); j++)
         {
@@ -185,6 +207,24 @@ void CplayerManager::collisionEnemy()
     if (IntersectRect(&tempBoss, m_player->getPlayerAttackRC(), m_boss->getRect()))
     {
         m_boss->setHp(m_boss->getHp() - (m_player->getAtk() * 0.5));
+        sprintf(atk, "-%.1f", m_player->getAtk() * 0.5);
+        HFONT font, saveFont;
+        font = CreateFont(25, 0, 0, 0, 100, false, false, false, HANGEUL_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("»ﬁ∏’µ’±Ÿ«ÏµÂ∂Û¿Œ"));
+        saveFont = (HFONT)SelectObject(getMapDC(), font);
+        SetBkMode(getMapDC(), TRANSPARENT);
+        SetTextColor(getMapDC(), RGB(255, 0, 0));
+        TextOut(getMapDC(), m_boss->getRect()->left + (m_boss->getRect()->right - m_boss->getRect()->left) / 2, m_boss->getRect()->top + 10, atk, lstrlen(atk));
+        DeleteObject(SelectObject(getMapDC(), saveFont));
+        EFFECT->play("»˜∆Æ1", m_boss->getRect()->left + (m_boss->getRect()->right - m_boss->getRect()->left) / 2 + RND->getFromIntTo(0, 30),
+            m_boss->getRect()->top + (m_boss->getRect()->bottom - m_boss->getRect()->top) / 2 + RND->getFromIntTo(0, 30));
+    }
+    if (IntersectRect(&temp, m_player->getPlayerLightningCenterRC(), m_boss->getRect()) ||
+        IntersectRect(&temp, m_player->getPlayerLightningLeftRC(), m_boss->getRect()) ||
+        IntersectRect(&temp, m_player->getPlayerLightningUpRC(), m_boss->getRect()) ||
+        IntersectRect(&temp, m_player->getPlayerLightningRightRC(), m_boss->getRect()) ||
+        IntersectRect(&temp, m_player->getPlayerLightningDownRC(), m_boss->getRect()))
+    {
+        m_boss->setHp(m_boss->getHp() - (m_player->getAtk() * 0.3));
         sprintf(atk, "-%.1f", m_player->getAtk() * 0.5);
         HFONT font, saveFont;
         font = CreateFont(25, 0, 0, 0, 100, false, false, false, HANGEUL_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("»ﬁ∏’µ’±Ÿ«ÏµÂ∂Û¿Œ"));

@@ -49,7 +49,6 @@ public:
 	void sceneChange();
 	void shopOn();
 	void npcCollison();
-	
 
 	void setPlayerMemory(CplayerData* playerdate){ m_playerData = playerdate;}
 };
