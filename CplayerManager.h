@@ -24,7 +24,7 @@ private:
 	int m_deathCount;
 private:
 	
-	list<POINT>* m_fastLoadLocation;
+	//list<POINT>* m_fastLoadLocation;
 
 	bool isInventoryOn;
 
@@ -44,7 +44,7 @@ public:
 
 	Cplayer* getPlayer() { return m_player; }
 
-	void setFastLoadLocation(list<POINT>* lp) { m_fastLoadLocation = lp; }
+	//void setFastLoadLocation(list<POINT>* lp) { m_fastLoadLocation = lp; }
 
 	Cinventory* getInventoryMemory() { return m_inventory; }
 

@@ -3,7 +3,6 @@
 
 Cplayer::Cplayer() :isMoving(false), isIdle(false), isAttack(false), isLive(true), isRect(false), m_maxHp(1000), m_maxMp(500), m_maxExp(100)
 {
-	m_fastLoadLocation = nullptr;
 }
 
 Cplayer::~Cplayer()
@@ -114,11 +113,11 @@ void Cplayer::update()
 	moveControl();
 	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth() - 90, playerMoveDown->getFrameHeight() - 50);
 	
-	if (isSetAstar)
-	{
-		isAstarMove = true;
-		isSetAstar = false;
-	}
+	//if (isSetAstar)
+	//{
+	//	isAstarMove = true;
+	//	isSetAstar = false;
+	//}
 
 	playerAStarMove();
 
@@ -471,50 +470,50 @@ void Cplayer::isAttackRender()
 void Cplayer::playerAStarMove()
 {
 
-	if (m_fastLoadLocation != nullptr && m_fastLoadLocation->size() > 0)
-	{
-		// 처음 실행시에만 begin으로 set해주기
-		if (isAstarMove == true)
-		{
-			m_liFastLoadLocation = m_fastLoadLocation->begin();
-			isAstarMove = false;
-		}
-		if (m_liFastLoadLocation == m_fastLoadLocation->end())
-		{
-			return;
-		}
+	//if (m_fastLoadLocation != nullptr && m_fastLoadLocation->size() > 0)
+	//{
+	//	// 처음 실행시에만 begin으로 set해주기
+	//	if (isAstarMove == true)
+	//	{
+	//		m_liFastLoadLocation = m_fastLoadLocation->begin();
+	//		isAstarMove = false;
+	//	}
+	//	if (m_liFastLoadLocation == m_fastLoadLocation->end())
+	//	{
+	//		return;
+	//	}
 
-		if ((m_playerX+18) < m_liFastLoadLocation->x)
-		{
-			direction = DIRECTIONS::DIRECTIONS_RIGHT;
-			isMoving = true;
-			m_playerX += 2.0f;
-		}
-		else if ((m_playerX + 18) > m_liFastLoadLocation->x)
-		{
-			direction = DIRECTIONS::DIRECTIONS_LEFT;
-			isMoving = true;
-			m_playerX -= 2.0f;
-		}
-		if ((m_playerY+36) < m_liFastLoadLocation->y)
-		{
-			direction = DIRECTIONS::DIRECTIONS_DOWN;
-			isMoving = true;
-			m_playerY += 2.0f;
-		}
-		else if ((m_playerY+36) > m_liFastLoadLocation->y)
-		{
-			direction = DIRECTIONS::DIRECTIONS_UP;
-			isMoving = true;
-			m_playerY -= 2.0f;
-		}
+	//	if ((m_playerX+18) < m_liFastLoadLocation->x)
+	//	{
+	//		direction = DIRECTIONS::DIRECTIONS_RIGHT;
+	//		isMoving = true;
+	//		m_playerX += 2.0f;
+	//	}
+	//	else if ((m_playerX + 18) > m_liFastLoadLocation->x)
+	//	{
+	//		direction = DIRECTIONS::DIRECTIONS_LEFT;
+	//		isMoving = true;
+	//		m_playerX -= 2.0f;
+	//	}
+	//	if ((m_playerY+36) < m_liFastLoadLocation->y)
+	//	{
+	//		direction = DIRECTIONS::DIRECTIONS_DOWN;
+	//		isMoving = true;
+	//		m_playerY += 2.0f;
+	//	}
+	//	else if ((m_playerY+36) > m_liFastLoadLocation->y)
+	//	{
+	//		direction = DIRECTIONS::DIRECTIONS_UP;
+	//		isMoving = true;
+	//		m_playerY -= 2.0f;
+	//	}
 
-		if ((m_liFastLoadLocation->x < (m_playerX + 18) + 1) && (m_liFastLoadLocation->x > (m_playerX + 18) - 1)
-			&& (m_liFastLoadLocation->y < (m_playerY + 36) + 1) && (m_liFastLoadLocation->y > (m_playerY + 36) - 1))
-		{
-			m_liFastLoadLocation++;
-		}
-	}
+	//	if ((m_liFastLoadLocation->x < (m_playerX + 18) + 1) && (m_liFastLoadLocation->x > (m_playerX + 18) - 1)
+	//		&& (m_liFastLoadLocation->y < (m_playerY + 36) + 1) && (m_liFastLoadLocation->y > (m_playerY + 36) - 1))
+	//	{
+	//		m_liFastLoadLocation++;
+	//	}
+	//}
 }
 
 void Cplayer::playerSkillControl()

@@ -73,10 +73,10 @@ void CaStar::release()
 
 void CaStar::update()
 {
-    if ((m_currentPlayer.x != m_playerIndex.x) && (m_currentPlayer.y != m_playerIndex.y))
+    if ((m_currentTarget.x != m_targetIndex.x) || (m_currentTarget.y != m_targetIndex.y))
     {
-        m_currentPlayer.x = m_playerIndex.x;
-        m_currentPlayer.y = m_playerIndex.y;
+        m_currentTarget.x = m_targetIndex.x;
+        m_currentTarget.y = m_targetIndex.y;
 
         _openList.clear();
         _closeList.clear();
@@ -84,20 +84,21 @@ void CaStar::update()
         m_fastLoadLocation.clear();
         init2();
     }
-    if (InputManager->isOnceKeyDown(VK_RBUTTON))
+
+   /* if (InputManager->isOnceKeyDown(VK_RBUTTON))
     {
-     /*   _openList.clear();
+        _openList.clear();
         _closeList.clear();
         m_fastLoad.clear();
         m_fastLoadLocation.clear();
         init2();
-        isButtonClick = true;*/
+        isButtonClick = true;
     }
     else
     {
         isButtonClick = false;
         isKeyUp = true;
-    }
+    }*/
   
     if (_astarState == ASTAR_STATE::ASTAR_STATE_END)
     {
@@ -130,9 +131,9 @@ void CaStar::tileComposition()
     {
         for (size_t j = 0; j < TILE_X; j++)
         {
-            /*if (m_attribute[i * TILEX + j] == ATTRIBUTE::COLLISION_ON)
-                _tile[i][j].type = TILE_TYPE::TILE_TYPE_WALL;*/
-           if (m_enemyIndex.y == i && m_enemyIndex.x == j)
+            if (m_attribute[i * TILEX + j] == ATTRIBUTE::COLLISION_ON)
+                _tile[i][j].type = TILE_TYPE::TILE_TYPE_WALL;
+           if (m_startIndex.y == i && m_startIndex.x == j)
             {
                  _selectType = TILE_TYPE::TILE_TYPE_START;
                 if (_tile[i][j].type == TILE_TYPE::TILE_TYPE_START)_startPointSet = false;
@@ -165,7 +166,7 @@ void CaStar::tileComposition()
             //if (PtInRect(&_tile[i][j].rc, cameraMouse))
             //{
             //}
-            if (m_playerIndex.y + 1 == i && m_playerIndex.x == j)
+            if (m_targetIndex.y + 1 == i && m_targetIndex.x == j)
             {
                 _selectType = TILE_TYPE::TILE_TYPE_END;
                 if (_tile[i][j].type == TILE_TYPE::TILE_TYPE_END)_endPointSet = false;
@@ -481,9 +482,9 @@ void CaStar::showWay(aStarTile* tile)
     {
         tile->color = RGB(255, 180, 180);
         m_fastLoad.push_back(PointMake(tile->j, tile->i));
-        int centerX = tile->rc.left + (tile->rc.right - tile->rc.left) / 2;
-        int centerY = tile->rc.top + (tile->rc.bottom - tile->rc.top) / 2;
-        m_fastLoadLocation.push_front(PointMake(centerX, centerY));
+       /* int centerX = tile->rc.left + (tile->rc.right - tile->rc.left) / 2;
+        int centerY = tile->rc.top + (tile->rc.bottom - tile->rc.top) / 2;*/
+        m_fastLoadLocation.push_front(PointMake(tile->rc.left, tile->rc.top));
     }
     tile = tile->parent;
 

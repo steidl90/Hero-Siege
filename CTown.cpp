@@ -38,10 +38,10 @@ void Ctown::render()
 		}
 	}
 
-	for (auto iter = m_fastLoadIndex.begin(); iter != m_fastLoadIndex.end(); ++iter)
+	/*for (auto iter = m_fastLoadIndex.begin(); iter != m_fastLoadIndex.end(); ++iter)
 	{
 		IMAGE->frameRender("tilemap", getMapDC(), _tiles[(*iter).x + (*iter).y * TILEX].rc.left, _tiles[(*iter).x + (*iter).y * TILEX].rc.top, 0, 0);
-	}
+	}*/
 }
 
 void Ctown::load()

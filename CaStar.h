@@ -52,10 +52,10 @@ private:
 	vector<POINT> m_fastLoad;
 	list<POINT> m_fastLoadLocation;
 
-	POINT m_playerIndex;
-	POINT m_currentPlayer;
+	POINT m_targetIndex;
+	POINT m_currentTarget;
 
-	POINT m_enemyIndex;
+	POINT m_startIndex;
 
 	ASTAR_STATE _astarState;
 	TILE_TYPE _selectType;
@@ -102,8 +102,8 @@ public:
 	void typeColor(TILE_TYPE type);
 
 	// Ãß°¡
-	void setPlayerIndex(POINT index) { m_playerIndex = index; }
-	void setEnemyIndex(POINT index) { m_enemyIndex = index; }
+	void setTargetIndex(POINT index) { m_targetIndex = index; }
+	void setStartIndex(POINT index) { m_startIndex = index; }
 	//void setPlayer(Cplayer* player) { m_player = player; }
 	vector<POINT>* getFastLoad() { return &m_fastLoad; }
 	list<POINT>* getFastLoadLocation() { return &m_fastLoadLocation; }

@@ -11,13 +11,12 @@ enum class STATE
 };
 
 class CaStar;
-class Cdungeon;
 class Cenemy : public Cunit
 {
 protected:
 	class Cplayer* m_player;
 	CaStar* m_aStar;
-	Cdungeon* m_dungeon;
+	ATTRIBUTE* m_attribute;
 
 	image* m_walkImage;
 	animation* m_walkAni;
@@ -33,7 +32,6 @@ protected:
 
 	RECT m_astarRc;
 	list<POINT>::iterator m_liAstar;
-	list<POINT>::iterator m_currentIter;
 
 	float m_x, m_y;
 	float m_returnX, m_returnY;
@@ -53,6 +51,9 @@ protected:
 
 	bool isDetect;
 	bool isAstarStart;
+	bool isAstarSet;
+
+	bool isSetAstar;
 
 	int m_cooltimeCount;
 	int m_rndskillCount;
@@ -93,6 +94,9 @@ public:
 
 	virtual void setPlayer(Cplayer* player) { m_player = player; }
 	virtual RECT getRect() { return m_walkRc; }
+	void setAttribute(ATTRIBUTE* att) { m_attribute = att; }
+
+	void aStarMove();
 
 };
 

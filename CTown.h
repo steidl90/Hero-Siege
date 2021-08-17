@@ -21,7 +21,7 @@ private:
 	int _pos[2];
 
 	// 에이스타 추가
-	vector<POINT> m_fastLoadIndex;
+	//vector<POINT> m_fastLoadIndex;
 
 public:
 	Ctown();
@@ -49,7 +49,7 @@ public:
 	string getImageName(OBJECTIMAGE image);
 
 	// 에이스타 추가
-	void setFastLoadIndex(vector<POINT>* p) { m_fastLoadIndex = *p; }
+	//void setFastLoadIndex(vector<POINT>* p) { m_fastLoadIndex = *p; }
 	
 };
 
