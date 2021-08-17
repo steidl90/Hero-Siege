@@ -185,7 +185,8 @@ enum class ITEMTYPE
 	ITEMTYPE_ARMOR,
 	ITEMTYPE_SHOES,
 	ITEMTYPE_GLOVES,
-	ITEMTYPE_PENDANT
+	ITEMTYPE_PENDANT,
+	ITEMTYPE_POTION
 };
 
 struct EquipItem
@@ -218,4 +219,12 @@ struct DropItem
 	float x;
 	float y;
 	RECT itemRect;
+};
+
+struct Potion
+{
+	image* image;
+	int Count;
+	int recoveryHp;
+	int recoveryMp;
 };

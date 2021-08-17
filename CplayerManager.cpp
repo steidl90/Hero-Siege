@@ -72,7 +72,8 @@ void CplayerManager::update()
     if(isInventoryOn) m_InventoryUI->update();
     m_playerUi->update();
 
-    getItem();
+    this->getItem();
+    this->usePotion();
 }
 
 void CplayerManager::render()
@@ -288,6 +289,24 @@ void CplayerManager::getItem()
                 m_inventory->addItem(m_dropItem->getDropItemList()[i].item);
                 m_dropItem->removeItem(i);
             }
+        }
+    }
+}
+
+void CplayerManager::usePotion()
+{
+    if (InputManager->isOnceKeyDown('T'))
+    {
+        if (m_inventory->getPotion()->Count > 0)
+        {
+            m_inventory->setPotion(m_inventory->getPotion()->Count - 1);
+            m_player->setHp(m_player->getHp() + m_inventory->getPotion()->recoveryHp);
+            m_player->setMp(m_player->getMp() + m_inventory->getPotion()->recoveryMp);
+
+            if (m_player->getHp() > m_player->getMaxHp())
+                m_player->setHp(m_player->getMaxHp());
+            if (m_player->getMp() > m_player->getMaxMp())
+                m_player->setMp(m_player->getMaxMp());
         }
     }
 }

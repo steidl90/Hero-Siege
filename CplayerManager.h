@@ -63,4 +63,6 @@ public:
 	void setTileAttribute(ATTRIBUTE* att) { m_player->setAttribute(att); }
 
 	CdropItem* getDropItem() { return m_dropItem; }
+
+	void usePotion();
 };

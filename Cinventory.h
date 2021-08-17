@@ -23,6 +23,8 @@ class Cinventory
 	int m_glovesCount;
 	int m_pendantCount;
 
+	Potion m_potion;
+
 public:
 
 	Cinventory();
@@ -42,6 +44,9 @@ public:
 	void UnEquipItem(Citem* item);
 	// 아이템 버릴때
 	void AbandonItem();
+
+	Potion* getPotion() { return &m_potion; }
+	void setPotion(int count) { m_potion.Count = count; }
 
 	// 장착중인 아이템 리스트 
 	vector<Citem*>* getvWeaponList() { return &m_vWeaponList; }

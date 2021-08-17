@@ -10,6 +10,7 @@ HRESULT Cshop::init()
 
 		m_vTotalList.push_back((ITEM->getItem(i)));
 	}
+
 	return S_OK;
 }
 
@@ -52,57 +53,4 @@ void Cshop::sellItem()
 		m_myInventory->AbandonItem();
 		m_myInventory->clearSelectItem();
 	}
-
-
-	//int i = 0;
-	//for (int i = 0; i < 5; i++)
-	//{
-	//	if (m_myInventory->getEquipItem()[i].isEquip == false);
-	//	{
-	//		
-	//	}
-
-	//	if (m_myInventory->getEquipItem()[i].m_item->getType() == m_myInventory->getSelectItem()->m_item->getType())
-	//	{
-	//		if (m_myInventory->getEquipItem()[i].m_item != nullptr)
-	//		{
-	//			if (m_myInventory->getEquipItem()[i].m_item->getItemId() == m_myInventory->getSelectItem()->m_item->getItemId()) break;
-	//			else
-	//			{
-	//				m_player->setGold(m_player->getGold() + m_myInventory->getSelectItem()->m_item->getBuyPrice());
-	//				m_myInventory->AbandonItem();
-	//				m_myInventory->clearSelectItem();
-	//			}
-	//		}
-	//		else
-	//		{
-	//			m_player->setGold(m_player->getGold() + m_myInventory->getSelectItem()->m_item->getBuyPrice());
-	//			m_myInventory->AbandonItem();
-	//			m_myInventory->clearSelectItem();
-	//		}
-	//	}
-	//}
-
-
-	/*for (iter = m_myInventory->getvEquipList()->begin(); iter != m_myInventory->getvEquipList()->end(); ++iter, i++)
-	{
-		if (static_cast<int>(item->getType()) == i)
-		{
-			if ((*iter) != nullptr)
-			{
-				if ((*iter)->getItemId() == item->getItemId()) break;
-				else
-				{
-					m_myInventory->AbandonItem();
-					m_myInventory->getSelectItem()->m_item.getty
-					m_player->setGold(m_player->getGold() + item->getBuyPrice());
-				}
-			}
-			else
-			{
-				m_player->setGold(m_player->getGold() + item->getBuyPrice());
-				m_myInventory->AbandonItem();
-			}
-		}
-	}*/
 }
