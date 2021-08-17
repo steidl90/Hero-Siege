@@ -93,7 +93,9 @@ HRESULT Cplayer::init()
 
 	//렉트
 	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth(), playerMoveDown->getFrameHeight());
+	
 	isAstarMove = true;
+	isSetAstar = false;
 	m_index = 0;
 	return S_OK;
 }
@@ -112,8 +114,12 @@ void Cplayer::update()
 	moveControl();
 	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth() - 90, playerMoveDown->getFrameHeight() - 50);
 	
-	if (InputManager->isStayKeyDown(VK_RBUTTON))
+	if (isSetAstar)
+	{
 		isAstarMove = true;
+		isSetAstar = false;
+	}
+
 	playerAStarMove();
 
 	if (direction == DIRECTIONS::DIRECTIONS_LEFT) m_playerSkill->update("왼쪽창스킬");
@@ -464,57 +470,59 @@ void Cplayer::isAttackRender()
 
 void Cplayer::playerAStarMove()
 {
-	vector<POINT>::iterator iter;
 
 	if (m_fastLoadLocation != nullptr && m_fastLoadLocation->size() > 0)
 	{
-		/*if(isAstarMove == true)
-			iter = m_fastLoadLocation.begin();*/
-
-		//if (iter == m_fastLoadLocation.end())
-		//{
-		//	m_fastLoadLocation.clear();
-		//	isAstarMove = false;
-		//	return;
-		//}
-
+		// 처음 실행시에만 begin으로 set해주기
+		if (isAstarMove == true)
+		{
+			m_liFastLoadLocation = m_fastLoadLocation->begin();
+			isAstarMove = false;
+		}
+		if (m_liFastLoadLocation == m_fastLoadLocation->end())
+		{
+			return;
+		}
 		/*if (m_index == m_fastLoadLocation->size())
 		{
 			m_fastLoadLocation->clear();
 			m_index = 0;
 			return;
 		}*/
+		
 
-		if (m_playerX < (*m_fastLoadLocation)[m_index].x)
+
+
+		if (m_playerX < m_liFastLoadLocation->x)
 		{
 			direction = DIRECTIONS::DIRECTIONS_RIGHT;
 			isMoving = true;
 			m_playerX += 2.0f;
 		}
-		else if (m_playerX > (*m_fastLoadLocation)[m_index].x)
+		else if (m_playerX > m_liFastLoadLocation->x)
 		{
 			direction = DIRECTIONS::DIRECTIONS_LEFT;
 			isMoving = true;
 			m_playerX -= 2.0f;
 		}
-		if (m_playerY < (*m_fastLoadLocation)[m_index].y)
+		if (m_playerY < m_liFastLoadLocation->y)
 		{
 			direction = DIRECTIONS::DIRECTIONS_DOWN;
 			isMoving = true;
 			m_playerY += 2.0f;
 		}
-		else if (m_playerY > (*m_fastLoadLocation)[m_index].y)
+		else if (m_playerY > m_liFastLoadLocation->y)
 		{
 			direction = DIRECTIONS::DIRECTIONS_UP;
 			isMoving = true;
 			m_playerY -= 2.0f;
 		}
 
-		/*if ((*m_fastLoadLocation)[m_index].x < m_playerX + 1 && (*m_fastLoadLocation)[m_index].x > m_playerX - 1
-			&& (*m_fastLoadLocation)[m_index].y < m_playerY + 1 && (*m_fastLoadLocation)[m_index].y > m_playerY - 1)
+		if ((m_liFastLoadLocation->x < m_playerX + 1) && (m_liFastLoadLocation->x > m_playerX - 1)
+			&& (m_liFastLoadLocation->y < m_playerY + 1) && (m_liFastLoadLocation->y > m_playerY - 1))
 		{
-			if(m_index < m_fastLoadLocation->size()) m_index++;
-		}*/
+			m_liFastLoadLocation++;
+		}
 	}
 }
 

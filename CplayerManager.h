@@ -24,11 +24,13 @@ private:
 	int m_deathCount;
 private:
 	
-	vector<POINT>* m_fastLoadLocation;
+	list<POINT>* m_fastLoadLocation;
 
 	bool isInventoryOn;
 
 	int m_timer;
+
+	bool isAstar;
 public:
 	CplayerManager();
 	~CplayerManager();
@@ -42,7 +44,7 @@ public:
 
 	Cplayer* getPlayer() { return m_player; }
 
-	void setFastLoadLocation(vector<POINT>* vp) { m_fastLoadLocation = vp; }
+	void setFastLoadLocation(list<POINT>* lp) { m_fastLoadLocation = lp; }
 
 	Cinventory* getInventoryMemory() { return m_inventory; }
 

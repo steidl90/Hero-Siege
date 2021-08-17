@@ -98,6 +98,7 @@ void CsceneTown::update()
 {
 
 	m_aStar->update();
+	// 주소전달일 경우 구지 update에 set 안해줘도 실시간으로 값 변화 적용됨
 	m_aStar->setPlayerIndex(PointMake(m_player->getplayerRect()->left / TILESIZE, m_player->getplayerRect()->top / TILESIZE));
 	m_camera->update();
 	m_camera->setTargetPoint(PointMake(m_player->getplayerRect()->left, m_player->getplayerRect()->top));
@@ -105,6 +106,7 @@ void CsceneTown::update()
 	m_town->setFastLoadIndex(m_aStar->getFastLoad());
 	m_player->update();
 	m_player->setFastLoadLocation(m_aStar->getFastLoadLocation());
+
 	//NPC
 	m_npc->update();
 

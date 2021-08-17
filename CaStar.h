@@ -50,7 +50,7 @@ private:
 	vector<aStarTile*> _closeList;
 	// Ãß°¡
 	vector<POINT> m_fastLoad;
-	vector<POINT> m_fastLoadLocation;
+	list<POINT> m_fastLoadLocation;
 	POINT m_playerIndex;
 
 	ASTAR_STATE _astarState;
@@ -101,7 +101,7 @@ public:
 	void setPlayerIndex(POINT index) { m_playerIndex = index; }
 	void setPlayer(Cplayer* player) { m_player = player; }
 	vector<POINT>* getFastLoad() { return &m_fastLoad; }
-	vector<POINT>* getFastLoadLocation() { return &m_fastLoadLocation; }
+	list<POINT>* getFastLoadLocation() { return &m_fastLoadLocation; }
 	void setCameraMemory(camera* cm) { m_camera = cm; }
 	void setAttribute(ATTRIBUTE* att) { m_attribute = att; }
 };

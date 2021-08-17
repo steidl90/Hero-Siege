@@ -79,8 +79,10 @@ private:
 	tagTile* m_CheckTile;
 	ATTRIBUTE* m_attribute;
 
-	vector<POINT>* m_fastLoadLocation;
+	list<POINT>* m_fastLoadLocation;
+	list<POINT>::iterator m_liFastLoadLocation;
 
+	bool isSetAstar;
 	bool isAstarMove;
 	int m_index;
 public:
@@ -120,7 +122,8 @@ public:
 	void blockCheck(float speed, RECT* playerRC, DIRECTIONS direct);
 	void setCheckTile(tagTile* tile) { m_CheckTile = tile; }
 	void setAttribute(ATTRIBUTE* att) { m_attribute = att; }
-	void setAstarMove(vector<POINT>* fastload) { m_fastLoadLocation = fastload; }
+	void setAstarMove(list<POINT>* fastload) { m_fastLoadLocation = fastload; }
+	void setIsAstar(bool astar) { isSetAstar = astar; }
 
 	CplayerSkill* getSkill() { return m_playerSkill; }
 

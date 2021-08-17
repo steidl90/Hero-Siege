@@ -73,7 +73,7 @@ void CaStar::release()
 
 void CaStar::update()
 {
-    if (!m_fastLoadLocation.empty())
+    /*if (!m_fastLoadLocation.empty())
     {
         if (m_player->getPlayerX() > m_fastLoadLocation.begin()->x - 1 && m_player->getPlayerX() < m_fastLoadLocation.begin()->x + 1
             && m_player->getPlayerY() > m_fastLoadLocation.begin()->y - 1 && m_player->getPlayerY() < m_fastLoadLocation.begin()->y + 1)
@@ -81,7 +81,7 @@ void CaStar::update()
             m_fastLoad.clear();
             m_fastLoadLocation.clear();
         }
-    }
+    }*/
     if (InputManager->isOnceKeyDown(VK_RBUTTON))
     {
         _openList.clear();
@@ -498,7 +498,7 @@ void CaStar::showWay(aStarTile* tile)
         m_fastLoad.push_back(PointMake(tile->j, tile->i));
         int centerX = tile->rc.left + (tile->rc.right - tile->rc.left) / 2;
         int centerY = tile->rc.top + (tile->rc.bottom - tile->rc.top) / 2;
-        m_fastLoadLocation.push_back(PointMake(centerX, centerY));
+        m_fastLoadLocation.push_front(PointMake(centerX, centerY));
     }
     tile = tile->parent;
 
