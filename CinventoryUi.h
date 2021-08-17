@@ -97,11 +97,11 @@ public:
 	// 장착 테두리 출력
 	void showEquipSelect();
 
-	// 리스트에서 선택시 동작
+	// 리스트에서 선택시 동작 / + 장착
 	void selectItem();
 	void selectEquipItem();
+	//void setEquipItem(int index, int x, int y);
 	// 아이템 장착 동작!
-	void setEquipItem(int index, int x, int y);
 	void setPlayerStat(int index);
 	void clickEquipButton();
 	// 장비창 rect 클릭시 선택 아이템 타입 변경

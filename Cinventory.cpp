@@ -134,7 +134,7 @@ void Cinventory::AbandonItem()
 	case ITEMTYPE::ITEMTYPE_ARMOR:
 		for (auto iter = m_vArmorList.begin(); iter != m_vArmorList.end(); ++iter)
 		{
-			if ((*iter)->getName() == m_selectItem.m_item->getName())
+			if ((*iter)->getItemId() == m_selectItem.m_item->getItemId())
 			{
 				Citem* temp = *iter;
 				m_vArmorList.erase(iter);
@@ -146,7 +146,7 @@ void Cinventory::AbandonItem()
 	case ITEMTYPE::ITEMTYPE_GLOVES:
 		for (auto iter = m_vGlovesList.begin(); iter != m_vGlovesList.end(); ++iter)
 		{
-			if ((*iter)->getName() == m_selectItem.m_item->getName())
+			if ((*iter)->getItemId() == m_selectItem.m_item->getItemId())
 			{
 				Citem* temp = *iter;
 				m_vGlovesList.erase(iter);
@@ -158,7 +158,7 @@ void Cinventory::AbandonItem()
 	case ITEMTYPE::ITEMTYPE_SHOES:
 		for (auto iter = m_vShoesList.begin(); iter != m_vShoesList.end(); ++iter)
 		{
-			if ((*iter)->getName() == m_selectItem.m_item->getName())
+			if ((*iter)->getItemId() == m_selectItem.m_item->getItemId())
 			{
 				Citem* temp = *iter;
 				m_vShoesList.erase(iter);
@@ -170,7 +170,7 @@ void Cinventory::AbandonItem()
 	case ITEMTYPE::ITEMTYPE_PENDANT:
 		for (auto iter = m_vPendantList.begin(); iter != m_vPendantList.end(); ++iter)
 		{
-			if ((*iter)->getName() == m_selectItem.m_item->getName())
+			if ((*iter)->getItemId() == m_selectItem.m_item->getItemId())
 			{
 				Citem* temp = *iter;
 				m_vPendantList.erase(iter);

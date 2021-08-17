@@ -445,8 +445,14 @@ void CinventoryUi::selectEquipItem()
 						// 아이템 장착에 관한 모든 것 세팅
 						if (m_clickCount > 1)
 						{
-							this->setPlayerStat(i);
-							m_Inventory->equipItem();
+							if (m_Inventory->getSelectItem()->m_item != nullptr)
+							{
+								if (m_Inventory->getSelectItem()->m_item->getLimitLevel() <= m_player->getLv())
+								{
+									this->setPlayerStat(i);
+									m_Inventory->equipItem();
+								}
+							}
 						}
 						isKeyUp = false;
 					}
@@ -465,11 +471,12 @@ void CinventoryUi::selectEquipItem()
 // 아이템 장착!
 // 아이템 장착시 구조체배열 에 장착할 아이템 정보 넣어주기
 // 수정 완료
-void CinventoryUi::setEquipItem(int index, int x, int y)
-{
-	this->setPlayerStat(index);
-	m_Inventory->equipItem();
-}
+//void CinventoryUi::setEquipItem(int index, int x, int y)
+//{
+//
+//			//this->setPlayerStat(index);
+//			//m_Inventory->equipItem();
+//}
 
 // 수정 완료
 void CinventoryUi::setPlayerStat(int index)
@@ -525,9 +532,14 @@ void CinventoryUi::clickEquipButton()
 		{
 			if (isKeyUp)
 			{
-				//this->setEquipItem(m_SelectIndex, m_selectRenderX, m_selectRenderY);
-				m_Inventory->equipItem();
-				isKeyUp = false;
+				if (m_Inventory->getSelectItem()->m_item != nullptr)
+				{
+					if (m_Inventory->getSelectItem()->m_item->getLimitLevel() <= m_player->getLv())
+					{
+						m_Inventory->equipItem();
+						isKeyUp = false;
+					}
+				}
 			}
 		}
 	}
