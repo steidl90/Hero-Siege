@@ -12,7 +12,7 @@ CsceneTown::~CsceneTown()
 HRESULT CsceneTown::init()
 {
 	m_wingImage = IMAGE->findImage("Ç³Â÷³¯°³");
-	ANIMATION->addDefAnimation("Ç³Â÷", "Ç³Â÷³¯°³", 10, false, true);
+	ANIMATION->addDefAnimation("Ç³Â÷", "Ç³Â÷³¯°³", 12, false, true);
 	m_wingAni = ANIMATION->findAnimation("Ç³Â÷");
 	ANIMATION->start("Ç³Â÷");
 
@@ -166,7 +166,7 @@ void CsceneTown::render()
 	{
 		Rectangle(getMemDC(), m_npcRect.left, m_npcRect.top, m_npcRect.right, m_npcRect.bottom);
 	}
-	m_wingImage->aniRender(getMapDC(), m_wingX[0], m_wingY[0], m_wingAni);
+	m_wingImage->aniRender(getMapDC(), m_wingX[0]-10, m_wingY[0]-10, m_wingAni);
 	TCHAR str[256];
 	sprintf_s(str, "ÀÌ³ë¾ß ¸¶À»");
 	TextOut(getMemDC(), WINSIZEX - 165, 20, str, strlen(str));
