@@ -17,8 +17,11 @@ HRESULT Cmonk::init(POINT position, float HP, float damage, float def, int exp, 
 	m_enemyAttack = new CenemyAttack;
 	m_enemyAttack->init(5, 100, true , "¸ùÅ©°ø°ÝÇÏ");
 
-	m_player = new Cplayer;
-	m_player->init();
+	//m_player = new Cplayer;
+	//m_player->init();
+
+	m_aStar = new CaStar;
+	m_aStar->init();
 
 	m_isIdle = false;
 	m_state = STATE::DOWN;
@@ -59,18 +62,26 @@ HRESULT Cmonk::init(POINT position, float HP, float damage, float def, int exp, 
 	m_walkImage = IMAGE->findImage("¸ùÅ©");
 	m_walkAni = ANIMATION->findAnimation("¸ùÅ©ÇÏ");
 	ANIMATION->start("¸ùÅ©ÇÏ");
+
+	m_aStar->setPlayerIndex(PointMake(m_player->getPlayerX() / TILESIZE, m_player->getPlayerY() / TILESIZE));
+	m_aStar->setEnemyIndex(PointMake(m_x / TILESIZE, m_y / TILESIZE));
 	return S_OK;
 }
 
 void Cmonk::release()
 {
 	SAFE_DELETE(m_enemyAttack);
-	SAFE_DELETE(m_player);
+	//SAFE_DELETE(m_player);
 	SAFE_DELETE(m_hpBar);
 }
 
 void Cmonk::update()
 {
+	if (isDetect)
+	{
+		m_aStar->update();
+	}
+
 	m_hpBar->setGauge(m_hp, m_maxHp);
 	m_hpBar->mapUpdate(m_x - 15, m_y - 45);
 	m_enemyAttack->update();
@@ -94,8 +105,8 @@ void Cmonk::render()
 	if (InputManager->isToggleKey(VK_TAB))
 	{
 		Rectangle(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkRc.right, m_walkRc.bottom);
-		Rectangle(getMapDC(), m_traceRc.left, m_traceRc.top, m_traceRc.right, m_traceRc.bottom);
-		Rectangle(getMapDC(), m_dieRc.left, m_dieRc.top, m_dieRc.right, m_dieRc.bottom);
+		//Rectangle(getMapDC(), m_traceRc.left, m_traceRc.top, m_traceRc.right, m_traceRc.bottom);
+		//Rectangle(getMapDC(), m_dieRc.left, m_dieRc.top, m_dieRc.right, m_dieRc.bottom);
 	}
 	m_hpBar->mapRender();
 	IMAGE->findImage("ÀÏ¹Ý¸ó½ºÅÍÃ¼·Â¹Ù")->render(getMapDC(), m_x -20, m_y - 48);

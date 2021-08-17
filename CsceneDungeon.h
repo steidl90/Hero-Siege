@@ -5,7 +5,8 @@
 #include "CenemyManager.h"
 #include "camera.h"
 #include "Cmevius.h"
-//#include "CdropItem.h"
+
+
 class CsceneDungeon : public gameNode
 {
 private:
@@ -14,7 +15,7 @@ private:
 	CplayerManager* m_player;
 	CenemyManager* m_enemyManager;
 	Cmevius* m_boss;
-	//CdropItem* m_dropItem;
+
 
 	RECT m_changeRect;
 

@@ -39,6 +39,7 @@ HRESULT CsceneDungeon::init()
 	m_player->setEnemyMemory(m_enemyManager);
 	m_player->setBossMemory(m_boss);
 
+
 	m_player->getPlayer()->setAtk(DATA->getAtk());
 	m_player->getPlayer()->setCritical(DATA->getCritical());
 	m_player->getPlayer()->setCriticalAtk(DATA->getCriticalAtk());
@@ -69,10 +70,10 @@ HRESULT CsceneDungeon::init()
 		for (int j = 0; j < 2; j++)
 		{
 			Cslime* m_slime = new Cslime;
+			m_slime->setPlayer(m_player->getPlayer());
 			m_slime->init(PointMake(RND->getFromIntTo(800, 1000) + i * RND->getFromIntTo(130, 180),
 				RND->getFromIntTo(250, 350) + j * RND->getFromIntTo(100, 150)),
 				900, 1, 1, exp, 500);
-			m_slime->setPlayer(m_player->getPlayer());
 			m_enemyManager->registerEnemy(m_slime);
 		}
 	}
@@ -81,10 +82,10 @@ HRESULT CsceneDungeon::init()
 		for (int j = 0; j < 3; j++)
 		{
 			Cslime* m_slime2 = new Cslime;
+			m_slime2->setPlayer(m_player->getPlayer());
 			m_slime2->init(PointMake(RND->getFromIntTo(100, 150) + i * RND->getFromIntTo(100, 180),
 				RND->getFromIntTo(600, 650) + j * RND->getFromIntTo(120, 150)),
 				900, 1, 1, exp, 500);
-			m_slime2->setPlayer(m_player->getPlayer());
 			m_enemyManager->registerEnemy(m_slime2);
 		}
 	}
@@ -94,10 +95,10 @@ HRESULT CsceneDungeon::init()
 		for (int j = 0; j < 2; j++)
 		{
 			Celemental* m_elemental = new Celemental;
+			m_elemental->setPlayer(m_player->getPlayer());
 			m_elemental->init(PointMake(RND->getFromIntTo(100, 150) + i * RND->getFromIntTo(120, 150),
 				240 + j * RND->getFromIntTo(50, 100)),
 				500, 10,2, exp, 500);
-			m_elemental->setPlayer(m_player->getPlayer());
 			m_enemyManager->registerEnemy(m_elemental);
 		}
 	}
@@ -106,10 +107,10 @@ HRESULT CsceneDungeon::init()
 		for (int j = 0; j < 2; j++)
 		{
 			Celemental* m_elemental2 = new Celemental;
+			m_elemental2->setPlayer(m_player->getPlayer());
 			m_elemental2->init(PointMake(RND->getFromIntTo(900, 1000) + i * RND->getFromIntTo(120, 150),
 				RND->getFromIntTo(250, 350) + j * RND->getFromIntTo(100, 150)),
 				500, 10,2, exp, 500);
-			m_elemental2->setPlayer(m_player->getPlayer());
 			m_enemyManager->registerEnemy(m_elemental2);
 		}
 	}
@@ -119,10 +120,10 @@ HRESULT CsceneDungeon::init()
 		for (int j = 0; j < 3; j++)
 		{
 			Cmonk* m_monk = new Cmonk;
+			m_monk->setPlayer(m_player->getPlayer());
 			m_monk->init(PointMake(RND->getFromIntTo(100, 150) + i * RND->getFromIntTo(100, 180),
 				RND->getFromIntTo(600, 650) + j * RND->getFromIntTo(120, 150)),
 				700, 20, 3, exp, 350);
-			m_monk->setPlayer(m_player->getPlayer());
 			m_enemyManager->registerEnemy(m_monk);
 		}
 	}
@@ -130,9 +131,9 @@ HRESULT CsceneDungeon::init()
 	for (int i = 0; i <2 ; i++)
 	{
 		Cpriest* m_priest = new Cpriest;
+		m_priest->setPlayer(m_player->getPlayer());
 		m_priest->init(PointMake(900 + i * 650, 200 + i * 400),
 			900, 50, 5, exp, 500);
-		m_priest->setPlayer(m_player->getPlayer());
 		m_enemyManager->registerEnemy(m_priest);
 	}
 	//교도관 설정 = 중앙 하단
@@ -141,9 +142,9 @@ HRESULT CsceneDungeon::init()
 		for (int j = 0; j < 3; j++)
 		{
 			Cprison* m_prison = new Cprison;
+			m_prison->setPlayer(m_player->getPlayer());
 			m_prison->init(PointMake(950 + i * 100, 1050 + j * 100),
 				700, 40, 4, exp, 350);
-			m_prison->setPlayer(m_player->getPlayer());
 			m_enemyManager->registerEnemy(m_prison);
 		}
 	}

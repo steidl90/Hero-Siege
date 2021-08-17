@@ -1,7 +1,6 @@
 #pragma once
 #include "Cunit.h"
 
-
 enum class STATE
 {
 	LEFT,
@@ -11,10 +10,14 @@ enum class STATE
 	IDLE
 };
 
+class CaStar;
+class Cdungeon;
 class Cenemy : public Cunit
 {
 protected:
 	class Cplayer* m_player;
+	CaStar* m_aStar;
+	Cdungeon* m_dungeon;
 
 	image* m_walkImage;
 	animation* m_walkAni;
@@ -26,7 +29,11 @@ protected:
 
 	effect* m_effect;
 	STATE m_state;
-	RECT m_traceRc;		
+	RECT m_traceRc;	
+
+	RECT m_astarRc;
+	list<POINT>::iterator m_liAstar;
+	list<POINT>::iterator m_currentIter;
 
 	float m_x, m_y;
 	float m_returnX, m_returnY;
@@ -43,6 +50,9 @@ protected:
 	bool m_isWalking;
 	bool m_isAttack;
 	bool m_isDie;
+
+	bool isDetect;
+	bool isAstarStart;
 
 	int m_cooltimeCount;
 	int m_rndskillCount;

@@ -16,8 +16,11 @@ HRESULT Cprison::init(POINT position, float HP, float damage, float def, int exp
 	m_enemyAttack = new CenemyAttack;
 	m_enemyAttack->init(5, 100, true, "교도관공격하");
 
-	m_player = new Cplayer;
-	m_player->init();
+	/*m_player = new Cplayer;
+	m_player->init();*/
+
+	m_aStar = new CaStar;
+	m_aStar->init();
 
 	m_isIdle = false;
 	m_state = STATE::DOWN;
@@ -51,18 +54,26 @@ HRESULT Cprison::init(POINT position, float HP, float damage, float def, int exp
 	m_walkImage = IMAGE->findImage("교도관");
 	m_walkAni = ANIMATION->findAnimation("교도관하");
 	ANIMATION->start("교도관하");
+
+	m_aStar->setPlayerIndex(PointMake(m_player->getPlayerX() / TILESIZE, m_player->getPlayerY() / TILESIZE));
+	m_aStar->setEnemyIndex(PointMake(m_x / TILESIZE, m_y / TILESIZE));
 	return S_OK;
 }
 
 void Cprison::release()
 {
 	SAFE_DELETE(m_enemyAttack);
-	SAFE_DELETE(m_player);
+	//SAFE_DELETE(m_player);
 	SAFE_DELETE(m_hpBar);
 }
 
 void Cprison::update()
 {
+	if (isDetect)
+	{
+		m_aStar->update();
+	}
+
 	m_hpBar->setGauge(m_hp, m_maxHp);
 	m_hpBar->mapUpdate(m_x - 15, m_y - 45);
 	m_enemyAttack->update();
@@ -79,6 +90,7 @@ void Cprison::update()
 	}
 	m_walkRc = RectMakeCenter(m_x, m_y, m_walkImage->getFrameWidth(), m_walkImage->getFrameHeight());
 	m_traceRc = RectMakeCenter(m_x, m_y, m_trace, m_trace);
+	m_astarRc = RectMake(m_x, m_y, TILESIZE, TILESIZE);
 }
 
 void Cprison::render()
@@ -86,8 +98,8 @@ void Cprison::render()
 	if (InputManager->isToggleKey(VK_TAB))
 	{
 		Rectangle(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkRc.right, m_walkRc.bottom);
-		Rectangle(getMapDC(), m_traceRc.left, m_traceRc.top, m_traceRc.right, m_traceRc.bottom);
-		Rectangle(getMapDC(), m_dieRc.left, m_dieRc.top, m_dieRc.right, m_dieRc.bottom);
+		//Rectangle(getMapDC(), m_traceRc.left, m_traceRc.top, m_traceRc.right, m_traceRc.bottom);
+		//Rectangle(getMapDC(), m_dieRc.left, m_dieRc.top, m_dieRc.right, m_dieRc.bottom);
 	}
 	m_hpBar->mapRender();
 	IMAGE->findImage("일반몬스터체력바")->render(getMapDC(), m_x -21, m_y - 48);

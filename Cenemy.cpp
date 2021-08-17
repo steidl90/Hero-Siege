@@ -2,6 +2,9 @@
 #include "Cenemy.h"
 #include "Cplayer.h"
 #include "CenemyAttack.h"
+#include "Cdungeon.h"
+#include "CaStar.h"
+
 Cenemy::Cenemy()
 {
 }
@@ -36,7 +39,57 @@ void Cenemy::move()
 	RECT temp;
 	if (IntersectRect(&temp, m_player->getplayerMoveRC(), &m_traceRc))
 	{
-		if (m_player->getplayerMoveRC()->right >= m_traceRc.left && m_player->getplayerMoveRC()->right < m_walkRc.left)
+		if (m_aStar->getFastLoadLocation() != nullptr)
+		{
+			if (m_aStar->getFastLoadLocation()->size() > 0)
+			{
+				// 일단 실험 조건
+				if (m_currentIter != m_aStar->getFastLoadLocation()->begin())
+				{
+					m_currentIter = m_aStar->getFastLoadLocation()->begin();
+					m_liAstar = m_aStar->getFastLoadLocation()->begin();
+				}
+
+				if (m_liAstar != m_aStar->getFastLoadLocation()->end())
+				{
+					if (m_x < m_liAstar->x)
+					{
+						m_x++;
+						m_isWalking = true;
+						m_state = STATE::RIGHT;
+
+					}
+					else if (m_x > m_liAstar->x)
+					{
+						m_x--;
+						m_isWalking = true;
+						m_state = STATE::LEFT;
+					}
+
+					if (m_y < m_liAstar->y)
+					{
+						m_y++;
+						m_isWalking = true;
+						m_state = STATE::DOWN;
+						
+					}
+					else if (m_y > m_liAstar->y)
+					{
+						m_y--;
+						m_isWalking = true;
+						m_state = STATE::UP;
+					}
+
+					if (m_liAstar->x < m_x + 1 && m_liAstar->x > m_x - 1
+						&& m_liAstar->y < m_y + 1 && m_liAstar->y > m_y - 1)
+					{
+						m_liAstar++;
+					}
+				}
+			}
+		}
+
+		/*if (m_player->getplayerMoveRC()->right >= m_traceRc.left && m_player->getplayerMoveRC()->right < m_walkRc.left)
 		{
 			if (m_player->getplayerMoveRC()->right < m_walkRc.left - m_distance) m_x--;
 			m_isWalking = true;
@@ -59,7 +112,8 @@ void Cenemy::move()
 			if (m_player->getplayerMoveRC()->top > m_walkRc.bottom + m_distance)m_y++;
 			m_isWalking = true;
 			m_state = STATE::DOWN;
-		}
+		}*/
+		isDetect = true;
 	}
 	else
 	{
@@ -97,6 +151,7 @@ void Cenemy::move()
 			m_x = m_returnX;
 			m_y = m_returnY;
 		}
+		isDetect = false;
 	}
 	animation();
 }

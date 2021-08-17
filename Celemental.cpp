@@ -16,8 +16,11 @@ HRESULT Celemental::init(POINT position, float HP, float damage, float def, int 
 	m_enemyAttack = new CenemyAttack;
 	m_enemyAttack->init(50, 500, false, "¿¤¸®¸àÅ»½ºÅ³¾Ö´Ï");
 
-	m_player = new Cplayer;
-	m_player->init();
+	//m_player = new Cplayer;
+	//m_player->init();
+
+	m_aStar = new CaStar;
+	m_aStar->init();
 
 	m_isWalking = true;
 	m_state = STATE::DOWN;
@@ -46,18 +49,25 @@ HRESULT Celemental::init(POINT position, float HP, float damage, float def, int 
 	m_walkImage = IMAGE->findImage("¿¤¸®¸àÅ»");
 	m_walkAni = ANIMATION->findAnimation("¿¤¸®¸àÅ»ÇÏ");
 	ANIMATION->start("¿¤¸®¸àÅ»ÇÏ");
+
+	m_aStar->setPlayerIndex(PointMake(m_player->getPlayerX() / TILESIZE, m_player->getPlayerY() / TILESIZE));
+	m_aStar->setEnemyIndex(PointMake(m_x / TILESIZE, m_y / TILESIZE));
 	return S_OK;
 }
 
 void Celemental::release()
 {
 	SAFE_DELETE(m_enemyAttack);
-	SAFE_DELETE(m_player);
+	//SAFE_DELETE(m_player);
 	SAFE_DELETE(m_hpBar);
 }
 
 void Celemental::update()
 {
+	if (isDetect)
+	{
+		m_aStar->update();
+	}
 	m_hpBar->setGauge(m_hp, m_maxHp);
 	m_hpBar->mapUpdate(m_x - 15, m_y - 45);
 	m_enemyAttack->update();
@@ -72,7 +82,7 @@ void Celemental::render()
 {
 	if (InputManager->isToggleKey(VK_TAB))
 	{
-		Rectangle(getMapDC(), m_traceRc.left, m_traceRc.top, m_traceRc.right, m_traceRc.bottom);
+		//Rectangle(getMapDC(), m_traceRc.left, m_traceRc.top, m_traceRc.right, m_traceRc.bottom);
 		Rectangle(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkRc.right, m_walkRc.bottom);
 	}
 	m_hpBar->mapRender();

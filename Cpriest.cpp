@@ -16,8 +16,11 @@ HRESULT Cpriest::init(POINT position, float HP, float damage, float def, int exp
 	m_enemyAttack = new CenemyAttack;
 	m_enemyAttack->init(50, 500, false, "리치스킬애니");
 
-	m_player = new Cplayer;
-	m_player->init();
+	//m_player = new Cplayer;
+	//m_player->init();
+
+	m_aStar = new CaStar;
+	m_aStar->init();
 
 	m_isIdle = false;
 	m_state = STATE::DOWN;
@@ -58,18 +61,26 @@ HRESULT Cpriest::init(POINT position, float HP, float damage, float def, int exp
 	m_walkImage = IMAGE->findImage("리치");
 	m_walkAni = ANIMATION->findAnimation("리치하");
 	ANIMATION->start("리치하");
+
+	m_aStar->setPlayerIndex(PointMake(m_player->getPlayerX() / TILESIZE, m_player->getPlayerY() / TILESIZE));
+	m_aStar->setEnemyIndex(PointMake(m_x / TILESIZE, m_y / TILESIZE));
 	return S_OK;
 }
 
 void Cpriest::release()
 {
 	SAFE_DELETE(m_enemyAttack);
-	SAFE_DELETE(m_player);
+	//SAFE_DELETE(m_player);
 	SAFE_DELETE(m_hpBar);
 }
 
 void Cpriest::update()
 {
+	if (isDetect)
+	{
+		m_aStar->update();
+	}
+
 	m_hpBar->setGauge(m_hp, m_maxHp);
 	m_hpBar->mapUpdate(m_x - 18, m_y - 65);
 	m_enemyAttack->update();
@@ -93,8 +104,8 @@ void Cpriest::render()
 	if (InputManager->isToggleKey(VK_TAB))
 	{
 		Rectangle(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkRc.right, m_walkRc.bottom);
-		Rectangle(getMapDC(), m_traceRc.left, m_traceRc.top, m_traceRc.right, m_traceRc.bottom);
-		Rectangle(getMapDC(), m_dieRc.left, m_dieRc.top, m_dieRc.right, m_dieRc.bottom);
+		//Rectangle(getMapDC(), m_traceRc.left, m_traceRc.top, m_traceRc.right, m_traceRc.bottom);
+		//Rectangle(getMapDC(), m_dieRc.left, m_dieRc.top, m_dieRc.right, m_dieRc.bottom);
 	}
 	m_hpBar->mapRender();
 	IMAGE->findImage("레어몬스터체력바")->render(getMapDC(), m_x -27, m_y - 71);

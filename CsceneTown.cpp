@@ -53,8 +53,8 @@ HRESULT CsceneTown::init()
 	m_player->getInventoryMemory()->setvPendantList(DATA->getvPendantList());
 
 	m_aStar = new CaStar;
-	m_aStar->setCameraMemory(m_camera);
-	m_aStar->setPlayer(m_player->getPlayer());
+	//m_aStar->setCameraMemory(m_camera);
+	//m_aStar->setPlayer(m_player->getPlayer());
 	m_aStar->setAttribute(m_town->getAttribute());
 	m_aStar->init();
 
@@ -100,6 +100,7 @@ void CsceneTown::update()
 	m_aStar->update();
 	// 주소전달일 경우 구지 update에 set 안해줘도 실시간으로 값 변화 적용됨
 	m_aStar->setPlayerIndex(PointMake(m_player->getplayerRect()->left / TILESIZE, m_player->getplayerRect()->top / TILESIZE));
+
 	m_camera->update();
 	m_camera->setTargetPoint(PointMake(m_player->getplayerRect()->left, m_player->getplayerRect()->top));
 	m_town->update();

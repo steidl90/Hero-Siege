@@ -17,6 +17,8 @@ HRESULT Cdungeon::init()
     return S_OK;
 }
 
+// 에이스타 초기화용
+
 void Cdungeon::release()
 {
 }
@@ -35,6 +37,12 @@ void Cdungeon::render()
 		{
 			(*iter).frameObject->render();
 		}
+	}
+
+	for (int i = 0; i < TILEX; i++)
+	{
+		LineMake(getTileDC(), 0, i * TILESIZE, MAPSIZE, i * TILESIZE);
+		LineMake(getTileDC(), i * TILESIZE, 0, i * TILESIZE, MAPSIZE);
 	}
 }
 

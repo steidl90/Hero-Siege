@@ -348,7 +348,7 @@ void Cplayer::moveAnimation()
 
 void Cplayer::playerStateRender()
 {
-	//Rectangle(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerMoveRc.right, playerMoveRc.bottom);
+	Rectangle(getMapDC(), playerMoveRc.left, playerMoveRc.top, playerMoveRc.right, playerMoveRc.bottom);
 	if (isMoving)
 	{
 		switch (direction)
@@ -483,43 +483,34 @@ void Cplayer::playerAStarMove()
 		{
 			return;
 		}
-		/*if (m_index == m_fastLoadLocation->size())
-		{
-			m_fastLoadLocation->clear();
-			m_index = 0;
-			return;
-		}*/
-		
 
-
-
-		if (m_playerX < m_liFastLoadLocation->x)
+		if ((m_playerX+18) < m_liFastLoadLocation->x)
 		{
 			direction = DIRECTIONS::DIRECTIONS_RIGHT;
 			isMoving = true;
 			m_playerX += 2.0f;
 		}
-		else if (m_playerX > m_liFastLoadLocation->x)
+		else if ((m_playerX + 18) > m_liFastLoadLocation->x)
 		{
 			direction = DIRECTIONS::DIRECTIONS_LEFT;
 			isMoving = true;
 			m_playerX -= 2.0f;
 		}
-		if (m_playerY < m_liFastLoadLocation->y)
+		if ((m_playerY+36) < m_liFastLoadLocation->y)
 		{
 			direction = DIRECTIONS::DIRECTIONS_DOWN;
 			isMoving = true;
 			m_playerY += 2.0f;
 		}
-		else if (m_playerY > m_liFastLoadLocation->y)
+		else if ((m_playerY+36) > m_liFastLoadLocation->y)
 		{
 			direction = DIRECTIONS::DIRECTIONS_UP;
 			isMoving = true;
 			m_playerY -= 2.0f;
 		}
 
-		if ((m_liFastLoadLocation->x < m_playerX + 1) && (m_liFastLoadLocation->x > m_playerX - 1)
-			&& (m_liFastLoadLocation->y < m_playerY + 1) && (m_liFastLoadLocation->y > m_playerY - 1))
+		if ((m_liFastLoadLocation->x < (m_playerX + 18) + 1) && (m_liFastLoadLocation->x > (m_playerX + 18) - 1)
+			&& (m_liFastLoadLocation->y < (m_playerY + 36) + 1) && (m_liFastLoadLocation->y > (m_playerY + 36) - 1))
 		{
 			m_liFastLoadLocation++;
 		}
