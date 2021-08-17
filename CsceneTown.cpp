@@ -222,20 +222,47 @@ void CsceneTown::npcCollison()
 	if (InputManager->isOnceKeyDown('B'))
 	{
 		RECT temp;
-		if (IntersectRect(&temp, m_player->getplayerRect(), m_npc->getGaNorRect())||
-		IntersectRect(&temp, m_player->getplayerRect(), m_npc->getShopKeeperRect())||
-		IntersectRect(&temp, m_player->getplayerRect(), m_npc->getBlackMarketRect())||
-		IntersectRect(&temp, m_player->getplayerRect(), m_npc->getEdwardRect())||
-		IntersectRect(&temp, m_player->getplayerRect(), m_npc->getEricRect())||
-		IntersectRect(&temp, m_player->getplayerRect(), m_npc->getHalsteinRect())||
-		IntersectRect(&temp, m_player->getplayerRect(), m_npc->getKaylaRect())||
-		IntersectRect(&temp, m_player->getplayerRect(), m_npc->getSarcasterRect())||
-		IntersectRect(&temp, m_player->getplayerRect(), m_npc->getTorsteinRect())||
-		IntersectRect(&temp, m_player->getplayerRect(), m_npc->getWitchRect()))
+		if (IntersectRect(&temp, m_player->getplayerRect(), m_npc->getGaNorRect()) ||
+			IntersectRect(&temp, m_player->getplayerRect(), m_npc->getShopKeeperRect()) ||
+			IntersectRect(&temp, m_player->getplayerRect(), m_npc->getBlackMarketRect()) ||
+			IntersectRect(&temp, m_player->getplayerRect(), m_npc->getEdwardRect()) ||
+			IntersectRect(&temp, m_player->getplayerRect(), m_npc->getEricRect()) ||
+			IntersectRect(&temp, m_player->getplayerRect(), m_npc->getHalsteinRect()) ||
+			IntersectRect(&temp, m_player->getplayerRect(), m_npc->getKaylaRect()) ||
+			IntersectRect(&temp, m_player->getplayerRect(), m_npc->getTorsteinRect()) ||
+			IntersectRect(&temp, m_player->getplayerRect(), m_npc->getWitchRect()))
 		{
 			isNpcCollison = !isNpcCollison;
 		}
+
+		RECT dest;
+		if (IntersectRect(&dest, m_player->getplayerRect(), m_npc->getSarcasterRect()))
+		{
+			isNpcCollison = !isNpcCollison;
+			//체력 회복
+			if (m_player->getPlayer()->getHp() < m_player->getPlayer()->getMaxHp())
+			{
+				if (m_timerHp + 0.5 < TIME->getWorldTime())
+				{
+					m_player->getPlayer()->setHp(m_player->getPlayer()->getMaxHp());
+					m_timerHp = TIME->getWorldTime();
+				}
+			}
+
+			//마나 회복
+			if (m_player->getPlayer()->getMp() < m_player->getPlayer()->getMaxMp())
+			{
+				if (m_timerMp + 0.5 < TIME->getWorldTime())
+				{
+					m_player->getPlayer()->setMp(m_player->getPlayer() -> getMaxMp());
+					m_timerMp = TIME->getWorldTime();
+				}
+			}
+
+		}
 	}
 }
+
+
 
 
