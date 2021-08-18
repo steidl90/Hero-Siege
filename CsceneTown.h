@@ -39,6 +39,9 @@ private:
 	image* m_wingShadowImage;
 	animation* m_wingShadowAni;
 	int m_wingX[2], m_wingY[2];
+
+	image* m_talkImage;
+	RECT m_talkRc;
 public:
 	CsceneTown();
 	~CsceneTown();

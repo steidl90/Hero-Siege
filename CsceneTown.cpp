@@ -14,6 +14,8 @@ HRESULT CsceneTown::init()
 	m_wingImage = IMAGE->findImage("Ç³Â÷³¯°³");
 	ANIMATION->addDefAnimation("Ç³Â÷", "Ç³Â÷³¯°³", 10, false, true);
 	m_wingAni = ANIMATION->findAnimation("Ç³Â÷");
+	m_talkImage = IMAGE->findImage("¹öÆ°");
+
 	ANIMATION->start("Ç³Â÷");
 
 	m_wingX[0] = 575;
@@ -159,8 +161,10 @@ void CsceneTown::update()
 		m_player->getPlayer()->setMp(m_player->getPlayer()->getMaxMp());
 	}
 
+	m_talkRc = RectMake(m_player->getplayerRect()->left, m_player->getplayerRect()->top, m_talkImage->getFrameWidth(), m_talkImage->getFrameHeight());
 	sceneChange();
 	m_wingRect = RectMakeCenter(m_wingX[0], m_wingY[0], m_wingImage->getFrameWidth(), m_wingImage->getFrameHeight());
+
 }
 
 void CsceneTown::render()
@@ -182,6 +186,20 @@ void CsceneTown::render()
 	sprintf_s(str, "ÀÌ³ë¾ß ¸¶À»");
 	TextOut(getMemDC(), WINSIZEX - 165, 20, str, strlen(str));
 
+	RECT dest;
+		if (IntersectRect(&dest, m_player->getplayerRect(), m_npc->getKaylaRect()))
+		{
+
+			m_talkImage->render(getMemDC(), m_player->getplayerRect()->left, m_player->getplayerRect()->top);
+			TCHAR str[256];
+			sprintf_s(str, "È¸º¹ÇÏ±â");
+			TextOut(getMemDC(), m_player->getplayerRect()->left, m_player->getplayerRect()->top, str, strlen(str));
+			TCHAR buttonstr[256];
+			sprintf_s(buttonstr, "F");
+			TextOut(getMemDC(), m_player->getplayerRect()->left, m_player->getplayerRect()->top, buttonstr, strlen(buttonstr));
+
+		}
+	
 }
 
 void CsceneTown::sceneChange()
@@ -239,7 +257,9 @@ void CsceneTown::shopOn()
 
 void CsceneTown::npcCollison()
 {
-	if (InputManager->isOnceKeyDown('B'))
+	SetTextColor(getMemDC(), RGB(255, 255, 255));
+
+	if (InputManager->isOnceKeyDown('F'))
 	{
 		
 		RECT dest;
