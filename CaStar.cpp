@@ -166,7 +166,7 @@ void CaStar::tileComposition()
             //if (PtInRect(&_tile[i][j].rc, cameraMouse))
             //{
             //}
-            if (m_targetIndex.y + 1 == i && m_targetIndex.x == j)
+            if (m_targetIndex.y + 1 == i && m_targetIndex.x + 1 == j)
             {
                 _selectType = TILE_TYPE::TILE_TYPE_END;
                 if (_tile[i][j].type == TILE_TYPE::TILE_TYPE_END)_endPointSet = false;

@@ -134,7 +134,7 @@ void Cquest::render()
 
 			TCHAR queststr[256];
 			sprintf_s(queststr, "Äù½ºÆ® ¿Ï·á!");
-			TextOut(getMemDC(), WINSIZEX - 165, 400, queststr, strlen(queststr));
+			TextOut(getMemDC(), WINSIZEX - 200, 310, queststr, strlen(queststr));
 			if (collision())
 			{
 				m_buttonImage->render(getMemDC(), m_x[2], m_y[2]);

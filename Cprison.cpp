@@ -126,12 +126,12 @@ void Cprison::render()
 	IMAGE->findImage("일반몬스터체력바")->render(getMapDC(), m_x -21, m_y - 48);
 	if (m_isWalking)m_walkImage->aniRender(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkAni);
 	m_enemyAttack->render();
-	TCHAR str[256];
-	sprintf_s(str, "%.2f,%.2f", x,y);
-	TextOut(getMemDC(),500,500, str, strlen(str));
-	TCHAR a[256];
-	sprintf_s(a, "%.2f,%.2f", m_player->getPlayerX(), m_player->getPlayerY());
-	TextOut(getMemDC(), 500, 550, a, strlen(a));
+	//TCHAR str[256];
+	//sprintf_s(str, "%.2f,%.2f", x,y);
+	//TextOut(getMemDC(),500,500, str, strlen(str));
+	//TCHAR a[256];
+	//sprintf_s(a, "%.2f,%.2f", m_player->getPlayerX(), m_player->getPlayerY());
+	//TextOut(getMemDC(), 500, 550, a, strlen(a));
 }
 
 void Cprison::attack()
