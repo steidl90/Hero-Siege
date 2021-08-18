@@ -158,6 +158,9 @@ HRESULT Cimage::init()
     IMAGE->addImage("보스체력바", "images/Enemy/BossHpbar.bmp", 855 * 0.8, 65 * 0.8, true, RGB(255, 0, 255));
     IMAGE->addImage("레벨업", "images/LevelUP.bmp", 183 * 1.5, 55 * 1.5, true, RGB(255, 0, 255));
     IMAGE->addImage("상점창", "images/shop_window.bmp", 469, 473, true, RGB(255, 0, 255));
+    IMAGE->addImage("버튼", "images/Button.bmp", 34 * 0.8, 32 * 0.8, true, RGB(255, 0, 255));
+    IMAGE->addImage("대화창", "images/Dialog.bmp", 541, 213, true, RGB(255, 0, 255));
+    IMAGE->addImage("대화창배경", "images/DialogBG.bmp", 541, 213, true, RGB(255, 0, 255));\
 
     IMAGE->addFrameImage("버튼1", "images/Button1.bmp", 208, 39, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("버튼2", "images/Button2.bmp", 210, 41, 1, 1, true, RGB(255, 0, 255));
@@ -182,10 +185,10 @@ HRESULT Cimage::init()
     IMAGE->addFrameImage("선택화이트메이지", "images/Choose/ChooseWhiteMage.bmp", 360, 74, 6, 1, true, RGB(255, 0, 255));
 
     //==================ECT=================//
-    IMAGE->addFrameImage("히트", "images/Hit.bmp", 414, 71, 6, 1, true, RGB(255, 0, 255));
-    IMAGE->addFrameImage("퀘스트1", "images/Quest1.bmp", 48, 25, 3, 1, true, RGB(255, 0, 255));
-
-    IMAGE->addImage("퀘스트2", "images/Quest2.bmp", 9, 25, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("히트", "images/Hit.bmp", 9, 71, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("퀘스트1", "images/Quest1.bmp", 54, 25, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("퀘스트2", "images/Quest2.bmp", 96, 25, 6, 1, true, RGB(255, 0, 255));
+    IMAGE->addFrameImage("퀘스트3", "images/Quest3.bmp", 16, 25,1,1, true, RGB(255, 0, 255));
 
 
 

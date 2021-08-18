@@ -78,6 +78,11 @@ HRESULT CsceneTown::init()
 
 	m_npc = new CNPC;
 	m_npc->init();
+	m_quest = new Cquest;
+	m_quest->init();
+	m_quest->setPlayer(m_player->getPlayer());
+	m_quest->setNPC(m_npc);
+
 	isShopOn = false;
 	isNpcCollison = false;
 	return S_OK;
@@ -102,6 +107,7 @@ void CsceneTown::update()
 	m_camera->setTargetPoint(PointMake(m_player->getplayerRect()->left, m_player->getplayerRect()->top));
 	m_town->update();
 	m_town->setFastLoadIndex(m_aStar->getFastLoad());
+	m_quest->update();
 	m_player->update();
 	m_player->setFastLoadLocation(m_aStar->getFastLoadLocation());
 	//NPC
@@ -154,6 +160,7 @@ void CsceneTown::render()
 	m_town->render();
 	//NPC
 	m_npc->render();
+	m_quest->render();
 	m_player->render();
 
 	if (isShopOn) m_shopUi->render();

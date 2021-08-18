@@ -6,6 +6,7 @@
 #include "CplayerUi.h"
 #include "CinventoryUi.h"
 #include "CdropItem.h"
+#include "Cquest.h"
 
 class CaStar;
 class CenemyManager;
@@ -21,6 +22,7 @@ private:
 	CenemyManager* m_enemy;
 	Cmevius* m_boss;
 	CdropItem* m_dropItem;
+	Cquest* m_quest;
 	int m_deathCount;
 private:
 	

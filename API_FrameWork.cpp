@@ -61,7 +61,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	setWindowSize(WINSTARTX, WINSTARTY, WINSIZEX, WINSIZEY);
 	ShowWindow(m_hWnd, nCmdShow);
-
 	//메인게임 초기화 실패하면 종료
 	if (FAILED(mg.init()))
 	{

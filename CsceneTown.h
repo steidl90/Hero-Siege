@@ -7,6 +7,7 @@
 #include "CshopUi.h"
 #include "CplayerData.h"
 #include "CNPC.h"
+#include "Cquest.h"
 class CsceneTown : public gameNode
 {
 private:
@@ -19,6 +20,7 @@ private:
 	CplayerData* m_playerData;
 
 	CNPC* m_npc;
+	Cquest* m_quest;
 private:
 	RECT m_changeRect;
 	RECT m_shopRect;
