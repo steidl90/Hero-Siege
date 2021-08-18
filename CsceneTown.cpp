@@ -86,10 +86,7 @@ HRESULT CsceneTown::init()
 
 	m_player->setQuestMemory(m_quest);
 
-
 	//TODO::수정이 필요함 겟-셋-겟
-	
-
 
 	m_quest->setQuest(DATA->getQuest());
 	m_quest->setMaxQuest(DATA->getMaxQuest());
@@ -97,14 +94,11 @@ HRESULT CsceneTown::init()
 	m_quest->setIsQuesting(DATA->getIsQuesting());
 	m_quest->setIsComplete(DATA->getIsComplete());
 	
-
-
 	isShopOn = false;
 	isNpcCollison = false;
 
 	////////////////////////////
 	m_buttonImage = IMAGE->findImage("버튼");
-	m_talkImage = IMAGE->findImage("버튼");
 
 	m_x = m_player->getplayerRect()->left + 15;
 	m_y = m_player->getplayerRect()->top;
@@ -138,7 +132,6 @@ void CsceneTown::update()
 
 	shopOn();
 
-	npcCollison();
 
 	//체력 리젠
 	if (m_player->getPlayer()->getHp() < m_player->getPlayer()->getMaxHp())
@@ -168,7 +161,6 @@ void CsceneTown::update()
 		m_player->getPlayer()->setMp(m_player->getPlayer()->getMaxMp());
 	}
 
-	m_talkRc = RectMake(m_player->getplayerRect()->left, m_player->getplayerRect()->top, m_talkImage->getFrameWidth(), m_talkImage->getFrameHeight());
 	sceneChange();
 	m_wingRect = RectMakeCenter(m_wingX[0], m_wingY[0], m_wingImage->getFrameWidth(), m_wingImage->getFrameHeight());
 
@@ -197,17 +189,8 @@ void CsceneTown::render()
 	sprintf_s(str, "이노야 마을");
 	TextOut(getMemDC(), WINSIZEX - 165, 20, str, strlen(str));
 
-	RECT dest;
-	if (IntersectRect(&dest, m_player->getplayerRect(), m_npc->getKaylaRect()))
-	{
-		m_talkImage->render(getMemDC(), m_player->getplayerRect()->left, m_player->getplayerRect()->top);
-		TCHAR str[256];
-		sprintf_s(str, "회복하기");
-		TextOut(getMemDC(), m_x - 20, m_y + 20, str, strlen(str));
-		TCHAR buttonstr[256];
-		sprintf_s(buttonstr, "F");
-		TextOut(getMemDC(), m_x + 10, m_y + 5, buttonstr, strlen(buttonstr));
-	}
+	npcCollison();
+
 }
 
 void CsceneTown::sceneChange()
@@ -271,11 +254,23 @@ void CsceneTown::shopOn()
 
 void CsceneTown::npcCollison()
 {
-	SetTextColor(getMemDC(), RGB(255, 255, 255));
+	RECT temp;
+	if (IntersectRect(&temp, m_player->getplayerRect(), m_npc->getKaylaRect()))
+	{
+		m_buttonImage->render(getMapDC(), m_x, m_y);
+		TCHAR str[256];
+		sprintf_s(str, "회복하기");
+		SetBkMode(getMapDC(), TRANSPARENT);
+		SetTextColor(getMapDC(), RGB(255, 255, 255));
+		TextOut(getMapDC(), m_x - 20, m_y + 20, str, strlen(str));
+		TCHAR buttonstr[256];
+		sprintf_s(buttonstr, "F");
+		TextOut(getMapDC(), m_x + 10, m_y + 5, buttonstr, strlen(buttonstr));
+	}
 
+	SetTextColor(getMemDC(), RGB(255, 255, 255));
 	if (InputManager->isOnceKeyDown('F'))
 	{
-		
 		RECT dest;
 		if (IntersectRect(&dest, m_player->getplayerRect(), m_npc->getKaylaRect()))
 		{
