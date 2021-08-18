@@ -119,12 +119,12 @@ void Cquest::render()
 
 		TCHAR str[256];
 		sprintf_s(str, "몬스터를 처치하라!");
-		TextOut(getMemDC(), WINSIZEX - 165, 350, str, strlen(str));
+		TextOut(getMemDC(), WINSIZEX - 200, 280, str, strlen(str));
 		if (!m_isComplete)
 		{
 			TCHAR queststr[256];
 			sprintf_s(queststr, "몬스터 처치 \n %d / %d", m_quest, m_maxQuest);
-			TextOut(getMemDC(), WINSIZEX - 165, 400, queststr, strlen(queststr));
+			TextOut(getMemDC(), WINSIZEX - 200, 310, queststr, strlen(queststr));
 		}
 		else if (m_isComplete)
 		{

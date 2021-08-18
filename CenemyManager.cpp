@@ -26,12 +26,12 @@ void CenemyManager::update()
 
 void CenemyManager::render()
 {
-	CHAR str[128];
+	/*CHAR str[128];
 	sprintf_s(str, "몇마리 : %d", m_vEnemy.size());
 	TextOut(getMemDC(), 100, 100, str, strlen(str));
 	CHAR str1[128];
 	sprintf_s(str1, "몇마리 : %d", m_vEnemy.capacity());
-	TextOut(getMemDC(), 100, 130, str1, strlen(str1));
+	TextOut(getMemDC(), 100, 130, str1, strlen(str1));*/
 	for (int i = 0; i < m_vEnemy.size(); i++)
 	{
 		IMAGE->findImage("몬스터그림자")->alphaRender(getMapDC(), m_vEnemy[i]->getRect().left+3,
