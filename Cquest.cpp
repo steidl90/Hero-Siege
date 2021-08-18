@@ -2,6 +2,15 @@
 #include "Cquest.h"
 #include "Cplayer.h"
 
+Cquest::Cquest()
+{
+	m_player = nullptr;
+}
+
+Cquest::~Cquest()
+{
+}
+
 HRESULT Cquest::init()
 {
 	m_npc = new CNPC;
@@ -18,7 +27,7 @@ HRESULT Cquest::init()
 	m_x[2] = WINSIZEX/2+3;
 	m_y[2] = WINSIZEY/2-50;
 	m_quest = 0;
-	m_MaxQuest = 50;
+	m_maxQuest = 50;
 
 
 	ANIMATION->addDefAnimation("퀘스트애니", "퀘스트1", 6, false, true);
@@ -41,46 +50,58 @@ void Cquest::release()
 
 void Cquest::update()
 {
-	dialog();
-	if (m_isDialog && InputManager->isOnceKeyDown('F'))
-	{
-		acceptQuest();
-	}
-	m_questRc = RectMake(m_x[0], m_y[0], m_questImage->getFrameWidth(), m_questImage->getFrameHeight());
-	m_dialogRc = RectMake(m_x[1], m_y[1], m_dialogImage->getFrameWidth(), m_dialogImage->getFrameHeight());
-	m_buttonRc = RectMake(m_x[2], m_y[2], m_buttonImage->getFrameWidth(), m_buttonImage->getFrameHeight());
+
+		dialog();
+		if (m_isDialog && InputManager->isOnceKeyDown('F'))
+		{
+			acceptQuest();
+		}
+		if (m_npc != nullptr)
+		{
+		m_questRc = RectMake(m_x[0], m_y[0], m_questImage->getFrameWidth(), m_questImage->getFrameHeight());
+		m_dialogRc = RectMake(m_x[1], m_y[1], m_dialogImage->getFrameWidth(), m_dialogImage->getFrameHeight());
+		m_buttonRc = RectMake(m_x[2], m_y[2], m_buttonImage->getFrameWidth(), m_buttonImage->getFrameHeight());
+		}
 }
 
 void Cquest::render()
 {
-	if (collision())
+	if (m_npc != nullptr)
 	{
-		m_buttonImage->render(getMemDC(), m_x[2], m_y[2]);
-		if (m_isDialog)
+		if (collision())
 		{
-			m_dialogImage->render(getMemDC(), m_x[1], m_y[1]);
-			m_dialogBGImage->render(getMemDC(), m_x[1], m_y[1]);
+			m_buttonImage->render(getMemDC(), m_x[2], m_y[2]);
+			if (m_isDialog)
+			{
+				m_dialogImage->render(getMemDC(), m_x[1], m_y[1]);
+				m_dialogBGImage->render(getMemDC(), m_x[1], m_y[1]);
 
+			}
 		}
+		m_questImage->aniRender(getMapDC(), m_x[0], m_y[0], m_questAni);
 	}
-	m_questImage->aniRender(getMapDC(), m_x[0], m_y[0], m_questAni);
-	if (m_isQuesting)
-	{
-		TCHAR str[256];
-		sprintf_s(str, "이노야 마을");
-		TextOut(getMemDC(), WINSIZEX - 165, 200, str, strlen(str));
-		TCHAR queststr[256];
-		sprintf_s(queststr, "%d/%d",m_quest,m_MaxQuest);
-		TextOut(getMemDC(), WINSIZEX - 165, 400, queststr, strlen(queststr));
-	}
+		if (m_isQuesting)
+		{
+			TCHAR str[256];
+			sprintf_s(str, "이노야 마을");
+			TextOut(getMemDC(), WINSIZEX - 165, 200, str, strlen(str));
+			TCHAR queststr[256];
+			sprintf_s(queststr, "%d/%d", m_quest, m_maxQuest);
+			TextOut(getMemDC(), WINSIZEX - 165, 400, queststr, strlen(queststr));
+		}
 }
 
 bool Cquest::collision()
 {
+	if(m_npc != nullptr)
+	{ 
 	RECT temp;
 	if (IntersectRect(&temp, m_player->getplayerMoveRC(), m_npc->getGaNorRect()))
 	{
 		return true;
+	}
+	return false;
+
 	}
 	return false;
 }

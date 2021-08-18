@@ -21,12 +21,15 @@ private:
 	RECT m_buttonRc;
 
 	int m_x[3], m_y[3];
-	int m_quest, m_MaxQuest;
+	int m_quest, m_maxQuest;
 	bool m_isDialog;
 	bool m_isQuesting;
 	bool m_isComplete;
 
 public:
+	Cquest();
+	~Cquest();
+
 	HRESULT init();
 	void release();
 	void update();
@@ -40,7 +43,21 @@ public:
 	void setQuest(int quest) { m_quest = quest; }
 	int getQuest() { return m_quest; }
 
+	void setMaxQuest(int maxQuest) { m_maxQuest = maxQuest; }
+	int getMaxQuest() { return m_maxQuest; }
+
+	void setIsDialog(bool dialog) { m_isDialog = dialog; }
+	bool getIsDialog() { return m_isDialog; }
+
+	void setIsQuesting(bool quest) { m_isQuesting = quest; }
+	bool getIsQuesting() { return m_isQuesting; }
+	
+	void setIsComplete(bool complete) { m_isComplete = complete; }
+	bool getIsComplete() { return m_isComplete; }
+
+
 	void setPlayer(Cplayer* player) { m_player = player; }
 	void setNPC(CNPC* NPC) { m_npc = NPC; }
+	
 };
 

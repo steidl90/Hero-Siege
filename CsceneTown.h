@@ -52,5 +52,6 @@ public:
 	void shopOn();
 	void npcCollison();
 
-	void setPlayerMemory(CplayerData* playerdate){ m_playerData = playerdate;}
+	void setPlayerMemory(CplayerData* playerdata){ m_playerData = playerdata;}
+	void setQuestMemory(Cquest* questdata) { m_quest = questdata; }
 };

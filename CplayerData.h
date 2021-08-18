@@ -20,6 +20,12 @@ private:
 	float m_x;
 	float m_y;
 
+	//퀘스트 데이터
+	int m_quest, m_maxQuest;
+	bool m_isDialog;
+	bool m_isQuesting;
+	bool m_isComplete;
+
 	//보유 아이템
 	vector<Citem*> m_vWeaponList;
 	vector<Citem*> m_vArmorList;
@@ -69,5 +75,21 @@ public:
 	float getSpeed() { return m_speed; }
 	float getX() { return m_x; }
 	float getY() { return m_y; }
+
+	void setQuest(int quest) { m_quest = quest; }
+	int getQuest() { return m_quest; }
+
+	void setMaxQuest(int maxquest) { m_maxQuest = maxquest; }
+	int getMaxQuest() { return m_maxQuest; }
+	
+	void setIsDialog(bool dialog) { m_isDialog = dialog; }
+	bool getIsDialog() { return m_isDialog; }
+	
+	void setIsQuesting(bool questing) { m_isQuesting = questing; }
+	bool getIsQuesting() { return m_isQuesting; }
+	
+	void setIsComplete(bool complete) { m_isComplete = complete; }
+	bool getIsComplete() { return m_isComplete; }
+
 };
 

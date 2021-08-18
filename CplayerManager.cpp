@@ -34,6 +34,8 @@ HRESULT CplayerManager::init()
     m_dropItem = new CdropItem;
     m_dropItem->init();
 
+    
+
     isInventoryOn = false;
     return S_OK;
 }
@@ -207,7 +209,8 @@ void CplayerManager::collisionEnemy()
 
         if ((*iter)->getHp() <= 0)
         {
-            //m_quest->setQuest(m_quest->getQuest()+1);
+
+            m_quest->setQuest(m_quest->getQuest()+1);
             m_deathCount++;
             if (m_deathCount % 2 == 0) {
                 m_player->setExp(m_player->getExp() + (*iter)->getExp());

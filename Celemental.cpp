@@ -16,9 +16,6 @@ HRESULT Celemental::init(POINT position, float HP, float damage, float def, int 
 	m_enemyAttack = new CenemyAttack;
 	m_enemyAttack->init(50, 500, false, "¿¤¸®¸àÅ»½ºÅ³¾Ö´Ï");
 
-	//m_player = new Cplayer;
-	//m_player->init();
-
 	m_aStar = new CaStar;
 	m_aStar->init();
 	m_aStar->setAttribute(m_attribute);
@@ -59,7 +56,6 @@ HRESULT Celemental::init(POINT position, float HP, float damage, float def, int 
 void Celemental::release()
 {
 	SAFE_DELETE(m_enemyAttack);
-	//SAFE_DELETE(m_player);
 	SAFE_DELETE(m_hpBar);
 	SAFE_DELETE(m_aStar);
 }
