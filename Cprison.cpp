@@ -27,8 +27,8 @@ HRESULT Cprison::init(POINT position, float HP, float damage, float def, int exp
 	m_y = m_returnY = position.y;
 	m_trace = trace;
 
-	m_distance = 36.0f;
-	m_speed = 2.0f;
+	m_distance = 10.0f;
+	m_speed = 20.0f;
 	m_hp = m_maxHp = HP;
 	m_damage = damage;
 	m_def = def;
@@ -70,7 +70,7 @@ void Cprison::update()
 
 	if (isDetect)
 	{
-		m_aStar->setTargetIndex(PointMake((m_player->getPlayerX() - m_distance) / TILESIZE, (m_player->getPlayerY() - m_distance) / TILESIZE));
+		m_aStar->setTargetIndex(PointMake((m_player->getPlayerX()) / TILESIZE, (m_player->getPlayerY()) / TILESIZE));
 		m_aStar->setStartIndex(PointMake(m_x / TILESIZE, m_y / TILESIZE));
 		m_aStar->update();
 	}
@@ -119,42 +119,50 @@ void Cprison::render()
 	{
 		Rectangle(getMapDC(), m_astarRc.left, m_astarRc.top, m_astarRc.right, m_astarRc.bottom);
 		//Rectangle(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkRc.right, m_walkRc.bottom);
-		//Rectangle(getMapDC(), m_traceRc.left, m_traceRc.top, m_traceRc.right, m_traceRc.bottom);
+		Rectangle(getMapDC(), m_traceRc.left, m_traceRc.top, m_traceRc.right, m_traceRc.bottom);
 		//Rectangle(getMapDC(), m_dieRc.left, m_dieRc.top, m_dieRc.right, m_dieRc.bottom);
 	}
 	m_hpBar->mapRender();
 	IMAGE->findImage("일반몬스터체력바")->render(getMapDC(), m_x -21, m_y - 48);
 	if (m_isWalking)m_walkImage->aniRender(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkAni);
-	if(!m_isWalking)
-		m_enemyAttack->render();
+	m_enemyAttack->render();
 	TCHAR str[256];
-	sprintf_s(str, "%d",m_isWalking);
+	sprintf_s(str, "%.2f,%.2f", x,y);
 	TextOut(getMemDC(),500,500, str, strlen(str));
+	TCHAR a[256];
+	sprintf_s(a, "%.2f,%.2f", m_player->getPlayerX(), m_player->getPlayerY());
+	TextOut(getMemDC(), 500, 550, a, strlen(a));
 }
 
 void Cprison::attack()
 {
 	RECT temp;
-	//if (IntersectRect(&temp, m_player->getplayerMoveRC(), &m_traceRc))
-	//{
-		if (m_player->getplayerMoveRC()->right >= m_walkRc.left - m_distance && m_state == STATE::LEFT)
+	if (IntersectRect(&temp, m_player->getplayerMoveRC(), &m_traceRc))
+	{
+		if (m_player->getplayerMoveRC()->right >= m_walkRc.left - m_distance&& 
+			m_player->getplayerMoveRC()->top >=m_walkRc.top-50 &&
+			m_player->getplayerMoveRC()->bottom <= m_walkRc.bottom + 50 && m_state == STATE::LEFT)
 		{
 
+			m_isWalking = false;
 			m_enemyAttack->init2(1, 1, true, "교도관공격좌");
 			m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
 				m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2, 0, 1.0f, "교도관공격", "교도관공격좌");
-			m_isWalking = false;
 		}
 
-		else if (m_player->getplayerMoveRC()->left <= m_walkRc.right + m_distance && m_state == STATE::RIGHT)
+		else if (m_player->getplayerMoveRC()->left < m_walkRc.right + (m_distance*5) &&
+			m_player->getplayerMoveRC()->top >= m_walkRc.top - 50 &&
+			m_player->getplayerMoveRC()->bottom <= m_walkRc.bottom + 50 && m_state == STATE::RIGHT)
 		{
+			m_isWalking = false;
 			m_enemyAttack->init2(1, 1, true, "교도관공격우");
 			m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
 				m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2, 0, 1.0f, "교도관공격", "교도관공격우");
-			m_isWalking = false;
 		}
 
-		if (m_player->getplayerMoveRC()->bottom >= m_walkRc.top - m_distance && m_state == STATE::UP)
+		else if (m_player->getplayerMoveRC()->bottom >= m_walkRc.top - m_distance &&
+			m_player->getplayerMoveRC()->left >= m_walkRc.left - 50 &&
+			m_player->getplayerMoveRC()->right <= m_walkRc.right + 50 && m_state == STATE::UP)
 		{
 			m_enemyAttack->init2(1, 1, true, "교도관공격상");
 			m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
@@ -162,7 +170,9 @@ void Cprison::attack()
 			m_isWalking = false;
 		}
 
-		if (m_player->getplayerMoveRC()->top <= m_walkRc.bottom + m_distance && m_state == STATE::DOWN)
+		else if (m_player->getplayerMoveRC()->top <= m_walkRc.bottom + m_distance &&
+			m_player->getplayerMoveRC()->left >= m_walkRc.left - 50 &&
+			m_player->getplayerMoveRC()->right <= m_walkRc.right + 50 && m_state == STATE::DOWN)
 		{
 			m_enemyAttack->init2(1, 1, true, "교도관공격하");
 			m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
@@ -170,7 +180,7 @@ void Cprison::attack()
 			m_isWalking = false;
 		}
 		else m_isWalking = true;
-	//}
+	}
 }
 
 void Cprison::die()

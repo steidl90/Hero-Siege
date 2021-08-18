@@ -33,6 +33,11 @@ protected:
 	RECT m_astarRc;
 	list<POINT>::iterator m_liAstar;
 
+
+	//임시변수
+	float x, y;
+	//임시변수
+
 	float m_x, m_y;
 	float m_returnX, m_returnY;
 	float m_trace;
