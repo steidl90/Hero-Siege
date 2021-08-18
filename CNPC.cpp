@@ -97,7 +97,6 @@ void CNPC::update()
 
 void CNPC::render()
 {
-    
     if(InputManager->isToggleKey(VK_F1)) getNpcRectangle();
      
     //°¡³ë¸£

@@ -113,8 +113,6 @@ void Cplayer::update()
 	playerLevelUp();
 	playerMoveRc = RectMake(m_playerX, m_playerY, playerMoveDown->getFrameWidth() - 90, playerMoveDown->getFrameHeight() - 50);
 	
-	playerAStarMove();
-
 	if (direction == DIRECTIONS::DIRECTIONS_LEFT) m_playerSkill->update("왼쪽창스킬");
 	else if (direction == DIRECTIONS::DIRECTIONS_RIGHT) m_playerSkill->update("오른쪽창스킬");
 	else if (direction == DIRECTIONS::DIRECTIONS_UP) m_playerSkill->update("위쪽창스킬");
