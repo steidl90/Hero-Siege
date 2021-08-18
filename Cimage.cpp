@@ -164,6 +164,9 @@ HRESULT Cimage::init()
     IMAGE->addImage("버튼", "images/Button.bmp", 34 * 0.8, 32 * 0.8, true, RGB(255, 0, 255));
     IMAGE->addImage("대화창", "images/Dialog.bmp", 541, 213, true, RGB(255, 0, 255));
     IMAGE->addImage("대화창배경", "images/DialogBG.bmp", 541, 213, true, RGB(255, 0, 255));\
+    IMAGE->addImage("대화텍스트", "images/DialogText.bmp", 541, 213,true, RGB(255, 0, 255));
+    IMAGE->addImage("퀘스트성공텍스트", "images/DialogCompleteText.bmp", 541, 213,true, RGB(255, 0, 255));
+    IMAGE->addImage("일상텍스트", "images/DialogCompleteToText.bmp", 541, 213,true, RGB(255, 0, 255));
 
     IMAGE->addFrameImage("버튼1", "images/Button1.bmp", 208, 39, 1, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("버튼2", "images/Button2.bmp", 210, 41, 1, 1, true, RGB(255, 0, 255));

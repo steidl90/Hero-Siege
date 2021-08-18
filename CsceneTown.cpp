@@ -36,7 +36,7 @@ HRESULT CsceneTown::init()
 	m_player->getPlayer()->setCriticalAtk(DATA->getCriticalAtk());
 	m_player->getPlayer()->setDef(DATA->getDef());
 	m_player->getPlayer()->setExp(DATA->getExp());
-	m_player->getPlayer()->setGold(DATA->getGold());
+	m_player->getPlayer()->setGold(DATA->getGold());	
 	m_player->getPlayer()->setHp(DATA->getHp());
 	m_player->getPlayer()->setMaxHp(DATA->getMaxHp());
 	m_player->getPlayer()->setMp(DATA->getMp());
@@ -77,10 +77,26 @@ HRESULT CsceneTown::init()
 
 	m_npc = new CNPC;
 	m_npc->init();
+
 	m_quest = new Cquest;
 	m_quest->init();
 	m_quest->setPlayer(m_player->getPlayer());
 	m_quest->setNPC(m_npc);
+
+	m_player->setQuestMemory(m_quest);
+
+
+	//TODO::수정이 필요함 겟-셋-겟
+	
+
+
+	m_quest->setQuest(DATA->getQuest());
+	m_quest->setMaxQuest(DATA->getMaxQuest());
+	m_quest->setIsDialog(DATA->getIsDialog());
+	m_quest->setIsQuesting(DATA->getIsQuesting());
+	m_quest->setIsComplete(DATA->getIsComplete());
+	
+
 
 	isShopOn = false;
 	isNpcCollison = false;
@@ -193,6 +209,12 @@ void CsceneTown::sceneChange()
 		DATA->setvShoesList(m_player->getInventoryMemory()->getvShoesList());
 		DATA->setvGlovesList(m_player->getInventoryMemory()->getvGlovesList());
 		DATA->setvPendantList(m_player->getInventoryMemory()->getvPendantList());
+
+		DATA->setQuest(m_quest->getQuest());
+		DATA->setMaxQuest(m_quest->getMaxQuest());
+		DATA->setIsDialog(m_quest->getIsDialog());
+		DATA->setIsQuesting(m_quest->getIsQuesting());
+		DATA->setIsComplete(m_quest->getIsComplete());
 
 		SCENE->changeScene("던전");
 	}

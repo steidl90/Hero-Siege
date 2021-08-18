@@ -55,6 +55,7 @@ public:
 	// Ãß°¡
 	void setEnemyMemory(CenemyManager* enemy) { m_enemy = enemy; }
 	void setBossMemory(Cmevius* boss) { m_boss = boss; }
+	void setQuestMemory(Cquest* quest) { m_quest = quest; }
 
 	void collisionEnemy();
 	void getItem();

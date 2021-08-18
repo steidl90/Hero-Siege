@@ -39,7 +39,6 @@ HRESULT CsceneDungeon::init()
 	m_player->setEnemyMemory(m_enemyManager);
 	m_player->setBossMemory(m_boss);
 
-
 	m_player->getPlayer()->setAtk(DATA->getAtk());
 	m_player->getPlayer()->setCritical(DATA->getCritical());
 	m_player->getPlayer()->setCriticalAtk(DATA->getCriticalAtk());
@@ -63,6 +62,17 @@ HRESULT CsceneDungeon::init()
 	m_player->getInventoryMemory()->setvPendantList(DATA->getvPendantList());
 
 	m_changeRect = RectMake(170, MAPSIZE - 230, 100, 50);
+
+	m_quest = new Cquest;
+
+
+	m_quest->setQuest(DATA->getQuest());
+	m_quest->setMaxQuest(DATA->getMaxQuest());
+	m_quest->setIsDialog(DATA->getIsDialog());
+	m_quest->setIsQuesting(DATA->getIsQuesting());
+	m_quest->setIsComplete(DATA->getIsComplete());
+	m_player->setQuestMemory(m_quest);
+
 
 	int exp = 20;
 
@@ -185,6 +195,7 @@ void CsceneDungeon::update()
 		m_boss->collision();
 	}
 	m_player->collisionEnemy();
+	m_quest->update();
 	sceneChange();
 }
 
@@ -198,7 +209,7 @@ void CsceneDungeon::render()
 	m_enemyManager->render();
 	m_boss->render();
 	m_player->render();
-
+	m_quest->render();
 	//Rectangle(getMapDC(), m_changeRect.left, m_changeRect.top, m_changeRect.right, m_changeRect.bottom);
 
 	TCHAR str[256];
@@ -233,6 +244,12 @@ void CsceneDungeon::sceneChange()
 		DATA->setvGlovesList(m_player->getInventoryMemory()->getvGlovesList());
 		DATA->setvPendantList(m_player->getInventoryMemory()->getvPendantList());
 
+		DATA->setQuest(m_quest->getQuest());
+		DATA->setMaxQuest(m_quest->getMaxQuest());
+		DATA->setIsDialog(m_quest->getIsDialog());
+		DATA->setIsQuesting(m_quest->getIsQuesting());
+		DATA->setIsComplete(m_quest->getIsComplete());
+
 		SCENE->changeScene("마을");
 	}
 	else if (m_player->getPlayer()->getHp() < 0)
@@ -259,6 +276,12 @@ void CsceneDungeon::sceneChange()
 		DATA->setvShoesList(m_player->getInventoryMemory()->getvShoesList());
 		DATA->setvGlovesList(m_player->getInventoryMemory()->getvGlovesList());
 		DATA->setvPendantList(m_player->getInventoryMemory()->getvPendantList());
+
+		DATA->setQuest(m_quest->getQuest());
+		DATA->setMaxQuest(m_quest->getMaxQuest());
+		DATA->setIsDialog(m_quest->getIsDialog());
+		DATA->setIsQuesting(m_quest->getIsQuesting());
+		DATA->setIsComplete(m_quest->getIsComplete());
 
 		SCENE->changeScene("마을");
 	}
