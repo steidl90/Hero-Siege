@@ -158,6 +158,7 @@ void CsceneDungeon::release()
 	SAFE_DELETE(m_player);
 	SAFE_DELETE(m_enemyManager);
 	SAFE_DELETE(m_boss);
+	EFFECT->release();
 }
 
 void CsceneDungeon::update()

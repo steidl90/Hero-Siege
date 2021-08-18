@@ -49,13 +49,6 @@ HRESULT Cmonk::init(POINT position, float HP, float damage, float def, int exp, 
 	ANIMATION->addAnimation("根农快", "根农", 12, 17, 8,	 false,	 true);
 	ANIMATION->addAnimation("根农惑", "根农", 18, 23, 8,		false,	 true);
 
-
-	//EFFECT->addEffect("根农荤噶窍", "images/DieMotion/DownMonkDie.bmp", 912, 111, 76, 111, 1, 0.05f, 1);
-	//EFFECT->addEffect("根农荤噶惑", "images/DieMotion/UpMonkDie.bmp", 912, 111, 76, 111, 1, 0.05f, 1);
-	//EFFECT->addEffect("根农荤噶谅", "images/DieMotion/LeftMonkDie.bmp", 912, 111, 76, 111, 1, 0.05f, 1);
-	//EFFECT->addEffect("根农荤噶快", "images/DieMotion/RightMonkDie.bmp", 912, 111, 76, 111, 1, 0.05f, 1);
-
-
 	m_walkImage = IMAGE->findImage("根农");
 	m_walkAni = ANIMATION->findAnimation("根农窍");
 	ANIMATION->start("根农窍");
@@ -67,6 +60,7 @@ void Cmonk::release()
 	SAFE_DELETE(m_enemyAttack);
 	SAFE_DELETE(m_player);
 	SAFE_DELETE(m_hpBar);
+	EFFECT->release();
 }
 
 void Cmonk::update()

@@ -81,9 +81,6 @@
     <Filter Include="mainGame\히어로시즈\Cunit\CplayerManager\Cplayer\CplayerSkill">
       <UniqueIdentifier>{d67614be-55bc-43b6-94f2-adacb553d430}</UniqueIdentifier>
     </Filter>
-    <Filter Include="맵툴">
-      <UniqueIdentifier>{9ebba9ea-0830-4de6-a6c1-189486752f6b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="mainGame\히어로시즈\Cobject\CTown">
       <UniqueIdentifier>{e3caed79-d7df-4244-838c-85082f62e2be}</UniqueIdentifier>
     </Filter>
@@ -98,9 +95,6 @@
     </Filter>
     <Filter Include="이펙트">
       <UniqueIdentifier>{2e134f28-1250-4606-8eff-bf40947e3f51}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="맵툴\테스트캐릭">
-      <UniqueIdentifier>{79e92196-bbff-4400-9926-a07691137b68}</UniqueIdentifier>
     </Filter>
     <Filter Include="mainGame\히어로시즈\Cobject\Citem">
       <UniqueIdentifier>{b0a26e03-75d1-47c3-b390-61bac4954a55}</UniqueIdentifier>
@@ -150,6 +144,12 @@
     </Filter>
     <Filter Include="mainGame\히어로시즈\Cobject\CNPC">
       <UniqueIdentifier>{05663bb4-d63d-4af2-9f15-4b693f243689}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="맵툴">
+      <UniqueIdentifier>{9ebba9ea-0830-4de6-a6c1-189486752f6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="맵툴\테스트캐릭">
+      <UniqueIdentifier>{79e92196-bbff-4400-9926-a07691137b68}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -561,5 +561,10 @@
     <Image Include="API_FrameWork.ico">
       <Filter>리소스 파일</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="POINTER.cur">
+      <Filter>리소스 파일</Filter>
+    </None>
   </ItemGroup>
 </Project>

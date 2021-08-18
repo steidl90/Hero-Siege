@@ -66,6 +66,7 @@ void Cpriest::release()
 	SAFE_DELETE(m_enemyAttack);
 	SAFE_DELETE(m_player);
 	SAFE_DELETE(m_hpBar);
+	EFFECT->release();
 }
 
 void Cpriest::update()
