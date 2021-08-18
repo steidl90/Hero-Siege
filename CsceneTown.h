@@ -39,6 +39,15 @@ private:
 	image* m_wingShadowImage;
 	animation* m_wingShadowAni;
 	int m_wingX[2], m_wingY[2];
+
+	// ±‚≈∏
+	image* m_buttonImage;
+	RECT m_buttonRc;
+
+	int m_x;
+	int m_y;
+	bool isMessageRender;
+
 public:
 	CsceneTown();
 	~CsceneTown();
@@ -54,4 +63,6 @@ public:
 
 	void setPlayerMemory(CplayerData* playerdata){ m_playerData = playerdata;}
 	void setQuestMemory(Cquest* questdata) { m_quest = questdata; }
+
+	void shopCollision();
 };

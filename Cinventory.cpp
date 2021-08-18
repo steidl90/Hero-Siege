@@ -21,7 +21,7 @@ HRESULT Cinventory::init()
 	}
 
 	//m_potion.image
-	m_potion.Count = 5;
+	m_potion.Count = 20;
 	m_potion.recoveryHp = 200;
 	m_potion.recoveryMp = 300;
 
