@@ -5,7 +5,6 @@ HRESULT CdropItem::init()
 {
 	for (int i = 0; i < ITEM->getTotalItemCount(); i++)
 	{
-		OutputDebugString(_TEXT("!\n"));
 		m_vDropItemList.push_back((ITEM->getItem(i)));
 	}
 	return S_OK;

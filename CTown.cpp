@@ -105,11 +105,11 @@ void Ctown::initTileAttribute()
 		IMAGE->frameRender(this->getImageName(_tilesImage[i].objImage), getTileDC(), _tiles[i].rc.left, _tiles[i].rc.top, _tiles[i].objFrameX, _tiles[i].objFrameY);
 	}
 
-	for (int i = 0; i < TILEX; i++)
+	/*for (int i = 0; i < TILEX; i++)
 	{
 		LineMake(getTileDC(), 0, i * TILESIZE, MAPSIZE, i * TILESIZE);
 		LineMake(getTileDC(), i * TILESIZE, 0, i * TILESIZE, MAPSIZE);
-	}
+	}*/
 }
 
 void Ctown::initFrameObject()

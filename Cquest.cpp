@@ -20,7 +20,6 @@ HRESULT Cquest::init()
 	m_quest = 0;
 	m_MaxQuest = 50;
 
-
 	ANIMATION->addDefAnimation("Äù½ºÆ®¾Ö´Ï", "Äù½ºÆ®1", 6, false, true);
 	ANIMATION->addDefAnimation("Äù½ºÆ®2¾Ö´Ï", "Äù½ºÆ®2", 6, false, true);
 	ANIMATION->addDefAnimation("Äù½ºÆ®3¾Ö´Ï", "Äù½ºÆ®3", 1, false, true);
@@ -60,7 +59,6 @@ void Cquest::render()
 		{
 			m_dialogImage->render(getMemDC(), m_x[1], m_y[1]);
 			m_dialogBGImage->render(getMemDC(), m_x[1], m_y[1]);
-
 		}
 	}
 	m_questImage->aniRender(getMapDC(), m_x[0], m_y[0], m_questAni);

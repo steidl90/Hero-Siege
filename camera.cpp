@@ -29,7 +29,6 @@ void camera::update()
 		camera_y1 = 0;
 		camera_y2 = camera_height;
 	}
-
 	if (camera_x2 > MAPSIZE)
 	{
 		camera_x2 = MAPSIZE;

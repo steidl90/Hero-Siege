@@ -139,9 +139,6 @@
     <Filter Include="mainGame\히어로시즈\Cobject\CprogressBar">
       <UniqueIdentifier>{09b8904c-d0b6-421e-a72d-980ab76d8711}</UniqueIdentifier>
     </Filter>
-    <Filter Include="mainGame\히어로시즈\Cunit\CplayerManager\Cplayer\CplayerDate">
-      <UniqueIdentifier>{595e05b2-627c-43a0-80cf-2c52fca64c06}</UniqueIdentifier>
-    </Filter>
     <Filter Include="mainGame\히어로시즈\Cobject\CNPC">
       <UniqueIdentifier>{05663bb4-d63d-4af2-9f15-4b693f243689}</UniqueIdentifier>
     </Filter>
@@ -150,6 +147,9 @@
     </Filter>
     <Filter Include="맵툴\테스트캐릭">
       <UniqueIdentifier>{79e92196-bbff-4400-9926-a07691137b68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame\히어로시즈\Cunit\CplayerManager\Cplayer\CplayerData">
+      <UniqueIdentifier>{595e05b2-627c-43a0-80cf-2c52fca64c06}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -346,7 +346,7 @@
       <Filter>mainGame\히어로시즈\Cobject\Cshop</Filter>
     </ClInclude>
     <ClInclude Include="CplayerData.h">
-      <Filter>mainGame\히어로시즈\Cunit\CplayerManager\Cplayer\CplayerDate</Filter>
+      <Filter>mainGame\히어로시즈\Cunit\CplayerManager\Cplayer\CplayerData</Filter>
     </ClInclude>
     <ClInclude Include="CNPC.h">
       <Filter>mainGame\히어로시즈\Cobject\CNPC</Filter>
@@ -537,7 +537,7 @@
       <Filter>mainGame\히어로시즈\Cobject\Cshop</Filter>
     </ClCompile>
     <ClCompile Include="CplayerData.cpp">
-      <Filter>mainGame\히어로시즈\Cunit\CplayerManager\Cplayer\CplayerDate</Filter>
+      <Filter>mainGame\히어로시즈\Cunit\CplayerManager\Cplayer\CplayerData</Filter>
     </ClCompile>
     <ClCompile Include="CNPC.cpp">
       <Filter>mainGame\히어로시즈\Cobject\CNPC</Filter>
@@ -561,10 +561,5 @@
     <Image Include="API_FrameWork.ico">
       <Filter>리소스 파일</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="POINTER.cur">
-      <Filter>리소스 파일</Filter>
-    </None>
   </ItemGroup>
 </Project>

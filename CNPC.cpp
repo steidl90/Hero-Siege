@@ -147,7 +147,6 @@ void CNPC::getNpcAni()
     ANIMATION->start("사캐스터");
     ANIMATION->start("토스테인");
     ANIMATION->start("위치");
-
 }
 
 void CNPC::getNpcRectangle()

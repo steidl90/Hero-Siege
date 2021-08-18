@@ -102,7 +102,7 @@ HRESULT CsceneDungeon::init()
 			m_elemental->setPlayer(m_player->getPlayer());
 			m_elemental->setAttribute(m_dungeon->getAttribute());
 			m_elemental->init(PointMake(RND->getFromIntTo(100, 150) + i * RND->getFromIntTo(120, 150),
-				240 + j * RND->getFromIntTo(50, 100)),
+				270 + j * RND->getFromIntTo(50, 70)),
 				500, 10,2, exp, 500);
 			m_enemyManager->registerEnemy(m_elemental);
 		}
