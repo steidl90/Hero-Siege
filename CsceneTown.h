@@ -43,6 +43,8 @@ private:
 	// ±‚≈∏
 	image* m_buttonImage;
 	RECT m_buttonRc;
+	image* m_talkImage;
+	RECT m_talkRc;
 
 	int m_x;
 	int m_y;

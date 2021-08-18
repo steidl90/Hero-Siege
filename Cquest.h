@@ -4,7 +4,6 @@ class Cplayer;
 class Cquest : public CNPC
 {
 private:
-
 	CNPC* m_npc;
 	Cplayer* m_player;
 
@@ -55,7 +54,6 @@ public:
 	
 	void setIsComplete(bool complete) { m_isComplete = complete; }
 	bool getIsComplete() { return m_isComplete; }
-
 
 	void setPlayer(Cplayer* player) { m_player = player; }
 	void setNPC(CNPC* NPC) { m_npc = NPC; }

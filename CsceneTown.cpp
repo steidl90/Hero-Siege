@@ -14,6 +14,7 @@ HRESULT CsceneTown::init()
 	m_wingImage = IMAGE->findImage("풍차날개");
 	ANIMATION->addDefAnimation("풍차", "풍차날개", 10, false, true);
 	m_wingAni = ANIMATION->findAnimation("풍차");
+
 	ANIMATION->start("풍차");
 
 	m_wingX[0] = 575;
@@ -103,6 +104,7 @@ HRESULT CsceneTown::init()
 
 	////////////////////////////
 	m_buttonImage = IMAGE->findImage("버튼");
+	m_talkImage = IMAGE->findImage("버튼");
 
 	m_x = m_player->getplayerRect()->left + 15;
 	m_y = m_player->getplayerRect()->top;
@@ -166,8 +168,10 @@ void CsceneTown::update()
 		m_player->getPlayer()->setMp(m_player->getPlayer()->getMaxMp());
 	}
 
+	m_talkRc = RectMake(m_player->getplayerRect()->left, m_player->getplayerRect()->top, m_talkImage->getFrameWidth(), m_talkImage->getFrameHeight());
 	sceneChange();
 	m_wingRect = RectMakeCenter(m_wingX[0], m_wingY[0], m_wingImage->getFrameWidth(), m_wingImage->getFrameHeight());
+
 	m_buttonRc = RectMake(m_x, m_y, m_buttonImage->getFrameWidth(), m_buttonImage->getFrameHeight());
 	m_x = m_player->getplayerRect()->left + 5;
 	m_y = m_player->getplayerRect()->top - 30;
@@ -193,7 +197,17 @@ void CsceneTown::render()
 	sprintf_s(str, "이노야 마을");
 	TextOut(getMemDC(), WINSIZEX - 165, 20, str, strlen(str));
 
-
+	RECT dest;
+	if (IntersectRect(&dest, m_player->getplayerRect(), m_npc->getKaylaRect()))
+	{
+		m_talkImage->render(getMemDC(), m_player->getplayerRect()->left, m_player->getplayerRect()->top);
+		TCHAR str[256];
+		sprintf_s(str, "회복하기");
+		TextOut(getMemDC(), m_x - 20, m_y + 20, str, strlen(str));
+		TCHAR buttonstr[256];
+		sprintf_s(buttonstr, "F");
+		TextOut(getMemDC(), m_x + 10, m_y + 5, buttonstr, strlen(buttonstr));
+	}
 }
 
 void CsceneTown::sceneChange()
@@ -257,7 +271,9 @@ void CsceneTown::shopOn()
 
 void CsceneTown::npcCollison()
 {
-	if (InputManager->isOnceKeyDown('B'))
+	SetTextColor(getMemDC(), RGB(255, 255, 255));
+
+	if (InputManager->isOnceKeyDown('F'))
 	{
 		
 		RECT dest;
@@ -301,8 +317,6 @@ void CsceneTown::shopCollision()
 		sprintf_s(buttonstr, "F");
 		TextOut(getMemDC(), m_x + 10, m_y + 5, buttonstr, strlen(buttonstr));
 	}
+
+
 }
-
-
-
-

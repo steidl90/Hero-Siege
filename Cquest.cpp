@@ -75,7 +75,6 @@ void Cquest::update()
 		m_dialogRc = RectMake(m_x[1], m_y[1], m_dialogImage->getFrameWidth(), m_dialogImage->getFrameHeight());
 		m_buttonRc = RectMake(m_x[2], m_y[2], m_buttonImage->getFrameWidth(), m_buttonImage->getFrameHeight());
 	}
-
 }
 
 void Cquest::render()
