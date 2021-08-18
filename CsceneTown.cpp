@@ -161,12 +161,13 @@ void CsceneTown::update()
 		m_player->getPlayer()->setMp(m_player->getPlayer()->getMaxMp());
 	}
 
-	sceneChange();
-	m_wingRect = RectMakeCenter(m_wingX[0], m_wingY[0], m_wingImage->getFrameWidth(), m_wingImage->getFrameHeight());
-
 	m_buttonRc = RectMake(m_x, m_y, m_buttonImage->getFrameWidth(), m_buttonImage->getFrameHeight());
 	m_x = m_player->getplayerRect()->left + 5;
 	m_y = m_player->getplayerRect()->top - 30;
+
+	sceneChange();
+	m_wingRect = RectMakeCenter(m_wingX[0], m_wingY[0], m_wingImage->getFrameWidth(), m_wingImage->getFrameHeight());
+
 }
 
 void CsceneTown::render()
