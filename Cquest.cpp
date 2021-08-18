@@ -27,7 +27,7 @@ HRESULT Cquest::init()
 	m_x[2] = WINSIZEX / 2 + 3;
 	m_y[2] = WINSIZEY / 2 - 50;
 	m_quest = 0;
-	m_maxQuest = 50;
+	m_maxQuest = 30;
 
 
 	ANIMATION->addDefAnimation("퀘스트애니", "퀘스트1", 6, false, true);
