@@ -167,7 +167,6 @@ HRESULT CsceneDungeon::init()
 			m_enemyManager->registerEnemy(m_prison);
 		}
 	}
-
 	return S_OK;
 }
 

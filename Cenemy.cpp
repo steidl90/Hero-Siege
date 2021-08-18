@@ -179,7 +179,8 @@ void Cenemy::aStarMove()
 				m_isWalking = true;
 				m_state = STATE::UP;
 			}
-
+			x = m_liAstar->x;
+			y = m_liAstar->y;
 			if (m_liAstar->x < m_x + 5 && m_liAstar->x > m_x - 5
 				&& m_liAstar->y < m_y + 5 && m_liAstar->y > m_y - 5)
 			{
@@ -191,5 +192,6 @@ void Cenemy::aStarMove()
 			m_aStar->getFastLoadLocation()->clear();
 		}
 	}
+
 }
 
