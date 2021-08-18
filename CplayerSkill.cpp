@@ -59,9 +59,9 @@ void CplayerSkill::render()
 {
 	for (m_viPlayerSkill = m_vPlayerSkill.begin(); m_viPlayerSkill != m_vPlayerSkill.end(); ++m_viPlayerSkill)
 	{
-		//Rectangle(getMapDC(), m_viPlayerSkill->m_skillRc.left, m_viPlayerSkill->m_skillRc.top, m_viPlayerSkill->m_skillRc.right, m_viPlayerSkill->m_skillRc.bottom);
 		m_viPlayerSkill->m_skillImage->aniRender(getMapDC(), m_viPlayerSkill->m_skillRc.left, m_viPlayerSkill->m_skillRc.top, m_viPlayerSkill->m_skillAni);
 	}
+	//Rectangle(getMapDC(), m_viPlayerSkill->m_skillRc.left, m_viPlayerSkill->m_skillRc.top, m_viPlayerSkill->m_skillRc.right, m_viPlayerSkill->m_skillRc.bottom);
 }
 
 void CplayerSkill::skillInformation(float x, float y, float angle, float speed, float range, const char* fileName,const char* aniName)

@@ -63,6 +63,8 @@ private:
 	int m_witchX;
 	int m_witchY;
 
+	animation* m_healingcrossAni;
+
 	bool m_isAni;
 public:
 	HRESULT init();

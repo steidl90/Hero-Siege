@@ -74,6 +74,11 @@ HRESULT CNPC::init()
     m_witchX = 540;
     m_witchY = 240;
 
+    //힐링십자가
+    IMAGE->findImage("힐링십자가");
+    ANIMATION->addDefAnimation("힐링십자가", "힐링십자가", 10, false, true);
+    m_healingcrossAni = ANIMATION->findAnimation("힐링십자가");
+
     return S_OK;
 }
 
@@ -119,6 +124,8 @@ void CNPC::render()
     //카일리아
     IMAGE->findImage("NPC그림자")->alphaRender(getMapDC(), m_kaylaX - 3, m_kaylaY + 33, 100);
     m_kaylaImage->aniRender(getMapDC(), m_kaylaX, m_kaylaY, m_kaylaAni);
+    IMAGE->findImage("힐링십자가")->aniRender(getMapDC(), m_kaylaX-40, m_kaylaY, m_healingcrossAni);
+
     //사캐스터
     IMAGE->findImage("NPC그림자")->alphaRender(getMapDC(), m_sarcasterX-1, m_sarcasterY + 37, 100);
     m_sarcasterImage->aniRender(getMapDC(), m_sarcasterX, m_sarcasterY, m_sarcasterAni);
@@ -128,6 +135,8 @@ void CNPC::render()
     //위치
     IMAGE->findImage("NPC그림자")->alphaRender(getMapDC(), m_witchX + 1, m_witchY + 50, 100);
     m_witchImage->aniRender(getMapDC(), m_witchX, m_witchY, m_witchAni);
+    
+
     if (m_isAni)
     {
         getNpcAni();
@@ -147,6 +156,7 @@ void CNPC::getNpcAni()
     ANIMATION->start("사캐스터");
     ANIMATION->start("토스테인");
     ANIMATION->start("위치");
+    ANIMATION->start("힐링십자가");
 }
 
 void CNPC::getNpcRectangle()
