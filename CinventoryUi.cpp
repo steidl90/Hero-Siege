@@ -92,7 +92,8 @@ void CinventoryUi::update()
 	this->selectPotion();
 	if (m_selectType == ITEMTYPE::ITEMTYPE_POTION)
 	{
-		this->selectEquipItem();
+		this->selectItemTypeMain();
+		this->selectItemTypeSub();
 	}
 	else
 	{

@@ -64,6 +64,7 @@ HRESULT CshopUi::init()
 	isButtonClick = false;
 	isKeyUp = true;
 	m_exit = false;
+
 	return S_OK;
 }
 

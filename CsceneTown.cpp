@@ -100,6 +100,13 @@ HRESULT CsceneTown::init()
 
 	isShopOn = false;
 	isNpcCollison = false;
+
+	////////////////////////////
+	m_buttonImage = IMAGE->findImage("버튼");
+
+	m_x = m_player->getplayerRect()->left + 15;
+	m_y = m_player->getplayerRect()->top;
+
 	return S_OK;
 }
 
@@ -161,6 +168,9 @@ void CsceneTown::update()
 
 	sceneChange();
 	m_wingRect = RectMakeCenter(m_wingX[0], m_wingY[0], m_wingImage->getFrameWidth(), m_wingImage->getFrameHeight());
+	m_buttonRc = RectMake(m_x, m_y, m_buttonImage->getFrameWidth(), m_buttonImage->getFrameHeight());
+	m_x = m_player->getplayerRect()->left + 5;
+	m_y = m_player->getplayerRect()->top - 30;
 }
 
 void CsceneTown::render()
@@ -176,11 +186,13 @@ void CsceneTown::render()
 	m_player->render();
 
 	if (isShopOn) m_shopUi->render();
+	else this->shopCollision();
 
 	m_wingImage->aniRender(getMapDC(), m_wingX[0]-10, m_wingY[0]-10, m_wingAni);
 	TCHAR str[256];
 	sprintf_s(str, "이노야 마을");
 	TextOut(getMemDC(), WINSIZEX - 165, 20, str, strlen(str));
+
 
 }
 
@@ -225,7 +237,7 @@ void CsceneTown::shopOn()
 	RECT temp;
 	if (IntersectRect(&temp, m_player->getplayerRect(), &m_shopRect))
 	{
-		if (InputManager->isOnceKeyDown('P'))
+		if (InputManager->isOnceKeyDown('F'))
 		{
 			isShopOn = !isShopOn;
 		}
@@ -235,6 +247,12 @@ void CsceneTown::shopOn()
 		isShopOn = false;
 	}
 	//isShopOn = true;
+
+	if (m_shopUi->getExit())
+	{
+		isShopOn = false;
+		m_shopUi->setExit(false);
+	}
 }
 
 void CsceneTown::npcCollison()
@@ -267,6 +285,21 @@ void CsceneTown::npcCollison()
 			}
 
 		}
+	}
+}
+
+void CsceneTown::shopCollision()
+{
+	RECT temp;
+	if (IntersectRect(&temp, m_player->getplayerRect(), &m_shopRect))
+	{
+		m_buttonImage->render(getMemDC(), m_x, m_y);
+		TCHAR str[256];
+		sprintf_s(str, "상점방문");
+		TextOut(getMemDC(), m_x - 20, m_y + 20, str, strlen(str));
+		TCHAR buttonstr[256];
+		sprintf_s(buttonstr, "F");
+		TextOut(getMemDC(), m_x + 10, m_y + 5, buttonstr, strlen(buttonstr));
 	}
 }
 
