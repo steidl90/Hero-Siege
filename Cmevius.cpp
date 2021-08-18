@@ -16,7 +16,7 @@ HRESULT Cmevius::init(POINT position, int hp, float p1Damage1)
     m_em = new CenemyManager;
     
     m_attack = new CenemyAttack;
-    m_attack->init(100,500,false,"리치스킬애니");
+    m_attack->init(100,800,false,"리치스킬애니");
     m_hpBar = new CprogressBar;
     m_hpBar->init("images/hp.bmp", "images/hp_back.bmp", m_x, m_y, 596, 16);
     m_hpBar->setGauge(m_hp, m_maxHp);
@@ -28,7 +28,7 @@ HRESULT Cmevius::init(POINT position, int hp, float p1Damage1)
     ANIMATION->addDefAnimation("애니걷기", "보스걷기", 3, false, false);
     ANIMATION->addDefAnimation("애니공", "보스공", 10, false, true);
     ANIMATION->addDefAnimation("보스페이즈2", "보스몬스터", 5, false, true);
-    EFFECT->addEffect("라이트닝", "images/Lightning.bmp", 576, 402, 72, 402, 1, 0.25f, 100);
+    EFFECT->addEffect("라이트닝", "images/Lightning.bmp", 576, 402, 72, 402, 1, 0.15f, 100);
     EFFECT->addEffect("스텀프", "images/Stomp.bmp", 819*3, 78*3, 91*3, 78*3, 1, 0.1f, 200);
     EFFECT->addEffect("보스텔레포트", "images/Teleport.bmp", 1254*3, 316*3, 114*3,316*3, 1, 0.13f, 100);
     m_isAppear = true;
@@ -44,8 +44,6 @@ HRESULT Cmevius::init(POINT position, int hp, float p1Damage1)
     m_speed = 2;
 
     m_hp = m_maxHp = hp;
-    //m_def = def;
-    //m_exp = exp;
 
     m_skillDamagePattern1= p1Damage1;
 
@@ -149,6 +147,7 @@ void Cmevius::update()
         meviusphase3();
         m_x = 900;
         m_y = 900;
+        m_skillDamagePattern1 = 150;
     }
     if (InputManager->isStayKeyDown('6'))
     {
@@ -164,8 +163,8 @@ void Cmevius::render()
 {
     if (m_meviusImage != nullptr) 
     {
-        //Rectangle(getMapDC(), m_meviusRc.left, m_meviusRc.top, m_meviusRc.right, m_meviusRc.bottom);
         EFFECT->render();
+        //Rectangle(getMapDC(), m_meviusRc.left, m_meviusRc.top, m_meviusRc.right, m_meviusRc.bottom);
         m_attack->render();
         m_meviusImage->aniRender(getMapDC(), m_x, m_y, m_meviusAnimation);
 

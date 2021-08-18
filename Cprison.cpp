@@ -27,7 +27,7 @@ HRESULT Cprison::init(POINT position, float HP, float damage, float def, int exp
 	m_y = m_returnY = position.y;
 	m_trace = trace;
 
-	m_distance = 10.0f;
+	m_distance = 36.0f;
 	m_speed = 2.0f;
 	m_hp = m_maxHp = HP;
 	m_damage = damage;
@@ -70,12 +70,13 @@ void Cprison::update()
 
 	if (isDetect)
 	{
-		m_aStar->setTargetIndex(PointMake(m_player->getPlayerX() / TILESIZE, m_player->getPlayerY() / TILESIZE));
+		m_aStar->setTargetIndex(PointMake((m_player->getPlayerX() - m_distance) / TILESIZE, (m_player->getPlayerY() - m_distance) / TILESIZE));
 		m_aStar->setStartIndex(PointMake(m_x / TILESIZE, m_y / TILESIZE));
 		m_aStar->update();
 	}
 	else
 	{
+		m_isWalking = true;
 		m_aStar->setTargetIndex(PointMake(m_returnX / TILESIZE, m_returnY / TILESIZE));
 		m_aStar->setStartIndex(PointMake(m_x / TILESIZE, m_y / TILESIZE));
 		m_aStar->update();
@@ -124,69 +125,74 @@ void Cprison::render()
 	m_hpBar->mapRender();
 	IMAGE->findImage("일반몬스터체력바")->render(getMapDC(), m_x -21, m_y - 48);
 	if (m_isWalking)m_walkImage->aniRender(getMapDC(), m_walkRc.left, m_walkRc.top, m_walkAni);
-	m_enemyAttack->render();
+	if(!m_isWalking)
+		m_enemyAttack->render();
+	TCHAR str[256];
+	sprintf_s(str, "%d",m_isWalking);
+	TextOut(getMemDC(),500,500, str, strlen(str));
 }
 
 void Cprison::attack()
 {
 	RECT temp;
-	if (IntersectRect(&temp, m_player->getplayerMoveRC(), &m_traceRc))
-	{
+	//if (IntersectRect(&temp, m_player->getplayerMoveRC(), &m_traceRc))
+	//{
 		if (m_player->getplayerMoveRC()->right >= m_walkRc.left - m_distance && m_state == STATE::LEFT)
 		{
 
-			m_isWalking = false;
 			m_enemyAttack->init2(1, 1, true, "교도관공격좌");
 			m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
 				m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2, 0, 1.0f, "교도관공격", "교도관공격좌");
+			m_isWalking = false;
 		}
 
 		else if (m_player->getplayerMoveRC()->left <= m_walkRc.right + m_distance && m_state == STATE::RIGHT)
 		{
-			m_isWalking = false;
 			m_enemyAttack->init2(1, 1, true, "교도관공격우");
 			m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
 				m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2, 0, 1.0f, "교도관공격", "교도관공격우");
+			m_isWalking = false;
 		}
 
 		if (m_player->getplayerMoveRC()->bottom >= m_walkRc.top - m_distance && m_state == STATE::UP)
 		{
-			m_isWalking = false;
 			m_enemyAttack->init2(1, 1, true, "교도관공격상");
 			m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
 				m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2, 0, 1.0f, "교도관공격", "교도관공격상");
+			m_isWalking = false;
 		}
 
 		if (m_player->getplayerMoveRC()->top <= m_walkRc.bottom + m_distance && m_state == STATE::DOWN)
 		{
-			m_isWalking = false;
 			m_enemyAttack->init2(1, 1, true, "교도관공격하");
 			m_enemyAttack->fire(m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,
 				m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2 + 10, 0, 1.0f, "교도관공격", "교도관공격하");
+			m_isWalking = false;
 		}
-	}
+		else m_isWalking = true;
+	//}
 }
 
 void Cprison::die()
 {
 	if (m_state == STATE::LEFT)
 	{
-		EFFECT->addEffect("교도관사망좌", "images/DieMotion/LeftPrisonGuardDie.bmp", 1261, 90, 97, 90, 1, 0.05f, 1);
+		EFFECT->addEffect("교도관사망좌", "images/DieMotion/LeftPrisonGuardDie.bmp", 1164, 90, 97, 90, 1, 0.05f, 1);
 		EFFECT->play("교도관사망좌", m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2, m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2);
 	}
 	if (m_state == STATE::RIGHT)
 	{
-		EFFECT->addEffect("교도관사망우", "images/DieMotion/RightPrisonGuardDie.bmp", 1261, 90, 97, 90, 1, 0.05f, 1);
+		EFFECT->addEffect("교도관사망우", "images/DieMotion/RightPrisonGuardDie.bmp", 1164, 90, 97, 90, 1, 0.05f, 1);
 		EFFECT->play("교도관사망우", m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2);
 	}
 	if (m_state == STATE::UP)
 	{
-		EFFECT->addEffect("교도관사망상", "images/DieMotion/UpPrisonGuardDie.bmp", 1261, 90, 97, 90, 1, 0.05f, 1);
+		EFFECT->addEffect("교도관사망상", "images/DieMotion/UpPrisonGuardDie.bmp", 1164, 90, 97, 90, 1, 0.05f, 1);
 		EFFECT->play("교도관사망상", m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2, m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2);
 	}
 	if (m_state == STATE::DOWN) 
 	{
-		EFFECT->addEffect("교도관사망하", "images/DieMotion/DownPrisonGuardDie.bmp", 1261, 90, 97, 90, 1, 0.05f, 1);
+		EFFECT->addEffect("교도관사망하", "images/DieMotion/DownPrisonGuardDie.bmp", 1164, 90, 97, 90, 1, 0.05f, 1);
 		EFFECT->play("교도관사망하", m_walkRc.right - (m_walkRc.right - m_walkRc.left) / 2,m_walkRc.bottom - (m_walkRc.bottom - m_walkRc.top) / 2);
 	}
 }
