@@ -98,12 +98,9 @@ public:
 	void playerStateRender();
 	void isAttackRender();
 	void playerLevelUp();
-	void playerAStarMove();
 
 	void playerSkillControl();
 	void playerSkillRender();
-
-	//void mouseMoveAstar();
 
 	void playerRectangle();
 
