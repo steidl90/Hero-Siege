@@ -25,6 +25,7 @@ private:
 	bool m_isDialog;
 	bool m_isQuesting;
 	bool m_isComplete;
+	bool m_isOneTime;
 
 public:
 	Cquest();
@@ -37,8 +38,8 @@ public:
 
 	bool collision();
 	void dialog();
-	void acceptQuest();
-	void completedQuest();
+	void selectQuest();
+	void stateQuest();
 
 	void setQuest(int quest) { m_quest = quest; }
 	int getQuest() { return m_quest; }
