@@ -161,9 +161,6 @@ void CsceneTown::render()
 
 	if (isShopOn) m_shopUi->render();
 
-	if (isNpcCollison) Rectangle(getMemDC(), m_npcRect.left, m_npcRect.top, m_npcRect.right, m_npcRect.bottom);
-	else !isNpcCollison;
-
 	m_wingImage->aniRender(getMapDC(), m_wingX[0]-10, m_wingY[0]-10, m_wingAni);
 	TCHAR str[256];
 	sprintf_s(str, "이노야 마을");
@@ -222,22 +219,9 @@ void CsceneTown::npcCollison()
 {
 	if (InputManager->isOnceKeyDown('B'))
 	{
-		RECT temp;
-		/*if (IntersectRect(&temp, m_player->getplayerRect(), m_npc->getGaNorRect()) ||
-			IntersectRect(&temp, m_player->getplayerRect(), m_npc->getShopKeeperRect()) ||
-			IntersectRect(&temp, m_player->getplayerRect(), m_npc->getBlackMarketRect()) ||
-			IntersectRect(&temp, m_player->getplayerRect(), m_npc->getEdwardRect()) ||
-			IntersectRect(&temp, m_player->getplayerRect(), m_npc->getEricRect()) ||
-			IntersectRect(&temp, m_player->getplayerRect(), m_npc->getHalsteinRect()) ||
-			IntersectRect(&temp, m_player->getplayerRect(), m_npc->getKaylaRect()) ||
-			IntersectRect(&temp, m_player->getplayerRect(), m_npc->getTorsteinRect()) ||
-			IntersectRect(&temp, m_player->getplayerRect(), m_npc->getWitchRect()))
-		{
-			isNpcCollison = !isNpcCollison;
-		}*/
-
+		
 		RECT dest;
-		if (IntersectRect(&dest, m_player->getplayerRect(), m_npc->getSarcasterRect()))
+		if (IntersectRect(&dest, m_player->getplayerRect(), m_npc->getKaylaRect()))
 		{
 			isNpcCollison = !isNpcCollison;
 			//체력 회복

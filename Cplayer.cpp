@@ -121,6 +121,7 @@ void Cplayer::update()
 
 void Cplayer::render()
 {
+	//playerRectangle();
 	IMAGE->findImage("NPC그림자")->alphaRender(getMapDC(), m_playerX - 1, m_playerY + 55, 100);
 	
 	
@@ -231,17 +232,39 @@ void Cplayer::moveControl()
 		else if (direction == DIRECTIONS::DIRECTIONS_UP) m_playerSkill->skillInformation(m_playerX + 15, m_playerY - 20, PI * 0.5, 7.0f, 700, "위쪽창던지기", "위쪽창스킬");
 		else if (direction == DIRECTIONS::DIRECTIONS_DOWN) m_playerSkill->skillInformation(m_playerX + 15, m_playerY + 100, PI * 1.5, 7.0f, 700, "아래쪽창던지기", "아래쪽창스킬");
 	}
-	else if (InputManager->isOnceKeyDown('W') && this->getLv() >= 3 && this->getMp() > 100)
+	else if (InputManager->isOnceKeyDown('W') && this->getLv() >= 3 && this->getMp() > 30)
 	{
-		this->setMp(getMp() - 100);
+		this->setMp(getMp() - 30);
 		isAttack = true;
-		for (size_t i = 0; i < 30; i++)
+		
+		if (direction == DIRECTIONS::DIRECTIONS_LEFT)
 		{
-			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.21, 7.0f, 350, "리치스킬", "리치스킬애니");
-			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.22, 6.0f, 300, "리치스킬", "리치스킬애니");
-			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.26, 5.0f, 250, "리치스킬", "리치스킬애니");
-			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, (i + m_angle) * 0.65, 4.3f, 200, "리치스킬", "리치스킬애니");
+			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, PI * 0.95, 7.0f, 700, "왼쪽창던지기", "왼쪽창스킬");
+			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, PI, 7.0f, 700, "왼쪽창던지기", "왼쪽창스킬");
+			m_playerSkill->skillInformation(m_playerX - 15, m_playerY + 33, PI*1.05, 7.0f, 700, "왼쪽창던지기", "왼쪽창스킬");
+
+
 		}
+		else if (direction == DIRECTIONS::DIRECTIONS_RIGHT)
+		{
+			m_playerSkill->skillInformation(m_playerX + 50, m_playerY + 33, PI2*0.025, 7.0f, 700, "오른쪽창던지기", "오른쪽창스킬");
+			m_playerSkill->skillInformation(m_playerX + 50, m_playerY + 33, PI2, 7.0f, 700, "오른쪽창던지기", "오른쪽창스킬");
+			m_playerSkill->skillInformation(m_playerX + 50, m_playerY + 33, PI2* -0.025, 7.0f, 700, "오른쪽창던지기", "오른쪽창스킬");
+		}
+		else if (direction == DIRECTIONS::DIRECTIONS_UP)
+		{
+			m_playerSkill->skillInformation(m_playerX + 15, m_playerY - 20, PI * 0.45, 7.0f, 700, "위쪽창던지기", "위쪽창스킬");
+			m_playerSkill->skillInformation(m_playerX + 15, m_playerY - 20, PI * 0.5, 7.0f, 700, "위쪽창던지기", "위쪽창스킬");
+			m_playerSkill->skillInformation(m_playerX + 15, m_playerY - 20, PI * 0.55, 7.0f, 700, "위쪽창던지기", "위쪽창스킬");
+		}
+		else if (direction == DIRECTIONS::DIRECTIONS_DOWN)
+		{
+			m_playerSkill->skillInformation(m_playerX + 15, m_playerY + 100, PI * 1.45, 7.0f, 700, "아래쪽창던지기", "아래쪽창스킬");
+			m_playerSkill->skillInformation(m_playerX + 15, m_playerY + 100, PI * 1.5, 7.0f, 700, "아래쪽창던지기", "아래쪽창스킬");
+			m_playerSkill->skillInformation(m_playerX + 15, m_playerY + 100, PI * 1.55, 7.0f, 700, "아래쪽창던지기", "아래쪽창스킬");
+
+		}
+		
 	}
 	else if (InputManager->isStayKeyDown('E') && this->getLv() >= 7 && m_count == 0 && this->getMp() > 50)
 	{
@@ -476,13 +499,13 @@ void Cplayer::playerLevelUp()
 void Cplayer::playerSkillControl()
 {
 	if (isRect && skillState == SKILL::SKILL_LEFT)
-		{
-			lightningCenterRc = RectMake(m_skillX - 300, m_skillY+48, 36, 36);
-			lightningLeftRc = RectMake(m_skillX - 336, m_skillY+48, 36, 36);
-			lightningRightRc = RectMake(m_skillX - 264, m_skillY+48, 36, 36);
-			lightningUpRc = RectMake(m_skillX - 300, m_skillY+12, 36, 36);
-			lightningDownRc = RectMake(m_skillX - 300, m_skillY + 84, 36, 36);	
-		}
+	{
+		lightningCenterRc = RectMake(m_skillX - 300, m_skillY+48, 36, 36);
+		lightningLeftRc = RectMake(m_skillX - 336, m_skillY+48, 36, 36);
+		lightningRightRc = RectMake(m_skillX - 264, m_skillY+48, 36, 36);
+		lightningUpRc = RectMake(m_skillX - 300, m_skillY+12, 36, 36);
+		lightningDownRc = RectMake(m_skillX - 300, m_skillY + 84, 36, 36);	
+	}
 
 	else if (isRect && skillState == SKILL::SKILL_RIGHT)
 	{
@@ -500,11 +523,7 @@ void Cplayer::playerSkillControl()
 		lightningRightRc = RectMake(m_skillX + 36, m_skillY - 250, 36, 36);
 		lightningUpRc = RectMake(m_skillX, m_skillY - 286, 36, 36);
 		lightningDownRc = RectMake(m_skillX, m_skillY - 214, 36, 36);
-		/*Rectangle(getMapDC(), lightningCenterRc.left, lightningCenterRc.top, lightningCenterRc.right, lightningCenterRc.bottom);
-		Rectangle(getMapDC(), lightningLeftRc.left, lightningLeftRc.top, lightningLeftRc.right, lightningLeftRc.bottom);
-		Rectangle(getMapDC(), lightningRightRc.left, lightningRightRc.top, lightningRightRc.right, lightningRightRc.bottom);
-		Rectangle(getMapDC(), lightningUpRc.left, lightningUpRc.top, lightningUpRc.right, lightningUpRc.bottom);
-		Rectangle(getMapDC(), lightningDownRc.left, lightningDownRc.top, lightningDownRc.right, lightningDownRc.bottom);*/
+		
 	}
 	else if (isRect && skillState == SKILL::SKILL_DOWN)
 	{
@@ -513,11 +532,7 @@ void Cplayer::playerSkillControl()
 		lightningRightRc = RectMake(m_skillX + 36, m_skillY + 250, 36, 36);
 		lightningUpRc = RectMake(m_skillX, m_skillY + 214, 36, 36);
 		lightningDownRc = RectMake(m_skillX, m_skillY + 286, 36, 36);
-		/*Rectangle(getMapDC(), lightningCenterRc.left, lightningCenterRc.top, lightningCenterRc.right, lightningCenterRc.bottom);
-		Rectangle(getMapDC(), lightningLeftRc.left, lightningLeftRc.top, lightningLeftRc.right, lightningLeftRc.bottom);
-		Rectangle(getMapDC(), lightningRightRc.left, lightningRightRc.top, lightningRightRc.right, lightningRightRc.bottom);
-		Rectangle(getMapDC(), lightningUpRc.left, lightningUpRc.top, lightningUpRc.right, lightningUpRc.bottom);
-		Rectangle(getMapDC(), lightningDownRc.left, lightningDownRc.top, lightningDownRc.right, lightningDownRc.bottom);*/
+		
 	}
 	
 }
@@ -614,12 +629,23 @@ void Cplayer::playerRectangle()
 	Rectangle(getMapDC(), lightningUpRc.left, lightningUpRc.top, lightningUpRc.right, lightningUpRc.bottom);
 	Rectangle(getMapDC(), lightningDownRc.left, lightningDownRc.top, lightningDownRc.right, lightningDownRc.bottom);
 
+	/*Rectangle(getMapDC(), lightningCenterRc.left, lightningCenterRc.top, lightningCenterRc.right, lightningCenterRc.bottom);
+	Rectangle(getMapDC(), lightningLeftRc.left, lightningLeftRc.top, lightningLeftRc.right, lightningLeftRc.bottom);
+	Rectangle(getMapDC(), lightningRightRc.left, lightningRightRc.top, lightningRightRc.right, lightningRightRc.bottom);
+	Rectangle(getMapDC(), lightningUpRc.left, lightningUpRc.top, lightningUpRc.right, lightningUpRc.bottom);
+	Rectangle(getMapDC(), lightningDownRc.left, lightningDownRc.top, lightningDownRc.right, lightningDownRc.bottom);
+
 	Rectangle(getMapDC(), lightningCenterRc.left, lightningCenterRc.top, lightningCenterRc.right, lightningCenterRc.bottom);
 	Rectangle(getMapDC(), lightningLeftRc.left, lightningLeftRc.top, lightningLeftRc.right, lightningLeftRc.bottom);
 	Rectangle(getMapDC(), lightningRightRc.left, lightningRightRc.top, lightningRightRc.right, lightningRightRc.bottom);
 	Rectangle(getMapDC(), lightningUpRc.left, lightningUpRc.top, lightningUpRc.right, lightningUpRc.bottom);
 	Rectangle(getMapDC(), lightningDownRc.left, lightningDownRc.top, lightningDownRc.right, lightningDownRc.bottom);
 
+	Rectangle(getMapDC(), lightningCenterRc.left, lightningCenterRc.top, lightningCenterRc.right, lightningCenterRc.bottom);
+	Rectangle(getMapDC(), lightningLeftRc.left, lightningLeftRc.top, lightningLeftRc.right, lightningLeftRc.bottom);
+	Rectangle(getMapDC(), lightningRightRc.left, lightningRightRc.top, lightningRightRc.right, lightningRightRc.bottom);
+	Rectangle(getMapDC(), lightningUpRc.left, lightningUpRc.top, lightningUpRc.right, lightningUpRc.bottom);
+	Rectangle(getMapDC(), lightningDownRc.left, lightningDownRc.top, lightningDownRc.right, lightningDownRc.bottom);*/
 
 }
 

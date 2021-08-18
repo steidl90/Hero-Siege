@@ -13,7 +13,7 @@ CplayerManager::~CplayerManager()
 
 HRESULT CplayerManager::init()
 {
-    EFFECT->addEffect("히트1", "images/Hit.bmp", 414, 71, 69, 71, 1, 0.2f, 5);
+    EFFECT->addEffect("히트1", "images/Hit.bmp", 414, 71, 69, 71, 1, 0.2f, 10);
 
     m_player = new Cplayer;
     m_player->init();

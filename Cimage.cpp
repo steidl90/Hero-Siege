@@ -104,6 +104,9 @@ HRESULT Cimage::init()
     IMAGE->addFrameImage("작은풀1", "images/GrassSmall1.bmp", 152, 19, 8, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("작은풀2", "images/GrassSmall2.bmp", 160, 17, 8, 1, true, RGB(255, 0, 255));
 
+    IMAGE->addFrameImage("힐링십자가", "images/healingcross.bmp", 272, 52, 8, 1, true, RGB(255, 0, 255));
+
+
     IMAGE->addFrameImage("커피집", "images/CoffeeHouse.bmp", 904, 152, 8, 1, true, RGB(255, 0, 255));
     //IMAGE->addFrameImage("풍차날개", "images/WindmillWing.bmp", 2016, 339, 6, 1, true, RGB(255, 0, 255));
     IMAGE->addFrameImage("풍차날개", "images/WindmillWing1.bmp", 7140, 339, 21, 1, true, RGB(255, 0, 255));
