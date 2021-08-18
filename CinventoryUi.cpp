@@ -89,13 +89,20 @@ void CinventoryUi::release()
 void CinventoryUi::update()
 {
 
-	
-	this->selectItem();
-	this->selectEquipItem();
-	this->selectItemTypeMain();
-	this->selectItemTypeSub();
-	this->abandonItem();
-	this->clickEquipButton();
+	this->selectPotion();
+	if (m_selectType == ITEMTYPE::ITEMTYPE_POTION)
+	{
+		this->selectEquipItem();
+	}
+	else
+	{
+		this->selectItem();
+		this->selectEquipItem();
+		this->selectItemTypeMain();
+		this->selectItemTypeSub();
+		this->abandonItem();
+		this->clickEquipButton();
+	}
 
 	// 서순 중요 인덱스 계산은 아이템 버리기 등 변경사항 후에 바로 해주기
 	if (zDelta > 0)
@@ -110,6 +117,7 @@ void CinventoryUi::update()
 		isButtonClick = false;
 		isKeyUp = true;
 	}
+
 }
 
 void CinventoryUi::render()
@@ -143,7 +151,10 @@ void CinventoryUi::render()
 	// 선택된 타입별 아이템 출력
 	this->showListItemType();
 	// 장착 테두리
-	this->showEquipSelect();
+	if (m_selectType != ITEMTYPE::ITEMTYPE_POTION)
+		this->showEquipSelect();
+	else
+		this->showPotionInfo();
 	// 선택시 출력 부분
 	if (m_Inventory->getSelectItem()->isSelect)
 	{
@@ -754,285 +765,6 @@ void CinventoryUi::showItemCompare()
 	TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 200, criAtk, lstrlen(criAtk));
 	TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 220, speed, lstrlen(speed));
 
-
-	/*switch (m_Inventory->getSelectItem()->m_item->getType())
-	{
-	case ITEMTYPE::ITEMTYPE_WEAPON:
-		if (m_Inventory->getEquipWeapon() == nullptr)
-		{
-			temp_atk = temp_def = temp_hp = temp_mp = temp_cri = 0;
-			temp_criAtk = temp_speed = 0;
-		}
-		else
-		{
-			temp_atk = m_Inventory->getEquipWeapon()->getAtk();
-			temp_def = m_Inventory->getEquipWeapon()->getDef();
-			temp_hp = m_Inventory->getEquipWeapon()->getHp();
-			temp_mp = m_Inventory->getEquipWeapon()->getMp();
-			temp_cri = m_Inventory->getEquipWeapon()->getCritical();
-			temp_criAtk = m_Inventory->getEquipWeapon()->getCriticalAtk();
-			temp_speed = m_Inventory->getEquipWeapon()->getSpeed();
-		}
-
-		if (m_Inventory->getSelectItem()->m_item->getAtk() - temp_atk > 0)
-			wsprintf(atk, "+%d", (m_Inventory->getSelectItem()->m_item->getAtk() - temp_atk));
-		else
-			wsprintf(atk, "%d", (m_Inventory->getSelectItem()->m_item->getAtk() - temp_atk));
-		if (m_Inventory->getSelectItem()->m_item->getDef() - temp_def > 0)
-			wsprintf(def, "+%d", (m_Inventory->getSelectItem()->m_item->getDef() - temp_def));
-		else
-			wsprintf(def, "%d", (m_Inventory->getSelectItem()->m_item->getDef() - temp_def));
-		if (m_Inventory->getSelectItem()->m_item->getHp() - temp_hp > 0)
-			wsprintf(hp, "+%d", (m_Inventory->getSelectItem()->m_item->getHp() - temp_hp));
-		else
-			wsprintf(hp, "%d", (m_Inventory->getSelectItem()->m_item->getHp() - temp_hp));
-		if (m_Inventory->getSelectItem()->m_item->getMp() - temp_mp > 0)
-			wsprintf(mp, "+%d", (m_Inventory->getSelectItem()->m_item->getMp() - temp_mp));
-		else
-			wsprintf(mp, "%d", (m_Inventory->getSelectItem()->m_item->getMp() - temp_mp));
-		if (m_Inventory->getSelectItem()->m_item->getCritical() - temp_cri > 0)
-			wsprintf(cri, "+%d", (m_Inventory->getSelectItem()->m_item->getCritical() - temp_cri));
-		else
-			wsprintf(cri, "%d", (m_Inventory->getSelectItem()->m_item->getCritical() - temp_cri));
-		if (m_Inventory->getSelectItem()->m_item->getCriticalAtk() - temp_criAtk > 0)
-			sprintf(criAtk, "+%.1f", m_Inventory->getSelectItem()->m_item->getCriticalAtk() - temp_criAtk);
-		else
-			sprintf(criAtk, "%.1f", m_Inventory->getSelectItem()->m_item->getCriticalAtk() - temp_criAtk);
-		if (m_Inventory->getSelectItem()->m_item->getSpeed() - temp_speed > 0)
-			sprintf(speed, "+%.1f", m_Inventory->getSelectItem()->m_item->getSpeed() - temp_speed);
-		else
-			sprintf(speed, "%.1f", m_Inventory->getSelectItem()->m_item->getSpeed() - temp_speed);
-
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 100, atk, lstrlen(atk));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 120, def, lstrlen(def));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 140, hp, lstrlen(hp));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 160, mp, lstrlen(mp));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 180, cri, lstrlen(cri));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 200, criAtk, lstrlen(criAtk));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 220, speed, lstrlen(speed));
-
-		break;
-	case ITEMTYPE::ITEMTYPE_ARMOR:
-		if (m_Inventory->getEquipArmor() == nullptr)
-		{
-			temp_atk = temp_def = temp_hp = temp_mp = temp_cri = 0;
-			temp_criAtk = temp_speed = 0;
-		}
-		else
-		{
-			temp_atk = m_Inventory->getEquipArmor()->getAtk();
-			temp_def = m_Inventory->getEquipArmor()->getDef();
-			temp_hp = m_Inventory->getEquipArmor()->getHp();
-			temp_mp = m_Inventory->getEquipArmor()->getMp();
-			temp_cri = m_Inventory->getEquipArmor()->getCritical();
-			temp_criAtk = m_Inventory->getEquipArmor()->getCriticalAtk();
-			temp_speed = m_Inventory->getEquipArmor()->getSpeed();
-		}
-
-		if (m_Inventory->getSelectItem()->m_item->getAtk() - temp_atk > 0)
-			wsprintf(atk, "+%d", (m_Inventory->getSelectItem()->m_item->getAtk() - temp_atk));
-		else
-			wsprintf(atk, "%d", (m_Inventory->getSelectItem()->m_item->getAtk() - temp_atk));
-		if (m_Inventory->getSelectItem()->m_item->getDef() - temp_def > 0)
-			wsprintf(def, "+%d", (m_Inventory->getSelectItem()->m_item->getDef() - temp_def));
-		else
-			wsprintf(def, "%d", (m_Inventory->getSelectItem()->m_item->getDef() - temp_def));
-		if (m_Inventory->getSelectItem()->m_item->getHp() - temp_hp > 0)
-			wsprintf(hp, "+%d", (m_Inventory->getSelectItem()->m_item->getHp() - temp_hp));
-		else
-			wsprintf(hp, "%d", (m_Inventory->getSelectItem()->m_item->getHp() - temp_hp));
-		if (m_Inventory->getSelectItem()->m_item->getMp() - temp_mp > 0)
-			wsprintf(mp, "+%d", (m_Inventory->getSelectItem()->m_item->getMp() - temp_mp));
-		else
-			wsprintf(mp, "%d", (m_Inventory->getSelectItem()->m_item->getMp() - temp_mp));
-		if (m_Inventory->getSelectItem()->m_item->getCritical() - temp_cri > 0)
-			wsprintf(cri, "+%d", (m_Inventory->getSelectItem()->m_item->getCritical() - temp_cri));
-		else
-			wsprintf(cri, "%d", (m_Inventory->getSelectItem()->m_item->getCritical() - temp_cri));
-		if (m_Inventory->getSelectItem()->m_item->getCriticalAtk() - temp_criAtk > 0)
-			sprintf(criAtk, "+%.1f", m_Inventory->getSelectItem()->m_item->getCriticalAtk() - temp_criAtk);
-		else
-			sprintf(criAtk, "%.1f", m_Inventory->getSelectItem()->m_item->getCriticalAtk() - temp_criAtk);
-		if (m_Inventory->getSelectItem()->m_item->getSpeed() - temp_speed > 0)
-			sprintf(speed, "+%.1f", m_Inventory->getSelectItem()->m_item->getSpeed() - temp_speed);
-		else
-			sprintf(speed, "%.1f", m_Inventory->getSelectItem()->m_item->getSpeed() - temp_speed);
-
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 100, atk, lstrlen(atk));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 120, def, lstrlen(def));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 140, hp, lstrlen(hp));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 160, mp, lstrlen(mp));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 180, cri, lstrlen(cri));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 200, criAtk, lstrlen(criAtk));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 220, speed, lstrlen(speed));
-		break;
-	
-	case ITEMTYPE::ITEMTYPE_SHOES:
-		if (m_Inventory->getEquipShoes() == nullptr)
-		{
-			temp_atk = temp_def = temp_hp = temp_mp = temp_cri = 0;
-			temp_criAtk = temp_speed = 0;
-		}
-		else
-		{
-			temp_atk = m_Inventory->getEquipShoes()->getAtk();
-			temp_def = m_Inventory->getEquipShoes()->getDef();
-			temp_hp = m_Inventory->getEquipShoes()->getHp();
-			temp_mp = m_Inventory->getEquipShoes()->getMp();
-			temp_cri = m_Inventory->getEquipShoes()->getCritical();
-			temp_criAtk = m_Inventory->getEquipShoes()->getCriticalAtk();
-			temp_speed = m_Inventory->getEquipShoes()->getSpeed();
-		}
-
-		if (m_Inventory->getSelectItem()->m_item->getAtk() - temp_atk > 0)
-			wsprintf(atk, "+%d", (m_Inventory->getSelectItem()->m_item->getAtk() - temp_atk));
-		else
-			wsprintf(atk, "%d", (m_Inventory->getSelectItem()->m_item->getAtk() - temp_atk));
-		if (m_Inventory->getSelectItem()->m_item->getDef() - temp_def > 0)
-			wsprintf(def, "+%d", (m_Inventory->getSelectItem()->m_item->getDef() - temp_def));
-		else
-			wsprintf(def, "%d", (m_Inventory->getSelectItem()->m_item->getDef() - temp_def));
-		if (m_Inventory->getSelectItem()->m_item->getHp() - temp_hp > 0)
-			wsprintf(hp, "+%d", (m_Inventory->getSelectItem()->m_item->getHp() - temp_hp));
-		else
-			wsprintf(hp, "%d", (m_Inventory->getSelectItem()->m_item->getHp() - temp_hp));
-		if (m_Inventory->getSelectItem()->m_item->getMp() - temp_mp > 0)
-			wsprintf(mp, "+%d", (m_Inventory->getSelectItem()->m_item->getMp() - temp_mp));
-		else
-			wsprintf(mp, "%d", (m_Inventory->getSelectItem()->m_item->getMp() - temp_mp));
-		if (m_Inventory->getSelectItem()->m_item->getCritical() - temp_cri > 0)
-			wsprintf(cri, "+%d", (m_Inventory->getSelectItem()->m_item->getCritical() - temp_cri));
-		else
-			wsprintf(cri, "%d", (m_Inventory->getSelectItem()->m_item->getCritical() - temp_cri));
-		if (m_Inventory->getSelectItem()->m_item->getCriticalAtk() - temp_criAtk > 0)
-			sprintf(criAtk, "+%.1f", m_Inventory->getSelectItem()->m_item->getCriticalAtk() - temp_criAtk);
-		else
-			sprintf(criAtk, "%.1f", m_Inventory->getSelectItem()->m_item->getCriticalAtk() - temp_criAtk);
-		if (m_Inventory->getSelectItem()->m_item->getSpeed() - temp_speed > 0)
-			sprintf(speed, "+%.1f", m_Inventory->getSelectItem()->m_item->getSpeed() - temp_speed);
-		else
-			sprintf(speed, "%.1f", m_Inventory->getSelectItem()->m_item->getSpeed() - temp_speed);
-
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 100, atk, lstrlen(atk));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 120, def, lstrlen(def));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 140, hp, lstrlen(hp));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 160, mp, lstrlen(mp));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 180, cri, lstrlen(cri));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 200, criAtk, lstrlen(criAtk));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 220, speed, lstrlen(speed));
-		break;
-	case ITEMTYPE::ITEMTYPE_GLOVES:
-		if (m_Inventory->getEquipGloves() == nullptr)
-		{
-			temp_atk = temp_def = temp_hp = temp_mp = temp_cri = 0;
-			temp_criAtk = temp_speed = 0;
-		}
-		else
-		{
-			temp_atk = m_Inventory->getEquipGloves()->getAtk();
-			temp_def = m_Inventory->getEquipGloves()->getDef();
-			temp_hp = m_Inventory->getEquipGloves()->getHp();
-			temp_mp = m_Inventory->getEquipGloves()->getMp();
-			temp_cri = m_Inventory->getEquipGloves()->getCritical();
-			temp_criAtk = m_Inventory->getEquipGloves()->getCriticalAtk();
-			temp_speed = m_Inventory->getEquipGloves()->getSpeed();
-		}
-
-		if (m_Inventory->getSelectItem()->m_item->getAtk() - temp_atk > 0)
-			wsprintf(atk, "+%d", (m_Inventory->getSelectItem()->m_item->getAtk() - temp_atk));
-		else
-			wsprintf(atk, "%d", (m_Inventory->getSelectItem()->m_item->getAtk() - temp_atk));
-		if (m_Inventory->getSelectItem()->m_item->getDef() - temp_def > 0)
-			wsprintf(def, "+%d", (m_Inventory->getSelectItem()->m_item->getDef() - temp_def));
-		else
-			wsprintf(def, "%d", (m_Inventory->getSelectItem()->m_item->getDef() - temp_def));
-		if (m_Inventory->getSelectItem()->m_item->getHp() - temp_hp > 0)
-			wsprintf(hp, "+%d", (m_Inventory->getSelectItem()->m_item->getHp() - temp_hp));
-		else
-			wsprintf(hp, "%d", (m_Inventory->getSelectItem()->m_item->getHp() - temp_hp));
-		if (m_Inventory->getSelectItem()->m_item->getMp() - temp_mp > 0)
-			wsprintf(mp, "+%d", (m_Inventory->getSelectItem()->m_item->getMp() - temp_mp));
-		else
-			wsprintf(mp, "%d", (m_Inventory->getSelectItem()->m_item->getMp() - temp_mp));
-		if (m_Inventory->getSelectItem()->m_item->getCritical() - temp_cri > 0)
-			wsprintf(cri, "+%d", (m_Inventory->getSelectItem()->m_item->getCritical() - temp_cri));
-		else
-			wsprintf(cri, "%d", (m_Inventory->getSelectItem()->m_item->getCritical() - temp_cri));
-		if (m_Inventory->getSelectItem()->m_item->getCriticalAtk() - temp_criAtk > 0)
-			sprintf(criAtk, "+%.1f", m_Inventory->getSelectItem()->m_item->getCriticalAtk() - temp_criAtk);
-		else
-			sprintf(criAtk, "%.1f", m_Inventory->getSelectItem()->m_item->getCriticalAtk() - temp_criAtk);
-		if (m_Inventory->getSelectItem()->m_item->getSpeed() - temp_speed > 0)
-			sprintf(speed, "+%.1f", m_Inventory->getSelectItem()->m_item->getSpeed() - temp_speed);
-		else
-			sprintf(speed, "%.1f", m_Inventory->getSelectItem()->m_item->getSpeed() - temp_speed);
-
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 100, atk, lstrlen(atk));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 120, def, lstrlen(def));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 140, hp, lstrlen(hp));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 160, mp, lstrlen(mp));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 180, cri, lstrlen(cri));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 200, criAtk, lstrlen(criAtk));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 220, speed, lstrlen(speed));
-		break;
-	case ITEMTYPE::ITEMTYPE_PENDANT:
-		if (m_Inventory->getEquipPendant() == nullptr)
-		{
-			temp_atk = temp_def = temp_hp = temp_mp = temp_cri = 0;
-			temp_criAtk = temp_speed = 0;
-		}
-		else
-		{
-			temp_atk = m_Inventory->getEquipPendant()->getAtk();
-			temp_def = m_Inventory->getEquipPendant()->getDef();
-			temp_hp = m_Inventory->getEquipPendant()->getHp();
-			temp_mp = m_Inventory->getEquipPendant()->getMp();
-			temp_cri = m_Inventory->getEquipPendant()->getCritical();
-			temp_criAtk = m_Inventory->getEquipPendant()->getCriticalAtk();
-			temp_speed = m_Inventory->getEquipPendant()->getSpeed();
-		}
-
-		if (m_Inventory->getSelectItem()->m_item->getAtk() - temp_atk > 0)
-			wsprintf(atk, "+%d", (m_Inventory->getSelectItem()->m_item->getAtk() - temp_atk));
-		else
-			wsprintf(atk, "%d", (m_Inventory->getSelectItem()->m_item->getAtk() - temp_atk));
-		if (m_Inventory->getSelectItem()->m_item->getDef() - temp_def > 0)
-			wsprintf(def, "+%d", (m_Inventory->getSelectItem()->m_item->getDef() - temp_def));
-		else
-			wsprintf(def, "%d", (m_Inventory->getSelectItem()->m_item->getDef() - temp_def));
-		if (m_Inventory->getSelectItem()->m_item->getHp() - temp_hp > 0)
-			wsprintf(hp, "+%d", (m_Inventory->getSelectItem()->m_item->getHp() - temp_hp));
-		else
-			wsprintf(hp, "%d", (m_Inventory->getSelectItem()->m_item->getHp() - temp_hp));
-		if (m_Inventory->getSelectItem()->m_item->getMp() - temp_mp > 0)
-			wsprintf(mp, "+%d", (m_Inventory->getSelectItem()->m_item->getMp() - temp_mp));
-		else
-			wsprintf(mp, "%d", (m_Inventory->getSelectItem()->m_item->getMp() - temp_mp));
-		if (m_Inventory->getSelectItem()->m_item->getCritical() - temp_cri > 0)
-			wsprintf(cri, "+%d", (m_Inventory->getSelectItem()->m_item->getCritical() - temp_cri));
-		else
-			wsprintf(cri, "%d", (m_Inventory->getSelectItem()->m_item->getCritical() - temp_cri));
-		if (m_Inventory->getSelectItem()->m_item->getCriticalAtk() - temp_criAtk > 0)
-			sprintf(criAtk, "+%.1f", m_Inventory->getSelectItem()->m_item->getCriticalAtk() - temp_criAtk);
-		else
-			sprintf(criAtk, "%.1f", m_Inventory->getSelectItem()->m_item->getCriticalAtk() - temp_criAtk);
-		if (m_Inventory->getSelectItem()->m_item->getSpeed() - temp_speed > 0)
-			sprintf(speed, "+%.1f", m_Inventory->getSelectItem()->m_item->getSpeed() - temp_speed);
-		else
-			sprintf(speed, "%.1f", m_Inventory->getSelectItem()->m_item->getSpeed() - temp_speed);
-
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 100, atk, lstrlen(atk));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 120, def, lstrlen(def));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 140, hp, lstrlen(hp));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 160, mp, lstrlen(mp));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 180, cri, lstrlen(cri));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 200, criAtk, lstrlen(criAtk));
-		TextOut(getMemDC(), m_ItemInfoRect.left + 140, m_ItemInfoRect.top + 220, speed, lstrlen(speed));
-		break;
-
-	default:
-		break;
-	}*/
 }
 
 void CinventoryUi::abandonItem()
@@ -1068,4 +800,42 @@ void CinventoryUi::unEquipItem()
 	m_player->setSpeed(m_player->getSpeed() - m_Inventory->getEquipItem(m_selectType)->m_item->getSpeed());
 
 	m_Inventory->clearEquipItem(m_selectType);
+}
+
+void CinventoryUi::selectPotion()
+{
+
+	if (PtInRect(&m_vEquipItemSubRect[5], m_ptMouse))
+	{
+		if (isButtonClick)
+		{
+			if (isKeyUp)
+			{
+				m_selectType = ITEMTYPE::ITEMTYPE_POTION;
+				m_Inventory->clearSelectItem();
+				isSelectRender = false;
+
+				isKeyUp = false;
+			}
+		}
+	}
+}
+
+void CinventoryUi::showPotionInfo()
+{
+	char str[100];
+	// 포션 이미지 구하기
+	//IMAGE->findImage(m_Inventory->getSelectItem()->m_item->getSmallImage())->frameRender(getMemDC(), m_ItemInfoRect.left + 11, m_ItemInfoRect.top
+	//	, m_Inventory->getSelectItem()->m_item->getFrame().x
+	//	, m_Inventory->getSelectItem()->m_item->getFrame().y);
+
+	SetTextColor(getMemDC(), RGB(255, 255, 255));
+	/*TextOut(getMemDC(), m_ItemInfoRect.left + 80, m_ItemInfoRect.top + 10
+		, TEXT("포션"), lstrlen("포션"));*/
+	wsprintf(str, "보유 개수: %d", m_Inventory->getPotion()->Count);
+	TextOut(getMemDC(), m_ItemInfoRect.left + 80, m_ItemInfoRect.top + 10, str, lstrlen(str));
+	wsprintf(str, "HP 회복량: %d", m_Inventory->getPotion()->recoveryHp);
+	TextOut(getMemDC(), m_ItemInfoRect.left + 80, m_ItemInfoRect.top + 30, str, lstrlen(str));
+	wsprintf(str, "MP 회복량: %d", m_Inventory->getPotion()->recoveryMp);
+	TextOut(getMemDC(), m_ItemInfoRect.left + 80, m_ItemInfoRect.top + 50, str, lstrlen(str));
 }

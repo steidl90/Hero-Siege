@@ -16,8 +16,12 @@ HRESULT Cslime::init(POINT position, float HP, float damage, float def, int exp,
 	m_enemyAttack = new CenemyAttack;
 	m_enemyAttack->init(5, 100, true, "슬라임공격하");
 
-	m_player = new Cplayer;
-	m_player->init();
+	//m_player = new Cplayer;
+	//m_player->init();
+
+	//m_aStar = new CaStar;
+	//m_aStar->init();
+	//m_aStar->setAttribute(m_attribute);
 
 	m_isIdle = false;
 	m_state = STATE::DOWN;
@@ -49,18 +53,41 @@ HRESULT Cslime::init(POINT position, float HP, float damage, float def, int exp,
 	m_walkImage = IMAGE->findImage("슬라임");
 	m_walkAni = ANIMATION->findAnimation("슬라임애니");
 	ANIMATION->start("슬라임애니");
+
+	isSetAstar = false;
+
 	return S_OK;
 }
 
 void Cslime::release()
 {
 	SAFE_DELETE(m_enemyAttack);
-	SAFE_DELETE(m_player);
+	//SAFE_DELETE(m_player);
 	SAFE_DELETE(m_hpBar);
 }
 
 void Cslime::update()
 {
+	/*m_aStar->setTargetIndex(PointMake(m_player->getPlayerX() / TILESIZE, m_player->getPlayerY() / TILESIZE));
+	m_aStar->setStartIndex(PointMake(m_x / TILESIZE, m_y / TILESIZE));
+
+	if (isDetect)
+	{
+		m_aStar->update();
+	}
+
+	if (m_aStar->getFastLoadLocation() != nullptr)
+	{
+		if (m_aStar->getFastLoadLocation()->size() > 0)
+		{
+			if (isAstarSet) isAstarStart = true;
+
+			isAstarSet = false;
+		}
+		else
+			isAstarSet = true;
+	}*/
+
 	m_hpBar->setGauge(m_hp, m_maxHp);
 	m_hpBar->mapUpdate(m_x - 15, m_y - 25);
 	m_enemyAttack->update();

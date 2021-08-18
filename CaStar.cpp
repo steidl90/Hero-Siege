@@ -73,16 +73,19 @@ void CaStar::release()
 
 void CaStar::update()
 {
-    if (!m_fastLoadLocation.empty())
+    if ((m_currentTarget.x != m_targetIndex.x) || (m_currentTarget.y != m_targetIndex.y))
     {
-        if (m_player->getPlayerX() > m_fastLoadLocation.begin()->x - 1 && m_player->getPlayerX() < m_fastLoadLocation.begin()->x + 1
-            && m_player->getPlayerY() > m_fastLoadLocation.begin()->y - 1 && m_player->getPlayerY() < m_fastLoadLocation.begin()->y + 1)
-        {
-            m_fastLoad.clear();
-            m_fastLoadLocation.clear();
-        }
+        m_currentTarget.x = m_targetIndex.x;
+        m_currentTarget.y = m_targetIndex.y;
+
+        _openList.clear();
+        _closeList.clear();
+        m_fastLoad.clear();
+        m_fastLoadLocation.clear();
+        init2();
     }
-    if (InputManager->isOnceKeyDown(VK_RBUTTON))
+
+   /* if (InputManager->isOnceKeyDown(VK_RBUTTON))
     {
         _openList.clear();
         _closeList.clear();
@@ -95,7 +98,7 @@ void CaStar::update()
     {
         isButtonClick = false;
         isKeyUp = true;
-    }
+    }*/
   
     if (_astarState == ASTAR_STATE::ASTAR_STATE_END)
     {
@@ -130,12 +133,10 @@ void CaStar::tileComposition()
         {
             if (m_attribute[i * TILEX + j] == ATTRIBUTE::COLLISION_ON)
                 _tile[i][j].type = TILE_TYPE::TILE_TYPE_WALL;
-
-            if (m_playerIndex.y + 1 == i && m_playerIndex.x == j)
+           if (m_startIndex.y == i && m_startIndex.x == j)
             {
                  _selectType = TILE_TYPE::TILE_TYPE_START;
                 if (_tile[i][j].type == TILE_TYPE::TILE_TYPE_START)_startPointSet = false;
-                //if (_tile[i][j].type == TILE_TYPE::TILE_TYPE_END)_endPointSet = false;
 
                 _tile[i][j].type = _selectType;
                 _tile[i][j].color = _selectedTypeColor;
@@ -151,55 +152,40 @@ void CaStar::tileComposition()
                     _startX = j;
                     _startY = i;
                 }
-                /*   if (_selectType == TILE_TYPE::TILE_TYPE_END)
-                   {
-                       if (_endPointSet)
-                       {
-                           _tile[_endY][_endX].color = RGB(255, 255, 255);
-                           _tile[_endY][_endX].type = TILE_TYPE::TILE_TYPE_EMPTY;
-                       }
-                       _endPointSet = true;
-                       _endX = j;
-                       _endY = i;
-                   }
-                 */
             }
         }
     }
-    POINT cameraMouse = m_ptMouse; // x y
-    cameraMouse.x += m_camera->getCameraPoint().x;
-    cameraMouse.y += m_camera->getCameraPoint().y;
+    //POINT cameraMouse = m_ptMouse; // x y
+    //cameraMouse.x += m_camera->getCameraPoint().x;
+    //cameraMouse.y += m_camera->getCameraPoint().y;
 
-    if (isButtonClick)
+    for (size_t i = 0; i < TILE_Y; i++)
     {
-        if (isKeyUp)
+        for (size_t j = 0; j < TILE_X; j++)
         {
-            for (size_t i = 0; i < TILE_Y; i++)
+            //if (PtInRect(&_tile[i][j].rc, cameraMouse))
+            //{
+            //}
+            if (m_targetIndex.y + 1 == i && m_targetIndex.x == j)
             {
-                for (size_t j = 0; j < TILE_X; j++)
+                _selectType = TILE_TYPE::TILE_TYPE_END;
+                if (_tile[i][j].type == TILE_TYPE::TILE_TYPE_END)_endPointSet = false;
+
+                if (_selectType == TILE_TYPE::TILE_TYPE_END)
                 {
-                    if (PtInRect(&_tile[i][j].rc, cameraMouse))
+                    if (_endPointSet)
                     {
-                        _selectType = TILE_TYPE::TILE_TYPE_END;
-                        if (_tile[i][j].type == TILE_TYPE::TILE_TYPE_END)_endPointSet = false;
-   
-                        if (_selectType == TILE_TYPE::TILE_TYPE_END)
-                        {
-                            if (_endPointSet)
-                            {
-                                _tile[_endY][_endX].color = RGB(255, 255, 255);
-                                _tile[_endY][_endX].type = TILE_TYPE::TILE_TYPE_EMPTY;
-                            }
-                            _endPointSet = true;
-                            _endX = j;
-                            _endY = i;
-                        }
+                        _tile[_endY][_endX].color = RGB(255, 255, 255);
+                        _tile[_endY][_endX].type = TILE_TYPE::TILE_TYPE_EMPTY;
                     }
+                    _endPointSet = true;
+                    _endX = j;
+                    _endY = i;
                 }
             }
-            isKeyUp = false;
         }
     }
+
 }
 
 void CaStar::tileInitializing()
@@ -496,9 +482,9 @@ void CaStar::showWay(aStarTile* tile)
     {
         tile->color = RGB(255, 180, 180);
         m_fastLoad.push_back(PointMake(tile->j, tile->i));
-        int centerX = tile->rc.left + (tile->rc.right - tile->rc.left) / 2;
-        int centerY = tile->rc.top + (tile->rc.bottom - tile->rc.top) / 2;
-        m_fastLoadLocation.push_back(PointMake(centerX, centerY));
+       /* int centerX = tile->rc.left + (tile->rc.right - tile->rc.left) / 2;
+        int centerY = tile->rc.top + (tile->rc.bottom - tile->rc.top) / 2;*/
+        m_fastLoadLocation.push_front(PointMake(tile->rc.left, tile->rc.top));
     }
     tile = tile->parent;
 

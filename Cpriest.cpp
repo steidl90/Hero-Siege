@@ -16,8 +16,8 @@ HRESULT Cpriest::init(POINT position, float HP, float damage, float def, int exp
 	m_enemyAttack = new CenemyAttack;
 	m_enemyAttack->init(50, 500, false, "리치스킬애니");
 
-	m_player = new Cplayer;
-	m_player->init();
+	//m_player = new Cplayer;
+	//m_player->init();
 
 	m_isIdle = false;
 	m_state = STATE::DOWN;
@@ -58,19 +58,23 @@ HRESULT Cpriest::init(POINT position, float HP, float damage, float def, int exp
 	m_walkImage = IMAGE->findImage("리치");
 	m_walkAni = ANIMATION->findAnimation("리치하");
 	ANIMATION->start("리치하");
+
+	isSetAstar = false;
+
 	return S_OK;
 }
 
 void Cpriest::release()
 {
 	SAFE_DELETE(m_enemyAttack);
-	SAFE_DELETE(m_player);
+	//SAFE_DELETE(m_player);
 	SAFE_DELETE(m_hpBar);
 	EFFECT->release();
 }
 
 void Cpriest::update()
 {
+
 	m_hpBar->setGauge(m_hp, m_maxHp);
 	m_hpBar->mapUpdate(m_x - 18, m_y - 65);
 	m_enemyAttack->update();

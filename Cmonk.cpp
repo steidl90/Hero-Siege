@@ -17,8 +17,12 @@ HRESULT Cmonk::init(POINT position, float HP, float damage, float def, int exp, 
 	m_enemyAttack = new CenemyAttack;
 	m_enemyAttack->init(5, 100, true , "根农傍拜窍");
 
-	m_player = new Cplayer;
-	m_player->init();
+	//m_player = new Cplayer;
+	//m_player->init();
+
+	//m_aStar = new CaStar;
+	//m_aStar->init();
+	//m_aStar->setAttribute(m_attribute);
 
 	m_isIdle = false;
 	m_state = STATE::DOWN;
@@ -52,19 +56,43 @@ HRESULT Cmonk::init(POINT position, float HP, float damage, float def, int exp, 
 	m_walkImage = IMAGE->findImage("根农");
 	m_walkAni = ANIMATION->findAnimation("根农窍");
 	ANIMATION->start("根农窍");
+
+	isSetAstar = false;
+
+
 	return S_OK;
 }
 
 void Cmonk::release()
 {
 	SAFE_DELETE(m_enemyAttack);
-	SAFE_DELETE(m_player);
+	//SAFE_DELETE(m_player);
 	SAFE_DELETE(m_hpBar);
 	EFFECT->release();
 }
 
 void Cmonk::update()
 {
+	/*m_aStar->setTargetIndex(PointMake(m_player->getPlayerX() / TILESIZE, m_player->getPlayerY() / TILESIZE));
+	m_aStar->setStartIndex(PointMake(m_x / TILESIZE, m_y / TILESIZE));*/
+
+	//if (isDetect)
+	//{
+	//	m_aStar->update();
+	//}
+
+	//if (m_aStar->getFastLoadLocation() != nullptr)
+	//{
+	//	if (m_aStar->getFastLoadLocation()->size() > 0)
+	//	{
+	//		if (isAstarSet) isAstarStart = true;
+
+	//		isAstarSet = false;
+	//	}
+	//	else
+	//		isAstarSet = true;
+	//}
+
 	m_hpBar->setGauge(m_hp, m_maxHp);
 	m_hpBar->mapUpdate(m_x - 15, m_y - 45);
 	m_enemyAttack->update();

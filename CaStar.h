@@ -32,7 +32,7 @@ struct aStarTile
 	int F, G, H;
 	char str[128];
 
-	aStarTile* parent;	
+	aStarTile* parent;
 	TILE_TYPE type;
 };
 
@@ -42,16 +42,20 @@ class CaStar :public gameNode
 {
 
 private:
-	camera* m_camera;
-	Cplayer* m_player;
+	//camera* m_camera;
+	//Cplayer* m_player;
 private:
 	aStarTile _tile[TILE_X][TILE_Y];
 	vector<aStarTile*> _openList;
 	vector<aStarTile*> _closeList;
 	// 추가
 	vector<POINT> m_fastLoad;
-	vector<POINT> m_fastLoadLocation;
-	POINT m_playerIndex;
+	list<POINT> m_fastLoadLocation;
+
+	POINT m_targetIndex;
+	POINT m_currentTarget;
+
+	POINT m_startIndex;
 
 	ASTAR_STATE _astarState;
 	TILE_TYPE _selectType;
@@ -98,11 +102,12 @@ public:
 	void typeColor(TILE_TYPE type);
 
 	// 추가
-	void setPlayerIndex(POINT index) { m_playerIndex = index; }
-	void setPlayer(Cplayer* player) { m_player = player; }
+	void setTargetIndex(POINT index) { m_targetIndex = index; }
+	void setStartIndex(POINT index) { m_startIndex = index; }
+	//void setPlayer(Cplayer* player) { m_player = player; }
 	vector<POINT>* getFastLoad() { return &m_fastLoad; }
-	vector<POINT>* getFastLoadLocation() { return &m_fastLoadLocation; }
-	void setCameraMemory(camera* cm) { m_camera = cm; }
+	list<POINT>* getFastLoadLocation() { return &m_fastLoadLocation; }
+	//void setCameraMemory(camera* cm) { m_camera = cm; }
 	void setAttribute(ATTRIBUTE* att) { m_attribute = att; }
 };
 

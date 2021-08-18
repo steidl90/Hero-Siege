@@ -17,6 +17,8 @@ private:
 
 	Citem* m_shopSelectItem;
 
+	Potion m_potion;
+
 public:
 
 	HRESULT init();

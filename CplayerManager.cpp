@@ -52,13 +52,28 @@ void CplayerManager::update()
     if (InputManager->isOnceKeyDown('I'))
         isInventoryOn = !isInventoryOn;
     EFFECT->update();
+    // nullptr일경우  size연산 접근오류이므로 예외처리
+    //if (m_fastLoadLocation != nullptr)
+    //{
+    //    // 리스트의 사이즈가 1이상이면 플레이어쪽에 에이스타 경로좌표 1번 set해주고 끝, 경로좌표가 초기화될시 다시 set해줄 준비
+    //    if (m_fastLoadLocation->size() > 0)
+    //    {
+    //        if (isAstar)
+    //        {
+    //            m_player->setIsAstar(true);
+    //            m_player->setAstarMove(m_fastLoadLocation);
+    //        }
+    //        isAstar = false;
+    //    }
+    //    else
+    //        isAstar = true;
+    //}
     m_player->update();
-    if(m_fastLoadLocation != nullptr)
-        m_player->setAstarMove(m_fastLoadLocation);
     if(isInventoryOn) m_InventoryUI->update();
     m_playerUi->update();
 
-    getItem();
+    this->getItem();
+    this->usePotion();
 }
 
 void CplayerManager::render()
@@ -275,6 +290,24 @@ void CplayerManager::getItem()
                 m_inventory->addItem(m_dropItem->getDropItemList()[i].item);
                 m_dropItem->removeItem(i);
             }
+        }
+    }
+}
+
+void CplayerManager::usePotion()
+{
+    if (InputManager->isOnceKeyDown('T'))
+    {
+        if (m_inventory->getPotion()->Count > 0)
+        {
+            m_inventory->setPotion(m_inventory->getPotion()->Count - 1);
+            m_player->setHp(m_player->getHp() + m_inventory->getPotion()->recoveryHp);
+            m_player->setMp(m_player->getMp() + m_inventory->getPotion()->recoveryMp);
+
+            if (m_player->getHp() > m_player->getMaxHp())
+                m_player->setHp(m_player->getMaxHp());
+            if (m_player->getMp() > m_player->getMaxMp())
+                m_player->setMp(m_player->getMaxMp());
         }
     }
 }

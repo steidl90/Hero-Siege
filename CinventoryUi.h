@@ -60,18 +60,6 @@ private:
 
 	POINT m_equipRenderPoint[5];  // 필요없는 변수인데 이걸 없애면 오류가 나네... ???
 
-
-	//bool isEquipRender;
-	//bool isEquipWeapon;
-	//bool isEquipArmor;
-	//bool isEquipShoes;
-	//bool isEquipGloves;
-	//bool isEquipPendant;
-	//Citem* m_equipWeapon;
-	//Citem* m_equipArmor;
-	//Citem* m_equipShoes;
-	//Citem* m_equipGloves;
-	//Citem* m_equipPendant;
 public:
 
 	CinventoryUi();
@@ -100,7 +88,7 @@ public:
 	// 리스트에서 선택시 동작 / + 장착
 	void selectItem();
 	void selectEquipItem();
-	//void setEquipItem(int index, int x, int y);
+
 	// 아이템 장착 동작!
 	void setPlayerStat(int index);
 	void clickEquipButton();
@@ -114,10 +102,12 @@ public:
 
 	// 아이템 버리기 동작
 	void abandonItem();
-	//bool checkEquipItem();
 
 	// 아이템 해제 동작
 	void unEquipItem();
 	
+	// 포션 선택
+	void selectPotion();
+	void showPotionInfo();
 };
 

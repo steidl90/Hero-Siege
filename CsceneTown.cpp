@@ -53,11 +53,10 @@ HRESULT CsceneTown::init()
 	m_player->getInventoryMemory()->setvGlovesList(DATA->getvGlovesList());
 	m_player->getInventoryMemory()->setvPendantList(DATA->getvPendantList());
 
-	m_aStar = new CaStar;
-	m_aStar->setCameraMemory(m_camera);
-	m_aStar->setPlayer(m_player->getPlayer());
-	m_aStar->setAttribute(m_town->getAttribute());
-	m_aStar->init();
+	//m_aStar = new CaStar;
+	//m_aStar->setCameraMemory(m_camera);
+	//m_aStar->setAttribute(m_town->getAttribute());
+	//m_aStar->init();
 
 	m_shop = new Cshop;
 	m_shop->setInventoryMemory(m_player->getInventoryMemory());
@@ -93,7 +92,7 @@ void CsceneTown::release()
 	SAFE_DELETE(m_camera);
 	SAFE_DELETE(m_town);
 	SAFE_DELETE(m_player);
-	SAFE_DELETE(m_aStar);
+	//SAFE_DELETE(m_aStar);
 	SAFE_DELETE(m_shop);
 	SAFE_DELETE(m_shopUi);
 	SAFE_DELETE(m_npc);
@@ -101,15 +100,12 @@ void CsceneTown::release()
 
 void CsceneTown::update()
 {
-	m_aStar->update();
-	m_aStar->setPlayerIndex(PointMake(m_player->getplayerRect()->left / TILESIZE, m_player->getplayerRect()->top / TILESIZE));
 	m_camera->update();
 	m_camera->setTargetPoint(PointMake(m_player->getplayerRect()->left, m_player->getplayerRect()->top));
 	m_town->update();
-	m_town->setFastLoadIndex(m_aStar->getFastLoad());
 	m_quest->update();
 	m_player->update();
-	m_player->setFastLoadLocation(m_aStar->getFastLoadLocation());
+
 	//NPC
 	m_npc->update();
 

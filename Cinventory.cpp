@@ -20,6 +20,11 @@ HRESULT Cinventory::init()
 		ZeroMemory(&m_selectItem, sizeof(SelectItem));
 	}
 
+	//m_potion.image
+	m_potion.Count = 5;
+	m_potion.recoveryHp = 200;
+	m_potion.recoveryMp = 300;
+
 	m_weaponCount = 0;
 	m_armorCount = 0;
 	m_shoesCount = 0;
