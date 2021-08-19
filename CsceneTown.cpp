@@ -235,7 +235,7 @@ void CsceneTown::shopOn()
 	RECT temp;
 	if (IntersectRect(&temp, m_player->getplayerRect(), &m_shopRect))
 	{
-		if (InputManager->isOnceKeyDown('F'))
+		if (InputManager->isOnceKeyDown('P'))
 		{
 			isShopOn = !isShopOn;
 		}
@@ -310,7 +310,7 @@ void CsceneTown::shopCollision()
 		sprintf_s(str, "상점방문");
 		TextOut(getMemDC(), m_x - 20, m_y + 20, str, strlen(str));
 		TCHAR buttonstr[256];
-		sprintf_s(buttonstr, "F");
+		sprintf_s(buttonstr, "P");
 		TextOut(getMemDC(), m_x + 10, m_y + 5, buttonstr, strlen(buttonstr));
 	}
 
