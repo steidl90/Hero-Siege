@@ -498,7 +498,6 @@ void CinventoryUi::setPlayerStat(int index)
 	// 선택한 아이템 타입에 따라 해당 인덱스에 아이템 정보 입력
 	Temp[static_cast<int>(m_Inventory->getSelectItem()->m_item->getType())] 
 		= m_Inventory->getSelectItem()->m_item;
-
 	for (int i = 0; i < 5; i++)
 	{
 		if (i == static_cast<int>(m_Inventory->getSelectItem()->m_item->getType()))
@@ -548,6 +547,7 @@ void CinventoryUi::clickEquipButton()
 				{
 					if (m_Inventory->getSelectItem()->m_item->getLimitLevel() <= m_player->getLv())
 					{
+						this->setPlayerStat(m_Inventory->getSelectItem()->m_itemIndex);
 						m_Inventory->equipItem();
 						isKeyUp = false;
 					}
