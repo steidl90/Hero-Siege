@@ -31,8 +31,12 @@ protected:
 	RECT m_traceRc;	
 
 	RECT m_astarRc;
+
+	list<POINT> m_currentAStar;
+	list<POINT> m_moveAStar;
 	list<POINT>::iterator m_liAstar;
 
+	
 
 	//임시변수
 	float x, y;
@@ -101,6 +105,7 @@ public:
 	virtual RECT getRect() { return m_walkRc; }
 	void setAttribute(ATTRIBUTE* att) { m_attribute = att; }
 
+	void setAstarRoot(list<POINT> list) { m_currentAStar = list; }
 	void aStarMove();
 
 };
