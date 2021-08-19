@@ -92,21 +92,13 @@ void Cprison::update()
 
 	if (m_currentAStar.size() > 0)
 	{
-	/*	if (x != m_currentAStar.begin()->x || y != m_currentAStar.begin()->y)
-		{*/
-		
-		if (m_moveAStar != m_currentAStar)
+		if (x != m_currentAStar.begin()->x || y != m_currentAStar.begin()->y)
 		{
+			m_moveAStar.clear();
 			m_moveAStar = m_currentAStar;
-
-			m_liAstar = m_moveAStar.begin();
 		}
-
-			//if (isAstarSet) isAstarStart = true;
-			//isAstarSet = false;
-		//}
-		//else
-		//	isAstarSet = true;
+		else
+			isAstarSet = true;
 	}
 
 	m_hpBar->setGauge(m_hp, m_maxHp);

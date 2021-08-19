@@ -194,55 +194,56 @@ void Cenemy::aStarMove()
 			m_aStar->getFastLoadLocation()->clear();
 		}
 	}*/
-		if (isAstarStart)
-		{
-			//m_liAstar = m_moveAStar.begin();
-			//isAstarStart = false;
-		}
-		if (m_moveAStar.size() > 0)
-		{
-			if (m_liAstar != m_moveAStar.end())
-			{
-				if (m_x < m_liAstar->x)
-				{
-					m_x++;
-					m_isWalking = true;
-					m_state = STATE::RIGHT;
-				}
-				else if (m_x > m_liAstar->x)
-				{
-					m_x--;
-					m_isWalking = true;
-					m_state = STATE::LEFT;
-				}
+		//if (isAstarStart)
+		//{
+		//	//m_liAstar = m_moveAStar.begin();
+		//	//isAstarStart = false;
+		//}
 
-				if (m_y < m_liAstar->y)
-				{
-					m_y++;
-					m_isWalking = true;
-					m_state = STATE::DOWN;
+		//if (m_moveAStar.size() > 0)
+		//{
+		//	if (m_liAstar != m_moveAStar.end())
+		//	{
+		//		if (m_x < m_liAstar->x)
+		//		{
+		//			m_x++;
+		//			m_isWalking = true;
+		//			m_state = STATE::RIGHT;
+		//		}
+		//		else if (m_x > m_liAstar->x)
+		//		{
+		//			m_x--;
+		//			m_isWalking = true;
+		//			m_state = STATE::LEFT;
+		//		}
 
-				}
-				else if (m_y > m_liAstar->y)
-				{
-					m_y--;
-					m_isWalking = true;
-					m_state = STATE::UP;
-				}
+		//		if (m_y < m_liAstar->y)
+		//		{
+		//			m_y++;
+		//			m_isWalking = true;
+		//			m_state = STATE::DOWN;
 
-				x = m_liAstar->x;
-				y = m_liAstar->y;
+		//		}
+		//		else if (m_y > m_liAstar->y)
+		//		{
+		//			m_y--;
+		//			m_isWalking = true;
+		//			m_state = STATE::UP;
+		//		}
 
-				if (m_liAstar->x < m_x + 5 && m_liAstar->x > m_x - 5
-					&& m_liAstar->y < m_y + 5 && m_liAstar->y > m_y - 5)
-				{
-					m_liAstar++;
-				}
-			}
-			else
-			{
-				//m_aStar->getFastLoadLocation()->clear();
-			}
-		}
+		//		x = m_liAstar->x;
+		//		y = m_liAstar->y;
+
+		//		if (m_liAstar->x < m_x + 5 && m_liAstar->x > m_x - 5
+		//			&& m_liAstar->y < m_y + 5 && m_liAstar->y > m_y - 5)
+		//		{
+		//			m_liAstar++;
+		//		}
+		//	}
+		//	else
+		//	{
+		//		//m_aStar->getFastLoadLocation()->clear();
+		//	}
+		//}
 }
 
