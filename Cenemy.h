@@ -33,7 +33,6 @@ protected:
 	RECT m_astarRc;
 
 	list<POINT> m_currentAStar;
-	list<POINT> m_moveAStar;
 	list<POINT>::iterator m_liAstar;
 
 	

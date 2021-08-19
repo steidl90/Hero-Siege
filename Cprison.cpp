@@ -76,7 +76,6 @@ void Cprison::update()
 	}
 	else
 	{
-		//m_isWalking = true;
 		m_aStar->setTargetIndex(PointMake(m_returnX / TILESIZE, m_returnY / TILESIZE));
 		m_aStar->setStartIndex(PointMake(m_x / TILESIZE, m_y / TILESIZE));
 		m_aStar->update();
@@ -86,16 +85,10 @@ void Cprison::update()
 	{
 		if (m_aStar->getFastLoadLocation()->size() > 0)
 		{
-			setAstarRoot(*m_aStar->getFastLoadLocation());
-		}
-	}
+			if (isAstarSet) isAstarStart = true;
+			isAstarSet = false;
 
-	if (m_currentAStar.size() > 0)
-	{
-		if (x != m_currentAStar.begin()->x || y != m_currentAStar.begin()->y)
-		{
-			m_moveAStar.clear();
-			m_moveAStar = m_currentAStar;
+			setAstarRoot(*m_aStar->getFastLoadLocation());
 		}
 		else
 			isAstarSet = true;
