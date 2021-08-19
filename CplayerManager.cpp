@@ -274,10 +274,10 @@ void CplayerManager::collisionEnemy()
         }
     }
 
-    if (m_boss->getHp() <= 0)
+    /*if (m_boss->getHp() <= 0)
     {
         PostQuitMessage(0);
-    }
+    }*/
     
 }
 
