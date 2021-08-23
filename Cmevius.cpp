@@ -134,7 +134,7 @@ void Cmevius::update()
     if (m_hp <= m_maxHp *0.8)
     {
         meviusphase2();
-    }   
+    }  
     if (m_hp <= m_maxHp * 0.5)
     {
         if (!m_isTeleport)
@@ -149,6 +149,8 @@ void Cmevius::update()
         m_y = 900;
         m_skillDamagePattern1 = 150;
     }
+
+
     if (InputManager->isStayKeyDown('6'))
     {
         m_hp -= 100;

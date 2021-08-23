@@ -50,9 +50,9 @@ void CenemyManager::registerEnemy(Cenemy* enemy)
 
 void CenemyManager::removeMinion(int arrNum)
 {
-		Cenemy* temp = *(m_vEnemy.begin() + arrNum);
-		m_vEnemy.erase(m_vEnemy.begin() + arrNum);
-		delete temp;
+	Cenemy* temp = *(m_vEnemy.begin() + arrNum);
+	m_vEnemy.erase(m_vEnemy.begin() + arrNum);
+	delete temp;
 }
 
 void CenemyManager::collision()
